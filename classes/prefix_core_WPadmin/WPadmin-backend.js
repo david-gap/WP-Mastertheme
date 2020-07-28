@@ -1,0 +1,248 @@
+jQuery(document).ready(function($){
+
+    /* Global Settings
+    /––––––––––––––––––––––––*/
+    // custom vars that need to be global
+
+
+
+    /*==================================================================================
+      FUNCTIONS
+    ==================================================================================*/
+
+    /* unserialize array
+    /––––––––––––––––––––––––*/
+    function unserialize(serializedString){
+      var str = decodeURI(serializedString);
+      var pairs = str.split('&');
+      var obj = {}, p, idx, val;
+      for (var i=0, n=pairs.length; i < n; i++) {
+        p = pairs[i].split('=');
+        idx = p[0];
+        if (idx.indexOf("[]") == (idx.length - 2)) {
+          // Eh um vetor
+          var ind = idx.substring(0, idx.length-2)
+          if (obj[ind] === undefined) {
+            obj[ind] = [];
+          }
+          obj[ind].push(p[1]);
+        }
+        else {
+          obj[idx] = p[1];
+        }
+      }
+      return obj;
+    };
+
+
+    /* AJAX
+    /––––––––––––––––––––––––*/
+    function ajaxCall(getdata) {
+      $.ajax({
+        url: Ajax_File,
+        type: 'POST',
+        data: getdata,
+        success: function(data) {
+          // DEBUG: console.log("Ajax update success");
+          // DEBUG: console.log(data);
+          var result = jQuery.parseJSON( data );
+          $('#configuration').removeClass('loading');
+          // console
+          if(result.log){
+            console.log(result.log);
+          }
+          // message
+          if(result.message){
+            $('#configuration #config-message').html(result.message);
+          }
+          // css
+          if(result.type){
+            $('#configuration #config-message').attr('class', result.type);
+          }
+        },
+        error:function(){
+          // DEBUG: console.log("Ajax update failed");
+        }
+      });
+    }
+
+
+    /* save content
+    /––––––––––––––––––––––––*/
+    function SaveContent(data) {
+      // ajax is active - disable reload
+      event.preventDefault();
+      ajaxCall(data);
+    }
+
+
+
+    /*==================================================================================
+      CALL ACTIONS
+    ==================================================================================*/
+
+    /* save form
+    /––––––––––––––––––––––––*/
+    $(document).on('click', '#configuration input[type="submit"]', function (event) {
+      // get content
+      var get_action = $(this).data('action');
+      var get_formData = $('#configuration form').serialize();
+      // build data array
+      var data = {
+        action: get_action,
+        formdata: get_formData
+      };
+      $('#configuration').addClass('loading');
+      SaveContent(data);
+    });
+
+
+    /* select media
+    /––––––––––––––––––––––––*/
+    $(document).on('click', '#configuration .wp-single-media', function (e) {
+      // get action
+      var action = $(this).attr('data-action');
+      var input_id = $(this).siblings('.img-saved').attr('id');
+      var container = $(this).parents('div').data('id');
+      var meta_gallery_frame;
+      // check if right action is active for img selection
+      if(action == "WPadmin"){
+        // stop page reload
+        e.preventDefault();
+        // if the frame already exists, re-open it.
+        if ( meta_gallery_frame ) {
+          meta_gallery_frame.open();
+          return;
+        }
+        // Sets up the media library frame
+        meta_gallery_frame = wp.media.frames.meta_gallery_frame = wp.media({
+          title: input_id.title,
+          button: { text:  input_id.button },
+          library: { type: 'image' },
+          multiple: true
+        });
+        // get already selected images
+        meta_gallery_frame.on('open', function() {
+          var selection = meta_gallery_frame.state().get('selection');
+          var library = meta_gallery_frame.state('gallery-edit').get('library');
+          var ids = $('div[data-id="' + container + '"]').find('.img-saved').val();
+          if (ids) {
+            idsArray = ids.split(',');
+            idsArray.forEach(function(id) {
+                    attachment = wp.media.attachment(id);
+                    attachment.fetch();
+                    selection.add( attachment ? [ attachment ] : [] );
+            });
+          }
+        });
+        //When an image is selected, run a callback.
+        meta_gallery_frame.on('select', function() {
+                var imageIDArray = [];
+                var imageHTML = '';
+                var metadataString = '';
+                images = meta_gallery_frame.state().get('selection');
+                images.each(function(attachment) {
+                        imageIDArray.push(attachment.attributes.id);
+                        imageHTML += '<span class="remove_image"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24.9 24.9" xml:space="preserve"><rect x="-3.7" y="10.9" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1549 12.4451)" fill="#000" width="32.2" height="3"/><rect x="10.9" y="-3.7" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1549 12.4451)" fill="#000" width="3" height="32.2"/></svg></span><img id="'+attachment.attributes.id+'" src="'+attachment.attributes.sizes.thumbnail.url+'">';
+                });
+                metadataString = imageIDArray.join(",");
+                if (metadataString) {
+                  $('div[data-id="' + container + '"]').find('.img-saved').val(metadataString);
+                  $('div[data-id="' + container + '"]').find('.img-selected').html(imageHTML);
+                }
+        });
+        // Finally, open the modal
+        meta_gallery_frame.open();
+      }
+    });
+
+
+    /* remove selected media
+    /------------------------*/
+    $(document).on('click', '#configuration .img-selected .remove_image', function (e) {
+      event.preventDefault();
+      if (confirm('Are you sure you want to remove this image?')) {
+        $(this).parents('.img-selected').siblings('.img-saved').val('');
+        $(this).parents('.img-selected').html('');
+      }
+    });
+
+
+    /* sortable multi fields
+    /------------------------*/
+    if($('.sortable').length!==0){
+      $( ".sortable" ).sortable({
+        update: function( event, ui ) {
+          // create array
+          // var img_ids = [];
+          // // push ids into array
+          // $( ".galleriesImages_list li" ).each(function() {
+          //   var img_id = $(this).attr("data-id");
+          //   img_ids.push(img_id);
+          // });
+          // // array to string
+          // var newSort = img_ids.join();
+          // // insert new value
+          // $("#galleriesImages").val(newSort);
+        }
+      });
+    }
+
+
+  /* Generate configuration file
+  /––––––––––––––––––––––––*/
+  $(document).on('click', '#configuration button.ajax-action', function (event) {
+    event.preventDefault();
+    // vars
+    var get_action = $(this).attr('data-action');
+    // build data array
+    var data = {
+      action: get_action
+    };
+    // run ajax
+    ajaxCall(data);
+	});
+
+
+  /* duplicate rows
+  /––––––––––––––––––––––––*/
+  $(document).on('click', '#configuration button.input-fields-adder', function (event) {
+    event.preventDefault();
+    // vars
+    var get_main_parent = $(this).siblings('ul');
+    var current_last_id = $(get_main_parent).children('li').last().attr('data-row');
+    var new_row_id = parseFloat(current_last_id) + 1;
+    // copy
+    var $clone = $(get_main_parent).children('li').last().clone();
+    $clone.find('input').val('');
+    $clone.appendTo(get_main_parent);
+    // remove css class if array has now more then 1 values
+    $(get_main_parent).removeClass('disable-remove');
+    // update row number
+    $(get_main_parent).children('li').last().attr('data-row', new_row_id);
+    $(get_main_parent).children('li').last().find('input').attr('value', '');
+    $( 'li[data-row="' + new_row_id + '"] input' ).each(function() {
+      var name = $( this ).attr( "name" );
+      var new_name = name.replace("[" + current_last_id + "]", "[" + new_row_id + "]");
+      $( this ).attr( "name", new_name );
+    });
+
+	});
+
+
+  /* delete rows
+  /––––––––––––––––––––––––*/
+  $(document).on('click', '#configuration .addable .remove', function (event) {
+    var confirm1 = confirm('Are you sure you want to delete this entry?');
+    if (confirm1) {
+      // add css class if array has now only 1 value
+      if ( $(this).parents('ul').children('li').length == 2 ) {
+        $(this).parents('ul').addClass('disable-remove');
+      }
+      // remove row
+      $(this).parents('li').remove();
+    }
+	});
+
+
+});
