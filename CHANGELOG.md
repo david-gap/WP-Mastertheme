@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 1.1 | 28.07.2020 <root files>
+## 1.1 | 28.07.2020 <template header, classes update>
 * add frontend css class to body
 * WPinit class version 2.5.2
 * template class version 2.3.2
