@@ -18,7 +18,7 @@
     // body class
     $pt = $obj ? 'pt-' . $obj->post_type : '';
   ?>
-  <body class="<?php echo $pt; ?> <?php echo prefix_template::$template_coloring; ?> <?php echo prefix_template::CheckSticky(prefix_template::$template_header_sticky); ?>">
+  <body class="frontend <?php echo $pt; ?> <?php echo prefix_template::$template_coloring; ?> <?php echo prefix_template::CheckSticky(prefix_template::$template_header_sticky); ?>">
     <?php echo prefix_WPseo::GoogleTracking(true); ?>
     <?php if(!in_array('header', $options)): ?>
       <header>
