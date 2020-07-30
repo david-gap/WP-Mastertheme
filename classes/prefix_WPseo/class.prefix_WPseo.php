@@ -4,7 +4,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.1.2
+ * @version     2.1.3
  *
 */
 
@@ -52,7 +52,10 @@ class prefix_WPseo {
     private $WPseo_icon_114           = 0;
     private $WPseo_datastructure      = 0;
     private $WPseo_datastructure_add  = array(
-      "type" => "Website"
+      array(
+        "key" => "type",
+        "value" => "Website"
+      )
     );
     private $WPseo_address = array(
       "company" => "Company",
@@ -84,6 +87,10 @@ class prefix_WPseo {
     static $classtitle = 'WP SEO';
     static $classkey = 'seo';
     static $backend = array(
+      "google-tracking" => array(
+        "label" => "Google tracking",
+        "type" => "text"
+      ),
       "logo" => array(
         "label" => "Logo",
         "type" => "img"

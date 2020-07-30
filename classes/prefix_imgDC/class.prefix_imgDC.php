@@ -6,7 +6,7 @@
  * IMG dominant color - WP compatible
  * https://github.com/david-gap/classes
  * Author:      David Voglgsang
- * @version     2.1
+ * @version     2.1.1
  *
  */
 
@@ -80,7 +80,7 @@ class prefix_imgDC {
         add_action( 'admin_menu', array( $this, 'imgDC_backendPage' ) );
         // add class assets
         add_action('admin_enqueue_scripts', array( $this, 'imgDC_backend_enqueue_scripts_and_styles' ) );
-        if($this->$imgDC_assets == 1):
+        if($this->imgDC_assets == 1):
           add_action('wp_enqueue_scripts', array( $this, 'imgDC_frontend_enqueue_scripts_and_styles' ) );
         endif;
       endif;
@@ -132,7 +132,7 @@ class prefix_imgDC {
         // update vars
         $this->imgDC_wp = array_key_exists('wp', $myConfig) ? $myConfig['wp'] : $this->imgDC_wp;
         $this->imgDC_content = array_key_exists('content', $myConfig) ? $myConfig['content'] : $this->imgDC_content;
-        $this->$imgDC_assets = array_key_exists('assets', $myConfig) ? $myConfig['assets'] : $this->$imgDC_assets;
+        $this->imgDC_assets = array_key_exists('assets', $myConfig) ? $myConfig['assets'] : $this->imgDC_assets;
         SELF::$imgDC_nocolor_files = array_key_exists('nocolor_files', $myConfig) ? $myConfig['nocolor_files'] : SELF::$imgDC_nocolor_files;
         SELF::$imgDC_defaultcolor = array_key_exists('defaultcolor', $myConfig) ? $myConfig['defaultcolor'] : SELF::$imgDC_defaultcolor;
       endif;

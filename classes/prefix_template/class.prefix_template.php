@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.3.2
+ * @version     2.3.3
  *
 */
 
@@ -613,8 +613,10 @@ class prefix_template {
         return;
       endif;
       // save page optons
-      $options = $_POST['template_page_options'] && $_POST['template_page_options'] !== '' ? serialize($_POST['template_page_options']) : '';
-      update_post_meta($post_id, 'template_page_options', $options);
+      if(isset($_POST['template_page_options'])):
+        $options = $_POST['template_page_options'] !== '' ? serialize($_POST['template_page_options']) : '';
+        update_post_meta($post_id, 'template_page_options', $options);
+      endif;
     }
 
 

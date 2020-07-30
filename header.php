@@ -1,11 +1,11 @@
 <?php
 /**
  * @author      David Voglgsang
- * @version     1.0
+ * @version     1.1
 */
 ?>
 <!DOCTYPE html>
-<html <?php language_attributes(); ?>>
+<html <?php language_attributes(); ?> class="<?= prefix_core_BaseFunctions::get_browser_name(); ?>">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1, initial-scale=1">
