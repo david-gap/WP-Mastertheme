@@ -3,7 +3,7 @@
  * Post Type File Single
  *
  * @author      David Voglgsang
- * @version     1.0
+ * @version     1.1
  *
 */
 
@@ -11,9 +11,7 @@ get_header();
 
 $obj = get_queried_object();
 // page options
-$options = prefix_template::PageOptions($obj->ID);
-// body class
-$pt = $obj ? 'pt-' . $obj->post_type : '';
+$options = $obj && array_key_exists('ID', $obj) ? prefix_template::PageOptions($obj->ID) : array();
 ?>
 <section id="detail-page" <?php echo prefix_template::AddContainer(prefix_template::$template_container, true); ?>>
   <? the_post_thumbnail('large', ['class' => 'post-thumb']); ?>
@@ -24,6 +22,7 @@ $pt = $obj ? 'pt-' . $obj->post_type : '';
       <?php endif; ?>
       <?php the_content(); ?>
     </article>
+    <?php comments_template();?>
     <?php get_sidebar(); ?>
   <?php endwhile; endif; ?>
 </section>

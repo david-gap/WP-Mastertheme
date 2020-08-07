@@ -3,17 +3,13 @@
  * Sidebar File
  *
  * @author      David Voglgsang
- * @version     1.0
+ * @version     1.1
  *
 */
 
-get_header();
-
 $obj = get_queried_object();
 // page options
-$options = prefix_template::PageOptions($obj->ID);
-// post type
-$pt = $obj ? 'pt-' . $obj->post_type : '';
+$options = $obj && array_key_exists('ID', $obj) ? prefix_template::PageOptions($obj->ID) : array();
 
 if(!in_array('sidebar', $options)): ?>
   <aside id="sidebar">

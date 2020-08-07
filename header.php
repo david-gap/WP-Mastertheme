@@ -1,7 +1,7 @@
 <?php
 /**
  * @author      David Voglgsang
- * @version     1.1
+ * @version     1.2
 */
 ?>
 <!DOCTYPE html>
@@ -14,11 +14,9 @@
   <?php
     $obj = get_queried_object();
     // page options
-    $options = prefix_template::PageOptions($obj->ID);
-    // body class
-    $pt = $obj ? 'pt-' . $obj->post_type : '';
+    $options = $obj && array_key_exists('ID', $obj) ? prefix_template::PageOptions($obj->ID) : array();
   ?>
-  <body class="frontend <?php echo $pt; ?> <?php echo prefix_template::$template_coloring; ?> <?php echo prefix_template::CheckSticky(prefix_template::$template_header_sticky); ?>">
+  <body class="<? prefix_template::BodyCSS(); ?>">
     <?php echo prefix_WPseo::GoogleTracking(true); ?>
     <?php if(!in_array('header', $options)): ?>
       <header>
@@ -31,4 +29,5 @@
         ?>
       </header>
     <?php endif; ?>
+    <?php prefix_template::ContentBlock(prefix_template::$template_header_after); ?>
     <main>

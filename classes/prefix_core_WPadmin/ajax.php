@@ -33,8 +33,8 @@ if($run_action) {
   /------------------------*/
   function SaveFormInput(){
     // get
-    $fields  = unserialize($_POST['formdata']);
-    $fields  = serialize($fields);
+    // $fields  = unserialize($_POST['formdata']);
+    // $fields  = serialize($fields);
     $fields = array();
     parse_str($_POST['formdata'], $fields);
     // clean array

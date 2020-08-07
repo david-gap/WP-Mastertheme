@@ -3,7 +3,7 @@
  * Search results page
  *
  * @author      David Voglgsang
- * @version     1.0
+ * @version     1.1
  *
 */
 
@@ -23,7 +23,18 @@ get_header();
       <?php endwhile;	?>
     </div>
   <?php else: ?>
-    <?php echo __('No results were found','Template'); ?>
+    <p><?php echo __('Sorry, but nothing matched your search terms. Please try again with some different keywords.','Template'); ?></p>
   <?php endif; ?>
 </section>
+<nav class="pagination">
+  <?
+  $big = 999999999; // need an unlikely integer
+  echo paginate_links( array(
+      'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+      'format' => '?paged=%#%',
+      'current' => max( 1, get_query_var('paged') ),
+      'total' => $wp_query->max_num_pages
+  ) );
+  ?>
+</nav>
 <?php get_footer(); ?>

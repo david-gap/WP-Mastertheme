@@ -1,14 +1,14 @@
 <?php
 /**
  * @author      David Voglgsang
- * @version     1.0
+ * @version     1.1
 */
 
 $obj = get_queried_object();
 // page options
-$options = prefix_template::PageOptions($obj->ID);
-// body class
-$pt = $obj ? 'pt-' . $obj->post_type : '';
+$options = $obj && array_key_exists('ID', $obj) ? prefix_template::PageOptions($obj->ID) : array();
+// custom content before footer
+prefix_template::ContentBlock(prefix_template::$template_footer_before);
 ?>
     </main>
     <?php if(prefix_template::$template_footer_active == 1 && !in_array('footer', $options)): ?>

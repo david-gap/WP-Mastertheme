@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## 1.3 | 07.08.2020 <cleaning, classes update>
+* post/blog comments
+* clean files from not needed code
+* PageOptions fallback
+* Add template element after header and before footer
+* Search results pagination
+* Body css from BodyCSS function & filterable
+* WPadmin fallback for classes with no backend input
+* WPadmin ajax success output improvement & delete not needed function
+* WPadmin clean ajax file
+* WPinit class version 2.5.3
+* template class version 2.4.3
+
 ## 1.2 | 28.07.2020 <html broser name, classes update>
 * add browser name as css class to html
 * imgDC class version 2.1.1

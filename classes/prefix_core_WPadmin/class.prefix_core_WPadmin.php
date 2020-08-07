@@ -4,7 +4,7 @@
  *
  * Backend area to manage configuration file
  * Author:      David Voglgsnag
- * @version     1.0
+ * @version     1.0.1
  *
  */
 
@@ -110,13 +110,13 @@ class prefix_core_WPadmin {
           foreach ($registered_classes as $class_key => $classname) {
             if(strpos($classname, 'prefix_') === 0 && strpos($classname, '_core_') == false):
               // for each registered custom class
-              $builder = $classname::$backend;
+              $builder = isset($classname::$backend) ? $classname::$backend : '';
               $builder_title = isset($classname::$classtitle) ? $classname::$classtitle : '';
               $builder_slug = isset($classname::$classkey) ? $classname::$classkey : $classname;
               // db values
               $db_settings = array_key_exists($builder_slug, $db_option) ? $db_option[$builder_slug] : array();
               // check if backend values exists
-              if($builder):
+              if($builder !== ''):
                 // container
                 $output .= '<table class="config-group ' . $classname . '">';
                   // return title

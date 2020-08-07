@@ -42,37 +42,28 @@ jQuery(document).ready(function($){
         url: Ajax_File,
         type: 'POST',
         data: getdata,
+        dataType: "json",
         success: function(data) {
           // DEBUG: console.log("Ajax update success");
           // DEBUG: console.log(data);
-          var result = jQuery.parseJSON( data );
           $('#configuration').removeClass('loading');
           // console
-          if(result.log){
-            console.log(result.log);
+          if(data.log){
+            console.log(data.log);
           }
           // message
-          if(result.message){
-            $('#configuration #config-message').html(result.message);
+          if(data.message){
+            $('#configuration #config-message').html(data.message);
           }
           // css
-          if(result.type){
-            $('#configuration #config-message').attr('class', result.type);
+          if(data.type){
+            $('#configuration #config-message').attr('class', data.type);
           }
         },
         error:function(){
           // DEBUG: console.log("Ajax update failed");
         }
       });
-    }
-
-
-    /* save content
-    /––––––––––––––––––––––––*/
-    function SaveContent(data) {
-      // ajax is active - disable reload
-      event.preventDefault();
-      ajaxCall(data);
     }
 
 
@@ -93,7 +84,8 @@ jQuery(document).ready(function($){
         formdata: get_formData
       };
       $('#configuration').addClass('loading');
-      SaveContent(data);
+      event.preventDefault();
+      ajaxCall(data);
     });
 
 
@@ -168,27 +160,6 @@ jQuery(document).ready(function($){
     });
 
 
-    /* sortable multi fields
-    /------------------------*/
-    if($('.sortable').length!==0){
-      $( ".sortable" ).sortable({
-        update: function( event, ui ) {
-          // create array
-          // var img_ids = [];
-          // // push ids into array
-          // $( ".galleriesImages_list li" ).each(function() {
-          //   var img_id = $(this).attr("data-id");
-          //   img_ids.push(img_id);
-          // });
-          // // array to string
-          // var newSort = img_ids.join();
-          // // insert new value
-          // $("#galleriesImages").val(newSort);
-        }
-      });
-    }
-
-
   /* Generate configuration file
   /––––––––––––––––––––––––*/
   $(document).on('click', '#configuration button.ajax-action', function (event) {
@@ -243,6 +214,27 @@ jQuery(document).ready(function($){
       $(this).parents('li').remove();
     }
 	});
+
+
+  /* sortable multi fields
+  /------------------------*/
+  if($('.sortable').length!==0){
+    $('.sortable').sortable({
+      update: function( event, ui ) {
+        // create array
+        // var img_ids = [];
+        // // push ids into array
+        // $( ".galleriesImages_list li" ).each(function() {
+        //   var img_id = $(this).attr("data-id");
+        //   img_ids.push(img_id);
+        // });
+        // // array to string
+        // var newSort = img_ids.join();
+        // // insert new value
+        // $("#galleriesImages").val(newSort);
+      }
+    });
+  }
 
 
 });
