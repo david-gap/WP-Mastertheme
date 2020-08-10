@@ -1,8 +1,10 @@
 # CHANGELOG
 
-## 1.3.1 | 07.08.2020 <clean admin, classes update>
-* Remove duplicate class from admin folder
+## 1.4 | 10.08.2020 <clean admin, classes update>
+* Remove duplicate class from WPadmin folder
 * WPinit class version 2.5.4
+* template class version 2.4.4
+* imgDC class version 2.1.2
 
 ## 1.3 | 07.08.2020 <cleaning, classes update>
 * post/blog comments

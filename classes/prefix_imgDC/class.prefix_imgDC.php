@@ -6,7 +6,7 @@
  * IMG dominant color - WP compatible
  * https://github.com/david-gap/classes
  * Author:      David Voglgsang
- * @version     2.1.1
+ * @version     2.1.2
  *
  */
 
@@ -445,26 +445,27 @@ class prefix_imgDC {
         // get attachment meta data
         $metadata = wp_get_attachment_metadata($id);
         $img_type = get_post_mime_type($id);
-        $img_path = $path["baseurl"] . '/' . $metadata["file"];
+        $img_path = $path && array_key_exists('baseurl', $path) ? $path["baseurl"] : '';
+        $img_path .= $metadata && array_key_exists('file', $metadata) ? '/' . $metadata["file"] : '';
         $full_image_url = wp_get_attachment_image_src($id, 'full');
         $thumb_image_url = wp_get_attachment_image_src($id, 'thumbnail');
         // fallback - img width
-        if(strpos($additional, 'width="') === false):
+        if(strpos($additional, 'width="') == false):
             $additional .= $metadata && array_key_exists('width', $metadata) ? ' width="' . $metadata["width"] . '"' : '';
         endif;
         // fallback - img height
-        if(strpos($additional, 'height="') === false):
+        if(strpos($additional, 'height="') == false):
             $additional .= $metadata && array_key_exists('height', $metadata) ? ' height="' . $metadata["height"] . '"' : '';
         endif;
         // fallback - alt
-        if(strpos($additional, 'alt="') === false):
+        if(strpos($additional, 'alt="') == false):
             $img_alt = get_post_meta( $id, '_wp_attachment_image_alt', true);
             $additional .= $img_alt ? ' alt="' . $img_alt . '"' : '';
         endif;
         // add file type as css class
         $css .= ' ' . str_replace(array("/", "+"), array("-", "-"), $img_type);
         // fallback - srcset
-        if(strpos($additional, 'data-srcset="') === false):
+        if(strpos($additional, 'srcset="') === false):
             $srcset = wp_get_attachment_image_srcset( $id );
             if(!$srcset):
               $srcset = '';
@@ -484,7 +485,7 @@ class prefix_imgDC {
               endif;
             endif;
             // return srcset
-            $additional .= $srcset !== '' ? ' data-srcset="' . $srcset . '"' : '';
+            $additional .= $srcset !== '' ? ' srcset="' . $srcset . '"' : '';
         endif;
         // fallback - sizes
         if(strpos($additional, 'sizes="') === false):
@@ -566,7 +567,7 @@ class prefix_imgDC {
               $id = SELF::getAttachmentID_notOrginal($remove_cdn);
             endif;
           elseif($check_srcset !== false):
-            $additional .= str_replace('srcset', 'data-srcset', $value);
+            $additional .= str_replace('srcset', 'srcset', $value);
           else:
             $additional .= $value;
           endif;
