@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.3.1 | 07.08.2020 <clean admin, classes update>
+* Remove duplicate class from admin folder
+* WPinit class version 2.5.4
+
 ## 1.3 | 07.08.2020 <cleaning, classes update>
 * post/blog comments
 * clean files from not needed code
