@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.5 | 11.08.2020 <assets, classes update>
+* Add assets folder with the current jquery version 3.5.1
+* WPinit class version 2.6.4
+* WPseo class version 2.2.3
+* template class version 2.5.4
+
 ## 1.4 | 10.08.2020 <clean admin, classes update>
 * Remove duplicate class from WPadmin folder
 * WPinit class version 2.5.4
