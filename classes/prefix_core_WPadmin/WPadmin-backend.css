@@ -1,11 +1,17 @@
 /*==================================================================================
   THEME
 ==================================================================================*/
-#configuration .button {
+#configuration input[type="submit"] {
   margin-top: 20px;
 }
 #configuration .error {
   color: #a53737;
+}
+#configuration .ajax-action {
+  margin-top: 10px;
+}
+#configuration .config-group {
+  margin-top: 20px;
 }
 #configuration .config-group tr th {
   text-align: left;
@@ -35,7 +41,10 @@
 #configuration .config-group td {
   padding: 5px 0;
 }
-
+#configuration .config-group .wp-picker-active {
+  padding: 5px;
+  border: 1px solid;
+}
 
 /*==================================================================================
   LOADING

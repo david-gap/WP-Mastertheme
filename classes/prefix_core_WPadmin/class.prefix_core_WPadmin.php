@@ -4,7 +4,7 @@
  *
  * Backend area to manage configuration file
  * Author:      David Voglgsnag
- * @version     1.0.1
+ * @version     1.1.1
  *
  */
 
@@ -75,11 +75,14 @@ class prefix_core_WPadmin {
     $class_path = get_template_directory_uri() . '/classes/prefix_core_WPadmin/';
     $backend_ajax_action_file = $class_path . 'ajax.php';
     // scripts
-    wp_enqueue_script('backend/WPadmin-script', $class_path . 'WPadmin-backend.js', false, 0.7);
+    wp_enqueue_script('backend/WPadmin-script', $class_path . 'WPadmin-backend.js', false, 0.8);
     wp_localize_script( 'backend/WPadmin-script', 'Ajax_File', $backend_ajax_action_file );
     // css
     wp_enqueue_script( 'backend/WPadmin-styles' );
-    wp_enqueue_style('backend/WPadmin-styles', $class_path . 'WPadmin-backend.css', false, 0.2);
+    wp_enqueue_style('backend/WPadmin-styles', $class_path . 'WPadmin-backend.css', false, 0.3);
+    // Add the color picker css file
+    wp_enqueue_style('wp-color-picker');
+    wp_enqueue_script('wp-color-picker');
   }
 
 
@@ -104,7 +107,8 @@ class prefix_core_WPadmin {
       // output
       $output .= '<div class="wrap" id="configuration">';
         $output .= '<h1 class="wp-heading-inline">' . __('Page Configurator','WPadmin') . '</h1>';
-        $output .= '<button class="page-title-action ajax-action" data-action="GeneratConfigFile">' . __('Generate configuration file','WPadmin') . '</button>';
+        $output .= '<br><button class="page-title-action ajax-action" data-action="GenerateConfigFile">' . __('Generate configuration file','WPadmin') . '</button>';
+        $output .= '<br><button class="page-title-action ajax-action" data-action="GenerateCssFile">' . __('Download css file','WPadmin') . '</button>';
         $output .= '<span id="config-message"></span>';
         $output .= '<form>';
           foreach ($registered_classes as $class_key => $classname) {
@@ -205,6 +209,7 @@ class prefix_core_WPadmin {
 
       case "text":
         $attr .= $value !== false ? 'value="' . $value . '"' : '';
+        $attr .= $css !== '' ? ' ' . ' class="' . $css . '"' : '';
         $output .= '<input type="text"' . $attr . '>';
         break;
 
@@ -285,6 +290,7 @@ class prefix_core_WPadmin {
                   $output .= '<ul class="multiple">';
                     foreach ($multiple as $multiple_key => $multiple_input) {
                       $multiple_value = array_key_exists('value', $multiple_input) ? $multiple_input["value"] : false;
+                      $multiple_css = array_key_exists('css', $multiple_input) ? ' ' . $multiple_input["css"] : '';
                       $db_value = $single_value !== false && array_key_exists($multiple_key, $single_value) ? $single_value[$multiple_key] : false;
                       $output .= '<li>';
                         $output .= '<label>' . $multiple_input["label"] . '</label>';
@@ -293,7 +299,7 @@ class prefix_core_WPadmin {
                           $multiple_value,
                           $name . '[' . $single_key . '][' . $multiple_key. ']',
                           $id . '_' . $multiple_key,
-                          '',
+                          $multiple_css,
                           $db_value
                         );
                       $output .= '</li>';

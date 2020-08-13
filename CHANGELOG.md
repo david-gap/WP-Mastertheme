@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 1.6 | 13.08.2020 <container, classes update>
+* set header, main und footer container apart
+* Ajax option to download generated file
+* Add color picker to backend configurator
+* Ajax action to generate css file from all classes custom css
+* BaseFunctions class version 2.7
+* WPinit class version 2.7.4
+* template class version 2.5.5
+* WPgutenberg class version 2.2.1
+
 ## 1.5 | 11.08.2020 <assets, classes update>
 * Add assets folder with the current jquery version 3.5.1
 * WPinit class version 2.6.4

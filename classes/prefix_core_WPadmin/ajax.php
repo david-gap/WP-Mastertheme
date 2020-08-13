@@ -13,7 +13,7 @@ if($run_action) {
 
   /* CONNECT TO DATABASE
   /===================================================== */
-  $allow_connection = array('SaveFormInput', 'GeneratConfigFile');
+  $allow_connection = array('SaveFormInput', 'GenerateConfigFile', 'GenerateCssFile');
   if(in_array($run_action, $allow_connection)):
       $url = (!empty($_SERVER['HTTPS'])) ? "https://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'] : "http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
       $url = $_SERVER['REQUEST_URI'];
@@ -61,7 +61,7 @@ if($run_action) {
 
   /* SAVE CONFIGURATIN FILE
   /------------------------*/
-  function GeneratConfigFile(){
+  function GenerateConfigFile(){
     $db_option = get_option('WPadmin_configuration') ? get_option('WPadmin_configuration') : false;
     // check if configurations been saved
     if($db_option !== false):
@@ -83,13 +83,46 @@ if($run_action) {
   }
 
 
+  /* GENERATE CSS FILE
+  /------------------------*/
+  function GenerateCssFile(){
+    $css = prefix_WPinit::BuildCustomCSS(false);
+    if($css !== ''):
+      ob_start();
+        header("Content-Disposition: attachment; filename=\"custom.css\"");
+        header('Content-type: text/css');
+        header("Content-Type: application/force-download");
+        header("Connection: close");
+        echo $css;
+        $file_content = ob_get_contents();
+      ob_end_clean();
+      // custom css exists
+      $return = array(
+        'message' => __('New css file been created','WPadmin'),
+        'type' => 'success',
+        'file' => 'data:text/css;base64,' . base64_encode($file_content),
+        'name' => 'custom.css'
+      );
+    else:
+      // no custom css been defined
+      $return = array(
+        'message' => __('No css defined','WPadmin'),
+        'type' => 'error'
+      );
+    endif;
+    echo json_encode($return);
+  }
+
+
   /* DEMO
   /------------------------*/
   function Demo(){
     $return = array(
       'message' => 'message',
       'type' => 'success or error',
-      'log' => 'Log'
+      'log' => 'Log',
+      'file' => 'file_content_to_download',
+      'name' => 'file.name'
     );
     echo json_encode($return);
   }
@@ -102,8 +135,11 @@ if($run_action) {
     case "SaveFormInput":
       SaveFormInput();
       break;
-    case "GeneratConfigFile":
-      GeneratConfigFile();
+    case "GenerateConfigFile":
+      GenerateConfigFile();
+      break;
+    case "GenerateCssFile":
+      GenerateCssFile();
       break;
     default:
       echo "no access granted";

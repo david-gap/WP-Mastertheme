@@ -59,6 +59,15 @@ jQuery(document).ready(function($){
           if(data.type){
             $('#configuration #config-message').attr('class', data.type);
           }
+          // css
+          if(data.file && data.name){
+            var $a = $("<a>");
+            $a.attr("href",data.file);
+            $("#configuration #config-message").append($a);
+            $a.attr("download",data.name);
+            $a[0].click();
+            $a.remove();
+          }
         },
         error:function(){
           // DEBUG: console.log("Ajax update failed");
@@ -160,81 +169,99 @@ jQuery(document).ready(function($){
     });
 
 
-  /* Generate configuration file
-  /––––––––––––––––––––––––*/
-  $(document).on('click', '#configuration button.ajax-action', function (event) {
-    event.preventDefault();
-    // vars
-    var get_action = $(this).attr('data-action');
-    // build data array
-    var data = {
-      action: get_action
-    };
-    // run ajax
-    ajaxCall(data);
-	});
-
-
-  /* duplicate rows
-  /––––––––––––––––––––––––*/
-  $(document).on('click', '#configuration button.input-fields-adder', function (event) {
-    event.preventDefault();
-    // vars
-    var get_main_parent = $(this).siblings('ul');
-    var current_last_id = $(get_main_parent).children('li').last().attr('data-row');
-    var new_row_id = parseFloat(current_last_id) + 1;
-    // copy
-    var $clone = $(get_main_parent).children('li').last().clone();
-    $clone.find('input').val('');
-    $clone.appendTo(get_main_parent);
-    // remove css class if array has now more then 1 values
-    $(get_main_parent).removeClass('disable-remove');
-    // update row number
-    $(get_main_parent).children('li').last().attr('data-row', new_row_id);
-    $(get_main_parent).children('li').last().find('input').attr('value', '');
-    $( 'li[data-row="' + new_row_id + '"] input' ).each(function() {
-      var name = $( this ).attr( "name" );
-      var new_name = name.replace("[" + current_last_id + "]", "[" + new_row_id + "]");
-      $( this ).attr( "name", new_name );
+    /* Generate configuration file
+    /––––––––––––––––––––––––*/
+    $(document).on('click', '#configuration button.ajax-action', function (event) {
+      event.preventDefault();
+      // vars
+      var get_action = $(this).attr('data-action');
+      // build data array
+      var data = {
+        action: get_action
+      };
+      // run ajax
+      ajaxCall(data);
     });
 
-	});
+
+    /* duplicate rows
+    /––––––––––––––––––––––––*/
+    $(document).on('click', '#configuration button.input-fields-adder', function (event) {
+      event.preventDefault();
+      // vars
+      var get_main_parent = $(this).siblings('ul');
+      var current_last_id = $(get_main_parent).children('li').last().attr('data-row');
+      var new_row_id = parseFloat(current_last_id) + 1;
+      // copy
+      var $clone = $(get_main_parent).children('li').last().clone();
+      // clear values
+      $clone.find('input').val('');
+      // reset color picker
+      var $colorpicker = $('.wp-picker-container .wp-picker-input-wrap label input', $clone).clone();
+      $('.wp-picker-container', $clone).html($colorpicker);
+      $('.wp-picker-container .colorpicker', $clone).wpColorPicker();
+      // inset copy
+      $clone.appendTo(get_main_parent);
+      // remove css class if array has now more then 1 values
+      $(get_main_parent).removeClass('disable-remove');
+      // update row number
+      $(get_main_parent).children('li').last().attr('data-row', new_row_id);
+      $(get_main_parent).children('li').last().find('input').attr('value', '');
+      $(this).siblings('ul').find('li[data-row="' + new_row_id + '"] input').each(function() {
+        var type = $( this ).attr( "type" );
+        if(type !== 'button' && type !== 'submit'){
+          var name = $( this ).attr( "name" );
+          var new_name = name.replace("[" + current_last_id + "]", "[" + new_row_id + "]");
+          $( this ).attr( "name", new_name );
+        }
+      });
+    });
 
 
-  /* delete rows
-  /––––––––––––––––––––––––*/
-  $(document).on('click', '#configuration .addable .remove', function (event) {
-    var confirm1 = confirm('Are you sure you want to delete this entry?');
-    if (confirm1) {
-      // add css class if array has now only 1 value
-      if ( $(this).parents('ul').children('li').length == 2 ) {
-        $(this).parents('ul').addClass('disable-remove');
+    /* delete rows
+    /––––––––––––––––––––––––*/
+    $(document).on('click', '#configuration .addable .remove', function (event) {
+      var confirm1 = confirm('Are you sure you want to delete this entry?');
+      if (confirm1) {
+        // add css class if array has now only 1 value
+        if ( $(this).parents('ul').children('li').length == 2 ) {
+          $(this).parents('ul').addClass('disable-remove');
+        }
+        // remove row
+        $(this).parents('li').remove();
       }
-      // remove row
-      $(this).parents('li').remove();
+  	});
+
+
+    /* Color picker
+    /------------------------*/
+    function RunColorPicker(){
+      $('.colorpicker').each(function(){
+        $(this).wpColorPicker();
+      });
     }
-	});
+    RunColorPicker();
 
 
-  /* sortable multi fields
-  /------------------------*/
-  if($('.sortable').length!==0){
-    $('.sortable').sortable({
-      update: function( event, ui ) {
-        // create array
-        // var img_ids = [];
-        // // push ids into array
-        // $( ".galleriesImages_list li" ).each(function() {
-        //   var img_id = $(this).attr("data-id");
-        //   img_ids.push(img_id);
-        // });
-        // // array to string
-        // var newSort = img_ids.join();
-        // // insert new value
-        // $("#galleriesImages").val(newSort);
-      }
-    });
-  }
+    /* sortable multi fields
+    /------------------------*/
+    if($('.sortable').length!==0){
+      $('.sortable').sortable({
+        update: function( event, ui ) {
+          // create array
+          // var img_ids = [];
+          // // push ids into array
+          // $( ".galleriesImages_list li" ).each(function() {
+          //   var img_id = $(this).attr("data-id");
+          //   img_ids.push(img_id);
+          // });
+          // // array to string
+          // var newSort = img_ids.join();
+          // // insert new value
+          // $("#galleriesImages").val(newSort);
+        }
+      });
+    }
 
 
 });
