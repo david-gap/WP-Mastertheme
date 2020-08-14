@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.7 | 13.08.2020 <page options, classes update>
+* Backend page/post options darkmode and hide title
+* BaseFunctions class version 2.8
+* template class version 2.6.5
+
 ## 1.6 | 13.08.2020 <container, classes update>
 * set header, main und footer container apart
 * Ajax option to download generated file

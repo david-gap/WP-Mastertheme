@@ -75,11 +75,39 @@ jQuery(document).ready(function($){
       });
     }
 
+    /* page options
+    /––––––––––––––––––––––––*/
+    function updatePageUptions() {
+      // get selected page options
+      var page_options = $('#WPtemplate').find('input:checked').map(function(_, el) {return $(el).val();}).get();
+      // dark mode
+      if($.inArray('darkmode', page_options) > -1){
+        $('.editor-styles-wrapper').addClass('dark');
+      } else {
+        $('.editor-styles-wrapper').removeClass('dark');
+      }
+      // title - smaller
+      if($.inArray('title', page_options) > -1){
+        $('.editor-post-title__input').addClass('small');
+      } else {
+        $('.editor-post-title__input').removeClass('small');
+      }
+    }
+    setTimeout(function(){
+      updatePageUptions();
+    },2000);
+
 
 
     /*==================================================================================
       CALL ACTIONS
     ==================================================================================*/
+
+    /* recheck dark mode
+    /––––––––––––––––––––––––*/
+    $(document).on('click', '#WPtemplate input', function (event) {
+      updatePageUptions();
+    });
 
     /* save form
     /––––––––––––––––––––––––*/
