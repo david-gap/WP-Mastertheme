@@ -1,7 +1,7 @@
 <?php
 /**
  * @author      David Voglgsang
- * @version     1.3
+ * @version     1.4
 */
 ?>
 <!DOCTYPE html>
@@ -20,7 +20,7 @@
     <?php echo prefix_WPseo::GoogleTracking(true); ?>
     <?php if(!in_array('header', $options)): ?>
       <header>
-        <nav <?php echo prefix_template::AddContainer(prefix_template::$template_container_header, true); ?>>
+        <nav>
           <?php echo prefix_template::HeaderContent(); ?>
         </nav>
         <?php

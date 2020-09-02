@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 1.8 | 02.09.2020 <header & footer, classes update>
+* header & footer container improved with before and after container
+* WPseo class version 2.2.4
+* WPinit class version 2.7.5
+* WPgutenberg class version 2.3.1
+* template class version 2.7.5
+* WPinit class version 1.2.1
+
 ## 1.7 | 13.08.2020 <page options, classes update>
 * Backend page/post options darkmode and hide title
 * BaseFunctions class version 2.8

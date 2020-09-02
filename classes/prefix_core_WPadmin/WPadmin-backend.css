@@ -7,6 +7,10 @@
 #configuration .error {
   color: #a53737;
 }
+#configuration hr {
+  border-bottom: 1px solid #000;
+  min-width: 10px
+}
 #configuration .ajax-action {
   margin-top: 10px;
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  * @author      David Voglgsang
- * @version     1.2
+ * @version     1.3
 */
 
 $obj = get_queried_object();
@@ -13,9 +13,7 @@ prefix_template::ContentBlock(prefix_template::$template_footer_before);
     </main>
     <?php if(prefix_template::$template_footer_active == 1 && !in_array('footer', $options)): ?>
       <footer>
-        <div class="footer-container <?php echo prefix_template::AddContainer(prefix_template::$template_container_footer, false); ?>">
           <?php echo prefix_template::FooterContent(); ?>
-        </div>
       </footer>
     <?php endif; ?>
     <?php

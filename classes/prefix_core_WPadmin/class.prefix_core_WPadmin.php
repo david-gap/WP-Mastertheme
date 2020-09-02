@@ -4,7 +4,7 @@
  *
  * Backend area to manage configuration file
  * Author:      David Voglgsnag
- * @version     1.1.1
+ * @version     1.2.1
  *
  */
 
@@ -207,6 +207,12 @@ class prefix_core_WPadmin {
           $output .= '</span>';
         break;
 
+      case "hr":
+        $attr .= ' value="1"';
+        $output .= '<hr>';
+        $output .= '<input type="hidden"' . $attr . '>';
+        break;
+
       case "text":
         $attr .= $value !== false ? 'value="' . $value . '"' : '';
         $attr .= $css !== '' ? ' ' . ' class="' . $css . '"' : '';
@@ -250,31 +256,44 @@ class prefix_core_WPadmin {
         break;
 
       case "multiple":
+        // save multiple before sort by DB
+        $backend_inputs = $multiple;
         // sort by DB
         if(strpos($css, 'sortable') !== false && $value !== false):
           $resort = array();
+          $new = array();
+          // check if option new
+          foreach ($multiple as $single_key => $single) {
+            if(!array_key_exists($single_key, $value)):
+              $new[$single_key] = $multiple[$single_key];
+            endif;
+          }
+          // sort given options
           foreach ($value as $single_key => $single) {
             $resort[$single_key] = $multiple[$single_key];
           }
           $multiple = $resort;
+          $multiple = array_merge($multiple, $new);
         endif;
         // output
         $output .= '<ul class="multiple' . $css . '">';
           foreach ($multiple as $multiple_key => $multiple_input) {
-            $multiple_value = array_key_exists('value', $multiple_input) ? $multiple_input["value"] : false;
-            $multiple_css = array_key_exists('css', $multiple_input) ? ' ' . $multiple_input["css"] : '';
-            $db_value = $value !== false && array_key_exists($multiple_key, $value) ? $value[$multiple_key] : false;
-            $output .= '<li>';
-              $output .= '<label for="' . $id . '_' . $multiple_key . '">' . $multiple_input["label"] . '</label>';
-              $output .= SELF::BuildInput(
-                $multiple_input["type"],
-                $multiple_value,
-                $name . '[' . $multiple_key. ']',
-                $id . '_' . $multiple_key,
-                $multiple_css,
-                $db_value
-              );
-            $output .= '</li>';
+            if(array_key_exists($multiple_key, $backend_inputs)):
+              $multiple_value = array_key_exists('value', $multiple_input) ? $multiple_input["value"] : false;
+              $multiple_css = array_key_exists('css', $multiple_input) ? ' ' . $multiple_input["css"] : '';
+              $db_value = $value !== false && array_key_exists($multiple_key, $value) ? $value[$multiple_key] : false;
+              $output .= '<li>';
+                $output .= '<label for="' . $id . '_' . $multiple_key . '">' . $multiple_input["label"] . '</label>';
+                $output .= SELF::BuildInput(
+                  $multiple_input["type"],
+                  $multiple_value,
+                  $name . '[' . $multiple_key. ']',
+                  $id . '_' . $multiple_key,
+                  $multiple_css,
+                  $db_value
+                );
+              $output .= '</li>';
+            endif;
           }
         $output .= '</ul>';
         break;
