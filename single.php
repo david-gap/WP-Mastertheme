@@ -3,7 +3,7 @@
  * Post Type File Single
  *
  * @author      David Voglgsang
- * @version     1.1
+ * @version     1.1.1
  *
 */
 
@@ -21,9 +21,9 @@ $options = $obj && array_key_exists('ID', $obj) ? prefix_template::PageOptions($
         <h1><?php the_title(); ?></h1>
       <?php endif; ?>
       <?php the_content(); ?>
+      <?php comments_template();?>
     </article>
-    <?php comments_template();?>
-    <?php get_sidebar(); ?>
   <?php endwhile; endif; ?>
+  <?php get_sidebar(); ?>
 </section>
 <?php get_footer(); ?>

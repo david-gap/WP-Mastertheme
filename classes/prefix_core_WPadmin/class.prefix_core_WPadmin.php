@@ -4,7 +4,7 @@
  *
  * Backend area to manage configuration file
  * Author:      David Voglgsnag
- * @version     1.2.1
+ * @version     1.3.1
  *
  */
 
@@ -145,13 +145,15 @@ class prefix_core_WPadmin {
                           $css .= array_key_exists('css', $input) ? ' ' . $input["css"] : '';
                           $value = array_key_exists('value', $input) ? $input["value"] : false;
                           $db_value = array_key_exists($input_key, $db_settings) ? $db_settings[$input_key] : false;
+                          $placeholder = array_key_exists('placeholder', $input) ? ' ' . $input["placeholder"] : '';
                           $output .= SELF::BuildInput(
                             $input["type"],
                             $value,
                             $builder_slug . '[' . $input_key. ']',
                             'WPadmin_' . $builder_slug . '_' . $input_key,
                             $css,
-                            $db_value
+                            $db_value,
+                            $placeholder
                           );
                         else:
                           $output .= '<span class="error">' . __('Input type is missing','WPadmin') . '</span>';
@@ -180,12 +182,13 @@ class prefix_core_WPadmin {
     * @param $value value saved in DB
     * @return string form input
   */
-  function BuildInput(string $type = 'text', $multiple = '', string $name = '', string $id = '', string $css = "", $value = false){
+  function BuildInput(string $type = 'text', $multiple = '', string $name = '', string $id = '', string $css = "", $value = false, $placeholder = ''){
     // vars
     $output = '';
     $attr   = '';
     $attr   .= $name !== '' && $type !== 'select' ? ' name="' . $name . '"' : '';
     $attr   .= $id !== '' && $type !== 'switchbutton' ? ' id="' . $id . '"' : '';
+    $attr   .= $placeholder !== '' ? ' placeholder="' . $placeholder . '"' : '';
     // build input
     switch ($type) {
       case "checkbox":
@@ -282,6 +285,7 @@ class prefix_core_WPadmin {
               $multiple_value = array_key_exists('value', $multiple_input) ? $multiple_input["value"] : false;
               $multiple_css = array_key_exists('css', $multiple_input) ? ' ' . $multiple_input["css"] : '';
               $db_value = $value !== false && array_key_exists($multiple_key, $value) ? $value[$multiple_key] : false;
+              $multiple_ph = array_key_exists('placeholder', $multiple_input) ? ' ' . $multiple_input["placeholder"] : '';
               $output .= '<li>';
                 $output .= '<label for="' . $id . '_' . $multiple_key . '">' . $multiple_input["label"] . '</label>';
                 $output .= SELF::BuildInput(
@@ -290,7 +294,8 @@ class prefix_core_WPadmin {
                   $name . '[' . $multiple_key. ']',
                   $id . '_' . $multiple_key,
                   $multiple_css,
-                  $db_value
+                  $db_value,
+                  $multiple_ph
                 );
               $output .= '</li>';
             endif;

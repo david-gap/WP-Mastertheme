@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 1.9 | 07.09.2020 <blog template, classes update>
+* fix sidebar position
+* Blog/Search template by post type 
+* WPadmin add placeholder option
+* BaseFunctions class version 2.8.1
+* template class version 2.8.5
+* WPinit class version 2.8.5
+
 ## 1.8 | 02.09.2020 <header & footer, classes update>
 * header & footer container improved with before and after container
 * WPseo class version 2.2.4

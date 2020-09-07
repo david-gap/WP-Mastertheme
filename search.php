@@ -3,7 +3,7 @@
  * Search results page
  *
  * @author      David Voglgsang
- * @version     1.1
+ * @version     1.2
  *
 */
 
@@ -15,12 +15,16 @@ get_header();
   </h1>
   <?php if ( have_posts() ) : ?>
     <div class="results">
-      <?php while ( have_posts() ) : the_post(); ?>
-        <article class="post">
-          <h3><a href="<?php echo get_permalink(); ?>"><?php the_title(); ?></a></h3>
-          <?php the_excerpt(); ?>
-        </article>
-      <?php endwhile;	?>
+      <?php while ( have_posts() ) : the_post();
+        if(get_post_type() == "post"):
+          // blog output
+          $blog_type = get_post_meta($id, 'template_blog_type', true) ? get_post_meta($id, 'template_blog_type', true) : "default";
+          get_template_part('template_parts/' . get_post_type() . '_' . $blog_type);
+        else:
+          // default output
+          get_template_part('template_parts/post_default');
+        endif;
+      endwhile;	?>
     </div>
   <?php else: ?>
     <p><?php echo __('Sorry, but nothing matched your search terms. Please try again with some different keywords.','Template'); ?></p>
