@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.10.1 | 17.09.2020 <tempalte class bug fix>
+* template class version 2.8.7
+
 ## 1.10 | 17.09.2020 <object query fix, classes update>
 * fix object query for page/post ID
 * BaseFunctions class version 2.8.2
