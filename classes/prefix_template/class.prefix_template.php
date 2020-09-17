@@ -751,7 +751,7 @@ class prefix_template {
         update_post_meta($post_id, 'template_page_options', '');
       endif;
       // save blog template
-      if("post" != $post_type && "attachment" != $post_type && "nav_menu_item" != $post_type && isset($_POST['template_blog_type'])):
+      if(isset($post_type) && "post" != $post_type && "attachment" != $post_type && "nav_menu_item" != $post_type && isset($_POST['template_blog_type'])):
         update_post_meta($post_id, 'template_blog_type', $_POST['template_blog_type']);
       endif;
     }
