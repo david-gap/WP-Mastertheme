@@ -1,8 +1,14 @@
 # CHANGELOG
 
+## 1.10 | 17.09.2020 <object query fix, classes update>
+* fix object query for page/post ID
+* BaseFunctions class version 2.8.2
+* template class version 2.8.6
+* WPseo class version 2.2.5
+
 ## 1.9 | 07.09.2020 <blog template, classes update>
 * fix sidebar position
-* Blog/Search template by post type 
+* Blog/Search template by post type
 * WPadmin add placeholder option
 * BaseFunctions class version 2.8.1
 * template class version 2.8.5

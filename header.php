@@ -1,7 +1,7 @@
 <?php
 /**
  * @author      David Voglgsang
- * @version     1.4
+ * @version     1.4.1
 */
 ?>
 <!DOCTYPE html>
@@ -14,7 +14,7 @@
   <?php
     $obj = get_queried_object();
     // page options
-    $options = $obj && array_key_exists('ID', $obj) ? prefix_template::PageOptions($obj->ID) : array();
+    $options = $obj && property_exists($obj, 'ID') ? prefix_template::PageOptions($obj->ID) : array();
   ?>
   <body class="<? prefix_template::BodyCSS(); ?>">
     <?php echo prefix_WPseo::GoogleTracking(true); ?>
