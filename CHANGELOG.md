@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.11.2 | 22.09.2020 <tempalte class update>
+* template class version 2.9.8
+
 ## 1.11.1 | 17.09.2020 <tempalte class update>
 * template class version 2.9.7
 
