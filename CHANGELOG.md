@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.12.2 | 22.09.2020 <mautic support>
+* Mautic class version 0.1
+
 ## 1.11.2 | 22.09.2020 <tempalte class update>
 * template class version 2.9.8
 
