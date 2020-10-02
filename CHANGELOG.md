@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.13.2 | 22.09.2020 <class update, pingback>
+* template class version 2.10.8
+* WPgutenberg class version 2.4.1
+* add pingback url to header
+
 ## 1.12.2 | 22.09.2020 <mautic support>
 * Mautic class version 0.1
 

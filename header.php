@@ -1,7 +1,7 @@
 <?php
 /**
  * @author      David Voglgsang
- * @version     1.4.1
+ * @version     1.4.2
 */
 ?>
 <!DOCTYPE html>
@@ -9,6 +9,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1, initial-scale=1">
+    <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
     <?php wp_head(); ?>
   </head>
   <?php
