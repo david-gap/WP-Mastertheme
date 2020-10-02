@@ -1,6 +1,9 @@
 # CHANGELOG
 
-## 1.13.2 | 22.09.2020 <class update, pingback>
+## 1.13.3 | 02.10.2020 <fix gutenberg action>
+* remove future action from gutenberg class
+
+## 1.13.2 | 02.10.2020 <class update, pingback>
 * template class version 2.10.8
 * WPgutenberg class version 2.4.1
 * add pingback url to header

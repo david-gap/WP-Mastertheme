@@ -84,8 +84,6 @@ class prefix_WPgutenberg {
       endif;
       // add theme support
       SELF::CustomThemeSupport();
-      // register custom blocks
-      add_action( 'init', array($this, 'WPgutenbergCustomBlocks') );
       // Change inline font size to var
       if($this->WPgutenberg_fontsizeScaler == 0):
         add_filter('the_content',  array($this, 'InlineFontSize') );
