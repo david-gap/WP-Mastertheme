@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.13.4 | 02.10.2020 <page title class, mautic class update>
+* Add css class to post title
+* Mautic class version 0.1.1
+
 ## 1.13.3 | 02.10.2020 <fix gutenberg action>
 * remove future action from gutenberg class
 

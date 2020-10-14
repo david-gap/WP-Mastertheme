@@ -17,7 +17,7 @@ $options = $obj && property_exists($obj, 'ID') ? prefix_template::PageOptions($o
   <?php if (have_posts() ) : while (have_posts()) : the_post() ?>
     <article>
       <?php if(!in_array('title', $options)): ?>
-        <h1><?php the_title(); ?></h1>
+        <h1 class="post-title"><?php the_title(); ?></h1>
       <?php endif; ?>
       <?php the_content(); ?>
       <?php comments_template();?>

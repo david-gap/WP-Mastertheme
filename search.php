@@ -10,7 +10,7 @@
 get_header();
 ?>
 <section id="search-results" <?php echo prefix_template::AddContainer(prefix_template::$template_container, true); ?>>
-  <h1>
+  <h1 class="post-title">
     <?php echo $wp_query->found_posts; ?> <?php echo __('Search results for','Template'); ?>: "<?php the_search_query(); ?>"
   </h1>
   <?php if ( have_posts() ) : ?>
