@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.13.5 | 03.10.2020 <WPinit class update>
+* WPinit class version 2.8.6
+
 ## 1.13.4 | 02.10.2020 <page title class, mautic class update>
 * Add css class to post title
 * Mautic class version 0.1.1
