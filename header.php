@@ -1,7 +1,7 @@
 <?php
 /**
  * @author      David Voglgsang
- * @version     1.4.2
+ * @version     1.5.2
 */
 ?>
 <!DOCTYPE html>
@@ -30,5 +30,12 @@
         ?>
       </header>
     <?php endif; ?>
-    <?php prefix_template::ContentBlock(prefix_template::$template_header_after); ?>
+    <?php
+      // global code after header
+      prefix_template::ContentBlock(prefix_template::$template_header_after);
+      // custom post code before main
+      if(prefix_template::$template_page_options['beforeMain'] == 1 && array_key_exists('beforeMain', $options)):
+        prefix_template::ContentBlock($options['beforeMain']);
+      endif;
+    ?>
     <main>

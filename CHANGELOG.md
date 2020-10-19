@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.14.5 | 03.10.2020 <post before/after code, class update>
+* header custom content block before main tag
+* footer custom content block after main tag
+* backend styling for template fields
+* template class version 2.11.8
+
 ## 1.13.5 | 03.10.2020 <WPinit class update>
 * WPinit class version 2.8.6
 

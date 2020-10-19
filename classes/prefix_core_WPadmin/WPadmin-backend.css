@@ -248,3 +248,20 @@
 .switchbutton label:last-of-type {
 	border-radius: 0 4px 4px 0;
 }
+
+
+/*==================================================================================
+  PAGE/POST OPTIONS
+==================================================================================*/
+#WPtemplate p {
+  margin-bottom: 5px;
+}
+#WPtemplate ul {
+  margin-top: 0;
+}
+#WPtemplate .exeption {
+  margin-top: 20px;
+}
+#WPtemplate .exeption textarea {
+  width: 100%;
+}

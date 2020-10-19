@@ -1,7 +1,7 @@
 <?php
 /**
  * @author      David Voglgsang
- * @version     1.3.1
+ * @version     1.4.1
 */
 
 $obj = get_queried_object();
@@ -9,6 +9,10 @@ $obj = get_queried_object();
 $options = $obj && property_exists($obj, 'ID') ? prefix_template::PageOptions($obj->ID) : array();
 // custom content before footer
 prefix_template::ContentBlock(prefix_template::$template_footer_before);
+// custom post code after main
+if(prefix_template::$template_page_options['afterMain'] == 1 && array_key_exists('afterMain', $options)):
+  prefix_template::ContentBlock($options['afterMain']);
+endif;
 ?>
     </main>
     <?php if(prefix_template::$template_footer_active == 1 && !in_array('footer', $options)): ?>
