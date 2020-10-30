@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.15.5 | 03.10.2020 <post meta block, class update>
+* template class version 2.12.8
+* meta block output und pages and posts
+
 ## 1.14.5 | 03.10.2020 <post before/after code, class update>
 * header custom content block before main tag
 * footer custom content block after main tag

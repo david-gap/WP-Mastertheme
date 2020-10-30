@@ -17,6 +17,7 @@ $options = $obj && property_exists($obj, 'ID') ? prefix_template::PageOptions($o
   <? the_post_thumbnail('large', ['class' => 'post-thumb']); ?>
   <?php if (have_posts() ) : while (have_posts()) : the_post() ?>
     <article>
+      <?php echo prefix_template::postMeta($obj->post_type, $options); ?>
       <?php if(!in_array('title', $options)): ?>
         <h1 class="post-title"><?php the_title(); ?></h1>
       <?php endif; ?>
