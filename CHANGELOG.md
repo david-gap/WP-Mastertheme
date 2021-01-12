@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.15.7 | 12.01.2021 <template class fix>
+* template class version 2.12.10
+
 ## 1.15.6 | 12.01.2021 <template class fix>
 * template class version 2.12.9
 
