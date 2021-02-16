@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.16.8 | 16.02.2021 <post format, seo class fix>
+* template class version 2.13.11
+* seo class version 2.2.6
+
 ## 1.15.8 | 12.01.2021 <template class fix>
 * template class version 2.12.11
 

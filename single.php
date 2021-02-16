@@ -3,7 +3,7 @@
  * Post Type File Single
  *
  * @author      David Voglgsang
- * @version     1.1.2
+ * @version     1.2.2
  *
 */
 
