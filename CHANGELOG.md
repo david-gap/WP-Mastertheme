@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.17.8 | 08.03.2021 <template class sticky fix, mautic sc>
+* template class version 2.13.12
+* mautic class version 0.2.1
+
 ## 1.16.8 | 16.02.2021 <post format, seo class fix>
 * template class version 2.13.11
 * seo class version 2.2.6
