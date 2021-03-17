@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.17.9 | 17.03.2021 <base class date function fix>
+* base class version 2.8.3
+
 ## 1.17.8 | 08.03.2021 <template class sticky fix, mautic sc>
 * template class version 2.13.12
 * mautic class version 0.2.1

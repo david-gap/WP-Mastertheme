@@ -4,7 +4,7 @@
  *
  * Base dev functions - parent for all custom classes
  * Author:      David Voglgsnag
- * @version     2.8.2
+ * @version     2.8.3
  *
  */
 
@@ -464,7 +464,7 @@ class prefix_core_BaseFunctions {
     * @param string $end: end date
     * @return bool if times are true or false
   */
-  function DateCheck(string $start = "", string $end = "", string $factor = "between"){
+  public static function DateCheck(string $start = "", string $end = "", string $factor = "between"){
     // vars
     $current_date = time();
     $startdate = strtotime($start);
@@ -525,7 +525,7 @@ class prefix_core_BaseFunctions {
     * @param string $seperator: seperates start with end date
     * @return string date range start - end
   */
-  function DateRange(string $start = "", string $end = "", string $seperator = "-" ) {
+  public static function DateRange(string $start = "", string $end = "", string $seperator = "-" ) {
       // vars
       $current_date = time();
       $startdate = strtotime($start);

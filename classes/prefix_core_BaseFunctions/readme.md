@@ -1,4 +1,4 @@
-**Version 2.8.2** (17.09.2020)
+**Version 2.8.3** (17.03.2021)
 
 Custom class "prefix_core_BaseFunctions" used as a library for useful functions
 
@@ -241,6 +241,13 @@ Custom login formular
 core_BaseFunctions::WPLoginForm("login/taget/path");
 /* RESULTING: string */
 return "html WP Login Form"
+```
+
+### 4.6 UPLOAD WP IMG
+Upload image to media directory
+```php
+core_BaseFunctions::WPuploadFile("path/file");
+/* RESULTING: upload file ID */
 ```
 
 
