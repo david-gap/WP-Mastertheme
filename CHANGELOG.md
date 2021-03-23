@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.18.9 | 23.03.2021 <gutenberg custom blocks, class fixes>
+* template class version 2.13.13
+* WPgutenberg class version 2.4.1
+
 ## 1.17.9 | 17.03.2021 <base class date function fix>
 * base class version 2.8.3
 

@@ -23,6 +23,7 @@ Table of Contents:
   2.4 MANAGE BLOCKS
   2.5 ADD STYLES OPTIONS
   2.6 CUSTOM THEME SUPPORT
+  2.7 REGISTER CUSTOM BLOCKS
 3.0 OUTPUT
   3.1 RETURN CUSTOM CSS
   3.2 CHANGE INLINE FONT SIZE
@@ -88,6 +89,10 @@ class prefix_WPgutenberg {
       if($this->WPgutenberg_fontsizeScaler == 0):
         add_filter('the_content',  array($this, 'InlineFontSize') );
       endif;
+      // add custom blocks scripts
+      if(strpos(implode(",", $this->AllowGutenbergBlocks()), 'templates/') !== false):
+        add_action( 'enqueue_block_editor_assets', array($this, 'WPgutenbergCustomBlocks'), 100 );
+      endif;
     }
 
     /* 1.3 BACKEND ARRAY
@@ -132,6 +137,7 @@ class prefix_WPgutenberg {
           "core/table",
           "core/verse",
           "core/code",
+          "core/cover",
           "core/freeform",
           "core/html",
           "core/preformatted",
@@ -185,7 +191,8 @@ class prefix_WPgutenberg {
           "core-embed/ted",
           "core-embed/tumblr",
           "core-embed/videopress",
-          "core-embed/wordpress-tv"
+          "core-embed/wordpress-tv",
+          "templates/vimeo"
         )
       ),
       "CustomAllowedBlocks" => array(
@@ -335,6 +342,34 @@ class prefix_WPgutenberg {
       remove_theme_support( 'core-block-patterns' );
     endif;
 
+  }
+
+
+  /* 2.7 REGISTER CUSTOM BLOCKS
+  /------------------------*/
+  function WPgutenbergCustomBlocks(){
+    $class_path = get_template_directory_uri() . '/classes/prefix_WPgutenberg/';
+    $blocks = array('vimeo');
+    foreach ($blocks as $key => $name) {
+      // register script
+      // wp_register_script(
+      //   'gutenberg-block' . $name,
+      //   $class_path . 'blocks/' . $name . '/index.js',
+      //   ['wp-i18n', 'wp-element', 'wp-blocks', 'wp-components'],
+      //   '1.0'
+      // );
+      // register block
+      register_block_type('templates/' . $name, array(
+        'editor_script' => 'gutenberg-block' . $name
+      ));
+    }
+    // register script
+    wp_enqueue_script(
+      'gutenberg-block',
+      $class_path . 'assets/js/gutenberg-blocks.js',
+      [ 'wp-i18n', 'wp-element', 'wp-blocks', 'wp-components', 'wp-editor' ],
+      '0.2'
+    );
   }
 
 

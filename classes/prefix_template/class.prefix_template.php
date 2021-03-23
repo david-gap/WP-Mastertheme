@@ -1192,6 +1192,7 @@ class prefix_template {
         'street2' => '',
         'postalCode' => '',
         'city' => '',
+        'country' => '',
         'phone' => '',
         'mobile' => '',
         'email' => '',
@@ -1201,6 +1202,7 @@ class prefix_template {
           'street2' => '',
           'postalCode' => '',
           'city' => '',
+          'country' => '',
           'phone' => '',
           'mobile' => '',
           'email' => ''
