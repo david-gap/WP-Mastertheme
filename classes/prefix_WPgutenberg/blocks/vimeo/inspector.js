@@ -37,8 +37,8 @@ export default class Inspector extends Component {
         videoAutoPlay,
         videoBackgroud,
         videoLoop,
-        videoDimentionX,
-        videoDimentionY
+        videoDimensionX,
+        videoDimensionY
       },
       setAttributes
     } = this.props;
@@ -53,15 +53,15 @@ export default class Inspector extends Component {
                 onChange={videoID => setAttributes({ videoID })}
               />
               <TextControl
-                label={__("Dimention X", "WPgutenberg")}
-                value={videoDimentionX}
-                onChange={videoDimentionX => setAttributes({ videoDimentionX })}
+                label={__("Dimension X", "WPgutenberg")}
+                value={videoDimensionX}
+                onChange={videoDimensionX => setAttributes({ videoDimensionX })}
               />
               <TextControl
-                label={__("Dimention Y", "WPgutenberg")}
+                label={__("Dimension Y", "WPgutenberg")}
                 help={__("example: 4:3 = ", "WPgutenberg")}
-                value={videoDimentionY}
-                onChange={videoDimentionY => setAttributes({ videoDimentionY })}
+                value={videoDimensionY}
+                onChange={videoDimensionY => setAttributes({ videoDimensionY })}
               />
               <PanelRow>
                 <ToggleControl

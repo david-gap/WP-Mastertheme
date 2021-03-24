@@ -44,8 +44,8 @@ function getURL(atts){
 }
 
 // geneeate video dimention
-function getDimention(atts){
-  let math = 100 / atts["videoDimentionX"] * atts["videoDimentionY"];
+function getDimension(atts){
+  let math = 100 / atts["videoDimensionX"] * atts["videoDimensionY"];
   let dimention = math + '%';
   return dimention;
 }
@@ -74,7 +74,7 @@ export default registerBlockType( 'templates/vimeo', {
   attributes,
   edit: props => {
     const {
-      attributes: { videoID, videoDimentionX, videoDimentionY, videoAutoPlay, videoBackgroud, videoLoop },
+      attributes: { videoID, videoDimensionX, videoDimensionY, videoAutoPlay, videoBackgroud, videoLoop },
       attributes,
       className,
       setAttributes
@@ -82,14 +82,14 @@ export default registerBlockType( 'templates/vimeo', {
 
     let settings = getSettings(attributes);
     let videoURL = getURL(attributes);
-    let videoDimention = getDimention(attributes);
+    let videoDimension = getDimension(attributes);
 
     return [
       <Inspector {...{ setAttributes, ...props }} />,
       <div className={classnames(
         'block-vimeo'
       )}>
-        <div style={{paddingTop: videoDimention}} className={classnames(
+        <div style={{paddingTop: videoDimension}} className={classnames(
           'resp_video',
         )}>
           {
@@ -103,18 +103,18 @@ export default registerBlockType( 'templates/vimeo', {
   },
   save: props => {
     const {
-      attributes: { videoID, videoDimentionX, videoDimentionY, videoAutoPlay, videoBackgroud, videoLoop },
+      attributes: { videoID, videoDimensionX, videoDimensionY, videoAutoPlay, videoBackgroud, videoLoop },
       attributes
     } = props;
 
     let videoURL = getURL(attributes);
-    let videoDimention = getDimention(attributes);
+    let videoDimension = getDimension(attributes);
 
     return (
       <div className={classnames(
         'block-vimeo'
       )}>
-        <div style={{paddingTop: videoDimention}} className={classnames(
+        <div style={{paddingTop: videoDimension}} className={classnames(
           'resp_video',
         )}>
           {
@@ -127,7 +127,7 @@ export default registerBlockType( 'templates/vimeo', {
     );
   }
 	// save: props => {
-	// 	// const { videoID, videoAutoPlay, videoLoop, videoDimentionX, videoDimentionY } = props.attributes;
+	// 	// const { videoID, videoAutoPlay, videoLoop, videoDimensionX, videoDimensionY } = props.attributes;
 	// 	return (
 	// 		<div>
 	// 		</div>

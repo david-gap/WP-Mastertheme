@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.18.10 | 24.03.2021 <gutenberg class clean up>
+* WPgutenberg class version 2.4.2
+
 ## 1.18.9 | 23.03.2021 <gutenberg custom blocks, class fixes>
 * template class version 2.13.13
 * WPgutenberg class version 2.4.1

@@ -15,11 +15,11 @@ const attributes = {
     type: 'boolean',
     default: false,
   },
-  videoDimentionX: {
+  videoDimensionX: {
     type: 'string',
     default: '4',
   },
-  videoDimentionY: {
+  videoDimensionY: {
     type: 'string',
     default: '3',
   }
