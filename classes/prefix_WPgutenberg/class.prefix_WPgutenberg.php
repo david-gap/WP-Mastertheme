@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.4.2
+ * @version     2.4.3
  */
 
 /*=======================================================
@@ -131,6 +131,7 @@ class prefix_WPgutenberg {
           "core/gallery",
           "core/list",
           "core/quote",
+          "core/group",
           "core/audio",
           "core/file",
           "core/video",
