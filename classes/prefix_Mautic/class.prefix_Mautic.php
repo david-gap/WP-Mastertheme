@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     0.2.1
+ * @version     0.2.2
  */
 
 /*=======================================================
@@ -49,7 +49,11 @@ class prefix_Mautic {
       SELF::updateVars();
       // add tracking code
       add_action( 'wp_footer', array($this, 'mauticTracking'), 100 );
-      add_shortcode( 'mautic', array( $this, 'mauticContent' ) );
+      // mautic shortcode
+      if ( shortcode_exists( 'mautic' ) ):
+      else:
+        add_shortcode( 'mautic', array( $this, 'mauticContent' ) );
+      endif;
     }
 
     /* 1.3 BACKEND ARRAY
