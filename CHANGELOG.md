@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 1.18.13 | 06.04.2021 <mautic class fix>
+## 1.18.13 | 06.04.2021 <mautic class shortcode fix>
 * Mautic class version 0.2.2
 
 ## 1.18.12 | 06.04.2021 <gutenberg class fix>
