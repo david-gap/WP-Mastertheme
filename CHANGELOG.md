@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.18.12 | 06.04.2021 <gutenberg class fix>
+* WPgutenberg class version 2.4.4
+
 ## 1.18.11 | 31.03.2021 <gutenberg class fix>
 * WPgutenberg class version 2.4.3
 
