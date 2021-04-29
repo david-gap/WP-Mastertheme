@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.18.14 | 29.04.2021 <gutenberg class block selection fix>
+* WPgutenberg class version 2.4.5
+
 ## 1.18.13 | 06.04.2021 <mautic class shortcode fix>
 * Mautic class version 0.2.2
 

@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.4.4
+ * @version     2.4.5
  */
 
 /*=======================================================
@@ -144,6 +144,7 @@ class prefix_WPgutenberg {
           "core/preformatted",
           "core/pullquote",
           "core/button",
+          "core/buttons",
           "core/columns",
           "core/media-text",
           "core/more",
@@ -189,11 +190,13 @@ class prefix_WPgutenberg {
           "core-embed/slideshare",
           "core-embed/smugmug",
           "core-embed/speaker",
+          "core-embed/tiktok",
           "core-embed/ted",
           "core-embed/tumblr",
           "core-embed/videopress",
           "core-embed/wordpress-tv",
-          "templates/vimeo"
+          "templates/vimeo",
+          "templates/posts"
         )
       ),
       "CustomAllowedBlocks" => array(
