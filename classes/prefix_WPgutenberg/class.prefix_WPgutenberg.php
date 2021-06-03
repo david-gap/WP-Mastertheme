@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.4.5
+ * @version     2.5.5
  */
 
 /*=======================================================
@@ -23,7 +23,8 @@ Table of Contents:
   2.4 MANAGE BLOCKS
   2.5 ADD STYLES OPTIONS
   2.6 CUSTOM THEME SUPPORT
-  2.7 REGISTER CUSTOM BLOCKS
+  2.7 ENQUEUE CUSTOM BLOCKS ASSETS
+  2.8 REGISTER CUSTOM BLOCKS
 3.0 OUTPUT
   3.1 RETURN CUSTOM CSS
   3.2 CHANGE INLINE FONT SIZE
@@ -86,12 +87,14 @@ class prefix_WPgutenberg {
       // add theme support
       SELF::CustomThemeSupport();
       // Change inline font size to var
-      if($this->WPgutenberg_fontsizeScaler == 0):
+      if($this->WPgutenberg_fontsizeScaler !== 0):
         add_filter('the_content',  array($this, 'InlineFontSize') );
       endif;
-      // add custom blocks scripts
       if(strpos(implode(",", $this->AllowGutenbergBlocks()), 'templates/') !== false):
-        add_action( 'enqueue_block_editor_assets', array($this, 'WPgutenbergCustomBlocks'), 100 );
+        // add custom blocks scripts
+        add_action( 'enqueue_block_editor_assets', array($this, 'WPgutenbergEnqueueCustomBlocksAssets'), 1 );
+        // register custom blocks
+        add_action( 'init', array($this, 'WPgutenbergRegisterCustomBlocks') );
       endif;
     }
 
@@ -349,24 +352,14 @@ class prefix_WPgutenberg {
   }
 
 
-  /* 2.7 REGISTER CUSTOM BLOCKS
+  /* 2.7 ENQUEUE CUSTOM BLOCKS ASSETS
   /------------------------*/
-  function WPgutenbergCustomBlocks(){
-    $class_path = get_template_directory_uri() . '/classes/prefix_WPgutenberg/';
-    $blocks = array('vimeo');
-    foreach ($blocks as $key => $name) {
-      // register script
-      // wp_register_script(
-      //   'gutenberg-block' . $name,
-      //   $class_path . 'blocks/' . $name . '/index.js',
-      //   ['wp-i18n', 'wp-element', 'wp-blocks', 'wp-components'],
-      //   '1.0'
-      // );
-      // register block
-      register_block_type('templates/' . $name, array(
-        'editor_script' => 'gutenberg-block' . $name
-      ));
+  function WPgutenbergEnqueueCustomBlocksAssets(){
+    // Only load if Gutenberg is available.
+    if ( ! function_exists( 'register_block_type' ) ) {
+      return;
     }
+    $class_path = get_template_directory_uri() . '/classes/prefix_WPgutenberg/';
     // register script
     wp_enqueue_script(
       'gutenberg-block',
@@ -374,6 +367,17 @@ class prefix_WPgutenberg {
       [ 'wp-i18n', 'wp-element', 'wp-blocks', 'wp-components', 'wp-editor' ],
       '0.2'
     );
+  }
+
+
+  /* 2.8 REGISTER CUSTOM BLOCKS
+  /------------------------*/
+  function WPgutenbergRegisterCustomBlocks(){
+    // Only load if Gutenberg is available.
+    if ( ! function_exists( 'register_block_type' ) ) {
+      return;
+    }
+    include 'blocks/posts/index.php';
   }
 
 

@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.13.12
+ * @version     2.14.12
  *
 */
 
@@ -93,6 +93,7 @@ class prefix_template {
   static $template_ph_custom          = "";
   static $template_address            = array(
     'company' => '',
+    'name' => '',
     'street' => '',
     'street2' => '',
     'postalCode' => '',
@@ -103,6 +104,7 @@ class prefix_template {
     'email' => '',
     'labels' => array(
       'company' => '',
+      'name' => '',
       'street' => '',
       'street2' => '',
       'postalCode' => '',
@@ -243,6 +245,10 @@ class prefix_template {
           "label" => "Company",
           "type" => "text"
         ),
+        "name" => array(
+          "label" => "Name",
+          "type" => "text"
+        ),
         "street" => array(
           "label" => "Street",
           "type" => "text"
@@ -281,6 +287,10 @@ class prefix_template {
           "value" => array(
             "company" => array(
               "label" => "Company",
+              "type" => "text"
+            ),
+            "name" => array(
+              "label" => "Name",
               "type" => "text"
             ),
             "street" => array(
@@ -1188,6 +1198,7 @@ class prefix_template {
       // defaults
       $defaults = array(
         'company' => '',
+        'name' => '',
         'street' => '',
         'street2' => '',
         'postalCode' => '',
@@ -1198,6 +1209,7 @@ class prefix_template {
         'email' => '',
         'labels' => array(
           'company' => '',
+          'name' => '',
           'street' => '',
           'street2' => '',
           'postalCode' => '',
@@ -1212,10 +1224,16 @@ class prefix_template {
 
       $output .= '<address>';
         if($config["company"] !== ''):
-          $output .= '<b rel="me" class="company">';
+          $output .= '<span rel="me" class="company">';
             $output .= $config["labels"] && array_key_exists('company', $config["labels"]) && $config["labels"]["company"] !== '' ? $config["labels"]["company"] . ' ' : '';
             $output .= $config["company"];
-          $output .= '</b>';
+          $output .= '</span>';
+        endif;
+        if($config["name"] !== ''):
+          $output .= '<span class="name">';
+            $output .= $config["labels"] && array_key_exists('name', $config["labels"]) && $config["labels"]["name"] !== '' ? $config["labels"]["name"] . ' ' : '';
+            $output .= $config["name"];
+          $output .= '</span>';
         endif;
         if($config["street"] !== ''):
           $output .= '<span class="street">';
@@ -1265,7 +1283,9 @@ class prefix_template {
         if($config["email"] !== ''):
           $output .= '<a href="mailto:' . $config["email"] . '" class="mail">';
             $output .= $config["labels"] && array_key_exists('email', $config["labels"]) && $config["labels"]["email"] !== '' ? $config["labels"]["email"] . ' ' : '';
-            $output .= $config["email"];
+            $output .= $config["labels"] && array_key_exists('email', $config["labels"]) && $config["labels"]["email"] !== '' ? '<span>' : '';
+              $output .= $config["email"];
+            $output .= $config["labels"] && array_key_exists('email', $config["labels"]) && $config["labels"]["email"] !== '' ? '</span>' : '';
           $output .= '</a>';
         endif;
       $output .= '</address>';

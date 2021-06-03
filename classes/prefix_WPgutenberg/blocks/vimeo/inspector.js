@@ -5,11 +5,14 @@ const { __ } = wp.i18n;
 const { Component } = wp.element;
 const { registerBlockType } = wp.blocks;
 const {
-  InspectorControls,
   ColorPalette,
   PanelColorSettings,
   ContrastChecker
 } = wp.editor;
+
+const {
+  InspectorControls
+} = wp.blockEditor;
 
 const {
   CheckboxControl,

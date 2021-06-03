@@ -1,4 +1,4 @@
-**Version 2.13.13** (23.03.2021)
+**Version 2.14.13** (03.06.2021)
 
 Custom class "template" with template parts and header / footer builder
 
@@ -48,6 +48,7 @@ Custom class "template" with template parts and header / footer builder
   },
   "address": {
     "company": "Company",
+    "name": "Name",
     "street": "Street",
     "street2": "Street 2",
     "postalCode": "Postal Code",

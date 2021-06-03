@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.19.14 | 03.06.2021 <post block, mail attachment, contact name>
+* WPgutenberg class version 2.5.5
+* template class version 2.14.13
+* mail class class version 1.1.2
+
 ## 1.18.14 | 29.04.2021 <gutenberg class block selection fix>
 * WPgutenberg class version 2.4.5
 

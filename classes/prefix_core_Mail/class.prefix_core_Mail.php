@@ -5,7 +5,7 @@
  * PHP Mailer
  * https://github.com/david-gap/classes
  * Author: David Voglgsang
- * @version     1.0.2
+ * @version     1.1.2
  */
 
  class prefix_core_Mail {
@@ -251,15 +251,20 @@
 
   /*
     Attach a file to the mail
-    @param string $filename : path of the file to attach
+    @param string $file : path of the file to attach
+    @param string $filename : name of the file
     @param string $filetype : MIME-type of the file. default to 'application/x-unknown-content-type'
     @param string $disposition : instruct the Mailclient to display the file if possible ("inline") or always as a link ("attachment") possible values are "inline", "attachment"
   */
-  function Attach( $filename, $filetype = "", $disposition = "inline" ){
+  function Attach( $file, $filename = "", $filetype = "", $disposition = "inline" ){
     if( $filetype == "" ):
       $filetype = "application/x-unknown-content-type";
     endif;
-    $this->aattach[] = $filename;
+    if( $filename == "" ):
+      $filename = basename($file);
+    endif;
+    $this->aname[] = $filename;
+    $this->aattach[] = $file;
     $this->actype[] = $filetype;
     $this->adispo[] = $disposition;
   }
@@ -280,19 +285,19 @@
     // for each attached file, do...
     for( $i=0; $i < count( $this->aattach); $i++ ) {
 
-        $filename = $this->aattach[$i];
-        $basename = basename($filename);
+        $file = $this->aattach[$i];
+        $basename = $this->aname[$i];
         $ctype = $this->actype[$i];    // content-type
         $disposition = $this->adispo[$i];
 
-        if( ! file_exists( $filename) ) {
-            echo "PHPclasses_PHPMailform, method attach : file $filename can't be found"; exit;
+        if( ! file_exists( $file) ) {
+            echo "PHPclasses_PHPMailform, method attach : file $basename can't be found"; exit;
         }
         $subhdr= "--$this->boundary\nContent-type: $ctype;\n name=\"$basename\"\nContent-Transfer-Encoding: base64\nContent-Disposition: $disposition;\n  filename=\"$basename\"\n";
         $ata[$k++] = $subhdr;
         // non encoded line length
-        $linesz= filesize( $filename)+1;
-        $fp= fopen( $filename, 'r' );
+        $linesz= filesize( $file)+1;
+        $fp= fopen( $file, 'r' );
         $ata[$k++] = chunk_split(base64_encode(fread( $fp, $linesz)));
         fclose($fp);
     }

@@ -1,4 +1,4 @@
-**Version 1.0.2** (19.02.2020)
+**Version 1.1.2** (03.06.2021)
 
 Custom class "Mail" creates a mail content and send it.
 
@@ -23,6 +23,7 @@ $mail->Priority(1);                           // set the mail priority
 $mail->Receipt();                             // add this line to add a receipt to the mail. Off as default
 $mail->ReplyTo( 'replyto@mail.com' );         // set the Reply-to header. sender mail as default
 $mail->Attach( 'file_path',                   // attached file
+               'file_name',                   // file name
                'file_type',                   // file type
                'inline or attachment' ) ;     // define file possition if possible
 ```
