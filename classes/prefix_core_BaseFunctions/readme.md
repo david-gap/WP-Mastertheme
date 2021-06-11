@@ -1,4 +1,4 @@
-**Version 2.8.3** (17.03.2021)
+**Version 2.9.3** (11.06.2021)
 
 Custom class "prefix_core_BaseFunctions" used as a library for useful functions
 
@@ -147,6 +147,13 @@ return array(
   "city" => "Atlantis",
   "ZIP" => "3000"
 )
+```
+
+### 1.17 DETECT MOBILE DEVICE
+```php
+if(core_BaseFunctions::isMobileDevice()):
+  // is mobile device
+endif;
 ```
 
 

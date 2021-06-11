@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.8.6
+ * @version     2.8.7
  *
 */
 
@@ -491,6 +491,7 @@ class prefix_WPinit {
       'container' => '0',
       'nav' => '1'
     ), $atts );
+    $output = '';
     if ( has_nav_menu( $config['slug'] ) ) :
       // container
       if($config['container'] == 1):
@@ -500,19 +501,21 @@ class prefix_WPinit {
       endif;
       // output
       if($config['nav']):
-        echo '<nav>';
+        $output .= '<nav>';
       endif;
-        echo wp_nav_menu([
+        $output .= wp_nav_menu([
           'menu_class'=> $config['css'],
           'menu_id' => 'menu_' . $config['slug'],
           'container'=> $container,
-          'theme_location' => $config['slug']
+          'theme_location' => $config['slug'],
+          'echo' => false
         ]);
       if($config['nav']):
-        echo '</nav>';
+        $output .= '</nav>';
       endif;
 
     endif;
+    return $output;
   }
 
   /* 3.2 RETURN CUSTOM CSS

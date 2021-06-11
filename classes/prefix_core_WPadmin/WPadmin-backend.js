@@ -172,7 +172,7 @@ jQuery(document).ready(function($){
                 images = meta_gallery_frame.state().get('selection');
                 images.each(function(attachment) {
                         imageIDArray.push(attachment.attributes.id);
-                        imageHTML += '<span class="remove_image"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24.9 24.9" xml:space="preserve"><rect x="-3.7" y="10.9" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1549 12.4451)" fill="#000" width="32.2" height="3"/><rect x="10.9" y="-3.7" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1549 12.4451)" fill="#000" width="3" height="32.2"/></svg></span><img id="'+attachment.attributes.id+'" src="'+attachment.attributes.sizes.thumbnail.url+'">';
+                        imageHTML += '<span class="remove_image"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24.9 24.9" xml:space="preserve"><rect x="-3.7" y="10.9" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1549 12.4451)" fill="#000" width="32.2" height="3"/><rect x="10.9" y="-3.7" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1549 12.4451)" fill="#000" width="3" height="32.2"/></svg></span><img id="'+attachment.attributes.id+'" src="'+attachment.attributes.sizes.full.url+'">';
                 });
                 metadataString = imageIDArray.join(",");
                 if (metadataString) {

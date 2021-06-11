@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.14.12
+ * @version     2.14.14
  *
 */
 
@@ -100,6 +100,7 @@ class prefix_template {
     'city' => '',
     'country' => '',
     'phone' => '',
+    'fax' => '',
     'mobile' => '',
     'email' => '',
     'labels' => array(
@@ -111,6 +112,7 @@ class prefix_template {
       'city' => '',
       'country' => '',
       'phone' => '',
+      'fax' => '',
       'mobile' => '',
       'email' => ''
     )
@@ -193,6 +195,7 @@ class prefix_template {
     "container_end" => 1
   );
   static $template_footer_before      = "";
+  static $template_footer_after       = "";
 
 
   /* 1.2 ON LOAD RUN
@@ -273,6 +276,10 @@ class prefix_template {
           "label" => "Phone",
           "type" => "text"
         ),
+        "fax" => array(
+          "label" => "Fax",
+          "type" => "text"
+        ),
         "mobile" => array(
           "label" => "Mobile",
           "type" => "text"
@@ -315,6 +322,10 @@ class prefix_template {
             ),
             "phone" => array(
               "label" => "Phone",
+              "type" => "text"
+            ),
+            "fax" => array(
+              "label" => "Fax",
               "type" => "text"
             ),
             "mobile" => array(
@@ -683,6 +694,10 @@ class prefix_template {
         "before_footer" => array(
           "label" => "Custom content before footer",
           "type" => "textarea"
+        ),
+        "after_footer" => array(
+          "label" => "Custom content after footer",
+          "type" => "textarea"
         )
       )
     )
@@ -784,6 +799,7 @@ class prefix_template {
           SELF::$template_footer_custom = array_key_exists('custom', $footer) ? $footer['custom'] : SELF::$template_footer_custom;
           SELF::$template_footer_sort = array_key_exists('sort', $footer) ? $footer['sort'] : SELF::$template_footer_sort;
           SELF::$template_footer_before = array_key_exists('before_footer', $footer) ? $footer['before_footer'] : SELF::$template_footer_before;
+          SELF::$template_footer_after = array_key_exists('after_footer', $footer) ? $footer['after_footer'] : SELF::$template_footer_after;
         endif;
       endif;
     }
@@ -1205,6 +1221,7 @@ class prefix_template {
         'city' => '',
         'country' => '',
         'phone' => '',
+        'fax' => '',
         'mobile' => '',
         'email' => '',
         'labels' => array(
@@ -1216,6 +1233,7 @@ class prefix_template {
           'city' => '',
           'country' => '',
           'phone' => '',
+          'fax' => '',
           'mobile' => '',
           'email' => ''
         )
@@ -1225,64 +1243,70 @@ class prefix_template {
       $output .= '<address>';
         if($config["company"] !== ''):
           $output .= '<span rel="me" class="company">';
-            $output .= $config["labels"] && array_key_exists('company', $config["labels"]) && $config["labels"]["company"] !== '' ? $config["labels"]["company"] . ' ' : '';
+            $output .= $config["labels"] && array_key_exists('company', $config["labels"]) && $config["labels"]["company"] !== '' ? __($config["labels"]["company"], 'Template') . ' ' : '';
             $output .= $config["company"];
           $output .= '</span>';
         endif;
         if($config["name"] !== ''):
           $output .= '<span class="name">';
-            $output .= $config["labels"] && array_key_exists('name', $config["labels"]) && $config["labels"]["name"] !== '' ? $config["labels"]["name"] . ' ' : '';
+            $output .= $config["labels"] && array_key_exists('name', $config["labels"]) && $config["labels"]["name"] !== '' ? __($config["labels"]["name"], 'Template') . ' ' : '';
             $output .= $config["name"];
           $output .= '</span>';
         endif;
         if($config["street"] !== ''):
           $output .= '<span class="street">';
-            $output .= $config["labels"] && array_key_exists('street', $config["labels"]) && $config["labels"]["street"] !== '' ? $config["labels"]["street"] . ' ' : '';
+            $output .= $config["labels"] && array_key_exists('street', $config["labels"]) && $config["labels"]["street"] !== '' ? __($config["labels"]["street"], 'Template') . ' ' : '';
             $output .= $config["street"];
           $output .= '</span>';
         endif;
         if($config["street2"] !== ''):
           $output .= '<span class="street_add">';
-            $output .= $config["labels"] && array_key_exists('street2', $config["labels"]) && $config["labels"]["street2"] !== '' ? $config["labels"]["street2"] . ' ' : '';
+            $output .= $config["labels"] && array_key_exists('street2', $config["labels"]) && $config["labels"]["street2"] !== '' ? __($config["labels"]["street2"], 'Template') . ' ' : '';
             $output .= $config["street2"];
           $output .= '</span>';
         endif;
         $output .= $config["postalCode"] !== '' && $config["city"] !== '' ? '<span class="location">' : '';
           if($config["postalCode"] !== ''):
             $output .= '<span class="postalcode">';
-              $output .= $config["labels"] && array_key_exists('postalCode', $config["labels"]) && $config["labels"]["postalCode"] !== '' ? $config["labels"]["postalCode"] . ' ' : '';
+              $output .= $config["labels"] && array_key_exists('postalCode', $config["labels"]) && $config["labels"]["postalCode"] !== '' ? __($config["labels"]["postalCode"], 'Template') . ' ' : '';
               $output .= $config["postalCode"];
             $output .= '</span>';
           endif;
           $output .= $config["postalCode"] !== '' && $config["city"] !== '' ? ' ' : '';
           if($config["city"] !== ''):
             $output .= '<span class="city">';
-              $output .= $config["labels"] && array_key_exists('city', $config["labels"]) && $config["labels"]["city"] !== '' ? $config["labels"]["city"] . ' ' : '';
+              $output .= $config["labels"] && array_key_exists('city', $config["labels"]) && $config["labels"]["city"] !== '' ? __($config["labels"]["city"], 'Template') . ' ' : '';
               $output .= $config["city"];
             $output .= '</span>';
           endif;
         $output .= $config["postalCode"] !== '' && $config["city"] !== '' ? '</span>' : '';
         if($config["country"] !== ''):
           $output .= '<span class="country">';
-            $output .= $config["labels"] && array_key_exists('country', $config["labels"]) && $config["labels"]["country"] !== '' ? $config["labels"]["country"] . ' ' : '';
+            $output .= $config["labels"] && array_key_exists('country', $config["labels"]) && $config["labels"]["country"] !== '' ? __($config["labels"]["country"], 'Template') . ' ' : '';
             $output .= $config["country"];
           $output .= '</span>';
         endif;
         if($config["phone"] !== ''):
           $output .= '<a href="tel:' . prefix_core_BaseFunctions::cleanPhoneNr($config["phone"]) . '" class="call phone_nr">';
-            $output .= $config["labels"] && array_key_exists('phone', $config["labels"]) && $config["labels"]["phone"] !== '' ? $config["labels"]["phone"] . ' ' : '';
+            $output .= $config["labels"] && array_key_exists('phone', $config["labels"]) && $config["labels"]["phone"] !== '' ? __($config["labels"]["phone"], 'Template') . ' ' : '';
             $output .= $config["phone"];
+          $output .= '</a>';
+        endif;
+        if($config["fax"] !== ''):
+          $output .= '<a href="tel:' . prefix_core_BaseFunctions::cleanPhoneNr($config["fax"]) . '" class="call fax_nr">';
+            $output .= $config["labels"] && array_key_exists('fax', $config["labels"]) && $config["labels"]["fax"] !== '' ? __($config["labels"]["fax"], 'Template') . ' ' : '';
+            $output .= $config["fax"];
           $output .= '</a>';
         endif;
         if($config["mobile"] !== ''):
           $output .= '<a href="tel:' . prefix_core_BaseFunctions::cleanPhoneNr($config["mobile"]) . '" class="call mobile_nr">';
-            $output .= $config["labels"] && array_key_exists('mobile', $config["labels"]) && $config["labels"]["mobile"] !== '' ? $config["labels"]["mobile"] . ' ' : '';
+            $output .= $config["labels"] && array_key_exists('mobile', $config["labels"]) && $config["labels"]["mobile"] !== '' ? __($config["labels"]["mobile"], 'Template') . ' ' : '';
             $output .= $config["mobile"];
           $output .= '</a>';
         endif;
         if($config["email"] !== ''):
           $output .= '<a href="mailto:' . $config["email"] . '" class="mail">';
-            $output .= $config["labels"] && array_key_exists('email', $config["labels"]) && $config["labels"]["email"] !== '' ? $config["labels"]["email"] . ' ' : '';
+            $output .= $config["labels"] && array_key_exists('email', $config["labels"]) && $config["labels"]["email"] !== '' ? __($config["labels"]["email"], 'Template') . ' ' : '';
             $output .= $config["labels"] && array_key_exists('email', $config["labels"]) && $config["labels"]["email"] !== '' ? '<span>' : '';
               $output .= $config["email"];
             $output .= $config["labels"] && array_key_exists('email', $config["labels"]) && $config["labels"]["email"] !== '' ? '</span>' : '';

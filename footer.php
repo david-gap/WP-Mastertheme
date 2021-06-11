@@ -21,6 +21,8 @@ endif;
       </footer>
     <?php endif; ?>
     <?php
+    // custom content before footer
+    prefix_template::ContentBlock(prefix_template::$template_footer_after);
     wp_footer();
     ?>
   </body>

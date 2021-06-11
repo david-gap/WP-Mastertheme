@@ -4,7 +4,7 @@
  *
  * Base dev functions - parent for all custom classes
  * Author:      David Voglgsnag
- * @version     2.8.3
+ * @version     2.9.3
  *
  */
 
@@ -28,6 +28,7 @@
    1.14 CLEAN ARRAY
    1.15 SLUGIFY STRING
    1.16 INSERT TO ARRAY AT SPACIFIC POSITION
+   1.17 DETECT MOBILE DEVICE
  2.0 DATES
    2.1 CHECK IF VARS ARE OUT OF DATE
    2.2 DATE RANGE FORMAT
@@ -449,6 +450,16 @@ class prefix_core_BaseFunctions {
           array_slice( $existing, $position, null, true )
       );
       return $existing;
+    }
+
+
+    /* 1.17 DETECT MOBILE DEVICE
+    /------------------------*/
+    /**
+      * @return bool
+    */
+    function isMobileDevice() {
+      return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
     }
 
 
