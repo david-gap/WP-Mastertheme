@@ -52,7 +52,8 @@ export default class Inspector extends Component {
         postPopUpNav,
         postColumnsSpace,
         postTaxonomyFilter,
-        postTaxonomyFilterRelation
+        postTaxonomyFilterRelation,
+        postTaxonomyFilterOptions
       },
       setAttributes
     } = this.props;
@@ -71,7 +72,7 @@ export default class Inspector extends Component {
       'orderby': postSortBy
     };
     const posts = select( 'core' ).getEntityRecords( 'postType', postType, query );
-    if(posts){
+    if(posts && posts.length > 0){
       if(posts[0].meta !== undefined){
         Object.entries(posts[0].meta).forEach(([key, value]) => {
           fieldSelection.push( { value: key, label: "Meta: " + key } );
@@ -100,7 +101,7 @@ export default class Inspector extends Component {
     }
     // update taxonomy filter
     let postTaxonomies = [];
-    if(posts){
+    if(posts && posts.length > 0){
       if(posts[0]._links["wp:term"] !== undefined){
         const terms = posts[0]._links["wp:term"];
         Object.entries(terms).forEach(([key, value]) => {
@@ -119,8 +120,37 @@ export default class Inspector extends Component {
         });
       }
     }
-
-
+    // options
+    const postOptions = [
+      { value: "link_img", label: "Link image" },
+      { value: "link_row1", label: "Link row 1" },
+      { value: "link_row2", label: "Link row 2" },
+      { value: "link_box", label: "Link box" }
+    ]
+    function checkOptions(name){
+      if (postTaxonomyFilterOptions && postTaxonomyFilterOptions.length >= 1 && postTaxonomyFilterOptions.includes(name)) {
+        return true;
+      } else {
+        return false;
+      }
+    };
+    const onchangeOptions = (check) => {
+      const value = window.event.target.defaultValue;
+      const newSelection = [];
+      if (postTaxonomyFilterOptions && postTaxonomyFilterOptions.length >= 1) {
+        postTaxonomyFilterOptions.forEach(function(element) {
+            newSelection.push(element);
+        });
+      }
+      if(check){
+        newSelection.push(value);
+      } else {
+        var index = newSelection.indexOf(value);
+        newSelection.splice(index, 1);
+      }
+      setAttributes({ postTaxonomyFilterOptions: newSelection });
+    };
+    // taxonomy check
     function checkFilter(id){
       if (postTaxonomyFilter && postTaxonomyFilter.length >= 1 && postTaxonomyFilter.includes(id)) {
         return true;
@@ -161,6 +191,7 @@ export default class Inspector extends Component {
                 label={__("Sort by", "WPgutenberg")}
                 value={postSortBy}
                 options={[
+                  { value: "menu_order", label: "Menu order" },
                   { value: "date", label: "Date" },
                   { value: "title", label: "Title" }
                 ]}
@@ -204,6 +235,28 @@ export default class Inspector extends Component {
                 min={1}
                 max={100}
               />
+            </PanelRow>
+            <PanelRow>
+              <div>
+                <label><strong>{ __( 'Show', 'WPgutenberg' ) }</strong></label>
+                  <ul>
+                { postOptions.map(
+                  (options, setState) => {
+                  return(
+                    <li>
+                      <CheckboxControl
+                        label={options.label}
+                        key={options.value}
+                        value={options.value}
+                        name='getpostTaxonomyFilterOptions[]'
+                        checked={ checkOptions(options.value) }
+                        onChange={ onchangeOptions }
+                      />
+                    </li>
+                  );
+                }) }
+                </ul>
+              </div>
             </PanelRow>
           </PanelBody>
           <PanelBody title={ __( 'Layout', 'WPgutenberg' ) } >

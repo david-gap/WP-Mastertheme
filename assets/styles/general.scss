@@ -87,16 +87,6 @@ body.frontend  {
     font-size: $html__mobile_fontsize;
     line-height: $html__mobile_lineheight;
   }
-  *::before,
-  *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-size: contain;
-    -webkit-tap-highlight-color: transparent;
-  }
 
   main {
     * {
@@ -125,41 +115,8 @@ body.frontend  {
   }
 
 
-  /* Links
+  /* FULL AND WIDE ALIGN
   /––––––––––––––––––––––––*/
-  a {
-    transition: $transition_fast;
-  }
-
-
-  /* Flexbox row
-  /––––––––––––––––––––––––*/
-  .flex-row {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    @include mobile {
-      flex-direction: column;
-    }
-  }
-
-
-  /* OBJECT-FIT (Modernizr)
-  /––––––––––––––––––––––––*/
-  .modernizr-of {
-    width: 100%;
-    height: 100%; // add custom height as needed
-    background-size: cover; // modernizr
-    object-fit: cover;
-  }
-
-
-  /* IMAGES
-  /––––––––––––––––––––––––*/
-  main img {
-    max-width: 100%;
-    height: auto;
-  }
   .alignwide {
     margin-left: calc(-100vw / 2 + 100% / 2);
     margin-right: calc(-100vw / 2 + 100% / 2);
@@ -193,32 +150,6 @@ body.frontend  {
     img {
       width: 100vw;
     }
-  }
-
-
-  /* VIDEO
-  /––––––––––––––––––––––––*/
-  .wp-block-video,
-  .is-type-video {
-    &.alignwide,
-    &.alignfull {
-      text-align: center;
-      video {
-        width: 100%;
-        max-width: 100%;
-      }
-    }
-    video,
-    iframe {
-      max-width: 100%;
-    }
-  }
-
-
-  /* TABLE
-  /––––––––––––––––––––––––*/
-  table {
-    border-collapse: collapse;
   }
 
 
@@ -256,15 +187,92 @@ body.frontend  {
     outline: 0;
   }
 
+}
 
-  /* REMOVE MOBILE SUBMIT STYLING
-  /––––––––––––––––––––––––*/
-  input[type="submit"] {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+
+.editor-styles-wrapper *::before,
+.editor-styles-wrapper *::after,
+*::before,
+*::after {
+  box-sizing: border-box!important;
+  margin: 0;
+  padding: 0;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+/* Links
+/––––––––––––––––––––––––*/
+a {
+  transition: $transition_fast;
+}
+
+
+/* Flexbox row
+/––––––––––––––––––––––––*/
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  @include mobile {
+    flex-direction: column;
   }
+}
 
+
+/* OBJECT-FIT (Modernizr)
+/––––––––––––––––––––––––*/
+.modernizr-of {
+  width: 100%;
+  height: 100%; // add custom height as needed
+  background-size: cover; // modernizr
+  object-fit: cover;
+}
+
+
+/* IMAGES
+/––––––––––––––––––––––––*/
+main img {
+  max-width: 100%;
+  height: auto;
+}
+
+
+/* VIDEO
+/––––––––––––––––––––––––*/
+.wp-block-video,
+.is-type-video {
+  &.alignwide,
+  &.alignfull {
+    text-align: center;
+    video {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+  video,
+  iframe {
+    max-width: 100%;
+  }
+}
+
+
+/* TABLE
+/––––––––––––––––––––––––*/
+table {
+  border-collapse: collapse;
+}
+
+
+/* REMOVE MOBILE SUBMIT STYLING
+/––––––––––––––––––––––––*/
+input[type="submit"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 
@@ -282,6 +290,40 @@ body.frontend  {
     left: 0;
     width: 100%;
     height: 100%;
+  }
+}
+
+
+/* CONTAINER WITH OVERLAY
+/––––––––––––––––––––––––*/
+.overlay-container {
+  position: relative;
+  &.active-iframe .overlay,
+  &:focus .overlay,
+  &:focus-within .overlay,
+  > iframe:focus + .overlay,
+  > iframe:focus-within + .overlay,
+  > iframe:active + .overlay {
+    height: 0;
+  }
+  .overlay {
+    position: absolute;
+    display: block;
+    content: "";
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    cursor: pointer;
+    iframe,
+    video {
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
   }
 }
 

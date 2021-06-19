@@ -28,11 +28,11 @@ register_block_type(
       ),
       'postSortBy' => array(
         'type' => 'string',
-        'default' => 'date'
+        'default' => 'menu_order'
       ),
       'postSortDirection' => array(
         'type' => 'string',
-        'default' => 'desc'
+        'default' => 'asc'
       ),
       'postTextOne' => array(
         'type' => 'string',
@@ -173,17 +173,47 @@ function WPgutenberg_blockRender_posts($attr){
       $output .= '<ul>';
         while ( $filter_query->have_posts() ) : $filter_query->the_post();
           $output .= '<li>';
-            // add post thumbnail
-            if(array_key_exists('postThumb', $attr) && $attr['postThumb'] !== false):
-              $output .= get_the_post_thumbnail() ? '<figure>' . get_the_post_thumbnail(get_the_id(), 'full', array("data-id" => get_the_id())) . '</figure>' : '';
+            $linkOpen = '<a href="' . get_the_permalink() . '">';
+            $linkClose = '</a>';
+            if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_box', $attr['postTaxonomyFilterOptions'])):
+              $output .= $linkOpen;
             endif;
-            // add content
-            if(array_key_exists('postTextOne', $attr) && $attr['postTextOne'] !== ''):
-              $output .= '<h4>' . WPgutenberg_block_postsValue($attr['postTextOne'], get_the_ID()) . '</h4>';
-            endif;
-            if(array_key_exists('postTextTwo', $attr) && $attr['postTextTwo'] !== ''):
-              $output .= '<span>' . WPgutenberg_block_postsValue($attr['postTextTwo'], get_the_ID()) . '</span>';
-            endif;
+              // add post thumbnail
+              if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_img', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
+                $output .= $linkOpen;
+              endif;
+                if(array_key_exists('postThumb', $attr) && $attr['postThumb'] !== false):
+                  $output .= get_the_post_thumbnail() ? '<figure>' . get_the_post_thumbnail(get_the_id(), 'full', array("data-id" => get_the_id())) . '</figure>' : '';
+                endif;
+              if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_img', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
+                $output .= $linkClose;
+              endif;
+              // add content
+              $output .= '<div class="post-content">';
+                if(array_key_exists('postTextOne', $attr) && $attr['postTextOne'] !== ''):
+                  $output .= '<h4>';
+                    if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_row1', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
+                      $output .= $linkOpen;
+                    endif;
+                      $output .= WPgutenberg_block_postsValue($attr['postTextOne'], get_the_ID());
+                    if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_row1', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
+                      $output .= $linkClose;
+                    endif;
+                  $output .= '</h4>';
+                endif;
+                if(array_key_exists('postTextTwo', $attr) && $attr['postTextTwo'] !== ''):
+                  if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_row2', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
+                    $output .= $linkOpen;
+                  endif;
+                    $output .= '<div>' . WPgutenberg_block_postsValue($attr['postTextTwo'], get_the_ID()) . '</div>';
+                  if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_row2', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
+                    $output .= $linkClose;
+                  endif;
+                endif;
+              $output .= '</div>';
+              if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_box', $attr['postTaxonomyFilterOptions'])):
+                $output .= $linkClose;
+              endif;
           $output .= '</li>';
         endwhile;
         wp_reset_postdata();

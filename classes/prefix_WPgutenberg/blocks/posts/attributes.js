@@ -19,11 +19,11 @@ const attributes = {
   },
   postSortBy: {
     type: 'string',
-    default: 'date'
+    default: 'menu_order'
   },
   postSortDirection: {
     type: 'string',
-    default: 'desc'
+    default: 'asc'
   },
   postTextOne: {
     type: 'string',
@@ -56,6 +56,9 @@ const attributes = {
   postPopUpNav: {
     type: 'boolean',
     default: false,
+  },
+  postTaxonomyFilterOptions: {
+    type: 'array'
   }
 }
 

@@ -120,20 +120,12 @@ body.frontend,
         display: block;
         cursor: pointer;
         line-height: 1;
-        .arrow {
-          position: absolute;
-          top: calc(50% - 12px);
-          right: $space;
-          display: block;
-          width: 15px;
-          height: 25px;
-          pointer-events: none;
-          transition: .3s;
-          transform: rotate(-90deg);
-        }
         &.active {
-          .arrow {
-            transform: rotate(90deg);
+          .icon {
+            &:after {
+              transform: rotate(0deg);
+              transition: $transition_fast;
+            }
           }
           + div {
             padding: $space $space_half;
@@ -141,6 +133,31 @@ body.frontend,
             a {
               display: inline;
             }
+          }
+        }
+        .icon {
+          position: relative;
+          border-radius: 4px;
+          width: 30px;
+          height: 30px;
+          margin-left: $space;
+          &:before,
+          &:after {
+            position: absolute;
+            display: block;
+            content: "";
+            width: 20px;
+            height: 4px;
+            border-radius: 1px;
+          }
+          &:before,
+          &:after {
+            left: calc(50% - 10px);
+            top: calc(50% - 2px);
+          }
+          &:after {
+            transform: rotate(90deg);
+            transition: $transition_fast;
           }
         }
       }

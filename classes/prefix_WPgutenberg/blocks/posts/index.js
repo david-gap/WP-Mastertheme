@@ -65,18 +65,28 @@ function getcolumnSum(atts) {
   return columnSum;
 }
 
-function PostImg(postThumb, id, media){
+function PostImg(postThumb, postTaxonomyFilterOptions, id, media){
   if(postThumb === true && media){
     let themedia = media.media_details.sizes.thumbnail.source_url;
-    return (
-      <figure>
-        <img src={themedia} data-id={ id } width="100%" />
-      </figure>
-    );
+    if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes('link_img') && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+      return (
+        <a href="#">
+          <figure>
+            <img src={themedia} data-id={ id } width="100%" />
+          </figure>
+        </a>
+      );
+    } else {
+      return (
+        <figure>
+          <img src={themedia} data-id={ id } width="100%" />
+        </figure>
+      );
+    }
   }
 }
 
-function PostValues(type, post, taxonomy){
+function PostValues(type, post, postTaxonomyFilterOptions, row, taxonomy){
   var value;
   switch (type) {
     case "title":
@@ -90,7 +100,7 @@ function PostValues(type, post, taxonomy){
       value = dd + '.' + mm + '.' + yyyy;
       break;
     case "excerpt":
-      value = htmlToElem( post.excerpt.rendered );
+      value = post.excerpt.rendered;
       break;
     default:
       if(type.startsWith("tax__")){
@@ -125,9 +135,17 @@ function PostValues(type, post, taxonomy){
       break;
   }
   if(value !== ''){
-    return (
-      value
-    );
+    if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+      return (
+        <a href="#">
+          {htmlToElem( value )}
+        </a>
+      );
+    } else {
+      return (
+        htmlToElem( value )
+      );
+    }
   }
 }
 
@@ -209,7 +227,7 @@ export default registerBlockType( 'templates/posts', {
   } )( props => {
     // set values
     const {
-      attributes: { postType, postTaxonomyFilter, postTaxonomyFilterRelation, postSum, postSortDirection, postSortBy, postTextOne, postTextTwo, postColumns, anchor, postThumb, postSwiper, postPopUp, postPopUpNav, postColumnsSpace },
+      attributes: { postType, postTaxonomyFilter, postTaxonomyFilterRelation, postSum, postSortDirection, postSortBy, postTextOne, postTextTwo, postColumns, anchor, postThumb, postSwiper, postPopUp, postPopUpNav, postColumnsSpace, postTaxonomyFilterOptions },
       attributes,
       className,
       setAttributes,
@@ -222,9 +240,11 @@ export default registerBlockType( 'templates/posts', {
     let cssClasses = getCssClasses(attributes);
     let columnSpacing = getcolumnSpacing(attributes);
     let columnSum = getcolumnSum(attributes);
+
     // loading posts
     if ( ! posts ) {
         return (
+            <Inspector {...{ setAttributes, ...props }} />,
             <p>
                 <Spinner />
                 { __( 'Loading Posts', 'WPgutenberg' ) }
@@ -251,15 +271,33 @@ export default registerBlockType( 'templates/posts', {
         { posts.map(
           ( post ) => {
             // console.log(post);
-            return (
-              <li>
-                  {PostImg(postThumb, post.id, media[ post.id ])}
-                  <h4>
-                    {PostValues(postTextOne, post, taxOne)}
-                  </h4>
-                  <span>{PostValues(postTextTwo, post, taxTwo)}</span>
-              </li>
-            )
+            if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.indexOf('link_box') >= 1){
+              return (
+                <li>
+                  <a href="#">
+                      {PostImg(postThumb, postTaxonomyFilterOptions, post.id, media[ post.id ])}
+                      <div class="post-content">
+                        <h4>
+                          {PostValues(postTextOne, post, postTaxonomyFilterOptions, "link_row1", taxOne)}
+                        </h4>
+                        {PostValues(postTextTwo, post, postTaxonomyFilterOptions, "link_row2", taxTwo)}
+                      </div>
+                  </a>
+                </li>
+              )
+            } else {
+              return (
+                <li>
+                    {PostImg(postThumb, postTaxonomyFilterOptions, post.id, media[ post.id ])}
+                    <div class="post-content">
+                      <h4>
+                        {PostValues(postTextOne, post, postTaxonomyFilterOptions, "link_row1", taxOne)}
+                      </h4>
+                      {PostValues(postTextTwo, post, postTaxonomyFilterOptions, "link_row2", taxTwo)}
+                    </div>
+                </li>
+              )
+            }
           }
         ) }
       </ul>
@@ -268,7 +306,7 @@ export default registerBlockType( 'templates/posts', {
   } ),
   save: props => {
     const {
-      attributes: { postType, postTaxonomyFilter, postTaxonomyFilterRelation, postSum, postSortDirection, postSortBy, postTextOne, postTextTwo, postColumns, anchor, postThumb, postSwiper, postPopUp, postPopUpNav, postColumnsSpace },
+      attributes: { postType, postTaxonomyFilter, postTaxonomyFilterRelation, postSum, postSortDirection, postSortBy, postTextOne, postTextTwo, postColumns, anchor, postThumb, postSwiper, postPopUp, postPopUpNav, postColumnsSpace, postTaxonomyFilterOptions },
       attributes
     } = props;
 

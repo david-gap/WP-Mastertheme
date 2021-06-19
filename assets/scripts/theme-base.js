@@ -318,6 +318,35 @@ if(toggleButtons.length !== 0){
 }
 
 
+/* Overlay container
+/------------------------*/
+function checkOverlayContainers(e){
+  const target = e.target;
+  if (target.closest(".overlay-container") == null) {
+      var overlayContainers = document.querySelectorAll('.overlay-container');
+      if(overlayContainers){
+        Array.from(overlayContainers).forEach(function(container) {
+          container.classList.remove("active-iframe");
+        });
+      }
+  } else {
+    target.closest(".overlay-container").classList.add("active-iframe");
+  }
+}
+document.onfocusout = function(){
+  setTimeout(function(){
+      // using the 'setTimout' to let the event pass the run loop
+      if (document.activeElement instanceof HTMLIFrameElement) {
+          // Do your logic here..
+          document.querySelectorAll('.overlay-container').classList.add("active-iframe");
+      } else {
+        document.querySelectorAll('.overlay-container').classList.remove("active-iframe");
+      }
+  },0);
+};
+document.addEventListener('click', checkOverlayContainers);
+
+
 
 /*==================================================================================
   FORM

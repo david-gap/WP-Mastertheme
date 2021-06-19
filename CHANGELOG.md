@@ -1,12 +1,19 @@
 # CHANGELOG
 
+## 1.21.14 | 19.06.2021 <class and block fixes, overlay container, toogle>
+* add overlay container
+* add general styles to backend
+* toggle arrow to icon
+* fix posts block taxonomies
+* add link options and menu order to posts block
+
 ## 1.20.14 | 11.06.2021 <default css to master, class fixes>
 * add after footer code area
 * move default theme styles to master theme
 * BaseFunctions class version 2.9.3
 * template class version 2.14.14
 * WPinit class version 2.8.7
-* WPadmin class version 1.3.2 
+* WPadmin class version 1.3.2
 
 ## 1.19.14 | 03.06.2021 <post block, mail attachment, contact name>
 * WPgutenberg class version 2.5.5

@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.5.5
+ * @version     2.5.6
  */
 
 /*=======================================================
@@ -25,6 +25,7 @@ Table of Contents:
   2.6 CUSTOM THEME SUPPORT
   2.7 ENQUEUE CUSTOM BLOCKS ASSETS
   2.8 REGISTER CUSTOM BLOCKS
+  2.9 API REST FIX - ORDER BY MENU
 3.0 OUTPUT
   3.1 RETURN CUSTOM CSS
   3.2 CHANGE INLINE FONT SIZE
@@ -96,6 +97,9 @@ class prefix_WPgutenberg {
         // register custom blocks
         add_action( 'init', array($this, 'WPgutenbergRegisterCustomBlocks') );
       endif;
+      // Fix rest api
+      // register custom blocks
+      add_action( 'init', array($this, 'WPgutenbergFixApiSort'), 99 );
     }
 
     /* 1.3 BACKEND ARRAY
@@ -378,6 +382,36 @@ class prefix_WPgutenberg {
       return;
     }
     include 'blocks/posts/index.php';
+  }
+
+
+  /* 2.9 API REST FIX - ORDER BY MENU
+  /------------------------*/
+  function WPgutenbergFixApiSort() {
+    // get core post types
+    $core_args = array(
+      'public' => true,
+      '_builtin' => true
+    );
+    $core_pt = get_post_types( $core_args );
+    // get custom post types
+    $custom_args = array(
+      'publicly_queryable' => true
+    );
+    $custom_pt = get_post_types($custom_args);
+    // merge & clean post types
+    $post_types = array_merge($core_pt, $custom_pt);
+    unset($post_types['attachment']);
+    unset($post_types['nav_menu_item']);
+    // register meta box for all selected post types
+    foreach( $post_types as $post_type ){
+        $filter_name = 'rest_' . $post_type . '_collection_params';
+        add_filter( $filter_name, array($this, 'addRestOrderbyParams'), 10, 1 );
+    }
+  }
+  function addRestOrderbyParams( $params ) {
+    $params['orderby']['enum'][] = 'menu_order';
+    return $params;
   }
 
 
