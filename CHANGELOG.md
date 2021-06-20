@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.22.15 | 20.06.2021 <fix posts filter block text search>
+* WPgutenberg class version 2.6.7
+
 ## 1.22.14 | 20.06.2021 <posts filter block, default css, fieldset>
 * add loading animation
 * add grid fixer for posts block

@@ -150,6 +150,12 @@ function WPgutenberg_postresults_postsfilter(array $attr, string $source = 'firs
   if($tagsToQuery):
     $queryArgs['tag_id'] = $tagsToQuery;
   endif;
+  // text search
+  if($source == 'first_load' && $_GET['textsearch']):
+    $queryArgs['s'] = $_GET['textsearch'];
+  elseif($source == 'ajax' && array_key_exists('textsearch', $attr) && $attr['textsearch'] !== ""):
+    $queryArgs['s'] = $attr['textsearch'];
+  endif;
   // call posts
   $filter_query = new WP_Query( $queryArgs );
   // return
@@ -238,8 +244,13 @@ function WPgutenberg_blockRender_postsfilter($attr){
     $output .= '<form class="thefilter">';
       if($attr['postTextSearch']):
         $output .= '<div class="textsearch">';
+          if($_GET['textsearch']):
+            $textsearch = $_GET['textsearch'];
+          else:
+            $textsearch = '';
+          endif;
           $output .= '<label for="textsearch">' . __( 'Textsearch', 'WPgutenberg' ) . '</label>';
-          $output .= '<input type="text" id="textsearch" name="textsearch" placeholder="' . __( 'Search for', 'WPgutenberg' ) . '">';
+          $output .= '<input type="text" id="textsearch" name="textsearch" value="' . $textsearch . '" placeholder="' . __( 'Search for', 'WPgutenberg' ) . '">';
         $output .= '</div>';
       endif;
       if(array_key_exists('postTaxonomyFilter', $attr)):

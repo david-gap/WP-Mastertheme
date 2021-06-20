@@ -40,8 +40,7 @@ if($access == 'granted'):
     $return = array(
       'action' => 'insertFilteredPosts',
       'id' => $_POST['id'],
-      'content' => $output,
-      'log' => $_POST
+      'content' => $output
     );
     echo json_encode($return);
   }
