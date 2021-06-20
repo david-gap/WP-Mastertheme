@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.22.14 | 20.06.2021 <posts filter block, default css, fieldset>
+* add loading animation
+* add grid fixer for posts block
+* add post filter block
+* BaseFunctions class version 2.10.3
+
 ## 1.21.14 | 19.06.2021 <class and block fixes, overlay container, toogle>
 * add overlay container
 * add general styles to backend

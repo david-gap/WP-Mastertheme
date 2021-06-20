@@ -8,7 +8,7 @@ import Inspector from "./inspector";
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const { RichText } = wp.editor;
-const { Spinner, withAPIData } = wp.components;
+const { Spinner, withAPIData, TextControl, CheckboxControl } = wp.components;
 const { select, withSelect } = wp.data;
 
 const htmlToElem = ( html ) => wp.element.RawHTML( { children: html } );
@@ -41,10 +41,8 @@ function getSettings(atts) {
 
 // define block css
 function getCssClasses(atts) {
-  let cssClasses = 'block-posts';
-  cssClasses += atts["postSwiper"] === true ? " gallery-swiper" : " gallery-grid";
-  cssClasses += atts["postPopUp"] === true ? " add-popup" : "";
-  cssClasses += atts["postPopUpNav"] === true ? " popup-preview" : "";
+  let cssClasses = 'block-postsfilter';
+  cssClasses += " filter-" + atts["postFilterPosition"];
 
   return cssClasses;
 }
@@ -60,7 +58,7 @@ function getcolumnSpacing(atts) {
 // define column spacing
 function getcolumnSum(atts) {
   let columnSum = '';
-  columnSum += atts["postSwiper"] === true ? "1" : atts["postColumns"];
+  columnSum += atts["postListTemplate"] === 'list' ? "1" : atts["postColumns"];
 
   return columnSum;
 }
@@ -149,9 +147,79 @@ function PostValues(type, post, postTaxonomyFilterOptions, row, taxonomy){
   }
 }
 
+function searchBox(atts){
+  if(atts["postTextSearch"] === true){
+    var output = '<div class="textsearch">';
+    output += '<label for="textsearch">' + __( 'Textsearch', 'WPgutenberg' ) + '</label>';
+    output += '<input type="text" id="textsearch" name="textsearch" placeholder="' + __( 'Search for', 'WPgutenberg' ) + '">';
+    output += '</div>';
+    return (
+      htmlToElem( output )
+    );
+  }
+}
+
+function getTaxonomyFiedset(atts) {
+  // show legend
+  if(atts["postTaxonomyFilter"]){
+    return [
+      atts["postTaxonomyFilter"].map(
+        ( tax ) => {
+          return (
+            taxonomyFiedset(tax, atts)
+          )
+        }
+      )
+    ]
+  }
+}
+
+function taxonomyFiedset(taxonomy, atts) {
+  let output = '<fieldset>';
+      // show legend
+      if(atts["postTaxonomyFilterOptions"] && atts["postTaxonomyFilterOptions"].includes('legend')){
+        output += '<legend>';
+          if(taxonomy == 'category'){
+            output += 'categories';
+          } else if (taxonomy == 'post_tag') {
+            output += 'tags';
+          } else {
+            output += taxonomy;
+          }
+        output += '</legend>';
+      }
+      output += '<ul>';
+      // show empty taxonomies
+      let getEntityRecordsOptions = {
+        'hide_empty': true
+      };
+      if(atts["postTaxonomyFilterOptions"] && atts["postTaxonomyFilterOptions"].includes('emptytax')){
+        getEntityRecordsOptions['hide_empty'] = false;
+      }
+      const getTaxvalues = select( 'core' ).getEntityRecords( 'taxonomy', taxonomy, getEntityRecordsOptions );
+      if(getTaxvalues && getTaxvalues.length > 0){
+        getTaxvalues.map(
+          (tax, setState) => {
+              output += '<li>';
+                output += '<input type="checkbox">';
+                output += '<label>';
+                  output += tax.name;
+                output += '</label>';
+              output += '</li>';
+        })
+      }
+      output += '</ul>';
+  output += '</fieldset>';
+  if(getTaxvalues && getTaxvalues.length > 0){
+    return (
+        htmlToElem( output )
+    );
+  }
+}
+
 function getGridFixer(atts){
   let fix = [];
-  if(atts["postColumns"] > 1 && atts["postSwiper"] === false){
+  if(atts["postColumns"] > 1 && atts["postListTemplate"] == 'grid'){
     for (let i = 1; i < atts["postColumns"]; i++) {
       fix.push(i)
     }
@@ -159,7 +227,7 @@ function getGridFixer(atts){
       fix.map(
         ( num ) => {
           return (
-            <li class="grid-fixer"></li>
+            <div class="grid-fixer"></div>
           )
         }
       )
@@ -169,15 +237,14 @@ function getGridFixer(atts){
 
 
 
-
-export default registerBlockType( 'templates/posts', {
-  title: __( 'Posts', 'WPgutenberg' ),
+export default registerBlockType( 'templates/postsfilter', {
+  title: __( 'Posts Filter', 'WPgutenberg' ),
   description: __( 'Return posts', 'WPgutenberg' ),
   category: 'widgets',
   icon: 'format-aside',
   keywords: [
-    __( 'Posts', 'WPgutenberg' ),
-    __( 'Beiträge', 'WPgutenberg' )
+    __( 'Posts Filter', 'WPgutenberg' ),
+    __( 'Beiträge Filter', 'WPgutenberg' )
   ],
   supports: {
     html: false,                // Remove support for an HTML mode
@@ -195,22 +262,11 @@ export default registerBlockType( 'templates/posts', {
   edit: withSelect( ( select, props ) => {
     let query = {
       'status': 'publish',
-      'per_page': props.attributes.postSum,
+      'per_page': -1,
       'order': props.attributes.postSortDirection,
       'orderby': props.attributes.postSortBy,
       'tax_relation': props.attributes.postTaxonomyFilterRelation
     };
-    // add filter
-    if(props.attributes.postTaxonomyFilter && props.attributes.postTaxonomyFilter.length >= 1){
-      // query.concat(props.attributes.postTaxonomyFilter);
-      props.attributes.postTaxonomyFilter.forEach(function(element) {
-        var stringToArray = element.split("-");
-        if( query[stringToArray[0]] === undefined ) {
-            query[stringToArray[0]] = [];
-        }
-          query[stringToArray[0]].push(stringToArray[1]);
-      });
-    }
     // posts
     const posts = select( 'core' ).getEntityRecords( 'postType', props.attributes.postType, query );
     let media = {};
@@ -245,7 +301,7 @@ export default registerBlockType( 'templates/posts', {
   } )( props => {
     // set values
     const {
-      attributes: { postType, postTaxonomyFilter, postTaxonomyFilterRelation, postSum, postSortDirection, postSortBy, postTextOne, postTextTwo, postColumns, anchor, postThumb, postSwiper, postPopUp, postPopUpNav, postColumnsSpace, postTaxonomyFilterOptions },
+      attributes: { anchor, postType, postSortBy, postTextOne, postTextTwo, postTaxonomyFilter, postTaxonomyFilterOptions, postColumns, postFilterPosition, postListTemplate, postColumnsSpace, postTextSearch, postThumb, postTaxonomyFilterRelation, postSortDirection },
       attributes,
       className,
       setAttributes,
@@ -258,11 +314,9 @@ export default registerBlockType( 'templates/posts', {
     let cssClasses = getCssClasses(attributes);
     let columnSpacing = getcolumnSpacing(attributes);
     let columnSum = getcolumnSum(attributes);
-
     // loading posts
     if ( ! posts ) {
         return (
-            <Inspector {...{ setAttributes, ...props }} />,
             <p>
                 <Spinner />
                 { __( 'Loading Posts', 'WPgutenberg' ) }
@@ -279,20 +333,37 @@ export default registerBlockType( 'templates/posts', {
 
     return [
       <Inspector {...{ setAttributes, ...props }} />,
-      <div style={{'--postColumns': columnSum, '--postColumnsSpace': columnSpacing + 'px'}} data-columnspace={columnSpacing} data-columns={columnSum} id={anchor} className={classnames(
+      <div id={anchor} className={classnames(
         cssClasses, className
       )}>
         {
           // <ul>{settings}</ul>
         }
-      <ul>
-        { posts.map(
-          ( post ) => {
-            // console.log(post);
-            if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.indexOf('link_box') >= 1){
-              return (
-                <li>
-                  <a href="#">
+        <form class="thefilter">
+          {searchBox(attributes)}
+          {getTaxonomyFiedset(attributes)}
+        </form>
+        <div className={postListTemplate} style={{'--postColumns': columnSum, '--postColumnsSpace': columnSpacing + 'px'}} data-columnspace={columnSpacing} data-columns={columnSum}>
+          { posts.map(
+            ( post ) => {
+              // console.log(post);
+              if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.indexOf('link_box') >= 1){
+                return (
+                  <div>
+                    <a href="#">
+                        {PostImg(postThumb, postTaxonomyFilterOptions, post.id, media[ post.id ])}
+                        <div class="post-content">
+                          <h4>
+                            {PostValues(postTextOne, post, postTaxonomyFilterOptions, "link_row1", taxOne)}
+                          </h4>
+                          {PostValues(postTextTwo, post, postTaxonomyFilterOptions, "link_row2", taxTwo)}
+                        </div>
+                    </a>
+                  </div>
+                )
+              } else {
+                return (
+                  <div>
                       {PostImg(postThumb, postTaxonomyFilterOptions, post.id, media[ post.id ])}
                       <div class="post-content">
                         <h4>
@@ -300,32 +371,19 @@ export default registerBlockType( 'templates/posts', {
                         </h4>
                         {PostValues(postTextTwo, post, postTaxonomyFilterOptions, "link_row2", taxTwo)}
                       </div>
-                  </a>
-                </li>
-              )
-            } else {
-              return (
-                <li>
-                    {PostImg(postThumb, postTaxonomyFilterOptions, post.id, media[ post.id ])}
-                    <div class="post-content">
-                      <h4>
-                        {PostValues(postTextOne, post, postTaxonomyFilterOptions, "link_row1", taxOne)}
-                      </h4>
-                      {PostValues(postTextTwo, post, postTaxonomyFilterOptions, "link_row2", taxTwo)}
-                    </div>
-                </li>
-              )
+                  </div>
+                )
+              }
             }
-          }
-        ) }
-        {getGridFixer(attributes)}
-      </ul>
+          ) }
+          {getGridFixer(attributes)}
+        </div>
       </div>
     ];
   } ),
   save: props => {
     const {
-      attributes: { postType, postTaxonomyFilter, postTaxonomyFilterRelation, postSum, postSortDirection, postSortBy, postTextOne, postTextTwo, postColumns, anchor, postThumb, postSwiper, postPopUp, postPopUpNav, postColumnsSpace, postTaxonomyFilterOptions },
+      attributes: { anchor, postType, postSortBy, postTextOne, postTextTwo, postTaxonomyFilter, postTaxonomyFilterOptions, postColumns, postFilterPosition, postListTemplate, postColumnsSpace, postTextSearch, postThumb, postTaxonomyFilterRelation, postSortDirection },
       attributes
     } = props;
 

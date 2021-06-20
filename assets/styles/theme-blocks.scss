@@ -12,6 +12,7 @@ Table of Contents:
   1.0 BLOCKS
     1.1 SOCIAL MEDIA
     1.2 POSTS
+    1.3 POSTS FILTER
   2.0 BLOCK STYLINGS
     2.1 TOGGLE
     2.2 COLUMNS
@@ -100,6 +101,102 @@ body.frontend,
         li {
           figure {
             margin: 0;
+          }
+        }
+      }
+    }
+
+
+    /* 1.3 POSTS FILTER
+    /––––––––––––––––––––––––*/
+    div.block-postsfilter {
+      &.filter-left,
+      &.filter-right {
+        display: flex;
+        flex-wrap: nowrap;
+        @include mobile {
+          flex-direction: column;
+        }
+        .thefilter {
+          margin-right: 40px;
+          @include mobile {
+            margin-right: 0;
+          }
+        }
+      }
+      &.filter-right {
+        flex-direction: row-reverse;
+        @include mobile {
+          flex-direction: column;
+        }
+        .thefilter {
+          margin-right: 0;
+          margin-left: 40px;
+          @include mobile {
+            margin-left: 0;
+          }
+        }
+      }
+      > div {
+        &.grid,
+        &.list {
+          width: 100%;
+          figure {
+            margin: 0;
+          }
+        }
+        &.grid {
+          --columnSpacing: calc(var(--postColumns) - 1);
+          --spaceFixer: calc(var(--postColumnsSpace) * var(--columnSpacing));
+          --containerwidth: calc(100% - var(--spaceFixer));
+          --childwidth: calc(var(--containerwidth) / var(--postColumns));
+          display: grid;
+          grid-template-columns: repeat(auto-fit, var(--childwidth));
+          grid-gap: var(--postColumnsSpace);
+          justify-content: space-between;
+          align-content: flex-start;
+          > .wide {
+            grid-column: span var(--postColumns);
+          }
+        }
+        &.loading {
+          > div {
+            opacity: .3;
+            transition: $transition_fast;
+          }
+        }
+      }
+      > form {
+        &.thefilter {
+          > * + * {
+            margin-top: $space;
+          }
+          ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            li,
+            .components-base-control__field {
+              display: flex;
+              flex-wrap: nowrap;
+            }
+          }
+          fieldset {
+            max-width: 100%;
+            border: 0;
+            padding: 0;
+            margin-bottom: 0;
+            margin-left: 0;
+            margin-right: 0;
+            legend {
+              margin-bottom: 5px;
+            }
+          }
+          .textsearch {
+            label {
+              display: block;
+              margin-bottom: 5px;
+            }
           }
         }
       }

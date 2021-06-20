@@ -4,7 +4,7 @@
  *
  * Base dev functions - parent for all custom classes
  * Author:      David Voglgsnag
- * @version     2.9.3
+ * @version     2.10.3
  *
  */
 
@@ -36,6 +36,7 @@
    3.1 GET POST
    3.2 CHECK IF OPTION IS SELECTED
    3.3 CHECK IF CHECKBOX IS CHECKED
+   3.4 RETURN FILTER GROUP
  4.0 FOR WORDPRESS
    4.1 GET CURRENT LANGUAGE
    4.2 ADD USER ROLE
@@ -618,6 +619,86 @@ class prefix_core_BaseFunctions {
     } else {
       return (in_array($value,$range)) ? "checked='checked'" : "";
     }
+  }
+
+
+  /* 3.4 RETURN FILTER GROUP
+  /------------------------*/
+  /**
+    * @param string $slug: taxonomy slug
+    * @param string $tax_arg: taxonomy arguments
+    * @param string $class: css classes to fieldset
+    * @param int $hierarchical: build hierarchical
+    * @return string fieldset
+  */
+  public static function GetFilterGroup(string $slug = "", $tax_arg = array(), string $class = "", int $hierarchical = 0, bool $legend = true, string $addlist = ''){
+    // vars
+    $output = '';
+    $get_given = $tax_arg['get_term'] ? $tax_arg['get_term'] : $slug;
+    $given = $_GET[$get_given] ? explode( "__", $_GET[$get_given] ) : '';
+    $taxonomy_details = get_taxonomy( $slug );
+    $tax = get_terms( $slug, $tax_arg );
+    $css = $class !== "" ? ' class="' . $class . '"' : '';
+    // output
+    if(count($tax) >= 1):
+      $output .= '<fieldset' . $css . '>';
+          if($legend == true):
+            $output .= '<legend>' . __($taxonomy_details->labels->name, 'vsa') . '</legend>';
+          endif;
+            $output .= '<ul>';
+              if ( ! empty( $tax ) && ! is_wp_error( $tax ) ):
+                foreach ( $tax as $t ) {
+                    if($hierarchical !== 0 && $t->parent !== 0):
+                    else:
+                      $output .= '<li>';
+                        $output .= '<input type="checkbox" id="' . $slug . '-' . $t->slug . '" name="' . $slug . '" value="' . $t->slug . '" ' . SELF::setChecked($t->slug, $given) . '>';
+                        $output .= '<label for="' . $slug . '-' . $t->slug . '" tabindex="0">';
+                          $output .= $t->name;
+                        $output .= '</label>';
+                        // hierarchical
+                        if($hierarchical !== 0):
+                          $output .= SELF::GetFilterGroupSubs($slug, $t->term_id, $tax, $given);
+                        endif;
+                      $output .= '</li>';
+                    endif;
+                }
+                $output .= $addlist;
+              endif;
+            $output .= '</ul>';
+      $output .= '</fieldset>';
+    endif;
+
+    return $output;
+  }
+  /* RETURN FILTER GROUP - SUB CATEGORIES
+  /------------------------*/
+  /**
+    * @param string $slug: taxonomy slug
+    * @param int $id: current taxonomy id
+    * @param array $tax: taxonomy query
+    * @param $given: active filter
+    * @return string list of all subkategories
+  */
+  public static function GetFilterGroupSubs(string $slug = "", int $id = 0, array $tax = array(), $given){
+    $suboutput = '';
+    foreach( $tax as $subcategory ) {
+        if($subcategory->parent == $id):
+          $suboutput .= '<li>';
+            $suboutput .= '<input type="checkbox" id="' . $slug . '-' . $subcategory->slug . '" name="' . $slug . '" value="' . $subcategory->slug . '" ' . SELF::setChecked($subcategory->slug, $given) . '>';
+            $suboutput .= '<label for="' . $slug . '-' . $subcategory->slug . '" tabindex="0">';
+              $suboutput .= $subcategory->name;
+            $suboutput .= '</label>';
+            $suboutput .= SELF::GetFilterGroupSubs($slug, $subcategory->term_id, $tax, $given);
+          $suboutput .= '</li>';
+        endif;
+    }
+    if($suboutput !== ''):
+      $output .= '<ul class="subcategoreis">';
+        $output .= $suboutput;
+      $output .= '</ul>';
+    endif;
+
+    return $output;
   }
 
 

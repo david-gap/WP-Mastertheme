@@ -217,6 +217,12 @@ function WPgutenberg_blockRender_posts($attr){
           $output .= '</li>';
         endwhile;
         wp_reset_postdata();
+        // grid fixer
+        if(array_key_exists('postSwiper', $attr) && $attr['postSwiper'] !== true && array_key_exists('postColumns', $attr) && $attr['postColumns'] > 1):
+          for ($x = 1; $x < $attr['postColumns']; $x++) {
+            $output .= '<li class="grid-fixer"></li>';
+          }
+        endif;
       $output .= '</ul>';
     $output .= '</div>';
   endif;

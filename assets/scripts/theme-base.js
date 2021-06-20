@@ -347,6 +347,38 @@ document.onfocusout = function(){
 document.addEventListener('click', checkOverlayContainers);
 
 
+/* Post filter
+/------------------------*/
+function runPostFilter(input){
+  input.closest(".block-postsfilter").querySelector('.results').classList.add("loading");
+  // vars
+  const id = input.closest(".block-postsfilter").getAttribute('data-id');
+  var config = formValuesToAjax(input.closest('.block-postsfilter[data-id="' + id + '"]').querySelector('form'));
+  config['path'] = '../mastertheme/classes/prefix_WPgutenberg/blocks/postsfilter/ajax.php';
+  config['action'] = 'loadPosts';
+  config['id'] = id;
+  // run ajax function
+  ajaxCall(config);
+}
+function insertFilteredPosts(data){
+  document.querySelector('.block-postsfilter[data-id="' + data.id + '"] .results').innerHTML = data.content;
+  document.querySelector('.block-postsfilter[data-id="' + data.id + '"] .results').classList.remove("loading");
+}
+var postFilterInputs = document.querySelectorAll('.block-postsfilter input');
+if(postFilterInputs.length !== 0){
+  Array.from(postFilterInputs).forEach(function(input) {
+    if(input.type == 'text'){
+      input.oninput = function() {
+        runPostFilter(input);
+      }
+    } else if (input.type == 'checkbox') {
+      input.addEventListener ("change", function () {
+         runPostFilter(input);
+      });
+    }
+  });
+}
+
 
 /*==================================================================================
   FORM
@@ -369,6 +401,38 @@ function deselectRadioButtons(rootElement) {
   });
 }
 deselectRadioButtons();
+
+
+/* form values for ajax
+/------------------------*/
+function formValuesToAjax(form){
+  let array = [];
+  // add text, email, textarea and hidden fields
+  const formTextFields = form.querySelectorAll('input[type="text"], input[type="email"], input[type="hidden"], textarea');
+  if(formTextFields.length !== 0){
+    Array.from(formTextFields).forEach(function(input) {
+      array[input.name] = input.value;
+    });
+  }
+  // add radio and checkbox values in fieldsets
+  const formFieldsets = form.querySelectorAll('fieldset');
+  if(formFieldsets.length !== 0){
+    Array.from(formFieldsets).forEach(function(fieldset) {
+      const fieldsetInputs = fieldset.querySelectorAll('input');
+      if(fieldsetInputs.length !== 0){
+        let fieldsetArray = [];
+        Array.from(fieldsetInputs).forEach(function(input) {
+          if(input.checked){
+            fieldsetArray.push(input.value);
+          }
+        });
+        array[fieldsetInputs[0].name] = fieldsetArray.join('__');
+      // array[input.name] = input.value;});
+      }
+    });
+  }
+return array;
+}
 
 
 /* validate formular

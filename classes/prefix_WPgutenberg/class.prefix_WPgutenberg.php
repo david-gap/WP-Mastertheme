@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.5.6
+ * @version     2.6.6
  */
 
 /*=======================================================
@@ -203,7 +203,8 @@ class prefix_WPgutenberg {
           "core-embed/videopress",
           "core-embed/wordpress-tv",
           "templates/vimeo",
-          "templates/posts"
+          "templates/posts",
+          "templates/postsfilter"
         )
       ),
       "CustomAllowedBlocks" => array(
@@ -369,7 +370,7 @@ class prefix_WPgutenberg {
       'gutenberg-block',
       $class_path . 'assets/js/gutenberg-blocks.js',
       [ 'wp-i18n', 'wp-element', 'wp-blocks', 'wp-components', 'wp-editor' ],
-      '0.2'
+      '0.3'
     );
   }
 
@@ -382,6 +383,7 @@ class prefix_WPgutenberg {
       return;
     }
     include 'blocks/posts/index.php';
+    include 'blocks/postsfilter/index.php';
   }
 
 
