@@ -202,6 +202,10 @@ body.frontend  {
   background-size: contain;
   -webkit-tap-highlight-color: transparent;
 }
+.editor-styles-wrapper *,
+* {
+  box-sizing: border-box!important;
+}
 
 
 /* Links
@@ -230,6 +234,7 @@ a {
   overflow: hidden;
   margin: 0;
   padding: 0;
+  border-width: 0;
 }
 
 

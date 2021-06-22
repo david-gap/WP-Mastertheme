@@ -191,6 +191,7 @@ export default class Inspector extends Component {
                 label={__("Sort by", "WPgutenberg")}
                 value={postSortBy}
                 options={[
+                  { value: "menu_order", label: "Menu order" },
                   { value: "date", label: "Date" },
                   { value: "title", label: "Title" }
                 ]}

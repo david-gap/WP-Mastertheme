@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.22.16 | 22.06.2021 <js data values, box sizing fix>
+* JS function to get element data attributes as array
+* css fix box sizing
+* add custom blocks sort by menu
+
 ## 1.22.15 | 20.06.2021 <fix posts filter block text search>
 * WPgutenberg class version 2.6.7
 

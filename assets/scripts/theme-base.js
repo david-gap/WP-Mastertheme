@@ -299,6 +299,22 @@ if(actionButtons.length !== 0){
 }
 
 
+/* List all data attributes
+/------------------------*/
+function getDataAttributes(element) {
+    var data = {};
+    [].forEach.call(element.attributes, function(attr) {
+        if (/^data-/.test(attr.name)) {
+            var camelCaseName = attr.name.substr(5).replace(/-(.)/g, function ($0, $1) {
+                return $1.toUpperCase();
+            });
+            data[camelCaseName] = attr.value;
+        }
+    });
+    return data;
+}
+
+
 
 /*==================================================================================
   THEME BLOCKS
