@@ -71,9 +71,9 @@ export default class Inspector extends Component {
     // update text selection options
     let fieldSelection = [
       { value: "", label: "-" },
-      { value: "title", label: "title" },
-      { value: "date", label: "date" },
-      { value: "excerpt", label: "excerpt" }
+      { value: "title", label: __( 'Title', 'WPgutenberg' ) },
+      { value: "date", label: __( 'Date', 'WPgutenberg' ) },
+      { value: "excerpt", label: __( 'Excerpt', 'WPgutenberg' ) }
     ];
     const query = {
       'status': 'publish',
@@ -143,13 +143,13 @@ export default class Inspector extends Component {
     };
     // options
     const postOptions = [
-      { value: "legend", label: "Show legend" },
-      { value: "hirarchical", label: "Hirarchical taxonomies" },
-      { value: "emptytax", label: "Show empty taxonomies" },
-      { value: "link_img", label: "Link image" },
-      { value: "link_row1", label: "Link row 1" },
-      { value: "link_row2", label: "Link row 2" },
-      { value: "link_box", label: "Link box" }
+      { value: "legend", label: __( 'Show taxonomy legend', 'WPgutenberg' ) },
+      { value: "hirarchical", label: __( 'Hirarchical taxonomies', 'WPgutenberg' ) },
+      { value: "emptytax", label: __( 'Show empty taxonomies', 'WPgutenberg' ) },
+      { value: "link_img", label: __( 'Link image', 'WPgutenberg' ) },
+      { value: "link_row1", label: __( 'Link row 1', 'WPgutenberg' ) },
+      { value: "link_row2", label: __( 'Link row 2', 'WPgutenberg' ) },
+      { value: "link_box", label: __( 'Link box', 'WPgutenberg' ) }
     ]
     function checkOptions(name){
       if (postTaxonomyFilterOptions && postTaxonomyFilterOptions.length >= 1 && postTaxonomyFilterOptions.includes(name)) {
@@ -191,9 +191,9 @@ export default class Inspector extends Component {
                 label={__("Sort by", "WPgutenberg")}
                 value={postSortBy}
                 options={[
-                  { value: "menu_order", label: "Menu order" },
-                  { value: "date", label: "Date" },
-                  { value: "title", label: "Title" }
+                  { value: "menu_order", label: __( 'Menu order', 'WPgutenberg' ) },
+                  { value: "date", label: __( 'Date', 'WPgutenberg' ) },
+                  { value: "title", label: __( 'Title', 'WPgutenberg' ) }
                 ]}
                 onChange={postSortBy => setAttributes({ postSortBy })}
               />
@@ -203,8 +203,8 @@ export default class Inspector extends Component {
                 label={__("Sort direction", "WPgutenberg")}
                 value={postSortDirection}
                 options={[
-                  { value: "desc", label: "DESC" },
-                  { value: "asc", label: "ASC" }
+                  { value: "asc", label: __( 'ASC', 'WPgutenberg' ) },
+                  { value: "desc", label: __( 'DESC', 'WPgutenberg' ) }
                 ]}
                 onChange={postSortDirection => setAttributes({ postSortDirection })}
               />
@@ -214,8 +214,8 @@ export default class Inspector extends Component {
                 label={__("Relation", "WPgutenberg")}
                 value={postTaxonomyFilterRelation}
                 options={[
-                  { value: "AND", label: "AND" },
-                  { value: "OR", label: "OR" }
+                  { value: "AND", label: __( 'AND', 'WPgutenberg' ) },
+                  { value: "OR", label: __( 'OR', 'WPgutenberg' ) }
                 ]}
                 onChange={postTaxonomyFilterRelation => setAttributes({ postTaxonomyFilterRelation })}
               />
@@ -243,9 +243,9 @@ export default class Inspector extends Component {
                 label={__("Filter position", "WPgutenberg")}
                 value={postFilterPosition}
                 options={[
-                  { value: "top", label: "Top" },
-                  { value: "left", label: "Left" },
-                  { value: "right", label: "Right" }
+                  { value: "top", label: __( 'Top', 'WPgutenberg' ) },
+                  { value: "left", label: __( 'Left', 'WPgutenberg' ) },
+                  { value: "right", label: __( 'Right', 'WPgutenberg' ) }
                 ]}
                 onChange={postFilterPosition => setAttributes({ postFilterPosition })}
               />
@@ -255,8 +255,8 @@ export default class Inspector extends Component {
                 label={__("Template", "WPgutenberg")}
                 value={postListTemplate}
                 options={[
-                  { value: "grid", label: "Grid" },
-                  { value: "list", label: "List" }
+                  { value: "grid", label: __( 'Grid', 'WPgutenberg' ) },
+                  { value: "list", label: __( 'List', 'WPgutenberg' ) }
                 ]}
                 onChange={postListTemplate => setAttributes({ postListTemplate })}
               />

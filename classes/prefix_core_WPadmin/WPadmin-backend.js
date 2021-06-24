@@ -128,7 +128,7 @@ jQuery(document).ready(function($){
 
     /* select media
     /––––––––––––––––––––––––*/
-    $(document).on('click', '#configuration .wp-single-media', function (e) {
+    $(document).on('click', '#configuration .wp-single-media, .metaboxes .wp-single-media', function (e) {
       // get action
       var action = $(this).attr('data-action');
       var input_id = $(this).siblings('.img-saved').attr('id');
@@ -188,7 +188,7 @@ jQuery(document).ready(function($){
 
     /* remove selected media
     /------------------------*/
-    $(document).on('click', '#configuration .img-selected .remove_image', function (e) {
+    $(document).on('click', '#configuration .img-selected .remove_image, .metaboxes .img-selected .remove_image', function (e) {
       event.preventDefault();
       if (confirm('Are you sure you want to remove this image?')) {
         $(this).parents('.img-selected').siblings('.img-saved').val('');

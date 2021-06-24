@@ -79,7 +79,7 @@ class prefix_core_WPadmin {
     wp_localize_script( 'backend/WPadmin-script', 'Ajax_File', $backend_ajax_action_file );
     // css
     wp_enqueue_script( 'backend/WPadmin-styles' );
-    wp_enqueue_style('backend/WPadmin-styles', $class_path . 'WPadmin-backend.css', false, 0.3);
+    wp_enqueue_style('backend/WPadmin-styles', $class_path . 'WPadmin-backend.css', false, 0.5);
     // Add the color picker css file
     wp_enqueue_style('wp-color-picker');
     wp_enqueue_script('wp-color-picker');

@@ -9,6 +9,9 @@ const attributes = {
   postTaxonomyFilter: {
     type: 'array'
   },
+  postIdFilter: {
+    type: 'array'
+  },
   postTaxonomyFilterRelation: {
     type: 'string',
     default: 'AND'

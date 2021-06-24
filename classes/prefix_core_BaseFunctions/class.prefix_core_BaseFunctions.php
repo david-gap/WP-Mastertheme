@@ -4,7 +4,7 @@
  *
  * Base dev functions - parent for all custom classes
  * Author:      David Voglgsnag
- * @version     2.10.3
+ * @version     2.11.3
  *
  */
 
@@ -44,6 +44,7 @@
    4.4 RETURN TAXONOMY TERMS IN A LIST
    4.5 LOGIN FORMULAR
    4.6 UPLOAD WP IMG
+   4.7 META BLOCKES
  5.0 COORDINATES
    5.1 CONVERT: WGS lat/long TO CH1903 y
    5.2 CONVERT: WGS lat/long TO CH1903 x
@@ -935,6 +936,50 @@ class prefix_core_BaseFunctions {
       // return $file;
     endif;
   }
+
+
+  /* 4.7 META BLOCKES
+  /------------------------*/
+  /**
+    * Upload image to media directory
+    * @param int $postID: post id
+    * @param array $metas: meta list, key is the name value is a array with label and type
+  */
+  public function metaBoxes(int $postID = 0, array $metas = array()) {
+    echo '<div class="metaboxes">';
+      foreach( $metas as $metafield => $metafeildValues ){
+        if(array_key_exists('label', $metafeildValues) && array_key_exists('type', $metafeildValues)):
+          $value = get_post_meta($postID, $metafield, true);
+          echo '<div class="components-panel__row edit-post-post-visibility" data-id="' . $metafield . '">';
+            echo '<label for="' . $metafield . '"><strong>' . __( $metafeildValues["label"], 'WPtickets' ) . '</strong></label><br />';
+              if($metafeildValues["type"] == "wysiwig"):
+                wp_editor($value, $metafield, array(
+                            'wpautop'       => true,
+                            'media_buttons' => false,
+                            'textarea_name' => $metafield,
+                            'textarea_rows' => 10,
+                            'teeny'         => true
+                ));
+              elseif($metafeildValues["type"] == "image"):
+                echo '<input type="hidden" class="img-saved" id="' . $metafield . '" name="' . $metafield . '" value="' . $value . '" style="margin-top:5px; width:100%;">';
+                echo '<button class="wp-single-media" data-action="WPadmin">' . __('Select images','WPadmin') . '</button>';
+                // img
+                echo '<span class="img-selected">';
+                  if($value !== false && $value !== ''):
+                    echo '<span class="remove_image"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24.9 24.9" xml:space="preserve"><rect x="-3.7" y="10.9" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1549 12.4451)" fill="#000" width="32.2" height="3"/><rect x="10.9" y="-3.7" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1549 12.4451)" fill="#000" width="3" height="32.2"/></svg></span>';
+                    echo '<img src="' . wp_get_attachment_thumb_url($value) . '">';
+                  endif;
+                echo '</span>';
+              else:
+                echo '<input type="text" id="' . $metafield . '" name="' . $metafield . '" value="' . $value . '" style="margin-top:5px; width:100%;">';
+              endif;
+          echo '</div>';
+          echo '<hr style="margin: 20px 0;" />';
+        endif;
+      }
+    echo '</div>';
+  }
+
 
 
 

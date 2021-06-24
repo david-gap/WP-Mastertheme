@@ -85,20 +85,40 @@ function PostImg(postThumb, postTaxonomyFilterOptions, id, media){
 }
 
 function PostValues(type, post, postTaxonomyFilterOptions, row, taxonomy){
-  var value;
+  var value = '';
   switch (type) {
     case "title":
-      value = post.title.rendered;
+      value += '<h4>';
+        if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+          value += '<a href="#">';
+        }
+          value += post.title.rendered;
+        if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+          value += '</a>';
+        }
+      value += '</h4>';
       break;
     case "date":
       var setdate = new Date(post.date);
       var dd = ((setdate.getDate())>=10)? setdate.getDate() : '0' + setdate.getDate();
       var mm = ((setdate.getMonth())>=9)? (setdate.getMonth()+1) : '0' + (setdate.getMonth()+1);
       var yyyy = setdate.getFullYear();
-      value = dd + '.' + mm + '.' + yyyy;
+      if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+        value += '<a href="#">';
+      }
+        value += dd + '.' + mm + '.' + yyyy;
+      if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+        value += '</a>';
+      }
       break;
     case "excerpt":
-      value = post.excerpt.rendered;
+      if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+        value += '<a href="#">';
+      }
+        value += post.excerpt.rendered;
+      if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+        value += '</a>';
+      }
       break;
     default:
       if(type.startsWith("tax__")){
@@ -122,28 +142,45 @@ function PostValues(type, post, postTaxonomyFilterOptions, row, taxonomy){
               }
             }
           });
-          value = buildvalue;
+          if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+            value += '<a href="#">';
+          }
+            value += buildvalue;
+          if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+            value += '</a>';
+          }
         }
       } else {
         // meta boxes
         if (post.hasOwnProperty("meta") && post.meta.hasOwnProperty(type)) {
-          value = post.meta[type];
+          if(type.includes("Image")){
+            let img = select('core').getMedia( post.meta[type] );
+            if(img){
+              if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+                value += '<a href="#">';
+              }
+                value += '<figure><img src="' + img.media_details.sizes.thumbnail.source_url + '" width="100%" /></figure>';
+              if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+                value += '</a>';
+              }
+            }
+          } else {
+            if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+              value += '<a href="#">';
+            }
+              value += post.meta[type];
+            if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+              value += '</a>';
+            }
+          }
         }
       }
       break;
   }
   if(value !== ''){
-    if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
-      return (
-        <a href="#">
-          {htmlToElem( value )}
-        </a>
-      );
-    } else {
-      return (
-        htmlToElem( value )
-      );
-    }
+    return (
+      htmlToElem( value )
+    );
   }
 }
 
@@ -366,9 +403,7 @@ export default registerBlockType( 'templates/postsfilter', {
                   <div>
                       {PostImg(postThumb, postTaxonomyFilterOptions, post.id, media[ post.id ])}
                       <div class="post-content">
-                        <h4>
-                          {PostValues(postTextOne, post, postTaxonomyFilterOptions, "link_row1", taxOne)}
-                        </h4>
+                        {PostValues(postTextOne, post, postTaxonomyFilterOptions, "link_row1", taxOne)}
                         {PostValues(postTextTwo, post, postTaxonomyFilterOptions, "link_row2", taxTwo)}
                       </div>
                   </div>

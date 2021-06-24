@@ -60,7 +60,7 @@ function getcolumnSpacing(atts) {
 // define column spacing
 function getcolumnSum(atts) {
   let columnSum = '';
-  columnSum += atts["postSwiper"] === true ? "1" : atts["postColumns"];
+  columnSum += atts["postSwiper"] === true ? atts["postColumns"] : atts["postColumns"];
 
   return columnSum;
 }
@@ -87,20 +87,40 @@ function PostImg(postThumb, postTaxonomyFilterOptions, id, media){
 }
 
 function PostValues(type, post, postTaxonomyFilterOptions, row, taxonomy){
-  var value;
+  var value = '';
   switch (type) {
     case "title":
-      value = post.title.rendered;
+      value += '<h4>';
+        if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+          value += '<a href="#">';
+        }
+          value += post.title.rendered;
+        if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+          value += '</a>';
+        }
+      value += '</h4>';
       break;
     case "date":
       var setdate = new Date(post.date);
       var dd = ((setdate.getDate())>=10)? setdate.getDate() : '0' + setdate.getDate();
       var mm = ((setdate.getMonth())>=9)? (setdate.getMonth()+1) : '0' + (setdate.getMonth()+1);
       var yyyy = setdate.getFullYear();
-      value = dd + '.' + mm + '.' + yyyy;
+      if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+        value += '<a href="#">';
+      }
+        value += dd + '.' + mm + '.' + yyyy;
+      if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+        value += '</a>';
+      }
       break;
     case "excerpt":
-      value = post.excerpt.rendered;
+      if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+        value += '<a href="#">';
+      }
+        value += post.excerpt.rendered;
+      if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+        value += '</a>';
+      }
       break;
     default:
       if(type.startsWith("tax__")){
@@ -124,28 +144,45 @@ function PostValues(type, post, postTaxonomyFilterOptions, row, taxonomy){
               }
             }
           });
-          value = buildvalue;
+          if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+            value += '<a href="#">';
+          }
+            value += buildvalue;
+          if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+            value += '</a>';
+          }
         }
       } else {
         // meta boxes
         if (post.hasOwnProperty("meta") && post.meta.hasOwnProperty(type)) {
-          value = post.meta[type];
+          if(type.includes("Image")){
+            let img = select('core').getMedia( post.meta[type] );
+            if(img){
+              if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+                value += '<a href="#">';
+              }
+                value += '<figure><img src="' + img.media_details.sizes.thumbnail.source_url + '" width="100%" /></figure>';
+              if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+                value += '</a>';
+              }
+            }
+          } else {
+            if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+              value += '<a href="#">';
+            }
+              value += post.meta[type];
+            if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+              value += '</a>';
+            }
+          }
         }
       }
       break;
   }
   if(value !== ''){
-    if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
-      return (
-        <a href="#">
-          {htmlToElem( value )}
-        </a>
-      );
-    } else {
-      return (
-        htmlToElem( value )
-      );
-    }
+    return (
+      htmlToElem( value )
+    );
   }
 }
 
@@ -201,15 +238,20 @@ export default registerBlockType( 'templates/posts', {
       'tax_relation': props.attributes.postTaxonomyFilterRelation
     };
     // add filter
-    if(props.attributes.postTaxonomyFilter && props.attributes.postTaxonomyFilter.length >= 1){
-      // query.concat(props.attributes.postTaxonomyFilter);
-      props.attributes.postTaxonomyFilter.forEach(function(element) {
-        var stringToArray = element.split("-");
-        if( query[stringToArray[0]] === undefined ) {
-            query[stringToArray[0]] = [];
-        }
-          query[stringToArray[0]].push(stringToArray[1]);
-      });
+    if(props.attributes.postIdFilter && props.attributes.postIdFilter.length >= 1){
+      query['include'] = props.attributes.postIdFilter;
+    } else {
+      // taxonomy filter
+      if(props.attributes.postTaxonomyFilter && props.attributes.postTaxonomyFilter.length >= 1){
+        // query.concat(props.attributes.postTaxonomyFilter);
+        props.attributes.postTaxonomyFilter.forEach(function(element) {
+          var stringToArray = element.split("-");
+          if( query[stringToArray[0]] === undefined ) {
+              query[stringToArray[0]] = [];
+          }
+            query[stringToArray[0]].push(stringToArray[1]);
+        });
+      }
     }
     // posts
     const posts = select( 'core' ).getEntityRecords( 'postType', props.attributes.postType, query );
@@ -245,7 +287,7 @@ export default registerBlockType( 'templates/posts', {
   } )( props => {
     // set values
     const {
-      attributes: { postType, postTaxonomyFilter, postTaxonomyFilterRelation, postSum, postSortDirection, postSortBy, postTextOne, postTextTwo, postColumns, anchor, postThumb, postSwiper, postPopUp, postPopUpNav, postColumnsSpace, postTaxonomyFilterOptions },
+      attributes: { postType, postTaxonomyFilter, postIdFilter, postTaxonomyFilterRelation, postSum, postSortDirection, postSortBy, postTextOne, postTextTwo, postColumns, anchor, postThumb, postSwiper, postPopUp, postPopUpNav, postColumnsSpace, postTaxonomyFilterOptions },
       attributes,
       className,
       setAttributes,
@@ -308,9 +350,7 @@ export default registerBlockType( 'templates/posts', {
                 <li>
                     {PostImg(postThumb, postTaxonomyFilterOptions, post.id, media[ post.id ])}
                     <div class="post-content">
-                      <h4>
-                        {PostValues(postTextOne, post, postTaxonomyFilterOptions, "link_row1", taxOne)}
-                      </h4>
+                      {PostValues(postTextOne, post, postTaxonomyFilterOptions, "link_row1", taxOne)}
                       {PostValues(postTextTwo, post, postTaxonomyFilterOptions, "link_row2", taxTwo)}
                     </div>
                 </li>
@@ -325,7 +365,7 @@ export default registerBlockType( 'templates/posts', {
   } ),
   save: props => {
     const {
-      attributes: { postType, postTaxonomyFilter, postTaxonomyFilterRelation, postSum, postSortDirection, postSortBy, postTextOne, postTextTwo, postColumns, anchor, postThumb, postSwiper, postPopUp, postPopUpNav, postColumnsSpace, postTaxonomyFilterOptions },
+      attributes: { postType, postTaxonomyFilter, postIdFilter, postTaxonomyFilterRelation, postSum, postSortDirection, postSortBy, postTextOne, postTextTwo, postColumns, anchor, postThumb, postSwiper, postPopUp, postPopUpNav, postColumnsSpace, postTaxonomyFilterOptions },
       attributes
     } = props;
 

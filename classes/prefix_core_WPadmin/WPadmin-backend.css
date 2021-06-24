@@ -133,7 +133,8 @@
 /*==================================================================================
   IMAGE SELECTOR
 ==================================================================================*/
-#configuration .img-selected {
+#configuration .img-selected,
+.metaboxes .img-selected {
   display: block;
   position: relative;
   border: 1px solid;
@@ -142,15 +143,18 @@
   line-height: 0;
   margin: 15px 0 10px;
 }
-#configuration .img-selected:empty {
+#configuration .img-selected:empty,
+.metaboxes .img-selected:empty {
   border: 0 solid;
   margin: 0;
 }
-#configuration .img-selected img {
+#configuration .img-selected img,
+.metaboxes .img-selected img {
   width: 100%;
   height: auto;
 }
-#configuration .img-selected .remove_image {
+#configuration .img-selected .remove_image,
+.metaboxes .img-selected .remove_image {
   position: absolute;
   top: -10px;
   right: -10px;
@@ -162,7 +166,8 @@
   background-color: white;
   cursor: pointer;
 }
-#configuration .img-selected .remove_image svg {
+#configuration .img-selected .remove_image svg,
+.metaboxes .img-selected .remove_image svg {
   width: 10px;
   margin: 5px;
 }

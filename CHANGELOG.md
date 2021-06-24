@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 1.23.16 | 24.06.2021 <meta fields, meta post blocks support>
+* move loading animation into frontend Body
+* add base function for meta blocks
+* post block results alternative selection by posts
+* fix post blocks backend swiper result with columns
+* post and filter post blocks supports meta values as image or alternative link
+
 ## 1.22.16 | 22.06.2021 <js data values, box sizing fix>
 * JS function to get element data attributes as array
 * css fix box sizing

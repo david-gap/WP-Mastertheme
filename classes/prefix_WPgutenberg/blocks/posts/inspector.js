@@ -26,7 +26,8 @@ const {
   TextControl,
   TextareaControl,
   ToggleControl,
-  SelectControl
+  SelectControl,
+  MyFormTokenField
 } = wp.components;
 
 /**
@@ -53,7 +54,8 @@ export default class Inspector extends Component {
         postColumnsSpace,
         postTaxonomyFilter,
         postTaxonomyFilterRelation,
-        postTaxonomyFilterOptions
+        postTaxonomyFilterOptions,
+        postIdFilter
       },
       setAttributes
     } = this.props;
@@ -61,13 +63,13 @@ export default class Inspector extends Component {
     // update text selection options
     let fieldSelection = [
       { value: "", label: "-" },
-      { value: "title", label: "title" },
-      { value: "date", label: "date" },
-      { value: "excerpt", label: "excerpt" }
+      { value: "title", label: __( 'Title', 'WPgutenberg' ) },
+      { value: "date", label: __( 'Date', 'WPgutenberg' ) },
+      { value: "excerpt", label: __( 'Excerpt', 'WPgutenberg' ) }
     ];
     const query = {
       'status': 'publish',
-      'per_page': 1,
+      'per_page': -1,
       'order': postSortDirection,
       'orderby': postSortBy
     };
@@ -99,6 +101,23 @@ export default class Inspector extends Component {
         }
       });
     }
+    // post id selection
+    let postNames = [];
+    let postsFieldValue = [];
+    if ( posts !== null ) {
+      postNames = posts.map( ( post ) => post.title.raw );
+      if(postIdFilter){
+        postsFieldValue = postIdFilter.map( ( postId ) => {
+          let wantedPost = posts.find( ( post ) => {
+            return post.id === postId;
+          } );
+          if ( wantedPost === undefined || ! wantedPost ) {
+            return false;
+          }
+          return wantedPost.title.raw;
+        } );
+      }
+    }
     // update taxonomy filter
     let postTaxonomies = [];
     if(posts && posts.length > 0){
@@ -122,10 +141,10 @@ export default class Inspector extends Component {
     }
     // options
     const postOptions = [
-      { value: "link_img", label: "Link image" },
-      { value: "link_row1", label: "Link row 1" },
-      { value: "link_row2", label: "Link row 2" },
-      { value: "link_box", label: "Link box" }
+      { value: "link_img", label: __( 'Link image', 'WPgutenberg' ) },
+      { value: "link_row1", label: __( 'Link row 1', 'WPgutenberg' ) },
+      { value: "link_row2", label: __( 'Link row 2', 'WPgutenberg' ) },
+      { value: "link_box", label: __( 'Link box', 'WPgutenberg' ) }
     ]
     function checkOptions(name){
       if (postTaxonomyFilterOptions && postTaxonomyFilterOptions.length >= 1 && postTaxonomyFilterOptions.includes(name)) {
@@ -191,9 +210,9 @@ export default class Inspector extends Component {
                 label={__("Sort by", "WPgutenberg")}
                 value={postSortBy}
                 options={[
-                  { value: "menu_order", label: "Menu order" },
-                  { value: "date", label: "Date" },
-                  { value: "title", label: "Title" }
+                  { value: "menu_order", label: __( 'Menu order', 'WPgutenberg' ) },
+                  { value: "date", label: __( 'Date', 'WPgutenberg' ) },
+                  { value: "title", label: __( 'Title', 'WPgutenberg' ) }
                 ]}
                 onChange={postSortBy => setAttributes({ postSortBy })}
               />
@@ -203,8 +222,8 @@ export default class Inspector extends Component {
                 label={__("Sort direction", "WPgutenberg")}
                 value={postSortDirection}
                 options={[
-                  { value: "desc", label: "DESC" },
-                  { value: "asc", label: "ASC" }
+                  { value: "asc", label: __( 'ASC', 'WPgutenberg' ) },
+                  { value: "desc", label: __( 'DESC', 'WPgutenberg' ) }
                 ]}
                 onChange={postSortDirection => setAttributes({ postSortDirection })}
               />
@@ -317,12 +336,35 @@ export default class Inspector extends Component {
           </PanelBody>
           <PanelBody title={ __( 'Posts Filter', 'WPgutenberg' ) } >
             <PanelRow>
+              <FormTokenField
+                label={__("Select posts", "WPgutenberg")}
+                value={ postsFieldValue }
+                suggestions={ postNames }
+                maxSuggestions={ 20 }
+                onChange={ ( postIdFilter ) => {
+                  // Build array of selected posts.
+                  let postIdFilterArray = [];
+                  postIdFilter.map(
+                    ( postName ) => {
+                      const matchingPost = posts.find( ( post ) => {
+                        return post.title.raw === postName;
+                      } );
+                      if ( matchingPost !== undefined ) {
+                        postIdFilterArray.push( matchingPost.id );
+                      }
+                    }
+                  )
+                  setAttributes( { postIdFilter: postIdFilterArray } );
+                } }
+              />
+            </PanelRow>
+            <PanelRow>
               <SelectControl
                 label={__("Relation", "WPgutenberg")}
                 value={postTaxonomyFilterRelation}
                 options={[
-                  { value: "AND", label: "AND" },
-                  { value: "OR", label: "OR" }
+                  { value: "AND", label: __( 'AND', 'WPgutenberg' ) },
+                  { value: "OR", label: __( 'OR', 'WPgutenberg' ) }
                 ]}
                 onChange={postTaxonomyFilterRelation => setAttributes({ postTaxonomyFilterRelation })}
               />

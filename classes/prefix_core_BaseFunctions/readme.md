@@ -1,4 +1,4 @@
-**Version 2.10.3** (20.06.2021)
+**Version 2.11.3** (20.06.2021)
 
 Custom class "prefix_core_BaseFunctions" used as a library for useful functions
 
@@ -255,6 +255,29 @@ Upload image to media directory
 ```php
 core_BaseFunctions::WPuploadFile("path/file");
 /* RESULTING: upload file ID */
+```
+
+### 4.7 META BLOCKS
+Template for meta fields in the backend
+Meta fields key including "Image" can be used as a Image in the post blocks
+Meta field key "BlockUrl" can be a alternative link inside the post blocks
+```php
+static $metaFields = array(
+  'ImageSelection' => array(
+    'label' => 'Image',
+    'type' => 'image'
+  ),
+  'TextArea' => array(
+    'label' => 'Text with wysiwig',
+    'type' => 'wysiwig'
+  ),
+  'BlockUrl' => array(
+    'label' => 'Text field for URL',
+    'type' => 'text'
+  )
+);
+core_BaseFunctions::metaBoxes("post_id", $metaFields);
+/* RESULTING: table */
 ```
 
 
