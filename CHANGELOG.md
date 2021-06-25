@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.23.17 | 25.06.2021 <posts block fixes>
+* backend scroll inside swiper
+* swiper spacing
+
 ## 1.23.16 | 24.06.2021 <meta fields, meta post blocks support>
 * move loading animation into frontend Body
 * add base function for meta blocks

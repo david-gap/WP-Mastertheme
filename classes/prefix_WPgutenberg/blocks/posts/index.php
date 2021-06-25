@@ -119,7 +119,7 @@ function WPgutenberg_blockRender_posts($attr){
   $css .= array_key_exists('postPopUp', $attr) && $attr['postPopUp'] !== false ? ' add-popup' : '';
   $css .= array_key_exists('postPopUpNav', $attr) && $attr['postPopUpNav'] !== false ? ' popup-preview' : '';
   // reset spacing if only one column
-  $spacing = array_key_exists('postColumns', $attr) && $attr['postColumns'] > 1 ? $attr['postColumnsSpace'] : 0;
+  $spacing = $attr['postColumnsSpace'];
   // inline stylings
   $columns = array_key_exists('postColumns', $attr) ? $attr['postColumns'] : 1;
   $inlinecss .= '--postColumns: ' . $columns . ';';

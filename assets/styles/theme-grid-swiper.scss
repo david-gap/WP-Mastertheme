@@ -7,6 +7,23 @@
 
 
 // frontend only
+body.frontend {
+
+  /* SWIPER
+  /––––––––––––––––––––––––*/
+  .gallery-swiper {
+    ul {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      &::-webkit-scrollbar {
+          display: none;
+      }
+    }
+  }
+
+}
+
+
 body.frontend,
 .block-editor .editor-styles-wrapper {
 
@@ -17,11 +34,6 @@ body.frontend,
       list-style: none;
       padding: 0;
       margin: 0;
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-      &::-webkit-scrollbar {
-          display: none;
-      }
     }
   }
 

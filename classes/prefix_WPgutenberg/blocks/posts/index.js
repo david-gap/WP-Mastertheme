@@ -52,7 +52,7 @@ function getCssClasses(atts) {
 // define column spacing
 function getcolumnSpacing(atts) {
   let columnSpacing = '';
-  columnSpacing += atts["postColumns"] > 1 ? atts["postColumnsSpace"] : "0";
+  columnSpacing += atts["postColumnsSpace"];
 
   return columnSpacing;
 }
