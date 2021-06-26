@@ -13,6 +13,7 @@ Table of Contents:
     1.1 SOCIAL MEDIA
     1.2 POSTS
     1.3 POSTS FILTER
+    1.4 ACCORDION
   2.0 BLOCK STYLINGS
     2.1 TOGGLE
     2.2 COLUMNS
@@ -203,74 +204,76 @@ body.frontend,
     }
 
 
+    /* 1.4 ACCORDION
+    /––––––––––––––––––––––––*/
+    .block-accordion {
+      .accordion-item {
+        .accordion-label {
+          display: flex;
+          flex-wrap: nowrap;
+          justify-content: space-between;
+          padding: $space $space_half;
+          position: relative;
+          cursor: pointer;
+          line-height: 1;
+          &.active {
+            .icon {
+              &:after {
+                transform: rotate(0deg);
+                transition: $transition_fast;
+              }
+            }
+            + .accordion-content {
+              padding: $space $space_half;
+              height: auto;
+              a {
+                display: inline;
+              }
+            }
+          }
+          .icon {
+            position: relative;
+            border-radius: 4px;
+            width: 30px;
+            height: 30px;
+            margin-left: $space;
+            &:before,
+            &:after {
+              position: absolute;
+              display: block;
+              content: "";
+              width: 20px;
+              height: 4px;
+              border-radius: 1px;
+            }
+            &:before,
+            &:after {
+              left: calc(50% - 10px);
+              top: calc(50% - 2px);
+            }
+            &:after {
+              transform: rotate(90deg);
+              transition: $transition_fast;
+            }
+          }
+        }
+        .accordion-content {
+          padding: 0;
+          height: 0;
+          overflow: hidden;
+          transition: .3s;
+          + .label {
+            border-top: 1px solid;
+          }
+        }
+      }
+    }
+
+
 
   /*==================================================================================
     2.0 BLOCK STYLINGS
   ==================================================================================*/
-
-    /* 2.1 TOGGLE
-    /––––––––––––––––––––––––*/
-    .toggle {
-      .label {
-        padding: $space $space_half;
-        position: relative;
-        display: block;
-        cursor: pointer;
-        line-height: 1;
-        &.active {
-          .icon {
-            &:after {
-              transform: rotate(0deg);
-              transition: $transition_fast;
-            }
-          }
-          + div {
-            padding: $space $space_half;
-            height: auto;
-            a {
-              display: inline;
-            }
-          }
-        }
-        .icon {
-          position: relative;
-          border-radius: 4px;
-          width: 30px;
-          height: 30px;
-          margin-left: $space;
-          &:before,
-          &:after {
-            position: absolute;
-            display: block;
-            content: "";
-            width: 20px;
-            height: 4px;
-            border-radius: 1px;
-          }
-          &:before,
-          &:after {
-            left: calc(50% - 10px);
-            top: calc(50% - 2px);
-          }
-          &:after {
-            transform: rotate(90deg);
-            transition: $transition_fast;
-          }
-        }
-      }
-      > div {
-        padding: 0;
-        height: 0;
-        overflow: hidden;
-        transition: .3s;
-        a {
-          display: none;
-        }
-        + .label {
-          border-top: 1px solid;
-        }
-      }
-    }
 
 
     /* 2.2 COLUMNS

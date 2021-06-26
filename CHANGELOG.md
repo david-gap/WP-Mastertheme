@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.24.17 | 26.06.2021 <accordion block>
+* add accordion and accordion item blocks
+* update accordion/toggle css/js
+* add is-type-video to responsive video styles
+
 ## 1.23.17 | 25.06.2021 <posts block fixes>
 * backend scroll inside swiper
 * swiper spacing

@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.6.8
+ * @version     2.7.8
  */
 
 /*=======================================================
@@ -204,7 +204,9 @@ class prefix_WPgutenberg {
           "core-embed/wordpress-tv",
           "templates/vimeo",
           "templates/posts",
-          "templates/postsfilter"
+          "templates/postsfilter",
+          "templates/accordion",
+          "templates/accordion-item"
         )
       ),
       "CustomAllowedBlocks" => array(
@@ -312,7 +314,7 @@ class prefix_WPgutenberg {
       wp_enqueue_script(
         'backend-gutenberg-css-classes',
         $path,
-        ['wp-i18n', 'wp-element', 'wp-blocks']
+        ['wp-i18n', 'wp-element', 'wp-blocks', 'wp-icons']
       );
     endif;
   }

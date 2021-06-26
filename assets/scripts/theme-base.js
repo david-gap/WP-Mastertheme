@@ -325,7 +325,7 @@ function getDataAttributes(element) {
 function toggleBlock(){
   this.classList.toggle("active");
 }
-var toggleButtons = document.querySelectorAll('.toggle > .label');
+var toggleButtons = document.querySelectorAll('.block-accordion > .accordion-item > .accordion-label');
 if(toggleButtons.length !== 0){
   Array.from(toggleButtons).forEach(function(element) {
     element.addEventListener('click', toggleBlock);

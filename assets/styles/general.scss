@@ -346,13 +346,14 @@ input[type="submit"] {
 
 /* RESPONSIVE VIDEO
 /––––––––––––––––––––––––*/
+.is-type-video .wp-block-embed__wrapper,
 .resp_video {
   position: relative;
 	padding-top: 56.25%;
   height: 0;
   overflow: hidden;
-  iframe,
-  video {
+  > iframe,
+  > video {
     position: absolute;
     top: 0;
     left: 0;
