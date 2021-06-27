@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.24.18 | 27.06.2021 <fix gutenberg editor configuration loading>
+* remove wp-icon from custom blocks
+
 ## 1.24.17 | 26.06.2021 <accordion block>
 * add accordion and accordion item blocks
 * update accordion/toggle css/js
