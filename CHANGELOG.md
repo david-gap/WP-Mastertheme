@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.24.19 | 29.06.2021 <fix gutenberg posts filter block>
+* disable hidden fields if categorie is empty
+* add accordion to structure styles
+
 ## 1.24.18 | 27.06.2021 <fix gutenberg editor configuration loading>
 * remove wp-icon from custom blocks
 

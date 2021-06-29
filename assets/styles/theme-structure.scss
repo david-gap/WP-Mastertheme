@@ -174,7 +174,6 @@ body.frontend,
       & > .wp-block-cover,
       & > .wp-block-file,
       & > .wp-block-columns,
-      & > .wp-block-columns .wp-block-column,
       & > .wp-block-columns .wp-block-column p,
       & > .wp-block-columns .wp-block-column ol,
       & > .wp-block-columns .wp-block-column ul,
@@ -182,17 +181,22 @@ body.frontend,
       & > .wp-block-columns .wp-block-column figure,
       & > .wp-block-media-text p,
       & > .post-password-form p,
-      & > .toggle,
-      & > .toggle > div p,
-      & > .toggle > div ol,
-      & > .toggle > div ul,
-      & > .toggle > div img,
-      & > .toggle > div figure,
+      & > .block-accordion,
+      & > .block-accordion .accordion-content p,
+      & > .block-accordion .accordion-content ol,
+      & > .block-accordion .accordion-content ul,
+      & > .block-accordion .accordion-content img,
+      & > .block-accordion .accordion-content figure,
       & > .block-posts,
       & > #search-form {
         margin-bottom: $space;
         &:last-child {
           margin-bottom: 0;
+        }
+      }
+      & > .wp-block-columns .wp-block-column {
+        @include mobile {
+          margin-bottom: $space;
         }
       }
     }

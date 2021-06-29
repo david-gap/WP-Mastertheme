@@ -284,12 +284,16 @@ function WPgutenberg_blockRender_postsfilter($attr){
           $output .= prefix_core_BaseFunctions::GetFilterGroup($value, $tax_arg, 'group-' . $value, $hierarchical, $showlegend);
         }
       endif;
-      $output .= '<input type="hidden" name="postTaxonomyFilter" value="' . implode('__', $attr['postTaxonomyFilter']) . '">';
+      if(array_key_exists('postTaxonomyFilter', $attr)):
+        $output .= '<input type="hidden" name="postTaxonomyFilter" value="' . implode('__', $attr['postTaxonomyFilter']) . '">';
+      endif;
       $output .= '<input type="hidden" name="postTaxonomyFilterRelation" value="' . $attr['postTaxonomyFilterRelation'] . '">';
       $output .= '<input type="hidden" name="postType" value="' . $attr['postType'] . '">';
       $output .= '<input type="hidden" name="postSortBy" value="' . $attr['postSortBy'] . '">';
       $output .= '<input type="hidden" name="postSortDirection" value="' . $attr['postSortDirection'] . '">';
-      $output .= '<input type="hidden" name="postTaxonomyFilterOptions" value="' . implode('__', $attr['postTaxonomyFilterOptions']) . '">';
+      if(array_key_exists('postTaxonomyFilterOptions', $attr)):
+        $output .= '<input type="hidden" name="postTaxonomyFilterOptions" value="' . implode('__', $attr['postTaxonomyFilterOptions']) . '">';
+      endif;
       $output .= '<input type="hidden" name="postTextOne" value="' . $attr['postTextOne'] . '">';
       $output .= '<input type="hidden" name="postTextTwo" value="' . $attr['postTextTwo'] . '">';
       $output .= '<input type="hidden" name="postThumb" value="' . $attr['postThumb'] . '">';
