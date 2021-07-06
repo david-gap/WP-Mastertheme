@@ -67,7 +67,7 @@ function getcolumnSum(atts) {
 
 function PostImg(postThumb, postTaxonomyFilterOptions, id, media){
   if(postThumb === true && media){
-    let themedia = media.media_details.sizes.thumbnail.source_url;
+    let themedia = media.source_url;
     if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes('link_img') && postTaxonomyFilterOptions.indexOf('link_box') < 1){
       return (
         <a href="#">
@@ -161,7 +161,7 @@ function PostValues(type, post, postTaxonomyFilterOptions, row, taxonomy){
               if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
                 value += '<a href="#">';
               }
-                value += '<figure><img src="' + img.media_details.sizes.thumbnail.source_url + '" width="100%" /></figure>';
+                value += '<figure><img src="' + img.source_url + '" width="100%" /></figure>';
               if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
                 value += '</a>';
               }

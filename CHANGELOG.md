@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.24.20 | 06.07.2021 <fix gutenberg posts img loading, container>
+* container sizing on first group inner
+* load gutenberg posts source_url in case Thumb is missing
+
 ## 1.24.19 | 29.06.2021 <fix gutenberg posts filter block>
 * disable hidden fields if categorie is empty
 * add accordion to structure styles

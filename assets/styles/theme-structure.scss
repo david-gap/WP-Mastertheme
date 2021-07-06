@@ -30,7 +30,7 @@ body.frontend,
   ==================================================================================*/
   .container,
   .is-style-container,
-  .is-style-content-container .wp-block-group__inner-container {
+  .is-style-content-container > .wp-block-group__inner-container {
     max-width: $container_content;
     margin-left: auto;
     margin-right: auto;
