@@ -6,7 +6,6 @@
 */
 
 
-@import 'vars';
 
 /* DEFAULT
 /––––––––––––––––––––––––*/
@@ -63,59 +62,12 @@ header .hamburger {
 }
 
 
-/* HIDE/SHOW CONTAINER
-/––––––––––––––––––––––––*/
-header #menu-main-container {
-
-  @include desktop {
-    text-align: center;
-    &.hidden_desktop {
-      pointer-events: none;
-      width: 100vw;
-      height: 100vh;
-      position: fixed;
-      top: 0;
-      left: 0;
-      opacity: 0;
-      pointer-events: none;
-      right: -80vw;
-      ul {
-        margin-top: -2000px!important;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-    }
-  }
-  @include mobile {
-    font-size: $mnav__mobile_fontsize;
-    line-height: $mnav__mobile_lineheight;
-    &.hidden_mobile {
-      pointer-events: none;
-      width: 100vw;
-      height: 100vh;
-      position: fixed;
-      top: 0;
-      left: 0;
-      opacity: 0;
-      pointer-events: none;
-      right: -80vw;
-      ul {
-        margin-top: -2000px!important;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-    }
-  }
-}
-
-
 /* ACTIVE
 /––––––––––––––––––––––––*/
 .active-menu header {
   .hamburger {
     z-index: 101;
+    margin-left: auto;
     span {
       transform: rotate(-45deg);
         width: 65%;
@@ -139,13 +91,13 @@ header #menu-main-container {
     align-items: center;
     overflow: scroll;
     > ul {
-      padding: $space_double $space;
-      font-size: $mnav__mobile_fontsize;
-      line-height: $mnav__mobile_lineheight;
+      padding: var(--space_double) var(--space);
+      font-size: var(--mnav__mobile_fontsize);
+      line-height: var(--mnav__mobile_lineheight);
       > li {
-        margin-bottom: $space;
+        margin-bottom: var(--space);
         ul {
-          margin-bottom: $space;
+          margin-bottom: var(--space);
         }
       }
     }

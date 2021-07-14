@@ -1,0 +1,23 @@
+
+/* Main Menu
+/––––––––––––––––––––––––*/
+header #menu-main-container {
+  text-align: center;
+  &.hidden_desktop {
+    pointer-events: none;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    right: -80vw;
+    ul {
+      margin-top: -2000px!important;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.25.20 | 14.07.2021 <deploy issues>
+* split theme JS from custom JS
+* always load theme scripts
+* split responsive styles from base files
+
 ## 1.24.20 | 06.07.2021 <fix gutenberg posts img loading, container>
 * container sizing on first group inner
 * load gutenberg posts source_url in case Thumb is missing

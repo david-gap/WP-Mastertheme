@@ -8,7 +8,6 @@
 */
 
 
-@import 'vars';
 
 /*=======================================================
 Table of Contents:
@@ -30,21 +29,18 @@ body.frontend,
   ==================================================================================*/
   .container,
   .is-style-container,
-  .is-style-content-container > .wp-block-group__inner-container {
-    max-width: $container_content;
+  .is-style-content-container > .wp-block-group__inner-container,
+  .is-style-content-container > .wp-block-cover__inner-container {
+    max-width: var(--container_content);
     margin-left: auto;
     margin-right: auto;
-    padding-left: $container__side;
-    padding-right: $container__side;
-    @include vpw_min($container__width) {
-      width: 100%;
-    }
+    padding-left: var(--container__side);
+    padding-right: var(--container__side);
+    width: 100%;
   }
-  .is-style-content-container .wp-block-cover__inner-container {
-    max-width: $container_content;
-    @include vpw_min($container__width) {
-      width: 100%;
-    }
+  .wp-block-cover.is-style-content-container,
+  .wp-block-cover-image.is-style-content-container {
+    padding: 0;
   }
   > header,
   > main,
@@ -55,22 +51,18 @@ body.frontend,
   .before-container,
   .after-container {
     width: 100%;
-    max-width: $container_spacing;
+    max-width: var(--container_spacing);
     min-width: fit-content;
     &:empty {
       padding: 0;
     }
   }
   .before-container {
-    padding-left: $container__side;
+    padding-left: var(--container__side);
   }
   .after-container {
     direction: rtl;
-    padding-right: $container__side;
-    @include mobile {
-      direction: ltr;
-      padding-left: $container__side;
-    }
+    padding-right: var(--container__side);
   }
 
 
@@ -79,26 +71,23 @@ body.frontend,
   2.0 HEADER
   ==================================================================================*/
   > header {
-    transition: $transition_slow;
+    transition: var(--transition_slow);
     nav {
       display: flex;
       justify-content: space-between;
-      padding: $space_half 0;
+      padding: var(--space_half) 0;
       .header-container {
         display: flex;
         justify-content: space-between;
         align-items: center;
         > * {
-          margin-right: $space_double;
+          margin-right: var(--space_double);
           &:last-child {
             margin-right: 0;
           }
         }
         > *:last-child {
           text-align: right;
-          @include mobile {
-            text-align: left;
-          }
         }
       }
       .logo {
@@ -114,7 +103,7 @@ body.frontend,
         }
       }
       #menu-main-container {
-        transition: $transition_fast;
+        transition: var(--transition_fast);
         ul#menu_main {
           display: flex;
           list-style: none;
@@ -123,14 +112,14 @@ body.frontend,
           flex-direction: column;
           justify-content: center;
           align-items: center;
-          transition: $transition_slow;
+          transition: var(--transition_slow);
           > li {
             ul {
               list-style: none;
               margin: 0;
               padding: 0;
               > li {
-                margin: $space_half 0;
+                margin: var(--space_half) 0;
               }
             }
           }
@@ -141,12 +130,12 @@ body.frontend,
       }
     }
     > hr.divider {
-      max-width: $container_content;
+      max-width: var(--container_content);
       margin-bottom: 0;
       margin-left: auto;
       margin-right: auto;
       opacity: .5;
-      transition: $transition_slow;
+      transition: var(--transition_slow);
     }
   }
 
@@ -159,7 +148,7 @@ body.frontend,
   /* 3.1 SPACING
   /––––––––––––––––––––––––*/
   > main {
-    margin: $space_double 0;
+    margin: var(--space_double) 0;
     section,
     article,
     .wp-block-container,
@@ -189,30 +178,25 @@ body.frontend,
       & > .block-accordion .accordion-content figure,
       & > .block-posts,
       & > #search-form {
-        margin-bottom: $space;
+        margin-bottom: var(--space);
         &:last-child {
           margin-bottom: 0;
         }
       }
-      & > .wp-block-columns .wp-block-column {
-        @include mobile {
-          margin-bottom: $space;
-        }
-      }
     }
     h1 {
-      margin-bottom: $space_double;
+      margin-bottom: var(--space_double);
     }
     h2 {
-      margin-top: $space_double;
-      margin-bottom: $space_half;
+      margin-top: var(--space_double);
+      margin-bottom: var(--space_half);
       &:first-child {
         margin-top: 0;
       }
     }
     h3 {
-      margin-top: $space;
-      margin-bottom: $space_short;
+      margin-top: var(--space);
+      margin-bottom: var(--space_short);
     }
     h4, h5, h6 {
       margin-bottom: 0;
@@ -232,14 +216,6 @@ body.frontend,
         justify-content: space-between;
         flex-direction: row;
         flex-wrap: nowrap;
-        @include mobile {
-          flex-direction: column;
-          > div,
-          > img {
-            width: 100%;
-            margin-right: 0;
-          }
-        }
         > div {
           display: flex;
           flex-direction: column;
@@ -277,28 +253,15 @@ body.frontend,
   > footer {
     display: flex;
     margin-top: auto;
-    @include mobile {
-      flex-direction: column;
-    }
     .footer-container {
       display: flex;
       flex-wrap: nowrap;
       justify-content: space-between;
-      @include mobile {
-        flex-direction: column;
-        margin: 0;
-        .copyright {
-          order: 2;
-        }
-      }
       > * {
-        margin-bottom: $space;
+        margin-bottom: var(--space);
       }
       > *:last-child {
         text-align: right;
-        @include mobile {
-          text-align: left;
-        }
       }
     }
     nav {
@@ -307,7 +270,7 @@ body.frontend,
         margin: 0;
         padding: 0;
         > li ul {
-          margin-bottom: $space_half
+          margin-bottom: var(--space_half);
         }
       }
     }
@@ -317,9 +280,6 @@ body.frontend,
       &:last-child {
         .location {
           justify-content: flex-end;
-          @include mobile {
-            justify-content: flex-start;
-          }
         }
       }
       .location {

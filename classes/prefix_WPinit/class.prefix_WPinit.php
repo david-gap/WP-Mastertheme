@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.8.7
+ * @version     2.9.7
  *
 */
 
@@ -69,6 +69,7 @@ class prefix_WPinit {
     private $WPinit_cachebust_file   = '/dist/rev-manifest.json';
     private $WPinit_css_version      = 1.0;
     private $WPinit_css_path         = "/dist/style.min.css";
+    private $WPinit_theme_js_version = 1.2;
     private $WPinit_js               = 1;
     private $WPinit_js_version       = 1.0;
     private $WPinit_js_path          = "/dist/script.min.js";
@@ -156,7 +157,7 @@ class prefix_WPinit {
         "type" => "switchbutton"
       ),
       "js" => array(
-        "label" => "Embed JS file",
+        "label" => "Embed custom JS file",
         "type" => "switchbutton"
       ),
       "HeaderCss" => array(
@@ -308,6 +309,11 @@ class prefix_WPinit {
     // enqueues scripts and styles (optional typekit embed)
     // >> https://developer.wordpress.org/reference/functions/wp_enqueue_script/
     function WPinit_enqueue() {
+      // template javascript
+        wp_register_script('theme/scripts', get_template_directory_uri() . $this->WPinit_js_path, ['jquery'], $this->WPinit_theme_js_version, true);
+        wp_enqueue_script('theme/scripts');
+        # get theme directory for javascript files
+        wp_localize_script( 'theme/scripts', 'theme_directory', get_stylesheet_directory_uri());
       // jQuery (from wp core)
       if ($this->WPinit_jquery == 1 && !is_admin()):
         wp_deregister_script( 'jquery' );
@@ -316,10 +322,10 @@ class prefix_WPinit {
       endif;
       // scripts
       if ($this->WPinit_js == 1 && !is_admin()):
-        wp_register_script('theme/scripts', get_stylesheet_directory_uri() . $this->WPinit_js_path, ['jquery'], $this->WPinit_js_version, true);
-        wp_enqueue_script('theme/scripts');
-        # get theme directory for javascript files
-        wp_localize_script( 'theme/scripts', 'theme_directory', get_stylesheet_directory_uri());
+        wp_register_script('custom/scripts', get_stylesheet_directory_uri() . $this->WPinit_js_path, ['jquery'], $this->WPinit_js_version, true);
+        wp_enqueue_script('custom/scripts');
+        # get custom directory for javascript files
+        wp_localize_script( 'custom/scripts', 'theme_directory', get_stylesheet_directory_uri());
       endif;
       if (is_admin()):
         wp_register_script('theme/backend-scripts', get_stylesheet_directory_uri() . '/dist/script_backend.min.js', '0.1', true);

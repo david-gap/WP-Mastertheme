@@ -1,0 +1,11 @@
+
+/* WIDE
+/––––––––––––––––––––––––*/
+body.frontend {
+  main {
+    .alignwide {
+      margin-left: calc(var(--img_wide_left) * -1);
+      margin-right: calc(var(--img_wide_right) * -1);
+    }
+  }
+}

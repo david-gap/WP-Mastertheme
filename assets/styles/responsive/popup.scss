@@ -1,0 +1,12 @@
+.popup {
+  .popup-next-preview,
+  .popup-back-preview {
+    width: calc(100vw - var(--popup__space) - var(--popup__space));
+  }
+  .popup-back-preview {
+    left: calc(var(--popup_prev_visible) + var(--popup__space) + var(--popup__space) - 100%);
+  }
+  .popup-next-preview {
+    right: calc(var(--popup_prev_visible) + var(--popup__space) + var(--popup__space) - 100%);
+  }
+}

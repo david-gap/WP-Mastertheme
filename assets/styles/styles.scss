@@ -1,0 +1,27 @@
+/*
+ * Main CSS File
+ * Merges all .scss files (in the desired order) before they're processed by gulp.
+ *
+ * @author      David Voglgsang
+ *
+*/
+
+
+@charset 'UTF-8';
+
+/*==================================================================================
+  THEME
+==================================================================================*/
+@import 'general';
+@import 'theme-structure';
+@import 'theme-hamburger';
+@import 'theme-sticky';
+@import 'theme-blocks';
+
+
+
+/*==================================================================================
+  CLASSES ADDONS
+==================================================================================*/
+@import 'theme-popup';
+@import 'theme-grid-swiper';
