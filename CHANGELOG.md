@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.26.20 | 14.07.2021 <deploy issues part two>
+* moving default color, form and font styles to mastertheme
+* clean css from unnecessary variables
+* load base and customizer css file
+
 ## 1.25.20 | 14.07.2021 <deploy issues>
 * split theme JS from custom JS
 * always load theme scripts
