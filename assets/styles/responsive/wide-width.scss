@@ -4,8 +4,8 @@
 body.frontend {
   main {
     .alignwide {
-      margin-left: calc(var(--img_wide_left) * -1);
-      margin-right: calc(var(--img_wide_right) * -1);
+      margin-left: calc(var(--wide__left) * -1);
+      margin-right: calc(var(--wide__right) * -1);
     }
   }
 }

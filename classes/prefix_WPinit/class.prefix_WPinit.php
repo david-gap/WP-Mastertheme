@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.9.7
+ * @version     2.10.7
  *
 */
 
@@ -63,20 +63,21 @@ class prefix_WPinit {
       * @param private array $WPinit_google_fonts: google fonts
       * @param private array $WPinit_HeaderCss: Load cutom theme css in header
     */
-    private $WPinit_support          = array("title-tag", "menus", "html5", "post-thumbnails");
-    private $WPinit_css              = 1;
-    private $WPinit_cachebust        = 1;
-    private $WPinit_cachebust_file   = '/dist/rev-manifest.json';
-    private $WPinit_css_version      = 1.0;
-    private $WPinit_css_path         = "/dist/style.min.css";
-    private $WPinit_theme_js_version = 1.2;
-    private $WPinit_js               = 1;
-    private $WPinit_js_version       = 1.0;
-    private $WPinit_js_path          = "/dist/script.min.js";
-    private $WPinit_jquery           = 1;
-    private $WPinit_upload_svg       = 1;
-    private $WPinit_admin_menu       = array();
-    private $WPinit_menus            = array(
+    private $WPinit_support            = array("title-tag", "menus", "html5", "post-thumbnails");
+    private $WPinit_css                = 1;
+    private $WPinit_cachebust          = 1;
+    private $WPinit_cachebust_file     = '/dist/rev-manifest.json';
+    private $WPinit_css_version        = 1.0;
+    private $WPinit_css_path           = "/dist/style.min.css";
+    private $WPinit_theme_js_version   = 1.2;
+    private $WPinit_theme_css_version  = 1.3;
+    private $WPinit_js                 = 1;
+    private $WPinit_js_version         = 1.0;
+    private $WPinit_js_path            = "/dist/script.min.js";
+    private $WPinit_jquery             = 1;
+    private $WPinit_upload_svg         = 1;
+    private $WPinit_admin_menu         = array();
+    private $WPinit_menus              = array(
       array(
         'key' => 'mainmenu',
         'value' => 'Main Menu'
@@ -314,6 +315,10 @@ class prefix_WPinit {
         wp_enqueue_script('theme/scripts');
         # get theme directory for javascript files
         wp_localize_script( 'theme/scripts', 'theme_directory', get_stylesheet_directory_uri());
+      // template css
+        wp_enqueue_style('theme/styles', get_template_directory_uri() . '' . $this->WPinit_css_path, false, $this->WPinit_theme_css_version);
+      // template customizer file
+        wp_enqueue_style('theme/customizer', get_stylesheet_directory_uri() . '/customizer.css', false, '1.0');
       // jQuery (from wp core)
       if ($this->WPinit_jquery == 1 && !is_admin()):
         wp_deregister_script( 'jquery' );
@@ -342,7 +347,7 @@ class prefix_WPinit {
         else:
           $file = $this->WPinit_css_path;
         endif;
-        wp_enqueue_style('theme/styles', get_stylesheet_directory_uri() . $file, false, $this->WPinit_css_version);
+        wp_enqueue_style('custom/styles', get_stylesheet_directory_uri() . $file, false, $this->WPinit_css_version);
       endif;
     }
 

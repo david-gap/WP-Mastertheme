@@ -162,7 +162,7 @@ body.frontend,
     .wp-block-group__inner-container,
     .wp-block-cover__inner-container {
       & > .wp-block-columns .wp-block-column {
-        margin-bottom: var(--space);
+        margin-bottom: var(--content__space);
       }
     }
   }

@@ -1,0 +1,41 @@
+/**
+ * Defalut input styles
+ *
+ * @author      David Voglgsang
+ *
+*/
+
+
+body.frontend,
+.block-editor .editor-styles-wrapper {
+
+  input[type="text"],
+  input[type="email"],
+  select,
+  textarea {
+    width: 100%;
+    max-width: calc(100% - var(--input__padding) - var(--input__padding) - 2px);
+    padding: var(--input__padding);
+    border-radius: 0;
+    border-width: 1px;
+    min-height: 20px;
+    appearance: none;
+  }
+
+  input[type="submit"] {
+    border-radius: 0;
+    padding: var(--input__padding);
+    appearance: none;
+    cursor: pointer;
+  }
+
+  input, select, textarea {
+    &::-webkit-input-placeholder { text-transform: uppercase; }
+    &::-moz-placeholder { text-transform: uppercase; }
+    &:-ms-input-placeholder { text-transform: uppercase; }
+    &:-moz-placeholder { text-transform: uppercase; }
+  }
+
+
+
+}

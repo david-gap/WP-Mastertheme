@@ -71,17 +71,17 @@ body.frontend,
   2.0 HEADER
   ==================================================================================*/
   > header {
-    transition: var(--transition_slow);
+    transition: .7s;
     nav {
       display: flex;
       justify-content: space-between;
-      padding: var(--space_half) 0;
+      padding: 10px 0;
       .header-container {
         display: flex;
         justify-content: space-between;
         align-items: center;
         > * {
-          margin-right: var(--space_double);
+          margin-right: 40px;
           &:last-child {
             margin-right: 0;
           }
@@ -103,7 +103,7 @@ body.frontend,
         }
       }
       #menu-main-container {
-        transition: var(--transition_fast);
+        transition: .3s;
         ul#menu_main {
           display: flex;
           list-style: none;
@@ -112,14 +112,14 @@ body.frontend,
           flex-direction: column;
           justify-content: center;
           align-items: center;
-          transition: var(--transition_slow);
+          transition: .7s;
           > li {
             ul {
               list-style: none;
               margin: 0;
               padding: 0;
               > li {
-                margin: var(--space_half) 0;
+                margin: 10px 0;
               }
             }
           }
@@ -135,7 +135,7 @@ body.frontend,
       margin-left: auto;
       margin-right: auto;
       opacity: .5;
-      transition: var(--transition_slow);
+      transition: .7s;
     }
   }
 
@@ -148,7 +148,7 @@ body.frontend,
   /* 3.1 SPACING
   /––––––––––––––––––––––––*/
   > main {
-    margin: var(--space_double) 0;
+    margin: 0;
     section,
     article,
     .wp-block-container,
@@ -178,27 +178,13 @@ body.frontend,
       & > .block-accordion .accordion-content figure,
       & > .block-posts,
       & > #search-form {
-        margin-bottom: var(--space);
+        margin-bottom: var(--content__space);
         &:last-child {
           margin-bottom: 0;
         }
       }
     }
-    h1 {
-      margin-bottom: var(--space_double);
-    }
-    h2 {
-      margin-top: var(--space_double);
-      margin-bottom: var(--space_half);
-      &:first-child {
-        margin-top: 0;
-      }
-    }
-    h3 {
-      margin-top: var(--space);
-      margin-bottom: var(--space_short);
-    }
-    h4, h5, h6 {
+    h1, h2, h3, h4, h5, h6, p, figure {
       margin-bottom: 0;
     }
   }
@@ -258,7 +244,7 @@ body.frontend,
       flex-wrap: nowrap;
       justify-content: space-between;
       > * {
-        margin-bottom: var(--space);
+        margin-bottom: 20px;
       }
       > *:last-child {
         text-align: right;
@@ -270,7 +256,7 @@ body.frontend,
         margin: 0;
         padding: 0;
         > li ul {
-          margin-bottom: var(--space_half);
+          margin-bottom: 10px;
         }
       }
     }

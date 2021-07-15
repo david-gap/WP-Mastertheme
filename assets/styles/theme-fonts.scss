@@ -1,0 +1,108 @@
+/*
+ * Default font stylings
+ * Add only
+ *
+ * @author      David Voglgsang
+ *
+*/
+
+
+/*=======================================================
+Table of Contents:
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+  1 HEADER
+  1 FOOTER
+  1 GENERAL
+=======================================================*/
+
+
+
+body.frontend,
+.block-editor .editor-styles-wrapper {
+
+  /*==================================================================================
+    1.0 HEADER
+  ==================================================================================*/
+
+  > header {
+    nav {
+      .logo {
+        line-height: 0;
+        &.text_logo {
+          font-size: 150%;
+          font-weight: 700;
+          line-height: 1.2s;
+        }
+      }
+      #menu-main-container {
+        font-size: var(--mnav__fontsize);
+        line-height: var(--mnav__lineheight);
+        ul#menu_main {
+          > li {
+            > a {
+              font-weight: 700;
+            }
+            ul {
+              > li {
+                font-size: 80%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+
+  /*==================================================================================
+    2.0 FOOTER
+  ==================================================================================*/
+
+  > footer {
+    .footer-container {
+      font-size: var(--footer__fontsize);
+      line-height: var(--footer__lineheight);
+    }
+  }
+
+
+
+  /*==================================================================================
+    3.0 GENERAL
+  ==================================================================================*/
+
+  // inputs
+  input[type="text"],
+  input[type="email"],
+  select,
+  textarea {
+    &:not(.editor-post-title__input) {
+      font-size: 110%;
+      line-height: 1.5;
+    }
+  }
+  input[type="submit"] {
+    font-size: 110%;
+    letter-spacing: 1px;
+    line-height: 1.5;
+  }
+  // button
+  button {
+    font-size: 100%;
+    font-family: inherit;
+  }
+  // fieldset
+  fieldset {
+    legend {
+      font-weight: bold;
+    }
+  }
+  .textsearch {
+    label {
+      font-weight: bold;
+    }
+  }
+
+
+}

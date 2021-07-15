@@ -30,12 +30,12 @@
   opacity: 1;
   pointer-events: auto;
   user-select: none;
-  transition: var(--transition_fast);
+  transition: .3s;
   &.closed {
     opacity: 0;
     pointer-events: none;
     z-index: -1;
-    transition: var(--transition_fast);
+    transition: .3s;
   }
   .popup-next-preview,
   .popup-back-preview {
@@ -118,7 +118,7 @@
   border-width: 5px 10px;
   width: 40px;
   height: 70px;
-  transition: var(--transition_fast);
+  transition: .3s;
   opacity: 0;
   &.back {
     left: 20px;

@@ -67,7 +67,6 @@ header .hamburger {
 .active-menu header {
   .hamburger {
     z-index: 101;
-    margin-left: auto;
     span {
       transform: rotate(-45deg);
         width: 65%;
@@ -91,13 +90,13 @@ header .hamburger {
     align-items: center;
     overflow: scroll;
     > ul {
-      padding: var(--space_double) var(--space);
+      padding: 40px;
       font-size: var(--mnav__mobile_fontsize);
       line-height: var(--mnav__mobile_lineheight);
       > li {
-        margin-bottom: var(--space);
+        margin-bottom: 20px;
         ul {
-          margin-bottom: var(--space);
+          margin-bottom: 20px;
         }
       }
     }

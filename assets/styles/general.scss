@@ -12,6 +12,12 @@
   STYLES
 ==================================================================================*/
 
+:root {
+  --container_content: calc(var(--container__width) - var(--container__side) - var(--container__side));
+  --container_spacing: calc(50% - var(--container__side) - (var(--container__width) / 2));
+  --img_wide_reset:    calc(var(--container__width) + var(--img_wide_left) + var(--img_wide_right));
+}
+
 html {
   &:not(.wp-toolbar) {
     width: 100%;
@@ -175,7 +181,7 @@ body.frontend {
 /* Links
 /––––––––––––––––––––––––*/
 a {
-  transition: var(--transition_fast);
+  transition: .3s;
 }
 
 
