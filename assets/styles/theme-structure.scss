@@ -31,7 +31,7 @@ body.frontend,
   .is-style-container,
   .is-style-content-container > .wp-block-group__inner-container,
   .is-style-content-container > .wp-block-cover__inner-container {
-    max-width: var(--container_content);
+    max-width: var(--container__width);
     margin-left: auto;
     margin-right: auto;
     padding-left: var(--container__side);
