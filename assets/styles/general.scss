@@ -57,7 +57,7 @@ body.frontend {
       /* Gutenberg font size
       /––––––––––––––––––––––––*/
       font-size: var(--font-size);
-      line-height: calc(var(--font-size) * 1.2);
+      line-height: calc(var(--font-size) * var(--html__lineheight));
       /* Anchor position
       /––––––––––––––––––––––––*/
       // anchors are not allowed to have top spacing
