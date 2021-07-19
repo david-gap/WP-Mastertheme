@@ -184,7 +184,7 @@ function WPgutenberg_blockRender_posts($attr){
     $output .= '<div' . $id . ' class="block-posts' . $css . '" data-columnspace="' . $spacing . '" data-columns="' . $columns . '" style="' . $inlinecss . '">';
       $output .= '<ul>';
         while ( $filter_query->have_posts() ) : $filter_query->the_post();
-          $output .= '<li>';
+          $output .= '<li data-id="' . get_the_ID() . '">';
             $get_url = get_post_meta(get_the_ID(), 'BlockUrl', true) ? get_post_meta(get_the_ID(), 'BlockUrl', true) : get_the_permalink();
             $linkOpen = $get_url && $get_url !== '' ? '<a href="' . $get_url . '">' : '';
             $linkClose = $get_url && $get_url !== '' ? '</a>' : '';

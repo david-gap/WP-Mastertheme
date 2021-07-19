@@ -333,7 +333,7 @@ export default registerBlockType( 'templates/posts', {
             // console.log(post);
             if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.indexOf('link_box') >= 1){
               return (
-                <li>
+                <li data-id={post.id}>
                   <a href="#">
                       {PostImg(postThumb, postTaxonomyFilterOptions, post.id, media[ post.id ])}
                       <div class="post-content">
@@ -347,7 +347,7 @@ export default registerBlockType( 'templates/posts', {
               )
             } else {
               return (
-                <li>
+                <li data-id={post.id}>
                     {PostImg(postThumb, postTaxonomyFilterOptions, post.id, media[ post.id ])}
                     <div class="post-content">
                       {PostValues(postTextOne, post, postTaxonomyFilterOptions, "link_row1", taxOne)}

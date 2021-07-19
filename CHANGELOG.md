@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.27.21 | 19.07.2021 <post & post filter block id>
+* add id information into post and post filter block
+* swiper li styles
+
 ## 1.26.21 | 19.07.2021 <small layout fixes>
 * wrong container variable name
 * gutenberg resizer line height by variable

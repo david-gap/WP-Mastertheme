@@ -82,7 +82,7 @@ body.frontend,
       scroll-snap-type: x mandatory;
       overflow-y: hidden;
       width: 100%;
-      li {
+      > li {
         scroll-snap-align: start;
         padding: 0;
         margin: 0;

@@ -172,7 +172,7 @@ function WPgutenberg_postresults_postsfilter(array $attr, string $source = 'firs
       $get_url = get_post_meta(get_the_ID(), 'BlockUrl', true) ? get_post_meta(get_the_ID(), 'BlockUrl', true) : get_the_permalink();
       $linkOpen = $get_url && $get_url !== '' ? '<a href="' . $get_url . '">' : '';
       $linkClose = $get_url && $get_url !== '' ? '</a>' : '';
-      $output .= '<div>';
+      $output .= '<div data-id="' . get_the_ID() . '">';
         if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_box', $attr['postTaxonomyFilterOptions'])):
           $output .= $linkOpen;
         endif;
