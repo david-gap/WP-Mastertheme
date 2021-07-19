@@ -12,7 +12,7 @@ body.frontend {
   /* SWIPER
   /––––––––––––––––––––––––*/
   .gallery-swiper {
-    ul {
+    > ul {
       -ms-overflow-style: none;
       scrollbar-width: none;
       &::-webkit-scrollbar {
@@ -73,7 +73,7 @@ body.frontend,
         opacity: 1;
       }
     }
-    ul {
+    > ul {
       display: flex;
       flex-direction: row;
       flex-wrap: nowrap;

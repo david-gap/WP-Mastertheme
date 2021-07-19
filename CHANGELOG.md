@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.26.21 | 19.07.2021 <small layout fixes>
+* wrong container variable name
+* gutenberg resizer line height by variable
+* post filter swiper ul style only for first ul
+
 ## 1.26.20 | 14.07.2021 <deploy issues part two>
 * moving default color, form and font styles to mastertheme
 * clean css from unnecessary variables
