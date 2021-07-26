@@ -14,6 +14,7 @@ Table of Contents:
     1.2 POSTS
     1.3 POSTS FILTER
     1.4 ACCORDION
+    1.5 GALLERY
   2.0 BLOCK STYLINGS
     2.1 TOGGLE
     2.2 COLUMNS
@@ -243,6 +244,95 @@ body.frontend,
           transition: .3s;
           + .label {
             border-top: 1px solid;
+          }
+        }
+      }
+    }
+
+
+    /* 1.5 GALLERY
+    /––––––––––––––––––––––––*/
+    .gallery-block {
+      --sliderHeight: 300px;
+      height: var(--sliderHeight);
+      // backend
+      &.extraheight {
+        --sliderHeight: 500px;
+      }
+      .wp-block {
+        margin: 0;
+      }
+      ul {
+        overflow-x: hidden!important;
+        > .block-editor-inner-blocks {
+          width: 100%;
+          height: 100%;
+          > .block-editor-block-list__layout {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            overflow-x: scroll;
+            overflow-y: hidden;
+            height: 100%;
+            li.gallery-item {
+              > .block-editor-inner-blocks,
+              > .block-editor-inner-blocks > .block-editor-block-list__layout {
+                height: 100%;
+              }
+            }
+            > div {
+              width: 100%!important;
+              max-width: 100%;
+              flex-basis: 100%!important;
+              flex: 0 0 100%;
+              height: 100%;
+              .components-resizable-box__container {
+                width: 100%!important;
+                img {
+                  height: var(--sliderHeight);
+                  max-height: 100%!important;
+                  width: 100%!important;
+                }
+              }
+              img {
+                height: 100%;
+              }
+            }
+          }
+        }
+      }
+      // frontend
+      > ul {
+        height: 100%;
+        li.gallery-item {
+          height: 100%;
+          .wp-block-cover,
+          .wp-block-cover-image {
+            min-height: unset;
+            max-height: 100%;
+            padding: 0;
+            height: 100%;
+            > img {
+              height: 100%;
+              object-fit: cover!important;
+            }
+            .wp-block-cover__inner-container {
+              padding: var(--content__space);
+            }
+          }
+          figure {
+            width: 100%;
+            margin: 0;
+            max-width: 100%;
+            height: 100%;
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover!important;
+            }
+          }
+          .block-list-appender {
+            display: none;
           }
         }
       }

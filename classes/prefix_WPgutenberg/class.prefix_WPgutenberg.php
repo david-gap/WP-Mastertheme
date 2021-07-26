@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.7.11
+ * @version     2.8.11
  */
 
 /*=======================================================
@@ -206,7 +206,9 @@ class prefix_WPgutenberg {
           "templates/posts",
           "templates/postsfilter",
           "templates/accordion",
-          "templates/accordion-item"
+          "templates/accordion-item",
+          "templates/gallery",
+          "templates/gallery-item"
         )
       ),
       "CustomAllowedBlocks" => array(

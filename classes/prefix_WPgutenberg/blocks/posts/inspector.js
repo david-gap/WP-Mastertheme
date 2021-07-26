@@ -120,12 +120,15 @@ export default class Inspector extends Component {
     }
     // update taxonomy filter
     let postTaxonomies = [];
+    let currentTaxVal;
     if(posts && posts.length > 0){
       if(posts[0]._links["wp:term"] !== undefined){
         const terms = posts[0]._links["wp:term"];
         Object.entries(terms).forEach(([key, value]) => {
           // get taxonomies
           const getTaxvalues = select( 'core' ).getEntityRecords( 'taxonomy', value.taxonomy );
+          let sectionOptions = [];
+          let selectedOptions = [];
           if(getTaxvalues){
             if(value.taxonomy == "post_tag"){
               var cleanTax = 'tags';
@@ -134,7 +137,35 @@ export default class Inspector extends Component {
             } else {
               var cleanTax = value.taxonomy;
             }
-            postTaxonomies.push( { name: cleanTax, values: getTaxvalues } );
+            // set selection options
+            sectionOptions = getTaxvalues.map( ( tax ) => tax.name );
+            // insert selection
+            if(postTaxonomyFilter && postTaxonomyFilter.length >= 1){
+              selectedOptions[cleanTax] = postTaxonomyFilter.map( ( taxID ) => {
+                var stringToArray = taxID.split("-");
+                if(cleanTax == stringToArray[0]){
+                  let wantedPost = getTaxvalues.find( ( tax ) => {
+                    return tax.id === parseInt(stringToArray[1]);
+                  } );
+                  if ( wantedPost === undefined || ! wantedPost ) {
+                    return false;
+                  }
+                  return wantedPost.name;
+                } else {
+                  return false;
+                }
+              } );
+            }
+            if(selectedOptions[cleanTax] && selectedOptions[cleanTax].length >= 1){
+              var theSelectedOptions = selectedOptions[cleanTax].filter(Boolean);
+            } else {
+              var theSelectedOptions = [];
+            }
+            postTaxonomies.push( { name: cleanTax, options: sectionOptions, query: getTaxvalues, values: theSelectedOptions } );
+            // if(selectedOptions[cleanTax]){
+            //   postTaxonomies.push( { name: cleanTax, options: sectionOptions, values: selectedOptions[cleanTax] } );
+            // } else {
+            // }
           }
         });
       }
@@ -374,27 +405,42 @@ export default class Inspector extends Component {
                 { postTaxonomies.map(
                   (taxonomy, setState) => {
                   return(
-                    <div>
-                    <label><strong>{taxonomy.name}</strong></label>
-                    <ul>
-                      { taxonomy.values.map(
-                        (tax, setState) => {
-                        return(
-                          <li>
-                            <CheckboxControl
-                              label={tax.name}
-                              key={tax.id}
-                              value={taxonomy.name + "-" + tax.id}
-                              name='getPostTaxonomyFilter[]'
-                              checked={ checkFilter(taxonomy.name + "-" + tax.id) }
-                              // class= {'components-checkbox-control__input filtercheckbox' + tax.id}
-                              onChange={ onchangeFilter }
-                            />
-                          </li>
-                        );
-                      }) }
-                    </ul>
-                    </div>
+                    <PanelRow>
+                      <FormTokenField
+                        label={taxonomy.name}
+                        value={ taxonomy.values }
+                        suggestions={ taxonomy.options }
+                        maxSuggestions={ 20 }
+                        onFocus= { ( index ) => {
+                          currentTaxVal = postTaxonomyFilter;
+                        } }
+                        onChange={ ( postTaxonomyFilter ) => {
+                          // build array of selected posts from other taxonomies
+                          let postTaxFilterArray = [];
+                          if(currentTaxVal && currentTaxVal.length >= 1){
+                            // query.concat(props.attributes.postTaxonomyFilter);
+                            currentTaxVal.forEach(function(allTaxSelections) {
+                              var stringToArray = allTaxSelections.split("-");
+                              if( stringToArray[0] !== taxonomy.name ) {
+                                postTaxFilterArray.push( allTaxSelections );
+                              }
+                            });
+                          }
+                          // add to selection from current taxonomy
+                          postTaxonomyFilter.map(
+                            ( taxSelection ) => {
+                              const matchingTax = taxonomy.query.find( ( tax ) => {
+                                return tax.name === taxSelection;
+                              } );
+                              if ( matchingTax !== undefined ) {
+                                postTaxFilterArray.push( taxonomy.name + "-" + matchingTax.id );
+                              }
+                            }
+                          )
+                          setAttributes( { postTaxonomyFilter: postTaxFilterArray } );
+                        } }
+                      />
+                    </PanelRow>
                   );
                 }) }
               </div>
