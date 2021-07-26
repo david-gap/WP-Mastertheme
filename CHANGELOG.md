@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.28.21 | 26.07.2021 <post block tax selection, gallery block>
+* change post block taxonomy selection
+* add gallery block
+
 ## 1.27.21 | 19.07.2021 <post & post filter block id>
 * add id information into post and post filter block
 * swiper li styles
