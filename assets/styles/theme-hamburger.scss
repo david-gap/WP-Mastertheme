@@ -154,28 +154,22 @@ body.frontend,
       }
       &.toggle-submenu {
         .menu-item-has-children {
-          position: relative;
           > a {
+            position: relative;
             padding-right: 30px;
-          }
-          &:after {
-            position: absolute;
-            z-index: 10;
-            top: 1px;
-            right: 0;
-            display: inline-block;
-            content: "";
-            width: 10px;
-            height: 10px;
-            border: solid;
-            border-width: 0 2px 2px 0;
-            transform: rotate(45deg);
-            cursor: pointer;
+            .toggle {
+              position: absolute;
+              z-index: 10;
+              svg {
+                width: 100%;
+                height: auto;
+              }
+            }
           }
           &.active {
             &:after {
               top: 6px;
-              transform: rotate(-135deg);
+              transform: rotate(-180deg);
             }
             > .sub-menu {
               height: auto;

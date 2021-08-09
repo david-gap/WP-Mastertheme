@@ -273,11 +273,11 @@ if(hamburger) {
 /------------------------*/
 function subMenuToggler(e) {
   // disable link call
-  // e.preventDefault();
+  e.preventDefault();
   // toggle submenu visibility
-  this.classList.toggle("active");
+  this.closest('.menu-item-has-children').classList.toggle("active");
 }
-var menuSub = mainMenu.querySelectorAll('.menu-item-has-children');
+var menuSub = mainMenu.querySelectorAll('.menu-item-has-children .toggle');
 if(menuSub.length !== 0){
   Array.from(menuSub).forEach(function(submenu) {
     submenu.addEventListener('click', subMenuToggler);
