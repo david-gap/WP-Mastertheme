@@ -124,7 +124,7 @@ body.frontend,
     /––––––––––––––––––––––––*/
     &.active-menu {
       #menu-main-container {
-        background-color: var(--light__main_background);
+        background-color: var(--light__mnav_background);
       }
     }
 
@@ -218,7 +218,7 @@ body.frontend,
     /––––––––––––––––––––––––*/
     &.active-menu {
       #menu-main-container {
-        background-color: var(--dark__main_background);
+        background-color: var(--dark__mnav_background);
       }
     }
 

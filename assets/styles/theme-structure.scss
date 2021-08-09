@@ -103,15 +103,23 @@ body.frontend,
         }
       }
       #menu-main-container {
-        transition: .3s;
-        ul#menu_main {
+        transition: .7s;
+        &.horizontal {
+          > ul {
+            flex-direction: row;
+            align-items: center;
+          }
+        }
+        &.vertical {
+          > ul {
+            flex-direction: column;
+          }
+        }
+        > ul#menu_main {
           display: flex;
           list-style: none;
           margin: 0;
           padding: 0;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
           transition: .7s;
           > li {
             ul {

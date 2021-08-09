@@ -1,9 +1,14 @@
-/*==================================================================================
-  GENERAL
-==================================================================================*/
+/* GENERAL */
 
-/* Flexbox row
-/––––––––––––––––––––––––*/
+.desktop {
+  display: none!important;
+}
+
+.hidden_mobile {
+  opacity: 0;
+}
+
+/* Flexbox row */
 .flex-row {
   flex-direction: column;
 }
@@ -13,22 +18,17 @@ body.frontend {
   line-height: var(--html__mobile_lineheight);
   main {
     * {
-      /* Gutenberg font size
-      /––––––––––––––––––––––––*/
+      /* Gutenberg font size */
       font-size: calc(var(--font-size) * var(--gutenberg__font_scale));
       line-height: calc(var(--font-size) * var(--gutenberg__font_scale) * 1.2);
-
-      /* Anchor position
-      /––––––––––––––––––––––––*/
-      // anchors are not allowed to have top spacing
+      /* Anchor position */
+      /* anchors are not allowed to have top spacing */
       &[id]:target {
         padding-top: var(--html__anchor_mobile);
         margin-top: calc(var(--html__anchor_mobile) * -1);
       }
     }
-
-    /* FULL AND WIDE ALIGN
-    /––––––––––––––––––––––––*/
+    /* FULL AND WIDE ALIGN */
     .alignwide {
       margin-left: 0;
       margin-right: 0;
@@ -39,9 +39,7 @@ body.frontend {
         margin-right: calc(var(--container__side) * -1);
       }
     }
-
-    /* HIDE/SHOW BY BREAKPOINT
-    /––––––––––––––––––––––––*/
+    /* HIDE/SHOW BY BREAKPOINT */
     .mobile {
       display: none!important;
     }
@@ -52,8 +50,7 @@ body.frontend {
 }
 
 
-/* DEFAULT FONT SIZE
-/––––––––––––––––––––––––*/
+/* DEFAULT FONT SIZE */
 .editor-styles-wrapper {
   font-size: var(--html__mobile_fontsize) !important;
   line-height: var(--html__mobile_lineheight) !important;
@@ -61,14 +58,9 @@ body.frontend {
 
 
 
-/*==================================================================================
-  BLOCKS
-==================================================================================*/
-
 body.frontend,
 .block-editor .editor-styles-wrapper {
-  /* BLOCK - POSTS
-  /––––––––––––––––––––––––*/
+  /* BLOCK - POSTS */
   div.block-posts {
     &.gallery-swiper {
       > ul {
@@ -82,9 +74,7 @@ body.frontend,
       }
     }
   }
-
-  /* BLOCK - POSTS FILTER
-  /––––––––––––––––––––––––*/
+  /* BLOCK - POSTS FILTER */
   div.block-postsfilter {
     &.filter-left,
     &.filter-right {
@@ -100,24 +90,13 @@ body.frontend,
       }
     }
   }
-
-  /* COLUMNS
-  /––––––––––––––––––––––––*/
+  /* COLUMNS */
   .columns {
     flex-direction: row;
   }
-}
 
 
-
-/*==================================================================================
-  SWIPER
-==================================================================================*/
-
-body.frontend,
-.block-editor .editor-styles-wrapper {
-  /* SWIPER NAVIGATION ARROWS
-  /––––––––––––––––––––––––*/
+  /* SWIPER NAVIGATION ARROWS */
   .gallery-swiper .arrow {
     top: calc(50% - 20px);
     width: 25px;
@@ -132,16 +111,9 @@ body.frontend,
       right: 5vw;
     }
   }
-}
 
 
-
-/*==================================================================================
-  STRUCTURE
-==================================================================================*/
-
-body.frontend,
-.block-editor .editor-styles-wrapper {
+  /* STRUCTURE */
   .after-container {
     direction: ltr;
     padding-left: var(--container__side);
@@ -201,42 +173,19 @@ body.frontend,
       }
     }
   }
-}
 
 
-
-/*==================================================================================
-  MAIN MENU
-==================================================================================*/
-
-header #menu-main-container {
-  font-size: var(--mnav__mobile_fontsize);
-  line-height: var(--mnav__mobile_lineheight);
-  &.hidden_mobile {
-    pointer-events: none;
-    width: 100vw;
-    height: 100vh;
+  /* MAIN MENU */
+  header #menu-main-container {
     position: fixed;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    pointer-events: none;
-    right: -80vw;
-    ul {
-      margin-top: -2000px!important;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
+    font-size: var(--mnav__mobile_fontsize);
+    line-height: var(--mnav__mobile_lineheight);
   }
 }
 
 
 
-/*==================================================================================
-  POPUP
-==================================================================================*/
-
+/* POPUP */
 .popup {
   .popup-next-preview,
   .popup-back-preview {

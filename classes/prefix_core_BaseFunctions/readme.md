@@ -1,4 +1,4 @@
-**Version 2.11.3** (20.06.2021)
+**Version 2.12.3** (09.08.2021)
 
 Custom class "prefix_core_BaseFunctions" used as a library for useful functions
 
@@ -274,6 +274,10 @@ static $metaFields = array(
   'BlockUrl' => array(
     'label' => 'Text field for URL',
     'type' => 'text'
+  ),
+  'BlockUrl' => array(
+    'label' => 'Checkbox field',
+    'type' => 'checkbox'
   )
 );
 core_BaseFunctions::metaBoxes("post_id", $metaFields);

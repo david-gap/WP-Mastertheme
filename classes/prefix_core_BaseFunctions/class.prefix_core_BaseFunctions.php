@@ -4,7 +4,7 @@
  *
  * Base dev functions - parent for all custom classes
  * Author:      David Voglgsnag
- * @version     2.11.3
+ * @version     2.12.3
  *
  */
 
@@ -970,6 +970,8 @@ class prefix_core_BaseFunctions {
                     echo '<img src="' . wp_get_attachment_thumb_url($value) . '">';
                   endif;
                 echo '</span>';
+              elseif($metafeildValues["type"] == "checkbox"):
+                echo '<input type="checkbox" id="' . $metafield . '" name="' . $metafield . '" value="1" style="margin-top:5px;" ' . SELF::setChecked($value, '1') . '>';
               else:
                 echo '<input type="text" id="' . $metafield . '" name="' . $metafield . '" value="' . $value . '" style="margin-top:5px; width:100%;">';
               endif;

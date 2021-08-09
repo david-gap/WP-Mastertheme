@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.29.21 | 09.08.2021 <main menu style options>
+* backend selection for horizontal / vertical menu
+* hamburger menu position (left, right, side contained, fullscreen)
+* add checkbox field to meta blocks
+
 ## 1.28.21 | 26.07.2021 <post block tax selection, gallery block>
 * change post block taxonomy selection
 * add gallery block

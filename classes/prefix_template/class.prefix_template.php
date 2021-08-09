@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.14.14
+ * @version     2.15.14
  *
 */
 
@@ -66,6 +66,8 @@ class prefix_template {
     * @param static int $template_header_sticky: activate sticky header
     * @param static int $template_header_stickyload: activate sticky header on load
     * @param static int $template_header_dmenu: Activate header hamburger for desktop
+    * @param static string template_header_menu_style: Select menu direction (options: horizontal/vertical)
+    * @param static string template_header_hmenu_style: Select hamburger menu style (options: fullscreen, left, left_contained, right, right_contained)
     * @param static string $template_header_custom:  Custom header html
     * @param static array $template_header_sort: Sort and activate blocks inside header builder
     * @param static string $template_header_logo_link: Logo link with wordpress fallback
@@ -130,6 +132,8 @@ class prefix_template {
   static $template_header_sticky      = 1;
   static $template_header_stickyload  = 0;
   static $template_header_dmenu       = 1;
+  static $template_header_menu_style  = 'horizontal';
+  static $template_header_hmenu_style = 'fullscreen';
   static $template_header_custom      = "";
   static $template_header_sort        = array(
     "container_start" => 1,
@@ -417,6 +421,16 @@ class prefix_template {
         "desktop_menu" => array(
           "label" => "Desktop menu",
           "type" => "switchbutton"
+        ),
+        "menu_style" => array(
+          "label" => "Menu direction",
+          "type" => "select",
+          "value" => array('horizontal','vertical')
+        ),
+        "hmenu_style" => array(
+          "label" => "Hamburger menu position",
+          "type" => "select",
+          "value" => array('fullscreen','left','left_contained','right','right_contained')
         ),
         "custom" => array(
           "label" => "Custom Element",
@@ -771,6 +785,8 @@ class prefix_template {
           SELF::$template_header_sticky = array_key_exists('sticky', $header) ? $header['sticky'] : SELF::$template_header_sticky;
           SELF::$template_header_stickyload = array_key_exists('sticky_onload', $header) ? $header['sticky_onload'] : SELF::$template_header_stickyload;
           SELF::$template_header_dmenu = array_key_exists('desktop_menu', $header) ? $header['desktop_menu'] : SELF::$template_header_dmenu;
+          SELF::$template_header_menu_style = array_key_exists('menu_style', $header) ? $header['menu_style'] : SELF::$template_header_menu_style;
+          SELF::$template_header_hmenu_style = array_key_exists('hmenu_style', $header) ? $header['hmenu_style'] : SELF::$template_header_hmenu_style;
           SELF::$template_header_custom = array_key_exists('custom', $header) ? $header['custom'] : SELF::$template_header_custom;
           SELF::$template_header_sort = array_key_exists('sort', $header) ? $header['sort'] : SELF::$template_header_sort;
           SELF::$template_header_logo_link = array_key_exists('logo_link', $header) ? $header['logo_link'] : SELF::$template_header_logo_link;
@@ -905,10 +921,10 @@ class prefix_template {
             endif;
             break;
           case 'menu':
-            echo $value == 1 ? SELF::WP_MainMenu(SELF::$template_header_dmenu, 'menu') : '';
+            echo $value == 1 ? SELF::WP_MainMenu(SELF::$template_header_dmenu, 'menu', SELF::$template_header_menu_style, SELF::$template_header_hmenu_style) : '';
             break;
           case 'hamburger':
-            echo $value == 1 ? SELF::WP_MainMenu(SELF::$template_header_dmenu, 'hamburger') : '';
+            echo $value == 1 ? SELF::WP_MainMenu(SELF::$template_header_dmenu, 'hamburger', SELF::$template_header_menu_style, SELF::$template_header_hmenu_style) : '';
             break;
           case 'logo':
             echo $value == 1 ? SELF::Logo(SELF::$template_header_logo_link, SELF::$template_header_logo_d, SELF::$template_header_logo_m) : '';
@@ -1167,13 +1183,20 @@ class prefix_template {
 
     /* 3.7 CHECK IF MAINMENU IS ACTIVE
     /------------------------*/
-    public static function WP_MainMenu(int $active = 1, string $request = ''){
+    public static function WP_MainMenu(int $active = 1, string $request = '', string $direction = '', string $hamburgerStyle = ''){
       if($active === 1):
         $menu_active = 'hidden_mobile';
         $hamburger_active = 'mobile';
       else:
         $menu_active = 'hidden_mobile hidden_desktop';
         $hamburger_active = '';
+      endif;
+      // layout options
+      if($direction !== ''):
+        $menu_active .= ' ' . $direction;
+      endif;
+      if($hamburgerStyle !== ''):
+        $menu_active .= ' ' . $hamburgerStyle;
       endif;
       // output
       $output = '';
