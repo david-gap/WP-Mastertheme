@@ -162,6 +162,7 @@ body.frontend,
               z-index: 10;
               top: 0;
               right: 0;
+              transition: .3s;
               svg {
                 width: 100%;
                 height: auto;
@@ -169,9 +170,11 @@ body.frontend,
             }
           }
           &.active {
-            &:after {
-              top: 6px;
-              transform: rotate(-180deg);
+            > a {
+              .toggle {
+                transform: rotate(-180deg);
+                transition: .3s;
+              }
             }
             > .sub-menu {
               height: auto;
