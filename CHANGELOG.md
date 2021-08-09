@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.29.22 | 09.08.2021 <main menu fullscreen position>
+* remove margin top from hamburger menu fullscreen style
+
 ## 1.29.21 | 09.08.2021 <main menu style options>
 * backend selection for horizontal / vertical menu
 * hamburger menu position (left, right, side contained, fullscreen)

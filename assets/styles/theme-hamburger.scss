@@ -70,9 +70,6 @@ body.frontend,
     #menu-main-container {
       &.fullscreen {
         top: 0;
-        > ul#menu_main {
-          margin-top: -2000px;
-        }
       }
       &.left,
       &.left_contained {
