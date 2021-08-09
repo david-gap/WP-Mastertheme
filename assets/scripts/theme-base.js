@@ -269,6 +269,34 @@ if(hamburger) {
 }
 
 
+/* Hamburger toggle submenus
+/------------------------*/
+function subMenuToggler(e) {
+  // disable link call
+  // e.preventDefault();
+  // toggle submenu visibility
+  this.classList.toggle("active");
+}
+var menuSub = mainMenu.querySelectorAll('.menu-item-has-children');
+if(menuSub.length !== 0){
+  Array.from(menuSub).forEach(function(submenu) {
+    submenu.addEventListener('click', subMenuToggler);
+    submenu.addEventListener('keypress', subMenuToggler);
+  });
+}
+
+
+/* Close Menu if click outside of menu
+/------------------------*/
+// function closeHamburgerMenu(e){
+//   const target = e.target;
+//   if (target.closest("#menu-main-container") == null && body.classList.contains('active-menu')) {
+//       MenuToggler();
+//   }
+// }
+// document.addEventListener('click', closeHamburgerMenu);
+
+
 /* Action Links
 /------------------------*/
 // example: <span class="funcCall" data-ajax-action="true" data-action="DEMO" data-id="page">DEMO</span>

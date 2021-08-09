@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.15.14
+ * @version     2.16.14
  *
 */
 
@@ -68,6 +68,7 @@ class prefix_template {
     * @param static int $template_header_dmenu: Activate header hamburger for desktop
     * @param static string template_header_menu_style: Select menu direction (options: horizontal/vertical)
     * @param static string template_header_hmenu_style: Select hamburger menu style (options: fullscreen, left, left_contained, right, right_contained)
+    * @param static string template_header_hmenu_toggle: Hamburger Menü toggle able submenus
     * @param static string $template_header_custom:  Custom header html
     * @param static array $template_header_sort: Sort and activate blocks inside header builder
     * @param static string $template_header_logo_link: Logo link with wordpress fallback
@@ -86,14 +87,14 @@ class prefix_template {
     * @param static array $template_footer_sort: Sort and activate blocks inside footer builder
     * @param static string $template_footer_before: html code before footer
   */
-  static $template_container_header   = 1;
-  static $template_container          = 1;
-  static $template_container_footer   = 1;
-  static $template_coloring           = "light";
-  static $template_ph_active          = true;
-  static $template_ph_address         = true;
-  static $template_ph_custom          = "";
-  static $template_address            = array(
+  static $template_container_header      = 1;
+  static $template_container             = 1;
+  static $template_container_footer      = 1;
+  static $template_coloring              = "light";
+  static $template_ph_active             = true;
+  static $template_ph_address            = true;
+  static $template_ph_custom             = "";
+  static $template_address               = array(
     'company' => '',
     'name' => '',
     'street' => '',
@@ -119,23 +120,24 @@ class prefix_template {
       'email' => ''
     )
   );
-  static $template_socialmedia        = array(
+  static $template_socialmedia           = array(
     "facebook" => "",
     "instagram" => ""
   );
-  static $template_contactblock       = array(
+  static $template_contactblock          = array(
     "phone" => "",
     "mail" => "",
     "whatsapp" => ""
   );
-  static $template_header_divider     = 1;
-  static $template_header_sticky      = 1;
-  static $template_header_stickyload  = 0;
-  static $template_header_dmenu       = 1;
-  static $template_header_menu_style  = 'horizontal';
-  static $template_header_hmenu_style = 'fullscreen';
-  static $template_header_custom      = "";
-  static $template_header_sort        = array(
+  static $template_header_divider        = 1;
+  static $template_header_sticky         = 1;
+  static $template_header_stickyload     = 0;
+  static $template_header_dmenu          = 1;
+  static $template_header_menu_style     = 'horizontal';
+  static $template_header_hmenu_style    = 'fullscreen';
+  static $template_header_hmenu_toggle   = 0;
+  static $template_header_custom         = "";
+  static $template_header_sort           = array(
     "container_start" => 1,
     "logo" => 1,
     "menu" => 1,
@@ -144,22 +146,22 @@ class prefix_template {
     "custom" => 0,
     "container_end" => 1
   );
-  static $template_header_logo_link   = "";
-  static $template_header_logo_d      = array(
+  static $template_header_logo_link      = "";
+  static $template_header_logo_d         = array(
     "img" => "",
     "width" => "",
     "height" => "",
     "alt" => ""
   );
-  static $template_header_logo_m      = array(
+  static $template_header_logo_m         = array(
     "img" => "",
     "width" => "",
     "height" => "",
     "alt" => ""
   );
-  static $template_header_after       = "";
-  static $template_page_active        = 1;
-  static $template_page_options       = array(
+  static $template_header_after          = "";
+  static $template_page_active           = 1;
+  static $template_page_options          = array(
     "header" => 1,
     "date" => 0,
     "time" => 0,
@@ -172,24 +174,24 @@ class prefix_template {
     "beforeMain" => 1,
     "afterMain" => 1
   );
-  static $template_page_metablock     = array(
+  static $template_page_metablock        = array(
     "page" => 0,
     "post" => 0
   );
-  static $template_page_metablockAdds = array();
-  static $template_blog_type          = 1;
-  static $template_blog_type_parts    = array(
+  static $template_page_metablockAdds    = array();
+  static $template_blog_type             = 1;
+  static $template_blog_type_parts       = array(
     "author" => 0,
     "date" => 0,
     "time" => 0,
     "categories" => 0
   );
-  static $template_blog_dateformat    = 'd.m.Y';
-  static $template_page_additional    = array();
-  static $template_footer_active      = 1;
-  static $template_footer_cr          = "";
-  static $template_footer_custom      = "";
-  static $template_footer_sort        = array(
+  static $template_blog_dateformat       = 'd.m.Y';
+  static $template_page_additional       = array();
+  static $template_footer_active         = 1;
+  static $template_footer_cr             = "";
+  static $template_footer_custom         = "";
+  static $template_footer_sort           = array(
     "container_start" => 1,
     "menu" => 1,
     "socialmedia" => 1,
@@ -198,8 +200,8 @@ class prefix_template {
     "custom" => 0,
     "container_end" => 1
   );
-  static $template_footer_before      = "";
-  static $template_footer_after       = "";
+  static $template_footer_before         = "";
+  static $template_footer_after          = "";
 
 
   /* 1.2 ON LOAD RUN
@@ -431,6 +433,10 @@ class prefix_template {
           "label" => "Hamburger menu position",
           "type" => "select",
           "value" => array('fullscreen','left','left_contained','right','right_contained')
+        ),
+        "hmenu_toggle" => array(
+          "label" => "Hamburger menu toggle able submenus",
+          "type" => "switchbutton"
         ),
         "custom" => array(
           "label" => "Custom Element",
@@ -787,6 +793,7 @@ class prefix_template {
           SELF::$template_header_dmenu = array_key_exists('desktop_menu', $header) ? $header['desktop_menu'] : SELF::$template_header_dmenu;
           SELF::$template_header_menu_style = array_key_exists('menu_style', $header) ? $header['menu_style'] : SELF::$template_header_menu_style;
           SELF::$template_header_hmenu_style = array_key_exists('hmenu_style', $header) ? $header['hmenu_style'] : SELF::$template_header_hmenu_style;
+          SELF::$template_header_hmenu_toggle = array_key_exists('hmenu_toggle', $header) ? $header['hmenu_toggle'] : SELF::$template_header_hmenu_toggle;
           SELF::$template_header_custom = array_key_exists('custom', $header) ? $header['custom'] : SELF::$template_header_custom;
           SELF::$template_header_sort = array_key_exists('sort', $header) ? $header['sort'] : SELF::$template_header_sort;
           SELF::$template_header_logo_link = array_key_exists('logo_link', $header) ? $header['logo_link'] : SELF::$template_header_logo_link;
@@ -921,10 +928,10 @@ class prefix_template {
             endif;
             break;
           case 'menu':
-            echo $value == 1 ? SELF::WP_MainMenu(SELF::$template_header_dmenu, 'menu', SELF::$template_header_menu_style, SELF::$template_header_hmenu_style) : '';
+            echo $value == 1 ? SELF::WP_MainMenu(SELF::$template_header_dmenu, 'menu', SELF::$template_header_menu_style, SELF::$template_header_hmenu_style, SELF::$template_header_hmenu_toggle) : '';
             break;
           case 'hamburger':
-            echo $value == 1 ? SELF::WP_MainMenu(SELF::$template_header_dmenu, 'hamburger', SELF::$template_header_menu_style, SELF::$template_header_hmenu_style) : '';
+            echo $value == 1 ? SELF::WP_MainMenu(SELF::$template_header_dmenu, 'hamburger', SELF::$template_header_menu_style, SELF::$template_header_hmenu_style, SELF::$template_header_hmenu_toggle) : '';
             break;
           case 'logo':
             echo $value == 1 ? SELF::Logo(SELF::$template_header_logo_link, SELF::$template_header_logo_d, SELF::$template_header_logo_m) : '';
@@ -1183,7 +1190,7 @@ class prefix_template {
 
     /* 3.7 CHECK IF MAINMENU IS ACTIVE
     /------------------------*/
-    public static function WP_MainMenu(int $active = 1, string $request = '', string $direction = '', string $hamburgerStyle = ''){
+    public static function WP_MainMenu(int $active = 1, string $request = '', string $direction = '', string $hamburgerStyle = '', int $submenutoggle = 0){
       if($active === 1):
         $menu_active = 'hidden_mobile';
         $hamburger_active = 'mobile';
@@ -1198,6 +1205,9 @@ class prefix_template {
       if($hamburgerStyle !== ''):
         $menu_active .= ' ' . $hamburgerStyle;
       endif;
+      if($submenutoggle === 1):
+        $menu_active .= ' toggle-submenu';
+      endif;
       // output
       $output = '';
       if ( has_nav_menu( 'mainmenu' ) ) :
@@ -1208,7 +1218,6 @@ class prefix_template {
             'menu_id' => 'menu_main',
             'container'=> 'div',
             'container_id' => 'menu-main-container',
-            'depth' => 2,
             'theme_location' => 'mainmenu'
           ]);
         endif;

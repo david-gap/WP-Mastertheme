@@ -1,4 +1,4 @@
-**Version 2.15.14** (09.08.2021)
+**Version 2.16.14** (09.08.2021)
 
 Custom class "template" with template parts and header / footer builder
 
@@ -18,6 +18,7 @@ Custom class "template" with template parts and header / footer builder
 * $template_header_dmenu: Activate header hamburger for desktop
 * $template_header_menu_style: Select menu direction (options: horizontal/vertical)
 * $template_header_hmenu_style: Select hamburger menu style fullscreen (options: fullscreen, left, left_contained, right, right_contained)
+* $template_header_hmenu_toggle: Hamburger Menü toggle able submenus
 * $template_header_custom: Custom header html
 * $template_header_sort: Sort and activate blocks inside header builder
 * $template_header_logo_link: Logo link with wordpress fallback
@@ -96,6 +97,7 @@ Custom class "template" with template parts and header / footer builder
     "desktop_menu": 0,
     "menu_style": 'horizontal',
     "hmenu_style": 'fullscreen',
+    "hmenu_toggle": 1,
     "custom": "",
     "after_header": ""
   },

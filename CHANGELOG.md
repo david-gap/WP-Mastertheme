@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.30.22 | 09.08.2021 <toggle submenu>
+* add submenu toggle inside hamburger menu
+
 ## 1.29.22 | 09.08.2021 <main menu fullscreen position>
 * remove margin top from hamburger menu fullscreen style
 

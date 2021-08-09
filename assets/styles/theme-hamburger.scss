@@ -152,6 +152,41 @@ body.frontend,
         right: calc((100vw - var(--container__width)) / 2);
         justify-content: flex-end;
       }
+      &.toggle-submenu {
+        .menu-item-has-children {
+          position: relative;
+          > a {
+            padding-right: 30px;
+          }
+          &:after {
+            position: absolute;
+            z-index: 10;
+            top: 1px;
+            right: 0;
+            display: inline-block;
+            content: "";
+            width: 10px;
+            height: 10px;
+            border: solid;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+            cursor: pointer;
+          }
+          &.active {
+            &:after {
+              top: 6px;
+              transform: rotate(-135deg);
+            }
+            .sub-menu {
+              height: auto;
+            }
+          }
+          .sub-menu {
+            height: 0;
+            overflow: hidden;
+          }
+        }
+      }
       > ul#menu_main {
         flex-direction: column;
         margin: 0;
