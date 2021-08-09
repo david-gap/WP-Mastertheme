@@ -288,13 +288,13 @@ if(menuSub.length !== 0){
 
 /* Close Menu if click outside of menu
 /------------------------*/
-// function closeHamburgerMenu(e){
-//   const target = e.target;
-//   if (target.closest("#menu-main-container") == null && body.classList.contains('active-menu')) {
-//       MenuToggler();
-//   }
-// }
-// document.addEventListener('click', closeHamburgerMenu);
+function closeHamburgerMenu(e){
+  const target = e.target;
+  if (target.closest("#menu-main-container") == null && target.closest(".hamburger") == null && body.classList.contains('active-menu')) {
+    MenuToggler();
+  }
+}
+document.addEventListener('click', closeHamburgerMenu);
 
 
 /* Action Links

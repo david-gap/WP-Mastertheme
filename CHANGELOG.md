@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.30.23 | 09.08.2021 <outside hamburger toggle>
+* close hamburger menu by click outside the menu
+
 ## 1.30.22 | 09.08.2021 <toggle submenu>
 * add submenu toggle inside hamburger menu
 
