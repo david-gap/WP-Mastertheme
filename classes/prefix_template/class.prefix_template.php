@@ -222,6 +222,10 @@ class prefix_template {
     if(SELF::$template_blog_type == 1):
       add_theme_support( 'post-formats', array( 'image', 'video', 'audio' ) );
     endif;
+    // add post formats
+    if(SELF::$template_header_hmenu_toggle == 1):
+      add_filter( 'nav_menu_item_title', array( $this, 'addToggleElementToMenu' ), 10, 2 );
+    endif;
   }
 
 
@@ -1230,6 +1234,15 @@ class prefix_template {
       endif;
 
       return $output;
+    }
+    // hook for toggle submenu
+    function addToggleElementToMenu( $title, $item ) {
+      if( is_object( $item ) && isset( $item->ID ) ) {
+        if(isset( $item->classes ) && in_array('menu-item-has-children', $item->classes) ):
+          $title .= '<span class="toggle"><svg xmlns="http://www.w3.org/2000/svg" width="11.982" height="6.694" viewBox="0 0 11.982 6.694"><path id="Pfad_24309" data-name="Pfad 24309" d="M-10.114,10.982a.293.293,0,0,0,.208-.085l4.86-4.686a.985.985,0,0,0,.3-.709.985.985,0,0,0-.3-.709L-9.906.112A.3.3,0,0,0-10.126,0a.3.3,0,0,0-.229.09.3.3,0,0,0-.083.232.3.3,0,0,0,.119.216l4.856,4.687a.384.384,0,0,1,.118.277.384.384,0,0,1-.118.277l-4.856,4.687a.3.3,0,0,0-.071.327.3.3,0,0,0,.276.189Z" transform="translate(11.482 10.939) rotate(90)" fill="#000" stroke="#000" stroke-miterlimit="10" stroke-width="1"/></svg></span>';
+        endif;
+      }
+      return $title;
     }
 
 
