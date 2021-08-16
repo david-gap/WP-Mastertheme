@@ -1,9 +1,11 @@
 /* GENERAL */
 
-.mobile {
-  display: none!important;
-}
+body.frontend {
+  .mobile {
+    display: none!important;
+  }
 
-.hidden_desktop {
-  opacity: 0;
+  .hidden_desktop {
+    opacity: 0;
+  }
 }

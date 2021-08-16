@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 1.31.23 | 09.08.2021 <gutenberg core blocks hook>
+* block hook to all blocks to hide on desktop/mobile
+* image block hook to activate popup
+* gallery block hook to activate swiper, popup and popup preview
+* js function to load popup on image block
+* fix mobile css class for backend
+
 ## 1.30.23 | 09.08.2021 <outside hamburger toggle>
 * close hamburger menu by click outside the menu
 

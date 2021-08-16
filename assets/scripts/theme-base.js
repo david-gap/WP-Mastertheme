@@ -583,3 +583,35 @@ function loadPopUp(){
     }
   }, 500);
 }
+
+
+/* Load
+/------------------------*/
+function loadImagePopUp(){
+  // load pop up
+  loadPopUp();
+  // load content
+  setTimeout(function(self) {
+    // insert image and arrows
+    var popupContainer = document.querySelector('.popup > .popup-container > .popup-content');
+    popupContainer.insertAdjacentHTML('beforebegin', galleryArrowBefore);
+    popupContainer.appendChild(self.cloneNode());
+    popupContainer.insertAdjacentHTML('afterend', galleryArrowAfter);
+    // add id of current gallery
+    var currentGallery = self.closest('.add-popup');
+    popupContainer.setAttribute('data-id', currentGallery.getAttribute('data-id'));
+    // check for preview images
+  }, 100, this);
+}
+
+
+/* open
+/------------------------*/
+var activeImagePopUps = document.querySelectorAll('.wp-block-image.add-popup img');
+if(activeImagePopUps.length > 0){
+  Array.from(activeImagePopUps).forEach(function(popup) {
+    // open pop-up
+    popup.addEventListener('click', loadImagePopUp);
+    popup.addEventListener('keypress', loadImagePopUp);
+  });
+}

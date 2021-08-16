@@ -1,5 +1,12 @@
 /**
- * Import blocks
+ * Hook core blocks
+ */
+import "./core-extensions/all";
+import "./core-extensions/image";
+import "./core-extensions/gallery";
+
+/**
+ * Import custom blocks
  */
 import "./vimeo";
 import "./posts";

@@ -135,3 +135,14 @@
     max-height: 100%;
   }
 }
+
+
+/* POPUP IMAGE
+/––––––––––––––––––––––––*/
+.wp-block-image {
+  &.add-popup {
+    img {
+      cursor: pointer;
+    }
+  }
+}

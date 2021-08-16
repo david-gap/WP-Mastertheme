@@ -1,12 +1,15 @@
 /* GENERAL */
 
-.desktop {
-  display: none!important;
+body.frontend {
+  .desktop {
+    display: none!important;
+  }
+
+  .hidden_mobile {
+    opacity: 0;
+  }
 }
 
-.hidden_mobile {
-  opacity: 0;
-}
 
 /* Flexbox row */
 .flex-row {
@@ -38,13 +41,6 @@ body.frontend {
         margin-left: calc(var(--container__side) * -1);
         margin-right: calc(var(--container__side) * -1);
       }
-    }
-    /* HIDE/SHOW BY BREAKPOINT */
-    .mobile {
-      display: none!important;
-    }
-    .desktop {
-      display: none!important;
     }
   }
 }
@@ -176,7 +172,7 @@ body.frontend,
 
 
   /* MAIN MENU */
-  header #menu-main-container {
+  > header nav #menu-main-container {
     position: fixed;
     font-size: var(--mnav__mobile_fontsize);
     line-height: var(--mnav__mobile_lineheight);
