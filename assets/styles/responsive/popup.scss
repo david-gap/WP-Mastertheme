@@ -9,4 +9,12 @@
   .popup-next-preview {
     right: calc(var(--popup_prev_visible) + var(--popup__space) + var(--popup__space) - 100%);
   }
+  .popup-container {
+    &:not(.popup-preview) {
+      .close {
+        right: 20;
+        top: 20;
+      }
+    }
+  }
 }

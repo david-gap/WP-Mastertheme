@@ -112,10 +112,10 @@ body.frontend,
     /––––––––––––––––––––––––*/
      header .hamburger {
       span {
-        background: var(--light__main_color);
+        background: var(--light__hamburger_color);
         &:before,
         &:after {
-            background: var(--light__main_color);
+            background: var(--light__hamburger_color);
         }
       }
     }
@@ -206,10 +206,10 @@ body.frontend,
     /––––––––––––––––––––––––*/
     header .hamburger {
       span {
-        background: var(--dark__main_color);
+        background: var(--dark__hamburger_color);
         &:before,
         &:after {
-            background: var(--dark__main_color);
+            background: var(--dark__hamburger_color);
         }
       }
     }
