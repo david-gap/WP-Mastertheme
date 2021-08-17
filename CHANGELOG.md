@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.31.24 | 09.08.2021 <hamburger, popup and core image block>
+* add hamburger color to customizer
+* update core image block inspector title
+* fix popup responsive close button position
+
 ## 1.31.23 | 09.08.2021 <gutenberg core blocks hook>
 * block hook to all blocks to hide on desktop/mobile
 * image block hook to activate popup
