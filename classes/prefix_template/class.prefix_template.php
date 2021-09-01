@@ -224,6 +224,7 @@ class prefix_template {
     endif;
     // shortcodes
     add_shortcode( 'socialmedia', array( $this, 'SocialMedia' ) );
+    add_shortcode( 'copyright', array( $this, 'Copyright' ) );
     // add post formats
     if(SELF::$template_blog_type == 1):
       add_theme_support( 'post-formats', array( 'image', 'video', 'audio' ) );
@@ -1430,11 +1431,13 @@ class prefix_template {
     /* 3.11 COPYRIGHT
     /------------------------*/
     public static function Copyright(string $cr = ""){
+      // value fallback
+      $value = $cr !== '' ? $cr : SELF::$template_footer_cr;
       // vars
       $output = '';
 
       $output .= '<span class="copyright">';
-        $output .= $cr;
+        $output .= $value;
       $output .= '</span>';
 
       return $output;

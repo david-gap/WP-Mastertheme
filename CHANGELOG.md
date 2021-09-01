@@ -1,8 +1,9 @@
 # CHANGELOG
 
-## 1.31.25 | 09.08.2021 <addressblock img, popup close>
+## 1.31.25 | 09.08.2021 <addressblock img, popup close, cr>
 * Add image to the adressblock
 * fix popup close button position
+* add copyright value fallback and shortcode
 
 ## 1.31.24 | 09.08.2021 <hamburger, popup and core image block>
 * add hamburger color to customizer
