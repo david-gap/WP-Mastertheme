@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.16.14
+ * @version     2.17.14
  *
 */
 
@@ -95,6 +95,12 @@ class prefix_template {
   static $template_ph_address            = true;
   static $template_ph_custom             = "";
   static $template_address               = array(
+    'logo' => array(
+      "img" => "",
+      "width" => "",
+      "height" => "",
+      "alt" => ""
+    ),
     'company' => '',
     'name' => '',
     'street' => '',
@@ -254,6 +260,28 @@ class prefix_template {
       "label" => "Addressblock information",
       "type" => "multiple",
       "value" => array(
+        "logo" => array(
+          "label" => "Logo",
+          "type" => "multiple",
+          "value" => array(
+            "img" => array(
+              "label" => "URL",
+              "type" => "img"
+            ),
+            "width" => array(
+              "label" => "Width",
+              "type" => "text"
+            ),
+            "height" => array(
+              "label" => "Height",
+              "type" => "text"
+            ),
+            "alt" => array(
+              "label" => "Alternative text",
+              "type" => "text"
+            )
+          )
+        ),
         "company" => array(
           "label" => "Company",
           "type" => "text"
@@ -1258,6 +1286,7 @@ class prefix_template {
       $output = '';
       // defaults
       $defaults = array(
+        'logo' => array(),
         'company' => '',
         'name' => '',
         'street' => '',
@@ -1286,6 +1315,15 @@ class prefix_template {
       $config = array_merge($defaults, $address);
 
       $output .= '<address>';
+        if(!empty($config["logo"])):
+          // logo
+          $logo_img = array_key_exists('img', $config["logo"]) && $config["logo"]['img'] !== '' ? wp_get_attachment_image_src($config["logo"]['img'], 'full') : '';
+
+            $logoAttributes .= array_key_exists('width', $config["logo"]) && $config["logo"]['width'] !== "" ? ' width="' . $config["logo"]['width'] . '"' : '';
+            $logoAttributes .= array_key_exists('height', $config["logo"]) && $config["logo"]['height'] !== "" ? ' height="' . $config["logo"]['height'] . '"' : '';
+            $logoAttributes .= array_key_exists('alt', $config["logo"]) && $config["logo"]['alt'] !== "" ? ' alt="' . $config["logo"]['alt'] . '"' : '';
+            $output .= '<img src="' . $logo_img[0] . '" ' . $logoAttributes . '>';
+        endif;
         if($config["company"] !== ''):
           $output .= '<span rel="me" class="company">';
             $output .= $config["labels"] && array_key_exists('company', $config["labels"]) && $config["labels"]["company"] !== '' ? __($config["labels"]["company"], 'Template') . ' ' : '';

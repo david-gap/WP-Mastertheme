@@ -1,4 +1,4 @@
-**Version 2.16.14** (09.08.2021)
+**Version 2.17.14** (01.09.2021)
 
 Custom class "template" with template parts and header / footer builder
 
@@ -50,16 +50,36 @@ Custom class "template" with template parts and header / footer builder
     "custom": ""
   },
   "address": {
-    "company": "Company",
-    "name": "Name",
-    "street": "Street",
-    "street2": "Street 2",
-    "postalCode": "Postal Code",
-    "country": "Country",
-    "city": "City",
-    "phone": "0041",
-    "mobile": "0041 2",
-    "email": "info@dmili.com"
+    'logo': {
+      "img": "Logo ID from the media library",
+      "width": "Image width",
+      "height": "Image height",
+      "alt": "Alternative text for the Image"
+    },
+    'company': 'Company name',
+    'name': 'Name of a person',
+    'street': 'Adress line 1',
+    'street2': 'Adress line 2',
+    'postalCode': 'Zip code',
+    'city': 'Location/City',
+    'country': 'Country',
+    'phone': 'Phone number',
+    'fax': 'Fax number',
+    'mobile': 'Mobile phone number',
+    'email': 'Email adress',
+    'labels': {
+      'company': 'Label for company name',
+      'name': 'Label for name of a person',
+      'street': 'Label for the adress line 1',
+      'street2': 'Label for the adress line 2',
+      'postalCode': 'Label for the zip code',
+      'city': 'Label for the location/city',
+      'country': 'Label for the country',
+      'phone': 'Label for the phone number',
+      'fax': 'Label for the fax number',
+      'mobile': 'Label for the mobile phone number',
+      'email': 'Label for the email address'
+    }
   },
   "contactblock": {
     "phone": "",
