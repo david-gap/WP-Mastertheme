@@ -644,7 +644,7 @@ class prefix_core_BaseFunctions {
     if(count($tax) >= 1):
       $output .= '<fieldset' . $css . '>';
           if($legend == true):
-            $output .= '<legend>' . _e($taxonomy_details->labels->name, 'vsa') . '</legend>';
+            $output .= '<legend>' . __($taxonomy_details->labels->name, 'vsa') . '</legend>';
           endif;
             $output .= '<ul>';
               if ( ! empty( $tax ) && ! is_wp_error( $tax ) ):
@@ -759,7 +759,7 @@ class prefix_core_BaseFunctions {
       // create role
       $result = add_role(
         $role,
-        _e($name, 'WP User'),
+        __($name, 'WP User'),
         $config
       );
     endif;
@@ -787,7 +787,7 @@ class prefix_core_BaseFunctions {
       if(!empty($tax)):
         // insert tax args
         $args = array(
-          'label' => _e($tax["label"], 'WP Taxonomies'),
+          'label' => __($tax["label"], 'WP Taxonomies'),
           'hierarchical' => true,
           'query_var' => true,
           'show_in_rest' => true,
@@ -859,11 +859,11 @@ class prefix_core_BaseFunctions {
     $output .= '<div class="login-area">';
         if($_GET['login'] == "logged_out"){
           $output .= '<p class="login-message login_success">';
-            $output .= _e('You have been logged out successfully', 'WP Login');
+            $output .= __('You have been logged out successfully', 'WP Login');
           $output .= '</p>';
         }
-        $output .= '<h3>' . _e( 'Login', 'WP Login' ) . '</h3>';
-        $output .= '<p class="desc">' . _e( 'Please enter your user data to login', 'WP Login' ) . '</p>';
+        $output .= '<h3>' . __( 'Login', 'WP Login' ) . '</h3>';
+        $output .= '<p class="desc">' . __( 'Please enter your user data to login', 'WP Login' ) . '</p>';
         // login form configuration
         $args = array(
           'echo'           => false,
@@ -874,10 +874,10 @@ class prefix_core_BaseFunctions {
           'id_password'    => 'user_pass',
           'id_remember'    => 'rememberme',
           'id_submit'      => 'wp-submit',
-          'label_username' => _e( 'Username', 'WP Login' ),
-          'label_password' => _e( 'Password', 'WP Login' ),
-          'label_remember' => _e( 'Remember Me', 'WP Login' ),
-          'label_log_in'   => _e( 'Log In', 'WP Login' ),
+          'label_username' => __( 'Username', 'WP Login' ),
+          'label_password' => __( 'Password', 'WP Login' ),
+          'label_remember' => __( 'Remember Me', 'WP Login' ),
+          'label_log_in'   => __( 'Log In', 'WP Login' ),
           'value_username' => '',
           'value_remember' => false
         );
@@ -886,10 +886,10 @@ class prefix_core_BaseFunctions {
         // error message if login has failed
         if($_GET['login'] == "failed"){
           $output .= '<p class="login-message login_error">';
-            $output .= _e('Username and/or password is wrong', 'WP Login');
+            $output .= __('Username and/or password is wrong', 'WP Login');
           $output .= '</p>';
         }
-        $output .= '<a href="' . wp_lostpassword_url() . '">' . _e( 'Lost Password?', 'WP Login' ) . '</a>';
+        $output .= '<a href="' . wp_lostpassword_url() . '">' . __( 'Lost Password?', 'WP Login' ) . '</a>';
     $output .= '</div>';
 
     return $output;
@@ -951,7 +951,7 @@ class prefix_core_BaseFunctions {
         if(array_key_exists('label', $metafeildValues) && array_key_exists('type', $metafeildValues)):
           $value = get_post_meta($postID, $metafield, true);
           echo '<div class="components-panel__row edit-post-post-visibility" data-id="' . $metafield . '">';
-            echo '<label for="' . $metafield . '"><strong>' . _e( $metafeildValues["label"], 'WPtickets' ) . '</strong></label><br />';
+            echo '<label for="' . $metafield . '"><strong>' . __( $metafeildValues["label"], 'WPtickets' ) . '</strong></label><br />';
               if($metafeildValues["type"] == "wysiwig"):
                 wp_editor($value, $metafield, array(
                             'wpautop'       => true,
@@ -962,7 +962,7 @@ class prefix_core_BaseFunctions {
                 ));
               elseif($metafeildValues["type"] == "image"):
                 echo '<input type="hidden" class="img-saved" id="' . $metafield . '" name="' . $metafield . '" value="' . $value . '" style="margin-top:5px; width:100%;">';
-                echo '<button class="wp-single-media" data-action="WPadmin">' . _e('Select images','WPadmin') . '</button>';
+                echo '<button class="wp-single-media" data-action="WPadmin">' . __('Select images','WPadmin') . '</button>';
                 // img
                 echo '<span class="img-selected">';
                   if($value !== false && $value !== ''):

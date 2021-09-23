@@ -55,8 +55,8 @@ class prefix_core_WPadmin {
   /------------------------*/
   function WPadmin_BackendPage() {
     add_menu_page(
-      _e('Configurator','WPadmin'),
-      _e('Configurator','WPadmin'),
+      __('Configurator','WPadmin'),
+      __('Configurator','WPadmin'),
       'page_configuration',
       'configuration',
       array( $this, 'WPadmin_Configurator' ),
@@ -95,7 +95,7 @@ class prefix_core_WPadmin {
   /------------------------*/
   function WPadmin_Configurator(){
       if ( !current_user_can( 'page_configuration' ) )  {
-        wp_die( _e( 'You do not have sufficient permissions to access this page.' ) );
+        wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
       }
       // call wp media
       wp_enqueue_media();
@@ -106,9 +106,9 @@ class prefix_core_WPadmin {
       // print_r($db_option);
       // output
       $output .= '<div class="wrap" id="configuration">';
-        $output .= '<h1 class="wp-heading-inline">' . _e('Page Configurator','WPadmin') . '</h1>';
-        $output .= '<br><button class="page-title-action ajax-action" data-action="GenerateConfigFile">' . _e('Generate configuration file','WPadmin') . '</button>';
-        $output .= '<br><button class="page-title-action ajax-action" data-action="GenerateCssFile">' . _e('Download css file','WPadmin') . '</button>';
+        $output .= '<h1 class="wp-heading-inline">' . __('Page Configurator','WPadmin') . '</h1>';
+        $output .= '<br><button class="page-title-action ajax-action" data-action="GenerateConfigFile">' . __('Generate configuration file','WPadmin') . '</button>';
+        $output .= '<br><button class="page-title-action ajax-action" data-action="GenerateCssFile">' . __('Download css file','WPadmin') . '</button>';
         $output .= '<span id="config-message"></span>';
         $output .= '<form>';
           foreach ($registered_classes as $class_key => $classname) {
@@ -136,7 +136,7 @@ class prefix_core_WPadmin {
                       if(array_key_exists('label', $input)):
                         $output .= $input["label"];
                       else:
-                        $output .= '<span class="error">' . _e('Label is missing','WPadmin') . '</span>';
+                        $output .= '<span class="error">' . __('Label is missing','WPadmin') . '</span>';
                       endif;
                       $output .= '</label></td>';
                       $output .= '<td>';
@@ -156,7 +156,7 @@ class prefix_core_WPadmin {
                             $placeholder
                           );
                         else:
-                          $output .= '<span class="error">' . _e('Input type is missing','WPadmin') . '</span>';
+                          $output .= '<span class="error">' . __('Input type is missing','WPadmin') . '</span>';
                         endif;
                       $output .= '</td>';
                     $output .= '</tr>';
@@ -165,7 +165,7 @@ class prefix_core_WPadmin {
               endif;
             endif;
           }
-          $output .= '<input type="submit" class="button button-primary" data-action="SaveFormInput" value="' . _e( 'Save', 'WPadmin' ) . '">';
+          $output .= '<input type="submit" class="button button-primary" data-action="SaveFormInput" value="' . __( 'Save', 'WPadmin' ) . '">';
         $output .= '</form>';
       $output .= '</div>';
       echo $output;
@@ -201,11 +201,11 @@ class prefix_core_WPadmin {
             $output .= '<span class="circle"></span>';
             $output .= '<input type="radio"' . $attr . ' value="1" id="' . $id . '_switch-yes" ' . prefix_core_BaseFunctions::setChecked('1', $value) . '>';
             $output .= '<label for="' . $id . '_switch-yes">';
-              $output .= _e('yes','WPadmin');
+              $output .= __('yes','WPadmin');
             $output .= '</label>';
             $output .= '<input type="radio"' . $attr . ' value="0" id="' . $id . '_switch-no" ' . prefix_core_BaseFunctions::setChecked('0', $value) . '>';
             $output .= '<label for="' . $id . '_switch-no">';
-              $output .= _e('no','WPadmin');
+              $output .= __('no','WPadmin');
             $output .= '</label>';
           $output .= '</span>';
         break;
@@ -233,7 +233,7 @@ class prefix_core_WPadmin {
           $attr .= $value !== false ? 'value="' . $value . '"' : '';
           $output .= '<input id="img-saved_' . $name . '" class="img-saved" type="hidden"' . $attr . '>';
           // select button
-          $output .= '<button class="wp-single-media" data-action="WPadmin">' . _e('Select images','WPadmin') . '</button><br />';
+          $output .= '<button class="wp-single-media" data-action="WPadmin">' . __('Select images','WPadmin') . '</button><br />';
           // img
           $output .= '<span class="img-selected">';
             if($value !== false && $value !== ''):
@@ -383,7 +383,7 @@ class prefix_core_WPadmin {
             endif;
           endif;
         $output .= '</ul>';
-        $output .= '<button class="button button-primary input-fields-adder" data-action="addInputRow">' . _e( 'Add entry', 'WPadmin' ) . '</button>';
+        $output .= '<button class="button button-primary input-fields-adder" data-action="addInputRow">' . __( 'Add entry', 'WPadmin' ) . '</button>';
         break;
 
       default:

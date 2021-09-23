@@ -206,7 +206,7 @@ class prefix_WPseo {
       foreach( $post_types as $post_type ){
           add_meta_box(
               'WPseo_page_DataStructure',
-              _e( 'Add data structure', 'WPseo' ),
+              __( 'Add data structure', 'WPseo' ),
               array($this, 'WPtemplate_pageoptions'),
               $post_type,
               'side',

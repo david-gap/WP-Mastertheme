@@ -181,8 +181,8 @@ class prefix_imgDC {
     function imgDC_backendPage() {
       add_submenu_page(
           'upload.php',
-          _e('Dominant Color','imgDC'),
-          _e('Dominant Color','imgDC'),
+          __('Dominant Color','imgDC'),
+          __('Dominant Color','imgDC'),
           'imgDC',
           'imgDC-DominantColor',
           array( $this, 'backend_page' ),
@@ -338,20 +338,20 @@ class prefix_imgDC {
     /------------------------*/
     function backend_page() {
         if ( !current_user_can( 'imgDC' ) )  {
-          wp_die( _e( 'You do not have sufficient permissions to access this page.' ) );
+          wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
         }
         $output = '';
         $output .= '<div class="wrap" id="imgDC">';
-          $output .= '<h1 class="wp-heading-inline">' . _e('Dominant Color','imgDC') . '</h1>';
-          $output .= '<button class="page-title-action ajax-action" data-action="DominantColors">' . _e('Generate dominant colors','imgDC') . '</button>';
+          $output .= '<h1 class="wp-heading-inline">' . __('Dominant Color','imgDC') . '</h1>';
+          $output .= '<button class="page-title-action ajax-action" data-action="DominantColors">' . __('Generate dominant colors','imgDC') . '</button>';
           $output .= '<table class="wp-list-table widefat fixed striped pages hidden">';
             $output .= '<thead>';
               $output .= '<tr>';
                 $output .= '<td>';
-                  $output .= _e('IMG color','imgDC');
+                  $output .= __('IMG color','imgDC');
                 $output .= '</td>';
                 $output .= '<td>';
-                  $output .= _e('Image / ID / Title','imgDC');
+                  $output .= __('Image / ID / Title','imgDC');
                 $output .= '</td>';
               $output .= '</tr>';
             $output .= '</thead>';
@@ -389,7 +389,7 @@ class prefix_imgDC {
           $output .= '<tr>';
             $output .= '<td style="background-color: #' . $new_color . '">';
               $output .= '&nbsp;';
-              $output .= $new_color == 'file_missing' ? _e( 'Current image file is missing', 'imgDC' ) : '';
+              $output .= $new_color == 'file_missing' ? __( 'Current image file is missing', 'imgDC' ) : '';
             $output .= '</td>';
             $output .= '<td>';
               $output .= '<img src="' . $full_image_url[0] . '" width="50" height="50" style="object-fit: cover;"> ';
@@ -414,7 +414,7 @@ class prefix_imgDC {
       $output .= '<table class="backend-metabox-output">';
         $output .= '<tr>';
           $output .= '<td>';
-            $output .= '<label for="imgDC_DominantColor">' . _e( 'Dominant color', 'imgDC' ) . '</label>';
+            $output .= '<label for="imgDC_DominantColor">' . __( 'Dominant color', 'imgDC' ) . '</label>';
           $output .= '</td>';
           $output .= '<td>';
             $output .= '<input type="text" disabled name="imgDC_DominantColor" value="' . $content . '">';

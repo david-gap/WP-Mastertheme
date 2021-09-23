@@ -140,7 +140,7 @@ class prefix_WPimgAttr {
             // create custom field
             $form_fields[$var_name] = array(
                 'value' => $value ? $value : '',
-                'label' => _e( 'Alternative Text', 'WPimgAttr' ) . ' (' . $lang . ')',
+                'label' => __( 'Alternative Text', 'WPimgAttr' ) . ' (' . $lang . ')',
                 'input' => 'text'
             );
           endif;
