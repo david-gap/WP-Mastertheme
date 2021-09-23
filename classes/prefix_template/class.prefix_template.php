@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.18.14
+ * @version     2.18.15
  *
 */
 
@@ -799,7 +799,7 @@ class prefix_template {
     foreach( $post_types as $post_type ){
         add_meta_box(
             'template_page_options',
-            __( 'Options', 'template' ),
+            _e( 'Options', 'template' ),
             array($this, 'WPtemplate_pageoptions'),
             $post_type,
             'side',
@@ -1116,7 +1116,7 @@ class prefix_template {
         // output
         echo '<div class="wrap" id="WPtemplate">';
           // page options
-          echo '<p><b>' . __( 'Page options', 'template' ) . '</b></p>';
+          echo '<p><b>' . _e( 'Page options', 'template' ) . '</b></p>';
           echo '<ul>';
             $exeptions = array('beforeMain', 'afterMain');
             foreach (SELF::$template_page_options as $key => $value) {
@@ -1136,7 +1136,7 @@ class prefix_template {
                 endif;
                 // output
                 if($show == true):
-                  echo '<li><label><input type="checkbox" name="template_page_options[]" value="' . $key . '" ' . $active . '>' . __( $hide . $key, 'template' ) . '</label></li>';
+                  echo '<li><label><input type="checkbox" name="template_page_options[]" value="' . $key . '" ' . $active . '>' . _e( $hide . $key, 'template' ) . '</label></li>';
                 endif;
               endif;
             }
@@ -1158,7 +1158,7 @@ class prefix_template {
                 $customLabel = 'Code after main block';
               endif;
               echo '<div class="exeption">';
-                echo '<p><label for="exeption-' . $key . '"><b>' . __( $customLabel, 'template' ) . '</b></label></p>';
+                echo '<p><label for="exeption-' . $key . '"><b>' . _e( $customLabel, 'template' ) . '</b></label></p>';
                 echo '<textarea id="exeption-' . $key . '" name="template_page_options[' . $key . ']">' . $options[$key] . '</textarea>';
               echo '</div>';
             endif;
@@ -1198,7 +1198,7 @@ class prefix_template {
 
       if(SELF::$template_ph_active === true):
         $output .= '<div id="placeholder">';
-          $output .= '<h1>' . __( 'Website under construction', 'Template' ) . '</h1>';
+          $output .= '<h1>' . _e( 'Website under construction', 'Template' ) . '</h1>';
           $output .= SELF::$template_ph_custom ? SELF::$template_ph_custom : '';
           $output .= SELF::$template_ph_address === true ? SELF::AddressBlock(SELF::$template_address) : '';
         $output .= '</div>';
@@ -1348,72 +1348,72 @@ class prefix_template {
         endif;
         if($config["company"] !== ''):
           $output .= '<span rel="me" class="company">';
-            $output .= $config["labels"] && array_key_exists('company', $config["labels"]) && $config["labels"]["company"] !== '' ? __($config["labels"]["company"], 'Template') . ' ' : '';
-            $output .= $config["company"];
+            $output .= $config["labels"] && array_key_exists('company', $config["labels"]) && $config["labels"]["company"] !== '' ? _e($config["labels"]["company"], 'Template') . ' ' : '';
+            $output .= _e($config["company"], 'Template Adressblock');
           $output .= '</span>';
         endif;
         if($config["name"] !== ''):
           $output .= '<span class="name">';
-            $output .= $config["labels"] && array_key_exists('name', $config["labels"]) && $config["labels"]["name"] !== '' ? __($config["labels"]["name"], 'Template') . ' ' : '';
-            $output .= $config["name"];
+            $output .= $config["labels"] && array_key_exists('name', $config["labels"]) && $config["labels"]["name"] !== '' ? _e($config["labels"]["name"], 'Template') . ' ' : '';
+            $output .= _e($config["name"], 'Template Adressblock');
           $output .= '</span>';
         endif;
         if($config["street"] !== ''):
           $output .= '<span class="street">';
-            $output .= $config["labels"] && array_key_exists('street', $config["labels"]) && $config["labels"]["street"] !== '' ? __($config["labels"]["street"], 'Template') . ' ' : '';
-            $output .= $config["street"];
+            $output .= $config["labels"] && array_key_exists('street', $config["labels"]) && $config["labels"]["street"] !== '' ? _e($config["labels"]["street"], 'Template') . ' ' : '';
+            $output .= _e($config["street"], 'Template Adressblock');
           $output .= '</span>';
         endif;
         if($config["street2"] !== ''):
           $output .= '<span class="street_add">';
-            $output .= $config["labels"] && array_key_exists('street2', $config["labels"]) && $config["labels"]["street2"] !== '' ? __($config["labels"]["street2"], 'Template') . ' ' : '';
-            $output .= $config["street2"];
+            $output .= $config["labels"] && array_key_exists('street2', $config["labels"]) && $config["labels"]["street2"] !== '' ? _e($config["labels"]["street2"], 'Template') . ' ' : '';
+            $output .= _e($config["street2"], 'Template Adressblock');
           $output .= '</span>';
         endif;
         $output .= $config["postalCode"] !== '' && $config["city"] !== '' ? '<span class="location">' : '';
           if($config["postalCode"] !== ''):
             $output .= '<span class="postalcode">';
-              $output .= $config["labels"] && array_key_exists('postalCode', $config["labels"]) && $config["labels"]["postalCode"] !== '' ? __($config["labels"]["postalCode"], 'Template') . ' ' : '';
-              $output .= $config["postalCode"];
+              $output .= $config["labels"] && array_key_exists('postalCode', $config["labels"]) && $config["labels"]["postalCode"] !== '' ? _e($config["labels"]["postalCode"], 'Template') . ' ' : '';
+              $output .= _e($config["postalCode"], 'Template Adressblock');
             $output .= '</span>';
           endif;
           $output .= $config["postalCode"] !== '' && $config["city"] !== '' ? ' ' : '';
           if($config["city"] !== ''):
             $output .= '<span class="city">';
-              $output .= $config["labels"] && array_key_exists('city', $config["labels"]) && $config["labels"]["city"] !== '' ? __($config["labels"]["city"], 'Template') . ' ' : '';
-              $output .= $config["city"];
+              $output .= $config["labels"] && array_key_exists('city', $config["labels"]) && $config["labels"]["city"] !== '' ? _e($config["labels"]["city"], 'Template') . ' ' : '';
+              $output .= _e($config["city"], 'Template Adressblock');
             $output .= '</span>';
           endif;
         $output .= $config["postalCode"] !== '' && $config["city"] !== '' ? '</span>' : '';
         if($config["country"] !== ''):
           $output .= '<span class="country">';
-            $output .= $config["labels"] && array_key_exists('country', $config["labels"]) && $config["labels"]["country"] !== '' ? __($config["labels"]["country"], 'Template') . ' ' : '';
-            $output .= $config["country"];
+            $output .= $config["labels"] && array_key_exists('country', $config["labels"]) && $config["labels"]["country"] !== '' ? _e($config["labels"]["country"], 'Template') . ' ' : '';
+            $output .= _e($config["country"], 'Template Adressblock');
           $output .= '</span>';
         endif;
         if($config["phone"] !== ''):
-          $output .= '<a href="tel:' . prefix_core_BaseFunctions::cleanPhoneNr($config["phone"]) . '" class="call phone_nr">';
-            $output .= $config["labels"] && array_key_exists('phone', $config["labels"]) && $config["labels"]["phone"] !== '' ? __($config["labels"]["phone"], 'Template') . ' ' : '';
-            $output .= $config["phone"];
+          $output .= '<a href="tel:' . prefix_core_BaseFunctions::cleanPhoneNr(_e($config["phone"], 'Template Adressblock')) . '" class="call phone_nr">';
+            $output .= $config["labels"] && array_key_exists('phone', $config["labels"]) && $config["labels"]["phone"] !== '' ? _e($config["labels"]["phone"], 'Template') . ' ' : '';
+            $output .= _e($config["phone"], 'Template Adressblock');
           $output .= '</a>';
         endif;
         if($config["fax"] !== ''):
-          $output .= '<a href="tel:' . prefix_core_BaseFunctions::cleanPhoneNr($config["fax"]) . '" class="call fax_nr">';
-            $output .= $config["labels"] && array_key_exists('fax', $config["labels"]) && $config["labels"]["fax"] !== '' ? __($config["labels"]["fax"], 'Template') . ' ' : '';
-            $output .= $config["fax"];
+          $output .= '<a href="tel:' . prefix_core_BaseFunctions::cleanPhoneNr(_e($config["fax"], 'Template Adressblock')) . '" class="call fax_nr">';
+            $output .= $config["labels"] && array_key_exists('fax', $config["labels"]) && $config["labels"]["fax"] !== '' ? _e($config["labels"]["fax"], 'Template') . ' ' : '';
+            $output .= _e($config["fax"], 'Template Adressblock');
           $output .= '</a>';
         endif;
         if($config["mobile"] !== ''):
-          $output .= '<a href="tel:' . prefix_core_BaseFunctions::cleanPhoneNr($config["mobile"]) . '" class="call mobile_nr">';
-            $output .= $config["labels"] && array_key_exists('mobile', $config["labels"]) && $config["labels"]["mobile"] !== '' ? __($config["labels"]["mobile"], 'Template') . ' ' : '';
-            $output .= $config["mobile"];
+          $output .= '<a href="tel:' . prefix_core_BaseFunctions::cleanPhoneNr(_e($config["mobile"], 'Template Adressblock')) . '" class="call mobile_nr">';
+            $output .= $config["labels"] && array_key_exists('mobile', $config["labels"]) && $config["labels"]["mobile"] !== '' ? _e($config["labels"]["mobile"], 'Template') . ' ' : '';
+            $output .= _e($config["mobile"], 'Template Adressblock');
           $output .= '</a>';
         endif;
         if($config["email"] !== ''):
-          $output .= '<a href="mailto:' . $config["email"] . '" class="mail">';
-            $output .= $config["labels"] && array_key_exists('email', $config["labels"]) && $config["labels"]["email"] !== '' ? __($config["labels"]["email"], 'Template') . ' ' : '';
+          $output .= '<a href="mailto:' . _e($config["email"], 'Template Adressblock') . '" class="mail">';
+            $output .= $config["labels"] && array_key_exists('email', $config["labels"]) && $config["labels"]["email"] !== '' ? _e($config["labels"]["email"], 'Template') . ' ' : '';
             $output .= $config["labels"] && array_key_exists('email', $config["labels"]) && $config["labels"]["email"] !== '' ? '<span>' : '';
-              $output .= $config["email"];
+              $output .= _e($config["email"], 'Template Adressblock');
             $output .= $config["labels"] && array_key_exists('email', $config["labels"]) && $config["labels"]["email"] !== '' ? '</span>' : '';
           $output .= '</a>';
         endif;
@@ -1687,7 +1687,7 @@ class prefix_template {
       $output = '';
       $output .= '<div id="scroll-to-top">';
         $output .= '<div ' . prefix_template::AddContainer(prefix_template::$template_container_totop, true) . '>';
-          $output .= '<span>' . __( 'To top', 'Template' ) . '</span>';
+          $output .= '<span>' . _e( 'To top', 'Template' ) . '</span>';
         $output .= '</div>';
       $output .= '</div>';
       return $output;

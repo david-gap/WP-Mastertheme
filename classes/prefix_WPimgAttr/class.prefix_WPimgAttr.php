@@ -5,7 +5,7 @@
  * Wordpress - add custom fields for alt tag translations
  * https://github.com/david-gap/classes
  * Author: David Voglgsang
- * @version     2.1
+ * @version     2.1.1
  *
 */
 
@@ -140,7 +140,7 @@ class prefix_WPimgAttr {
             // create custom field
             $form_fields[$var_name] = array(
                 'value' => $value ? $value : '',
-                'label' => __( 'Alternative Text', 'WPimgAttr' ) . ' (' . $lang . ')',
+                'label' => _e( 'Alternative Text', 'WPimgAttr' ) . ' (' . $lang . ')',
                 'input' => 'text'
             );
           endif;

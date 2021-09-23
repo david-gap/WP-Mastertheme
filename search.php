@@ -11,7 +11,7 @@ get_header();
 ?>
 <section id="search-results" <?php echo prefix_template::AddContainer(prefix_template::$template_container, true); ?>>
   <h1 class="post-title">
-    <?php echo $wp_query->found_posts; ?> <?php echo __('Search results for','Template'); ?>: "<?php the_search_query(); ?>"
+    <?php echo $wp_query->found_posts; ?> <?php echo _e('Search results for','Template'); ?>: "<?php the_search_query(); ?>"
   </h1>
   <?php if ( have_posts() ) : ?>
     <div class="results">
@@ -27,7 +27,7 @@ get_header();
       endwhile;	?>
     </div>
   <?php else: ?>
-    <p><?php echo __('Sorry, but nothing matched your search terms. Please try again with some different keywords.','Template'); ?></p>
+    <p><?php echo _e('Sorry, but nothing matched your search terms. Please try again with some different keywords.','Template'); ?></p>
   <?php endif; ?>
 </section>
 <nav class="pagination">

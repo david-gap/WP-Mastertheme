@@ -4,7 +4,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.2.6
+ * @version     2.2.7
  *
 */
 
@@ -206,7 +206,7 @@ class prefix_WPseo {
       foreach( $post_types as $post_type ){
           add_meta_box(
               'WPseo_page_DataStructure',
-              __( 'Add data structure', 'WPseo' ),
+              _e( 'Add data structure', 'WPseo' ),
               array($this, 'WPtemplate_pageoptions'),
               $post_type,
               'side',

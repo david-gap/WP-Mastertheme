@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.32.26 | 23.09.2021 <translate strings>
+* change string call
+
 ## 1.32.25 | 23.09.2021 <scroll to top, backend enqueue>
 * Add line-height support to gutenberg as default
 * js check for toggle able submenues if menu exists
