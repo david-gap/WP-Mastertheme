@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.32.25 | 23.09.2021 <scroll to top, backend enqueue>
+* Add line-height support to gutenberg as default
+* js check for toggle able submenues if menu exists
+* Add scroll to top element
+* Add backend theme files
+
 ## 1.31.25 | 09.08.2021 <addressblock img, popup close, cr>
 * Add image to the adressblock
 * fix popup close button position

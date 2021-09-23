@@ -277,12 +277,14 @@ function subMenuToggler(e) {
   // toggle submenu visibility
   this.closest('.menu-item-has-children').classList.toggle("active");
 }
-var menuSub = mainMenu.querySelectorAll('.menu-item-has-children .toggle');
-if(menuSub.length !== 0){
-  Array.from(menuSub).forEach(function(submenu) {
-    submenu.addEventListener('click', subMenuToggler);
-    submenu.addEventListener('keypress', subMenuToggler);
-  });
+if(mainMenu) {
+  var menuSub = mainMenu.querySelectorAll('.menu-item-has-children .toggle');
+  if(menuSub.length !== 0){
+    Array.from(menuSub).forEach(function(submenu) {
+      submenu.addEventListener('click', subMenuToggler);
+      submenu.addEventListener('keypress', subMenuToggler);
+    });
+  }
 }
 
 
@@ -295,6 +297,20 @@ function closeHamburgerMenu(e){
   }
 }
 document.addEventListener('click', closeHamburgerMenu);
+
+
+/* Scroll to top
+/------------------------*/
+function scrollToTop(){
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+var scrollToTopButtons = document.querySelectorAll('#scroll-to-top span');
+if(scrollToTopButtons.length !== 0){
+  Array.from(scrollToTopButtons).forEach(function(element) {
+    element.addEventListener('click', scrollToTop);
+    element.addEventListener('keypress', scrollToTop);
+  });
+}
 
 
 /* Action Links

@@ -15,6 +15,9 @@ if(prefix_template::$template_page_options['afterMain'] == 1 && array_key_exists
 endif;
 ?>
     </main>
+    <?php if(prefix_template::$template_scrolltotop_active == 1 && !in_array('scrolltotop', $options)):
+      echo prefix_template::scrollToTop();
+    endif; ?>
     <?php if(prefix_template::$template_footer_active == 1 && !in_array('footer', $options)): ?>
       <footer>
           <?php echo prefix_template::FooterContent(); ?>

@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.17.14
+ * @version     2.18.14
  *
 */
 
@@ -40,6 +40,8 @@ Table of Contents:
   3.14 ICON BLOCK
   3.15 CONTENT BLOCK
   3.16 BODY CSS
+  3.17 POST META
+  3.18 SCROLL TO TOP BUTTON
 =======================================================*/
 
 
@@ -55,6 +57,7 @@ class prefix_template {
     * default vars
     * @param static int $template_container_header: activate container for the header
     * @param static int $template_container: activate container for the content
+    * @param static int $template_container_totop: activate container for the scroll to top button
     * @param static int $template_container_footer: activate container for the footer
     * @param static string $template_coloring: template coloring (dark/light)
     * @param static bool $template_ph_active: activate placeholder
@@ -81,6 +84,7 @@ class prefix_template {
     * @param static array $template_page_metablock: activate metablock on detail page/posts
     * @param static array $template_page_metablockAdds: Add metabox to CPT by slugs
     * @param static array $template_page_options: show/hide template elements
+    * @param static int $template_scrolltotop_active: activate scroll to top
     * @param static int $template_footer_active: activate footer
     * @param static string $template_footer_cr: copyright text
     * @param static string $template_footer_custom: custom html
@@ -89,6 +93,7 @@ class prefix_template {
   */
   static $template_container_header      = 1;
   static $template_container             = 1;
+  static $template_container_totop       = 1;
   static $template_container_footer      = 1;
   static $template_coloring              = "light";
   static $template_ph_active             = true;
@@ -175,6 +180,7 @@ class prefix_template {
     "title" => 1,
     "comments" => 1,
     "sidebar" => 1,
+    "scrolltotop" => 0,
     "footer" => 1,
     "darkmode" => 1,
     "beforeMain" => 1,
@@ -194,6 +200,7 @@ class prefix_template {
   );
   static $template_blog_dateformat       = 'd.m.Y';
   static $template_page_additional       = array();
+  static $template_scrolltotop_active    = 1;
   static $template_footer_active         = 1;
   static $template_footer_cr             = "";
   static $template_footer_custom         = "";
@@ -247,6 +254,10 @@ class prefix_template {
     ),
     "container" => array(
       "label" => "Activate main container",
+      "type" => "switchbutton"
+    ),
+    "container_scrolltotop" => array(
+      "label" => "Activate scroll to top container",
       "type" => "switchbutton"
     ),
     "container_footer" => array(
@@ -622,6 +633,10 @@ class prefix_template {
               "label" => "Hide sidebar",
               "type" => "switchbutton"
             ),
+            "scrolltotop" => array(
+              "label" => "Hide scroll to top",
+              "type" => "switchbutton"
+            ),
             "footer" => array(
               "label" => "Hide footer",
               "type" => "switchbutton"
@@ -692,6 +707,10 @@ class prefix_template {
           "placeholder" => "d.m.Y"
         )
       )
+    ),
+    "scrolltotop" => array(
+      "label" => "Activate scroll to top",
+      "type" => "switchbutton"
     ),
     "footer" => array(
       "label" => "Footer",
@@ -807,11 +826,13 @@ class prefix_template {
         // update vars
         SELF::$template_container_header = array_key_exists('container_header', $myConfig) ? $myConfig['container_header'] : SELF::$template_container_header;
         SELF::$template_container = array_key_exists('container', $myConfig) ? $myConfig['container'] : SELF::$template_container;
+        SELF::$template_container_totop = array_key_exists('container_scrolltotop', $myConfig) ? $myConfig['container_scrolltotop'] : SELF::$template_container_totop;
         SELF::$template_container_footer = array_key_exists('container_footer', $myConfig) ? $myConfig['container_footer'] : SELF::$template_container_footer;
         SELF::$template_coloring = array_key_exists('coloring', $myConfig) ? $myConfig['coloring'] : SELF::$template_coloring;
         SELF::$template_address = array_key_exists('address', $myConfig) ? $myConfig['address'] : SELF::$template_address;
         SELF::$template_socialmedia = array_key_exists('socialmedia', $myConfig) ? $myConfig['socialmedia'] : SELF::$template_socialmedia;
         SELF::$template_contactblock = array_key_exists('contactblock', $myConfig) ? $myConfig['contactblock'] : SELF::$template_contactblock;
+        SELF::$template_scrolltotop_active = array_key_exists('scrolltotop', $myConfig) ? $myConfig['scrolltotop'] : SELF::$template_scrolltotop_active;
         if($myConfig && array_key_exists('placeholder', $myConfig)):
           $placeholder = $myConfig['placeholder'];
           SELF::$template_ph_active = array_key_exists('active', $placeholder) ? $placeholder['active'] : SELF::$template_ph_active;
@@ -1627,6 +1648,8 @@ class prefix_template {
     }
 
 
+    /* 3.17 POST META
+    /------------------------*/
     public static function postMeta($pt, $options){
       $output = '';
       // if metablock is active for post type
@@ -1654,6 +1677,19 @@ class prefix_template {
           $output .= '</div>';
         endif;
       endif;
+      return $output;
+    }
+
+
+    /* 3.18 SCROLL TO TOP BUTTON
+    /------------------------*/
+    static public function scrollToTop(){
+      $output = '';
+      $output .= '<div id="scroll-to-top">';
+        $output .= '<div ' . prefix_template::AddContainer(prefix_template::$template_container_totop, true) . '>';
+          $output .= '<span>' . __( 'To top', 'Template' ) . '</span>';
+        $output .= '</div>';
+      $output .= '</div>';
       return $output;
     }
 

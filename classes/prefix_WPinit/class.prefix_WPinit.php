@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.10.7
+ * @version     2.10.8
  *
 */
 
@@ -52,9 +52,11 @@ class prefix_WPinit {
       * @param private int $WPinit_cachebust_file: theme cachebust styling path
       * @param private int $WPinit_css_version: theme styling version
       * @param private string $WPinit_css_path: theme styling path (theme is root)
+      * @param private string $WPinit_admin_css_path: backend theme styling path (theme is root)
       * @param private int $WPinit_js: activate theme js
       * @param private int $WPinit_js_version: theme js version
       * @param private string $WPinit_js_path: theme js path (theme is root)
+      * @param private string $WPinit_admin_js_path: backend theme js path (theme is root)
       * @param private int $WPinit_jquery: activate jquery
       * @param private int $WPinit_upload_svg: enable svg upload
       * @param private array $WPinit_admin_menu: disable backend menus from not admins
@@ -63,17 +65,19 @@ class prefix_WPinit {
       * @param private array $WPinit_google_fonts: google fonts
       * @param private array $WPinit_HeaderCss: Load cutom theme css in header
     */
-    private $WPinit_support            = array("title-tag", "menus", "html5", "post-thumbnails");
+    private $WPinit_support            = array("title-tag", "menus", "html5", "post-thumbnails", "custom-line-height");
     private $WPinit_css                = 1;
     private $WPinit_cachebust          = 1;
     private $WPinit_cachebust_file     = '/dist/rev-manifest.json';
     private $WPinit_css_version        = 1.0;
     private $WPinit_css_path           = "/dist/style.min.css";
+    private $WPinit_admin_css_path     = "/dist/style_backend.min.css";
     private $WPinit_theme_js_version   = 1.2;
     private $WPinit_theme_css_version  = 1.3;
     private $WPinit_js                 = 1;
     private $WPinit_js_version         = 1.0;
     private $WPinit_js_path            = "/dist/script.min.js";
+    private $WPinit_admin_js_path      = "/dist/script_backend.min.js";
     private $WPinit_jquery             = 1;
     private $WPinit_upload_svg         = 1;
     private $WPinit_admin_menu         = array();
@@ -254,10 +258,12 @@ class prefix_WPinit {
         $this->WPinit_cachebust = array_key_exists('cachebust', $myConfig) ? $myConfig['cachebust'] : $this->WPinit_cachebust;
         $this->WPinit_cachebust_file = array_key_exists('cachebust_file', $myConfig) ? $myConfig['cachebust_file'] : $this->WPinit_cachebust_file;
         $this->WPinit_css_path = array_key_exists('css_path', $myConfig) ? $myConfig['css_path'] : $this->WPinit_css_path;
+        $this->WPinit_admin_css_path = array_key_exists('admin_css_path', $myConfig) ? $myConfig['admin_css_path'] : $this->WPinit_admin_css_path;
         $this->WPinit_css_version = array_key_exists('css_version', $myConfig) ? $myConfig['css_version'] : $this->WPinit_css_path;
         $this->WPinit_js = array_key_exists('js', $myConfig) ? $myConfig['js'] : $this->WPinit_js;
         $this->WPinit_js_version = array_key_exists('js_version', $myConfig) ? $myConfig['js_version'] : $this->WPinit_js_version;
         $this->WPinit_js_path = array_key_exists('js_path', $myConfig) ? $myConfig['js_path'] : $this->WPinit_js_path;
+        $this->WPinit_admin_js_path = array_key_exists('admin_js_path', $myConfig) ? $myConfig['admin_js_path'] : $this->WPinit_admin_js_path;
         $this->WPinit_jquery = array_key_exists('jquery', $myConfig) ? $myConfig['jquery'] : $this->WPinit_jquery;
         $this->WPinit_admin_menu = array_key_exists('admin_menu', $myConfig) ? $myConfig['admin_menu'] : $this->WPinit_admin_menu;
         $this->WPinit_menus = array_key_exists('menus', $myConfig) ? array_merge($this->WPinit_menus, $myConfig['menus']) : $this->WPinit_menus;
@@ -333,8 +339,9 @@ class prefix_WPinit {
         wp_localize_script( 'custom/scripts', 'theme_directory', get_stylesheet_directory_uri());
       endif;
       if (is_admin()):
-        wp_register_script('theme/backend-scripts', get_stylesheet_directory_uri() . '/dist/script_backend.min.js', '0.1', true);
+        wp_register_script('theme/backend-scripts', get_stylesheet_directory_uri() . $this->WPinit_admin_js_path, $this->WPinit_js_version, true);
         wp_enqueue_script('theme/backend-scripts');
+        wp_enqueue_style('theme/backend-styles', get_stylesheet_directory_uri() . '' . $this->WPinit_admin_css_path, false, $this->WPinit_theme_css_version);
         # get theme directory for javascript files
         wp_localize_script( 'theme/backend-scripts', 'theme_directory', get_stylesheet_directory_uri());
       endif;
