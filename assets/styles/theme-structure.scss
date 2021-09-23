@@ -247,6 +247,10 @@ body.frontend,
   ==================================================================================*/
   #scroll-to-top {
     width: 100%;
+    margin-top: auto;
+    + footer {
+      margin-top: 0;
+    }
     span {
       cursor: pointer;
     }
