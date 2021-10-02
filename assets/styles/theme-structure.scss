@@ -73,6 +73,7 @@ body.frontend,
   ==================================================================================*/
   > header {
     transition: .7s;
+    position: relative;
     nav {
       display: flex;
       justify-content: space-between;

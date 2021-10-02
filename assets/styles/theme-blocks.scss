@@ -65,7 +65,7 @@ body.frontend,
           display: grid;
           grid-template-columns: repeat(auto-fit, var(--childwidth));
           grid-gap: var(--postColumnsSpace);
-          justify-content: space-between;
+          // justify-content: space-between;
           align-content: flex-start;
         }
       }
@@ -94,6 +94,10 @@ body.frontend,
         li {
           figure {
             margin: 0;
+            audio,
+            video {
+              max-width: 100%;
+            }
           }
         }
       }
@@ -134,7 +138,7 @@ body.frontend,
           display: grid;
           grid-template-columns: repeat(auto-fit, var(--childwidth));
           grid-gap: var(--postColumnsSpace);
-          justify-content: space-between;
+          // justify-content: space-between;
           align-content: flex-start;
           > .wide {
             grid-column: span var(--postColumns);
@@ -159,7 +163,12 @@ body.frontend,
             li,
             .components-base-control__field {
               display: flex;
-              flex-wrap: nowrap;
+              flex-wrap: wrap;
+              .subcategoreis {
+                flex-basis: 100%;
+                width: 100%;
+                margin-left: 15px;
+              }
             }
           }
           fieldset {

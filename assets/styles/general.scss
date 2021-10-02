@@ -120,7 +120,7 @@ body.frontend {
   .alignwide {
     margin-left: calc(-100vw / 2 + 100% / 2);
     margin-right: calc(-100vw / 2 + 100% / 2);
-    max-width: 100vw;
+    max-width: calc(100vw - (100vw - 100%));
   }
   .alignfull {
     margin-left: calc(-100vw / 2 + 100% / 2);

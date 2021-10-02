@@ -169,6 +169,9 @@ function WPgutenberg_blockRender_posts($attr){
     'orderby' => $attr['postSortBy'],
     'order' => $attr['postSortDirection']
   );
+  if($attr['postType'] == 'attachment'):
+    $queryArgs['post_status'] = 'inherit';
+  endif;
   if(array_key_exists('postIdFilter', $attr)):
    $queryArgs['post__in'] = $attr['postIdFilter'];
   else:
@@ -196,7 +199,21 @@ function WPgutenberg_blockRender_posts($attr){
                 $output .= $linkOpen;
               endif;
                 if(array_key_exists('postThumb', $attr) && $attr['postThumb'] !== false):
+                if($attr['postType'] == 'attachment'):
+                  $mineType = get_post_mime_type();
+                  $audioType = ['audio/mpeg3', 'audio/x-mpeg-3', 'video/mpeg', 'video/x-mpeg', 'audio/m4a', 'audio/ogg', 'audio/wav', 'audio/x-wav', 'audio/mpeg'];
+                  $videoType = ['video/mp4', 'video/x-m4v', 'video/quicktime', 'video/x-ms-asf', 'video/x-ms-wmv', 'application/x-troff-msvideo', 'video/avi', 'video/msvideo', 'video/x-msvideo', 'video/ogg', 'video/3gpp', 'audio/3gpp', 'video/3gpp2', 'audio/3gpp2', 'video/mpeg'];
+                  if(in_array($mineType, $audioType)):
+                    $file = '<audio controls src="' . wp_get_attachment_url(get_the_id()) . '" data-id="' . get_the_id() . '" />';
+                  elseif (in_array($mineType, $videoType)):
+                    $file = '<video controls src="' . wp_get_attachment_url(get_the_id()) . '" data-id="' . get_the_id() . '" />';
+                  else:
+                    $file = wp_get_attachment_image(get_the_id(), 'full', true, array("data-id" => get_the_id()));
+                  endif;
+                  $output .= '<figure>' . $file . '</figure>';
+                else:
                   $output .= get_the_post_thumbnail() ? '<figure>' . get_the_post_thumbnail(get_the_id(), 'full', array("data-id" => get_the_id())) . '</figure>' : '';
+                endif;
                 endif;
               if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_img', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
                 $output .= $linkClose;
@@ -233,11 +250,11 @@ function WPgutenberg_blockRender_posts($attr){
         endwhile;
         wp_reset_postdata();
         // grid fixer
-        if(array_key_exists('postSwiper', $attr) && $attr['postSwiper'] !== true && array_key_exists('postColumns', $attr) && $attr['postColumns'] > 1):
-          for ($x = 1; $x < $attr['postColumns']; $x++) {
-            $output .= '<li class="grid-fixer"></li>';
-          }
-        endif;
+        // if(array_key_exists('postSwiper', $attr) && $attr['postSwiper'] !== true && array_key_exists('postColumns', $attr) && $attr['postColumns'] > 1):
+        //   for ($x = 1; $x < $attr['postColumns']; $x++) {
+        //     $output .= '<span class="grid-fixer"></span>';
+        //   }
+        // endif;
       $output .= '</ul>';
     $output .= '</div>';
   endif;

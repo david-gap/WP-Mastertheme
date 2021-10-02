@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.18.15
+ * @version     2.19.15
  *
 */
 
@@ -42,6 +42,7 @@ Table of Contents:
   3.16 BODY CSS
   3.17 POST META
   3.18 SCROLL TO TOP BUTTON
+  3.19 MAIN MENU SEARCH FORM
 =======================================================*/
 
 
@@ -69,6 +70,7 @@ class prefix_template {
     * @param static int $template_header_sticky: activate sticky header
     * @param static int $template_header_stickyload: activate sticky header on load
     * @param static int $template_header_dmenu: Activate header hamburger for desktop
+    * @param static int $template_header_menusearchform: Activate searchform inside the main menu
     * @param static string template_header_menu_style: Select menu direction (options: horizontal/vertical)
     * @param static string template_header_hmenu_style: Select hamburger menu style (options: fullscreen, left, left_contained, right, right_contained)
     * @param static string template_header_hmenu_toggle: Hamburger Menü toggle able submenus
@@ -144,6 +146,7 @@ class prefix_template {
   static $template_header_sticky         = 1;
   static $template_header_stickyload     = 0;
   static $template_header_dmenu          = 1;
+  static $template_header_menusearchform = 0;
   static $template_header_menu_style     = 'horizontal';
   static $template_header_hmenu_style    = 'fullscreen';
   static $template_header_hmenu_toggle   = 0;
@@ -155,6 +158,7 @@ class prefix_template {
     "hamburger" => 1,
     "socialmedia" => 0,
     "custom" => 0,
+    "searchform" => 0,
     "container_end" => 1
   );
   static $template_header_logo_link      = "";
@@ -211,6 +215,7 @@ class prefix_template {
     "copyright" => 1,
     "address" => 1,
     "custom" => 0,
+    "searchform" => 0,
     "container_end" => 1
   );
   static $template_footer_before         = "";
@@ -239,6 +244,10 @@ class prefix_template {
     // add post formats
     if(SELF::$template_header_hmenu_toggle == 1):
       add_filter( 'nav_menu_item_title', array( $this, 'addToggleElementToMenu' ), 10, 2 );
+    endif;
+    // add search form to main menu
+    if(SELF::$template_header_menusearchform == 1):
+      add_filter('wp_nav_menu_items', array( $this, 'addSearchFormToMainmenu' ), 10, 2);
     endif;
   }
 
@@ -468,6 +477,10 @@ class prefix_template {
           "label" => "Desktop menu",
           "type" => "switchbutton"
         ),
+        "mainmenu_searchform" => array(
+          "label" => "Activate menu search form",
+          "type" => "switchbutton"
+        ),
         "menu_style" => array(
           "label" => "Menu direction",
           "type" => "select",
@@ -557,6 +570,10 @@ class prefix_template {
             ),
             "socialmedia" => array(
               "label" => "social media",
+              "type" => "switchbutton"
+            ),
+            "searchform" => array(
+              "label" => "Search form",
               "type" => "switchbutton"
             ),
             "custom" => array(
@@ -757,6 +774,10 @@ class prefix_template {
               "label" => "Custom",
               "type" => "switchbutton"
             ),
+            "searchform" => array(
+              "label" => "Search form",
+              "type" => "switchbutton"
+            ),
             "container_end" => array(
               "label" => "Container end",
               "type" => "hr"
@@ -845,6 +866,7 @@ class prefix_template {
           SELF::$template_header_sticky = array_key_exists('sticky', $header) ? $header['sticky'] : SELF::$template_header_sticky;
           SELF::$template_header_stickyload = array_key_exists('sticky_onload', $header) ? $header['sticky_onload'] : SELF::$template_header_stickyload;
           SELF::$template_header_dmenu = array_key_exists('desktop_menu', $header) ? $header['desktop_menu'] : SELF::$template_header_dmenu;
+          SELF::$template_header_menusearchform = array_key_exists('mainmenu_searchform', $header) ? $header['mainmenu_searchform'] : SELF::$template_header_menusearchform;
           SELF::$template_header_menu_style = array_key_exists('menu_style', $header) ? $header['menu_style'] : SELF::$template_header_menu_style;
           SELF::$template_header_hmenu_style = array_key_exists('hmenu_style', $header) ? $header['hmenu_style'] : SELF::$template_header_hmenu_style;
           SELF::$template_header_hmenu_toggle = array_key_exists('hmenu_toggle', $header) ? $header['hmenu_toggle'] : SELF::$template_header_hmenu_toggle;
@@ -996,6 +1018,9 @@ class prefix_template {
           case 'contactblock':
             echo $value == 1 ? SELF::ContactBlock(SELF::$template_contactblock) : '';
             break;
+          case 'searchform':
+            echo $value == 1 ? '<div class="search-form">' . get_search_form( false ) . '</div>' : '';
+            break;
           case 'custom':
             // WP check
             if (function_exists('do_shortcode')):
@@ -1077,6 +1102,9 @@ class prefix_template {
             break;
           case 'contactblock':
             echo $value == 1 ? SELF::ContactBlock(SELF::$template_contactblock) : '';
+            break;
+          case 'searchform':
+            echo $value == 1 ? '<div class="search-form">' . get_search_form( false ) . '</div>' : '';
             break;
           case 'custom':
             // WP check
@@ -1289,7 +1317,7 @@ class prefix_template {
     function addToggleElementToMenu( $title, $item ) {
       if( is_object( $item ) && isset( $item->ID ) ) {
         if(isset( $item->classes ) && in_array('menu-item-has-children', $item->classes) ):
-          $title .= '<span class="toggle"><svg xmlns="http://www.w3.org/2000/svg" width="11.982" height="6.694" viewBox="0 0 11.982 6.694"><path id="Pfad_24309" data-name="Pfad 24309" d="M-10.114,10.982a.293.293,0,0,0,.208-.085l4.86-4.686a.985.985,0,0,0,.3-.709.985.985,0,0,0-.3-.709L-9.906.112A.3.3,0,0,0-10.126,0a.3.3,0,0,0-.229.09.3.3,0,0,0-.083.232.3.3,0,0,0,.119.216l4.856,4.687a.384.384,0,0,1,.118.277.384.384,0,0,1-.118.277l-4.856,4.687a.3.3,0,0,0-.071.327.3.3,0,0,0,.276.189Z" transform="translate(11.482 10.939) rotate(90)" stroke-miterlimit="10" stroke-width="1"/></svg></span>';
+          $title .= '<span class="toggle"><svg xmlns="http://www.w3.org/2000/svg" width="15.135" height="11.064" viewBox="0 0 15.135 11.064"><g transform="translate(-331.529 -434.15)"><g><line y1="1.05" x2="9" transform="matrix(-0.574, -0.819, 0.819, -0.574, 338.236, 443.67)" fill="none" stroke="#000" stroke-linecap="round" stroke-width="2"/><line x2="9" y2="1.05" transform="matrix(0.574, -0.819, 0.819, 0.574, 339.096, 443.068)" fill="none" stroke="#000" stroke-linecap="round" stroke-width="2"/></g></g></svg></span>';
         endif;
       }
       return $title;
@@ -1691,6 +1719,18 @@ class prefix_template {
         $output .= '</div>';
       $output .= '</div>';
       return $output;
+    }
+
+
+    /* 3.19 MAIN MENU SEARCH FORM
+    /------------------------*/
+    function addSearchFormToMainmenu($items, $args) {
+      if ($args->theme_location == 'mainmenu'):
+        $updated_options = '<li class="menu-item menu-search-form">' . get_search_form( false ) . '</li>';
+        $updated_options .= $items;
+        $items = $updated_options;
+      endif;
+      return $items;
     }
 
 

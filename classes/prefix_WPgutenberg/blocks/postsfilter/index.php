@@ -222,11 +222,11 @@ function WPgutenberg_postresults_postsfilter(array $attr, string $source = 'firs
   endif;
 
   // grid fixer
-  if(array_key_exists('postColumns', $attr) && $attr['postColumns'] > 1):
-    for ($x = 1; $x < $attr['postColumns']; $x++) {
-      $output .= '<div class="grid-fixer"></div>';
-    }
-  endif;
+  // if(array_key_exists('postColumns', $attr) && $attr['postColumns'] > 1):
+  //   for ($x = 1; $x < $attr['postColumns']; $x++) {
+  //     $output .= '<div class="grid-fixer"></div>';
+  //   }
+  // endif;
 
 
   return $output;
@@ -273,7 +273,7 @@ function WPgutenberg_blockRender_postsfilter($attr){
           if(in_array('legend', $attr['postTaxonomyFilterOptions'])):
             $showlegend = true;
           endif;
-          if(in_array('hierarchical', $attr['postTaxonomyFilterOptions'])):
+          if(in_array('hirarchical', $attr['postTaxonomyFilterOptions'])):
             $hierarchical = 1;
           endif;
           if(in_array('emptytax', $attr['postTaxonomyFilterOptions'])):

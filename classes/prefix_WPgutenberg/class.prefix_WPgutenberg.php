@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.9.11
+ * @version     2.10.11
  */
 
 /*=======================================================
@@ -407,7 +407,7 @@ class prefix_WPgutenberg {
     $custom_pt = get_post_types($custom_args);
     // merge & clean post types
     $post_types = array_merge($core_pt, $custom_pt);
-    unset($post_types['attachment']);
+    // unset($post_types['attachment']);
     unset($post_types['nav_menu_item']);
     // register meta box for all selected post types
     foreach( $post_types as $post_type ){

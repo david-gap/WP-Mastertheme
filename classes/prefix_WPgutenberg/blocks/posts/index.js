@@ -67,22 +67,63 @@ function getcolumnSum(atts) {
 
 function PostImg(postThumb, postTaxonomyFilterOptions, id, media){
   if(postThumb === true && media){
+
+    var imgType = ['image/jpeg', 'image/pjpeg', 'image/png', 'image/gif', 'image/x-icon'];
+    var audioType = ['audio/mpeg3', 'audio/x-mpeg-3', 'video/mpeg', 'video/x-mpeg', 'audio/m4a', 'audio/ogg', 'audio/wav', 'audio/x-wav', 'audio/mpeg'];
+    var videoType = ['video/mp4', 'video/x-m4v', 'video/quicktime', 'video/x-ms-asf', 'video/x-ms-wmv', 'application/x-troff-msvideo', 'video/avi', 'video/msvideo', 'video/x-msvideo', 'video/ogg', 'video/3gpp', 'audio/3gpp', 'video/3gpp2', 'audio/3gpp2', 'video/mpeg'];
     let themedia = media.source_url;
-    if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes('link_img') && postTaxonomyFilterOptions.indexOf('link_box') < 1){
-      return (
-        <a href="#">
+
+    if(imgType.includes(media.mime_type)){
+      if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes('link_img') && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+        return (
+          <a href="#">
+            <figure>
+              <img src={themedia} data-id={ id } width="100%" />
+            </figure>
+          </a>
+        );
+      } else {
+        return (
           <figure>
             <img src={themedia} data-id={ id } width="100%" />
           </figure>
-        </a>
-      );
+        );
+      }
+    } else if(audioType.includes(media.mime_type)) {
+      if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes('link_img') && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+        return (
+          <a href="#">
+            <figure class="wp-block-audio">
+              <audio controls src={themedia} data-id={ id } width="100%" />
+            </figure>
+          </a>
+        );
+      } else {
+        return (
+          <figure class="wp-block-audio">
+            <audio controls src={themedia} data-id={ id } width="100%" />
+          </figure>
+        );
+      }
+    } else if(videoType.includes(media.mime_type)) {
+      if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes('link_img') && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+        return (
+          <a href="#">
+            <figure class="is-block-video">
+              <video controls src={themedia} data-id={ id } width="100%" />
+            </figure>
+          </a>
+        );
+      } else {
+        return (
+          <figure class="is-block-video">
+            <video controls src={themedia} data-id={ id } width="100%" />
+          </figure>
+        );
+      }
     } else {
-      return (
-        <figure>
-          <img src={themedia} data-id={ id } width="100%" />
-        </figure>
-      );
     }
+
   }
 }
 
@@ -237,6 +278,9 @@ export default registerBlockType( 'templates/posts', {
       'orderby': props.attributes.postSortBy,
       'tax_relation': props.attributes.postTaxonomyFilterRelation
     };
+    if(props.attributes.postType && props.attributes.postType == 'attachment'){
+      query['status'] = 'inherit';
+    }
     // add filter
     if(props.attributes.postIdFilter && props.attributes.postIdFilter.length >= 1){
       query['include'] = props.attributes.postIdFilter;
@@ -260,7 +304,11 @@ export default registerBlockType( 'templates/posts', {
     let taxTwo = {};
     if(posts){
       posts.forEach( post => {
-        media[ post.id ] = select('core').getMedia( post.featured_media );
+        if(props.attributes.postType && props.attributes.postType == 'attachment'){
+          media[ post.id ] = post;
+        } else {
+          media[ post.id ] = select('core').getMedia( post.featured_media );
+        }
       });
     }
     if(props.attributes.postTextOne.startsWith("tax__")){

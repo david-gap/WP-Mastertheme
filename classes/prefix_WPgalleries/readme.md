@@ -1,4 +1,4 @@
-**Version 2.1.1** (23.09.2021)
+**Version 2.1.2** (01.10.2021)
 
 Custom class "WPgalleries"
 

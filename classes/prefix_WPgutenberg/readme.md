@@ -1,4 +1,4 @@
-**Version 2.9.11** (17.08.2021)
+**Version 2.10.11** (02.10.2021)
 
 Custom class "WPgutenberg" to select allowed guttenberg blocks and add style options
 

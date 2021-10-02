@@ -69,10 +69,13 @@ export default class Inspector extends Component {
     ];
     const query = {
       'status': 'publish',
-      'per_page': -1,
+      'per_page': 100,
       'order': postSortDirection,
       'orderby': postSortBy
     };
+    if(postType && postType == 'attachment'){
+      query['status'] = 'inherit';
+    }
     const posts = select( 'core' ).getEntityRecords( 'postType', postType, query );
     if(posts && posts.length > 0){
       if(posts[0].meta !== undefined){
@@ -96,7 +99,7 @@ export default class Inspector extends Component {
     const getposttypes = select('core').getPostTypes();
     if(getposttypes){
       getposttypes.forEach( type => {
-        if(type.slug !== "attachment" && type.slug !== "wp_block"){
+        if(type.slug !== "wp_block"){
           postTypes.push( { value: type.slug, label: type.labels.name } );
         }
       });
