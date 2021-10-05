@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 1.33.27 | 05.10.2021 <fix align wide>
+* align wide width
+
+## 1.33.26 | 02.10.2021 <searchbox, post block attachments>
+* add search form options
+* add attachments to posts block
+* fix post filter hirarchical
+* fix popup error caused by flex-fix elements
+* change string call
+
 ## 1.32.26 | 23.09.2021 <translate strings>
 * change string call
 

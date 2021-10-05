@@ -411,7 +411,7 @@ export default registerBlockType( 'templates/postsfilter', {
               }
             }
           ) }
-          {getGridFixer(attributes)}
+          { // getGridFixer(attributes)}
         </div>
       </div>
     ];

@@ -406,7 +406,7 @@ export default registerBlockType( 'templates/posts', {
             }
           }
         ) }
-        {getGridFixer(attributes)}
+        { // getGridFixer(attributes)}
       </ul>
       </div>
     ];
