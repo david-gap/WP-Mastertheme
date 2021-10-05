@@ -1,7 +1,8 @@
 # CHANGELOG
 
-## 1.33.27 | 05.10.2021 <fix align wide>
+## 1.33.27 | 05.10.2021 <alignwide, posts block flexfix>
 * align wide width
+* disable flex fix from posts block
 
 ## 1.33.26 | 02.10.2021 <searchbox, post block attachments>
 * add search form options
