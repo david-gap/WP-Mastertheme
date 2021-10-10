@@ -204,7 +204,7 @@ class prefix_template {
   );
   static $template_blog_dateformat       = 'd.m.Y';
   static $template_page_additional       = array();
-  static $template_scrolltotop_active    = 1;
+  static $template_scrolltotop_active    = 0;
   static $template_footer_active         = 1;
   static $template_footer_cr             = "";
   static $template_footer_custom         = "";
@@ -249,6 +249,34 @@ class prefix_template {
     if(SELF::$template_header_menusearchform == 1):
       add_filter('wp_nav_menu_items', array( $this, 'addSearchFormToMainmenu' ), 10, 2);
     endif;
+    // register strings
+    $strings = array();
+    $strings[] = 'To top';
+    $strings[] = SELF::$template_address['company'];
+    $strings[] = SELF::$template_address['name'];
+    $strings[] = SELF::$template_address['street'];
+    $strings[] = SELF::$template_address['street2'];
+    $strings[] = SELF::$template_address['postalCode'];
+    $strings[] = SELF::$template_address['city'];
+    $strings[] = SELF::$template_address['country'];
+    $strings[] = SELF::$template_address['phone'];
+    $strings[] = SELF::$template_address['fax'];
+    $strings[] = SELF::$template_address['mobile'];
+    $strings[] = SELF::$template_address['email'];
+    $strings[] = SELF::$template_address['labels']['company'];
+    $strings[] = SELF::$template_address['labels']['name'];
+    $strings[] = SELF::$template_address['labels']['street'];
+    $strings[] = SELF::$template_address['labels']['street2'];
+    $strings[] = SELF::$template_address['labels']['postalCode'];
+    $strings[] = SELF::$template_address['labels']['city'];
+    $strings[] = SELF::$template_address['labels']['country'];
+    $strings[] = SELF::$template_address['labels']['phone'];
+    $strings[] = SELF::$template_address['labels']['fax'];
+    $strings[] = SELF::$template_address['labels']['mobile'];
+    $strings[] = SELF::$template_address['labels']['email'];
+    foreach ($strings as $key => $value) {
+      $newString = __( $value, 'Template' );
+    }
   }
 
 

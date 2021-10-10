@@ -87,11 +87,33 @@ body.frontend,
           }
         }
       }
+      .sort-options {
+        label {
+          cursor: pointer;
+          .sort-arrow svg {
+            transition: .3s;
+          }
+          &.z-a {
+            .sort-arrow svg {
+              transform: rotate(-180deg);
+            }
+          }
+        }
+      }
       ul {
         list-style: none;
         margin: 0;
         padding: 0;
+        &.loading {
+          > li {
+            opacity: .3;
+            transition: .3s;
+          }
+        }
         li {
+          &.wide {
+            grid-column: span var(--postColumns);
+          }
           figure {
             margin: 0;
             audio,

@@ -78,8 +78,7 @@ export default class Inspector extends Component {
     const query = {
       'status': 'publish',
       'per_page': 1,
-      'order': postSortDirection,
-      'orderby': postSortBy
+      'order': postSortDirection
     };
     const posts = select( 'core' ).getEntityRecords( 'postType', postType, query );
     if(posts && posts.length > 0){
@@ -98,6 +97,29 @@ export default class Inspector extends Component {
           }
         });
       }
+    }
+    // sort options
+    let postSortOptions = [
+      { value: "menu_order", label: __( 'Menu order', 'WPgutenberg' ) },
+      { value: "date", label: __( 'Date', 'WPgutenberg' ) },
+      { value: "title", label: __( 'Title', 'WPgutenberg' ) }
+    ];
+    if(posts && posts.length > 0){
+      if(posts[0].meta !== undefined){
+        Object.entries(posts[0].meta).forEach(([key, value]) => {
+          postSortOptions.push( { value: key, label: "Meta: " + key } );
+        });
+      }
+      // if(posts[0]._links["wp:term"] !== undefined){
+      //   const terms = posts[0]._links["wp:term"];
+      //   Object.entries(terms).forEach(([key, value]) => {
+      //     if(value.taxonomy == "post_tag"){
+      //       postSortOptions.push( { value: 'tax__post_tag', label: "Taxonomy: Tags" } );
+      //     } else {
+      //       postSortOptions.push( { value: 'tax__' + value.taxonomy, label: "Taxonomy: " + value.taxonomy } );
+      //     }
+      //   });
+      // }
     }
     // update taxonomy filter
     let postTaxonomies = [];
@@ -190,11 +212,7 @@ export default class Inspector extends Component {
               <SelectControl
                 label={__("Sort by", "WPgutenberg")}
                 value={postSortBy}
-                options={[
-                  { value: "menu_order", label: __( 'Menu order', 'WPgutenberg' ) },
-                  { value: "date", label: __( 'Date', 'WPgutenberg' ) },
-                  { value: "title", label: __( 'Title', 'WPgutenberg' ) }
-                ]}
+                options={postSortOptions}
                 onChange={postSortBy => setAttributes({ postSortBy })}
               />
             </PanelRow>

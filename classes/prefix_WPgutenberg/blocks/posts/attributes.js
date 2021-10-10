@@ -60,6 +60,13 @@ const attributes = {
     type: 'boolean',
     default: false,
   },
+  postSortNav: {
+    type: 'boolean',
+    default: false,
+  },
+  postSortNavOptions: {
+    type: 'array'
+  },
   postTaxonomyFilterOptions: {
     type: 'array'
   }

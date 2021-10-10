@@ -1,4 +1,4 @@
-**Version 2.10.9** (02.10.2021)
+**Version 2.11.9** (10.10.2021)
 
 Custom class "WPinit" basic functions
 
@@ -14,6 +14,9 @@ Custom class "WPinit" basic functions
 * $WPinit_jquery: activate jquery
 * $WPinit_upload_svg: enable svg upload
 * $WPinit_admin_menu: disable backend menus from not admins
+* $WPinit_EditorMenu: make menu visible for editors
+* $WPinit_EditorWidget: make widgets visible for editors
+* $WPinit_EditorCustomizer: make customizer visible for editors
 * $WPinit_menus: list of all wanted WP menus
 * $WPinit_typekit_id: typekit fonts
 * $WPinit_google_fonts: google fonts

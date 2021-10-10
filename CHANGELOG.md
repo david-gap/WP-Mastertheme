@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.34.27 | 10.10.2021 <posts & postsfilter sorting>
+* add sort options to posts block
+* add sort by meta value to posts and postsfilter block
+* set "to top" button default to 0
+
 ## 1.33.27 | 05.10.2021 <alignwide, posts block flexfix>
 * align wide width
 * disable flex fix from posts block

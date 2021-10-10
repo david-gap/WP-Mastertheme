@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.10.9
+ * @version     2.11.9
  *
 */
 
@@ -31,6 +31,8 @@ Table of Contents:
   2.11 CLEAN THE CONTENT
   2.12 ADD FILE TYPES TO UPLOADER
   2.13 UPDATE LOCALS
+  2.14 EDITORS BACKEND
+  2.15 ACF TO REST API
 3.0 OUTPUT
   3.1 MENU
   3.2 RETURN CUSTOM CSS
@@ -60,6 +62,9 @@ class prefix_WPinit {
       * @param private int $WPinit_jquery: activate jquery
       * @param private int $WPinit_upload_svg: enable svg upload
       * @param private array $WPinit_admin_menu: disable backend menus from not admins
+      * @param private array $WPinit_EditorMenu: make menu visible for editors
+      * @param private array $WPinit_EditorWidget: make widgets visible for editors
+      * @param private array $WPinit_EditorCustomizer: make customizer visible for editors
       * @param private array $WPinit_menus: list of all wanted WP menus
       * @param private string $WPinit_typekit_id: typekit fonts
       * @param private array $WPinit_google_fonts: google fonts
@@ -81,6 +86,9 @@ class prefix_WPinit {
     private $WPinit_jquery             = 1;
     private $WPinit_upload_svg         = 1;
     private $WPinit_admin_menu         = array();
+    private $WPinit_EditorMenu         = 0;
+    private $WPinit_EditorWidget       = 0;
+    private $WPinit_EditorCustomizer   = 0;
     private $WPinit_menus              = array(
       array(
         'key' => 'mainmenu',
@@ -134,11 +142,24 @@ class prefix_WPinit {
       add_action('admin_enqueue_scripts', array( $this, 'WPinit_enqueue' ));
       add_action( 'admin_head', array( $this, 'GoogleFonts' ) );
       add_action( 'admin_head', array( $this, 'TypekitFonts' ) );
+      // acf fields
+      add_filter('rest_prepare_post', array( $this, 'ACFtoRestApi' ), 10, 3);
       // return css inside head
       if($this->WPinit_HeaderCss == 1):
         add_action( 'wp_head', array( $this, 'BuildCustomCSS' ), 10, 1 );
       endif;
+      // show backend menu for editors
+      if (current_user_can('editor')):
+        $role_object = get_role( 'editor' );
+        if($this->WPinit_EditorMenu == 1 || $this->WPinit_EditorWidget == 1 || $this->WPinit_EditorCustomizer == 1):
+          $role_object->add_cap( 'edit_theme_options' );
+        else:
+          $role_object->remove_cap( 'edit_theme_options' );
+        endif;
+        add_action('admin_head', array( $this, 'EditorAppearance' ));
+      endif;
     }
+
 
     /* 1.3 BACKEND ARRAY
     /------------------------*/
@@ -196,6 +217,18 @@ class prefix_WPinit {
       "admin_menu" => array(
         "label" => "Hide backend menu for not admins",
         "type" => "array_addable"
+      ),
+      "EditorMenu" => array(
+        "label" => "Show menu for editors",
+        "type" => "switchbutton"
+      ),
+      "EditorWidget" => array(
+        "label" => "Show widgets for editors",
+        "type" => "switchbutton"
+      ),
+      "EditorCustomizer" => array(
+        "label" => "Show customizer for editors",
+        "type" => "switchbutton"
       ),
       "menus" => array(
         "label" => "Registered menu",
@@ -266,6 +299,9 @@ class prefix_WPinit {
         $this->WPinit_admin_js_path = array_key_exists('admin_js_path', $myConfig) ? $myConfig['admin_js_path'] : $this->WPinit_admin_js_path;
         $this->WPinit_jquery = array_key_exists('jquery', $myConfig) ? $myConfig['jquery'] : $this->WPinit_jquery;
         $this->WPinit_admin_menu = array_key_exists('admin_menu', $myConfig) ? $myConfig['admin_menu'] : $this->WPinit_admin_menu;
+        $this->WPinit_EditorMenu = array_key_exists('EditorMenu', $myConfig) ? $myConfig['EditorMenu'] : $this->WPinit_EditorMenu;
+        $this->WPinit_EditorWidget = array_key_exists('EditorWidget', $myConfig) ? $myConfig['EditorWidget'] : $this->WPinit_EditorWidget;
+        $this->WPinit_EditorCustomizer = array_key_exists('EditorCustomizer', $myConfig) ? $myConfig['EditorCustomizer'] : $this->WPinit_EditorCustomizer;
         $this->WPinit_menus = array_key_exists('menus', $myConfig) ? array_merge($this->WPinit_menus, $myConfig['menus']) : $this->WPinit_menus;
         $this->WPinit_upload_svg = array_key_exists('upload_svg', $myConfig) ? $myConfig['upload_svg'] : $this->WPinit_upload_svg;
         $this->WPinit_upload_types = array_key_exists('upload_types', $myConfig) ? $myConfig['upload_types'] : $this->WPinit_upload_types;
@@ -492,6 +528,41 @@ class prefix_WPinit {
         $language = prefix_core_BaseFunctions::getCurrentLang() . '_' . strtoupper(prefix_core_BaseFunctions::getCurrentLang());
         setlocale(LC_TIME, $language);
       }
+    }
+
+
+    /* 2.14 EDITORS BACKEND
+    /------------------------*/
+    function EditorAppearance(){
+      // menu
+      if($this->WPinit_EditorMenu == 0):
+        remove_submenu_page( 'themes.php', 'nav-menus.php' );
+      endif;
+      // widgets
+      if($this->WPinit_EditorWidget == 0):
+        remove_submenu_page( 'themes.php', 'widgets.php' );
+      endif;
+      // customizer
+      if($this->WPinit_EditorCustomizer == 0):
+        remove_submenu_page( 'themes.php', 'customize.php?return=%2Fwp-admin%2F' );
+      endif;
+      // remove themes selection from editors
+      remove_submenu_page( 'themes.php', 'themes.php' );
+    }
+
+
+    /* 2.15 ACF TO REST API
+    /------------------------*/
+    function ACFtoRestApi($response, $post, $request) {
+        if (!function_exists('get_fields')) return $response;
+        if (isset($post)) {
+            $acf = get_fields($post->id);
+            foreach ($acf as $key => $value) {
+              // code...
+              $response->data['meta'][$key] = $value;
+            }
+        }
+        return $response;
     }
 
 

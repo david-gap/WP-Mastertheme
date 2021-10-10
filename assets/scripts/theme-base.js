@@ -407,6 +407,58 @@ document.onfocusout = function(){
 document.addEventListener('click', checkOverlayContainers);
 
 
+/* Post sort
+/------------------------*/
+function runPostSorting(){
+  this.closest(".block-posts").querySelector('ul').classList.add("loading");
+  // label settings
+  if(this.classList.contains('active')){
+    var selectedDirection = this.getAttribute('data-sortd');
+    if(selectedDirection == 'desc'){
+      this.setAttribute('data-sortd', 'asc');
+      this.classList.remove("z-a");
+      var newDirection = 'asc';
+    } else {
+      this.setAttribute('data-sortd', 'desc');
+      this.classList.add("z-a");
+      var newDirection = 'desc';
+    }
+  } else {
+    var labels = this.closest(".sort-options").querySelectorAll('label');
+    Array.from(labels).forEach(function(label) {
+      label.classList.remove("active");
+      label.setAttribute('data-sortd', 'asc');
+    });
+    this.classList.add("active");
+    var newDirection = 'asc';
+  }
+  // vars
+  var id = this.closest(".block-posts").getAttribute('data-id');
+  var sortBy = this.getAttribute('data-sort');
+  // update vars
+  document.querySelector('.block-posts[data-id="' + id + '"] .sort-options input[name="postSortBy"]').value = sortBy;
+  document.querySelector('.block-posts[data-id="' + id + '"] .sort-options input[name="postSortDirection"]').value = newDirection;
+  // run query
+  var config = formValuesToAjax(this.closest('.block-posts[data-id="' + id + '"]').querySelector('form'));
+  config['path'] = '../mastertheme/classes/prefix_WPgutenberg/blocks/posts/ajax.php';
+  config['action'] = 'loadPosts';
+  config['id'] = id;
+  // run ajax function
+  ajaxCall(config);
+}
+function insertSortedPosts(data){
+  document.querySelector('.block-posts[data-id="' + data.id + '"] ul').innerHTML = data.content;
+  document.querySelector('.block-posts[data-id="' + data.id + '"] ul').classList.remove("loading");
+}
+var postSortLabel = document.querySelectorAll('.sort-options label');
+if(postSortLabel.length !== 0){
+  Array.from(postSortLabel).forEach(function(label) {
+    label.addEventListener('click', runPostSorting);
+    label.addEventListener('keypress', runPostSorting);
+  });
+}
+
+
 /* Post filter
 /------------------------*/
 function runPostFilter(input){

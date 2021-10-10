@@ -51,6 +51,8 @@ export default class Inspector extends Component {
         postSwiper,
         postPopUp,
         postPopUpNav,
+        postSortNav,
+        postSortNavOptions,
         postColumnsSpace,
         postTaxonomyFilter,
         postTaxonomyFilterRelation,
@@ -70,8 +72,7 @@ export default class Inspector extends Component {
     const query = {
       'status': 'publish',
       'per_page': 100,
-      'order': postSortDirection,
-      'orderby': postSortBy
+      'order': postSortDirection
     };
     if(postType && postType == 'attachment'){
       query['status'] = 'inherit';
@@ -93,6 +94,29 @@ export default class Inspector extends Component {
           }
         });
       }
+    }
+    // sort options
+    let postSortOptions = [
+      { value: "menu_order", label: __( 'Menu order', 'WPgutenberg' ) },
+      { value: "date", label: __( 'Date', 'WPgutenberg' ) },
+      { value: "title", label: __( 'Title', 'WPgutenberg' ) }
+    ];
+    if(posts && posts.length > 0){
+      if(posts[0].meta !== undefined){
+        Object.entries(posts[0].meta).forEach(([key, value]) => {
+          postSortOptions.push( { value: key, label: "Meta: " + key } );
+        });
+      }
+      // if(posts[0]._links["wp:term"] !== undefined){
+      //   const terms = posts[0]._links["wp:term"];
+      //   Object.entries(terms).forEach(([key, value]) => {
+      //     if(value.taxonomy == "post_tag"){
+      //       postSortOptions.push( { value: 'tax__post_tag', label: "Taxonomy: Tags" } );
+      //     } else {
+      //       postSortOptions.push( { value: 'tax__' + value.taxonomy, label: "Taxonomy: " + value.taxonomy } );
+      //     }
+      //   });
+      // }
     }
     // update post type selection options
     let postTypes = [];
@@ -173,6 +197,44 @@ export default class Inspector extends Component {
         });
       }
     }
+    // sort nav options
+    let sortnavoptions = [
+      { value: "title", label: __( 'Title', 'WPgutenberg' ) },
+      { value: "date", label: __( 'Date', 'WPgutenberg' ) }
+    ];
+    let sortnavsuggestions = [];
+    let sortnavoptionsValue = [];
+    if(posts && posts.length > 0){
+      if(posts[0].meta !== undefined){
+        Object.entries(posts[0].meta).forEach(([key, value]) => {
+          sortnavoptions.push( { value: key, label: "Meta: " + key } );
+        });
+      }
+      // if(posts[0]._links["wp:term"] !== undefined){
+      //   const terms = posts[0]._links["wp:term"];
+      //   Object.entries(terms).forEach(([key, value]) => {
+      //     if(value.taxonomy == "post_tag"){
+      //       sortnavoptions.push( { value: 'tax__post_tag', label: "Taxonomy: Tags" } );
+      //     } else {
+      //       sortnavoptions.push( { value: 'tax__' + value.taxonomy, label: "Taxonomy: " + value.taxonomy } );
+      //     }
+      //   });
+      // }
+      Object.entries(sortnavoptions).forEach(([key, value]) => {
+        sortnavsuggestions.push( value.label );
+      });
+      if(postSortNavOptions){
+        sortnavoptionsValue = postSortNavOptions.map( ( option ) => {
+          let wantedOption = sortnavoptions.find( ( options ) => {
+            return options.value === option;
+          } );
+          if ( wantedOption === undefined || ! wantedOption ) {
+            return false;
+          }
+          return wantedOption.label;
+        } );
+      }
+    }
     // options
     const postOptions = [
       { value: "link_img", label: __( 'Link image', 'WPgutenberg' ) },
@@ -243,11 +305,7 @@ export default class Inspector extends Component {
               <SelectControl
                 label={__("Sort by", "WPgutenberg")}
                 value={postSortBy}
-                options={[
-                  { value: "menu_order", label: __( 'Menu order', 'WPgutenberg' ) },
-                  { value: "date", label: __( 'Date', 'WPgutenberg' ) },
-                  { value: "title", label: __( 'Title', 'WPgutenberg' ) }
-                ]}
+                options={postSortOptions}
                 onChange={postSortBy => setAttributes({ postSortBy })}
               />
             </PanelRow>
@@ -365,6 +423,37 @@ export default class Inspector extends Component {
                   label={ __( 'Image preview inside Pop-Up', 'WPgutenberg' ) }
                   checked={ postPopUpNav }
                   onChange={postPopUpNav => setAttributes({ postPopUpNav })}
+              />
+            </PanelRow>
+            <PanelRow>
+              <ToggleControl
+                  id="posts-sortnav"
+                  label={ __( 'Show the sort options', 'WPgutenberg' ) }
+                  checked={ postSortNav }
+                  onChange={postSortNav => setAttributes({ postSortNav })}
+              />
+            </PanelRow>
+            <PanelRow>
+              <FormTokenField
+                label={__("Select sort options", "WPgutenberg")}
+                value={ sortnavoptionsValue }
+                suggestions={ sortnavsuggestions }
+                maxSuggestions={ 20 }
+                onChange={ ( postSortNavOptions ) => {
+                  // Build array of selected posts.
+                  let postSortNavOptionsArray = [];
+                  postSortNavOptions.map(
+                    ( option ) => {
+                      const matchingOptions = sortnavoptions.find( ( options ) => {
+                        return options.label === option;
+                      } );
+                      if ( matchingOptions !== undefined ) {
+                        postSortNavOptionsArray.push( matchingOptions.value );
+                      }
+                    }
+                  )
+                  setAttributes( { postSortNavOptions: postSortNavOptionsArray } );
+                } }
               />
             </PanelRow>
           </PanelBody>

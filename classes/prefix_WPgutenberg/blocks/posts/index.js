@@ -245,6 +245,37 @@ function getGridFixer(atts){
   }
 }
 
+function sortNavigation(atts){
+  let output = '';
+  output += '<div class="sort-options">';
+    if(atts["postSortNavOptions"]){
+      atts["postSortNavOptions"].forEach( option => {
+        if(option.startsWith("tax__")){
+          var cleanType = option.replace("tax__", "");
+          if(cleanType == 'category'){
+            var cleanType = 'categories';
+          } else if (cleanType == 'post_tag') {
+            var cleanType = 'tags';
+          }
+        } else if(option.startsWith("acf__")) {
+          var cleanType = option.replace("acf__", "");
+        } else {
+          cleanType = option;
+        }
+        output += '<label data-sort="' + option + '" data-sortd="ASC" tabindex="0">';
+          output += '<span class="sort-name">' + cleanType + '</span>';
+          output += '<span><svg xmlns="http://www.w3.org/2000/svg" width="9.155" height="4.926" viewBox="0 0 9.155 4.926"><path d="M4.66 4.922a.88.88 0 0 0 .487-.208l3.676-3.158A.876.876 0 1 0 7.684.225l-3.11 2.667L1.464.225A.876.876 0 1 0 .328 1.556l3.68 3.154a.879.879 0 0 0 .652.208z" fill="#000"/></svg></span>';
+        output += '</label>';
+      });
+    }
+  output += '</div>';
+  if(atts["postSortNav"] && atts["postSortNav"] === true){
+    return [
+      htmlToElem( output )
+    ]
+  }
+}
+
 
 
 
@@ -271,13 +302,21 @@ export default registerBlockType( 'templates/posts', {
   },
   attributes,
   edit: withSelect( ( select, props ) => {
+    let defalutSort = ['menu_order', 'title', 'date'];
     let query = {
       'status': 'publish',
       'per_page': props.attributes.postSum,
       'order': props.attributes.postSortDirection,
-      'orderby': props.attributes.postSortBy,
       'tax_relation': props.attributes.postTaxonomyFilterRelation
     };
+    if(props.attributes.postSortBy && defalutSort.includes(props.attributes.postSortBy)){
+      query['orderby'] = props.attributes.postSortBy;
+    } else if (props.attributes.postSortBy && props.attributes.postSortBy.startsWith("tax__")) {
+      // query['orderby'] = props.attributes.postSortBy;
+    } else if (props.attributes.postSortBy) {
+      query['meta_key'] = props.attributes.postSortBy;
+      query['orderby'] = 'meta_value';
+    }
     if(props.attributes.postType && props.attributes.postType == 'attachment'){
       query['status'] = 'inherit';
     }
@@ -335,7 +374,7 @@ export default registerBlockType( 'templates/posts', {
   } )( props => {
     // set values
     const {
-      attributes: { postType, postTaxonomyFilter, postIdFilter, postTaxonomyFilterRelation, postSum, postSortDirection, postSortBy, postTextOne, postTextTwo, postColumns, anchor, postThumb, postSwiper, postPopUp, postPopUpNav, postColumnsSpace, postTaxonomyFilterOptions },
+      attributes: { postType, postTaxonomyFilter, postIdFilter, postTaxonomyFilterRelation, postSum, postSortDirection, postSortBy, postTextOne, postTextTwo, postColumns, anchor, postThumb, postSwiper, postPopUp, postPopUpNav, postSortNav, postSortNavOptions, postColumnsSpace, postTaxonomyFilterOptions },
       attributes,
       className,
       setAttributes,
@@ -375,6 +414,7 @@ export default registerBlockType( 'templates/posts', {
         {
           // <ul>{settings}</ul>
         }
+        {sortNavigation(attributes)}
       <ul>
         { posts.map(
           ( post ) => {
@@ -406,14 +446,13 @@ export default registerBlockType( 'templates/posts', {
             }
           }
         ) }
-        { // getGridFixer(attributes)}
       </ul>
       </div>
     ];
   } ),
   save: props => {
     const {
-      attributes: { postType, postTaxonomyFilter, postIdFilter, postTaxonomyFilterRelation, postSum, postSortDirection, postSortBy, postTextOne, postTextTwo, postColumns, anchor, postThumb, postSwiper, postPopUp, postPopUpNav, postColumnsSpace, postTaxonomyFilterOptions },
+      attributes: { postType, postTaxonomyFilter, postIdFilter, postTaxonomyFilterRelation, postSum, postSortDirection, postSortBy, postTextOne, postTextTwo, postColumns, anchor, postThumb, postSwiper, postPopUp, postPopUpNav, postSortNav, postSortNavOptions, postColumnsSpace, postTaxonomyFilterOptions },
       attributes
     } = props;
 

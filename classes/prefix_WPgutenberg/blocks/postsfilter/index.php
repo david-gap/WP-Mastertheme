@@ -97,6 +97,8 @@ function WPgutenberg_block_postsfilterValue($value, $id){
 
 // post results
 function WPgutenberg_postresults_postsfilter(array $attr, string $source = 'first_load'){
+  // sort direction
+  $postSortBy = in_array($attr['postSortBy'], array('title', 'date', 'menu_order')) ? $attr['postSortBy'] : 'meta_value';
   $output = '';
   // update filter options
   if(array_key_exists('postTaxonomyFilterOptions', $attr) && !is_array($attr['postTaxonomyFilterOptions'])):
@@ -151,10 +153,13 @@ function WPgutenberg_postresults_postsfilter(array $attr, string $source = 'firs
     'post_status'=>'publish',
     'posts_per_page'=> -1,
     'paged' => $paged,
-    'orderby' => $attr['postSortBy'],
+    'orderby' => $postSortBy,
     'order' => $attr['postSortDirection'],
     'tax_query' => $term_array
   );
+  if(!in_array($attr['postSortBy'], array('title', 'date', 'menu_order'))):
+    $queryArgs['meta_key'] = $attr['postSortBy'];
+  endif;
   if($tagsToQuery):
     $queryArgs['tag_id'] = $tagsToQuery;
   endif;

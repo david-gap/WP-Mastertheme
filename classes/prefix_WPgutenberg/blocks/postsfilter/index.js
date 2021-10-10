@@ -297,13 +297,21 @@ export default registerBlockType( 'templates/postsfilter', {
   },
   attributes,
   edit: withSelect( ( select, props ) => {
+    let defalutSort = ['menu_order', 'title', 'date'];
     let query = {
       'status': 'publish',
       'per_page': -1,
       'order': props.attributes.postSortDirection,
-      'orderby': props.attributes.postSortBy,
       'tax_relation': props.attributes.postTaxonomyFilterRelation
     };
+    if(props.attributes.postSortBy && defalutSort.includes(props.attributes.postSortBy)){
+      query['orderby'] = props.attributes.postSortBy;
+    } else if (props.attributes.postSortBy && props.attributes.postSortBy.startsWith("tax__")) {
+      // query['orderby'] = props.attributes.postSortBy;
+    } else if (props.attributes.postSortBy) {
+      query['meta_key'] = props.attributes.postSortBy;
+      query['orderby'] = 'meta_value';
+    }
     // posts
     const posts = select( 'core' ).getEntityRecords( 'postType', props.attributes.postType, query );
     let media = {};
@@ -411,7 +419,6 @@ export default registerBlockType( 'templates/postsfilter', {
               }
             }
           ) }
-          { // getGridFixer(attributes)}
         </div>
       </div>
     ];
