@@ -53,7 +53,8 @@ export default class Inspector extends Component {
         postThumb,
         postTextSearch,
         postTaxonomyFilter,
-        postTaxonomyFilterOptions
+        postTaxonomyFilterOptions,
+        postTaxonomyPreFilter
       },
       setAttributes
     } = this.props;
@@ -123,19 +124,50 @@ export default class Inspector extends Component {
     }
     // update taxonomy filter
     let postTaxonomies = [];
+    let currentTaxVal;
     if(posts && posts.length > 0){
       if(posts[0]._links["wp:term"] !== undefined){
         const terms = posts[0]._links["wp:term"];
         Object.entries(terms).forEach(([key, value]) => {
           // get taxonomies
-          if(value.taxonomy == "post_tag"){
-            var cleanTax = 'tags';
-          } else if(value.taxonomy == "category") {
-            var cleanTax = 'categories';
-          } else {
-            var cleanTax = value.taxonomy;
+          const getTaxvalues = select( 'core' ).getEntityRecords( 'taxonomy', value.taxonomy );
+          let sectionOptions = [];
+          let selectedOptions = [];
+          if(getTaxvalues){
+            // get taxonomies
+            if(value.taxonomy == "post_tag"){
+              var cleanTax = 'tags';
+            } else if(value.taxonomy == "category") {
+              var cleanTax = 'categories';
+            } else {
+              var cleanTax = value.taxonomy;
+            }
+            // set selection options
+            sectionOptions = getTaxvalues.map( ( tax ) => tax.name );
+            // insert selection
+            if(postTaxonomyPreFilter && postTaxonomyPreFilter.length >= 1){
+              selectedOptions[cleanTax] = postTaxonomyPreFilter.map( ( taxID ) => {
+                var stringToArray = taxID.split("-");
+                if(cleanTax == stringToArray[0]){
+                  let wantedPost = getTaxvalues.find( ( tax ) => {
+                    return tax.id === parseInt(stringToArray[1]);
+                  } );
+                  if ( wantedPost === undefined || ! wantedPost ) {
+                    return false;
+                  }
+                  return wantedPost.name;
+                } else {
+                  return false;
+                }
+              } );
+            }
+            if(selectedOptions[cleanTax] && selectedOptions[cleanTax].length >= 1){
+              var theSelectedOptions = selectedOptions[cleanTax].filter(Boolean);
+            } else {
+              var theSelectedOptions = [];
+            }
+            postTaxonomies.push( { name: cleanTax, value: value.taxonomy, options: sectionOptions, query: getTaxvalues, values: theSelectedOptions } );
           }
-          postTaxonomies.push( { name: cleanTax, value: value.taxonomy } );
         });
       }
     }
@@ -355,6 +387,53 @@ export default class Inspector extends Component {
                   );
                 }) }
                 </ul>
+              </div>
+            </PanelRow>
+          </PanelBody>
+          <PanelBody title={ __( 'Pre filter', 'WPgutenberg' ) } >
+            <PanelRow>
+              <div>
+                { postTaxonomies.map(
+                  (taxonomy, setState) => {
+                  return(
+                    <PanelRow>
+                      <FormTokenField
+                        label={taxonomy.name}
+                        value={ taxonomy.values }
+                        suggestions={ taxonomy.options }
+                        maxSuggestions={ 20 }
+                        onFocus= { ( index ) => {
+                          currentTaxVal = postTaxonomyPreFilter;
+                        } }
+                        onChange={ ( postTaxonomyPreFilter ) => {
+                          // build array of selected posts from other taxonomies
+                          let postTaxFilterArray = [];
+                          if(currentTaxVal && currentTaxVal.length >= 1){
+                            // query.concat(props.attributes.postTaxonomyPreFilter);
+                            currentTaxVal.forEach(function(allTaxSelections) {
+                              var stringToArray = allTaxSelections.split("-");
+                              if( stringToArray[0] !== taxonomy.name ) {
+                                postTaxFilterArray.push( allTaxSelections );
+                              }
+                            });
+                          }
+                          // add to selection from current taxonomy
+                          postTaxonomyPreFilter.map(
+                            ( taxSelection ) => {
+                              const matchingTax = taxonomy.query.find( ( tax ) => {
+                                return tax.name === taxSelection;
+                              } );
+                              if ( matchingTax !== undefined ) {
+                                postTaxFilterArray.push( taxonomy.name + "-" + matchingTax.id );
+                              }
+                            }
+                          )
+                          setAttributes( { postTaxonomyPreFilter: postTaxFilterArray } );
+                        } }
+                      />
+                    </PanelRow>
+                  );
+                }) }
               </div>
             </PanelRow>
           </PanelBody>

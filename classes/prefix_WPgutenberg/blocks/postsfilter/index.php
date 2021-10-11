@@ -59,6 +59,9 @@ register_block_type(
       ),
       'postTaxonomyFilter' => array(
         'type' => 'array'
+      ),
+      'postTaxonomyPreFilter' => array(
+        'type' => 'array'
       )
     ),
     'render_callback' => 'WPgutenberg_blockRender_postsfilter'
@@ -97,6 +100,7 @@ function WPgutenberg_block_postsfilterValue($value, $id){
 
 // post results
 function WPgutenberg_postresults_postsfilter(array $attr, string $source = 'first_load'){
+  // print_r($attr);
   // sort direction
   $postSortBy = in_array($attr['postSortBy'], array('title', 'date', 'menu_order')) ? $attr['postSortBy'] : 'meta_value';
   $output = '';
@@ -106,6 +110,7 @@ function WPgutenberg_postresults_postsfilter(array $attr, string $source = 'firs
   endif;
   // add filter
   $filter = [];
+  // categories
   if(array_key_exists('postTaxonomyFilter', $attr)):
     $attr['postTaxonomyFilter'] = is_array($attr['postTaxonomyFilter']) ? $attr['postTaxonomyFilter'] : explode("__", $attr['postTaxonomyFilter']);
     foreach ($attr['postTaxonomyFilter'] as $key => $value) {
@@ -122,6 +127,20 @@ function WPgutenberg_postresults_postsfilter(array $attr, string $source = 'firs
       endif;
     }
   endif;
+  // pre selection
+  if(array_key_exists('postTaxonomyPreFilter', $attr)):
+    if($source == 'first_load'):
+      foreach ($attr['postTaxonomyPreFilter'] as $key => $value) {
+        $stringToArray = explode("-", $value);
+        // if(array_key_exists($stringToArray[0], $filter)):
+        //   $filter[$stringToArray[0]] = [];
+        // endif;
+        $term = get_term( $stringToArray[1], $stringToArray[0] );
+        $filter[$stringToArray[0]][] = $term->slug;
+      }
+    endif;
+  endif;
+  // print_r($filter);
   if(!empty($filter)):
     $term_array = array('relation' => $attr['postTaxonomyFilterRelation']);
     foreach ($filter as $key => $value) {
@@ -286,7 +305,17 @@ function WPgutenberg_blockRender_postsfilter($attr){
           endif;
         endif;
         foreach ($attr['postTaxonomyFilter'] as $key => $value) {
-          $output .= prefix_core_BaseFunctions::GetFilterGroup($value, $tax_arg, 'group-' . $value, $hierarchical, $showlegend);
+          $given = array();
+          if(array_key_exists('postTaxonomyPreFilter', $attr)):
+            foreach ($attr['postTaxonomyPreFilter'] as $prefilter_key => $prefilter_value) {
+              $stringToArray = explode("-", $prefilter_value);
+              if($stringToArray[0] == $value):
+                $term = get_term( $stringToArray[1], $stringToArray[0] );
+                $given[] = $term->slug;
+              endif;
+            }
+          endif;
+          $output .= prefix_core_BaseFunctions::GetFilterGroup($value, $tax_arg, 'group-' . $value, $hierarchical, $showlegend, '', $given);
         }
       endif;
       if(array_key_exists('postTaxonomyFilter', $attr)):

@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 1.35.27 | 10.10.2021 <postfilter block preselection>
+* extend taxonomy group function for custom preselection
+* rename init labels for backend
+* add default rest prepare for pages
+* add preselection to postfilter block
+* modify sort label translation inside post block
+
 ## 1.34.27 | 10.10.2021 <posts & postsfilter sorting>
 * add sort options to posts block
 * add sort by meta value to posts and postsfilter block

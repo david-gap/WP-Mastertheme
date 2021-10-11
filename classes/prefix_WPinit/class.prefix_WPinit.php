@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.11.9
+ * @version     2.11.10
  *
 */
 
@@ -144,6 +144,7 @@ class prefix_WPinit {
       add_action( 'admin_head', array( $this, 'TypekitFonts' ) );
       // acf fields
       add_filter('rest_prepare_post', array( $this, 'ACFtoRestApi' ), 10, 3);
+      add_filter('rest_prepare_page', array( $this, 'ACFtoRestApi' ), 10, 3);
       // return css inside head
       if($this->WPinit_HeaderCss == 1):
         add_action( 'wp_head', array( $this, 'BuildCustomCSS' ), 10, 1 );
@@ -215,19 +216,19 @@ class prefix_WPinit {
       //   "type" => "text"
       // ),
       "admin_menu" => array(
-        "label" => "Hide backend menu for not admins",
+        "label" => "Hide backend menu to not admins",
         "type" => "array_addable"
       ),
       "EditorMenu" => array(
-        "label" => "Show menu for editors",
+        "label" => "Show menu to editors",
         "type" => "switchbutton"
       ),
       "EditorWidget" => array(
-        "label" => "Show widgets for editors",
+        "label" => "Show widgets to editors",
         "type" => "switchbutton"
       ),
       "EditorCustomizer" => array(
-        "label" => "Show customizer for editors",
+        "label" => "Show customizer to editors",
         "type" => "switchbutton"
       ),
       "menus" => array(
@@ -557,10 +558,12 @@ class prefix_WPinit {
         if (!function_exists('get_fields')) return $response;
         if (isset($post)) {
             $acf = get_fields($post->id);
-            foreach ($acf as $key => $value) {
-              // code...
-              $response->data['meta'][$key] = $value;
-            }
+            if($acf):
+              foreach ($acf as $key => $value) {
+                // code...
+                $response->data['meta'][$key] = $value;
+              }
+            endif;
         }
         return $response;
     }

@@ -4,7 +4,7 @@
  *
  * Base dev functions - parent for all custom classes
  * Author:      David Voglgsnag
- * @version     2.12.3
+ * @version     2.13.3
  *
  */
 
@@ -627,16 +627,19 @@ class prefix_core_BaseFunctions {
   /------------------------*/
   /**
     * @param string $slug: taxonomy slug
-    * @param string $tax_arg: taxonomy arguments
+    * @param string/array $tax_arg: taxonomy arguments
     * @param string $class: css classes to fieldset
     * @param int $hierarchical: build hierarchical
+    * @param int $legend: show or hide group legend
+    * @param string $addlist: add custom list element
+    * @param array $given: preselect options
     * @return string fieldset
   */
-  public static function GetFilterGroup(string $slug = "", $tax_arg = array(), string $class = "", int $hierarchical = 0, bool $legend = true, string $addlist = ''){
+  public static function GetFilterGroup(string $slug = "", $tax_arg = array(), string $class = "", int $hierarchical = 0, bool $legend = true, string $addlist = '', array $given = array()){
     // vars
     $output = '';
     $get_given = $tax_arg['get_term'] ? $tax_arg['get_term'] : $slug;
-    $given = $_GET[$get_given] ? explode( "__", $_GET[$get_given] ) : '';
+    $given = $_GET[$get_given] ? explode( "__", $_GET[$get_given] ) : $given;
     $taxonomy_details = get_taxonomy( $slug );
     $tax = get_terms( $slug, $tax_arg );
     $css = $class !== "" ? ' class="' . $class . '"' : '';

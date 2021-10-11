@@ -56,6 +56,9 @@ const attributes = {
   },
   postTaxonomyFilterOptions: {
     type: 'array'
+  },
+  postTaxonomyPreFilter: {
+    type: 'array'
   }
 }
 

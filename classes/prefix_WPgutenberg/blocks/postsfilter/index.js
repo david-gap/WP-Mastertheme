@@ -312,6 +312,16 @@ export default registerBlockType( 'templates/postsfilter', {
       query['meta_key'] = props.attributes.postSortBy;
       query['orderby'] = 'meta_value';
     }
+    // taxonomy pre filter
+    if(props.attributes.postTaxonomyPreFilter && props.attributes.postTaxonomyPreFilter.length >= 1){
+      props.attributes.postTaxonomyPreFilter.forEach(function(element) {
+        var stringToArray = element.split("-");
+        if( query[stringToArray[0]] === undefined ) {
+            query[stringToArray[0]] = [];
+        }
+          query[stringToArray[0]].push(stringToArray[1]);
+      });
+    }
     // posts
     const posts = select( 'core' ).getEntityRecords( 'postType', props.attributes.postType, query );
     let media = {};
@@ -346,7 +356,7 @@ export default registerBlockType( 'templates/postsfilter', {
   } )( props => {
     // set values
     const {
-      attributes: { anchor, postType, postSortBy, postTextOne, postTextTwo, postTaxonomyFilter, postTaxonomyFilterOptions, postColumns, postFilterPosition, postListTemplate, postColumnsSpace, postTextSearch, postThumb, postTaxonomyFilterRelation, postSortDirection },
+      attributes: { anchor, postType, postSortBy, postTextOne, postTextTwo, postTaxonomyFilter, postTaxonomyPreFilter, postTaxonomyFilterOptions, postColumns, postFilterPosition, postListTemplate, postColumnsSpace, postTextSearch, postThumb, postTaxonomyFilterRelation, postSortDirection },
       attributes,
       className,
       setAttributes,
@@ -425,7 +435,7 @@ export default registerBlockType( 'templates/postsfilter', {
   } ),
   save: props => {
     const {
-      attributes: { anchor, postType, postSortBy, postTextOne, postTextTwo, postTaxonomyFilter, postTaxonomyFilterOptions, postColumns, postFilterPosition, postListTemplate, postColumnsSpace, postTextSearch, postThumb, postTaxonomyFilterRelation, postSortDirection },
+      attributes: { anchor, postType, postSortBy, postTextOne, postTextTwo, postTaxonomyFilter, postTaxonomyPreFilter, postTaxonomyFilterOptions, postColumns, postFilterPosition, postListTemplate, postColumnsSpace, postTextSearch, postThumb, postTaxonomyFilterRelation, postSortDirection },
       attributes
     } = props;
 

@@ -295,12 +295,12 @@ function WPgutenberg_blockRender_posts($attr){
             if (function_exists('acf_get_field')):
               $term = acf_get_field($value);
               if($term):
-                $name = $term['label'];
+                $name = __( $term['label'], 'WPgutenberg-' . $attr['postType'] );
               else:
-                $name = __( $value, 'WPgutenberg' );
+                $name = __( $value, 'WPgutenberg-' . $attr['postType'] );
               endif;
             else:
-              $name = __( $value, 'WPgutenberg' );
+              $name = __( $value, 'WPgutenberg-' . $attr['postType'] );
             endif;
             $sortd = $value == $attr['postSortBy'] ? $attr['postSortDirection'] : 'asc';
             $sort_css = '';
@@ -316,6 +316,7 @@ function WPgutenberg_blockRender_posts($attr){
             if(array_key_exists('postTaxonomyFilter', $attr)):
               $output .= '<input type="hidden" name="postTaxonomyFilter" value="' . implode('__', $attr['postTaxonomyFilter']) . '">';
             endif;
+            $output .= '<input type="hidden" name="postSum" value="' . $attr['postSum'] . '">';
             $output .= '<input type="hidden" name="postTaxonomyFilterRelation" value="' . $attr['postTaxonomyFilterRelation'] . '">';
             $output .= '<input type="hidden" name="postType" value="' . $attr['postType'] . '">';
             $output .= '<input type="hidden" name="postSortBy" value="' . $postSortBy . '">';

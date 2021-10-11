@@ -263,7 +263,7 @@ function sortNavigation(atts){
           cleanType = option;
         }
         output += '<label data-sort="' + option + '" data-sortd="ASC" tabindex="0">';
-          output += '<span class="sort-name">' + cleanType + '</span>';
+          output += '<span class="sort-name">' + __( cleanType, 'WPgutenberg-' + atts["postType"] ) + '</span>';
           output += '<span><svg xmlns="http://www.w3.org/2000/svg" width="9.155" height="4.926" viewBox="0 0 9.155 4.926"><path d="M4.66 4.922a.88.88 0 0 0 .487-.208l3.676-3.158A.876.876 0 1 0 7.684.225l-3.11 2.667L1.464.225A.876.876 0 1 0 .328 1.556l3.68 3.154a.879.879 0 0 0 .652.208z" fill="#000"/></svg></span>';
         output += '</label>';
       });
