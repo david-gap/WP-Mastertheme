@@ -74,7 +74,7 @@ export default registerBlockType( 'templates/gallery', {
     return [
       <Inspector {...{ setAttributes, ...props }} />,
       <div className={classnames(
-        'gallery-block gallery-swiper'
+        'gallery-block gallery-swiper', className
       )}>
         <ul>
           <InnerBlocks

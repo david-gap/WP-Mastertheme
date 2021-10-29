@@ -1,7 +1,7 @@
 <?php
 /**
  * @author      David Voglgsang
- * @version     1.5.2
+ * @version     1.5.3
 */
 ?>
 <!DOCTYPE html>
@@ -17,7 +17,7 @@
     // page options
     $options = $obj && property_exists($obj, 'ID') ? prefix_template::PageOptions($obj->ID) : array();
   ?>
-  <body class="<? prefix_template::BodyCSS(); ?>">
+  <body class="<?php prefix_template::BodyCSS(); ?>">
     <?php echo prefix_WPseo::GoogleTracking(true); ?>
     <?php if(!in_array('header', $options)): ?>
       <header>

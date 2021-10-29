@@ -3,7 +3,7 @@
  * Blog template for images
  *
  * @author      David Voglgsang
- * @version     1.0
+ * @version     1.0.1
  *
 */
 $thumb = get_the_post_thumbnail();
@@ -15,7 +15,7 @@ $css .= $thumb ? ' flex' : '';
 ?>
 
 <article class="<?php echo $css; ?>">
-  <? echo $thumb ? '<div>' : ''; ?>
+  <?php echo $thumb ? '<div>' : ''; ?>
 
     <?php get_template_part('template_parts/header'); ?>
     <div class="entry-content">
@@ -23,7 +23,7 @@ $css .= $thumb ? ' flex' : '';
     </div>
     <?php get_template_part('template_parts/footer'); ?>
 
-  <? echo $thumb ? '</div>' : ''; ?>
+  <?php echo $thumb ? '</div>' : ''; ?>
 
-  <? echo $thumb; ?>
+  <?php echo $thumb; ?>
 </article>

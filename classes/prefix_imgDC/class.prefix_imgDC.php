@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  *
  *
@@ -6,7 +6,7 @@
  * IMG dominant color - WP compatible
  * https://github.com/david-gap/classes
  * Author:      David Voglgsang
- * @version     2.1.3
+ * @version     2.1.4
  *
  */
 

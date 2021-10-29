@@ -1,11 +1,11 @@
-<?
+<?php
 /**
  *
  *
  * PHP Mailer
  * https://github.com/david-gap/classes
  * Author: David Voglgsang
- * @version     1.1.2
+ * @version     1.1.3
  */
 
  class prefix_core_Mail {

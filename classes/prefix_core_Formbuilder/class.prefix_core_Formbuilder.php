@@ -1,11 +1,11 @@
-<?
+<?php
 /**
  *
  *
  * Form Builder
  * https://github.com/david-gap/classes
  * Author: David Voglgsang
- * @version     2.0
+ * @version     2.0.1
  */
 
 class prefix_core_Formbuilder {

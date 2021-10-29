@@ -87,7 +87,7 @@ export default registerBlockType( 'templates/accordion', {
     return [
       <Inspector {...{ setAttributes, ...props }} />,
       <div className={classnames(
-        'block-accordion'
+        'block-accordion', className
       )}>
         <InnerBlocks
           allowedBlocks={ ALLOWED_BLOCKS }

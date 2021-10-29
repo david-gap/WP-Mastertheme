@@ -1,4 +1,4 @@
-**Version 2.0** (06.07.2020)
+**Version 2.0.1** (29.10.2021)
 
 Custom class "Formbuilder": Build a formular simply by creating a array and inserting it into a new class season.
 

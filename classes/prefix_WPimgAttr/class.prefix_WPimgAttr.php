@@ -1,11 +1,11 @@
-<?
+<?php
 /**
  *
  *
  * Wordpress - add custom fields for alt tag translations
  * https://github.com/david-gap/classes
  * Author: David Voglgsang
- * @version     2.1.1
+ * @version     2.1.2
  *
 */
 

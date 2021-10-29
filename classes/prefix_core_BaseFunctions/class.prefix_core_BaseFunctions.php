@@ -1,10 +1,10 @@
-<?
+<?php
 /**
  *
  *
  * Base dev functions - parent for all custom classes
  * Author:      David Voglgsnag
- * @version     2.13.3
+ * @version     2.13.4
  *
  */
 
@@ -657,7 +657,7 @@ class prefix_core_BaseFunctions {
                       $output .= '<li>';
                         $output .= '<input type="checkbox" id="' . $slug . '-' . $t->slug . '" name="' . $slug . '" value="' . $t->slug . '" ' . SELF::setChecked($t->slug, $given) . '>';
                         $output .= '<label for="' . $slug . '-' . $t->slug . '" tabindex="0">';
-                          $output .= $t->name;
+                          $output .= __( $t->name, 'Taxonomies' );
                         $output .= '</label>';
                         // hierarchical
                         if($hierarchical !== 0):

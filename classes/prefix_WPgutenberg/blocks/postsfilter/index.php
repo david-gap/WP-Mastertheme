@@ -1,4 +1,4 @@
-<?
+<?php
 
 // register block
 register_block_type(
@@ -318,6 +318,32 @@ function WPgutenberg_blockRender_postsfilter($attr){
           $output .= prefix_core_BaseFunctions::GetFilterGroup($value, $tax_arg, 'group-' . $value, $hierarchical, $showlegend, '', $given);
         }
       endif;
+      // prefilter
+      if(array_key_exists('postTaxonomyPreFilter', $attr)):
+        $prefilterCats = array();
+        foreach ($attr['postTaxonomyPreFilter'] as $prefilter_key => $prefilter_value) {
+          $stringToArray = explode("-", $prefilter_value);
+          if(!in_array($stringToArray[0] , $attr['postTaxonomyFilter'])):
+            $prefilterCats[] = $stringToArray[0];
+          endif;
+        }
+        $prefilterCats = array_unique($prefilterCats);
+        foreach ($prefilterCats as $key => $value) {
+          $attr['postTaxonomyFilter'][] = $value;
+          $given = array();
+          if(array_key_exists('postTaxonomyPreFilter', $attr)):
+            foreach ($attr['postTaxonomyPreFilter'] as $prefilter_key => $prefilter_value) {
+              $stringToArray = explode("-", $prefilter_value);
+              if($stringToArray[0] == $value):
+                $term = get_term( $stringToArray[1], $stringToArray[0] );
+                $given[] = $term->slug;
+              endif;
+            }
+          endif;
+          $output .= prefix_core_BaseFunctions::GetFilterGroup($value, $tax_arg, 'dn group-' . $value, $hierarchical, $showlegend, '', $given);
+        }
+      endif;
+      // filter settings
       if(array_key_exists('postTaxonomyFilter', $attr)):
         $output .= '<input type="hidden" name="postTaxonomyFilter" value="' . implode('__', $attr['postTaxonomyFilter']) . '">';
       endif;

@@ -1,4 +1,4 @@
-<?
+<?php
 
 // register block
 register_block_type(
@@ -119,6 +119,8 @@ function WPgutenberg_block_postsValue($value, $id){
 function WPgutenberg_postresults_postssorting(array $attr, string $source = 'first_load'){
   // sort direction
   $postSortBy = in_array($attr['postSortBy'], array('title', 'date', 'menu_order')) ? $attr['postSortBy'] : 'meta_value';
+  // define if only a number of posts should be loaded or all
+  $postSum = $attr['postSum'] == 100 ? -1 : $attr['postSum'];
   // add filter
   $filter = [];
   if(array_key_exists('postTaxonomyFilter', $attr)):
@@ -167,7 +169,7 @@ function WPgutenberg_postresults_postssorting(array $attr, string $source = 'fir
   $queryArgs = array(
     'post_type'=> $attr['postType'],
     'post_status'=>'publish',
-    'posts_per_page'=> $attr['postSum'],
+    'posts_per_page'=> $postSum,
     'paged' => $paged,
     'orderby' => $postSortBy,
     'order' => $attr['postSortDirection']
@@ -308,7 +310,7 @@ function WPgutenberg_blockRender_posts($attr){
             $sort_css .= $sortd == 'desc' ? ' z-a' : "";
             $output .= '<label data-sort="' . $value . '" data-sortd="' . $sortd . '" tabindex="0" class="' . $sort_css . '">';
               $output .= '<span class="sort-name">' . $name . '</span>';
-              $output .= '<span class="sort-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="9.155" height="4.926" viewBox="0 0 9.155 4.926"><path d="M4.66 4.922a.88.88 0 0 0 .487-.208l3.676-3.158A.876.876 0 1 0 7.684.225l-3.11 2.667L1.464.225A.876.876 0 1 0 .328 1.556l3.68 3.154a.879.879 0 0 0 .652.208z" fill="#000"/></svg></span>';
+              $output .= '<span class="sort-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="16.679" height="12.609" viewBox="0 0 16.679 12.609"><g transform="translate(-330.757 -433.378)"><g><line y1="1.05" x2="9" transform="matrix(-0.574, -0.819, 0.819, -0.574, 338.236, 443.67)" fill="none" stroke="#000" stroke-linecap="round" stroke-width="3"/><line x2="9" y2="1.05" transform="matrix(0.574, -0.819, 0.819, 0.574, 339.096, 443.068)" fill="none" stroke="#000" stroke-linecap="round" stroke-width="3"/></g></g></svg></span>';
             $output .= '</label>';
           }
           // fields to resort

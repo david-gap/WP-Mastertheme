@@ -344,7 +344,7 @@ export default class Inspector extends Component {
                 value={postSum}
                 onChange={postSum => setAttributes({ postSum })}
                 min={1}
-                max={100}
+                max={101}
               />
             </PanelRow>
             <PanelRow>

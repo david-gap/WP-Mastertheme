@@ -1,10 +1,10 @@
-<?
+<?php
 /**
  *
  *
  * Backend area to manage configuration file
  * Author:      David Voglgsnag
- * @version     1.3.3
+ * @version     1.3.4
  *
  */
 

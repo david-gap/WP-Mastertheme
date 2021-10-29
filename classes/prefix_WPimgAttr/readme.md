@@ -1,4 +1,4 @@
-**Version 2.1.1** (23.09.2021)
+**Version 2.1.2** (29.10.2021)
 
 Custom class "WPimgAttr" adding custom fields for each language to WP media and inseting the alt attribute in front end.
 

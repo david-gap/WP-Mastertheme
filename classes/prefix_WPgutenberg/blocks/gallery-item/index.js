@@ -75,7 +75,7 @@ export default registerBlockType( 'templates/gallery-item', {
     return [
       <Inspector {...{ setAttributes, ...props }} />,
       <li className={classnames(
-        'gallery-item'
+        'gallery-item', className
       )}>
         <InnerBlocks
           template={ MY_TEMPLATE }

@@ -3,7 +3,7 @@
  * The template for displaying 404 pages (not found)
  *
  * @author      David Voglgsang
- * @version     1.0
+ * @version     1.0.1
 */
 
 get_header();
@@ -15,4 +15,4 @@ get_header();
       <a href="<?php echo get_bloginfo('url'); ?>" class="button"><?php echo _e('Back to home', 'Template'); ?></a>
     </article>
 </section>
-<? get_footer() ?>
+<?php get_footer() ?>

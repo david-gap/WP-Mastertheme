@@ -3,7 +3,7 @@
  * Blog template for audios
  *
  * @author      David Voglgsang
- * @version     1.0
+ * @version     1.0.1
  *
 */
 $audio = '';
@@ -27,7 +27,7 @@ $css .= $audio ? ' flex' : '';
 ?>
 
 <article class="<?php echo $css; ?>">
-  <? echo $audio ? '<div>' : ''; ?>
+  <?php echo $audio ? '<div>' : ''; ?>
 
     <?php get_template_part('template_parts/header'); ?>
     <div class="entry-content">
@@ -35,7 +35,7 @@ $css .= $audio ? ' flex' : '';
     </div>
     <?php get_template_part('template_parts/footer'); ?>
 
-  <? echo $audio ? '</div>' : ''; ?>
+  <?php echo $audio ? '</div>' : ''; ?>
 
   <?php echo $audio; ?>
 </article>

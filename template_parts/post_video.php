@@ -3,7 +3,7 @@
  * Blog template for video
  *
  * @author      David Voglgsang
- * @version     1.0
+ * @version     1.0.1
  *
 */
 $video = '';
@@ -47,7 +47,7 @@ $css .= $video ? ' flex' : '';
 ?>
 
 <article class="<?php echo $css; ?>">
-  <? echo $video ? '<div>' : ''; ?>
+  <?php echo $video ? '<div>' : ''; ?>
 
     <?php get_template_part('template_parts/header'); ?>
     <div class="entry-content">
@@ -55,7 +55,7 @@ $css .= $video ? ' flex' : '';
     </div>
     <?php get_template_part('template_parts/footer'); ?>
 
-  <? echo $video ? '</div>' : ''; ?>
+  <?php echo $video ? '</div>' : ''; ?>
 
   <?php echo $video; ?>
 </article>

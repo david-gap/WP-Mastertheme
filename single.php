@@ -3,7 +3,7 @@
  * Post Type File Single
  *
  * @author      David Voglgsang
- * @version     1.2.2
+ * @version     1.2.3
  *
 */
 
@@ -14,7 +14,7 @@ $obj = get_queried_object();
 $options = $obj && property_exists($obj, 'ID') ? prefix_template::PageOptions($obj->ID) : array();
 ?>
 <section id="detail-page" <?php echo prefix_template::AddContainer(prefix_template::$template_container, true); ?>>
-  <? the_post_thumbnail('large', ['class' => 'post-thumb']); ?>
+  <?php the_post_thumbnail('large', ['class' => 'post-thumb']); ?>
   <?php if (have_posts() ) : while (have_posts()) : the_post() ?>
     <article>
       <?php echo prefix_template::postMeta($obj->post_type, $options); ?>

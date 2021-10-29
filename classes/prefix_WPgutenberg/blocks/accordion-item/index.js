@@ -71,7 +71,7 @@ export default registerBlockType( 'templates/accordion-item', {
     return [
       <Inspector {...{ setAttributes, ...props }} />,
       <div className={classnames(
-        'accordion-item'
+        'accordion-item', className
       )}>
         <label class="accordion-label active">
           {accordionTitle}

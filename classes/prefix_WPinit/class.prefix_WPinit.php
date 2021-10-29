@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  *
  *
@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.11.10
+ * @version     2.11.11
  *
 */
 

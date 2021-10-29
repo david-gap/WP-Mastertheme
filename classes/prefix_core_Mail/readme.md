@@ -1,4 +1,4 @@
-**Version 1.1.2** (03.06.2021)
+**Version 1.1.3** (29.10.2021)
 
 Custom class "Mail" creates a mail content and send it.
 

@@ -264,7 +264,7 @@ function sortNavigation(atts){
         }
         output += '<label data-sort="' + option + '" data-sortd="ASC" tabindex="0">';
           output += '<span class="sort-name">' + __( cleanType, 'WPgutenberg-' + atts["postType"] ) + '</span>';
-          output += '<span><svg xmlns="http://www.w3.org/2000/svg" width="9.155" height="4.926" viewBox="0 0 9.155 4.926"><path d="M4.66 4.922a.88.88 0 0 0 .487-.208l3.676-3.158A.876.876 0 1 0 7.684.225l-3.11 2.667L1.464.225A.876.876 0 1 0 .328 1.556l3.68 3.154a.879.879 0 0 0 .652.208z" fill="#000"/></svg></span>';
+          output += '<span class="sort-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="16.679" height="12.609" viewBox="0 0 16.679 12.609"><g transform="translate(-330.757 -433.378)"><g><line y1="1.05" x2="9" transform="matrix(-0.574, -0.819, 0.819, -0.574, 338.236, 443.67)" fill="none" stroke="#000" stroke-linecap="round" stroke-width="3"/><line x2="9" y2="1.05" transform="matrix(0.574, -0.819, 0.819, 0.574, 339.096, 443.068)" fill="none" stroke="#000" stroke-linecap="round" stroke-width="3"/></g></g></svg></span>';
         output += '</label>';
       });
     }

@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 1.35.28 | 29.10.2021 <php open, blocks>
+* replace all php short open tag with long
+* fix postsfilter block prefilter
+* fix posts block max sum
+* fix gallery custom class name return
+* fix accordion custom class name return
+
 ## 1.35.27 | 10.10.2021 <postfilter block preselection>
 * extend taxonomy group function for custom preselection
 * rename init labels for backend
