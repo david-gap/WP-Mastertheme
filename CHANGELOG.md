@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 1.35.28 | 29.10.2021 <php open, blocks>
+## 1.35.28 | 29.10.2021 <php open, blocks fixes>
 * replace all php short open tag with long
 * fix postsfilter block prefilter
 * fix posts block max sum
