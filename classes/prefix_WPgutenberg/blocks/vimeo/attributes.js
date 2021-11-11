@@ -15,6 +15,10 @@ const attributes = {
     type: 'boolean',
     default: false,
   },
+  videoMute: {
+    type: 'boolean',
+    default: false,
+  },
   videoDimensionX: {
     type: 'string',
     default: '4',

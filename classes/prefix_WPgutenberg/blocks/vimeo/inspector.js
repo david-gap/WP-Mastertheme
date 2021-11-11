@@ -40,6 +40,7 @@ export default class Inspector extends Component {
         videoAutoPlay,
         videoBackgroud,
         videoLoop,
+        videoMute,
         videoDimensionX,
         videoDimensionY
       },
@@ -88,6 +89,14 @@ export default class Inspector extends Component {
                     label={ __( 'Loop', 'WPgutenberg' ) }
                     checked={ videoLoop }
                     onChange={videoLoop => setAttributes({ videoLoop })}
+                />
+              </PanelRow>
+              <PanelRow>
+                <ToggleControl
+                    id="vimeoblock-mute"
+                    label={ __( 'Mute', 'WPgutenberg' ) }
+                    checked={ videoMute }
+                    onChange={videoMute => setAttributes({ videoMute })}
                 />
               </PanelRow>
           </PanelBody>

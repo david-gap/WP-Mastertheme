@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.36.28 | 29.10.2021 <taxonomy strings, block extension>
+* fix taxonomy base function string name
+* Rename popup to lightbox
+* fix posts block first row h4
+* add mute to vimeo block
+
 ## 1.35.28 | 29.10.2021 <php open, blocks fixes>
 * replace all php short open tag with long
 * fix postsfilter block prefilter

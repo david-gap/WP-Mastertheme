@@ -412,7 +412,7 @@ export default class Inspector extends Component {
             <PanelRow>
               <ToggleControl
                   id="posts-popup"
-                  label={ __( 'Activate Pop-Up', 'WPgutenberg' ) }
+                  label={ __( 'Activate Lightbox', 'WPgutenberg' ) }
                   checked={ postPopUp }
                   onChange={postPopUp => setAttributes({ postPopUp })}
               />
@@ -420,7 +420,7 @@ export default class Inspector extends Component {
             <PanelRow>
               <ToggleControl
                   id="posts-popup"
-                  label={ __( 'Image preview inside Pop-Up', 'WPgutenberg' ) }
+                  label={ __( 'Image preview inside Lightbox', 'WPgutenberg' ) }
                   checked={ postPopUpNav }
                   onChange={postPopUpNav => setAttributes({ postPopUpNav })}
               />

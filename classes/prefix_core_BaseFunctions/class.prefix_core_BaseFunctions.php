@@ -647,7 +647,7 @@ class prefix_core_BaseFunctions {
     if(count($tax) >= 1):
       $output .= '<fieldset' . $css . '>';
           if($legend == true):
-            $output .= '<legend>' . __($taxonomy_details->labels->name, 'vsa') . '</legend>';
+            $output .= '<legend>' . __($taxonomy_details->labels->name, 'WP Taxonomies') . '</legend>';
           endif;
             $output .= '<ul>';
               if ( ! empty( $tax ) && ! is_wp_error( $tax ) ):
@@ -657,7 +657,7 @@ class prefix_core_BaseFunctions {
                       $output .= '<li>';
                         $output .= '<input type="checkbox" id="' . $slug . '-' . $t->slug . '" name="' . $slug . '" value="' . $t->slug . '" ' . SELF::setChecked($t->slug, $given) . '>';
                         $output .= '<label for="' . $slug . '-' . $t->slug . '" tabindex="0">';
-                          $output .= __( $t->name, 'Taxonomies' );
+                          $output .= __($t->name, 'WP Taxonomies');
                         $output .= '</label>';
                         // hierarchical
                         if($hierarchical !== 0):
@@ -954,7 +954,7 @@ class prefix_core_BaseFunctions {
         if(array_key_exists('label', $metafeildValues) && array_key_exists('type', $metafeildValues)):
           $value = get_post_meta($postID, $metafield, true);
           echo '<div class="components-panel__row edit-post-post-visibility" data-id="' . $metafield . '">';
-            echo '<label for="' . $metafield . '"><strong>' . __( $metafeildValues["label"], 'WPtickets' ) . '</strong></label><br />';
+            echo '<label for="' . $metafield . '"><strong>' . __( $metafeildValues["label"], 'WPadmin' ) . '</strong></label><br />';
               if($metafeildValues["type"] == "wysiwig"):
                 wp_editor($value, $metafield, array(
                             'wpautop'       => true,

@@ -38,8 +38,9 @@ function getSettings(atts) {
 function getURL(atts){
   let autoplay = atts["videoAutoPlay"] === true ? "1" : "0";
   let loop = atts["videoLoop"] === true ? "1" : "0";
+  let mute = atts["videoMute"] === true ? "1" : "0";
   let background = atts["videoBackgroud"] === true ? "1" : "0";
-  let videoURL = 'https://player.vimeo.com/video/' + atts["videoID"] + '?autoplay=' + autoplay + '&loop=' + loop + '&background=' + background;
+  let videoURL = 'https://player.vimeo.com/video/' + atts["videoID"] + '?autoplay=' + autoplay + '&loop=' + loop + '&muted=' + mute + '&background=' + background;
   return videoURL;
 }
 
@@ -74,7 +75,7 @@ export default registerBlockType( 'templates/vimeo', {
   attributes,
   edit: props => {
     const {
-      attributes: { videoID, videoDimensionX, videoDimensionY, videoAutoPlay, videoBackgroud, videoLoop },
+      attributes: { videoID, videoDimensionX, videoDimensionY, videoAutoPlay, videoBackgroud, videoLoop, videoMute },
       attributes,
       className,
       setAttributes
@@ -103,7 +104,7 @@ export default registerBlockType( 'templates/vimeo', {
   },
   save: props => {
     const {
-      attributes: { videoID, videoDimensionX, videoDimensionY, videoAutoPlay, videoBackgroud, videoLoop },
+      attributes: { videoID, videoDimensionX, videoDimensionY, videoAutoPlay, videoBackgroud, videoLoop, videoMute },
       attributes
     } = props;
 
@@ -127,7 +128,7 @@ export default registerBlockType( 'templates/vimeo', {
     );
   }
 	// save: props => {
-	// 	// const { videoID, videoAutoPlay, videoLoop, videoDimensionX, videoDimensionY } = props.attributes;
+	// 	// const { videoID, videoAutoPlay, videoLoop, videoMute, videoDimensionX, videoDimensionY } = props.attributes;
 	// 	return (
 	// 		<div>
 	// 		</div>
