@@ -5,6 +5,7 @@
 * Rename popup to lightbox
 * fix posts block first row h4
 * add mute to vimeo block
+* remove swisstopo demo from page.php
 
 ## 1.35.28 | 29.10.2021 <php open, blocks fixes>
 * replace all php short open tag with long
