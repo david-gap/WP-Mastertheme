@@ -408,9 +408,7 @@ export default registerBlockType( 'templates/postsfilter', {
                     <a href="#">
                         {PostImg(postThumb, postTaxonomyFilterOptions, post.id, media[ post.id ])}
                         <div class="post-content">
-                          <h4>
-                            {PostValues(postTextOne, post, postTaxonomyFilterOptions, "link_row1", taxOne)}
-                          </h4>
+                          {PostValues(postTextOne, post, postTaxonomyFilterOptions, "link_row1", taxOne)}
                           {PostValues(postTextTwo, post, postTaxonomyFilterOptions, "link_row2", taxTwo)}
                         </div>
                     </a>
