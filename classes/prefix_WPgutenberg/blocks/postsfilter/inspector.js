@@ -130,11 +130,10 @@ export default class Inspector extends Component {
         const terms = posts[0]._links["wp:term"];
         Object.entries(terms).forEach(([key, value]) => {
           // get taxonomies
-          const getTaxvalues = select( 'core' ).getEntityRecords( 'taxonomy', value.taxonomy );
+          const getTaxvalues = select( 'core' ).getEntityRecords( 'taxonomy', value.taxonomy, { per_page: -1 } );
           let sectionOptions = [];
           let selectedOptions = [];
           if(getTaxvalues){
-            // get taxonomies
             if(value.taxonomy == "post_tag"){
               var cleanTax = 'tags';
             } else if(value.taxonomy == "category") {

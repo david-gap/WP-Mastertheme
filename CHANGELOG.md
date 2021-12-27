@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 1.37.28 | 27.12.2021 <ie fix, header, blocks>
+* fix posts parts return
+* ie11 fix for css properties
+* change header sticky from fixed to sticky with ie fix
+* add chapter navigation to vimeo block
+* add link options to vimeo block for background video linking
+* css block arrow-toggle and variable usage on theme-blocks.scss
+* new hamburger navigation positions
+* option to keep header visible, while hamburger menu is active
+* add variable template_header_hmenu_scroll for future features
+* fix posts and postfilter taxonomy selection
+
 ## 1.36.28 | 29.10.2021 <taxonomy strings, block extension>
 * fix taxonomy base function string name
 * Rename popup to lightbox

@@ -162,7 +162,18 @@ body.frontend,
       color: var(--light__main_color);
     }
 
-    /* 2.9 OTHERS
+    /* 2.9 VIMEO TABLE OF CONTENT
+    /––––––––––––––––––––––––*/
+    .block-vimeo {
+      .arrow-toggle {
+        .label,
+        .table-of-content {
+          background-color: var(--light__main_background);
+        }
+      }
+    }
+
+    /* 2.10 OTHERS
     /––––––––––––––––––––––––*/
 
 
@@ -256,7 +267,18 @@ body.frontend,
       color: var(--dark__main_color);
     }
 
-    /* 3.9 OTHERS
+    /* 3.9 VIMEO TABLE OF CONTENT
+    /––––––––––––––––––––––––*/
+    .block-vimeo {
+      .arrow-toggle {
+        .label,
+        .table-of-content {
+          background-color: var(--dark__main_background);
+        }
+      }
+    }
+
+    /* 3.10 OTHERS
     /––––––––––––––––––––––––*/
 
 

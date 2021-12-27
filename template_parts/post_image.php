@@ -15,7 +15,13 @@ $css .= $thumb ? ' flex' : '';
 ?>
 
 <article class="<?php echo $css; ?>">
-  <?php echo $thumb ? '<div>' : ''; ?>
+  <?php
+    if($thumb):
+      echo '<div>';
+    else:
+      echo '';
+    endif;
+  ?>
 
     <?php get_template_part('template_parts/header'); ?>
     <div class="entry-content">
@@ -23,7 +29,13 @@ $css .= $thumb ? ' flex' : '';
     </div>
     <?php get_template_part('template_parts/footer'); ?>
 
-  <?php echo $thumb ? '</div>' : ''; ?>
+  <?php
+    if($thumb):
+      echo '</div>';
+    else:
+      echo '';
+    endif;
+  ?>
 
   <?php echo $thumb; ?>
 </article>

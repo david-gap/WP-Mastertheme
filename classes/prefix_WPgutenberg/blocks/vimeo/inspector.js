@@ -42,7 +42,14 @@ export default class Inspector extends Component {
         videoLoop,
         videoMute,
         videoDimensionX,
-        videoDimensionY
+        videoDimensionY,
+        videoTableOfContent,
+        videoTOCtoggle,
+        videoTOCposition,
+        videoTOCautoplay,
+        videoTOCstop,
+        videoLink,
+        videoLinkTarget
       },
       setAttributes
     } = this.props;
@@ -57,13 +64,12 @@ export default class Inspector extends Component {
                 onChange={videoID => setAttributes({ videoID })}
               />
               <TextControl
-                label={__("Dimension X", "WPgutenberg")}
+                label={__("Width", "WPgutenberg")}
                 value={videoDimensionX}
                 onChange={videoDimensionX => setAttributes({ videoDimensionX })}
               />
               <TextControl
-                label={__("Dimension Y", "WPgutenberg")}
-                help={__("example: 4:3 = ", "WPgutenberg")}
+                label={__("Height", "WPgutenberg")}
                 value={videoDimensionY}
                 onChange={videoDimensionY => setAttributes({ videoDimensionY })}
               />
@@ -99,6 +105,74 @@ export default class Inspector extends Component {
                     onChange={videoMute => setAttributes({ videoMute })}
                 />
               </PanelRow>
+            </PanelBody>
+            <PanelBody title={ __( 'Table of content (by chapters)', 'WPgutenberg' ) } >
+              <PanelRow>
+                <ToggleControl
+                    id="vimeoblock-TOC"
+                    label={ __( 'Active', 'WPgutenberg' ) }
+                    checked={ videoTableOfContent }
+                    onChange={videoTableOfContent => setAttributes({ videoTableOfContent })}
+                />
+              </PanelRow>
+              <PanelRow>
+                <ToggleControl
+                    id="vimeoblock-TOC"
+                    label={ __( 'Toggle', 'WPgutenberg' ) }
+                    checked={ videoTOCtoggle }
+                    onChange={videoTOCtoggle => setAttributes({ videoTOCtoggle })}
+                />
+              </PanelRow>
+              <PanelRow>
+                <SelectControl
+                  label={__("Position", "WPgutenberg")}
+                  value={videoTOCposition}
+                  options={[
+                    { value: "top", label: __( 'Top', 'WPgutenberg' ) },
+                    { value: "left", label: __( 'Left', 'WPgutenberg' ) },
+                    { value: "bottom", label: __( 'Bottom', 'WPgutenberg' ) },
+                    { value: "right", label: __( 'Right', 'WPgutenberg' ) }
+                  ]}
+                  onChange={videoTOCposition => setAttributes({ videoTOCposition })}
+                />
+              </PanelRow>
+              <PanelRow>
+                <ToggleControl
+                    id="vimeoblock-TOCautoplay"
+                    label={ __( 'Play on chapter selection', 'WPgutenberg' ) }
+                    checked={ videoTOCautoplay }
+                    onChange={videoTOCautoplay => setAttributes({ videoTOCautoplay })}
+                />
+              </PanelRow>
+              <PanelRow>
+                <ToggleControl
+                    id="vimeoblock-TOCend"
+                    label={ __( 'Stop on chapter end', 'WPgutenberg' ) }
+                    checked={ videoTOCstop }
+                    onChange={videoTOCstop => setAttributes({ videoTOCstop })}
+                />
+              </PanelRow>
+          </PanelBody>
+          <PanelBody title={ __( 'Video Link (background video only)', 'WPgutenberg' ) } >
+            <PanelRow>
+              <TextControl
+                label={__("Link", "WPgutenberg")}
+                help={__("Can only be used with background videos", "WPgutenberg")}
+                value={videoLink}
+                onChange={videoLink => setAttributes({ videoLink })}
+              />
+            </PanelRow>
+            <PanelRow>
+              <SelectControl
+                label={__("Target", "WPgutenberg")}
+                value={videoLinkTarget}
+                options={[
+                  { value: "_self", label: __( 'Same window', 'WPgutenberg' ) },
+                  { value: "_blank", label: __( 'New window', 'WPgutenberg' ) }
+                ]}
+                onChange={videoLinkTarget => setAttributes({ videoLinkTarget })}
+              />
+            </PanelRow>
           </PanelBody>
       </InspectorControls>
     );

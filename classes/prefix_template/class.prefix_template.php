@@ -21,7 +21,7 @@ Table of Contents:
 2.0 FUNCTIONS
   2.1 GET CONFIGURATION FORM CONFIG FILE
   2.2 ACTIVATE CONTAINER CSS CLASS FOR HEADER/FOOTER
-  2.3 STICKY MENU
+  2.3 STICKY HEADER
   2.4 SAVE METABOXES
 3.0 OUTPUT
   3.1 SORTABLE HEADER CONTENT
@@ -72,8 +72,10 @@ class prefix_template {
     * @param static int $template_header_dmenu: Activate header hamburger for desktop
     * @param static int $template_header_menusearchform: Activate searchform inside the main menu
     * @param static string template_header_menu_style: Select menu direction (options: horizontal/vertical)
-    * @param static string template_header_hmenu_style: Select hamburger menu style (options: fullscreen, left, left_contained, right, right_contained)
-    * @param static string template_header_hmenu_toggle: Hamburger Menü toggle able submenus
+    * @param static string template_header_hmenu_style: Select hamburger menu style (options: fullscreen, top, top_contained, left, left_contained, right, right_contained)
+    * @param static int $template_header_hmenu_visible_head: Define if header is visible on active hamburger menu
+    * @param static int $template_header_hmenu_scroll: Define if hamburger menu close by scrolling (Desktop only)
+    * @param static string $template_header_hmenu_toggle: Hamburger Menü toggle able submenus
     * @param static string $template_header_custom:  Custom header html
     * @param static array $template_header_sort: Sort and activate blocks inside header builder
     * @param static string $template_header_logo_link: Logo link with wordpress fallback
@@ -93,15 +95,15 @@ class prefix_template {
     * @param static array $template_footer_sort: Sort and activate blocks inside footer builder
     * @param static string $template_footer_before: html code before footer
   */
-  static $template_container_header      = 1;
-  static $template_container             = 1;
-  static $template_container_totop       = 1;
-  static $template_container_footer      = 1;
-  static $template_coloring              = "light";
-  static $template_ph_active             = true;
-  static $template_ph_address            = true;
-  static $template_ph_custom             = "";
-  static $template_address               = array(
+  static $template_container_header            = 1;
+  static $template_container                   = 1;
+  static $template_container_totop             = 1;
+  static $template_container_footer            = 1;
+  static $template_coloring                    = "light";
+  static $template_ph_active                   = true;
+  static $template_ph_address                  = true;
+  static $template_ph_custom                   = "";
+  static $template_address                     = array(
     'logo' => array(
       "img" => "",
       "width" => "",
@@ -133,25 +135,27 @@ class prefix_template {
       'email' => ''
     )
   );
-  static $template_socialmedia           = array(
+  static $template_socialmedia                 = array(
     "facebook" => "",
     "instagram" => ""
   );
-  static $template_contactblock          = array(
+  static $template_contactblock                = array(
     "phone" => "",
     "mail" => "",
     "whatsapp" => ""
   );
-  static $template_header_divider        = 1;
-  static $template_header_sticky         = 1;
-  static $template_header_stickyload     = 0;
-  static $template_header_dmenu          = 1;
-  static $template_header_menusearchform = 0;
-  static $template_header_menu_style     = 'horizontal';
-  static $template_header_hmenu_style    = 'fullscreen';
-  static $template_header_hmenu_toggle   = 0;
-  static $template_header_custom         = "";
-  static $template_header_sort           = array(
+  static $template_header_divider              = 1;
+  static $template_header_sticky               = 1;
+  static $template_header_stickyload           = 0;
+  static $template_header_dmenu                = 1;
+  static $template_header_menusearchform       = 0;
+  static $template_header_menu_style           = 'horizontal';
+  static $template_header_hmenu_style          = 'fullscreen';
+  static $template_header_hmenu_visible_head   = 0;
+  static $template_header_hmenu_scroll         = 0;
+  static $template_header_hmenu_toggle         = 0;
+  static $template_header_custom               = "";
+  static $template_header_sort                 = array(
     "container_start" => 1,
     "logo" => 1,
     "menu" => 1,
@@ -161,22 +165,22 @@ class prefix_template {
     "searchform" => 0,
     "container_end" => 1
   );
-  static $template_header_logo_link      = "";
-  static $template_header_logo_d         = array(
+  static $template_header_logo_link            = "";
+  static $template_header_logo_d               = array(
     "img" => "",
     "width" => "",
     "height" => "",
     "alt" => ""
   );
-  static $template_header_logo_m         = array(
+  static $template_header_logo_m               = array(
     "img" => "",
     "width" => "",
     "height" => "",
     "alt" => ""
   );
-  static $template_header_after          = "";
-  static $template_page_active           = 1;
-  static $template_page_options          = array(
+  static $template_header_after                = "";
+  static $template_page_active                 = 1;
+  static $template_page_options                = array(
     "header" => 1,
     "date" => 0,
     "time" => 0,
@@ -187,28 +191,29 @@ class prefix_template {
     "scrolltotop" => 0,
     "footer" => 1,
     "darkmode" => 1,
+    "header_fixed" => 1,
     "beforeMain" => 1,
     "afterMain" => 1
   );
-  static $template_page_metablock        = array(
+  static $template_page_metablock              = array(
     "page" => 0,
     "post" => 0
   );
-  static $template_page_metablockAdds    = array();
-  static $template_blog_type             = 1;
-  static $template_blog_type_parts       = array(
+  static $template_page_metablockAdds          = array();
+  static $template_blog_type                   = 1;
+  static $template_blog_type_parts             = array(
     "author" => 0,
     "date" => 0,
     "time" => 0,
     "categories" => 0
   );
-  static $template_blog_dateformat       = 'd.m.Y';
-  static $template_page_additional       = array();
-  static $template_scrolltotop_active    = 0;
-  static $template_footer_active         = 1;
-  static $template_footer_cr             = "";
-  static $template_footer_custom         = "";
-  static $template_footer_sort           = array(
+  static $template_blog_dateformat             = 'd.m.Y';
+  static $template_page_additional             = array();
+  static $template_scrolltotop_active          = 0;
+  static $template_footer_active               = 1;
+  static $template_footer_cr                   = "";
+  static $template_footer_custom               = "";
+  static $template_footer_sort                 = array(
     "container_start" => 1,
     "menu" => 1,
     "socialmedia" => 1,
@@ -218,8 +223,8 @@ class prefix_template {
     "searchform" => 0,
     "container_end" => 1
   );
-  static $template_footer_before         = "";
-  static $template_footer_after          = "";
+  static $template_footer_before               = "";
+  static $template_footer_after                = "";
 
 
   /* 1.2 ON LOAD RUN
@@ -517,8 +522,16 @@ class prefix_template {
         "hmenu_style" => array(
           "label" => "Hamburger menu position",
           "type" => "select",
-          "value" => array('fullscreen','left','left_contained','right','right_contained')
+          "value" => array('fullscreen','top_contained','left','left_contained','right','right_contained')
         ),
+        "hmenu_visible_head" => array(
+          "label" => "Visible header while menu is active",
+          "type" => "switchbutton"
+        ),
+        // "hmenu_scroll" => array(
+        //   "label" => "Close hamburger menu on scroll",
+        //   "type" => "switchbutton"
+        // ),
         "hmenu_toggle" => array(
           "label" => "Hamburger menu toggle able submenus",
           "type" => "switchbutton"
@@ -688,6 +701,10 @@ class prefix_template {
             ),
             "darkmode" => array(
               "label" => "Darkmode",
+              "type" => "switchbutton"
+            ),
+            "header_fixed" => array(
+              "label" => "Header fixed",
               "type" => "switchbutton"
             ),
             "beforeMain" => array(
@@ -897,6 +914,8 @@ class prefix_template {
           SELF::$template_header_menusearchform = array_key_exists('mainmenu_searchform', $header) ? $header['mainmenu_searchform'] : SELF::$template_header_menusearchform;
           SELF::$template_header_menu_style = array_key_exists('menu_style', $header) ? $header['menu_style'] : SELF::$template_header_menu_style;
           SELF::$template_header_hmenu_style = array_key_exists('hmenu_style', $header) ? $header['hmenu_style'] : SELF::$template_header_hmenu_style;
+          SELF::$template_header_hmenu_visible_head = array_key_exists('hmenu_visible_head', $header) ? $header['hmenu_visible_head'] : SELF::$template_header_hmenu_visible_head;
+          SELF::$template_header_hmenu_scroll = array_key_exists('hmenu_scroll', $header) ? $header['hmenu_scroll'] : SELF::$template_header_hmenu_scroll;
           SELF::$template_header_hmenu_toggle = array_key_exists('hmenu_toggle', $header) ? $header['hmenu_toggle'] : SELF::$template_header_hmenu_toggle;
           SELF::$template_header_custom = array_key_exists('custom', $header) ? $header['custom'] : SELF::$template_header_custom;
           SELF::$template_header_sort = array_key_exists('sort', $header) ? $header['sort'] : SELF::$template_header_sort;
@@ -947,7 +966,7 @@ class prefix_template {
     }
 
 
-    /* 2.3 STICKY MENU
+    /* 2.3 STICKY HEADER
     /------------------------*/
     public static function CheckSticky(int $sticky = 1, int $stickyOnLoad = 1){
       $output = '';
@@ -1032,10 +1051,10 @@ class prefix_template {
             endif;
             break;
           case 'menu':
-            echo $value == 1 ? SELF::WP_MainMenu(SELF::$template_header_dmenu, 'menu', SELF::$template_header_menu_style, SELF::$template_header_hmenu_style, SELF::$template_header_hmenu_toggle) : '';
+            echo $value == 1 ? SELF::WP_MainMenu(SELF::$template_header_dmenu, 'menu', SELF::$template_header_menu_style, SELF::$template_header_hmenu_style, SELF::$template_header_hmenu_toggle, SELF::$template_header_hmenu_visible_head) : '';
             break;
           case 'hamburger':
-            echo $value == 1 ? SELF::WP_MainMenu(SELF::$template_header_dmenu, 'hamburger', SELF::$template_header_menu_style, SELF::$template_header_hmenu_style, SELF::$template_header_hmenu_toggle) : '';
+            echo $value == 1 ? SELF::WP_MainMenu(SELF::$template_header_dmenu, 'hamburger', SELF::$template_header_menu_style, SELF::$template_header_hmenu_style, SELF::$template_header_hmenu_toggle, SELF::$template_header_hmenu_visible_head) : '';
             break;
           case 'logo':
             echo $value == 1 ? SELF::Logo(SELF::$template_header_logo_link, SELF::$template_header_logo_d, SELF::$template_header_logo_m) : '';
@@ -1179,7 +1198,6 @@ class prefix_template {
               // check if option is active
               if($value == 1 && !in_array($key, $exeptions)):
                 $active = prefix_core_BaseFunctions::setChecked($key, $options);
-                $hide = $key !== 'darkmode' ? 'Hide ' : '';
                 // rule for metabox before output
                 if(in_array($key, array('date', 'time', 'author'))):
                   if(in_array($post->post_type, array('page', 'post')) && SELF::$template_page_metablock[$post->post_type] == 1 || !empty(SELF::$template_page_metablockAdds) && in_array($post->post_type, SELF::$template_page_metablockAdds)):
@@ -1192,7 +1210,7 @@ class prefix_template {
                 endif;
                 // output
                 if($show == true):
-                  echo '<li><label><input type="checkbox" name="template_page_options[]" value="' . $key . '" ' . $active . '>' . __( $hide . $key, 'template' ) . '</label></li>';
+                  echo '<li><label><input type="checkbox" name="template_page_options[]" value="' . $key . '" ' . $active . '>' . SELF::$backend['page']['value']['options']['value'][$key]["label"] . '</label></li>';
                 endif;
               endif;
             }
@@ -1300,7 +1318,7 @@ class prefix_template {
 
     /* 3.7 CHECK IF MAINMENU IS ACTIVE
     /------------------------*/
-    public static function WP_MainMenu(int $active = 1, string $request = '', string $direction = '', string $hamburgerStyle = '', int $submenutoggle = 0){
+    public static function WP_MainMenu(int $active = 1, string $request = '', string $direction = '', string $hamburgerStyle = '', int $submenutoggle = 0, int $headvisibility){
       if($active === 1):
         $menu_active = 'hidden_mobile';
         $hamburger_active = 'mobile';
@@ -1314,6 +1332,9 @@ class prefix_template {
       endif;
       if($hamburgerStyle !== ''):
         $menu_active .= ' ' . $hamburgerStyle;
+      endif;
+      if($headvisibility === 1):
+        $menu_active .= ' showHeader';
       endif;
       if($submenutoggle === 1):
         $menu_active .= ' toggle-submenu';
@@ -1696,6 +1717,7 @@ class prefix_template {
           $options = unserialize($options);
         endif;
         $classes .= $options && is_array($options) && in_array('darkmode', $options) && SELF::$template_page_options['darkmode'] == 1 ? ' dark' : '';
+        $classes .= $options && is_array($options) && in_array('header_fixed', $options) && SELF::$template_page_options['header_fixed'] == 1 ? ' fixed' : '';
       endif;
       // apply filter
       $classes .= ' ' . apply_filters( 'template_BodyCSS', $classes );

@@ -15,6 +15,7 @@ Table of Contents:
     1.3 POSTS FILTER
     1.4 ACCORDION
     1.5 GALLERY
+    1.6 VIMEO
   2.0 BLOCK STYLINGS
     2.1 TOGGLE
     2.2 COLUMNS
@@ -33,6 +34,8 @@ body.frontend,
     /* 1.1 SOCIAL MEDIA
     /––––––––––––––––––––––––*/
     .socialmedia {
+      --iconSize: 20px;
+      --spaceBetween: 10px;
       list-style: none;
       padding: 0;
       display: flex;
@@ -43,11 +46,11 @@ body.frontend,
           display: block;
           line-height: 0;
           svg {
-            width: 20px;
+            width: var(--iconSize);
           }
         }
         + li {
-          margin-left: 10px;
+          margin-left: var(--spaceBetween);
         }
       }
     }
@@ -129,19 +132,20 @@ body.frontend,
     /* 1.3 POSTS FILTER
     /––––––––––––––––––––––––*/
     div.block-postsfilter {
+      --spaceBetween: 40px;
       &.filter-left,
       &.filter-right {
         display: flex;
         flex-wrap: nowrap;
         .thefilter {
-          margin-right: 40px;
+          margin-right: var(--spaceBetween);
         }
       }
       &.filter-right {
         flex-direction: row-reverse;
         .thefilter {
           margin-right: 0;
-          margin-left: 40px;
+          margin-left: var(--spaceBetween);
         }
       }
       > div {
@@ -218,12 +222,20 @@ body.frontend,
     /* 1.4 ACCORDION
     /––––––––––––––––––––––––*/
     .block-accordion {
+      --labelSpacing: 20px 10px;
+      --contentSpacing: 20px 10px;
+      --iconBorderRadius: 4px;
+      --iconWidth: 30px;
+      --iconHeight: 30px;
+      --iconSeperator: 20px;
+      --iconPlusWeight: 4px;
+      --iconPlusRadius: 1px;
       .accordion-item {
         .accordion-label {
           display: flex;
           flex-wrap: nowrap;
           justify-content: space-between;
-          padding: 20px 10px;
+          padding: var(--labelSpacing);
           position: relative;
           cursor: pointer;
           line-height: 1;
@@ -235,7 +247,7 @@ body.frontend,
               }
             }
             + .accordion-content {
-              padding: 20px 10px;
+              padding: var(--contentSpacing);
               height: auto;
               a {
                 display: inline;
@@ -244,23 +256,23 @@ body.frontend,
           }
           .icon {
             position: relative;
-            border-radius: 4px;
-            width: 30px;
-            height: 30px;
-            margin-left: 20px;
+            border-radius: var(--iconBorderRadius);
+            width: var(--iconWidth);
+            height: var(--iconHeight);
+            margin-left: var(--iconSeperator);
             &:before,
             &:after {
               position: absolute;
               display: block;
               content: "";
-              width: 20px;
-              height: 4px;
-              border-radius: 1px;
+              width: 50%;
+              height: var(--iconPlusWeight);
+              border-radius: var(--iconPlusRadius);
             }
             &:before,
             &:after {
-              left: calc(50% - 10px);
-              top: calc(50% - 2px);
+              left: calc(50% - 25%);
+              top: calc(50% - (var(--iconPlusWeight) / 2));
             }
             &:after {
               transform: rotate(90deg);
@@ -370,6 +382,67 @@ body.frontend,
     }
 
 
+    /* 1.6 VIMEO
+    /––––––––––––––––––––––––*/
+    .block-editor-block-list__block {
+      &.is-selected {
+        > .block-vimeo > a {
+          pointer-events: inherit;
+        }
+      }
+      > .block-vimeo > a {
+        pointer-events: none;
+      }
+    }
+    .block-vimeo {
+      --tocWidth: 30%;
+      --tocSpacing: 10px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-wrap: wrap;
+      > a {
+        display: block;
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        .block-editor-block-list__block & {
+
+
+        }
+      }
+      .video-container,
+      .resp_video {
+        width: 100%;
+      }
+      > .table-of-content {
+        &.position-left,
+        &.position-right {
+          width: var(--tocWidth);
+          padding: var(--tocSpacing);
+          + .video-container {
+            max-width: calc(100% - var(--tocWidth));
+          }
+        }
+        &.position-right,
+        &.position-bottom {
+          order: 2;
+          + .video-container {
+            order: 1;
+          }
+        }
+      }
+      .table-of-content {
+        ul {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+      }
+    }
+
+
 
   /*==================================================================================
     2.0 BLOCK STYLINGS
@@ -392,6 +465,8 @@ body.frontend,
   /* 2.3 SOCIAL MEDIA
   /––––––––––––––––––––––––*/
   .socialmedia {
+    --iconSize: 20px;
+    --spaceBetween: 10px;
     list-style: none;
     padding: 0;
     display: flex;
@@ -402,11 +477,11 @@ body.frontend,
         display: block;
         line-height: 0;
         svg {
-          width: 20px;
+          width: var(--iconSize);
         }
       }
       + li {
-        margin-left: 10px;
+        margin-left: var(--spaceBetween);
       }
     }
   }
@@ -414,6 +489,119 @@ body.frontend,
 
   /* 1.4 BLOCK STYLES
   /––––––––––––––––––––––––*/
+
+
+  /* 1.4 BLOCK STYLES
+  /––––––––––––––––––––––––*/
+  .arrow-toggle {
+    --size: 40px;
+    --tooglePosition: 15px;
+    --spacing: 10px 10px;
+    --maxSize: 100%;
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    &.position-left,
+    &.position-right {
+      height: 100%;
+      flex-direction: row;
+      .label {
+        &.active {
+          + div {
+            width: inherit;
+          }
+        }
+        + div {
+          width: 0;
+          height: 100%;
+          overflow-y: auto;
+          max-width: var(--maxSize);
+       }
+      }
+    }
+    &.position-top,
+    &.position-bottom {
+      width: 100%;
+      flex-direction: column;
+      .label {
+        &.active {
+          + div {
+            height: inherit;
+          }
+        }
+        + div {
+          width: 100%;
+          height: 0;
+          overflow-y: auto;
+          max-height: var(--maxSize);
+       }
+      }
+    }
+    &.position-top,
+    &.position-left {
+      .label {
+        order: 2;
+      }
+    }
+    &.position-top {
+      .label {
+        margin-top: calc(var(--tooglePosition) * -1);
+        &.active {
+          transform: rotate(180deg);
+        }
+      }
+    }
+    &.position-left {
+      .label {
+        transform: rotate(-90deg);
+        margin-left: calc(var(--tooglePosition) * -1);
+        &.active {
+          transform: rotate(90deg);
+        }
+      }
+    }
+    &.position-bottom {
+      bottom: 0;
+      .label {
+        transform: rotate(180deg);
+        margin-bottom: calc(var(--tooglePosition) * -1);
+        &.active {
+          transform: rotate(0deg);
+        }
+      }
+    }
+    &.position-right {
+      right: 0;
+      .label {
+        transform: rotate(90deg);
+        margin-right: calc(var(--tooglePosition) * -1);
+        &.active {
+          transform: rotate(-90deg);
+        }
+      }
+    }
+    .label {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: center;
+      width: var(--size);
+      height: var(--size);
+      border-radius: 50%;
+      svg {
+        width: 50%;
+        height: auto;
+      }
+      &.active {
+        + div {
+          padding: var(--spacing);
+        }
+      }
+    }
+  }
 
   // GROUP
   .is-style-fullheight {

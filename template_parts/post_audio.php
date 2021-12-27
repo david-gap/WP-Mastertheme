@@ -27,7 +27,13 @@ $css .= $audio ? ' flex' : '';
 ?>
 
 <article class="<?php echo $css; ?>">
-  <?php echo $audio ? '<div>' : ''; ?>
+  <?php
+    if($audio):
+      echo '<div>';
+    else:
+      echo '';
+    endif;
+  ?>
 
     <?php get_template_part('template_parts/header'); ?>
     <div class="entry-content">
@@ -35,7 +41,13 @@ $css .= $audio ? ' flex' : '';
     </div>
     <?php get_template_part('template_parts/footer'); ?>
 
-  <?php echo $audio ? '</div>' : ''; ?>
+    <?php
+      if($audio):
+        echo '</div>';
+      else:
+        echo '';
+      endif;
+    ?>
 
   <?php echo $audio; ?>
 </article>

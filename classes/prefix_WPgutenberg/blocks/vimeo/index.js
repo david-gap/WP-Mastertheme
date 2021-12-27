@@ -34,13 +34,56 @@ function getSettings(atts) {
   return settings;
 }
 
+// table of content by chapters
+function getTableOfContent(atts){
+  if(atts["videoTableOfContent"] === true){
+    let table = [],
+        css = "table-of-content",
+        toggleContainer = 'arrow-toggle',
+        autoplay = atts["videoTOCautoplay"] === true ? "1" : "0",
+        stop = atts["videoTOCstop"] === true ? "1" : "0";
+    // define position
+    if(atts["videoTOCposition"]){
+      toggleContainer += ' position-' + atts["videoTOCposition"];
+      css += ' position-' + atts["videoTOCposition"];
+    }
+    // build
+    if(atts["videoTOCtoggle"] && atts["videoTOCtoggle"] === true){
+      table.push(
+        <div class={toggleContainer}>
+          <span class="label"><svg width="15.135" height="11.064" viewBox="0 0 15.135 11.064"><g transform="translate(-331.529 -434.15)"><g><line y1="1.05" x2="9" transform="matrix(-0.574, -0.819, 0.819, -0.574, 338.236, 443.67)" fill="none" stroke="#000" stroke-linecap="round" stroke-width="2"></line><line x2="9" y2="1.05" transform="matrix(0.574, -0.819, 0.819, 0.574, 339.096, 443.068)" fill="none" stroke="#000" stroke-linecap="round" stroke-width="2"></line></g></g></svg></span>
+          <div class={css} data-autoplay={autoplay} data-stop={stop}>
+          </div>
+        </div>
+      );
+    } else {
+      table.push(
+        <div class={css} data-autoplay={autoplay} data-stop={stop}>
+        </div>
+      );
+    }
+    return table;
+  }
+}
+
+// video link
+function getVideoLink(atts){
+  let buildlink = [];
+  if(atts["videoBackgroud"] === true && atts["videoLink"]){
+    buildlink.push(
+      <a href={atts.videoLink} target={atts.videoLinkTarget} rel="noopener">&nbsp;</a>
+    );
+  }
+  return buildlink;
+}
+
 // geneeate video url
 function getURL(atts){
   let autoplay = atts["videoAutoPlay"] === true ? "1" : "0";
   let loop = atts["videoLoop"] === true ? "1" : "0";
   let mute = atts["videoMute"] === true ? "1" : "0";
   let background = atts["videoBackgroud"] === true ? "1" : "0";
-  let videoURL = 'https://player.vimeo.com/video/' + atts["videoID"] + '?autoplay=' + autoplay + '&loop=' + loop + '&muted=' + mute + '&background=' + background;
+  let videoURL = 'https://player.vimeo.com/video/' + atts["videoID"] + '?autoplay=' + autoplay + '&loop=' + loop + '&muted=' + mute + '&background=' + background + '&autopause=false';
   return videoURL;
 }
 
@@ -75,7 +118,7 @@ export default registerBlockType( 'templates/vimeo', {
   attributes,
   edit: props => {
     const {
-      attributes: { videoID, videoDimensionX, videoDimensionY, videoAutoPlay, videoBackgroud, videoLoop, videoMute },
+      attributes: { videoID, videoDimensionX, videoDimensionY, videoAutoPlay, videoBackgroud, videoLoop, videoMute, videoTableOfContent, videoTOCtoggle, videoTOCposition, videoTOCautoplay, videoTOCstop, videoLink, videoLinkTarget },
       attributes,
       className,
       setAttributes
@@ -84,55 +127,60 @@ export default registerBlockType( 'templates/vimeo', {
     let settings = getSettings(attributes);
     let videoURL = getURL(attributes);
     let videoDimension = getDimension(attributes);
+    let videoTOC = getTableOfContent(attributes);
+    let videoLinkContainer = getVideoLink(attributes);
 
     return [
       <Inspector {...{ setAttributes, ...props }} />,
       <div className={classnames(
         'block-vimeo'
       )}>
-        <div style={{paddingTop: videoDimension}} className={classnames(
-          'resp_video',
-        )}>
-          {
-            // <ul>{settings}</ul>
-          }
-          <iframe src={videoURL} frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-          <script src="https://player.vimeo.com/api/player.js"></script>
+        {videoLinkContainer}
+        {videoTOC}
+        <div class="video-container">
+          <div style={{paddingTop: videoDimension}} className={classnames(
+            'resp_video',
+          )}>
+            {
+              // <ul>{settings}</ul>
+            }
+            <iframe src={videoURL} frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+            <script src="https://player.vimeo.com/api/player.js"></script>
+          </div>
         </div>
       </div>
     ];
   },
   save: props => {
     const {
-      attributes: { videoID, videoDimensionX, videoDimensionY, videoAutoPlay, videoBackgroud, videoLoop, videoMute },
+      attributes: { videoID, videoDimensionX, videoDimensionY, videoAutoPlay, videoBackgroud, videoLoop, videoMute, videoTableOfContent, videoTOCtoggle, videoTOCposition, videoTOCautoplay, videoTOCstop, videoLink, videoLinkTarget },
       attributes
     } = props;
 
     let videoURL = getURL(attributes);
     let videoDimension = getDimension(attributes);
+    let videoTOC = getTableOfContent(attributes);
+    let videoLinkContainer = getVideoLink(attributes);
 
     return (
       <div className={classnames(
         'block-vimeo'
       )}>
-        <div style={{paddingTop: videoDimension}} className={classnames(
-          'resp_video',
-        )}>
-          {
-            // <ul>{settings}</ul>
-          }
-          <iframe src={videoURL} frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-          <script src="https://player.vimeo.com/api/player.js"></script>
+        {videoLinkContainer}
+        {videoTOC}
+        <div class="video-container">
+          <div style={{paddingTop: videoDimension}} className={classnames(
+            'resp_video',
+          )}>
+            {
+              // <ul>{settings}</ul>
+            }
+            <iframe src={videoURL} frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+            <script src="https://player.vimeo.com/api/player.js"></script>
+          </div>
         </div>
       </div>
     );
   }
-	// save: props => {
-	// 	// const { videoID, videoAutoPlay, videoLoop, videoMute, videoDimensionX, videoDimensionY } = props.attributes;
-	// 	return (
-	// 		<div>
-	// 		</div>
-	// 	);
-	// }
 
 });

@@ -47,7 +47,13 @@ $css .= $video ? ' flex' : '';
 ?>
 
 <article class="<?php echo $css; ?>">
-  <?php echo $video ? '<div>' : ''; ?>
+  <?php
+    if($video):
+      echo '<div>';
+    else:
+      echo '';
+    endif;
+  ?>
 
     <?php get_template_part('template_parts/header'); ?>
     <div class="entry-content">
@@ -55,7 +61,13 @@ $css .= $video ? ' flex' : '';
     </div>
     <?php get_template_part('template_parts/footer'); ?>
 
-  <?php echo $video ? '</div>' : ''; ?>
+    <?php
+      if($video):
+        echo '</div>';
+      else:
+        echo '';
+      endif;
+    ?>
 
   <?php echo $video; ?>
 </article>

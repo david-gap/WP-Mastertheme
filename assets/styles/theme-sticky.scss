@@ -10,11 +10,25 @@
 /* ACTIVE
 /––––––––––––––––––––––––*/
 body.sticky > header {
-  position: fixed;
+  position: sticky;
   z-index: 100;
   top: 0;
   left: 0;
   > hr.divider {
     max-width: 100%;
+  }
+}
+
+/* FIXED
+/––––––––––––––––––––––––*/
+body.sticky.fixed > header {
+  position: fixed;
+}
+
+/* IE FIX
+/––––––––––––––––––––––––*/
+html.InternetExplorer {
+  body.sticky > header {
+    position: fixed;
   }
 }

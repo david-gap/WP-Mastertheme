@@ -207,28 +207,31 @@ function themeConfiguration(data){
 
 /* Sticky menu
 /------------------------*/
-function StickyMenu(action) {
+function StickyHeader(action) {
   // get new scroll position and header height
   var scroll = window.scrollY,
       headerHeight = header.offsetHeight;
-  if(action == "load" && body.classList.contains('stickyable') === false){
-    // set main margin for sticky on load
-    main.style.marginTop = headerHeight + 'px';
-  } else {
-    // check if header is stickyable
-    if(body.classList.contains('stickyable') && scroll > scrollPosition){
-      body.classList.add("sticky");
-      // set main margin for sticky after scroll
-      if(scroll > headerHeight || action == "load"){
-        main.style.marginTop = headerHeight + 'px';
-      }
+  // on load actions
+  if(action == "load"){
+    // IE FIX
+    if(root.classList.contains('InternetExplorer') && body.classList.contains('sticky') && body.classList.contains('fixed') === false){
+      main.style.marginTop = headerHeight + 'px';
     }
   }
-  // reset sticky if sticky is not perminent
-  if (scroll < headerHeight) {
-    if(body.classList.contains('stickyable')){
+  // if stickyable set sticky
+  if(body.classList.contains('stickyable') && scroll > headerHeight){
+    body.classList.add("sticky");
+    // IE FIX
+    if(root.classList.contains('InternetExplorer') && body.classList.contains('fixed') === false){
+      main.style.marginTop = headerHeight + 'px';
+    }
+  }
+  // if stickyable reset sticky
+  if(body.classList.contains('stickyable') && scroll < headerHeight){
+    body.classList.remove("sticky");
+    // IE FIX
+    if(root.classList.contains('InternetExplorer') && body.classList.contains('fixed') === false){
       main.style.marginTop = '';
-      body.classList.remove("sticky");
     }
   }
   // update main scroll position
@@ -241,15 +244,15 @@ function StickyMenu(action) {
   }
 }
 var debounceSticky = debounce(function() {
-  StickyMenu();
+  StickyHeader();
 }, 100);
 var debounceStickyResize = debounce(function() {
-  StickyMenu("load");
+  StickyHeader("load");
 }, 100);
 window.addEventListener('scroll', debounceSticky);
 window.addEventListener('resize', debounceStickyResize);
 window.onload = function() {
-  StickyMenu("load");
+  StickyHeader("load");
 };
 
 
@@ -369,7 +372,7 @@ function getDataAttributes(element) {
 function toggleBlock(){
   this.classList.toggle("active");
 }
-var toggleButtons = document.querySelectorAll('.block-accordion > .accordion-item > .accordion-label');
+var toggleButtons = document.querySelectorAll('.block-accordion > .accordion-item > .accordion-label, .arrow-toggle > .label');
 if(toggleButtons.length !== 0){
   Array.from(toggleButtons).forEach(function(element) {
     element.addEventListener('click', toggleBlock);
@@ -490,6 +493,98 @@ if(postFilterInputs.length !== 0){
     }
   });
 }
+
+
+/* vimeo
+/------------------------*/
+// get all vimeo blocks
+var allVimeoVideos = document.querySelectorAll('.block-vimeo');
+// go to selected chapter
+function vimeoChapterSelection(link){
+  // get settings
+  const container = link.closest('.block-vimeo'),
+        iframe = container.querySelector('.resp_video iframe'),
+        player = new Vimeo.Player(iframe),
+        videoStop = link.closest('.table-of-content').getAttribute('data-stop'),
+        videoAutoplay = link.closest('.table-of-content').getAttribute('data-autoplay');
+  // go to chapter
+  const chapterStart = link.getAttribute('data-time');
+  const chapterEnd = link.getAttribute('data-end');
+  player.setCurrentTime(chapterStart);
+  // play if selected
+  if(videoAutoplay == "1"){
+    player.play();
+  } else {
+    player.play();
+    player.on('timeupdate', function(data) {
+      player.pause();
+    });
+  }
+  // set chapter end time
+  container.setAttribute('data-stop', chapterEnd);
+  // if selected stop video on chapter end
+  if(videoStop == 1){
+    // reset all events
+    player.on('timeupdate', function(data) {
+      const stopOn = link.closest('.block-vimeo').getAttribute('data-stop');
+      if(data.seconds > parseInt(stopOn)){
+        player.pause();
+      }
+      // if(data.seconds < parseInt(chapterEnd)){
+      //   player.play();
+      // }
+    });
+
+  }
+}
+// build table of content
+if(allVimeoVideos.length !== 0){
+  Array.from(allVimeoVideos).forEach(function(video) {
+    // call iframe and player api
+    const iframe = video.querySelector('.resp_video iframe');
+    const player = new Vimeo.Player(iframe);
+    //table of content
+    if(video.querySelectorAll(".table-of-content").length > 0){
+      player.getDuration().then(function(duration) {
+        player.getChapters().then(function(chapters) {
+          let chapterTimes = [];
+          // build list
+          var toc = '<ul>';
+            Array.from(chapters).forEach(function(chapter, key) {
+              var nextkey = key + 1;
+              var lastkey = chapters.length - 1;
+              if(key == lastkey){
+                var nextChapterStart = duration;
+              } else {
+                var nextChapterStart = chapters[nextkey].startTime;
+              }
+              toc += '<li><a data-time="' + chapter.startTime + '" data-end="' + nextChapterStart + '">' + chapter.title + '</a></li>';
+              chapterTimes.push(chapter.startTime);
+            });
+          toc += '</ul>';
+          // insert list
+          video.querySelector(".table-of-content").innerHTML = toc;
+          // add click action
+          var videoChaptersLink = video.querySelectorAll('.table-of-content ul li a');
+          if(videoChaptersLink.length > 0){
+            Array.from(videoChaptersLink).forEach(function(link) {
+              link.addEventListener('click', function(){
+                vimeoChapterSelection(link);
+              }, false);
+              link.addEventListener('keypress', function(){
+                vimeoChapterSelection(link);
+              }, false);
+            });
+          }
+        }).catch(function(error) {
+          // An error occurred
+        });
+      });
+    }
+    // array ended
+  });
+}
+
 
 
 /*==================================================================================
