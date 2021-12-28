@@ -23,7 +23,8 @@ const {
   TextControl,
   TextareaControl,
   ToggleControl,
-  SelectControl
+  SelectControl,
+  DateTimePicker
 } = wp.components;
 
 /**
@@ -37,14 +38,17 @@ export default class Inspector extends Component {
     const {
       attributes: {
         hideOnDesktop,
-        hideOnMobile
+        hideOnMobile,
+        disabledValue,
+        scaduleStart,
+        scaduleEnd
       },
       setAttributes
     } = this.props;
 
     return (
       <InspectorControls>
-          <PanelBody title={ __( 'Extensions', 'WPgutenberg' ) } >
+          <PanelBody title={ __( 'Visibility', 'WPgutenberg' ) } >
               <PanelRow>
                 <ToggleControl
                     id="hide-desktop"
@@ -61,6 +65,36 @@ export default class Inspector extends Component {
                     onChange={hideOnMobile => setAttributes({ hideOnMobile })}
                 />
               </PanelRow>
+              <PanelRow>
+                <ToggleControl
+                    id="disabled-content"
+                    label={ __( 'Disable content', 'WPgutenberg' ) }
+                    checked={ disabledValue }
+                    onChange={disabledValue => setAttributes({ disabledValue })}
+                />
+              </PanelRow>
+          </PanelBody>
+          <PanelBody title={ __( 'Scadule', 'WPgutenberg' ) } >
+            <PanelRow>
+              {__("Start", "WPgutenberg")}{<br />}
+              {__("If block availability starts on this date", "WPgutenberg")}
+            </PanelRow>
+            <PanelRow>
+              <DateTimePicker
+                currentDate={scaduleStart}
+                onChange={scaduleStart => setAttributes({ scaduleStart })}
+              />
+            </PanelRow>
+            <PanelRow>
+              {__("End", "WPgutenberg")}{<br />}
+              {__("If block availability stops on this date", "WPgutenberg")}
+            </PanelRow>
+            <PanelRow>
+              <DateTimePicker
+                currentDate={scaduleEnd}
+                onChange={scaduleEnd => setAttributes({ scaduleEnd })}
+              />
+            </PanelRow>
           </PanelBody>
       </InspectorControls>
     );

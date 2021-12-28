@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 1.38.28 | 28.12.2021 <block scadule and disabling, core config>
+* move configuration php file to mastertheme
+* optimize current time by wordpress timezone in dateCheck function
+* rename gallery item block in swiper item
+* option to scadule gutenberg blocks
+* option to disable gutenberg block from returning
+
 ## 1.37.28 | 27.12.2021 <ie fix, header, blocks>
 * fix posts parts return
 * ie11 fix for css properties

@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.12.11
+ * @version     2.13.11
  */
 
 /*=======================================================
@@ -29,6 +29,7 @@ Table of Contents:
 3.0 OUTPUT
   3.1 RETURN CUSTOM CSS
   3.2 CHANGE INLINE FONT SIZE
+  3.3 FILTER BLOCKS BEFORE DOM
 =======================================================*/
 
 class prefix_WPgutenberg {
@@ -100,6 +101,8 @@ class prefix_WPgutenberg {
       // Fix rest api
       // register custom blocks
       add_action( 'init', array($this, 'WPgutenbergFixApiSort'), 99 );
+      // filter blocks before dom
+      add_filter('render_block',  array($this, 'FilterBlocks'), 10, 2 );
     }
 
     /* 1.3 BACKEND ARRAY
@@ -458,6 +461,36 @@ class prefix_WPgutenberg {
     if(!is_admin()):
       return str_replace("font-size","--font-size",$content);
     endif;
+  }
+
+
+  /* 3.3 FILTER BLOCKS BEFORE DOM
+  /------------------------*/
+  function FilterBlocks($blockContent, $block){
+    // disabled block - by costum attribute
+    if($block['attrs'] && array_key_exists('disabledValue', $block['attrs'])):
+      if($block['attrs']['disabledValue'] == 1):
+        $blockContent = '';
+      endif;
+    endif;
+    // scaduled blocks - by costum attribute
+    if($block['attrs']):
+      if(array_key_exists('scaduleStart', $block['attrs']) && $block['attrs']['scaduleStart'] !== null && array_key_exists('scaduleEnd', $block['attrs']) && $block['attrs']['scaduleEnd'] !== null):
+        // if current date is between start and end date
+        $timeStatement = prefix_core_BaseFunctions::DateCheck($block['attrs']['scaduleStart'], $block['attrs']['scaduleEnd'], "between");
+        $blockContent = $timeStatement !== true ? '' : $blockContent;
+      elseif(array_key_exists('scaduleStart', $block['attrs']) && $block['attrs']['scaduleStart'] !== null && !array_key_exists('scaduleEnd', $block['attrs'])):
+        // if given startdate is in the future
+        $timeStatement = prefix_core_BaseFunctions::DateCheck($block['attrs']['scaduleStart'], "", "future");
+        $blockContent = $timeStatement === true ? '' : $blockContent;
+      elseif(!array_key_exists('scaduleStart', $block['attrs']) && array_key_exists('scaduleEnd', $block['attrs']) && $block['attrs']['scaduleEnd'] !== null):
+        // if given enddate is in the paste
+        $timeStatement = prefix_core_BaseFunctions::DateCheck("", $block['attrs']['scaduleEnd'], "past");
+        $blockContent = $timeStatement === true ? '' : $blockContent;
+      endif;
+    endif;
+
+    return $blockContent;
   }
 
 

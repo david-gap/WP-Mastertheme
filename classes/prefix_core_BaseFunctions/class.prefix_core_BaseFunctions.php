@@ -4,7 +4,7 @@
  *
  * Base dev functions - parent for all custom classes
  * Author:      David Voglgsnag
- * @version     2.13.4
+ * @version     2.13.5
  *
  */
 
@@ -479,7 +479,10 @@ class prefix_core_BaseFunctions {
   */
   public static function DateCheck(string $start = "", string $end = "", string $factor = "between"){
     // vars
-    $current_date = time();
+    // $current_date = time();
+    $getCurrentTime = new DateTime("now", new DateTimeZone(get_option('timezone_string')) );
+    $formatCurrentTime = $getCurrentTime->format('Y-m-d H:i:s');
+    $current_date = strtotime($formatCurrentTime);
     $startdate = strtotime($start);
     $enddate = strtotime($end);
     // check start date

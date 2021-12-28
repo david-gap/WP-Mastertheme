@@ -27,6 +27,7 @@ const withAdvancedControls = createHigherOrderComponent( ( BlockEdit ) => {
     const {
       hideOnDesktop,
       hideOnMobile,
+      disabledValue,
     } = attributes;
     return (
       <Fragment>
@@ -52,6 +53,23 @@ function applyExtraClass( extraProps, blockType, attributes ) {
   return extraProps;
 }
 
+
+// Add data value
+function addDataValues(BlockListBlock) {
+  return props => {
+    const { block } = props;
+
+    return (
+      <BlockListBlock {...props} wrapperProps={{
+        'data-disabled': props.attributes.disabledValue,
+        'data-ismobile': props.attributes.hideOnDesktop,
+        'data-isdesktop': props.attributes.hideOnMobile
+      }} />
+    );
+  };
+}
+
+
 // add filters
 addFilter(
   'blocks.registerBlockType',
@@ -67,4 +85,9 @@ addFilter(
   'blocks.getSaveContent.extraProps',
   'template/applyExtraClass',
   applyExtraClass
+);
+addFilter(
+  'editor.BlockListBlock',
+  'template/addDataValues',
+  addDataValues
 );

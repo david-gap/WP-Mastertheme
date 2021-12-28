@@ -6,6 +6,18 @@ const attributes = {
   hideOnMobile: {
     type: 'boolean',
     default: false,
+  },
+  disabledValue: {
+    type: 'boolean',
+    default: false,
+  },
+  scaduleStart: {
+    type: 'string',
+    default: '',
+  },
+  scaduleEnd: {
+    type: 'string',
+    default: '',
   }
 }
 

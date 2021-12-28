@@ -17,7 +17,7 @@ Table of Contents:
     1.5 GALLERY
     1.6 VIMEO
   2.0 BLOCK STYLINGS
-    2.1 TOGGLE
+    2.1 BACKEND HIGHLIGHTS
     2.2 COLUMNS
     2.3 FULL HIGHT
 =======================================================*/
@@ -447,6 +447,65 @@ body.frontend,
   /*==================================================================================
     2.0 BLOCK STYLINGS
   ==================================================================================*/
+
+
+    /* 2.1 BACKEND HIGHLIGHTS
+    /––––––––––––––––––––––––*/
+    .block-editor-block-list__block {
+      // disabled block
+      &[data-disabled="true"] {
+        opacity: .1;
+        &.is-selected {
+          opacity: 1;
+        }
+      }
+      // mobile / desktop block
+      &[data-ismobile="true"] {
+        &:after {
+          content: "mobile only";
+        }
+      }
+      &[data-isdesktop="true"] {
+        &:after {
+          content: "desktop only";
+        }
+      }
+      &[data-ismobile="true"],
+      &[data-isdesktop="true"] {
+        &.is-selected {
+          &:after {
+            opacity: 0;
+          }
+        }
+        &:after {
+          display: block;
+          position: absolute;
+          top: unset;
+          left: unset;
+          right: 0;
+          bottom: 0;
+          width: fit-content;
+          height: fit-content;
+          padding: 3px;
+          font-size: 10px;
+          background: black;
+          color: white;
+        }
+      }
+      &[data-ismobile="true"][data-isdesktop="true"] {
+        &:after {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          content: "configure visibility";
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          opacity: .7;
+        }
+      }
+    }
 
 
     /* 2.2 COLUMNS

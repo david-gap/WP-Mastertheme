@@ -35,12 +35,12 @@ function getSettings(atts) {
 }
 
 export default registerBlockType( 'templates/gallery-item', {
-  title: __( 'Gallery Item', 'WPgutenberg' ),
+  title: __( 'Swiper Item', 'WPgutenberg' ),
   description: __( 'Insert a gallery item', 'WPgutenberg' ),
   category: 'media',
   icon: 'format-image',
   keywords: [
-    __( 'Gallery item', 'WPgutenberg' ),
+    __( 'Swiper item', 'WPgutenberg' ),
     __( 'Images', 'WPgutenberg' ),
     __( 'Item', 'WPgutenberg' )
   ],
