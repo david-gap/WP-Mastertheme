@@ -43,10 +43,10 @@ export default class Inspector extends Component {
 
     return (
       <InspectorControls>
-          <PanelBody title={ __( 'Accordion item settings', 'WPgutenberg' ) } >
+          <PanelBody title={ __( 'Accordion item settings', 'devTheme' ) } >
             <PanelRow>
               <TextControl
-                label={__("Label", "WPgutenberg")}
+                label={__("Label", "devTheme")}
                 value={accordionTitle}
                 onChange={accordionTitle => setAttributes({ accordionTitle })}
               />

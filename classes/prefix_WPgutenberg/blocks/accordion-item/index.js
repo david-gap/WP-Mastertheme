@@ -35,14 +35,14 @@ function getSettings(atts) {
 }
 
 export default registerBlockType( 'templates/accordion-item', {
-  title: __( 'Accordion Item', 'WPgutenberg' ),
-  description: __( 'Insert a accordion item', 'WPgutenberg' ),
+  title: __( 'Accordion Item', 'devTheme' ),
+  description: __( 'Insert a accordion item', 'devTheme' ),
   category: 'media',
   icon: 'editor-insertmore',
   keywords: [
-    __( 'Accordion', 'WPgutenberg' ),
-    __( 'Toggle', 'WPgutenberg' ),
-    __( 'Item', 'WPgutenberg' )
+    __( 'Accordion', 'devTheme' ),
+    __( 'Toggle', 'devTheme' ),
+    __( 'Item', 'devTheme' )
   ],
   parent: [ 'templates/accordion' ],
   supports: {

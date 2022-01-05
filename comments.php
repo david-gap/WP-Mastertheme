@@ -3,7 +3,7 @@
  * Comments File
  *
  * @author      David Voglgsang
- * @version     1.0.1
+ * @version     1.0.2
  *
 */
 
@@ -19,7 +19,7 @@ if (comments_open() && !in_array('comments', $options)):
   <?php if (0 != get_comments_number()): ?>
     <h3 class="comments-title">
       <?php
-        printf( _nx( 'One thought on "%2$s"', '%1$s thoughts on "%2$s"', get_comments_number(), 'comments title', 'template' ),
+        printf( _nx( 'One thought on "%2$s"', '%1$s thoughts on "%2$s"', get_comments_number(), 'comments title', 'devTheme' ),
                 number_format_i18n( get_comments_number() ), '<span>' . get_the_title() . '</span>' );
       ?>
     </h3>

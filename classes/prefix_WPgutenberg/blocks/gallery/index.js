@@ -40,13 +40,13 @@ function getSettings(atts) {
 }
 
 export default registerBlockType( 'templates/gallery', {
-  title: __( 'Swiper Gallery', 'WPgutenberg' ),
-  description: __( 'Insert a image gallery', 'WPgutenberg' ),
+  title: __( 'Swiper Gallery', 'devTheme' ),
+  description: __( 'Insert a image gallery', 'devTheme' ),
   category: 'media',
   icon: 'format-gallery',
   keywords: [
-    __( 'Gallery', 'WPgutenberg' ),
-    __( 'Images', 'WPgutenberg' )
+    __( 'Gallery', 'devTheme' ),
+    __( 'Images', 'devTheme' )
   ],
   supports: {
     html: false,                // Remove support for an HTML mode

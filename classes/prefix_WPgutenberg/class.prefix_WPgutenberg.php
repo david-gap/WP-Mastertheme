@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.13.11
+ * @version     2.13.12
  */
 
 /*=======================================================
@@ -333,7 +333,7 @@ class prefix_WPgutenberg {
       $newColors = array();
       foreach (SELF::$WPgutenberg_ColorPalette as $colorkey => $color) {
         $newColors[] = array(
-          'name'  => __( $color["key"], 'WPgutenberg' ),
+          'name'  => __( $color["key"], 'devTheme' ),
           'slug'  => prefix_core_BaseFunctions::Slugify($color["key"]),
           'color'	=> $color["value"],
         );
@@ -345,7 +345,7 @@ class prefix_WPgutenberg {
       $newColors = array();
       foreach (SELF::$WPgutenberg_FontSizes as $sizekey => $size) {
         $newColors[] = array(
-          'name'  => __( $size["key"], 'WPgutenberg' ),
+          'name'  => __( $size["key"], 'devTheme' ),
           'slug'  => prefix_core_BaseFunctions::Slugify($size["key"]),
           'size'	=> $size["value"],
         );

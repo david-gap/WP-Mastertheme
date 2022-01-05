@@ -8,7 +8,7 @@
  * • include all php classes
  *
  * @author      David Voglgsang
- * @version     1.2.1
+ * @version     1.3.1
  *
 */
 
@@ -86,7 +86,7 @@ Table of Contents:
   function prefix_RunClassesInit(){
     global $additionalClasses;
     // basic classes
-    $basicClasses = array('core_BaseFunctions', 'core_WPadmin', 'WPinit', 'template');
+    $basicClasses = array('core_BaseFunctions', 'core_WPadmin', 'core_Customizer', 'WPinit', 'template');
     $runClasses = array_merge($basicClasses, $additionalClasses);
     // init classes
     foreach ($runClasses as $key => $class) {

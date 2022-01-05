@@ -3,7 +3,7 @@
  * Search results page
  *
  * @author      David Voglgsang
- * @version     1.2
+ * @version     1.2.1
  *
 */
 
@@ -11,7 +11,7 @@ get_header();
 ?>
 <section id="search-results" <?php echo prefix_template::AddContainer(prefix_template::$template_container, true); ?>>
   <h1 class="post-title">
-    <?php echo $wp_query->found_posts; ?> <?php echo _e('Search results for','Template'); ?>: "<?php the_search_query(); ?>"
+    <?php echo $wp_query->found_posts; ?> <?php _e('Search results for','devTheme'); ?>: "<?php the_search_query(); ?>"
   </h1>
   <?php if ( have_posts() ) : ?>
     <div class="results">
@@ -27,7 +27,7 @@ get_header();
       endwhile;	?>
     </div>
   <?php else: ?>
-    <p><?php echo _e('Sorry, but nothing matched your search terms. Please try again with some different keywords.','Template'); ?></p>
+    <p><?php _e('Sorry, but nothing matched your search terms. Please try again with some different keywords.','devTheme'); ?></p>
   <?php endif; ?>
 </section>
 <nav class="pagination">

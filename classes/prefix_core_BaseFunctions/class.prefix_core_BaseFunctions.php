@@ -4,7 +4,7 @@
  *
  * Base dev functions - parent for all custom classes
  * Author:      David Voglgsnag
- * @version     2.13.5
+ * @version     2.13.6
  *
  */
 
@@ -865,11 +865,11 @@ class prefix_core_BaseFunctions {
     $output .= '<div class="login-area">';
         if($_GET['login'] == "logged_out"){
           $output .= '<p class="login-message login_success">';
-            $output .= __('You have been logged out successfully', 'WP Login');
+            $output .= __('You have been logged out successfully', 'devTheme');
           $output .= '</p>';
         }
-        $output .= '<h3>' . __( 'Login', 'WP Login' ) . '</h3>';
-        $output .= '<p class="desc">' . __( 'Please enter your user data to login', 'WP Login' ) . '</p>';
+        $output .= '<h3>' . __( 'Login', 'devTheme' ) . '</h3>';
+        $output .= '<p class="desc">' . __( 'Please enter your user data to login', 'devTheme' ) . '</p>';
         // login form configuration
         $args = array(
           'echo'           => false,
@@ -880,10 +880,10 @@ class prefix_core_BaseFunctions {
           'id_password'    => 'user_pass',
           'id_remember'    => 'rememberme',
           'id_submit'      => 'wp-submit',
-          'label_username' => __( 'Username', 'WP Login' ),
-          'label_password' => __( 'Password', 'WP Login' ),
-          'label_remember' => __( 'Remember Me', 'WP Login' ),
-          'label_log_in'   => __( 'Log In', 'WP Login' ),
+          'label_username' => __( 'Username', 'devTheme' ),
+          'label_password' => __( 'Password', 'devTheme' ),
+          'label_remember' => __( 'Remember Me', 'devTheme' ),
+          'label_log_in'   => __( 'Log In', 'devTheme' ),
           'value_username' => '',
           'value_remember' => false
         );
@@ -892,10 +892,10 @@ class prefix_core_BaseFunctions {
         // error message if login has failed
         if($_GET['login'] == "failed"){
           $output .= '<p class="login-message login_error">';
-            $output .= __('Username and/or password is wrong', 'WP Login');
+            $output .= __('Username and/or password is wrong', 'devTheme');
           $output .= '</p>';
         }
-        $output .= '<a href="' . wp_lostpassword_url() . '">' . __( 'Lost Password?', 'WP Login' ) . '</a>';
+        $output .= '<a href="' . wp_lostpassword_url() . '">' . __( 'Lost Password?', 'devTheme' ) . '</a>';
     $output .= '</div>';
 
     return $output;
@@ -957,7 +957,7 @@ class prefix_core_BaseFunctions {
         if(array_key_exists('label', $metafeildValues) && array_key_exists('type', $metafeildValues)):
           $value = get_post_meta($postID, $metafield, true);
           echo '<div class="components-panel__row edit-post-post-visibility" data-id="' . $metafield . '">';
-            echo '<label for="' . $metafield . '"><strong>' . __( $metafeildValues["label"], 'WPadmin' ) . '</strong></label><br />';
+            echo '<label for="' . $metafield . '"><strong>' . __( $metafeildValues["label"], 'devTheme' ) . '</strong></label><br />';
               if($metafeildValues["type"] == "wysiwig"):
                 wp_editor($value, $metafield, array(
                             'wpautop'       => true,
@@ -968,7 +968,7 @@ class prefix_core_BaseFunctions {
                 ));
               elseif($metafeildValues["type"] == "image"):
                 echo '<input type="hidden" class="img-saved" id="' . $metafield . '" name="' . $metafield . '" value="' . $value . '" style="margin-top:5px; width:100%;">';
-                echo '<button class="wp-single-media" data-action="WPadmin">' . __('Select images','WPadmin') . '</button>';
+                echo '<button class="wp-single-media" data-action="WPadmin">' . __('Select images','devTheme') . '</button>';
                 // img
                 echo '<span class="img-selected">';
                   if($value !== false && $value !== ''):

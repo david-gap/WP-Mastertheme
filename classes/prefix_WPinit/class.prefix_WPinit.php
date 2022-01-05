@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.11.11
+ * @version     2.12.11
  *
 */
 
@@ -33,6 +33,7 @@ Table of Contents:
   2.13 UPDATE LOCALS
   2.14 EDITORS BACKEND
   2.15 ACF TO REST API
+  2.16 LOAD THEME TRANSLATION FILES
 3.0 OUTPUT
   3.1 MENU
   3.2 RETURN CUSTOM CSS
@@ -115,7 +116,7 @@ class prefix_WPinit {
       // clean WP head
       add_action( 'admin_head', array( $this, 'wp_onlyadmin_update' ), 1 );
       // template translation files
-      load_theme_textdomain('DMili', get_template_directory() . '/languages');
+      add_action('after_setup_theme', array( $this, 'themeTranslations' ));
       // disable admin menu
       add_action( 'admin_menu', array( $this, 'Backend_remove_menus' ), 1 );
       // thumbnail dimensions
@@ -360,8 +361,6 @@ class prefix_WPinit {
         wp_localize_script( 'theme/scripts', 'theme_directory', get_stylesheet_directory_uri());
       // template css
         wp_enqueue_style('theme/styles', get_template_directory_uri() . '' . $this->WPinit_css_path, false, $this->WPinit_theme_css_version);
-      // template customizer file
-        wp_enqueue_style('theme/customizer', get_stylesheet_directory_uri() . '/customizer.css', false, '1.0');
       // jQuery (from wp core)
       if ($this->WPinit_jquery == 1 && !is_admin()):
         wp_deregister_script( 'jquery' );
@@ -566,6 +565,13 @@ class prefix_WPinit {
             endif;
         }
         return $response;
+    }
+
+
+    /* 2.16 LOAD THEME TRANSLATION FILES
+    /------------------------*/
+    function themeTranslations(){
+      load_theme_textdomain('devTheme', get_template_directory() . '/languages');
     }
 
 

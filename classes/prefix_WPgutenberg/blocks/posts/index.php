@@ -262,7 +262,7 @@ function WPgutenberg_postresults_postssorting(array $attr, string $source = 'fir
     //   }
     // endif;
   else:
-    $output .= '<li class="wide"><p class="no-results">' . __( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'WPgutenberg' ) . '</p></li>';
+    $output .= '<li class="wide"><p class="no-results">' . __( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'devTheme' ) . '</p></li>';
   endif;
   return $output;
 }

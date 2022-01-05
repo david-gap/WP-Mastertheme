@@ -48,11 +48,11 @@ export default class Inspector extends Component {
 
     return (
       <InspectorControls>
-          <PanelBody title={ __( 'Visibility', 'WPgutenberg' ) } >
+          <PanelBody title={ __( 'Visibility', 'devTheme' ) } >
               <PanelRow>
                 <ToggleControl
                     id="hide-desktop"
-                    label={ __( 'Hide on desktop', 'WPgutenberg' ) }
+                    label={ __( 'Hide on desktop', 'devTheme' ) }
                     checked={ hideOnDesktop }
                     onChange={hideOnDesktop => setAttributes({ hideOnDesktop })}
                 />
@@ -60,7 +60,7 @@ export default class Inspector extends Component {
               <PanelRow>
                 <ToggleControl
                     id="hide-mobile"
-                    label={ __( 'Hide on mobile', 'WPgutenberg' ) }
+                    label={ __( 'Hide on mobile', 'devTheme' ) }
                     checked={ hideOnMobile }
                     onChange={hideOnMobile => setAttributes({ hideOnMobile })}
                 />
@@ -68,16 +68,16 @@ export default class Inspector extends Component {
               <PanelRow>
                 <ToggleControl
                     id="disabled-content"
-                    label={ __( 'Disable content', 'WPgutenberg' ) }
+                    label={ __( 'Disable content', 'devTheme' ) }
                     checked={ disabledValue }
                     onChange={disabledValue => setAttributes({ disabledValue })}
                 />
               </PanelRow>
           </PanelBody>
-          <PanelBody title={ __( 'Scadule', 'WPgutenberg' ) } >
+          <PanelBody title={ __( 'Schedule', 'devTheme' ) } >
             <PanelRow>
-              {__("Start", "WPgutenberg")}{<br />}
-              {__("If block availability starts on this date", "WPgutenberg")}
+              {__("Start", "devTheme")}{<br />}
+              {__("If block availability starts on this date", "devTheme")}
             </PanelRow>
             <PanelRow>
               <DateTimePicker
@@ -86,8 +86,8 @@ export default class Inspector extends Component {
               />
             </PanelRow>
             <PanelRow>
-              {__("End", "WPgutenberg")}{<br />}
-              {__("If block availability stops on this date", "WPgutenberg")}
+              {__("End", "devTheme")}{<br />}
+              {__("If block availability stops on this date", "devTheme")}
             </PanelRow>
             <PanelRow>
               <DateTimePicker

@@ -53,13 +53,13 @@ if(toggleButtons.length !== 0){
 }
 
 export default registerBlockType( 'templates/accordion', {
-  title: __( 'Accordion', 'WPgutenberg' ),
-  description: __( 'Insert a accordion', 'WPgutenberg' ),
+  title: __( 'Accordion', 'devTheme' ),
+  description: __( 'Insert a accordion', 'devTheme' ),
   category: 'media',
   icon: 'editor-insertmore',
   keywords: [
-    __( 'Accordion', 'WPgutenberg' ),
-    __( 'Toggle', 'WPgutenberg' )
+    __( 'Accordion', 'devTheme' ),
+    __( 'Toggle', 'devTheme' )
   ],
   supports: {
     html: false,                // Remove support for an HTML mode

@@ -242,7 +242,7 @@ function WPgutenberg_postresults_postsfilter(array $attr, string $source = 'firs
     endwhile;
     wp_reset_postdata();
   else:
-    $output .= '<p class="no-results wide">' . __( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'WPgutenberg' ) . '</p>';
+    $output .= '<p class="no-results wide">' . __( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'devTheme' ) . '</p>';
   endif;
 
   // grid fixer
@@ -282,8 +282,8 @@ function WPgutenberg_blockRender_postsfilter($attr){
           else:
             $textsearch = '';
           endif;
-          $output .= '<label for="textsearch">' . __( 'Textsearch', 'WPgutenberg' ) . '</label>';
-          $output .= '<input type="text" id="textsearch" name="textsearch" value="' . $textsearch . '" placeholder="' . __( 'Search for', 'WPgutenberg' ) . '">';
+          $output .= '<label for="textsearch">' . __( 'Textsearch', 'devTheme' ) . '</label>';
+          $output .= '<input type="text" id="textsearch" name="textsearch" value="' . $textsearch . '" placeholder="' . __( 'Search for', 'devTheme' ) . '">';
         $output .= '</div>';
       endif;
       if(array_key_exists('postTaxonomyFilter', $attr)):

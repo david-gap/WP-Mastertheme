@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.39.28 | 05.01.2022 <customizer, sidebar and localization>
+* reduce string text domain into one
+* register sidebar for header, sidebar and footer
+* add customizer class (live preview is on process)
+
 ## 1.38.28 | 28.12.2021 <block scadule and disabling, core config>
 * move configuration php file to mastertheme
 * optimize current time by wordpress timezone in dateCheck function

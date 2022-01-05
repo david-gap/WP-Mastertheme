@@ -4,7 +4,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.1.2
+ * @version     2.1.3
  *
 */
 
@@ -149,12 +149,12 @@ class prefix_WPgalleries {
     /------------------------*/
     function WPgalleries_register_cpt() {
       $labels = array(
-          'name' => __( $this->WPgalleries_cpt_label, 'WPgalleries' ),
+          'name' => __( $this->WPgalleries_cpt_label, 'devTheme' ),
       );
       $args = array(
           'labels' => $labels,
           'hierarchical' => true,
-          'description' => __( $this->WPgalleries_cpt_label, 'WPgalleries' ),
+          'description' => __( $this->WPgalleries_cpt_label, 'devTheme' ),
           'show_in_rest' => true,
           'supports' => $this->WPgalleries_cpt_support,
           'public' => true,
@@ -195,7 +195,7 @@ class prefix_WPgalleries {
       foreach( $WPgalleries_allow as $post_type ){
         add_meta_box(
             $this->WPgalleries_cpt_rewrite,
-            __( $this->WPgalleries_cpt_label, 'WPgalleries' ),
+            __( $this->WPgalleries_cpt_label, 'devTheme' ),
             array($this, 'WPgalleries_selection'),
             $post_type,
             'normal',
@@ -447,7 +447,7 @@ class prefix_WPgalleries {
         // output
         echo '<div class="wrap" id="WPgalleries">';
           echo '<input id="galleriesImages" type="hidden" name="WPgalleries_images" value="' . esc_attr($selection) . '" />';
-          echo '<button class="wp-media ajax-action" data-action="WPgalleries">' . __('Select images','WPgalleries') . '</button>';
+          echo '<button class="wp-media ajax-action" data-action="WPgalleries">' . __('Select images','devTheme') . '</button>';
           echo $selected_images;
         echo '</div>';
     }

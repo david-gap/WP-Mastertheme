@@ -95,13 +95,13 @@ function getDimension(atts){
 }
 
 export default registerBlockType( 'templates/vimeo', {
-  title: __( 'Vimeo', 'WPgutenberg' ),
-  description: __( 'Insert vimeo video and configurate the output', 'WPgutenberg' ),
+  title: __( 'Vimeo', 'devTheme' ),
+  description: __( 'Insert vimeo video and configurate the output', 'devTheme' ),
   category: 'media',
   icon: 'video-alt3',
   keywords: [
-    __( 'video', 'WPgutenberg' ),
-    __( 'vimeo', 'WPgutenberg' )
+    __( 'video', 'devTheme' ),
+    __( 'vimeo', 'devTheme' )
   ],
   supports: {
     html: false,                // Remove support for an HTML mode

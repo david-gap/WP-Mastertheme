@@ -72,9 +72,9 @@ export default class Inspector extends Component {
     // update text selection options
     let fieldSelection = [
       { value: "", label: "-" },
-      { value: "title", label: __( 'Title', 'WPgutenberg' ) },
-      { value: "date", label: __( 'Date', 'WPgutenberg' ) },
-      { value: "excerpt", label: __( 'Excerpt', 'WPgutenberg' ) }
+      { value: "title", label: __( 'Title', 'devTheme' ) },
+      { value: "date", label: __( 'Date', 'devTheme' ) },
+      { value: "excerpt", label: __( 'Excerpt', 'devTheme' ) }
     ];
     const query = {
       'status': 'publish',
@@ -101,9 +101,9 @@ export default class Inspector extends Component {
     }
     // sort options
     let postSortOptions = [
-      { value: "menu_order", label: __( 'Menu order', 'WPgutenberg' ) },
-      { value: "date", label: __( 'Date', 'WPgutenberg' ) },
-      { value: "title", label: __( 'Title', 'WPgutenberg' ) }
+      { value: "menu_order", label: __( 'Menu order', 'devTheme' ) },
+      { value: "date", label: __( 'Date', 'devTheme' ) },
+      { value: "title", label: __( 'Title', 'devTheme' ) }
     ];
     if(posts && posts.length > 0){
       if(posts[0].meta !== undefined){
@@ -196,13 +196,13 @@ export default class Inspector extends Component {
     };
     // options
     const postOptions = [
-      { value: "legend", label: __( 'Show taxonomy legend', 'WPgutenberg' ) },
-      { value: "hirarchical", label: __( 'Hirarchical taxonomies', 'WPgutenberg' ) },
-      { value: "emptytax", label: __( 'Show empty taxonomies', 'WPgutenberg' ) },
-      { value: "link_img", label: __( 'Link image', 'WPgutenberg' ) },
-      { value: "link_row1", label: __( 'Link row 1', 'WPgutenberg' ) },
-      { value: "link_row2", label: __( 'Link row 2', 'WPgutenberg' ) },
-      { value: "link_box", label: __( 'Link box', 'WPgutenberg' ) }
+      { value: "legend", label: __( 'Show taxonomy legend', 'devTheme' ) },
+      { value: "hirarchical", label: __( 'Hirarchical taxonomies', 'devTheme' ) },
+      { value: "emptytax", label: __( 'Show empty taxonomies', 'devTheme' ) },
+      { value: "link_img", label: __( 'Link image', 'devTheme' ) },
+      { value: "link_row1", label: __( 'Link row 1', 'devTheme' ) },
+      { value: "link_row2", label: __( 'Link row 2', 'devTheme' ) },
+      { value: "link_box", label: __( 'Link box', 'devTheme' ) }
     ]
     function checkOptions(name){
       if (postTaxonomyFilterOptions && postTaxonomyFilterOptions.length >= 1 && postTaxonomyFilterOptions.includes(name)) {
@@ -230,10 +230,10 @@ export default class Inspector extends Component {
 
     return (
       <InspectorControls>
-          <PanelBody title={ __( 'Posts query', 'WPgutenberg' ) } >
+          <PanelBody title={ __( 'Posts query', 'devTheme' ) } >
             <PanelRow>
               <SelectControl
-                label={__("Post type", "WPgutenberg")}
+                label={__("Post type", "devTheme")}
                 value={postType}
                 options={postTypes}
                 onChange={postType => setAttributes({ postType })}
@@ -241,7 +241,7 @@ export default class Inspector extends Component {
             </PanelRow>
             <PanelRow>
               <SelectControl
-                label={__("Sort by", "WPgutenberg")}
+                label={__("Sort by", "devTheme")}
                 value={postSortBy}
                 options={postSortOptions}
                 onChange={postSortBy => setAttributes({ postSortBy })}
@@ -249,29 +249,29 @@ export default class Inspector extends Component {
             </PanelRow>
             <PanelRow>
               <SelectControl
-                label={__("Sort direction", "WPgutenberg")}
+                label={__("Sort direction", "devTheme")}
                 value={postSortDirection}
                 options={[
-                  { value: "asc", label: __( 'ASC', 'WPgutenberg' ) },
-                  { value: "desc", label: __( 'DESC', 'WPgutenberg' ) }
+                  { value: "asc", label: __( 'ASC', 'devTheme' ) },
+                  { value: "desc", label: __( 'DESC', 'devTheme' ) }
                 ]}
                 onChange={postSortDirection => setAttributes({ postSortDirection })}
               />
             </PanelRow>
             <PanelRow>
               <SelectControl
-                label={__("Relation", "WPgutenberg")}
+                label={__("Relation", "devTheme")}
                 value={postTaxonomyFilterRelation}
                 options={[
-                  { value: "AND", label: __( 'AND', 'WPgutenberg' ) },
-                  { value: "OR", label: __( 'OR', 'WPgutenberg' ) }
+                  { value: "AND", label: __( 'AND', 'devTheme' ) },
+                  { value: "OR", label: __( 'OR', 'devTheme' ) }
                 ]}
                 onChange={postTaxonomyFilterRelation => setAttributes({ postTaxonomyFilterRelation })}
               />
             </PanelRow>
             <PanelRow>
               <SelectControl
-                label={__("Text row 1", "WPgutenberg")}
+                label={__("Text row 1", "devTheme")}
                 value={postTextOne}
                 options={fieldSelection}
                 onChange={postTextOne => setAttributes({ postTextOne })}
@@ -279,40 +279,40 @@ export default class Inspector extends Component {
             </PanelRow>
             <PanelRow>
               <SelectControl
-                label={__("Text row 2", "WPgutenberg")}
+                label={__("Text row 2", "devTheme")}
                 value={postTextTwo}
                 options={fieldSelection}
                 onChange={postTextTwo => setAttributes({ postTextTwo })}
               />
             </PanelRow>
           </PanelBody>
-          <PanelBody title={ __( 'Layout', 'WPgutenberg' ) } >
+          <PanelBody title={ __( 'Layout', 'devTheme' ) } >
             <PanelRow>
               <SelectControl
-                label={__("Filter position", "WPgutenberg")}
+                label={__("Filter position", "devTheme")}
                 value={postFilterPosition}
                 options={[
-                  { value: "top", label: __( 'Top', 'WPgutenberg' ) },
-                  { value: "left", label: __( 'Left', 'WPgutenberg' ) },
-                  { value: "right", label: __( 'Right', 'WPgutenberg' ) }
+                  { value: "top", label: __( 'Top', 'devTheme' ) },
+                  { value: "left", label: __( 'Left', 'devTheme' ) },
+                  { value: "right", label: __( 'Right', 'devTheme' ) }
                 ]}
                 onChange={postFilterPosition => setAttributes({ postFilterPosition })}
               />
             </PanelRow>
             <PanelRow>
               <SelectControl
-                label={__("Template", "WPgutenberg")}
+                label={__("Template", "devTheme")}
                 value={postListTemplate}
                 options={[
-                  { value: "grid", label: __( 'Grid', 'WPgutenberg' ) },
-                  { value: "list", label: __( 'List', 'WPgutenberg' ) }
+                  { value: "grid", label: __( 'Grid', 'devTheme' ) },
+                  { value: "list", label: __( 'List', 'devTheme' ) }
                 ]}
                 onChange={postListTemplate => setAttributes({ postListTemplate })}
               />
             </PanelRow>
             <PanelRow>
               <RangeControl
-                label={__("Column sum", "WPgutenberg")}
+                label={__("Column sum", "devTheme")}
                 value={postColumns}
                 onChange={postColumns => setAttributes({ postColumns })}
                 min={1}
@@ -321,7 +321,7 @@ export default class Inspector extends Component {
             </PanelRow>
             <PanelRow>
               <RangeControl
-                label={__("Column spacing", "WPgutenberg")}
+                label={__("Column spacing", "devTheme")}
                 value={postColumnsSpace}
                 onChange={postColumnsSpace => setAttributes({ postColumnsSpace })}
                 min={1}
@@ -331,7 +331,7 @@ export default class Inspector extends Component {
             <PanelRow>
               <ToggleControl
                   id="posts-thumb"
-                  label={ __( 'Show thumbnails', 'WPgutenberg' ) }
+                  label={ __( 'Show thumbnails', 'devTheme' ) }
                   checked={ postThumb }
                   onChange={postThumb => setAttributes({ postThumb })}
               />
@@ -339,14 +339,14 @@ export default class Inspector extends Component {
             <PanelRow>
               <ToggleControl
                   id="posts-textsearch"
-                  label={ __( 'Show Textsearch', 'WPgutenberg' ) }
+                  label={ __( 'Show Textsearch', 'devTheme' ) }
                   checked={ postTextSearch }
                   onChange={postTextSearch => setAttributes({ postTextSearch })}
               />
             </PanelRow>
             <PanelRow>
               <div>
-                <label><strong>{ __( 'Filteroptions', 'WPgutenberg' ) }</strong></label>
+                <label><strong>{ __( 'Filteroptions', 'devTheme' ) }</strong></label>
                   <ul>
                 { postTaxonomies.map(
                   (taxonomy, setState) => {
@@ -368,7 +368,7 @@ export default class Inspector extends Component {
             </PanelRow>
             <PanelRow>
               <div>
-                <label><strong>{ __( 'Show', 'WPgutenberg' ) }</strong></label>
+                <label><strong>{ __( 'Show', 'devTheme' ) }</strong></label>
                   <ul>
                 { postOptions.map(
                   (options, setState) => {
@@ -389,7 +389,7 @@ export default class Inspector extends Component {
               </div>
             </PanelRow>
           </PanelBody>
-          <PanelBody title={ __( 'Pre filter', 'WPgutenberg' ) } >
+          <PanelBody title={ __( 'Pre filter', 'devTheme' ) } >
             <PanelRow>
               <div>
                 { postTaxonomies.map(

@@ -45,11 +45,11 @@ export default class Inspector extends Component {
 
     return (
       <InspectorControls>
-          <PanelBody title={ __( 'Swiper & Lightbox', 'WPgutenberg' ) } >
+          <PanelBody title={ __( 'Swiper & Lightbox', 'devTheme' ) } >
               <PanelRow>
                 <ToggleControl
                     id="add-swiper"
-                    label={ __( 'Activate Swiper', 'WPgutenberg' ) }
+                    label={ __( 'Activate Swiper', 'devTheme' ) }
                     checked={ addSwiper }
                     onChange={addSwiper => setAttributes({ addSwiper })}
                 />
@@ -57,7 +57,7 @@ export default class Inspector extends Component {
               <PanelRow>
                 <ToggleControl
                     id="add-popup"
-                    label={ __( 'Activate Lightbox', 'WPgutenberg' ) }
+                    label={ __( 'Activate Lightbox', 'devTheme' ) }
                     checked={ addPopUp }
                     onChange={addPopUp => setAttributes({ addPopUp })}
                 />
@@ -65,7 +65,7 @@ export default class Inspector extends Component {
               <PanelRow>
                 <ToggleControl
                     id="add-popup"
-                    label={ __( 'Activate Lightbox preview', 'WPgutenberg' ) }
+                    label={ __( 'Activate Lightbox preview', 'devTheme' ) }
                     checked={ addPopUpPreview }
                     onChange={addPopUpPreview => setAttributes({ addPopUpPreview })}
                 />

@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.19.16
+ * @version     2.20.16
  *
 */
 
@@ -23,6 +23,7 @@ Table of Contents:
   2.2 ACTIVATE CONTAINER CSS CLASS FOR HEADER/FOOTER
   2.3 STICKY HEADER
   2.4 SAVE METABOXES
+  2.5 REGISTER WIDGETS
 3.0 OUTPUT
   3.1 SORTABLE HEADER CONTENT
   3.2 SORTABLE FOOTER CONTENT
@@ -43,6 +44,7 @@ Table of Contents:
   3.17 POST META
   3.18 SCROLL TO TOP BUTTON
   3.19 MAIN MENU SEARCH FORM
+  3.20 RETURN WIDGET
 =======================================================*/
 
 
@@ -163,7 +165,10 @@ class prefix_template {
     "socialmedia" => 0,
     "custom" => 0,
     "searchform" => 0,
-    "container_end" => 1
+    "container_end" => 1,
+    "widget_one" => 0,
+    "widget_two" => 0,
+    "widget_three" => 0
   );
   static $template_header_logo_link            = "";
   static $template_header_logo_d               = array(
@@ -221,7 +226,10 @@ class prefix_template {
     "address" => 1,
     "custom" => 0,
     "searchform" => 0,
-    "container_end" => 1
+    "container_end" => 1,
+    "widget_one" => 0,
+    "widget_two" => 0,
+    "widget_three" => 0
   );
   static $template_footer_before               = "";
   static $template_footer_after                = "";
@@ -239,6 +247,8 @@ class prefix_template {
       // update custom fields
       add_action('save_post', array( $this, 'WPtemplate_meta_Save' ),  10, 2 );
     endif;
+    // register widgets
+    SELF::registerCustomWidgets();
     // shortcodes
     add_shortcode( 'socialmedia', array( $this, 'SocialMedia' ) );
     add_shortcode( 'copyright', array( $this, 'Copyright' ) );
@@ -254,34 +264,6 @@ class prefix_template {
     if(SELF::$template_header_menusearchform == 1):
       add_filter('wp_nav_menu_items', array( $this, 'addSearchFormToMainmenu' ), 10, 2);
     endif;
-    // register strings
-    $strings = array();
-    $strings[] = 'To top';
-    $strings[] = SELF::$template_address['company'];
-    $strings[] = SELF::$template_address['name'];
-    $strings[] = SELF::$template_address['street'];
-    $strings[] = SELF::$template_address['street2'];
-    $strings[] = SELF::$template_address['postalCode'];
-    $strings[] = SELF::$template_address['city'];
-    $strings[] = SELF::$template_address['country'];
-    $strings[] = SELF::$template_address['phone'];
-    $strings[] = SELF::$template_address['fax'];
-    $strings[] = SELF::$template_address['mobile'];
-    $strings[] = SELF::$template_address['email'];
-    $strings[] = SELF::$template_address['labels']['company'];
-    $strings[] = SELF::$template_address['labels']['name'];
-    $strings[] = SELF::$template_address['labels']['street'];
-    $strings[] = SELF::$template_address['labels']['street2'];
-    $strings[] = SELF::$template_address['labels']['postalCode'];
-    $strings[] = SELF::$template_address['labels']['city'];
-    $strings[] = SELF::$template_address['labels']['country'];
-    $strings[] = SELF::$template_address['labels']['phone'];
-    $strings[] = SELF::$template_address['labels']['fax'];
-    $strings[] = SELF::$template_address['labels']['mobile'];
-    $strings[] = SELF::$template_address['labels']['email'];
-    foreach ($strings as $key => $value) {
-      $newString = __( $value, 'Template' );
-    }
   }
 
 
@@ -621,6 +603,18 @@ class prefix_template {
               "label" => "Custom",
               "type" => "switchbutton"
             ),
+            "widget_one" => array(
+              "label" => "Widget 1",
+              "type" => "switchbutton"
+            ),
+            "widget_two" => array(
+              "label" => "Widget 2",
+              "type" => "switchbutton"
+            ),
+            "widget_three" => array(
+              "label" => "Widget 3",
+              "type" => "switchbutton"
+            ),
             "container_end" => array(
               "label" => "Container end",
               "type" => "hr"
@@ -823,6 +817,18 @@ class prefix_template {
               "label" => "Search form",
               "type" => "switchbutton"
             ),
+            "widget_one" => array(
+              "label" => "Widget 1",
+              "type" => "switchbutton"
+            ),
+            "widget_two" => array(
+              "label" => "Widget 2",
+              "type" => "switchbutton"
+            ),
+            "widget_three" => array(
+              "label" => "Widget 3",
+              "type" => "switchbutton"
+            ),
             "container_end" => array(
               "label" => "Container end",
               "type" => "hr"
@@ -865,7 +871,7 @@ class prefix_template {
     foreach( $post_types as $post_type ){
         add_meta_box(
             'template_page_options',
-            __( 'Options', 'template' ),
+            __( 'Options', 'devTheme' ),
             array($this, 'WPtemplate_pageoptions'),
             $post_type,
             'side',
@@ -1004,6 +1010,78 @@ class prefix_template {
     }
 
 
+    /* 2.5 REGISTER WIDGETS
+    /------------------------*/
+    function registerCustomWidgets(){
+      // header
+      register_sidebar( array(
+        'name'          => __( 'Header 1', 'devTheme' ),
+        'id'            => 'header_widget_one',
+        'description'   => __( 'Widget for the header', 'devTheme' ),
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h5 class="header-widget">',
+        'after_title'   => '</h5>',
+      ) );
+      register_sidebar( array(
+        'name'          => __( 'Header 2', 'devTheme' ),
+        'id'            => 'header_widget_two',
+        'description'   => __( 'Widget for the header', 'devTheme' ),
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h5 class="header-widget">',
+        'after_title'   => '</h5>',
+      ) );
+      register_sidebar( array(
+        'name'          => __( 'Header 3', 'devTheme' ),
+        'id'            => 'header_widget_three',
+        'description'   => __( 'Widget for the header', 'devTheme' ),
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h5 class="header-widget">',
+        'after_title'   => '</h5>',
+      ) );
+      // page
+      register_sidebar( array(
+        'name'          => __( 'Page Sidebar', 'devTheme' ),
+        'id'            => 'sidebar',
+        'description'   => __( 'Sidebar Widget for Pages', 'devTheme' ),
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h5 class="sidebar-widget">',
+        'after_title'   => '</h5>',
+      ) );
+      // footer
+      register_sidebar( array(
+        'name'          => __( 'Footer 1', 'devTheme' ),
+        'id'            => 'footer_widget_one',
+        'description'   => __( 'Widget for the footer', 'devTheme' ),
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h5 class="footer-widget">',
+        'after_title'   => '</h5>',
+      ) );
+      register_sidebar( array(
+        'name'          => __( 'Footer 2', 'devTheme' ),
+        'id'            => 'footer_widget_two',
+        'description'   => __( 'Widget for the footer', 'devTheme' ),
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h5 class="footer-widget">',
+        'after_title'   => '</h5>',
+      ) );
+      register_sidebar( array(
+        'name'          => __( 'Footer 3', 'devTheme' ),
+        'id'            => 'footer_widget_three',
+        'description'   => __( 'Widget for the footer', 'devTheme' ),
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h5 class="footer-widget">',
+        'after_title'   => '</h5>',
+      ) );
+    }
+
+
 
   /*==================================================================================
     3.0 OUTPUT
@@ -1067,6 +1145,15 @@ class prefix_template {
             break;
           case 'searchform':
             echo $value == 1 ? '<div class="search-form">' . get_search_form( false ) . '</div>' : '';
+            break;
+          case 'widget_one':
+            echo $value == 1 ? SELF::getWidget('header_' . $key) : '';
+            break;
+          case 'widget_two':
+            echo $value == 1 ? SELF::getWidget('header_' . $key) : '';
+            break;
+          case 'widget_three':
+            echo $value == 1 ? SELF::getWidget('header_' . $key) : '';
             break;
           case 'custom':
             // WP check
@@ -1153,6 +1240,15 @@ class prefix_template {
           case 'searchform':
             echo $value == 1 ? '<div class="search-form">' . get_search_form( false ) . '</div>' : '';
             break;
+          case 'widget_one':
+            echo $value == 1 ? SELF::getWidget('footer_' . $key) : '';
+            break;
+          case 'widget_two':
+            echo $value == 1 ? SELF::getWidget('footer_' . $key) : '';
+            break;
+          case 'widget_three':
+            echo $value == 1 ? SELF::getWidget('footer_' . $key) : '';
+            break;
           case 'custom':
             // WP check
             if (function_exists('do_shortcode')):
@@ -1191,7 +1287,7 @@ class prefix_template {
         // output
         echo '<div class="wrap" id="WPtemplate">';
           // page options
-          echo '<p><b>' . __( 'Page options', 'template' ) . '</b></p>';
+          echo '<p><b>' . __( 'Page options', 'devTheme' ) . '</b></p>';
           echo '<ul>';
             $exeptions = array('beforeMain', 'afterMain');
             foreach (SELF::$template_page_options as $key => $value) {
@@ -1232,7 +1328,7 @@ class prefix_template {
                 $customLabel = 'Code after main block';
               endif;
               echo '<div class="exeption">';
-                echo '<p><label for="exeption-' . $key . '"><b>' . __( $customLabel, 'template' ) . '</b></label></p>';
+                echo '<p><label for="exeption-' . $key . '"><b>' . __( $customLabel, 'devTheme' ) . '</b></label></p>';
                 echo '<textarea id="exeption-' . $key . '" name="template_page_options[' . $key . ']">' . $options[$key] . '</textarea>';
               echo '</div>';
             endif;
@@ -1272,7 +1368,7 @@ class prefix_template {
 
       if(SELF::$template_ph_active === true):
         $output .= '<div id="placeholder">';
-          $output .= '<h1>' . __( 'Website under construction', 'Template' ) . '</h1>';
+          $output .= '<h1>' . __( 'Website under construction', 'devTheme' ) . '</h1>';
           $output .= SELF::$template_ph_custom ? SELF::$template_ph_custom : '';
           $output .= SELF::$template_ph_address === true ? SELF::AddressBlock(SELF::$template_address) : '';
         $output .= '</div>';
@@ -1425,72 +1521,72 @@ class prefix_template {
         endif;
         if($config["company"] !== ''):
           $output .= '<span rel="me" class="company">';
-            $output .= $config["labels"] && array_key_exists('company', $config["labels"]) && $config["labels"]["company"] !== '' ? __($config["labels"]["company"], 'Template') . ' ' : '';
-            $output .= __($config["company"], 'Template Adressblock');
+            $output .= $config["labels"] && array_key_exists('company', $config["labels"]) && $config["labels"]["company"] !== '' ? __($config["labels"]["company"], 'devTheme') . ' ' : '';
+            $output .= __($config["company"], 'devTheme');
           $output .= '</span>';
         endif;
         if($config["name"] !== ''):
           $output .= '<span class="name">';
-            $output .= $config["labels"] && array_key_exists('name', $config["labels"]) && $config["labels"]["name"] !== '' ? __($config["labels"]["name"], 'Template') . ' ' : '';
-            $output .= __($config["name"], 'Template Adressblock');
+            $output .= $config["labels"] && array_key_exists('name', $config["labels"]) && $config["labels"]["name"] !== '' ? __($config["labels"]["name"], 'devTheme') . ' ' : '';
+            $output .= __($config["name"], 'devTheme');
           $output .= '</span>';
         endif;
         if($config["street"] !== ''):
           $output .= '<span class="street">';
-            $output .= $config["labels"] && array_key_exists('street', $config["labels"]) && $config["labels"]["street"] !== '' ? __($config["labels"]["street"], 'Template') . ' ' : '';
-            $output .= __($config["street"], 'Template Adressblock');
+            $output .= $config["labels"] && array_key_exists('street', $config["labels"]) && $config["labels"]["street"] !== '' ? __($config["labels"]["street"], 'devTheme') . ' ' : '';
+            $output .= __($config["street"], 'devTheme');
           $output .= '</span>';
         endif;
         if($config["street2"] !== ''):
           $output .= '<span class="street_add">';
-            $output .= $config["labels"] && array_key_exists('street2', $config["labels"]) && $config["labels"]["street2"] !== '' ? __($config["labels"]["street2"], 'Template') . ' ' : '';
-            $output .= __($config["street2"], 'Template Adressblock');
+            $output .= $config["labels"] && array_key_exists('street2', $config["labels"]) && $config["labels"]["street2"] !== '' ? __($config["labels"]["street2"], 'devTheme') . ' ' : '';
+            $output .= __($config["street2"], 'devTheme');
           $output .= '</span>';
         endif;
         $output .= $config["postalCode"] !== '' && $config["city"] !== '' ? '<span class="location">' : '';
           if($config["postalCode"] !== ''):
             $output .= '<span class="postalcode">';
-              $output .= $config["labels"] && array_key_exists('postalCode', $config["labels"]) && $config["labels"]["postalCode"] !== '' ? __($config["labels"]["postalCode"], 'Template') . ' ' : '';
-              $output .= __($config["postalCode"], 'Template Adressblock');
+              $output .= $config["labels"] && array_key_exists('postalCode', $config["labels"]) && $config["labels"]["postalCode"] !== '' ? __($config["labels"]["postalCode"], 'devTheme') . ' ' : '';
+              $output .= __($config["postalCode"], 'devTheme');
             $output .= '</span>';
           endif;
           $output .= $config["postalCode"] !== '' && $config["city"] !== '' ? ' ' : '';
           if($config["city"] !== ''):
             $output .= '<span class="city">';
-              $output .= $config["labels"] && array_key_exists('city', $config["labels"]) && $config["labels"]["city"] !== '' ? __($config["labels"]["city"], 'Template') . ' ' : '';
-              $output .= __($config["city"], 'Template Adressblock');
+              $output .= $config["labels"] && array_key_exists('city', $config["labels"]) && $config["labels"]["city"] !== '' ? __($config["labels"]["city"], 'devTheme') . ' ' : '';
+              $output .= __($config["city"], 'devTheme');
             $output .= '</span>';
           endif;
         $output .= $config["postalCode"] !== '' && $config["city"] !== '' ? '</span>' : '';
         if($config["country"] !== ''):
           $output .= '<span class="country">';
-            $output .= $config["labels"] && array_key_exists('country', $config["labels"]) && $config["labels"]["country"] !== '' ? __($config["labels"]["country"], 'Template') . ' ' : '';
-            $output .= __($config["country"], 'Template Adressblock');
+            $output .= $config["labels"] && array_key_exists('country', $config["labels"]) && $config["labels"]["country"] !== '' ? __($config["labels"]["country"], 'devTheme') . ' ' : '';
+            $output .= __($config["country"], 'devTheme');
           $output .= '</span>';
         endif;
         if($config["phone"] !== ''):
-          $output .= '<a href="tel:' . prefix_core_BaseFunctions::cleanPhoneNr(__($config["phone"], 'Template Adressblock')) . '" class="call phone_nr">';
-            $output .= $config["labels"] && array_key_exists('phone', $config["labels"]) && $config["labels"]["phone"] !== '' ? __($config["labels"]["phone"], 'Template') . ' ' : '';
-            $output .= __($config["phone"], 'Template Adressblock');
+          $output .= '<a href="tel:' . prefix_core_BaseFunctions::cleanPhoneNr(__($config["phone"], 'devTheme')) . '" class="call phone_nr">';
+            $output .= $config["labels"] && array_key_exists('phone', $config["labels"]) && $config["labels"]["phone"] !== '' ? __($config["labels"]["phone"], 'devTheme') . ' ' : '';
+            $output .= __($config["phone"], 'devTheme');
           $output .= '</a>';
         endif;
         if($config["fax"] !== ''):
-          $output .= '<a href="tel:' . prefix_core_BaseFunctions::cleanPhoneNr(__($config["fax"], 'Template Adressblock')) . '" class="call fax_nr">';
-            $output .= $config["labels"] && array_key_exists('fax', $config["labels"]) && $config["labels"]["fax"] !== '' ? __($config["labels"]["fax"], 'Template') . ' ' : '';
-            $output .= __($config["fax"], 'Template Adressblock');
+          $output .= '<a href="tel:' . prefix_core_BaseFunctions::cleanPhoneNr(__($config["fax"], 'devTheme')) . '" class="call fax_nr">';
+            $output .= $config["labels"] && array_key_exists('fax', $config["labels"]) && $config["labels"]["fax"] !== '' ? __($config["labels"]["fax"], 'devTheme') . ' ' : '';
+            $output .= __($config["fax"], 'devTheme');
           $output .= '</a>';
         endif;
         if($config["mobile"] !== ''):
-          $output .= '<a href="tel:' . prefix_core_BaseFunctions::cleanPhoneNr(__($config["mobile"], 'Template Adressblock')) . '" class="call mobile_nr">';
-            $output .= $config["labels"] && array_key_exists('mobile', $config["labels"]) && $config["labels"]["mobile"] !== '' ? __($config["labels"]["mobile"], 'Template') . ' ' : '';
-            $output .= __($config["mobile"], 'Template Adressblock');
+          $output .= '<a href="tel:' . prefix_core_BaseFunctions::cleanPhoneNr(__($config["mobile"], 'devTheme')) . '" class="call mobile_nr">';
+            $output .= $config["labels"] && array_key_exists('mobile', $config["labels"]) && $config["labels"]["mobile"] !== '' ? __($config["labels"]["mobile"], 'devTheme') . ' ' : '';
+            $output .= __($config["mobile"], 'devTheme');
           $output .= '</a>';
         endif;
         if($config["email"] !== ''):
-          $output .= '<a href="mailto:' . __($config["email"], 'Template Adressblock') . '" class="mail">';
-            $output .= $config["labels"] && array_key_exists('email', $config["labels"]) && $config["labels"]["email"] !== '' ? __($config["labels"]["email"], 'Template') . ' ' : '';
+          $output .= '<a href="mailto:' . __($config["email"], 'devTheme') . '" class="mail">';
+            $output .= $config["labels"] && array_key_exists('email', $config["labels"]) && $config["labels"]["email"] !== '' ? __($config["labels"]["email"], 'devTheme') . ' ' : '';
             $output .= $config["labels"] && array_key_exists('email', $config["labels"]) && $config["labels"]["email"] !== '' ? '<span>' : '';
-              $output .= __($config["email"], 'Template Adressblock');
+              $output .= __($config["email"], 'devTheme');
             $output .= $config["labels"] && array_key_exists('email', $config["labels"]) && $config["labels"]["email"] !== '' ? '</span>' : '';
           $output .= '</a>';
         endif;
@@ -1765,7 +1861,7 @@ class prefix_template {
       $output = '';
       $output .= '<div id="scroll-to-top">';
         $output .= '<div ' . prefix_template::AddContainer(prefix_template::$template_container_totop, true) . '>';
-          $output .= '<span>' . __( 'To top', 'Template' ) . '</span>';
+          $output .= '<span>' . __( 'To top', 'devTheme' ) . '</span>';
         $output .= '</div>';
       $output .= '</div>';
       return $output;
@@ -1781,6 +1877,15 @@ class prefix_template {
         $items = $updated_options;
       endif;
       return $items;
+    }
+
+
+    /* 3.20 RETURN WIDGET
+    /------------------------*/
+    function getWidget($key) {
+      if(is_active_sidebar( $key )):
+          dynamic_sidebar( $key );
+      endif;
     }
 
 

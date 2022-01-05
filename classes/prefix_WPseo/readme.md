@@ -1,4 +1,4 @@
-**Version 2.2.7** (23.09.2021)
+**Version 2.2.8** (05.01.2022)
 
 Custom class "prefix_WPseo" for default SEO settings.
 

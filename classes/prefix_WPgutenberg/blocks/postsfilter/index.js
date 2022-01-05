@@ -187,8 +187,8 @@ function PostValues(type, post, postTaxonomyFilterOptions, row, taxonomy){
 function searchBox(atts){
   if(atts["postTextSearch"] === true){
     var output = '<div class="textsearch">';
-    output += '<label for="textsearch">' + __( 'Textsearch', 'WPgutenberg' ) + '</label>';
-    output += '<input type="text" id="textsearch" name="textsearch" placeholder="' + __( 'Search for', 'WPgutenberg' ) + '">';
+    output += '<label for="textsearch">' + __( 'Textsearch', 'devTheme' ) + '</label>';
+    output += '<input type="text" id="textsearch" name="textsearch" placeholder="' + __( 'Search for', 'devTheme' ) + '">';
     output += '</div>';
     return (
       htmlToElem( output )
@@ -275,13 +275,13 @@ function getGridFixer(atts){
 
 
 export default registerBlockType( 'templates/postsfilter', {
-  title: __( 'Posts Filter', 'WPgutenberg' ),
-  description: __( 'Return posts', 'WPgutenberg' ),
+  title: __( 'Posts Filter', 'devTheme' ),
+  description: __( 'Return posts', 'devTheme' ),
   category: 'widgets',
   icon: 'format-aside',
   keywords: [
-    __( 'Posts Filter', 'WPgutenberg' ),
-    __( 'Beiträge Filter', 'WPgutenberg' )
+    __( 'Posts Filter', 'devTheme' ),
+    __( 'Beiträge Filter', 'devTheme' )
   ],
   supports: {
     html: false,                // Remove support for an HTML mode
@@ -374,7 +374,7 @@ export default registerBlockType( 'templates/postsfilter', {
         return (
             <p>
                 <Spinner />
-                { __( 'Loading Posts', 'WPgutenberg' ) }
+                { __( 'Loading Posts', 'devTheme' ) }
             </p>
         );
     }
@@ -382,7 +382,7 @@ export default registerBlockType( 'templates/postsfilter', {
     if ( 0 === posts.length ) {
         return [
           <Inspector {...{ setAttributes, ...props }} />,
-          <p>{ __( 'No Posts', 'WPgutenberg' ) }</p>
+          <p>{ __( 'No Posts', 'devTheme' ) }</p>
         ]
     }
 
