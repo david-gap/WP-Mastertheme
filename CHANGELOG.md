@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.40.28 | 06.01.2022 <add translation, configurator style>
+* add translation file for de_CH
+* optimize customizer mobile values
+* Configurator styles
+
 ## 1.39.28 | 05.01.2022 <customizer, sidebar and localization>
 * reduce string text domain into one
 * register sidebar for header, sidebar and footer

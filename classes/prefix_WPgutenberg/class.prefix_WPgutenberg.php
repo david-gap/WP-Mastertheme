@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.13.12
+ * @version     2.13.13
  */
 
 /*=======================================================
@@ -103,6 +103,24 @@ class prefix_WPgutenberg {
       add_action( 'init', array($this, 'WPgutenbergFixApiSort'), 99 );
       // filter blocks before dom
       add_filter('render_block',  array($this, 'FilterBlocks'), 10, 2 );
+      // register strings
+      $backendStrings = array(
+        __('Gutenberg', 'devTheme'),
+        __('Active', 'devTheme'),
+        __('Gutenberg styles embed', 'devTheme'),
+        __('Backend style options', 'devTheme'),
+        __('Default Patterns', 'devTheme'),
+        __('Fontsize scaler', 'devTheme'),
+        __('Allowed core blocks', 'devTheme'),
+        __('Allowed costum blocks', 'devTheme'),
+        __('Custom color picker', 'devTheme'),
+        __('Custom color palette', 'devTheme'),
+        __('Name', 'devTheme'),
+        __('Color', 'devTheme'),
+        __('Custom font sizes', 'devTheme'),
+        __('Name', 'devTheme'),
+        __('Size (without px)', 'devTheme')
+      );
     }
 
     /* 1.3 BACKEND ARRAY

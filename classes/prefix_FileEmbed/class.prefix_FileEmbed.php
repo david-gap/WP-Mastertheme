@@ -4,7 +4,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.1
+ * @version     2.2
  *
 */
 
@@ -64,6 +64,23 @@ class prefix_FileEmbed {
       SELF::updateVars();
       // save file content as global
       SELF::Add_Files_as_Global();
+      // register strings
+      $backendStrings = array(
+        __('File Embed', 'devTheme'),
+        __('Lokales Hauptverzeichis', 'devTheme'),
+        __('Eingebundene Dateien', 'devTheme'),
+        __('Global name', 'devTheme'),
+        __('File directory', 'devTheme'),
+        __('First row are titles', 'devTheme'),
+        __('File coding', 'devTheme'),
+        __('Encoding', 'devTheme'),
+        __('Use column as ID', 'devTheme'),
+        __('Sort content by column', 'devTheme'),
+        __('Sort direction', 'devTheme'),
+        __('Sort value is date', 'devTheme'),
+        __('CSV sperated by', 'devTheme'),
+        __('SLL stream', 'devTheme')
+      );
     }
 
 

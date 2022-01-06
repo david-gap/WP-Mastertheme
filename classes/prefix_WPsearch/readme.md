@@ -1,4 +1,4 @@
-**Version 2.1** (24.07.2020)
+**Version 2.1.1** (06.01.2022)
 
 Custom class "prefix_WPsearch" to improve search query.
 

@@ -4,7 +4,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.2.8
+ * @version     2.2.9
  *
 */
 
@@ -90,11 +90,35 @@ class prefix_WPseo {
         // update custom fields
         add_action('save_post', array( $this, 'WPseo_meta_Save' ),  10, 2 );
       endif;
+      // register strings
+      $backendStrings = array(
+        __('SEO', 'devTheme'),
+        __('Google tracking', 'devTheme'),
+        __('Logo', 'devTheme'),
+        __('Favicon', 'devTheme'),
+        __('Apple touch icon (57px)', 'devTheme'),
+        __('Apple touch icon (72px)', 'devTheme'),
+        __('Apple touch icon (114px)', 'devTheme'),
+        __('Activate Data-Structures', 'devTheme'),
+        __('Activate custom Data-Structure for pages & posts', 'devTheme'),
+        __('Data-Structure Address', 'devTheme'),
+        __('Company', 'devTheme'),
+        __('Street', 'devTheme'),
+        __('Additional Street', 'devTheme'),
+        __('Zip Code', 'devTheme'),
+        __('City', 'devTheme'),
+        __('Country', 'devTheme'),
+        __('Phone', 'devTheme'),
+        __('E-Mail', 'devTheme'),
+        __('Additional Data', 'devTheme'),
+        __('Data key', 'devTheme'),
+        __('Data value', 'devTheme')
+      );
     }
 
     /* 1.3 BACKEND ARRAY
     /------------------------*/
-    static $classtitle = 'WP SEO';
+    static $classtitle = 'SEO';
     static $classkey = 'seo';
     static $backend = array(
       "google-tracking" => array(

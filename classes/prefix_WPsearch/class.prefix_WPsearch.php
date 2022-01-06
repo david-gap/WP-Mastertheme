@@ -4,7 +4,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.1
+ * @version     2.1.1
  *
 */
 
@@ -53,11 +53,17 @@ class prefix_WPsearch {
       if(!empty(is_array($this->WPsearch_tax))):
         add_action('parse_query', array( $this, 'WPsearch_Taxonomies'), 1 );
       endif;
+      // register strings
+      $backendStrings = array(
+        __('ACF searchability', 'devTheme'),
+        __('Field slugs', 'devTheme'),
+        __('Taxonomies', 'devTheme')
+      );
     }
 
     /* 1.3 BACKEND ARRAY
     /------------------------*/
-    static $classtitle = 'ACF searchable';
+    static $classtitle = 'ACF searchability';
     static $classkey = 'WPsearch';
     static $backend = array(
       "acf" => array(

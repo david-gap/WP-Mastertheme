@@ -6,7 +6,7 @@
  * IMG dominant color - WP compatible
  * https://github.com/david-gap/classes
  * Author:      David Voglgsang
- * @version     2.1.5
+ * @version     2.2.5
  *
  */
 
@@ -84,6 +84,15 @@ class prefix_imgDC {
           add_action('wp_enqueue_scripts', array( $this, 'imgDC_frontend_enqueue_scripts_and_styles' ) );
         endif;
       endif;
+      // register strings
+      $backendStrings = array(
+        __('IMG dominant content preloader', 'devTheme'),
+        __('Activate', 'devTheme'),
+        __('Use in the content and shortcodes', 'devTheme'),
+        __('Embed assets', 'devTheme'),
+        __('Ignored file types', 'devTheme'),
+        __('Default color', 'devTheme')
+      );
     }
 
 

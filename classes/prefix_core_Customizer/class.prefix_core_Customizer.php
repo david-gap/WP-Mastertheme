@@ -4,7 +4,7 @@
  *
  * Customizer extension
  * Author:      David Voglgsnag
- * @version     1.0
+ * @version     1.1
  *
  */
 
@@ -78,15 +78,20 @@ class prefix_core_Customizer {
           'type' => 'input',
           'default' => '100px'
         ),
+        'mobile_breakpoint' => array(
+          'label' => 'Breakpoint (mobile)',
+          'type' => 'input',
+          'default' => '768px'
+        ),
         'html__anchor_mobile' => array(
           'label' => 'Anchor position (mobile)',
           'type' => 'input',
           'default' => '120px'
         ),
-        'mobile_breakpoint' => array(
-          'label' => 'Breakpoint (mobile)',
+        'content__space_mobile' => array(
+          'label' => 'Content spacing (mobile)',
           'type' => 'input',
-          'default' => '768px'
+          'default' => '20px'
         )
       )
     ),
@@ -284,6 +289,57 @@ class prefix_core_Customizer {
     add_action( 'customize_preview_init', array($this, 'customizerPreview') );
     // create new customizer file after saving customizer
     add_action( 'customize_save_after', array($this, 'generateCusomizerFile') );
+    // register strings
+    $backendStrings = array(
+      __('Label', 'devTheme'),
+      __('Template sizes', 'devTheme'),
+      __('Container width', 'devTheme'),
+      __('Container side padding', 'devTheme'),
+      __('Content spacing', 'devTheme'),
+      __('Input padding', 'devTheme'),
+      __('Align wide left', 'devTheme'),
+      __('Align wide right', 'devTheme'),
+      __('Anchor position', 'devTheme'),
+      __('Breakpoint (mobile)', 'devTheme'),
+      __('Anchor position (mobile)', 'devTheme'),
+      __('Content spacing (mobile)', 'devTheme'),
+      __('Fonts', 'devTheme'),
+      __('Main font family', 'devTheme'),
+      __('Main font size', 'devTheme'),
+      __('Main line height', 'devTheme'),
+      __('Main font size (mobile)', 'devTheme'),
+      __('Main line height (mobile)', 'devTheme'),
+      __('Gutenberg font scaling (mobile)', 'devTheme'),
+      __('Main menu font size', 'devTheme'),
+      __('Main menu line height', 'devTheme'),
+      __('Main menu font size (mobile)', 'devTheme'),
+      __('Main menu line height (mobile)', 'devTheme'),
+      __('Footer font size', 'devTheme'),
+      __('Footer line height', 'devTheme'),
+      __('Colors', 'devTheme'),
+      __('Main color', 'devTheme'),
+      __('Scondary color', 'devTheme'),
+      __('Hamburger color', 'devTheme'),
+      __('Background color', 'devTheme'),
+      __('Font color', 'devTheme'),
+      __('Header background color', 'devTheme'),
+      __('Header container background color', 'devTheme'),
+      __('Hamburger navigation background color', 'devTheme'),
+      __('Footer background color', 'devTheme'),
+      __('Footer container background color', 'devTheme'),
+      __('Hamburger color (dark)', 'devTheme'),
+      __('Background color (dark)', 'devTheme'),
+      __('Font color (dark)', 'devTheme'),
+      __('Header background (dark)', 'devTheme'),
+      __('header container background (dark)', 'devTheme'),
+      __('Hamburger navigation background color (dark)', 'devTheme'),
+      __('Footer background (dark)', 'devTheme'),
+      __('Footer container background (dark)', 'devTheme'),
+      __('Lightbox', 'devTheme'),
+      __('Lightbox width', 'devTheme'),
+      __('Lightbox container padding', 'devTheme'),
+      __('Lightbox preview visibility', 'devTheme')
+    );
   }
 
 
@@ -361,11 +417,17 @@ class prefix_core_Customizer {
     $popup_space = preg_split('/(?<=[0-9])(?=[a-z]+)/i',get_theme_mod('popup__space', $this->defaultValues['theme_popup']['values']['popup__space']['default']));
     $popup_breakpoint = $popup_width[0] + $popup_space[0] + $popup_space[0];
     // build new file content
+    $mobileOutput = '';
     $output = '';
     $output .= ':root {';
       foreach ($this->defaultValues as $sectionKey => $sectionValues) {
         foreach ($sectionValues["values"] as $valueKey => $ValueSettings) {
-          $output .= '--' . $valueKey . ': ' . get_theme_mod($valueKey, $ValueSettings["default"]) . ';';
+          if (strpos($valueKey, '_mobile') !== false):
+            $output .= '--' . $valueKey . ': ' . get_theme_mod($valueKey, $ValueSettings["default"]) . ';';
+          else:
+            // move to mobile
+            $mobileOutput .= '--' . str_replace('_mobile', '', $valueKey) . ': ' . get_theme_mod($valueKey, $ValueSettings["default"]) . ';';
+          endif;
         }
       }
     $output .= '}';
@@ -395,6 +457,11 @@ class prefix_core_Customizer {
     $output .= '}';
     // mobile
     $output .= '@media screen and (max-width: ' . $mobile_breakpoint . $get_mobile_breakpoint[1] . ') {';
+      if($mobileOutput !== ''):
+        $output .= ':root {';
+          $output .= $mobileOutput;
+        $output .= '}';
+      endif;
       if(file_exists(get_template_directory() . "/dist/responsive_mobile.css")):
         $output .= file_get_contents(get_template_directory() . "/dist/responsive_mobile.css");
       endif;

@@ -1,0 +1,1723 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2022-01-06 18:46+0100\n"
+"PO-Revision-Date: 2022-01-06 19:57+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de_CH\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e;_nx;_n;_x;_ex;esc_attr__;esc_attr_e;esc_attr_x;"
+"esc_html__;esc_html_e;esc_html_x;_n_noop\n"
+"X-Poedit-SearchPath-0: 404.php\n"
+"X-Poedit-SearchPath-1: archive.php\n"
+"X-Poedit-SearchPath-2: comments.php\n"
+"X-Poedit-SearchPath-3: configuration.php\n"
+"X-Poedit-SearchPath-4: footer.php\n"
+"X-Poedit-SearchPath-5: header.php\n"
+"X-Poedit-SearchPath-6: index.php\n"
+"X-Poedit-SearchPath-7: search.php\n"
+"X-Poedit-SearchPath-8: sidebar.php\n"
+"X-Poedit-SearchPath-9: single.php\n"
+"X-Poedit-SearchPath-10: template_parts/footer.php\n"
+"X-Poedit-SearchPath-11: template_parts/header.php\n"
+"X-Poedit-SearchPath-12: template_parts/meta.php\n"
+"X-Poedit-SearchPath-13: template_parts/post_audio.php\n"
+"X-Poedit-SearchPath-14: template_parts/post_default.php\n"
+"X-Poedit-SearchPath-15: template_parts/post_image.php\n"
+"X-Poedit-SearchPath-16: template_parts/post_video.php\n"
+"X-Poedit-SearchPath-17: classes\n"
+"X-Poedit-SearchPathExcluded-0: classes/prefix_WPgutenberg/node_modules\n"
+
+#: 404.php:13
+msgid "404 Error"
+msgstr "404 Fehler"
+
+#: 404.php:14
+msgid "Page could not be found."
+msgstr "Seite konnte nicht gefunden werden."
+
+#: 404.php:15
+msgid "Back to home"
+msgstr "Zurück zur Startseite"
+
+#: classes/prefix_FileEmbed/class.prefix_FileEmbed.php:69
+msgid "File Embed"
+msgstr "Datei einbinden"
+
+#: classes/prefix_FileEmbed/class.prefix_FileEmbed.php:70
+msgid "Lokales Hauptverzeichis"
+msgstr ""
+
+#: classes/prefix_FileEmbed/class.prefix_FileEmbed.php:71
+msgid "Eingebundene Dateien"
+msgstr ""
+
+#: classes/prefix_FileEmbed/class.prefix_FileEmbed.php:72
+msgid "Global name"
+msgstr "Globaler Name"
+
+#: classes/prefix_FileEmbed/class.prefix_FileEmbed.php:73
+msgid "File directory"
+msgstr "Datei Pfad"
+
+#: classes/prefix_FileEmbed/class.prefix_FileEmbed.php:74
+msgid "First row are titles"
+msgstr "Erste Zeile sind Titel"
+
+#: classes/prefix_FileEmbed/class.prefix_FileEmbed.php:75
+msgid "File coding"
+msgstr "Datei Kodierung"
+
+#: classes/prefix_FileEmbed/class.prefix_FileEmbed.php:76
+msgid "Encoding"
+msgstr "Kodierung"
+
+#: classes/prefix_FileEmbed/class.prefix_FileEmbed.php:77
+msgid "Use column as ID"
+msgstr "Spalte als ID verwenden"
+
+#: classes/prefix_FileEmbed/class.prefix_FileEmbed.php:78
+msgid "Sort content by column"
+msgstr "Inhalt über Spalte sortieren"
+
+#: classes/prefix_FileEmbed/class.prefix_FileEmbed.php:79
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:314
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:252
+msgid "Sort direction"
+msgstr "Sortierrichtung"
+
+#: classes/prefix_FileEmbed/class.prefix_FileEmbed.php:80
+msgid "Sort value is date"
+msgstr "Sortierinhalt ist ein Datum"
+
+#: classes/prefix_FileEmbed/class.prefix_FileEmbed.php:81
+msgid "CSV sperated by"
+msgstr "CSV getrennt durch"
+
+#: classes/prefix_FileEmbed/class.prefix_FileEmbed.php:82
+msgid "SLL stream"
+msgstr "SSL stream"
+
+#: classes/prefix_Mautic/class.prefix_Mautic.php:59
+msgid "Mautic"
+msgstr "Mautic"
+
+#: classes/prefix_Mautic/class.prefix_Mautic.php:60
+msgid "Mautic URL"
+msgstr "Mautic Verzeichnis"
+
+#: classes/prefix_Mautic/class.prefix_Mautic.php:61
+msgid "Inline tracking code"
+msgstr "Inline Tracking Code"
+
+#: classes/prefix_Mautic/class.prefix_Mautic.php:62
+msgid "Inline formular script"
+msgstr "Inline Formularskript"
+
+#: classes/prefix_WPgalleries/class.prefix_WPgalleries.php:99
+msgid "Galleries"
+msgstr "Galerien"
+
+#: classes/prefix_WPgalleries/class.prefix_WPgalleries.php:100
+msgid "Register CPT"
+msgstr "CPT registrieren"
+
+#: classes/prefix_WPgalleries/class.prefix_WPgalleries.php:101
+msgid "CPT label"
+msgstr "CPT Bezeichnung"
+
+#: classes/prefix_WPgalleries/class.prefix_WPgalleries.php:102
+msgid "CPT rewrite"
+msgstr "CPT rewrite"
+
+#: classes/prefix_WPgalleries/class.prefix_WPgalleries.php:103
+msgid "CPT icon"
+msgstr "CPT Symbol"
+
+#: classes/prefix_WPgalleries/class.prefix_WPgalleries.php:104
+msgid "CPT support"
+msgstr "CPT Unterstützung"
+
+#: classes/prefix_WPgalleries/class.prefix_WPgalleries.php:105
+msgid "Add taxonomies"
+msgstr "Taxonomien hinzufügen"
+
+#: classes/prefix_WPgalleries/class.prefix_WPgalleries.php:106
+msgid "Actiate detail page"
+msgstr "Detailseite aktivieren"
+
+#: classes/prefix_WPgalleries/class.prefix_WPgalleries.php:107
+#: classes/prefix_imgDC/class.prefix_imgDC.php:92
+msgid "Embed assets"
+msgstr "Assets einbinden"
+
+#: classes/prefix_WPgalleries/class.prefix_WPgalleries.php:108
+msgid "Embed popup assets"
+msgstr "PopUp Assets einbinden"
+
+#: classes/prefix_WPgalleries/class.prefix_WPgalleries.php:109
+msgid "Activate on other post types"
+msgstr "Bei anderen Posttypen aktivieren"
+
+#: classes/prefix_WPgalleries/class.prefix_WPgalleries.php:464
+#: classes/prefix_core_BaseFunctions/class.prefix_core_BaseFunctions.php:971
+#: classes/prefix_core_WPadmin/class.prefix_core_WPadmin.php:243
+msgid "Select images"
+msgstr "Bilder auswählen"
+
+#: classes/prefix_WPgutenberg/blocks/accordion-item/index.js:38
+msgid "Accordion Item"
+msgstr "Akkordeon Gegenstand"
+
+#: classes/prefix_WPgutenberg/blocks/accordion-item/index.js:39
+msgid "Insert a accordion item"
+msgstr "Akkordeon Gegenstand einfügen"
+
+#: classes/prefix_WPgutenberg/blocks/accordion-item/index.js:43
+#: classes/prefix_WPgutenberg/blocks/accordion/index.js:56
+#: classes/prefix_WPgutenberg/blocks/accordion/index.js:61
+msgid "Accordion"
+msgstr "Akkordeon"
+
+#: classes/prefix_WPgutenberg/blocks/accordion-item/index.js:44
+#: classes/prefix_WPgutenberg/blocks/accordion/index.js:62
+#: classes/prefix_WPgutenberg/blocks/vimeo/inspector.js:121
+msgid "Toggle"
+msgstr "Aufklapper"
+
+#: classes/prefix_WPgutenberg/blocks/accordion-item/index.js:45
+#: classes/prefix_WPgutenberg/blocks/gallery-item/index.js:45
+msgid "Item"
+msgstr "Gegenstand"
+
+#: classes/prefix_WPgutenberg/blocks/accordion-item/inspector.js:46
+msgid "Accordion item settings"
+msgstr "Akkordeon Gegenstandeinstellungen"
+
+#: classes/prefix_WPgutenberg/blocks/accordion-item/inspector.js:49
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:294
+msgid "Label"
+msgstr "Bezeichnung"
+
+#: classes/prefix_WPgutenberg/blocks/accordion/index.js:57
+msgid "Insert a accordion"
+msgstr "Akkordeon einfügen"
+
+#: classes/prefix_WPgutenberg/blocks/core-extensions/all/inspector.js:51
+msgid "Visibility"
+msgstr "Sichtbarkeit"
+
+#: classes/prefix_WPgutenberg/blocks/core-extensions/all/inspector.js:55
+msgid "Hide on desktop"
+msgstr "Auf Desktopgrösse ausblenden"
+
+#: classes/prefix_WPgutenberg/blocks/core-extensions/all/inspector.js:63
+msgid "Hide on mobile"
+msgstr "Auf Mobilegrösse ausblenden"
+
+#: classes/prefix_WPgutenberg/blocks/core-extensions/all/inspector.js:71
+msgid "Disable content"
+msgstr "Inhalt deaktivieren"
+
+#: classes/prefix_WPgutenberg/blocks/core-extensions/all/inspector.js:77
+msgid "Schedule"
+msgstr "Zeitplan"
+
+#: classes/prefix_WPgutenberg/blocks/core-extensions/all/inspector.js:79
+msgid "Start"
+msgstr "Start"
+
+#: classes/prefix_WPgutenberg/blocks/core-extensions/all/inspector.js:80
+msgid "If block availability starts on this date"
+msgstr "Wenn die Blocksichtbarkeit von einem Startdatum abhängig ist"
+
+#: classes/prefix_WPgutenberg/blocks/core-extensions/all/inspector.js:89
+msgid "End"
+msgstr "Ende"
+
+#: classes/prefix_WPgutenberg/blocks/core-extensions/all/inspector.js:90
+msgid "If block availability stops on this date"
+msgstr "Wenn die Blocksichtbarkeit von einem Enddatum abhängig ist"
+
+#: classes/prefix_WPgutenberg/blocks/core-extensions/gallery/inspector.js:48
+msgid "Swiper & Lightbox"
+msgstr "Swiper & Lightbox"
+
+#: classes/prefix_WPgutenberg/blocks/core-extensions/gallery/inspector.js:52
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:407
+msgid "Activate Swiper"
+msgstr "Swiper aktivieren"
+
+#: classes/prefix_WPgutenberg/blocks/core-extensions/gallery/inspector.js:60
+#: classes/prefix_WPgutenberg/blocks/core-extensions/image/inspector.js:52
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:415
+msgid "Activate Lightbox"
+msgstr "Lightbox aktivieren"
+
+#: classes/prefix_WPgutenberg/blocks/core-extensions/gallery/inspector.js:68
+msgid "Activate Lightbox preview"
+msgstr "Lightbox Vorschau aktivieren"
+
+#: classes/prefix_WPgutenberg/blocks/core-extensions/image/inspector.js:48
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:338
+msgid "Lightbox"
+msgstr "Lightbox"
+
+#: classes/prefix_WPgutenberg/blocks/gallery-item/index.js:38
+msgid "Swiper Item"
+msgstr "Swiper Gegenstand"
+
+#: classes/prefix_WPgutenberg/blocks/gallery-item/index.js:39
+msgid "Insert a gallery item"
+msgstr "Galerie Gegenstand ergänzen"
+
+#: classes/prefix_WPgutenberg/blocks/gallery-item/index.js:43
+msgid "Swiper item"
+msgstr "Swiper Gegenstand"
+
+#: classes/prefix_WPgutenberg/blocks/gallery-item/index.js:44
+#: classes/prefix_WPgutenberg/blocks/gallery/index.js:49
+msgid "Images"
+msgstr "Bilder"
+
+#: classes/prefix_WPgutenberg/blocks/gallery/index.js:43
+msgid "Swiper Gallery"
+msgstr "Swiper Galerie"
+
+#: classes/prefix_WPgutenberg/blocks/gallery/index.js:44
+msgid "Insert a image gallery"
+msgstr "Galeriebild einfügen"
+
+#: classes/prefix_WPgutenberg/blocks/gallery/index.js:48
+msgid "Gallery"
+msgstr "Galerie"
+
+#: classes/prefix_WPgutenberg/blocks/posts/index.js:283
+#: classes/prefix_WPgutenberg/blocks/posts/index.js:288
+#: classes/prefix_template/class.prefix_template.php:357
+msgid "Posts"
+msgstr "Beiträge"
+
+#: classes/prefix_WPgutenberg/blocks/posts/index.js:284
+#: classes/prefix_WPgutenberg/blocks/postsfilter/index.js:279
+msgid "Return posts"
+msgstr "Beiträge ausgeben"
+
+#: classes/prefix_WPgutenberg/blocks/posts/index.js:289
+msgid "Beiträge"
+msgstr "Beiträge"
+
+#: classes/prefix_WPgutenberg/blocks/posts/index.js:397
+#: classes/prefix_WPgutenberg/blocks/postsfilter/index.js:377
+msgid "Loading Posts"
+msgstr "Beiträge werden geladen"
+
+#: classes/prefix_WPgutenberg/blocks/posts/index.js:405
+#: classes/prefix_WPgutenberg/blocks/postsfilter/index.js:385
+msgid "No Posts"
+msgstr "Keine Beiträge"
+
+#: classes/prefix_WPgutenberg/blocks/posts/index.php:265
+#: classes/prefix_WPgutenberg/blocks/postsfilter/index.php:245 search.php:30
+msgid ""
+"Sorry, but nothing matched your search terms. Please try again with some "
+"different keywords."
+msgstr ""
+"Es tut uns leid, aber mit Ihren Suchbegriffe wurden keine Ergebnisse "
+"gefunden. Bitte versuchen Sie es noch einmal mit anderen Suchbegriffen."
+
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:68
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:102
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:202
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:75
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:106
+msgid "Title"
+msgstr "Titel"
+
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:69
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:101
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:203
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:76
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:105
+msgid "Date"
+msgstr "Datum"
+
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:70
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:77
+msgid "Excerpt"
+msgstr "Textauszug"
+
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:100
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:104
+msgid "Menu order"
+msgstr "Menü Reihenfolge"
+
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:240
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:202
+msgid "Link image"
+msgstr "Bild verlinken"
+
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:241
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:203
+msgid "Link row 1"
+msgstr "Zeile 1 verlinken"
+
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:242
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:204
+msgid "Link row 2"
+msgstr "Zeile 2 verlinken"
+
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:243
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:205
+msgid "Link box"
+msgstr "Box verlinken"
+
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:295
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:233
+msgid "Posts query"
+msgstr "Beiträge Abfrage"
+
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:298
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:236
+msgid "Post type"
+msgstr "Post Typ"
+
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:306
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:244
+msgid "Sort by"
+msgstr "Sortieren nach"
+
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:317
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:255
+msgid "ASC"
+msgstr "ASC"
+
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:318
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:256
+msgid "DESC"
+msgstr "DESC"
+
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:325
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:274
+msgid "Text row 1"
+msgstr "Textzeile 1"
+
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:333
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:282
+msgid "Text row 2"
+msgstr "Textzeile 2"
+
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:343
+msgid "Item sum"
+msgstr "Anzahl der Artikeln"
+
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:352
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:371
+msgid "Show"
+msgstr "Ziegen"
+
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:373
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:289
+msgid "Layout"
+msgstr "Gestaltung"
+
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:378
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:315
+msgid "Column sum"
+msgstr "Spaltensumme"
+
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:389
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:324
+msgid "Column spacing"
+msgstr "Spaltenabstand"
+
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:399
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:334
+msgid "Show thumbnails"
+msgstr "Beitragsbild ausgeben"
+
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:423
+msgid "Image preview inside Lightbox"
+msgstr "Bildvorschau innerhalb der Lightbox"
+
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:431
+msgid "Show the sort options"
+msgstr "Sortieroptionen ausgeben"
+
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:438
+msgid "Select sort options"
+msgstr "Sortieroptionen auswählen"
+
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:460
+#: classes/prefix_WPgutenberg/blocks/postsfilter/index.js:278
+#: classes/prefix_WPgutenberg/blocks/postsfilter/index.js:283
+msgid "Posts Filter"
+msgstr "Beiträgeabfrage"
+
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:463
+msgid "Select posts"
+msgstr "Beiträge auswählen"
+
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:486
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:263
+msgid "Relation"
+msgstr "Beziehung"
+
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:489
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:266
+msgid "AND"
+msgstr "UND"
+
+#: classes/prefix_WPgutenberg/blocks/posts/inspector.js:490
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:267
+msgid "OR"
+msgstr "ODER"
+
+#: classes/prefix_WPgutenberg/blocks/postsfilter/index.js:190
+#: classes/prefix_WPgutenberg/blocks/postsfilter/index.php:285
+msgid "Textsearch"
+msgstr "Textsuche"
+
+#: classes/prefix_WPgutenberg/blocks/postsfilter/index.js:191
+#: classes/prefix_WPgutenberg/blocks/postsfilter/index.php:286
+msgid "Search for"
+msgstr "Suche nach"
+
+#: classes/prefix_WPgutenberg/blocks/postsfilter/index.js:284
+msgid "Beiträge Filter"
+msgstr "Beiträge Filter"
+
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:199
+msgid "Show taxonomy legend"
+msgstr "Taxonomien-Legende ausgeben"
+
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:200
+msgid "Hirarchical taxonomies"
+msgstr "Taxonomienhirarchie"
+
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:201
+msgid "Show empty taxonomies"
+msgstr "Leere Taxonomien ausgeben"
+
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:292
+msgid "Filter position"
+msgstr "Filterposition"
+
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:295
+#: classes/prefix_WPgutenberg/blocks/vimeo/inspector.js:131
+msgid "Top"
+msgstr "Oben"
+
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:296
+#: classes/prefix_WPgutenberg/blocks/vimeo/inspector.js:132
+msgid "Left"
+msgstr "Links"
+
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:297
+#: classes/prefix_WPgutenberg/blocks/vimeo/inspector.js:134
+msgid "Right"
+msgstr "Rechts"
+
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:304
+#: classes/prefix_template/class.prefix_template.php:269
+msgid "Template"
+msgstr "Template"
+
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:307
+msgid "Grid"
+msgstr "Raster (Grid)"
+
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:308
+msgid "List"
+msgstr "Liste"
+
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:342
+msgid "Show Textsearch"
+msgstr "Textsuche anzeigen"
+
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:349
+msgid "Filteroptions"
+msgstr "Filteroptionen"
+
+#: classes/prefix_WPgutenberg/blocks/postsfilter/inspector.js:392
+msgid "Pre filter"
+msgstr "Vorfilterung"
+
+#: classes/prefix_WPgutenberg/blocks/vimeo/index.js:98
+msgid "Vimeo"
+msgstr "Vimeo"
+
+#: classes/prefix_WPgutenberg/blocks/vimeo/index.js:99
+msgid "Insert vimeo video and configurate the output"
+msgstr "Vimeo Video einfügen imd dessen Ausgabe konfigurieren"
+
+#: classes/prefix_WPgutenberg/blocks/vimeo/index.js:103
+msgid "video"
+msgstr "Video"
+
+#: classes/prefix_WPgutenberg/blocks/vimeo/index.js:104
+msgid "vimeo"
+msgstr "Vimeo"
+
+#: classes/prefix_WPgutenberg/blocks/vimeo/inspector.js:59
+msgid "Video settings"
+msgstr "Videoeinstellungen"
+
+#: classes/prefix_WPgutenberg/blocks/vimeo/inspector.js:61
+msgid "ID"
+msgstr "ID"
+
+#: classes/prefix_WPgutenberg/blocks/vimeo/inspector.js:62
+msgid "example: https://player.vimeo.com/video/xxxxxxxxx"
+msgstr "Beispiel: https://player.vimeo.com/video/xxxxxxxxx"
+
+#: classes/prefix_WPgutenberg/blocks/vimeo/inspector.js:67
+#: classes/prefix_template/class.prefix_template.php:278
+#: classes/prefix_template/class.prefix_template.php:332
+#: classes/prefix_template/class.prefix_template.php:337
+msgid "Width"
+msgstr "Breite"
+
+#: classes/prefix_WPgutenberg/blocks/vimeo/inspector.js:72
+#: classes/prefix_template/class.prefix_template.php:279
+#: classes/prefix_template/class.prefix_template.php:333
+#: classes/prefix_template/class.prefix_template.php:338
+msgid "Height"
+msgstr "Höhe"
+
+#: classes/prefix_WPgutenberg/blocks/vimeo/inspector.js:79
+msgid "Autoplay"
+msgstr "Automatische Wiedergabe"
+
+#: classes/prefix_WPgutenberg/blocks/vimeo/inspector.js:87
+msgid "Background Video"
+msgstr "Hintergrund-Video"
+
+#: classes/prefix_WPgutenberg/blocks/vimeo/inspector.js:95
+msgid "Loop"
+msgstr "Schleife"
+
+#: classes/prefix_WPgutenberg/blocks/vimeo/inspector.js:103
+msgid "Mute"
+msgstr "Sturmmschalten"
+
+#: classes/prefix_WPgutenberg/blocks/vimeo/inspector.js:109
+msgid "Table of content (by chapters)"
+msgstr "Inhaltsverzeichnis (Kapitel)"
+
+#: classes/prefix_WPgutenberg/blocks/vimeo/inspector.js:113
+#: classes/prefix_WPgutenberg/class.prefix_WPgutenberg.php:109
+msgid "Active"
+msgstr "Aktivieren"
+
+#: classes/prefix_WPgutenberg/blocks/vimeo/inspector.js:128
+msgid "Position"
+msgstr "Position"
+
+#: classes/prefix_WPgutenberg/blocks/vimeo/inspector.js:133
+msgid "Bottom"
+msgstr "Unten"
+
+#: classes/prefix_WPgutenberg/blocks/vimeo/inspector.js:142
+msgid "Play on chapter selection"
+msgstr "Nach Kapitelauswahl abspielen"
+
+#: classes/prefix_WPgutenberg/blocks/vimeo/inspector.js:150
+msgid "Stop on chapter end"
+msgstr "Am Kapitelende anhalten"
+
+#: classes/prefix_WPgutenberg/blocks/vimeo/inspector.js:156
+msgid "Video Link (background video only)"
+msgstr "Video Link (nur bei Hintergrund-Videos)"
+
+#: classes/prefix_WPgutenberg/blocks/vimeo/inspector.js:159
+msgid "Link"
+msgstr "Link"
+
+#: classes/prefix_WPgutenberg/blocks/vimeo/inspector.js:160
+msgid "Can only be used with background videos"
+msgstr "Kann nur mit Hintergrund-Videos verwendet werden"
+
+#: classes/prefix_WPgutenberg/blocks/vimeo/inspector.js:167
+msgid "Target"
+msgstr "Ziel"
+
+#: classes/prefix_WPgutenberg/blocks/vimeo/inspector.js:170
+msgid "Same window"
+msgstr "Selbe Fenster"
+
+#: classes/prefix_WPgutenberg/blocks/vimeo/inspector.js:171
+msgid "New window"
+msgstr "Neues Fenster"
+
+#: classes/prefix_WPgutenberg/class.prefix_WPgutenberg.php:108
+msgid "Gutenberg"
+msgstr "Gutenberg"
+
+#: classes/prefix_WPgutenberg/class.prefix_WPgutenberg.php:110
+msgid "Gutenberg styles embed"
+msgstr "Gutenberg Formatierung einbinden"
+
+#: classes/prefix_WPgutenberg/class.prefix_WPgutenberg.php:111
+msgid "Backend style options"
+msgstr "Backend Formatierungsoptionen"
+
+#: classes/prefix_WPgutenberg/class.prefix_WPgutenberg.php:112
+msgid "Default Patterns"
+msgstr "Standard-Muster"
+
+#: classes/prefix_WPgutenberg/class.prefix_WPgutenberg.php:113
+msgid "Fontsize scaler"
+msgstr "Schriftgrösse skalieren"
+
+#: classes/prefix_WPgutenberg/class.prefix_WPgutenberg.php:114
+msgid "Allowed core blocks"
+msgstr "Erlaubte Kernblöcke"
+
+#: classes/prefix_WPgutenberg/class.prefix_WPgutenberg.php:115
+msgid "Allowed costum blocks"
+msgstr "Erlaube benutzerdefinierte Blöcke"
+
+#: classes/prefix_WPgutenberg/class.prefix_WPgutenberg.php:116
+msgid "Custom color picker"
+msgstr "Benutzerdefinierte Farbauswahl"
+
+#: classes/prefix_WPgutenberg/class.prefix_WPgutenberg.php:117
+msgid "Custom color palette"
+msgstr "Benutzerdefinierte Farbpalette"
+
+#: classes/prefix_WPgutenberg/class.prefix_WPgutenberg.php:118
+#: classes/prefix_WPgutenberg/class.prefix_WPgutenberg.php:121
+#: classes/prefix_WPinit/class.prefix_WPinit.php:184
+#: classes/prefix_WPinit/class.prefix_WPinit.php:187
+#: classes/prefix_template/class.prefix_template.php:282
+#: classes/prefix_template/class.prefix_template.php:294
+msgid "Name"
+msgstr "Name"
+
+#: classes/prefix_WPgutenberg/class.prefix_WPgutenberg.php:119
+msgid "Color"
+msgstr "Farbe"
+
+#: classes/prefix_WPgutenberg/class.prefix_WPgutenberg.php:120
+msgid "Custom font sizes"
+msgstr "Benutzerdefinierte Schriftgrösse"
+
+#: classes/prefix_WPgutenberg/class.prefix_WPgutenberg.php:122
+msgid "Size (without px)"
+msgstr "Grösse (ohne px)"
+
+#: classes/prefix_WPimgAttr/class.prefix_WPimgAttr.php:81
+msgid "Image attributes"
+msgstr "Bild-Attribute"
+
+#: classes/prefix_WPimgAttr/class.prefix_WPimgAttr.php:82
+msgid "Repalce img alt inside content"
+msgstr "Innerhalb des Inhalts img alt austauschen"
+
+#: classes/prefix_WPimgAttr/class.prefix_WPimgAttr.php:83
+msgid "Repalce img alt inside atttachments"
+msgstr "Innerhalb der Anhänge img alt austauschen"
+
+#: classes/prefix_WPimgAttr/class.prefix_WPimgAttr.php:84
+msgid "Repalce img alt inside shortcodes"
+msgstr "Innerhalb von Shortcodes img alt austauschen"
+
+#: classes/prefix_WPimgAttr/class.prefix_WPimgAttr.php:85
+msgid "Add languages"
+msgstr "Sprache ergänzen"
+
+#: classes/prefix_WPimgAttr/class.prefix_WPimgAttr.php:151
+msgid "Alternative Text"
+msgstr "Alternativer Text"
+
+#: classes/prefix_WPinit/class.prefix_WPinit.php:165
+msgid "Wordpress settings"
+msgstr "Wordpress Einstellungen"
+
+#: classes/prefix_WPinit/class.prefix_WPinit.php:166
+msgid "Wordpress Support"
+msgstr "Wordpress Unterstützung"
+
+#: classes/prefix_WPinit/class.prefix_WPinit.php:167
+msgid "Embed CSS file"
+msgstr "CSS Datei einbinden"
+
+#: classes/prefix_WPinit/class.prefix_WPinit.php:168
+msgid "Activate Cache Busting"
+msgstr "Cache Busting aktivieren"
+
+#: classes/prefix_WPinit/class.prefix_WPinit.php:169
+msgid "Embed Jquery file"
+msgstr "Jquery Datei einbinden"
+
+#: classes/prefix_WPinit/class.prefix_WPinit.php:170
+msgid "Embed custom JS file"
+msgstr "JS Datei einbinden"
+
+#: classes/prefix_WPinit/class.prefix_WPinit.php:171
+msgid "Load custom css inside header"
+msgstr "Benutzerdefiniertes CSS innerhalb vom header laden"
+
+#: classes/prefix_WPinit/class.prefix_WPinit.php:172
+msgid "Enable SVG upload"
+msgstr "SVG Unterstützung aktivieren"
+
+#: classes/prefix_WPinit/class.prefix_WPinit.php:173
+msgid "CSS Version"
+msgstr "CSS Version"
+
+#: classes/prefix_WPinit/class.prefix_WPinit.php:174
+msgid "JS Version"
+msgstr "JS Version"
+
+#: classes/prefix_WPinit/class.prefix_WPinit.php:175
+msgid "CSS file path"
+msgstr "CSS Dateipfad"
+
+#: classes/prefix_WPinit/class.prefix_WPinit.php:176
+msgid "Cache Busting file path"
+msgstr "Cache Busting Dateipfad"
+
+#: classes/prefix_WPinit/class.prefix_WPinit.php:177
+msgid "JS file path"
+msgstr "JS Dateipfad"
+
+#: classes/prefix_WPinit/class.prefix_WPinit.php:178
+msgid "Hide backend menu to not admins"
+msgstr "Backend Menü von nicht Administratoren ausblenden"
+
+#: classes/prefix_WPinit/class.prefix_WPinit.php:179
+msgid "Show menu to editors"
+msgstr "Menü für Autoren sichtbar"
+
+#: classes/prefix_WPinit/class.prefix_WPinit.php:180
+msgid "Show widgets to editors"
+msgstr "Widgets für Autoren sichtbar"
+
+#: classes/prefix_WPinit/class.prefix_WPinit.php:181
+msgid "Show customizer to editors"
+msgstr "Customizer für Autoren sichtbar"
+
+#: classes/prefix_WPinit/class.prefix_WPinit.php:182
+msgid "Registered menu"
+msgstr "Registrierte Menüs"
+
+#: classes/prefix_WPinit/class.prefix_WPinit.php:183
+#: classes/prefix_WPinit/class.prefix_WPinit.php:186
+msgid "Slug"
+msgstr "Slug"
+
+#: classes/prefix_WPinit/class.prefix_WPinit.php:185
+msgid "Add file types to uploader"
+msgstr "Dateityp zum uploader ergänzen"
+
+#: classes/prefix_WPinit/class.prefix_WPinit.php:188
+msgid "Typekit ID"
+msgstr "Typekit ID"
+
+#: classes/prefix_WPinit/class.prefix_WPinit.php:189
+msgid "Embed Google Fonts"
+msgstr "Google Fonts einbinden"
+
+#: classes/prefix_WPsearch/class.prefix_WPsearch.php:58
+msgid "ACF searchability"
+msgstr "ACF Suche"
+
+#: classes/prefix_WPsearch/class.prefix_WPsearch.php:59
+msgid "Field slugs"
+msgstr "Feld Slugs"
+
+#: classes/prefix_WPsearch/class.prefix_WPsearch.php:60
+msgid "Taxonomies"
+msgstr "Taxonomien"
+
+#: classes/prefix_WPseo/class.prefix_WPseo.php:95
+msgid "SEO"
+msgstr "SEO"
+
+#: classes/prefix_WPseo/class.prefix_WPseo.php:96
+msgid "Google tracking"
+msgstr "Google Tracking"
+
+#: classes/prefix_WPseo/class.prefix_WPseo.php:97
+#: classes/prefix_template/class.prefix_template.php:276
+#: classes/prefix_template/class.prefix_template.php:342
+msgid "Logo"
+msgstr "Logo"
+
+#: classes/prefix_WPseo/class.prefix_WPseo.php:98
+msgid "Favicon"
+msgstr "Favicon"
+
+#: classes/prefix_WPseo/class.prefix_WPseo.php:99
+msgid "Apple touch icon (57px)"
+msgstr "Apple touch Symbol (57px)"
+
+#: classes/prefix_WPseo/class.prefix_WPseo.php:100
+msgid "Apple touch icon (72px)"
+msgstr "Apple touch Symbol (72px)"
+
+#: classes/prefix_WPseo/class.prefix_WPseo.php:101
+msgid "Apple touch icon (114px)"
+msgstr "Apple touch Symbol (114px)"
+
+#: classes/prefix_WPseo/class.prefix_WPseo.php:102
+msgid "Activate Data-Structures"
+msgstr "Data-Struktur aktivieren"
+
+#: classes/prefix_WPseo/class.prefix_WPseo.php:103
+msgid "Activate custom Data-Structure for pages & posts"
+msgstr "Benutzerdefinierte Data-Struktur für Seiten & Beiträge aktivieren"
+
+#: classes/prefix_WPseo/class.prefix_WPseo.php:104
+msgid "Data-Structure Address"
+msgstr "Data-Struktur Adresse"
+
+#: classes/prefix_WPseo/class.prefix_WPseo.php:105
+#: classes/prefix_template/class.prefix_template.php:281
+#: classes/prefix_template/class.prefix_template.php:293
+msgid "Company"
+msgstr "Firma"
+
+#: classes/prefix_WPseo/class.prefix_WPseo.php:106
+#: classes/prefix_template/class.prefix_template.php:283
+#: classes/prefix_template/class.prefix_template.php:295
+msgid "Street"
+msgstr "Strasse"
+
+#: classes/prefix_WPseo/class.prefix_WPseo.php:107
+msgid "Additional Street"
+msgstr "Adresszusatz"
+
+#: classes/prefix_WPseo/class.prefix_WPseo.php:108
+msgid "Zip Code"
+msgstr "Postleitzahl"
+
+#: classes/prefix_WPseo/class.prefix_WPseo.php:109
+#: classes/prefix_template/class.prefix_template.php:286
+#: classes/prefix_template/class.prefix_template.php:298
+msgid "City"
+msgstr "Stadt"
+
+#: classes/prefix_WPseo/class.prefix_WPseo.php:110
+#: classes/prefix_template/class.prefix_template.php:287
+#: classes/prefix_template/class.prefix_template.php:299
+msgid "Country"
+msgstr "Land"
+
+#: classes/prefix_WPseo/class.prefix_WPseo.php:111
+#: classes/prefix_template/class.prefix_template.php:288
+#: classes/prefix_template/class.prefix_template.php:300
+#: classes/prefix_template/class.prefix_template.php:310
+msgid "Phone"
+msgstr "Telefon"
+
+#: classes/prefix_WPseo/class.prefix_WPseo.php:112
+#: classes/prefix_template/class.prefix_template.php:291
+#: classes/prefix_template/class.prefix_template.php:303
+msgid "E-Mail"
+msgstr "E-Mail-Adresse"
+
+#: classes/prefix_WPseo/class.prefix_WPseo.php:113
+msgid "Additional Data"
+msgstr "Zusätzliches Data"
+
+#: classes/prefix_WPseo/class.prefix_WPseo.php:114
+msgid "Data key"
+msgstr "Data Schlüssel"
+
+#: classes/prefix_WPseo/class.prefix_WPseo.php:115
+msgid "Data value"
+msgstr "Data Inhalt"
+
+#: classes/prefix_WPseo/class.prefix_WPseo.php:233
+msgid "Add data structure"
+msgstr "Data Struktur ergänzen"
+
+#: classes/prefix_core_BaseFunctions/class.prefix_core_BaseFunctions.php:868
+msgid "You have been logged out successfully"
+msgstr "Sie haben sich erfolgreich abgemeldet"
+
+#: classes/prefix_core_BaseFunctions/class.prefix_core_BaseFunctions.php:871
+msgid "Login"
+msgstr "Anmeldung"
+
+#: classes/prefix_core_BaseFunctions/class.prefix_core_BaseFunctions.php:872
+msgid "Please enter your user data to login"
+msgstr "Bitte geben Sie Ihre Benutzerdaten um sich anzumelden"
+
+#: classes/prefix_core_BaseFunctions/class.prefix_core_BaseFunctions.php:883
+msgid "Username"
+msgstr "Benutzername"
+
+#: classes/prefix_core_BaseFunctions/class.prefix_core_BaseFunctions.php:884
+msgid "Password"
+msgstr "Passwort"
+
+#: classes/prefix_core_BaseFunctions/class.prefix_core_BaseFunctions.php:885
+msgid "Remember Me"
+msgstr "Anmeldedaten merken"
+
+#: classes/prefix_core_BaseFunctions/class.prefix_core_BaseFunctions.php:886
+msgid "Log In"
+msgstr "Anmelden"
+
+#: classes/prefix_core_BaseFunctions/class.prefix_core_BaseFunctions.php:895
+msgid "Username and/or password is wrong"
+msgstr "Benutzername and/oder Passwort ist inkorrekt"
+
+#: classes/prefix_core_BaseFunctions/class.prefix_core_BaseFunctions.php:898
+msgid "Lost Password?"
+msgstr "Passwort vergessen?"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:295
+msgid "Template sizes"
+msgstr "Template Grössen"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:296
+msgid "Container width"
+msgstr "Container Breite"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:297
+msgid "Container side padding"
+msgstr "Container Seitenabstände"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:298
+msgid "Content spacing"
+msgstr "Inhaltabstand"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:299
+msgid "Input padding"
+msgstr "Input padding"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:300
+msgid "Align wide left"
+msgstr "Align wide links"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:301
+msgid "Align wide right"
+msgstr "Align wide rechts"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:302
+msgid "Anchor position"
+msgstr "Ankerposition"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:303
+msgid "Breakpoint (mobile)"
+msgstr "Breakpoint (mobil)"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:304
+msgid "Anchor position (mobile)"
+msgstr "Ankerposition (mobil)"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:305
+msgid "Content spacing (mobile)"
+msgstr "Inhaltabstand (mobil)"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:306
+msgid "Fonts"
+msgstr "Schriften"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:307
+msgid "Main font family"
+msgstr "Schriftfamilie"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:308
+msgid "Main font size"
+msgstr "Schriftgrösse"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:309
+msgid "Main line height"
+msgstr "Zeilenabstand"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:310
+msgid "Main font size (mobile)"
+msgstr "Schriftgrösse (mobil)"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:311
+msgid "Main line height (mobile)"
+msgstr "Zeilenabstand (mobil)"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:312
+msgid "Gutenberg font scaling (mobile)"
+msgstr "Gutenberg Schriftskalierung (mobil)"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:313
+msgid "Main menu font size"
+msgstr "Hauptmenü Schriftgrösse"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:314
+msgid "Main menu line height"
+msgstr "Hauptmann Zeilenabstand"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:315
+msgid "Main menu font size (mobile)"
+msgstr "Hauptmenü Schriftgrösse (mobil)"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:316
+msgid "Main menu line height (mobile)"
+msgstr "Hauptmann Zeilenabstand (mobil)"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:317
+msgid "Footer font size"
+msgstr "Footer Schriftgrösse"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:318
+msgid "Footer line height"
+msgstr "Footer Zeilenabstand"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:319
+msgid "Colors"
+msgstr "Farben"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:320
+msgid "Main color"
+msgstr "Hauptfarbe"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:321
+msgid "Scondary color"
+msgstr "Zweitfarbe"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:322
+msgid "Hamburger color"
+msgstr "Hamburger Farbe"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:323
+msgid "Background color"
+msgstr "Hintergrundfarbe"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:324
+msgid "Font color"
+msgstr "Schriftfarbe"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:325
+msgid "Header background color"
+msgstr "Header Hintergrundfarbe"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:326
+msgid "Header container background color"
+msgstr "Header Container Hintergrundfarbe"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:327
+msgid "Hamburger navigation background color"
+msgstr "Hamburger Natigationshintergrundfarbe"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:328
+msgid "Footer background color"
+msgstr "Footer Hintergrundfarbe"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:329
+msgid "Footer container background color"
+msgstr "Footer Container Hintergrundfarbe"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:330
+msgid "Hamburger color (dark)"
+msgstr "Hamburger Farbe (dunkel)"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:331
+msgid "Background color (dark)"
+msgstr "Hintergrundfarbe (dunkel)"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:332
+msgid "Font color (dark)"
+msgstr "Schriftfarbe (dunkel)"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:333
+msgid "Header background (dark)"
+msgstr "Header Hintergrundfarbe (dunkel)"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:334
+msgid "header container background (dark)"
+msgstr "Header Container Hintergrundfarbe (dunkel)"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:335
+msgid "Hamburger navigation background color (dark)"
+msgstr "Hamburger Navigationshintergrundfarbe (dunkel)"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:336
+msgid "Footer background (dark)"
+msgstr "Footer Hintergrundfarbe (dunkel)"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:337
+msgid "Footer container background (dark)"
+msgstr "Footer Container Hintergrundfarbe (dunkel)"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:339
+msgid "Lightbox width"
+msgstr "Lightbox Breite"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:340
+msgid "Lightbox container padding"
+msgstr "Lightbox Container Padding"
+
+#: classes/prefix_core_Customizer/class.prefix_core_Customizer.php:341
+msgid "Lightbox preview visibility"
+msgstr "Lightbox Vorschau Sichtbarkeit"
+
+#: classes/prefix_core_WPadmin/ajax.php:47
+msgid "Configuration updated"
+msgstr "Konfiguration aktualisieren"
+
+#: classes/prefix_core_WPadmin/ajax.php:53
+msgid "Configuration saved"
+msgstr "Konfiguration abspeichern"
+
+#: classes/prefix_core_WPadmin/ajax.php:70
+msgid "Configuration file created"
+msgstr "Konfigurationsdatei erstellen"
+
+#: classes/prefix_core_WPadmin/ajax.php:78
+msgid "Configuration Missing"
+msgstr "Konfiguration fehlt"
+
+#: classes/prefix_core_WPadmin/ajax.php:108
+msgid "New css file been created"
+msgstr "Neue CSS Datei wurde erstellt"
+
+#: classes/prefix_core_WPadmin/ajax.php:116
+msgid "No css defined"
+msgstr "Kein CSS definiert"
+
+#: classes/prefix_core_WPadmin/class.prefix_core_WPadmin.php:58
+#: classes/prefix_core_WPadmin/class.prefix_core_WPadmin.php:59
+msgid "Configurator"
+msgstr "Konfigurator"
+
+#: classes/prefix_core_WPadmin/class.prefix_core_WPadmin.php:95
+#: classes/prefix_imgDC/class.prefix_imgDC.php:350
+msgid "You do not have sufficient permissions to access this page."
+msgstr "Sie verfügen über keine Zugriffsrechte um diese Seite zu betreten"
+
+#: classes/prefix_core_WPadmin/class.prefix_core_WPadmin.php:106
+msgid "Page Configurator"
+msgstr "Seitenkonfiguration"
+
+#: classes/prefix_core_WPadmin/class.prefix_core_WPadmin.php:107
+msgid "Generate configuration file"
+msgstr "Konfigurationsdatei generieren"
+
+#: classes/prefix_core_WPadmin/class.prefix_core_WPadmin.php:108
+msgid "Download css file"
+msgstr "CSS Datei herunterladen"
+
+#: classes/prefix_core_WPadmin/class.prefix_core_WPadmin.php:145
+msgid "Label is missing"
+msgstr "Beschriftung fehlt"
+
+#: classes/prefix_core_WPadmin/class.prefix_core_WPadmin.php:165
+msgid "Input type is missing"
+msgstr "Input-Typ fehlt"
+
+#: classes/prefix_core_WPadmin/class.prefix_core_WPadmin.php:174
+msgid "Save"
+msgstr "Speichern"
+
+#: classes/prefix_core_WPadmin/class.prefix_core_WPadmin.php:211
+msgid "yes"
+msgstr "Ja"
+
+#: classes/prefix_core_WPadmin/class.prefix_core_WPadmin.php:215
+msgid "no"
+msgstr "Nein"
+
+#: classes/prefix_core_WPadmin/class.prefix_core_WPadmin.php:393
+msgid "Add entry"
+msgstr "Eintrag ergänzen"
+
+#: classes/prefix_imgDC/class.prefix_imgDC.php:89
+msgid "IMG dominant content preloader"
+msgstr "Bild dominante Farbe vorlader"
+
+#: classes/prefix_imgDC/class.prefix_imgDC.php:90
+msgid "Activate"
+msgstr "Aktivieren"
+
+#: classes/prefix_imgDC/class.prefix_imgDC.php:91
+msgid "Use in the content and shortcodes"
+msgstr "Im Inhalt und in Shortcodes anwenden"
+
+#: classes/prefix_imgDC/class.prefix_imgDC.php:93
+msgid "Ignored file types"
+msgstr "Ignorierte Datei-Typen"
+
+#: classes/prefix_imgDC/class.prefix_imgDC.php:94
+msgid "Default color"
+msgstr "Standard Farbe"
+
+#: classes/prefix_imgDC/class.prefix_imgDC.php:193
+#: classes/prefix_imgDC/class.prefix_imgDC.php:194
+#: classes/prefix_imgDC/class.prefix_imgDC.php:354
+msgid "Dominant Color"
+msgstr "Dominante Farbe"
+
+#: classes/prefix_imgDC/class.prefix_imgDC.php:355
+msgid "Generate dominant colors"
+msgstr "Dominanten Farben generieren"
+
+#: classes/prefix_imgDC/class.prefix_imgDC.php:360
+msgid "IMG color"
+msgstr "IMG Farbe"
+
+#: classes/prefix_imgDC/class.prefix_imgDC.php:363
+msgid "Image / ID / Title"
+msgstr "Bild / ID / Titel"
+
+#: classes/prefix_imgDC/class.prefix_imgDC.php:401
+msgid "Current image file is missing"
+msgstr "Die aktuelle Bilddatei fehlt"
+
+#: classes/prefix_imgDC/class.prefix_imgDC.php:426
+msgid "Dominant color"
+msgstr "Dominierende Farbe"
+
+#: classes/prefix_template/class.prefix_template.php:270
+msgid "Activate header container"
+msgstr "Header Container aktivieren"
+
+#: classes/prefix_template/class.prefix_template.php:271
+msgid "Activate main container"
+msgstr "Main Container aktivieren"
+
+#: classes/prefix_template/class.prefix_template.php:272
+msgid "Activate scroll to top container"
+msgstr "Nach oben scrollen Container aktivieren"
+
+#: classes/prefix_template/class.prefix_template.php:273
+msgid "Activate footer container"
+msgstr "Footer Container aktivieren"
+
+#: classes/prefix_template/class.prefix_template.php:274
+msgid "Body css (light/dark)"
+msgstr "Body css (light/dark)"
+
+#: classes/prefix_template/class.prefix_template.php:275
+msgid "Addressblock information"
+msgstr "Adressblock Informationen"
+
+#: classes/prefix_template/class.prefix_template.php:277
+#: classes/prefix_template/class.prefix_template.php:331
+#: classes/prefix_template/class.prefix_template.php:336
+msgid "URL"
+msgstr "URL"
+
+#: classes/prefix_template/class.prefix_template.php:280
+#: classes/prefix_template/class.prefix_template.php:334
+#: classes/prefix_template/class.prefix_template.php:339
+msgid "Alternative text"
+msgstr "Alternativer Text"
+
+#: classes/prefix_template/class.prefix_template.php:284
+#: classes/prefix_template/class.prefix_template.php:296
+msgid "Street add"
+msgstr "Zusatzadresse"
+
+#: classes/prefix_template/class.prefix_template.php:285
+#: classes/prefix_template/class.prefix_template.php:297
+msgid "Postcode"
+msgstr "Postleitzahl"
+
+#: classes/prefix_template/class.prefix_template.php:289
+#: classes/prefix_template/class.prefix_template.php:301
+msgid "Fax"
+msgstr "Fax"
+
+#: classes/prefix_template/class.prefix_template.php:290
+#: classes/prefix_template/class.prefix_template.php:302
+msgid "Mobile"
+msgstr "Mobil"
+
+#: classes/prefix_template/class.prefix_template.php:292
+msgid "Labels"
+msgstr "Beschriftungen"
+
+#: classes/prefix_template/class.prefix_template.php:304
+msgid "Social Media block (Icons)"
+msgstr "Soziale Medien Block (Symbole)"
+
+#: classes/prefix_template/class.prefix_template.php:305
+msgid "Facebook"
+msgstr "Facebook"
+
+#: classes/prefix_template/class.prefix_template.php:306
+msgid "Instagram"
+msgstr "Instagram"
+
+#: classes/prefix_template/class.prefix_template.php:307
+msgid "Twitter"
+msgstr "Twitter"
+
+#: classes/prefix_template/class.prefix_template.php:308
+msgid "Linkedin"
+msgstr "Linkedin"
+
+#: classes/prefix_template/class.prefix_template.php:309
+msgid "Contact block (Icons)"
+msgstr "Kontaktblock (Symbole)"
+
+#: classes/prefix_template/class.prefix_template.php:311
+msgid "Mail"
+msgstr "E-Mail"
+
+#: classes/prefix_template/class.prefix_template.php:312
+msgid "WhatsApp"
+msgstr "WhatsApp"
+
+#: classes/prefix_template/class.prefix_template.php:313
+msgid "Placeholder"
+msgstr "Platzhalter"
+
+#: classes/prefix_template/class.prefix_template.php:314
+msgid "Activate placeholder"
+msgstr "Platzhalter aktivieren"
+
+#: classes/prefix_template/class.prefix_template.php:315
+msgid "Add Adressblock"
+msgstr "Adressblock aktivieren"
+
+#: classes/prefix_template/class.prefix_template.php:316
+msgid "Custom output"
+msgstr "Benutzerdefinierte Ausgabe"
+
+#: classes/prefix_template/class.prefix_template.php:317
+msgid "Header"
+msgstr "Header"
+
+#: classes/prefix_template/class.prefix_template.php:318
+msgid "Activate divider"
+msgstr "Trennlinie aktivieren "
+
+#: classes/prefix_template/class.prefix_template.php:319
+msgid "Sticky header"
+msgstr "Header fixiert"
+
+#: classes/prefix_template/class.prefix_template.php:320
+msgid "Sticky header on load"
+msgstr "Header beim Laden fixieren"
+
+#: classes/prefix_template/class.prefix_template.php:321
+msgid "Desktop menu"
+msgstr "Desktop Menü"
+
+#: classes/prefix_template/class.prefix_template.php:322
+msgid "Activate menu search form"
+msgstr "Suchformular im Menü aktivieren"
+
+#: classes/prefix_template/class.prefix_template.php:323
+msgid "Menu direction"
+msgstr "Menü Richtung"
+
+#: classes/prefix_template/class.prefix_template.php:324
+msgid "Hamburger menu position"
+msgstr "Hamburger Menü Positionierung"
+
+#: classes/prefix_template/class.prefix_template.php:325
+msgid "Visible header while menu is active"
+msgstr "Header beim aktiven Menü sichtbar"
+
+#: classes/prefix_template/class.prefix_template.php:326
+msgid "Close hamburger menu on scroll"
+msgstr "Hamburger Menü beim scrollen schliessen"
+
+#: classes/prefix_template/class.prefix_template.php:327
+msgid "Hamburger menu toggle able submenus"
+msgstr "Submenüs beim Hamburger-Menü aufklappbar"
+
+#: classes/prefix_template/class.prefix_template.php:328
+#: classes/prefix_template/class.prefix_template.php:388
+msgid "Custom Element"
+msgstr "Benutzerdefiniertes Element"
+
+#: classes/prefix_template/class.prefix_template.php:329
+msgid "Custom Logo link"
+msgstr "Logo benutzerdefiniert verlinken"
+
+#: classes/prefix_template/class.prefix_template.php:330
+msgid "Logo desktop"
+msgstr "Desktop Logo"
+
+#: classes/prefix_template/class.prefix_template.php:335
+msgid "Logo mobile"
+msgstr "Mobil Logo"
+
+#: classes/prefix_template/class.prefix_template.php:340
+#: classes/prefix_template/class.prefix_template.php:389
+msgid "Sort and activate"
+msgstr "Sortieren und aktivieren"
+
+#: classes/prefix_template/class.prefix_template.php:341
+#: classes/prefix_template/class.prefix_template.php:390
+msgid "Container start"
+msgstr "Container Start"
+
+#: classes/prefix_template/class.prefix_template.php:343
+#: classes/prefix_template/class.prefix_template.php:391
+msgid "Menu"
+msgstr "Menü"
+
+#: classes/prefix_template/class.prefix_template.php:344
+msgid "Hamburger"
+msgstr "Hamburger"
+
+#: classes/prefix_template/class.prefix_template.php:345
+msgid "social media"
+msgstr "Soziale Medien"
+
+#: classes/prefix_template/class.prefix_template.php:346
+#: classes/prefix_template/class.prefix_template.php:396
+msgid "Search form"
+msgstr "Suchformular"
+
+#: classes/prefix_template/class.prefix_template.php:347
+#: classes/prefix_template/class.prefix_template.php:395
+msgid "Custom"
+msgstr "Benutzerdefiniert"
+
+#: classes/prefix_template/class.prefix_template.php:348
+#: classes/prefix_template/class.prefix_template.php:397
+msgid "Widget 1"
+msgstr "Widget 1"
+
+#: classes/prefix_template/class.prefix_template.php:349
+#: classes/prefix_template/class.prefix_template.php:398
+msgid "Widget 2"
+msgstr "Widget 2"
+
+#: classes/prefix_template/class.prefix_template.php:350
+#: classes/prefix_template/class.prefix_template.php:399
+msgid "Widget 3"
+msgstr "Widget 3"
+
+#: classes/prefix_template/class.prefix_template.php:351
+#: classes/prefix_template/class.prefix_template.php:400
+msgid "Container end"
+msgstr "Container Ende"
+
+#: classes/prefix_template/class.prefix_template.php:352
+msgid "Custom content after header"
+msgstr "Benutzerdefinierter Inhalt nach dem Header"
+
+#: classes/prefix_template/class.prefix_template.php:353
+msgid "Page"
+msgstr "Seite"
+
+#: classes/prefix_template/class.prefix_template.php:354
+msgid "Activate page options"
+msgstr "Seitenoptionen aktivieren"
+
+#: classes/prefix_template/class.prefix_template.php:355
+msgid "Activate metablock"
+msgstr "Metablock aktivieren"
+
+#: classes/prefix_template/class.prefix_template.php:356
+msgid "Pages"
+msgstr "Seiten"
+
+#: classes/prefix_template/class.prefix_template.php:358
+msgid "Metablock for CPT"
+msgstr "Metablock für CPT"
+
+#: classes/prefix_template/class.prefix_template.php:359
+#: classes/prefix_template/class.prefix_template.php:1427
+msgid "Page options"
+msgstr "Seitenoptionen"
+
+#: classes/prefix_template/class.prefix_template.php:360
+msgid "Hide header"
+msgstr "Header ausblenden"
+
+#: classes/prefix_template/class.prefix_template.php:361
+msgid "Hide date"
+msgstr "Datum ausblenden"
+
+#: classes/prefix_template/class.prefix_template.php:362
+msgid "Hide time"
+msgstr "Zeitangabe ausblenden"
+
+#: classes/prefix_template/class.prefix_template.php:363
+msgid "Hide author"
+msgstr "Autor ausblenden"
+
+#: classes/prefix_template/class.prefix_template.php:364
+msgid "Hide title"
+msgstr "Titel ausblenden"
+
+#: classes/prefix_template/class.prefix_template.php:365
+msgid "Hide comments"
+msgstr "Kommentare ausblenden"
+
+#: classes/prefix_template/class.prefix_template.php:366
+msgid "Hide sidebar"
+msgstr "Seitenbereich ausblenden"
+
+#: classes/prefix_template/class.prefix_template.php:367
+msgid "Hide scroll to top"
+msgstr "Nach oben ausblenden"
+
+#: classes/prefix_template/class.prefix_template.php:368
+msgid "Hide footer"
+msgstr "Footer ausblenden"
+
+#: classes/prefix_template/class.prefix_template.php:369
+msgid "Darkmode"
+msgstr "Darkmode"
+
+#: classes/prefix_template/class.prefix_template.php:370
+msgid "Header fixed"
+msgstr "Header fixieren"
+
+#: classes/prefix_template/class.prefix_template.php:371
+msgid "Code before main block"
+msgstr "Code vor main"
+
+#: classes/prefix_template/class.prefix_template.php:372
+msgid "Code after main block"
+msgstr "Code nach main"
+
+#: classes/prefix_template/class.prefix_template.php:373
+msgid "Add page options"
+msgstr "Seitenoption ergänzen"
+
+#: classes/prefix_template/class.prefix_template.php:374
+msgid "Option key"
+msgstr "Options-Key"
+
+#: classes/prefix_template/class.prefix_template.php:375
+msgid "Option label"
+msgstr "Options-Label"
+
+#: classes/prefix_template/class.prefix_template.php:376
+msgid "Blog"
+msgstr "Blog"
+
+#: classes/prefix_template/class.prefix_template.php:377
+msgid "Activate blog template options"
+msgstr "Blog Template-Optionen aktivieren"
+
+#: classes/prefix_template/class.prefix_template.php:378
+msgid "Show on overview pages"
+msgstr "Auf der Übersichtsseite ausgeben"
+
+#: classes/prefix_template/class.prefix_template.php:379
+msgid "Activate author"
+msgstr "Autor aktivieren"
+
+#: classes/prefix_template/class.prefix_template.php:380
+msgid "Activate date"
+msgstr "Datum aktivieren"
+
+#: classes/prefix_template/class.prefix_template.php:381
+msgid "Activate time"
+msgstr "Zeit aktivieren"
+
+#: classes/prefix_template/class.prefix_template.php:382
+msgid "Activate categories"
+msgstr "Kategorien aktivieren"
+
+#: classes/prefix_template/class.prefix_template.php:383
+msgid "Date format"
+msgstr "Datumformat"
+
+#: classes/prefix_template/class.prefix_template.php:384
+msgid "Activate scroll to top"
+msgstr "Nach oben scrollen aktivieren"
+
+#: classes/prefix_template/class.prefix_template.php:385
+msgid "Footer"
+msgstr "Footer"
+
+#: classes/prefix_template/class.prefix_template.php:386
+msgid "Activate footer"
+msgstr "Footer aktivieren"
+
+#: classes/prefix_template/class.prefix_template.php:387
+#: classes/prefix_template/class.prefix_template.php:393
+msgid "Copyright"
+msgstr "Urheberrecht"
+
+#: classes/prefix_template/class.prefix_template.php:392
+msgid "Social media"
+msgstr "Soziale Medien"
+
+#: classes/prefix_template/class.prefix_template.php:394
+msgid "Address block"
+msgstr "Adressblock"
+
+#: classes/prefix_template/class.prefix_template.php:401
+msgid "Custom content before footer"
+msgstr "Benutzerdefinierter Inhalt vor dem Footer"
+
+#: classes/prefix_template/class.prefix_template.php:402
+msgid "Custom content after footer"
+msgstr "Benutzerdefinierter Inhalt nach dem Footer"
+
+#: classes/prefix_template/class.prefix_template.php:1011
+msgid "Options"
+msgstr "Optionen"
+
+#: classes/prefix_template/class.prefix_template.php:1155
+msgid "Header 1"
+msgstr "Header 1"
+
+#: classes/prefix_template/class.prefix_template.php:1157
+#: classes/prefix_template/class.prefix_template.php:1166
+#: classes/prefix_template/class.prefix_template.php:1175
+msgid "Widget for the header"
+msgstr "Widgets für den Header"
+
+#: classes/prefix_template/class.prefix_template.php:1164
+msgid "Header 2"
+msgstr "Header 2"
+
+#: classes/prefix_template/class.prefix_template.php:1173
+msgid "Header 3"
+msgstr "Header 3"
+
+#: classes/prefix_template/class.prefix_template.php:1183
+msgid "Page Sidebar"
+msgstr "Seitenleiste"
+
+#: classes/prefix_template/class.prefix_template.php:1185
+msgid "Sidebar Widget for Pages"
+msgstr "Seitenleiste Widgets für Seiten"
+
+#: classes/prefix_template/class.prefix_template.php:1193
+msgid "Footer 1"
+msgstr "Footer 1"
+
+#: classes/prefix_template/class.prefix_template.php:1195
+#: classes/prefix_template/class.prefix_template.php:1204
+#: classes/prefix_template/class.prefix_template.php:1213
+msgid "Widget for the footer"
+msgstr "Widgets für den Footer"
+
+#: classes/prefix_template/class.prefix_template.php:1202
+msgid "Footer 2"
+msgstr "Footer 2"
+
+#: classes/prefix_template/class.prefix_template.php:1211
+msgid "Footer 3"
+msgstr "Footer 3"
+
+#: classes/prefix_template/class.prefix_template.php:1508
+msgid "Website under construction"
+msgstr "Website befindet sich im Aufbau"
+
+#: classes/prefix_template/class.prefix_template.php:2001
+msgid "To top"
+msgstr "Nach oben"
+
+#: comments.php:22
+#, php-format
+msgid "One thought on \"%2$s\""
+msgstr "Einen Gedanken an „%2$s“"
+
+#: search.php:14
+msgid "Search results for"
+msgstr "Suchresultate für"

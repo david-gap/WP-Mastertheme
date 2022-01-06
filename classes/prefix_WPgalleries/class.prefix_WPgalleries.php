@@ -4,7 +4,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.1.3
+ * @version     2.2.3
  *
 */
 
@@ -94,6 +94,20 @@ class prefix_WPgalleries {
       add_action( 'add_meta_boxes', array( $this, 'WPgalleries_Metabox' ) );
       // update custom fields
       add_action('save_post', array( $this, 'WPgalleries_meta_Save' ),  10, 2 );
+      // register strings
+      $backendStrings = array(
+        __('Galleries', 'devTheme'),
+        __('Register CPT', 'devTheme'),
+        __('CPT label', 'devTheme'),
+        __('CPT rewrite', 'devTheme'),
+        __('CPT icon', 'devTheme'),
+        __('CPT support', 'devTheme'),
+        __('Add taxonomies', 'devTheme'),
+        __('Actiate detail page', 'devTheme'),
+        __('Embed assets', 'devTheme'),
+        __('Embed popup assets', 'devTheme'),
+        __('Activate on other post types', 'devTheme')
+      );
     }
 
 

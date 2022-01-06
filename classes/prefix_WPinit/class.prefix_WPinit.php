@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.12.11
+ * @version     2.13.11
  *
 */
 
@@ -160,12 +160,40 @@ class prefix_WPinit {
         endif;
         add_action('admin_head', array( $this, 'EditorAppearance' ));
       endif;
+      // register strings
+      $backendStrings = array(
+        __('Wordpress settings', 'devTheme'),
+        __('Wordpress Support', 'devTheme'),
+        __('Embed CSS file', 'devTheme'),
+        __('Activate Cache Busting', 'devTheme'),
+        __('Embed Jquery file', 'devTheme'),
+        __('Embed custom JS file', 'devTheme'),
+        __('Load custom css inside header', 'devTheme'),
+        __('Enable SVG upload', 'devTheme'),
+        __('CSS Version', 'devTheme'),
+        __('JS Version', 'devTheme'),
+        __('CSS file path', 'devTheme'),
+        __('Cache Busting file path', 'devTheme'),
+        __('JS file path', 'devTheme'),
+        __('Hide backend menu to not admins', 'devTheme'),
+        __('Show menu to editors', 'devTheme'),
+        __('Show widgets to editors', 'devTheme'),
+        __('Show customizer to editors', 'devTheme'),
+        __('Registered menu', 'devTheme'),
+        __('Slug', 'devTheme'),
+        __('Name', 'devTheme'),
+        __('Add file types to uploader', 'devTheme'),
+        __('Slug', 'devTheme'),
+        __('Name', 'devTheme'),
+        __('Typekit ID', 'devTheme'),
+        __('Embed Google Fonts', 'devTheme')
+      );
     }
 
 
     /* 1.3 BACKEND ARRAY
     /------------------------*/
-    static $classtitle = 'WP init';
+    static $classtitle = 'Wordpress settings';
     static $classkey = 'wp';
     static $backend = array(
       "support" => array(

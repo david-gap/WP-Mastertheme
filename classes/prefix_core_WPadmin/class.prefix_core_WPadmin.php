@@ -4,7 +4,7 @@
  *
  * Backend area to manage configuration file
  * Author:      David Voglgsnag
- * @version     1.3.5
+ * @version     1.4.5
  *
  */
 
@@ -77,9 +77,6 @@ class prefix_core_WPadmin {
     // scripts
     wp_enqueue_script('backend/WPadmin-script', $class_path . 'WPadmin-backend.js', false, 0.8);
     wp_localize_script( 'backend/WPadmin-script', 'Ajax_File', $backend_ajax_action_file );
-    // css
-    wp_enqueue_script( 'backend/WPadmin-styles' );
-    wp_enqueue_style('backend/WPadmin-styles', $class_path . 'WPadmin-backend.css', false, 0.5);
     // Add the color picker css file
     wp_enqueue_style('wp-color-picker');
     wp_enqueue_script('wp-color-picker');
@@ -95,7 +92,7 @@ class prefix_core_WPadmin {
   /------------------------*/
   function WPadmin_Configurator(){
       if ( !current_user_can( 'page_configuration' ) )  {
-        wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+        wp_die( __( 'You do not have sufficient permissions to access this page.', 'devTheme' ) );
       }
       // call wp media
       wp_enqueue_media();
@@ -110,63 +107,73 @@ class prefix_core_WPadmin {
         $output .= '<br><button class="page-title-action ajax-action" data-action="GenerateConfigFile">' . __('Generate configuration file','devTheme') . '</button>';
         $output .= '<br><button class="page-title-action ajax-action" data-action="GenerateCssFile">' . __('Download css file','devTheme') . '</button>';
         $output .= '<span id="config-message"></span>';
-        $output .= '<form>';
-          foreach ($registered_classes as $class_key => $classname) {
-            if(strpos($classname, 'prefix_') === 0 && strpos($classname, '_core_') == false):
-              // for each registered custom class
-              $builder = isset($classname::$backend) ? $classname::$backend : '';
-              $builder_title = isset($classname::$classtitle) ? $classname::$classtitle : '';
-              $builder_slug = isset($classname::$classkey) ? $classname::$classkey : $classname;
-              // db values
-              $db_settings = array_key_exists($builder_slug, $db_option) ? $db_option[$builder_slug] : array();
-              // check if backend values exists
-              if($builder !== ''):
-                // container
-                $output .= '<table class="config-group ' . $classname . '">';
-                  // return title
-                  if($builder_title !== ''):
-                    $output .= '<tr>';
-                      $output .= '<th colspan="2"><h2>' . $builder_title . '</h2></th>';
-                    $output .= '</tr>';
-                  endif;
-                  // return inputs
-                  foreach ($builder as $input_key => $input) {
-                    $output .= '<tr>';
-                      $output .= '<td><label for="WPadmin_' . $builder_slug . '_' . $input_key . '">';
-                      if(array_key_exists('label', $input)):
-                        $output .= __($input["label"], 'devTheme');
-                      else:
-                        $output .= '<span class="error">' . __('Label is missing','devTheme') . '</span>';
-                      endif;
-                      $output .= '</label></td>';
-                      $output .= '<td>';
-                        if(array_key_exists('type', $input)):
-                          $css = '';
-                          $css .= array_key_exists('css', $input) ? ' ' . $input["css"] : '';
-                          $value = array_key_exists('value', $input) ? $input["value"] : false;
-                          $db_value = array_key_exists($input_key, $db_settings) ? $db_settings[$input_key] : false;
-                          $placeholder = array_key_exists('placeholder', $input) ? ' ' . $input["placeholder"] : '';
-                          $output .= SELF::BuildInput(
-                            $input["type"],
-                            $value,
-                            $builder_slug . '[' . $input_key. ']',
-                            'WPadmin_' . $builder_slug . '_' . $input_key,
-                            $css,
-                            $db_value,
-                            $placeholder
-                          );
-                        else:
-                          $output .= '<span class="error">' . __('Input type is missing','devTheme') . '</span>';
-                        endif;
-                      $output .= '</td>';
-                    $output .= '</tr>';
-                  }
-                $output .= '</table>';
+        $output .= '<div id="settings-group">';
+          $output .= '<ul id="configuration-navigation">';
+            foreach ($registered_classes as $class_key => $classname) {
+              if(strpos($classname, 'prefix_') === 0 && strpos($classname, '_core_') == false):
+                $builder_title = isset($classname::$classtitle) ? $classname::$classtitle : '';
+                $output .= '<li><a href="#' . $classname . '">' . $builder_title . '</a></li>';
               endif;
-            endif;
-          }
-          $output .= '<input type="submit" class="button button-primary" data-action="SaveFormInput" value="' . __( 'Save', 'devTheme' ) . '">';
-        $output .= '</form>';
+            }
+          $output .= '</ul>';
+          $output .= '<form>';
+            foreach ($registered_classes as $class_key => $classname) {
+              if(strpos($classname, 'prefix_') === 0 && strpos($classname, '_core_') == false):
+                // for each registered custom class
+                $builder = isset($classname::$backend) ? $classname::$backend : '';
+                $builder_title = isset($classname::$classtitle) ? $classname::$classtitle : '';
+                $builder_slug = isset($classname::$classkey) ? $classname::$classkey : $classname;
+                // db values
+                $db_settings = array_key_exists($builder_slug, $db_option) ? $db_option[$builder_slug] : array();
+                // check if backend values exists
+                if($builder !== ''):
+                  // container
+                  $output .= '<table id="' . $classname . '" class="config-group">';
+                    // return title
+                    if($builder_title !== ''):
+                      $output .= '<tr>';
+                        $output .= '<th colspan="2"><h2>' . $builder_title . '</h2></th>';
+                      $output .= '</tr>';
+                    endif;
+                    // return inputs
+                    foreach ($builder as $input_key => $input) {
+                      $output .= '<tr>';
+                        $output .= '<td><label for="WPadmin_' . $builder_slug . '_' . $input_key . '">';
+                        if(array_key_exists('label', $input)):
+                          $output .= esc_html( stripslashes( $input["label"] ) );
+                        else:
+                          $output .= '<span class="error">' . __('Label is missing','devTheme') . '</span>';
+                        endif;
+                        $output .= '</label></td>';
+                        $output .= '<td>';
+                          if(array_key_exists('type', $input)):
+                            $css = '';
+                            $css .= array_key_exists('css', $input) ? ' ' . $input["css"] : '';
+                            $value = array_key_exists('value', $input) ? $input["value"] : false;
+                            $db_value = array_key_exists($input_key, $db_settings) ? $db_settings[$input_key] : false;
+                            $placeholder = array_key_exists('placeholder', $input) ? ' ' . $input["placeholder"] : '';
+                            $output .= SELF::BuildInput(
+                              $input["type"],
+                              $value,
+                              $builder_slug . '[' . $input_key. ']',
+                              'WPadmin_' . $builder_slug . '_' . $input_key,
+                              $css,
+                              $db_value,
+                              $placeholder
+                            );
+                          else:
+                            $output .= '<span class="error">' . __('Input type is missing','devTheme') . '</span>';
+                          endif;
+                        $output .= '</td>';
+                      $output .= '</tr>';
+                    }
+                  $output .= '</table>';
+                endif;
+              endif;
+            }
+            $output .= '<input type="submit" class="button button-primary" data-action="SaveFormInput" value="' . __( 'Save', 'devTheme' ) . '">';
+          $output .= '</form>';
+        $output .= '</div>';
       $output .= '</div>';
       echo $output;
   }

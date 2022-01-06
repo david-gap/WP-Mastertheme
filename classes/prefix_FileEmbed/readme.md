@@ -1,4 +1,4 @@
-**Version 2.1** (24.07.2020)
+**Version 2.2** (06.01.2022)
 
 Custom class "prefix_FileEmbed" to set file content as a global
 

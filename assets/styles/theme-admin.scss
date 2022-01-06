@@ -1,0 +1,367 @@
+/**
+ * Theme backend
+ * Contains everything that is related to the wordpress backend
+ * configurator
+ *
+ * @author      David Voglgsang
+ *
+*/
+
+$light:         #fff;
+$coloring:      #bbd9e4;
+$button:        #007cba;
+
+$color_error:   #a53737;
+$color_success: #74b95b;
+
+body.wp-admin {
+
+  /*==================================================================================
+    CONFIGURATOR
+  ==================================================================================*/
+  #configuration {
+
+    #settings-group {
+      position: relative;
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: flex-start;
+      max-width: 800px;
+      margin-top: 20px;
+      #configuration-navigation {
+        margin: 0;
+        background-color: $light;
+        li {
+          margin: 0;
+          + li {
+            margin-top: 10px;
+          }
+          a {
+            text-transform: uppercase;
+            display: block;
+            padding: 8px 12px;
+            text-decoration: none;
+            background: linear-gradient(to bottom, $coloring 5%, $light 100%);
+            background-color: $coloring;
+            border: 1px solid $coloring;
+            font-weight: bold;
+            color: $button;
+            border-bottom-width: 4px;
+            &:hover {
+              border-bottom-color: $button;
+            }
+          }
+        }
+      }
+      > form {
+        margin-left: 20px;
+        .config-group {
+          width: 100%;
+          background-color: $light;
+          border: 1px solid $coloring;
+          border-bottom-width: 4px;
+          + .config-group {
+            margin-top: 40px;
+            border-top: 1px solid $coloring;
+            width: 100%;
+            padding-bottom: 20px;
+          }
+          tbody {
+            > tr {
+              > th {
+                text-align: left;
+                padding: 0 12px;
+                background-color: $coloring;
+              }
+              > td {
+                padding: 5px 12px;
+              }
+              td:first-child {
+                font-weight: bold;
+                max-width: 170px;
+                padding-right: 10px;
+              }
+              td:first-child label {
+                font-weight: bold;
+              }
+            }
+          }
+          ul {
+            margin-top: 0;
+            margin-bottom: 0;
+          }
+          .wp-picker-active {
+            padding: 5px;
+            border: 1px solid;
+          }
+        }
+        > table {
+          > tbody {
+            > tr {
+              > td {
+                vertical-align: top;
+              }
+            }
+          }
+        }
+        input[type="submit"] {
+          position: absolute;
+          top: 12px;
+          right: 20px;
+        }
+      }
+    }
+
+
+
+    /* DEFAULTS
+    /––––––––––––––––––––––––*/
+    .error {
+      color: $color_error;
+    }
+    hr {
+      border-bottom: 1px solid #000;
+      min-width: 10px
+    }
+    .ajax-action {
+      margin-top: 10px;
+    }
+    input[type="text"] {
+      width: 100%;
+      max-width: 180px;
+    }
+
+
+    /* LOADING ANIMATION
+    /––––––––––––––––––––––––*/
+    &.loading {
+      position: relative;
+      transition: .7s;
+      > form {
+        opacity: .5;
+      }
+      > form:after {
+        position: absolute;
+        z-index: 99900;
+        content: "";
+        left: 0;
+        top: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        background-image: url('images/loading.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100px;
+      }
+    }
+
+
+    /* MESSAGES
+    /––––––––––––––––––––––––*/
+    #config-message {
+      display: block;
+      max-width: 300px;
+      font-weight: bold;
+      &.success,
+      &.error {
+        margin-top: 20px;
+        padding: 10px;
+      }
+      &.success {
+        border: 1px solid $color_success;
+        color: $color_success;
+      }
+      &.error {
+        border: 1px solid $color_error;
+        color: $color_error;
+      }
+    }
+
+
+    /* SORTABLE
+    /––––––––––––––––––––––––*/
+    .sortable {
+      li {
+        &:before {
+          display: inline-block;
+          content: "";
+          width: 20px;
+          height: 15px;
+          margin-right: 5px;
+          background-image: linear-gradient(
+          to bottom,
+          transparent 1px,
+          gray 2px,
+          gray 2px,
+          transparent 3px,
+          transparent 7px,
+          gray 8px,
+          gray 8px,
+          transparent 9px,
+          transparent 13px,
+          gray 14px,
+          gray 14px,
+          transparent 15px
+          );
+        }
+        > label {
+          padding: 0 5px;
+        }
+      }
+    }
+
+
+    /* ADDABLE
+    /––––––––––––––––––––––––*/
+    ul.addable {
+      &.disable-remove {
+        input[type="text"],
+        ul.multiple {
+          width: 100%;
+        }
+        .remove {
+          display: none;
+        }
+      }
+      input[type="text"],
+      ul.multiple {
+        width: calc(100% - 22px);
+        display: inline-block;
+      }
+      .remove {
+        display: inline-block;
+        margin-left: 10px;
+        cursor: pointer;
+        color: $color_error;
+      }
+      + .input-fields-adder {
+        margin-top: 0;
+      }
+    }
+
+
+    /* MULTIPLE
+    /––––––––––––––––––––––––*/
+    .config-group {
+      .multiple {
+        margin: 0;
+        li {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+      }
+    }
+
+  }
+
+
+  /*==================================================================================
+    IMAGE SELECTOR
+  ==================================================================================*/
+  #configuration,
+  .metaboxes {
+    .img-selected {
+      display: block;
+      position: relative;
+      border: 1px solid;
+      line-height: 0;
+      max-width: 100px;
+      line-height: 0;
+      margin: 15px 0 10px;
+      &:empty {
+        border: 0 solid;
+        margin: 0;
+      }
+      img {
+        width: 100%;
+        height: auto;
+      }
+      .remove_image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 1px solid $color_error;
+        background-color: white;
+        cursor: pointer;
+        svg {
+          width: 10px;
+          rect {
+            fill: $color_error;
+          }
+        }
+      }
+    }
+  }
+
+
+  /*==================================================================================
+    PAGE/POST OPTIONS
+  ==================================================================================*/
+  #WPtemplate {
+    p {
+      margin-bottom: 5px;
+    }
+    ul {
+      margin-top: 0;
+    }
+    .exeption {
+      margin-top: 20px;
+      textarea {
+        width: 100%;
+      }
+    }
+  }
+
+
+  /*==================================================================================
+    SWITCH BUTTON
+  ==================================================================================*/
+  .switchbutton {
+    display: flex;
+    overflow: hidden;
+    input {
+      position: absolute !important;
+      clip: rect(0, 0, 0, 0);
+      height: 1px;
+      width: 1px;
+      border: 0;
+      overflow: hidden;
+      &:checked + label {
+        background-color: $button;
+        color: #FFF;
+        box-shadow: none;
+      }
+    }
+    label {
+      background-color: #e4e4e4;
+      color: rgba(0, 0, 0, 0.6);
+      font-size: 14px;
+      line-height: 1;
+      text-align: center;
+      padding: 8px 16px;
+      margin-right: -1px;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+      transition: all 0.1s ease-in-out;
+      &:hover {
+        cursor: pointer;
+      }
+      &:first-of-type {
+        border-radius: 4px 0 0 4px;
+      }
+      &:last-of-type {
+        border-radius: 0 4px 4px 0;
+      }
+    }
+  }
+
+}

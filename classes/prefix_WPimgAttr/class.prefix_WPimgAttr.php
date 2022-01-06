@@ -5,7 +5,7 @@
  * Wordpress - add custom fields for alt tag translations
  * https://github.com/david-gap/classes
  * Author: David Voglgsang
- * @version     2.1.3
+ * @version     2.2.3
  *
 */
 
@@ -76,6 +76,14 @@ class prefix_WPimgAttr {
     if($this->WPimgAttr_Alt_attachment == 1):
       add_filter( 'wp_get_attachment_image_attributes', array( $this, 'IMGalt_Attachment' ), 10, 2 );
     endif;
+    // register strings
+    $backendStrings = array(
+      __('Image attributes', 'devTheme'),
+      __('Repalce img alt inside content', 'devTheme'),
+      __('Repalce img alt inside atttachments', 'devTheme'),
+      __('Repalce img alt inside shortcodes', 'devTheme'),
+      __('Add languages', 'devTheme')
+    );
   }
 
 

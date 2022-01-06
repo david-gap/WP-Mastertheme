@@ -7,7 +7,7 @@ import Inspector from "./inspector";
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
-const { RichText } = wp.editor;
+const { RichText, InnerBlocks } = wp.editor;
 
 // Note: atts changed from attributes, see below
 function getSettings(atts) {
@@ -147,6 +147,11 @@ export default registerBlockType( 'templates/vimeo', {
             <iframe src={videoURL} frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
             <script src="https://player.vimeo.com/api/player.js"></script>
           </div>
+          {attributes.videoBackgroud > 0 && (
+            <div class="video-cover">
+              <InnerBlocks />
+            </div>
+          )}
         </div>
       </div>
     ];
@@ -178,6 +183,11 @@ export default registerBlockType( 'templates/vimeo', {
             <iframe src={videoURL} frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
             <script src="https://player.vimeo.com/api/player.js"></script>
           </div>
+          {attributes.videoBackgroud > 0 && (
+            <div class="video-cover">
+              <InnerBlocks.Content />
+            </div>
+          )}
         </div>
       </div>
     );

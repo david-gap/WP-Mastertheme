@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     0.2.2
+ * @version     0.3.2
  */
 
 /*=======================================================
@@ -54,6 +54,13 @@ class prefix_Mautic {
       else:
         add_shortcode( 'mautic', array( $this, 'mauticContent' ) );
       endif;
+      // register strings
+      $backendStrings = array(
+        __('Mautic', 'devTheme')
+        __('Mautic URL', 'devTheme'),
+        __('Inline tracking code', 'devTheme'),
+        __('Inline formular script', 'devTheme')
+      );
     }
 
     /* 1.3 BACKEND ARRAY

@@ -17,19 +17,11 @@ body.frontend {
 }
 
 body.frontend {
-  font-size: var(--html__mobile_fontsize);
-  line-height: var(--html__mobile_lineheight);
   main {
     * {
       /* Gutenberg font size */
       font-size: calc(var(--font-size) * var(--gutenberg__font_scale));
       line-height: calc(var(--font-size) * var(--gutenberg__font_scale) * 1.2);
-      /* Anchor position */
-      /* anchors are not allowed to have top spacing */
-      &[id]:target {
-        padding-top: var(--html__anchor_mobile);
-        margin-top: calc(var(--html__anchor_mobile) * -1);
-      }
     }
     /* FULL AND WIDE ALIGN */
     .alignwide {
@@ -43,13 +35,6 @@ body.frontend {
       }
     }
   }
-}
-
-
-/* DEFAULT FONT SIZE */
-.editor-styles-wrapper {
-  font-size: var(--html__mobile_fontsize) !important;
-  line-height: var(--html__mobile_lineheight) !important;
 }
 
 
@@ -168,14 +153,6 @@ body.frontend,
         }
       }
     }
-  }
-
-
-  /* MAIN MENU */
-  > header nav #menu-main-container {
-    position: fixed;
-    font-size: var(--mnav__mobile_fontsize);
-    line-height: var(--mnav__mobile_lineheight);
   }
 }
 
