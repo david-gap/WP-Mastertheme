@@ -36,7 +36,7 @@ if($access == 'granted'):
   /------------------------*/
   function filterPosts(){
     $output = '';
-    $output .= WPgutenberg_postresults_postsfilter($_POST, 'ajax');
+    $output .= WPgutenberg_postsfilter_getResultsAndSort($_POST, 'ajax');
     $return = array(
       'action' => 'insertFilteredPosts',
       'id' => $_POST['id'],

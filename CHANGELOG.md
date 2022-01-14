@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.41.28 | 14.01.2022 <posts and posts filter block sorting>
+* remove string sensitivity from multidimensinal sorting
+* rename posts and posts filter block functions
+* add taxonomy support (frontend only) to posts and posts filter block sorting
+
 ## 1.40.28 | 06.01.2022 <add translation, configurator style>
 * add translation file for de_CH
 * optimize customizer mobile values

@@ -36,7 +36,7 @@ if($access == 'granted'):
   /------------------------*/
   function sortPosts(){
     $output = '';
-    $output .= WPgutenberg_postresults_postssorting($_POST, 'ajax');
+    $output .= WPgutenberg_posts_getResultsAndSort($_POST, 'ajax');
     $return = array(
       'action' => 'insertSortedPosts',
       'id' => $_POST['id'],

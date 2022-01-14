@@ -107,16 +107,16 @@ export default class Inspector extends Component {
           postSortOptions.push( { value: key, label: "Meta: " + key } );
         });
       }
-      // if(posts[0]._links["wp:term"] !== undefined){
-      //   const terms = posts[0]._links["wp:term"];
-      //   Object.entries(terms).forEach(([key, value]) => {
-      //     if(value.taxonomy == "post_tag"){
-      //       postSortOptions.push( { value: 'tax__post_tag', label: "Taxonomy: Tags" } );
-      //     } else {
-      //       postSortOptions.push( { value: 'tax__' + value.taxonomy, label: "Taxonomy: " + value.taxonomy } );
-      //     }
-      //   });
-      // }
+      if(posts[0]._links["wp:term"] !== undefined){
+        const terms = posts[0]._links["wp:term"];
+        Object.entries(terms).forEach(([key, value]) => {
+          if(value.taxonomy == "post_tag"){
+            postSortOptions.push( { value: 'tax__post_tag', label: "Taxonomy: Tags" } );
+          } else {
+            postSortOptions.push( { value: 'tax__' + value.taxonomy, label: "Taxonomy: " + value.taxonomy } );
+          }
+        });
+      }
     }
     // update post type selection options
     let postTypes = [];
@@ -210,16 +210,16 @@ export default class Inspector extends Component {
           sortnavoptions.push( { value: key, label: "Meta: " + key } );
         });
       }
-      // if(posts[0]._links["wp:term"] !== undefined){
-      //   const terms = posts[0]._links["wp:term"];
-      //   Object.entries(terms).forEach(([key, value]) => {
-      //     if(value.taxonomy == "post_tag"){
-      //       sortnavoptions.push( { value: 'tax__post_tag', label: "Taxonomy: Tags" } );
-      //     } else {
-      //       sortnavoptions.push( { value: 'tax__' + value.taxonomy, label: "Taxonomy: " + value.taxonomy } );
-      //     }
-      //   });
-      // }
+      if(posts[0]._links["wp:term"] !== undefined){
+        const terms = posts[0]._links["wp:term"];
+        Object.entries(terms).forEach(([key, value]) => {
+          if(value.taxonomy == "post_tag"){
+            sortnavoptions.push( { value: 'tax__post_tag', label: "Taxonomy: Tags" } );
+          } else {
+            sortnavoptions.push( { value: 'tax__' + value.taxonomy, label: "Taxonomy: " + value.taxonomy } );
+          }
+        });
+      }
       Object.entries(sortnavoptions).forEach(([key, value]) => {
         sortnavsuggestions.push( value.label );
       });
@@ -343,7 +343,7 @@ export default class Inspector extends Component {
                 label={__("Item sum", "devTheme")}
                 value={postSum}
                 onChange={postSum => setAttributes({ postSum })}
-                min={1}
+                min={-1}
                 max={101}
               />
             </PanelRow>

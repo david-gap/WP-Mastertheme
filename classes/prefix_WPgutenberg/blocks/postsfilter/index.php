@@ -64,11 +64,11 @@ register_block_type(
         'type' => 'array'
       )
     ),
-    'render_callback' => 'WPgutenberg_blockRender_postsfilter'
+    'render_callback' => 'WPgutenberg_postsfilter_blockRender'
   )
 );
 
-function WPgutenberg_block_postsfilterValue($value, $id){
+function WPgutenberg_postsfilter_ContentRow($value, $id){
   switch ($value) {
     case "title":
       return get_the_title($id);
@@ -99,7 +99,60 @@ function WPgutenberg_block_postsfilterValue($value, $id){
 }
 
 // post results
-function WPgutenberg_postresults_postsfilter(array $attr, string $source = 'first_load'){
+function WPgutenberg_postsfilter_PostBuilder(array $attr, $id){
+  $output = '';
+  $get_url = get_post_meta($id, 'BlockUrl', true) ? get_post_meta($id, 'BlockUrl', true) : get_the_permalink($id);
+  $linkOpen = $get_url && $get_url !== '' ? '<a href="' . $get_url . '">' : '';
+  $linkClose = $get_url && $get_url !== '' ? '</a>' : '';
+  $output .= '<div data-id="' . $id . '">';
+    if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_box', $attr['postTaxonomyFilterOptions'])):
+      $output .= $linkOpen;
+    endif;
+      // add post thumbnail
+      if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_img', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
+        $output .= $linkOpen;
+      endif;
+        if(array_key_exists('postThumb', $attr) && $attr['postThumb'] !== false && $attr['postThumb'] !== ''):
+          $output .= get_the_post_thumbnail($id) ? '<figure>' . get_the_post_thumbnail($id, 'full', array("data-id" => $id)) . '</figure>' : '';
+        endif;
+      if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_img', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
+        $output .= $linkClose;
+      endif;
+      // add content
+      $output .= '<div class="post-content">';
+        if(array_key_exists('postTextOne', $attr) && $attr['postTextOne'] !== ''):
+          $output .= $attr['postTextOne'] == 'title' ? '<h4>' : '<div>';
+            if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_row1', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
+              $output .= $linkOpen;
+            endif;
+              $output .= WPgutenberg_postsfilter_ContentRow($attr['postTextOne'], $id);
+            if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_row1', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
+              $output .= $linkClose;
+            endif;
+          $output .= $attr['postTextOne'] == 'title' ? '</h4>' : '</div>';
+        endif;
+        if(array_key_exists('postTextTwo', $attr) && $attr['postTextTwo'] !== ''):
+          $output .= $attr['postTextTwo'] == 'title' ? '<h4>' : '<div>';
+            if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_row2', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
+              $output .= $linkOpen;
+            endif;
+              $output .= WPgutenberg_postsfilter_ContentRow($attr['postTextTwo'], $id);
+            if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_row2', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
+              $output .= $linkClose;
+            endif;
+          $output .= $attr['postTextTwo'] == 'title' ? '</h4>' : '</div>';
+        endif;
+      $output .= '</div>';
+      if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_box', $attr['postTaxonomyFilterOptions'])):
+        $output .= $linkClose;
+      endif;
+    $output .= '</div>';
+
+  return $output;
+}
+
+// post results
+function WPgutenberg_postsfilter_getResultsAndSort(array $attr, string $source = 'first_load'){
   // print_r($attr);
   // sort direction
   $postSortBy = in_array($attr['postSortBy'], array('title', 'date', 'menu_order')) ? $attr['postSortBy'] : 'meta_value';
@@ -176,7 +229,12 @@ function WPgutenberg_postresults_postsfilter(array $attr, string $source = 'firs
     'order' => $attr['postSortDirection'],
     'tax_query' => $term_array
   );
-  if(!in_array($attr['postSortBy'], array('title', 'date', 'menu_order'))):
+
+  if(strpos($attr['postSortBy'], 'tax__') !== false):
+    // sort by taxonomy
+    $cleanTax = str_replace('tax__', '', $attr['postSortBy']);
+    $terms = get_terms($cleanTax);
+  elseif(!in_array($attr['postSortBy'], array('title', 'date', 'menu_order'))):
     $queryArgs['meta_key'] = $attr['postSortBy'];
   endif;
   if($tagsToQuery):
@@ -193,54 +251,37 @@ function WPgutenberg_postresults_postsfilter(array $attr, string $source = 'firs
   // return
   if ( $filter_query->have_posts() ) :
     while ( $filter_query->have_posts() ) : $filter_query->the_post();
-      $get_url = get_post_meta(get_the_ID(), 'BlockUrl', true) ? get_post_meta(get_the_ID(), 'BlockUrl', true) : get_the_permalink();
-      $linkOpen = $get_url && $get_url !== '' ? '<a href="' . $get_url . '">' : '';
-      $linkClose = $get_url && $get_url !== '' ? '</a>' : '';
-      $output .= '<div data-id="' . get_the_ID() . '">';
-        if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_box', $attr['postTaxonomyFilterOptions'])):
-          $output .= $linkOpen;
-        endif;
-          // add post thumbnail
-          if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_img', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
-            $output .= $linkOpen;
-          endif;
-            if(array_key_exists('postThumb', $attr) && $attr['postThumb'] !== false && $attr['postThumb'] !== ''):
-              $output .= get_the_post_thumbnail() ? '<figure>' . get_the_post_thumbnail(get_the_id(), 'full', array("data-id" => get_the_id())) . '</figure>' : '';
-            endif;
-          if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_img', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
-            $output .= $linkClose;
-          endif;
-          // add content
-          $output .= '<div class="post-content">';
-            if(array_key_exists('postTextOne', $attr) && $attr['postTextOne'] !== ''):
-              $output .= $attr['postTextOne'] == 'title' ? '<h4>' : '<div>';
-                if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_row1', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
-                  $output .= $linkOpen;
-                endif;
-                  $output .= WPgutenberg_block_postsValue($attr['postTextOne'], get_the_ID());
-                if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_row1', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
-                  $output .= $linkClose;
-                endif;
-              $output .= $attr['postTextOne'] == 'title' ? '</h4>' : '</div>';
-            endif;
-            if(array_key_exists('postTextTwo', $attr) && $attr['postTextTwo'] !== ''):
-              $output .= $attr['postTextTwo'] == 'title' ? '<h4>' : '<div>';
-                if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_row2', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
-                  $output .= $linkOpen;
-                endif;
-                  $output .= WPgutenberg_block_postsValue($attr['postTextTwo'], get_the_ID());
-                if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_row2', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
-                  $output .= $linkClose;
-                endif;
-              $output .= $attr['postTextTwo'] == 'title' ? '</h4>' : '</div>';
-            endif;
-          $output .= '</div>';
-          if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_box', $attr['postTaxonomyFilterOptions'])):
-            $output .= $linkClose;
-          endif;
-        $output .= '</div>';
+      $key = get_the_ID();
+      $allPosts[$key] = get_the_ID();
     endwhile;
     wp_reset_postdata();
+
+    if($terms):
+      // sort query by taxonomy
+      $termsGroup = array();
+      foreach ($terms as $key => $term) {
+        $termsGroup[$key] = array($term->term_id, $term->name);
+      }
+      $termsSorted = prefix_core_BaseFunctions::MultidArraySort($termsGroup, 1, $attr['postSortDirection'], false);
+      // return by taxonomy
+      foreach ($termsSorted as $key => $term) {
+        foreach ($allPosts as $key => $postID) {
+          $post_terms = wp_get_object_terms( $postID, $cleanTax, array( 'fields' => 'ids' ) );
+          if(in_array($term["0"], $post_terms)):
+            // check primary taxonomy
+            $primary_term = intval(get_post_meta( $postID, '_primary_term_' . $cleanTax, true ));
+            if($primary_term == 0 || $primary_term > 0 && $primary_term == $term["0"]):
+              $output .= WPgutenberg_postsfilter_PostBuilder($attr, $postID);
+              unset($allPosts[$key]);
+            endif;
+          endif;
+        }
+      }
+    else:
+      foreach ($allPosts as $key => $postID) {
+        $output .= WPgutenberg_postsfilter_PostBuilder($attr, $postID);
+      }
+    endif;
   else:
     $output .= '<p class="no-results wide">' . __( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'devTheme' ) . '</p>';
   endif;
@@ -257,7 +298,7 @@ function WPgutenberg_postresults_postsfilter(array $attr, string $source = 'firs
 }
 
 // callback function
-function WPgutenberg_blockRender_postsfilter($attr){
+function WPgutenberg_postsfilter_blockRender($attr){
   $output = '';
   $css = '';
   $inlinecss = '';
@@ -360,7 +401,7 @@ function WPgutenberg_blockRender_postsfilter($attr){
       $output .= '<input type="hidden" name="postColumns" value="' . $columns . '">';
     $output .= '</form>';
     $output .= '<div class="results ' . $attr['postListTemplate'] . '" data-columnspace="' . $spacing . '" data-columns="' . $columns . '" style="' . $inlinecss . '">';
-      $output .= WPgutenberg_postresults_postsfilter($attr);
+      $output .= WPgutenberg_postsfilter_getResultsAndSort($attr);
     $output .= '</div>';
   $output .= '</div>';
 

@@ -4,7 +4,7 @@
  *
  * Base dev functions - parent for all custom classes
  * Author:      David Voglgsnag
- * @version     2.13.6
+ * @version     2.13.7
  *
  */
 
@@ -373,6 +373,13 @@ class prefix_core_BaseFunctions {
           switch ($order) {
               case "ASC":
                   natcasesort($sortable_array);
+              break;
+              case "asc":
+                  natcasesort($sortable_array);
+              break;
+              case "desc":
+                  natcasesort($sortable_array);
+                  $sortable_array = array_reverse($sortable_array, true);
               break;
               case "DESC":
                   natcasesort($sortable_array);

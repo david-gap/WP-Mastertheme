@@ -1,4 +1,4 @@
-**Version 2.13.6** (05.01.2022)
+**Version 2.13.7** (14.01.2022)
 
 Custom class "prefix_core_BaseFunctions" used as a library for useful functions
 
