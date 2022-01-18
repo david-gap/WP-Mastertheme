@@ -140,3 +140,35 @@ wp.blocks.registerBlockStyle( 'core/paragraph', [{
 ### NPM ACTIONS
 npm run dev
 npm run build
+
+
+## FILTERS
+to modify the posts block query.
+There is only one parameter given. A array with all the query parameters.
+The filter has to return a array.
+WPgutenberg_filter_posts_query
+
+to modify the postsfilter block query.
+There is only one parameter given. A array with all the query parameters.
+The filter has to return a array.
+WPgutenberg_filter_postsfilter_query
+
+to modify the posts block results.
+There are two parameters inside this query. First parameter is a arry with all resulted ids and the second is a array with the the block arguments.
+The filter has to return a array.
+WPgutenberg_filter_posts_results
+
+to modify the postsfilter block results.
+There are two parameters inside this query. First parameter is a arry with all resulted ids and the second is a array with all the resulted post ids.
+The filter has to return a array.
+WPgutenberg_filter_postsfilter_results
+
+to modify the posts block sorting inside the taxonomy term.
+additional sorting inside posts block if its getting sorted by a taxonomy and there is a wish to sort the posts inside the taxonomy.
+There are two parameters inside this query. First parameter is the multidimensional array with the post ids (tax id is the array key) and the second is a array with the the block arguments.
+WPgutenberg_filter_posts_taxSorting
+
+to modify the postsfilter block sorting inside the taxonomy term.
+additional sorting inside postsfilter block if its getting sorted by a taxonomy and there is a wish to sort the posts inside the taxonomy.
+There are two parameters inside this query. First parameter is the multidimensional array with the post ids (tax id is the array key) and the second is a array with the the block arguments.
+WPgutenberg_filter_postsfilter_taxSorting

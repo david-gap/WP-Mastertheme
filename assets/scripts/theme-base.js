@@ -65,6 +65,13 @@ let uniqueID = () => {
 }
 
 
+/* Check if function exists
+/------------------------*/
+function is_function(func) {
+  return typeof window[func] !== 'undefined' && $.isFunction(window[func]);
+}
+
+
 /* Convert RGB color to HEX code
 /------------------------*/
 function rgb2hex(rgb) {
@@ -165,11 +172,13 @@ function ajaxCall(getdata) {
         console.log(results.log);
       }
       // run function
-      if(results.action){
+      if(results.action && is_function(results.action)){
         eval(results.action + '(' + this.response + ')');
       } else {
         // DEBUG: console.log("Action not defined in ajax function");
       }
+      // rerun event listeners
+      runEventListeners();
     } else {
       // DEBUG: console.log("Ajax update failed");
     }
@@ -337,13 +346,6 @@ function funcCall(){
     eval(get_action + '()');
   }
 }
-var actionButtons = document.querySelectorAll('.funcCall');
-if(actionButtons.length !== 0){
-  Array.from(actionButtons).forEach(function(element) {
-    element.addEventListener('click', funcCall);
-    element.addEventListener('keypress', funcCall);
-  });
-}
 
 
 /* List all data attributes
@@ -372,13 +374,6 @@ function getDataAttributes(element) {
 function toggleBlock(){
   this.classList.toggle("active");
 }
-var toggleButtons = document.querySelectorAll('.block-accordion > .accordion-item > .accordion-label, .arrow-toggle > .label');
-if(toggleButtons.length !== 0){
-  Array.from(toggleButtons).forEach(function(element) {
-    element.addEventListener('click', toggleBlock);
-    element.addEventListener('keypress', toggleBlock);
-  });
-}
 
 
 /* Overlay container
@@ -396,18 +391,6 @@ function checkOverlayContainers(e){
     target.closest(".overlay-container").classList.add("active-iframe");
   }
 }
-document.onfocusout = function(){
-  setTimeout(function(){
-      // using the 'setTimout' to let the event pass the run loop
-      if (document.activeElement instanceof HTMLIFrameElement) {
-          // Do your logic here..
-          document.querySelectorAll('.overlay-container').classList.add("active-iframe");
-      } else {
-        document.querySelectorAll('.overlay-container').classList.remove("active-iframe");
-      }
-  },0);
-};
-document.addEventListener('click', checkOverlayContainers);
 
 
 /* Post sort
@@ -778,3 +761,54 @@ if(activeImagePopUps.length > 0){
     popup.addEventListener('keypress', loadImagePopUp);
   });
 }
+
+
+
+/*==================================================================================
+  EVENT LISTENERS
+==================================================================================*/
+
+/* load all event listeners for blocks on load or after ajax
+/------------------------*/
+function runEventListeners(){
+
+  /* Action Links
+  /------------------------*/
+  var actionButtons = document.querySelectorAll('.funcCall');
+  if(actionButtons.length !== 0){
+    Array.from(actionButtons).forEach(function(element) {
+      element.addEventListener('click', funcCall);
+      element.addEventListener('keypress', funcCall);
+    });
+  }
+
+  /* Toggle
+  /------------------------*/
+  var toggleButtons = document.querySelectorAll('.block-accordion > .accordion-item > .accordion-label, .arrow-toggle > .label');
+  if(toggleButtons.length !== 0){
+    Array.from(toggleButtons).forEach(function(element) {
+      element.addEventListener('click', toggleBlock);
+      element.addEventListener('keypress', toggleBlock);
+    });
+  }
+
+  /* Overlay container
+  /------------------------*/
+  var getOverlayContainers = document.querySelectorAll('.overlay-container');
+  if(getOverlayContainers.length !== 0){
+    document.onfocusout = function(){
+      setTimeout(function(){
+        // using the 'setTimout' to let the event pass the run loop
+        if (document.activeElement instanceof HTMLIFrameElement) {
+          // Do your logic here..
+          document.querySelectorAll('.overlay-container').classList.add("active-iframe");
+        } else {
+          document.querySelectorAll('.overlay-container').classList.remove("active-iframe");
+        }
+      },0);
+    };
+    document.addEventListener('click', checkOverlayContainers);
+  }
+
+}
+runEventListeners();

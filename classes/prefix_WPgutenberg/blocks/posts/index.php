@@ -256,6 +256,9 @@ function WPgutenberg_posts_getResultsAndSort(array $attr, string $source = 'firs
       $queryArgs['tag_id'] = $tagsToQuery;
     endif;
   endif;
+  // apply query filter
+  $queryArgs = apply_filters( 'WPgutenberg_filter_posts_query', $queryArgs );
+  // call posts
   $filter_query = new WP_Query( $queryArgs );
   // output
   $allPosts = array();
@@ -267,6 +270,9 @@ function WPgutenberg_posts_getResultsAndSort(array $attr, string $source = 'firs
     endwhile;
     wp_reset_postdata();
 
+    // apply filter to resulted ids
+    $allPosts = apply_filters( 'WPgutenberg_filter_posts_results', $allPosts, $attr );
+
     if($terms):
       // sort query by taxonomy
       $termsGroup = array();
@@ -274,19 +280,34 @@ function WPgutenberg_posts_getResultsAndSort(array $attr, string $source = 'firs
         $termsGroup[$key] = array($term->term_id, $term->name);
       }
       $termsSorted = prefix_core_BaseFunctions::MultidArraySort($termsGroup, 1, $attr['postSortDirection'], false);
-      // return by taxonomy
+      // regroup
+      $groupedIds = array();
       foreach ($termsSorted as $key => $term) {
+        $groupedIds[$term["0"]] = array();
         foreach ($allPosts as $key => $postID) {
           $post_terms = wp_get_object_terms( $postID, $cleanTax, array( 'fields' => 'ids' ) );
           if(in_array($term["0"], $post_terms)):
             // check primary taxonomy
             $primary_term = intval(get_post_meta( $postID, '_primary_term_' . $cleanTax, true ));
             if($primary_term == 0 || $primary_term > 0 && $primary_term == $term["0"]):
-              $output .= WPgutenberg_posts_PostBuilder($attr, $postID);
+              $groupedIds[$term["0"]][$postID] = $postID;
               unset($allPosts[$key]);
             endif;
           endif;
         }
+      }
+      // insert all posts without term to a special array
+      $groupedIds["no-term"] = $allPosts;
+      // set taxonomy filter
+      $groupedIds = apply_filters( 'WPgutenberg_filter_posts_taxSorting', $groupedIds, $attr );
+      // return by taxonomy
+      foreach ($groupedIds as $termkey => $termgroup) {
+        if(is_array($termgroup) && !empty($termgroup)):
+          foreach ($termgroup as $idkey => $id) {
+            // taxonomy is not empty
+            $output .= WPgutenberg_posts_PostBuilder($attr, $id);
+          }
+        endif;
       }
     else:
       foreach ($allPosts as $key => $postID) {

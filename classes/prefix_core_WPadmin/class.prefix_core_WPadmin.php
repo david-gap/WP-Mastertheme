@@ -111,8 +111,11 @@ class prefix_core_WPadmin {
           $output .= '<ul id="configuration-navigation">';
             foreach ($registered_classes as $class_key => $classname) {
               if(strpos($classname, 'prefix_') === 0 && strpos($classname, '_core_') == false):
-                $builder_title = isset($classname::$classtitle) ? $classname::$classtitle : '';
-                $output .= '<li><a href="#' . $classname . '">' . $builder_title . '</a></li>';
+                $builder = isset($classname::$backend) ? $classname::$backend : '';
+                if($builder !== ''):
+                  $builder_title = isset($classname::$classtitle) ? $classname::$classtitle : '';
+                  $output .= '<li><a href="#' . $classname . '">' . $builder_title . '</a></li>';
+                endif;
               endif;
             }
           $output .= '</ul>';
@@ -121,12 +124,12 @@ class prefix_core_WPadmin {
               if(strpos($classname, 'prefix_') === 0 && strpos($classname, '_core_') == false):
                 // for each registered custom class
                 $builder = isset($classname::$backend) ? $classname::$backend : '';
-                $builder_title = isset($classname::$classtitle) ? $classname::$classtitle : '';
-                $builder_slug = isset($classname::$classkey) ? $classname::$classkey : $classname;
-                // db values
-                $db_settings = array_key_exists($builder_slug, $db_option) ? $db_option[$builder_slug] : array();
                 // check if backend values exists
                 if($builder !== ''):
+                  $builder_title = isset($classname::$classtitle) ? $classname::$classtitle : '';
+                  $builder_slug = isset($classname::$classkey) ? $classname::$classkey : $classname;
+                  // db values
+                  $db_settings = array_key_exists($builder_slug, $db_option) ? $db_option[$builder_slug] : array();
                   // container
                   $output .= '<table id="' . $classname . '" class="config-group">';
                     // return title

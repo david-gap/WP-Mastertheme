@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.42.28 | 18.01.2022 <posts and postsfilter filters, event listeners>
+* move all content js event listeners into a function, so it can be reruned after ajax updates
+* add filter options for posts and postsfilter block on query, results and taxonomy sorting
+* configurator builder, ignore classes without any fields
+
 ## 1.41.28 | 14.01.2022 <posts and posts filter block sorting>
 * remove string sensitivity from multidimensinal sorting
 * rename posts and posts filter block functions
