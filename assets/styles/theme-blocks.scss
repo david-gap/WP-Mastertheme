@@ -222,20 +222,12 @@ body.frontend,
     /* 1.4 ACCORDION
     /––––––––––––––––––––––––*/
     .block-accordion {
-      --labelSpacing: 20px 10px;
-      --contentSpacing: 20px 10px;
-      --iconBorderRadius: 4px;
-      --iconWidth: 30px;
-      --iconHeight: 30px;
-      --iconSeperator: 20px;
-      --iconPlusWeight: 4px;
-      --iconPlusRadius: 1px;
       .accordion-item {
         .accordion-label {
           display: flex;
           flex-wrap: nowrap;
           justify-content: space-between;
-          padding: var(--labelSpacing);
+          padding: var(--block__accordion_label_spacing);
           position: relative;
           cursor: pointer;
           line-height: 1;
@@ -247,7 +239,7 @@ body.frontend,
               }
             }
             + .accordion-content {
-              padding: var(--contentSpacing);
+              padding: var(--block__accordion_content_spacing);
               height: auto;
               a {
                 display: inline;
@@ -256,23 +248,23 @@ body.frontend,
           }
           .icon {
             position: relative;
-            border-radius: var(--iconBorderRadius);
-            width: var(--iconWidth);
-            height: var(--iconHeight);
-            margin-left: var(--iconSeperator);
+            border-radius: var(--block__accordion_icon_borderRadius);
+            width: var(--block__accordion_icon_width);
+            height: var(--block__accordion_icon_height);
+            margin-left: var(--block__accordion_icon_seperator);
             &:before,
             &:after {
               position: absolute;
               display: block;
               content: "";
-              width: 50%;
-              height: var(--iconPlusWeight);
-              border-radius: var(--iconPlusRadius);
+              width: var(--block__accordion_icon_plusSize);
+              height: var(--block__accordion_icon_plusWeight);
+              border-radius: var(--block__accordion_icon_plusRadius);
             }
             &:before,
             &:after {
-              left: calc(50% - 25%);
-              top: calc(50% - (var(--iconPlusWeight) / 2));
+              left: calc(50% - (var(--block__accordion_icon_plusSize) / 2));
+              top: calc(50% - (var(--block__accordion_icon_plusWeight) / 2));
             }
             &:after {
               transform: rotate(90deg);
@@ -401,6 +393,7 @@ body.frontend,
       overflow: hidden;
       display: flex;
       flex-wrap: wrap;
+      width: 100%;
       > a {
         display: block;
         position: absolute;

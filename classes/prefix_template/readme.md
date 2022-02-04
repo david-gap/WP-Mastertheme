@@ -1,4 +1,4 @@
-**Version 2.21.16** (06.01.2022)
+**Version 2.22.16** (04.02.2022)
 
 Custom class "template" with template parts and header / footer builder
 
@@ -18,6 +18,7 @@ Custom class "template" with template parts and header / footer builder
 * $template_header_dmenu: Activate header hamburger for desktop
 * $template_header_menu_style: Select menu direction (options: horizontal/vertical)
 * $template_header_hmenu_style: Select hamburger menu style fullscreen (options: fullscreen, left, left_contained, right, right_contained)
+* $template_header_hmenu_text: Show text on hamburger menu button
 * $template_header_hmenu_toggle: Hamburger Menü toggle able submenus
 * $template_header_custom: Custom header html
 * $template_header_sort: Sort and activate blocks inside header builder
@@ -35,6 +36,7 @@ Custom class "template" with template parts and header / footer builder
 * $template_footer_custom: custom html
 * $template_footer_sort: Sort and activate blocks inside footer builder
 * $template_footer_before: html code before footer
+$template_searchform_autocomplete: configure the autocomplete in the search form
 
 ## CONFIGURATION FILE
 ```

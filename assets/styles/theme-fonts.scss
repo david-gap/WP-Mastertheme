@@ -11,8 +11,10 @@
 Table of Contents:
 –––––––––––––––––––––––––––––––––––––––––––––––––––––––––
   1 HEADER
-  1 FOOTER
-  1 GENERAL
+  2 FOOTER
+  3 GENERAL
+  4.0 BLOCKS
+    4.1 ACCORDION
 =======================================================*/
 
 
@@ -101,6 +103,27 @@ body.frontend,
   .textsearch {
     label {
       font-weight: bold;
+    }
+  }
+
+
+
+  /*==================================================================================
+    4.0 BLOCKS
+  ==================================================================================*/
+
+  /* 4.1 ACCORDION
+  /––––––––––––––––––––––––*/
+  .block-accordion {
+    .accordion-item {
+      .accordion-label {
+        font-size: var(--block__accordion_label_fontsize);
+        line-height: var(--block__accordion_label_lineheight);
+      }
+      .accordion-content {
+        font-size: var(--block__accordion_content_fontsize);
+        line-height: var(--block__accordion_content_lineheight);
+      }
     }
   }
 

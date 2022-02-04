@@ -14,10 +14,10 @@ body.frontend {
   &.active-menu > header nav {
     #menu-main-container {
       &.left_contained {
-        left: 0;
+        left: 0!important;
       }
       &.right_contained {
-        right: 0;
+        right: 0!important;
       }
     }
   }

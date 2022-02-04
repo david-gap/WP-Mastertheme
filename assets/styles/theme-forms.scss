@@ -22,7 +22,8 @@ body.frontend,
     appearance: none;
   }
 
-  input[type="submit"] {
+  input[type="submit"],
+  button[type="submit"] {
     border-radius: 0;
     padding: var(--input__padding);
     appearance: none;

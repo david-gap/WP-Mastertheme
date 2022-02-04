@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.21.16
+ * @version     2.22.16
  *
 */
 
@@ -24,6 +24,7 @@ Table of Contents:
   2.3 STICKY HEADER
   2.4 SAVE METABOXES
   2.5 REGISTER WIDGETS
+  2.6 REBUILD SEARCH FORM
 3.0 OUTPUT
   3.1 SORTABLE HEADER CONTENT
   3.2 SORTABLE FOOTER CONTENT
@@ -73,8 +74,9 @@ class prefix_template {
     * @param static int $template_header_stickyload: activate sticky header on load
     * @param static int $template_header_dmenu: Activate header hamburger for desktop
     * @param static int $template_header_menusearchform: Activate searchform inside the main menu
-    * @param static string template_header_menu_style: Select menu direction (options: horizontal/vertical)
-    * @param static string template_header_hmenu_style: Select hamburger menu style (options: fullscreen, top, top_contained, left, left_contained, right, right_contained)
+    * @param static string $template_header_menu_style: Select menu direction (options: horizontal/vertical)
+    * @param static string $template_header_hmenu_style: Select hamburger menu style (options: fullscreen, top, top_contained, left, left_contained, right, right_contained)
+    * @param static int $template_header_hmenu_text: Show text on hamburger menu button
     * @param static int $template_header_hmenu_visible_head: Define if header is visible on active hamburger menu
     * @param static int $template_header_hmenu_scroll: Define if hamburger menu close by scrolling (Desktop only)
     * @param static string $template_header_hmenu_toggle: Hamburger Menü toggle able submenus
@@ -96,6 +98,7 @@ class prefix_template {
     * @param static string $template_footer_custom: custom html
     * @param static array $template_footer_sort: Sort and activate blocks inside footer builder
     * @param static string $template_footer_before: html code before footer
+    * @param static string $template_searchform_autocomplete: configure the autocomplete in the search form
   */
   static $template_container_header            = 1;
   static $template_container                   = 1;
@@ -154,6 +157,7 @@ class prefix_template {
   static $template_header_menu_style           = 'horizontal';
   static $template_header_hmenu_style          = 'fullscreen';
   static $template_header_hmenu_visible_head   = 0;
+  static $template_header_hmenu_text           = 0;
   static $template_header_hmenu_scroll         = 0;
   static $template_header_hmenu_toggle         = 0;
   static $template_header_custom               = "";
@@ -233,6 +237,7 @@ class prefix_template {
   );
   static $template_footer_before               = "";
   static $template_footer_after                = "";
+  static $template_searchform_autocomplete     = 0;
 
 
   /* 1.2 ON LOAD RUN
@@ -322,6 +327,7 @@ class prefix_template {
       __('Activate menu search form', 'devTheme'),
       __('Menu direction', 'devTheme'),
       __('Hamburger menu position', 'devTheme'),
+      __('Hamburger text', 'devTheme'),
       __('Visible header while menu is active', 'devTheme'),
       __('Close hamburger menu on scroll', 'devTheme'),
       __('Hamburger menu toggle able submenus', 'devTheme'),
@@ -399,7 +405,9 @@ class prefix_template {
       __('Widget 3', 'devTheme'),
       __('Container end', 'devTheme'),
       __('Custom content before footer', 'devTheme'),
-      __('Custom content after footer', 'devTheme')
+      __('Custom content after footer', 'devTheme'),
+      __('Search form', 'devTheme'),
+      __('Autocomplete', 'devTheme')
     );
   }
 
@@ -642,6 +650,10 @@ class prefix_template {
           "label" => "Hamburger menu position",
           "type" => "select",
           "value" => array('fullscreen','top_contained','left','left_contained','right','right_contained')
+        ),
+        "hmenu_text" => array(
+          "label" => "Hamburger text",
+          "type" => "switchbutton"
         ),
         "hmenu_visible_head" => array(
           "label" => "Visible header while menu is active",
@@ -981,6 +993,16 @@ class prefix_template {
           "type" => "textarea"
         )
       )
+    ),
+    "searchform" => array(
+      "label" => "Search form",
+      "type" => "multiple",
+      "value" => array(
+        "autocomplete" => array(
+          "label" => "Autocomplete",
+          "type" => "switchbutton"
+        )
+      )
     )
   );
 
@@ -1058,6 +1080,7 @@ class prefix_template {
           SELF::$template_header_menu_style = array_key_exists('menu_style', $header) ? $header['menu_style'] : SELF::$template_header_menu_style;
           SELF::$template_header_hmenu_style = array_key_exists('hmenu_style', $header) ? $header['hmenu_style'] : SELF::$template_header_hmenu_style;
           SELF::$template_header_hmenu_visible_head = array_key_exists('hmenu_visible_head', $header) ? $header['hmenu_visible_head'] : SELF::$template_header_hmenu_visible_head;
+          SELF::$template_header_hmenu_text = array_key_exists('hmenu_text', $header) ? $header['hmenu_text'] : SELF::$template_header_hmenu_text;
           SELF::$template_header_hmenu_scroll = array_key_exists('hmenu_scroll', $header) ? $header['hmenu_scroll'] : SELF::$template_header_hmenu_scroll;
           SELF::$template_header_hmenu_toggle = array_key_exists('hmenu_toggle', $header) ? $header['hmenu_toggle'] : SELF::$template_header_hmenu_toggle;
           SELF::$template_header_custom = array_key_exists('custom', $header) ? $header['custom'] : SELF::$template_header_custom;
@@ -1089,6 +1112,10 @@ class prefix_template {
           SELF::$template_footer_sort = array_key_exists('sort', $footer) ? $footer['sort'] : SELF::$template_footer_sort;
           SELF::$template_footer_before = array_key_exists('before_footer', $footer) ? $footer['before_footer'] : SELF::$template_footer_before;
           SELF::$template_footer_after = array_key_exists('after_footer', $footer) ? $footer['after_footer'] : SELF::$template_footer_after;
+        endif;
+        if($configuration && array_key_exists('searchform', $myConfig)):
+          $searchform = $myConfig['searchform'];
+          SELF::$template_searchform_autocomplete = array_key_exists('autocomplete', $searchform) ? $searchform['autocomplete'] : SELF::$template_searchform_autocomplete;
         endif;
       endif;
     }
@@ -1219,6 +1246,35 @@ class prefix_template {
     }
 
 
+    /* 2.6 REBUILD SEARCH FORM
+    /------------------------*/
+    public function buildSearchForm(string $type = 'default'){
+      $output = '';
+      if($type == 'menu'):
+        $containerStart = '<li class="menu-item menu-search-form">';
+        $containerEnd = '</li>';
+      else:
+        $containerStart = '<div class="search-form">';
+        $containerEnd = '</div>';
+      endif;
+
+      $output .= $containerStart;
+        $search = get_search_form( false );
+        // disable autocomplete
+        if(SELF::$template_searchform_autocomplete == 1):
+          $autocomplete = 'on';
+        else:
+          $autocomplete = 'off';
+        endif;
+        $search = str_replace('name="s"', 'name="s" autocomplete="' . $autocomplete . '"', $search);
+        $output .= $search;
+      $output .= $containerEnd;
+
+      return $output;
+    }
+
+
+
 
   /*==================================================================================
     3.0 OUTPUT
@@ -1266,10 +1322,10 @@ class prefix_template {
             endif;
             break;
           case 'menu':
-            echo $value == 1 ? SELF::WP_MainMenu(SELF::$template_header_dmenu, 'menu', SELF::$template_header_menu_style, SELF::$template_header_hmenu_style, SELF::$template_header_hmenu_toggle, SELF::$template_header_hmenu_visible_head) : '';
+            echo $value == 1 ? SELF::WP_MainMenu(SELF::$template_header_dmenu, 'menu', SELF::$template_header_menu_style, SELF::$template_header_hmenu_style, SELF::$template_header_hmenu_toggle, SELF::$template_header_hmenu_visible_head, SELF::$template_header_hmenu_text) : '';
             break;
           case 'hamburger':
-            echo $value == 1 ? SELF::WP_MainMenu(SELF::$template_header_dmenu, 'hamburger', SELF::$template_header_menu_style, SELF::$template_header_hmenu_style, SELF::$template_header_hmenu_toggle, SELF::$template_header_hmenu_visible_head) : '';
+            echo $value == 1 ? SELF::WP_MainMenu(SELF::$template_header_dmenu, 'hamburger', SELF::$template_header_menu_style, SELF::$template_header_hmenu_style, SELF::$template_header_hmenu_toggle, SELF::$template_header_hmenu_visible_head, SELF::$template_header_hmenu_text) : '';
             break;
           case 'logo':
             echo $value == 1 ? SELF::Logo(SELF::$template_header_logo_link, SELF::$template_header_logo_d, SELF::$template_header_logo_m) : '';
@@ -1281,7 +1337,7 @@ class prefix_template {
             echo $value == 1 ? SELF::ContactBlock(SELF::$template_contactblock) : '';
             break;
           case 'searchform':
-            echo $value == 1 ? '<div class="search-form">' . get_search_form( false ) . '</div>' : '';
+            echo $value == 1 ? SELF::buildSearchForm() : '';
             break;
           case 'widget_one':
             echo $value == 1 ? SELF::getWidget('header_' . $key) : '';
@@ -1375,7 +1431,7 @@ class prefix_template {
             echo $value == 1 ? SELF::ContactBlock(SELF::$template_contactblock) : '';
             break;
           case 'searchform':
-            echo $value == 1 ? '<div class="search-form">' . get_search_form( false ) . '</div>' : '';
+            echo $value == 1 ? SELF::buildSearchForm() : '';
             break;
           case 'widget_one':
             echo $value == 1 ? SELF::getWidget('footer_' . $key) : '';
@@ -1551,7 +1607,7 @@ class prefix_template {
 
     /* 3.7 CHECK IF MAINMENU IS ACTIVE
     /------------------------*/
-    public static function WP_MainMenu(int $active = 1, string $request = '', string $direction = '', string $hamburgerStyle = '', int $submenutoggle = 0, int $headvisibility){
+    public static function WP_MainMenu(int $active = 1, string $request = '', string $direction = '', string $hamburgerStyle = '', int $submenutoggle = 0, int $headvisibility, int $hamburgerText = 0){
       if($active === 1):
         $menu_active = 'hidden_mobile';
         $hamburger_active = 'mobile';
@@ -1587,9 +1643,16 @@ class prefix_template {
         endif;
         // get hamburger
         if($request !== 'menu'):
-          $output .= '<button class="hamburger ' . $hamburger_active . '" aria-label="Main Menu">';
-            $output .= '<span>&nbsp;</span>';
-          $output .= '</button>';
+          if($hamburgerText === 1):
+            $output .= '<div class="hamburger-container">';
+              $output .= '<span>' . __('Open Menu', 'devTheme') . '</span>';
+          endif;
+            $output .= '<button class="hamburger ' . $hamburger_active . '" aria-label="Main Menu">';
+              $output .= '<span>&nbsp;</span>';
+            $output .= '</button>';
+          if($hamburgerText === 1):
+            $output .= '</div>';
+          endif;
         endif;
       endif;
 
@@ -2009,7 +2072,7 @@ class prefix_template {
     /------------------------*/
     function addSearchFormToMainmenu($items, $args) {
       if ($args->theme_location == 'mainmenu'):
-        $updated_options = '<li class="menu-item menu-search-form">' . get_search_form( false ) . '</li>';
+        $updated_options = SELF::buildSearchForm('menu');
         $updated_options .= $items;
         $items = $updated_options;
       endif;

@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     0.3.2
+ * @version     1.0
  */
 
 /*=======================================================
@@ -56,7 +56,7 @@ class prefix_Mautic {
       endif;
       // register strings
       $backendStrings = array(
-        __('Mautic', 'devTheme')
+        __('Mautic', 'devTheme'),
         __('Mautic URL', 'devTheme'),
         __('Inline tracking code', 'devTheme'),
         __('Inline formular script', 'devTheme')
@@ -147,8 +147,24 @@ class prefix_Mautic {
         $scripts .= "}";
       endif;
     endif;
+    // check if cookie solution is active
+    $pluginPath = 'cookie-law-info/cookie-law-info.php';
+    if (is_plugin_active( $pluginPath )):
+      // Plugin is activ
+      $return = false;
+      if (isset($_COOKIE['CookieLawInfoConsent'])):
+        // consent given
+        if (isset($_COOKIE['cookielawinfo-checkbox-advertisement']) && $_COOKIE['cookielawinfo-checkbox-advertisement'] == 'yes'):
+            // consent for marketing given
+            $return = true;
+        endif;
+      endif;
+    else:
+      // plugin is not active
+      $return = true;
+    endif;
     // return
-    if($scripts !== ''):
+    if($scripts !== '' && $return == true):
       $output .= "<script>";
         $output .= $scripts;
       $output .= "</script>";
@@ -161,16 +177,37 @@ class prefix_Mautic {
   /**
     * @param array $atts: list with all attributes
     * @return string placeholder for mautic content
-    * usage [mautic slot="ContentSlot"]
+    * usage [mautic type="content" slot="ContentSlot"]
   */
-  function mauticContent($atts){
+  function mauticContent($atts, $content = null){
     // vars
     $output = '';
     $config = shortcode_atts( array(
-      'slot' => ''
+      'slot' => '',
+      'type' => '',
+      'id' => ''
     ), $atts );
 
-    $output .= '<div class="mautic-slot" data-slot-name="' . $config['slot'] . '"></div>';
+    switch ( $config['type'] ) {
+      case 'form':
+        if($config['id'] !== ''):
+          $output .= '<script type="text/javascript" src="' . $this->Mautic_URL . '/form/generate.js?id=' . $config['id'] . '"></script>';
+        else:
+          $output .= 'Mautic form id is missing';
+        endif;
+        break;
+      case 'content':
+        if($config['slot'] !== ''):
+          $output .= '<div class="mautic-slot" data-slot-name="' . $config['slot'] . '">';
+            if($content !== null):
+              $output .= $content;
+            endif;
+          $output .= '</div>';
+        else:
+          $output .= 'Mautic slot name is missing';
+        endif;
+        break;
+    }
 
     return $output;
   }

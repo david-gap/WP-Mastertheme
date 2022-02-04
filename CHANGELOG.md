@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 1.43.28 | 18.01.2022 <configudator restructure>
+* new js to return parameter by key
+* fix menu contained position
+* add button to submit styles
+* move accordion styles to the configurator
+* restructure the configurator
+* mautic class with cookie query
+* new option to add text to the hamburger
+* add autocomplete to search form
+
 ## 1.42.28 | 18.01.2022 <posts and postsfilter filters, event listeners>
 * move all content js event listeners into a function, so it can be reruned after ajax updates
 * add filter options for posts and postsfilter block on query, results and taxonomy sorting
