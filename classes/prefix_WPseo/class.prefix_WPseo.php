@@ -4,7 +4,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.2.9
+ * @version     2.3.9
  *
 */
 
@@ -364,10 +364,26 @@ class prefix_WPseo {
       * @return string tracking code
     */
     public static function GoogleTracking(bool $body = false){
+      // check if cookie solution is active
+      $pluginPath = 'cookie-law-info/cookie-law-info.php';
+      if (is_plugin_active( $pluginPath )):
+        // Plugin is activ
+        $return = false;
+        if (isset($_COOKIE['CookieLawInfoConsent'])):
+          // consent given
+          if (isset($_COOKIE['cookielawinfo-checkbox-analytics']) && $_COOKIE['cookielawinfo-checkbox-analytics'] == 'yes'):
+              // consent for marketing given
+              $return = true;
+          endif;
+        endif;
+      else:
+        // plugin is not active
+        $return = true;
+      endif;
       // vars
       $trackingcode = SELF::$WPseo_tracking;
       $output = '';
-      if(1 == get_option('blog_public')):
+      if(1 == get_option('blog_public') && $return == true):
         if(strpos($trackingcode, 'GTM-') === 0 && $body === false):
           // GTM head
           $output .= "<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':";

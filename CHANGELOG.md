@@ -1,6 +1,10 @@
 # CHANGELOG
 
-## 1.43.28 | 18.01.2022 <configudator restructure>
+## 1.44.28 | 04.02.2022 <dsgvo support>
+* add cookie query to analytics code
+
+
+## 1.43.28 | 04.02.2022 <configudator restructure>
 * new js to return parameter by key
 * fix menu contained position
 * add button to submit styles
