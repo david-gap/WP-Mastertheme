@@ -332,6 +332,21 @@ class prefix_core_Customizer {
     'gutenberg' => array(
       'label' => 'Gutenberg Blocks',
       'sections' => array(
+        'gutenberg_seperator' => array(
+          'label' => 'Seperator',
+          'inputs' => array(
+            'light__gbSeperator_color' => array(
+              'label' => 'Default color',
+              'type' => 'color',
+              'default' => '#dddddd'
+            ),
+            'dark__gbSeperator_color' => array(
+              'label' => 'Default color (dark mode)',
+              'type' => 'color',
+              'default' => '#343434'
+            )
+          )
+        ),
         'gutenberg_accordion' => array(
           'label' => 'Accordion',
           'inputs' => array(
@@ -566,6 +581,9 @@ class prefix_core_Customizer {
       __('Input padding', 'devTheme'),
       __('Anchor position', 'devTheme'),
       __('Gutenberg Blocks', 'devTheme'),
+      __('Seperator', 'devTheme'),
+      __('Default color', 'devTheme'),
+      __('Default color (dark mode)', 'devTheme'),
       __('Accordion', 'devTheme'),
       __('Label background color', 'devTheme'),
       __('Label text color', 'devTheme'),

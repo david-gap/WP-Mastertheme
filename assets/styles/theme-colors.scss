@@ -24,7 +24,8 @@ Table of Contents:
     2.5 DIVIDER
     2.6 INPUTS
     2.7 LOADING
-    2.8 OTHERS
+    2.8 VIMEO TABLE OF CONTENT
+    2.9 GUTENBERG BLOCKS
   3.0 DARK COLORING
     3.1 MAIN BG
     3.2 LOGO TEXT
@@ -33,7 +34,8 @@ Table of Contents:
     3.5 DIVIDER
     3.6 INPUTS
     3.7 LOADING
-    3.8 OTHERS
+    3.8 VIMEO TABLE OF CONTENT
+    3.9 GUTENBERG BLOCKS
 =======================================================*/
 
 
@@ -198,8 +200,11 @@ body.frontend,
       }
     }
 
-    /* 2.9 OTHERS
+    /* 2.9 GUTENBERG BLOCKS
     /––––––––––––––––––––––––*/
+    hr.wp-block-separator {
+      color: var(--light__gbSeperator_color);
+    }
 
 
 
@@ -290,8 +295,11 @@ body.frontend,
       }
     }
 
-    /* 3.10 OTHERS
+    /* 3.9 GUTENBERG BLOCKS
     /––––––––––––––––––––––––*/
+    hr.wp-block-separator {
+      color: var(--dark__gbSeperator_color);
+    }
 
 
 

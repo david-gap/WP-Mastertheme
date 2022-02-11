@@ -155,6 +155,7 @@ class prefix_core_WPadmin {
                             $value = array_key_exists('value', $input) ? $input["value"] : false;
                             $db_value = array_key_exists($input_key, $db_settings) ? $db_settings[$input_key] : false;
                             $placeholder = array_key_exists('placeholder', $input) ? ' ' . $input["placeholder"] : '';
+                            $translate = array_key_exists('translation', $input) ? $input["translation"] : '';
                             $output .= SELF::BuildInput(
                               $input["type"],
                               $value,
@@ -162,7 +163,8 @@ class prefix_core_WPadmin {
                               'WPadmin_' . $builder_slug . '_' . $input_key,
                               $css,
                               $db_value,
-                              $placeholder
+                              $placeholder,
+                              $translate
                             );
                           else:
                             $output .= '<span class="error">' . __('Input type is missing','devTheme') . '</span>';
@@ -192,13 +194,15 @@ class prefix_core_WPadmin {
     * @param $value value saved in DB
     * @return string form input
   */
-  function BuildInput(string $type = 'text', $multiple = '', string $name = '', string $id = '', string $css = "", $value = false, $placeholder = ''){
+  function BuildInput(string $type = 'text', $multiple = '', string $name = '', string $id = '', string $css = "", $value = false, $placeholder = '', $translate = ''){
     // vars
-    $output = '';
     $attr   = '';
     $attr   .= $name !== '' && $type !== 'select' ? ' name="' . $name . '"' : '';
     $attr   .= $id !== '' && $type !== 'switchbutton' ? ' id="' . $id . '"' : '';
     $attr   .= $placeholder !== '' ? ' placeholder="' . $placeholder . '"' : '';
+    $output = '';
+    $translationValue = '';
+    $translationName = $translate !== '' ? $translate : str_replace(array('[', ']'), array('-', ''), $name);
     // build input
     switch ($type) {
       case "checkbox":
@@ -230,6 +234,8 @@ class prefix_core_WPadmin {
         $attr .= $value !== false ? 'value="' . $value . '"' : '';
         $attr .= $css !== '' ? ' ' . ' class="' . $css . '"' : '';
         $output .= '<input type="text"' . $attr . '>';
+        // translation option
+        $translationValue .= '<input type="text" name="langid[' . $translationName . ']" value="">';
         break;
 
       case "textarea":
@@ -252,6 +258,8 @@ class prefix_core_WPadmin {
             endif;
           $output .= '</span>';
         $output .= '</div>';
+        // translation option
+        // $translationValue .= '<input type="text" name="langid[' . $translationName . ']" value="">';
         break;
 
       case "select":
@@ -296,6 +304,7 @@ class prefix_core_WPadmin {
               $multiple_css = array_key_exists('css', $multiple_input) ? ' ' . $multiple_input["css"] : '';
               $db_value = $value !== false && array_key_exists($multiple_key, $value) ? $value[$multiple_key] : false;
               $multiple_ph = array_key_exists('placeholder', $multiple_input) ? ' ' . $multiple_input["placeholder"] : '';
+              $multiple_translate = array_key_exists('translation', $multiple_input) ? $multiple_input["translation"] : '';
               $output .= '<li>';
                 $output .= '<label for="' . $id . '_' . $multiple_key . '">' . $multiple_input["label"] . '</label>';
                 $output .= SELF::BuildInput(
@@ -305,7 +314,8 @@ class prefix_core_WPadmin {
                   $id . '_' . $multiple_key,
                   $multiple_css,
                   $db_value,
-                  $multiple_ph
+                  $multiple_ph,
+                  $multiple_translate
                 );
               $output .= '</li>';
             endif;
@@ -326,6 +336,8 @@ class prefix_core_WPadmin {
                       $multiple_value = array_key_exists('value', $multiple_input) ? $multiple_input["value"] : false;
                       $multiple_css = array_key_exists('css', $multiple_input) ? ' ' . $multiple_input["css"] : '';
                       $db_value = $single_value !== false && array_key_exists($multiple_key, $single_value) ? $single_value[$multiple_key] : false;
+                      $multiple_ph = array_key_exists('placeholder', $multiple_input) ? ' ' . $multiple_input["placeholder"] : '';
+                      $multiple_translate = array_key_exists('translation', $multiple_input) ? $multiple_input["translation"] : '';
                       $output .= '<li>';
                         $output .= '<label>' . $multiple_input["label"] . '</label>';
                         $output .= SELF::BuildInput(
@@ -334,7 +346,9 @@ class prefix_core_WPadmin {
                           $name . '[' . $single_key . '][' . $multiple_key. ']',
                           $id . '_' . $multiple_key,
                           $multiple_css,
-                          $db_value
+                          $db_value,
+                          $multiple_ph,
+                          $multiple_translate
                         );
                       $output .= '</li>';
                     }
@@ -349,6 +363,7 @@ class prefix_core_WPadmin {
                     $multiple_value = array_key_exists('value', $multiple_input) ? $multiple_input["value"] : false;
                     $multiple_css = array_key_exists('css', $multiple_input) ? ' ' . $multiple_input["css"] : '';
                     $db_value = $value !== false && array_key_exists($multiple_key, $value) ? $value[$multiple_key] : false;
+                    $multiple_translate = array_key_exists('translation', $multiple_input) ? $multiple_input["translation"] : '';
                     $output .= '<li>';
                       $output .= '<label>' . $multiple_input["label"] . '</label>';
                       $output .= SELF::BuildInput(
@@ -357,7 +372,9 @@ class prefix_core_WPadmin {
                         $name . '[0][' . $multiple_key. ']',
                         $id . '_' . $multiple_key,
                         $multiple_css,
-                        $db_value
+                        $db_value,
+                        '',
+                        $multiple_translate
                       );
                     $output .= '</li>';
                   }
@@ -399,6 +416,24 @@ class prefix_core_WPadmin {
       default:
         $output .= "<span>input type <strong>" . $type . "</strong> not defined</span>";
     }
+
+    // TRANSLATE
+    if($translate !== '' && $translationValue !== ''):
+      $languages = get_available_languages();
+      $db_option = get_option('WPadmin_configuration') ? get_option('WPadmin_configuration') : array();
+      $output .= '<span class="translations"><span>T</span><ul>';
+        foreach ($languages as $key => $lang) {
+          // check if value exisits
+          $langTranslations = array_key_exists($lang, $db_option) ? $db_option[$lang] : array();
+          $value = array_key_exists($translationName, $langTranslations) ? $langTranslations[$translationName] : '';
+          //
+          $output .= '<li>';
+            $output .= $lang . ': ' . str_replace(array('langid', 'value=""'), array($lang, 'value="' . $value . '"'), $translationValue);
+          $output .= '</li>';
+        }
+      $output .= '</ul></span>';
+    endif;
+
 
     return $output;
   }

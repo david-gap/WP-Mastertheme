@@ -1,8 +1,13 @@
 # CHANGELOG
 
+## 1.45.28 | 04.02.2022 <config translation>
+* add translation support to configuration area
+* make addressblock settings to translation
+* fix google analytics plugin query
+* add gutenberg seperator default color to customizer
+
 ## 1.44.28 | 04.02.2022 <dsgvo support>
 * add cookie query to analytics code
-
 
 ## 1.43.28 | 04.02.2022 <configudator restructure>
 * new js to return parameter by key

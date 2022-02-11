@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.22.16
+ * @version     2.23.16
  *
 */
 
@@ -447,7 +447,8 @@ class prefix_template {
           "value" => array(
             "img" => array(
               "label" => "URL",
-              "type" => "img"
+              "type" => "img",
+              "translation" => 'template_address_logo_img'
             ),
             "width" => array(
               "label" => "Width",
@@ -459,53 +460,65 @@ class prefix_template {
             ),
             "alt" => array(
               "label" => "Alternative text",
-              "type" => "text"
+              "type" => "text",
+              "translation" => 'template_address_logo_alt'
             )
           )
         ),
         "company" => array(
           "label" => "Company",
-          "type" => "text"
+          "type" => "text",
+          "translation" => 'template_address_company'
         ),
         "name" => array(
           "label" => "Name",
-          "type" => "text"
+          "type" => "text",
+          "translation" => 'template_address_name'
         ),
         "street" => array(
           "label" => "Street",
-          "type" => "text"
+          "type" => "text",
+          "translation" => 'template_address_street'
         ),
         "street2" => array(
           "label" => "Street add",
-          "type" => "text"
+          "type" => "text",
+          "translation" => 'template_address_street2'
         ),
         "postalCode" => array(
           "label" => "Postcode",
-          "type" => "text"
+          "type" => "text",
+          "translation" => 'template_address_postalCode'
         ),
         "city" => array(
           "label" => "City",
-          "type" => "text"
+          "type" => "text",
+          "translation" => 'template_address_city'
         ),
         "country" => array(
           "label" => "Country",
-          "type" => "text"
+          "type" => "text",
+          "translation" => 'template_address_country'
         ),
         "phone" => array(
           "label" => "Phone",
-          "type" => "text"
+          "type" => "text",
+          "translation" => 'template_address_phone'
         ),
         "fax" => array(
           "label" => "Fax",
-          "type" => "text"
+          "type" => "text",
+          "translation" => 'template_address_fax'
         ),
         "mobile" => array(
           "label" => "Mobile",
-          "type" => "text"
+          "type" => "text",
+          "translation" => 'template_address_mobile'
         ),
         "email" => array(
           "label" => "E-Mail",
-          "type" => "text"
+          "type" => "text",
+          "translation" => 'template_address_email'
         ),
         "labels" => array(
           "label" => "Labels",
@@ -513,47 +526,58 @@ class prefix_template {
           "value" => array(
             "company" => array(
               "label" => "Company",
-              "type" => "text"
+              "type" => "text",
+              "translation" => 'template_address_label_company'
             ),
             "name" => array(
               "label" => "Name",
-              "type" => "text"
+              "type" => "text",
+              "translation" => 'template_address_label_name'
             ),
             "street" => array(
               "label" => "Street",
-              "type" => "text"
+              "type" => "text",
+              "translation" => 'template_address_label_street'
             ),
             "street2" => array(
               "label" => "Street add",
-              "type" => "text"
+              "type" => "text",
+              "translation" => 'template_address_label_street2'
             ),
             "postalCode" => array(
               "label" => "Postcode",
-              "type" => "text"
+              "type" => "text",
+              "translation" => 'template_address_label_postalCode'
             ),
             "city" => array(
               "label" => "City",
-              "type" => "text"
+              "type" => "text",
+              "translation" => 'template_address_label_city'
             ),
             "country" => array(
               "label" => "Country",
-              "type" => "text"
+              "type" => "text",
+              "translation" => 'template_address_label_country'
             ),
             "phone" => array(
               "label" => "Phone",
-              "type" => "text"
+              "type" => "text",
+              "translation" => 'template_address_label_phone'
             ),
             "fax" => array(
               "label" => "Fax",
-              "type" => "text"
+              "type" => "text",
+              "translation" => 'template_address_label_fax'
             ),
             "mobile" => array(
               "label" => "Mobile",
-              "type" => "text"
+              "type" => "text",
+              "translation" => 'template_address_label_mobile'
             ),
             "email" => array(
               "label" => "E-Mail",
-              "type" => "text"
+              "type" => "text",
+              "translation" => 'template_address_label_email'
             )
           )
         )
@@ -1419,7 +1443,7 @@ class prefix_template {
             echo $value == 1 ? SELF::WP_FooterMenu($value) : '';
             break;
           case 'address':
-            echo $value == 1 ? SELF::AddressBlock(SELF::$template_address) : '';
+            echo $value == 1 ? SELF::AddressBlock(SELF::$template_address, true) : '';
             break;
           case 'copyright':
             echo $value == 1 && !empty(SELF::$template_footer_cr) ? SELF::Copyright(SELF::$template_footer_cr) : '';
@@ -1563,7 +1587,7 @@ class prefix_template {
         $output .= '<div id="placeholder">';
           $output .= '<h1>' . __( 'Website under construction', 'devTheme' ) . '</h1>';
           $output .= SELF::$template_ph_custom ? SELF::$template_ph_custom : '';
-          $output .= SELF::$template_ph_address === true ? SELF::AddressBlock(SELF::$template_address) : '';
+          $output .= SELF::$template_ph_address === true ? SELF::AddressBlock(SELF::$template_address, true) : '';
         $output .= '</div>';
 
         return $output;
@@ -1676,7 +1700,7 @@ class prefix_template {
       * options are company, street, street2, zip, postalCode, city, phone, mobile, email, labels (array with childs)
       * @return string price
     */
-    public static function AddressBlock(array $address = array()){
+    public static function AddressBlock(array $address = array(), bool $translation = false){
       // vars
       $output = '';
       // defaults
@@ -1712,81 +1736,80 @@ class prefix_template {
       $output .= '<address>';
         if(!empty($config["logo"])):
           // logo
-          $logo_img = array_key_exists('img', $config["logo"]) && $config["logo"]['img'] !== '' ? wp_get_attachment_image_src($config["logo"]['img'], 'full') : '';
-
+          $logo_img = array_key_exists('img', $config["logo"]) && $config["logo"]['img'] !== '' ? wp_get_attachment_image_src(prefix_core_BaseFunctions::getConfigTranslation('template_address_logo_img', $config["logo"]['img']), 'full') : '';
             $logoAttributes .= array_key_exists('width', $config["logo"]) && $config["logo"]['width'] !== "" ? ' width="' . $config["logo"]['width'] . '"' : '';
             $logoAttributes .= array_key_exists('height', $config["logo"]) && $config["logo"]['height'] !== "" ? ' height="' . $config["logo"]['height'] . '"' : '';
-            $logoAttributes .= array_key_exists('alt', $config["logo"]) && $config["logo"]['alt'] !== "" ? ' alt="' . $config["logo"]['alt'] . '"' : '';
+            $logoAttributes .= array_key_exists('alt', $config["logo"]) && $config["logo"]['alt'] !== "" ? ' alt="' . prefix_core_BaseFunctions::getConfigTranslation('template_address_logo_alt', $config["logo"]['alt']) . '"' : '';
             $output .= '<img src="' . $logo_img[0] . '" ' . $logoAttributes . '>';
         endif;
         if($config["company"] !== ''):
           $output .= '<span rel="me" class="company">';
-            $output .= $config["labels"] && array_key_exists('company', $config["labels"]) && $config["labels"]["company"] !== '' ? __($config["labels"]["company"], 'devTheme') . ' ' : '';
-            $output .= __($config["company"], 'devTheme');
+            $output .= $config["labels"] && array_key_exists('company', $config["labels"]) && $config["labels"]["company"] !== '' ? prefix_core_BaseFunctions::getConfigTranslation('template_address_label_company', $config["labels"]["company"], 'devTheme') . ' ' : '';
+            $output .= prefix_core_BaseFunctions::getConfigTranslation('template_address_company', $config["company"]);
           $output .= '</span>';
         endif;
         if($config["name"] !== ''):
           $output .= '<span class="name">';
-            $output .= $config["labels"] && array_key_exists('name', $config["labels"]) && $config["labels"]["name"] !== '' ? __($config["labels"]["name"], 'devTheme') . ' ' : '';
-            $output .= __($config["name"], 'devTheme');
+            $output .= $config["labels"] && array_key_exists('name', $config["labels"]) && $config["labels"]["name"] !== '' ? prefix_core_BaseFunctions::getConfigTranslation('template_address_label_name', $config["labels"]["name"]) . ' ' : '';
+            $output .= prefix_core_BaseFunctions::getConfigTranslation('template_address_name', $config["name"]);
           $output .= '</span>';
         endif;
         if($config["street"] !== ''):
           $output .= '<span class="street">';
-            $output .= $config["labels"] && array_key_exists('street', $config["labels"]) && $config["labels"]["street"] !== '' ? __($config["labels"]["street"], 'devTheme') . ' ' : '';
-            $output .= __($config["street"], 'devTheme');
+            $output .= $config["labels"] && array_key_exists('street', $config["labels"]) && $config["labels"]["street"] !== '' ? prefix_core_BaseFunctions::getConfigTranslation('template_address_label_street', $config["labels"]["street"]) . ' ' : '';
+            $output .= prefix_core_BaseFunctions::getConfigTranslation('template_address_street', $config["street"]);
           $output .= '</span>';
         endif;
         if($config["street2"] !== ''):
           $output .= '<span class="street_add">';
-            $output .= $config["labels"] && array_key_exists('street2', $config["labels"]) && $config["labels"]["street2"] !== '' ? __($config["labels"]["street2"], 'devTheme') . ' ' : '';
-            $output .= __($config["street2"], 'devTheme');
+            $output .= $config["labels"] && array_key_exists('street2', $config["labels"]) && $config["labels"]["street2"] !== '' ? prefix_core_BaseFunctions::getConfigTranslation('template_address_label_street2', $config["labels"]["street2"]) . ' ' : '';
+            $output .= prefix_core_BaseFunctions::getConfigTranslation('template_address_street2', $config["street2"]);
           $output .= '</span>';
         endif;
         $output .= $config["postalCode"] !== '' && $config["city"] !== '' ? '<span class="location">' : '';
           if($config["postalCode"] !== ''):
             $output .= '<span class="postalcode">';
-              $output .= $config["labels"] && array_key_exists('postalCode', $config["labels"]) && $config["labels"]["postalCode"] !== '' ? __($config["labels"]["postalCode"], 'devTheme') . ' ' : '';
-              $output .= __($config["postalCode"], 'devTheme');
+              $output .= $config["labels"] && array_key_exists('postalCode', $config["labels"]) && $config["labels"]["postalCode"] !== '' ? prefix_core_BaseFunctions::getConfigTranslation('template_address_label_postalCode', $config["labels"]["postalCode"]) . ' ' : '';
+              $output .= prefix_core_BaseFunctions::getConfigTranslation('template_address_postalCode', $config["postalCode"]);
             $output .= '</span>';
           endif;
           $output .= $config["postalCode"] !== '' && $config["city"] !== '' ? ' ' : '';
           if($config["city"] !== ''):
             $output .= '<span class="city">';
-              $output .= $config["labels"] && array_key_exists('city', $config["labels"]) && $config["labels"]["city"] !== '' ? __($config["labels"]["city"], 'devTheme') . ' ' : '';
-              $output .= __($config["city"], 'devTheme');
+              $output .= $config["labels"] && array_key_exists('city', $config["labels"]) && $config["labels"]["city"] !== '' ? prefix_core_BaseFunctions::getConfigTranslation('template_address_label_city', $config["labels"]["city"]) . ' ' : '';
+              $output .= prefix_core_BaseFunctions::getConfigTranslation('template_address_city', $config["city"]);
             $output .= '</span>';
           endif;
         $output .= $config["postalCode"] !== '' && $config["city"] !== '' ? '</span>' : '';
         if($config["country"] !== ''):
           $output .= '<span class="country">';
-            $output .= $config["labels"] && array_key_exists('country', $config["labels"]) && $config["labels"]["country"] !== '' ? __($config["labels"]["country"], 'devTheme') . ' ' : '';
-            $output .= __($config["country"], 'devTheme');
+            $output .= $config["labels"] && array_key_exists('country', $config["labels"]) && $config["labels"]["country"] !== '' ? prefix_core_BaseFunctions::getConfigTranslation('template_address_label_country', $config["labels"]["country"]) . ' ' : '';
+            $output .= prefix_core_BaseFunctions::getConfigTranslation('template_address_country', $config["country"]);
           $output .= '</span>';
         endif;
         if($config["phone"] !== ''):
-          $output .= '<a href="tel:' . prefix_core_BaseFunctions::cleanPhoneNr(__($config["phone"], 'devTheme')) . '" class="call phone_nr">';
-            $output .= $config["labels"] && array_key_exists('phone', $config["labels"]) && $config["labels"]["phone"] !== '' ? __($config["labels"]["phone"], 'devTheme') . ' ' : '';
-            $output .= __($config["phone"], 'devTheme');
+          $output .= '<a href="tel:' . prefix_core_BaseFunctions::cleanPhoneNr(prefix_core_BaseFunctions::getConfigTranslation('template_address_', $config["phone"])) . '" class="call phone_nr">';
+            $output .= $config["labels"] && array_key_exists('phone', $config["labels"]) && $config["labels"]["phone"] !== '' ? prefix_core_BaseFunctions::getConfigTranslation('template_address_label_phone', $config["labels"]["phone"]) . ' ' : '';
+            $output .= prefix_core_BaseFunctions::getConfigTranslation('template_address_phone', $config["phone"]);
           $output .= '</a>';
         endif;
         if($config["fax"] !== ''):
-          $output .= '<a href="tel:' . prefix_core_BaseFunctions::cleanPhoneNr(__($config["fax"], 'devTheme')) . '" class="call fax_nr">';
-            $output .= $config["labels"] && array_key_exists('fax', $config["labels"]) && $config["labels"]["fax"] !== '' ? __($config["labels"]["fax"], 'devTheme') . ' ' : '';
-            $output .= __($config["fax"], 'devTheme');
+          $output .= '<a href="tel:' . prefix_core_BaseFunctions::cleanPhoneNr(prefix_core_BaseFunctions::getConfigTranslation('template_address_', $config["fax"])) . '" class="call fax_nr">';
+            $output .= $config["labels"] && array_key_exists('fax', $config["labels"]) && $config["labels"]["fax"] !== '' ? prefix_core_BaseFunctions::getConfigTranslation('template_address_label_fax', $config["labels"]["fax"]) . ' ' : '';
+            $output .= prefix_core_BaseFunctions::getConfigTranslation('template_address_fax', $config["fax"]);
           $output .= '</a>';
         endif;
         if($config["mobile"] !== ''):
-          $output .= '<a href="tel:' . prefix_core_BaseFunctions::cleanPhoneNr(__($config["mobile"], 'devTheme')) . '" class="call mobile_nr">';
-            $output .= $config["labels"] && array_key_exists('mobile', $config["labels"]) && $config["labels"]["mobile"] !== '' ? __($config["labels"]["mobile"], 'devTheme') . ' ' : '';
-            $output .= __($config["mobile"], 'devTheme');
+          $output .= '<a href="tel:' . prefix_core_BaseFunctions::cleanPhoneNr(prefix_core_BaseFunctions::getConfigTranslation('template_address_', $config["mobile"])) . '" class="call mobile_nr">';
+            $output .= $config["labels"] && array_key_exists('mobile', $config["labels"]) && $config["labels"]["mobile"] !== '' ? prefix_core_BaseFunctions::getConfigTranslation('template_address_label_mobile', $config["labels"]["mobile"]) . ' ' : '';
+            $output .= prefix_core_BaseFunctions::getConfigTranslation('template_address_mobile', $config["mobile"]);
           $output .= '</a>';
         endif;
         if($config["email"] !== ''):
-          $output .= '<a href="mailto:' . __($config["email"], 'devTheme') . '" class="mail">';
-            $output .= $config["labels"] && array_key_exists('email', $config["labels"]) && $config["labels"]["email"] !== '' ? __($config["labels"]["email"], 'devTheme') . ' ' : '';
+          $output .= '<a href="mailto:' . prefix_core_BaseFunctions::getConfigTranslation('template_address_', $config["email"]) . '" class="mail">';
+            $output .= $config["labels"] && array_key_exists('email', $config["labels"]) && $config["labels"]["email"] !== '' ? prefix_core_BaseFunctions::getConfigTranslation('template_address_label_email', $config["labels"]["email"]) . ' ' : '';
             $output .= $config["labels"] && array_key_exists('email', $config["labels"]) && $config["labels"]["email"] !== '' ? '<span>' : '';
-              $output .= __($config["email"], 'devTheme');
+              $output .= prefix_core_BaseFunctions::getConfigTranslation('template_address_email', $config["email"]);
             $output .= $config["labels"] && array_key_exists('email', $config["labels"]) && $config["labels"]["email"] !== '' ? '</span>' : '';
           $output .= '</a>';
         endif;

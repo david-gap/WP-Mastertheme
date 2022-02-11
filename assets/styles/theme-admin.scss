@@ -322,6 +322,50 @@ body.wp-admin {
   }
 
 
+
+  /*==================================================================================
+    TRANSLATION OPTION
+  ==================================================================================*/
+  .translations {
+    position: relative;
+    span {
+      display: block;
+      width: 20px;
+      background-color: $button;
+      text-align: center;
+      color: $light;
+      &:hover {
+        + ul {
+          opacity: 1;
+          pointer-events: inherit;
+        }
+      }
+    }
+    ul {
+      position: absolute;
+      z-index: 1;
+      right: 0;
+      padding: 3px 0;
+      border-top: 1px solid $coloring;
+      background-color: $light;
+      opacity: 0;
+      pointer-events: none;
+      &:hover {
+        opacity: 1;
+        pointer-events: inherit;
+      }
+      li {
+        padding: 3px 5px;
+        input {
+          min-width: 100px;
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+
+
+
   /*==================================================================================
     SWITCH BUTTON
   ==================================================================================*/

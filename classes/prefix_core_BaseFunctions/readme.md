@@ -1,4 +1,4 @@
-**Version 2.13.7** (14.01.2022)
+**Version 2.14.7** (11.02.2022)
 
 Custom class "prefix_core_BaseFunctions" used as a library for useful functions
 
@@ -154,6 +154,11 @@ return array(
 if(core_BaseFunctions::isMobileDevice()):
   // is mobile device
 endif;
+```
+
+### CONFIGURATOR TRANSLATIONS
+```php
+core_BaseFunctions::getConfigTranslation('key', 'default value');
 ```
 
 

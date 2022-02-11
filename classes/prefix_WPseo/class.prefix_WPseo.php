@@ -4,7 +4,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.3.9
+ * @version     2.3.10
  *
 */
 
@@ -364,6 +364,9 @@ class prefix_WPseo {
       * @return string tracking code
     */
     public static function GoogleTracking(bool $body = false){
+      if(!function_exists('is_plugin_active')):
+        include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+      endif;
       // check if cookie solution is active
       $pluginPath = 'cookie-law-info/cookie-law-info.php';
       if (is_plugin_active( $pluginPath )):

@@ -4,7 +4,7 @@
  *
  * Base dev functions - parent for all custom classes
  * Author:      David Voglgsnag
- * @version     2.13.7
+ * @version     2.14.7
  *
  */
 
@@ -29,6 +29,7 @@
    1.15 SLUGIFY STRING
    1.16 INSERT TO ARRAY AT SPACIFIC POSITION
    1.17 DETECT MOBILE DEVICE
+   1.18 CONFIGURATOR TRANSLATIONS
  2.0 DATES
    2.1 CHECK IF VARS ARE OUT OF DATE
    2.2 DATE RANGE FORMAT
@@ -469,6 +470,34 @@ class prefix_core_BaseFunctions {
     */
     function isMobileDevice() {
       return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
+    }
+
+
+    /* 1.18 CONFIGURATOR TRANSLATIONS
+    /------------------------*/
+    /**
+      * @param string $key: translation key to search for
+      * @param string $default: Default return, if translation does not exist
+      * @return string
+    */
+    function getConfigTranslation(string $key = '', string $default = ''){
+      $output = '';
+      // if key is not empty
+      if($key !== ''):
+        // get configuration
+        global $configuration;
+        $lang = str_replace('-', '_', get_bloginfo( 'language' ));
+        // check for configuration file
+        if($configuration && is_array($configuration) && array_key_exists($lang, $configuration)):
+          // check for translation
+          if(is_array($configuration[$lang]) && array_key_exists($key, $configuration[$lang])):
+            $output .= $configuration[$lang][$key];
+          endif;
+        endif;
+        // fallback
+        $output .= $output == '' && $default !== '' ? $default : '';
+      endif;
+      return $output;
     }
 
 
