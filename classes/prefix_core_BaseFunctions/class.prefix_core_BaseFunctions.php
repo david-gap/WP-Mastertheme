@@ -486,7 +486,7 @@ class prefix_core_BaseFunctions {
       if($key !== ''):
         // get configuration
         global $configuration;
-        $lang = str_replace('-', '_', get_bloginfo( 'language' ));
+        $lang = SELF::getCurrentLang();
         // check for configuration file
         if($configuration && is_array($configuration) && array_key_exists($lang, $configuration)):
           // check for translation

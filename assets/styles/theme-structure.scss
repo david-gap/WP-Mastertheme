@@ -32,11 +32,11 @@ body.frontend,
   .is-style-container,
   .is-style-content-container > .wp-block-group__inner-container,
   .is-style-content-container > .wp-block-cover__inner-container {
-    max-width: var(--container__width);
+    max-width: var(--container__width, 1000px);
     margin-left: auto;
     margin-right: auto;
-    padding-left: var(--container__side);
-    padding-right: var(--container__side);
+    padding-left: var(--container__side, 20px);
+    padding-right: var(--container__side, 20px);
     width: 100%;
   }
   .wp-block-cover.is-style-content-container,
@@ -52,18 +52,18 @@ body.frontend,
   .before-container,
   .after-container {
     width: 100%;
-    max-width: var(--container_spacing);
+    max-width: var(--container_spacing, 20px);
     min-width: fit-content;
     &:empty {
       padding: 0;
     }
   }
   .before-container {
-    padding-left: var(--container__side);
+    padding-left: var(--container__side, 20px);
   }
   .after-container {
     direction: rtl;
-    padding-right: var(--container__side);
+    padding-right: var(--container__side, 20px);
   }
 
 
@@ -77,13 +77,14 @@ body.frontend,
     nav {
       display: flex;
       justify-content: space-between;
-      padding: 10px 0;
       .header-container {
+        padding-top: var(--header__paddingTop, 10px);
+        padding-bottom: var(--header__paddingBottom, 10px);
         display: flex;
         justify-content: space-between;
         align-items: center;
         > * {
-          margin-right: 40px;
+          margin-right: var(--header__itemSpacingHorizontal, 40px);
           &:last-child {
             margin-right: 0;
           }
@@ -124,23 +125,45 @@ body.frontend,
           padding: 0;
           transition: .7s;
           > li {
+            > a {
+              padding: var(--mnav__padding, 0);
+              margin: var(--mnav__margin, 0);
+              border-width: var(--mnav__border_width, 0);
+            }
+            > ul {
+              > li {
+                > a {
+                  padding: var(--mnav__sub_padding, 0);
+                  margin: var(--mnav__sub_margin, 0);
+                  border-width: var(--mnav__sub_border_width, 0);
+                }
+                > ul {
+                  > li {
+                    > a {
+                      padding: var(--mnav__subSub_padding, 0);
+                      margin: var(--mnav__subSub_margin, 0);
+                      border-width: var(--mnav__sub_border_width, 0);
+                    }
+                  }
+                }
+              }
+            }
             ul {
               list-style: none;
               margin: 0;
               padding: 0;
-              > li {
-                margin: 10px 0;
-              }
             }
           }
           a {
             text-decoration: none;
+            display: block;
+            border-style: solid;
           }
         }
       }
     }
     > hr.divider {
-      max-width: var(--container_content);
+      max-width: var(--container_content, 1000px);
       margin-bottom: 0;
       margin-left: auto;
       margin-right: auto;
@@ -188,7 +211,8 @@ body.frontend,
       & > .block-accordion .accordion-content figure,
       & > .block-posts,
       & > #search-form {
-        margin-bottom: var(--content__space);
+        margin-top: 0;
+        margin-bottom: var(--content__space, 30px);
         &:last-child {
           margin-bottom: 0;
         }
@@ -243,6 +267,31 @@ body.frontend,
   }
 
 
+  /* 3.3 MENU STYLING OPTIONS
+  /––––––––––––––––––––––––*/
+  .wp-menu {
+    &.horizontal {
+      display: flex;
+      flex-direction: row;
+    }
+    &.menu-seperated {
+      li {
+        &:last-child {
+          &::after {
+            display: none;
+          }
+        }
+        &:after {
+          display: inline-block;
+          content: " | ";
+          margin: 0 3px;
+        }
+      }
+    }
+  }
+
+
+
   /*==================================================================================
   4.0 SCROLL TO TOP
   ==================================================================================*/
@@ -264,13 +313,19 @@ body.frontend,
   > footer {
     display: flex;
     margin-top: auto;
+    .before-container,
+    .footer-container,
+    .after-container {
+      > * {
+        margin-bottom: var(--footer_itemSpacing, 20px);
+      }
+    }
     .footer-container {
       display: flex;
       flex-wrap: nowrap;
       justify-content: space-between;
-      > * {
-        margin-bottom: 20px;
-      }
+      padding-top: var(--footer__paddingTop, 30px);
+      padding-bottom: var(--footer__paddingBottom, 10px);
       > *:last-child {
         text-align: right;
       }

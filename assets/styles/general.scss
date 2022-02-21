@@ -13,9 +13,9 @@
 ==================================================================================*/
 
 :root {
-  --container_content: calc(var(--container__width) - var(--container__side) - var(--container__side));
-  --container_spacing: calc(50% - var(--container__side) - (var(--container__width) / 2));
-  --img_wide_reset:    calc(var(--container__width) + var(--img_wide_left) + var(--img_wide_right));
+  --container_content: calc(var(--container__width, 1000px) - var(--container__side, 20px) - var(--container__side, 20px));
+  --container_spacing: calc(50% - var(--container__side, 20px) - (var(--container__width, 1000px) / 2));
+  --img_wide_reset:    calc(var(--container__width, 1000px) + var(--img_wide_left, 200px) + var(--img_wide_right, 200px));
 }
 
 html {
@@ -26,9 +26,9 @@ html {
     overflow-x: hidden;
     margin: 0;
     padding: 0;
-    font-family: var(--html__fontfamily);
-    font-size: var(--html__fontsize);
-    line-height: var(--html__lineheight);
+    font-family: var(--html__fontfamily, Arial);
+    font-size: var(--html__fontsize, 12px);
+    line-height: var(--html__lineheight, 1.6);
     margin: 0;
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
@@ -48,9 +48,10 @@ body.frontend {
   min-height: 100vh;
   margin: 0;
   padding: 0;
-  font-family: var(--html__fontfamily);
-  font-size: var(--html__fontsize);
-  line-height: var(--html__lineheight);
+  // overflow-x: hidden;
+  font-family: var(--html__fontfamily, Arial);
+  font-size: var(--html__fontsize, 12px);
+  line-height: var(--html__lineheight, 1.6);
 
   main {
     * {
@@ -64,8 +65,8 @@ body.frontend {
       &[id]:target {
         // scroll-margin-top: var(--html__anchor);
         // scroll-snap-margin-top: var(--html__anchor);
-        padding-top: var(--html__anchor);
-        margin-top: calc(var(--html__anchor) * -1);
+        padding-top: var(--html__anchor, 0);
+        margin-top: calc(var(--html__anchor, 0) * -1);
       }
     }
 

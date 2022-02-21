@@ -16,6 +16,7 @@ Table of Contents:
     1.3 SOCIAL MEDIA
     1.4 MARKED TEXT
     1.5 ACCORDEON
+    1.6 BUTTONS
   2.0 LIGHT COLORING
     2.1 MAIN BG
     2.2 LOGO TEXT
@@ -51,12 +52,53 @@ body.frontend,
   /––––––––––––––––––––––––*/
   input[type="submit"],
   button[type="submit"] {
-    background-color: var(--color__main);
-    border: 1px solid var(--color__main);
-    color: var(--color__secondary);
+    background-color: var(--input__submit_bg_color);
+    border-color: var(--input__submit_border_color);
+    color: var(--input__submit_color);
     &:hover {
-      background-color: var(--color__secondary);
-      color: var(--color__main);
+      background-color: var(--input__submit_bg_color_hover);
+      border-color: var(--input__submit_border_color_hover);
+      color: var(--input__submit_color_hover);
+    }
+  }
+  input,
+  textarea,
+  select {
+    color:  var(--input__color);
+    background-color: var(--input__bg_color);
+    border-color: var(--input__border_color);
+  }
+  select {
+    background-color: var(--input__select_bg_color);
+    color: var(--input__select_color);
+    border-color: var(--input__select_border_color);
+  }
+  .select-container {
+    &:after {
+      color: var(--input__selectContainer_color);
+      background-color: var(--input__selectContainer_bg_color);
+    }
+  }
+  input[type="checkbox"],
+  input[type="radio"] {
+    &:checked {
+      + label:before {
+        background-color: var(--input__checkbox_bg_checked);
+      }
+    }
+    + label {
+      &:before {
+        background-color: var(--input__checkbox_bg);
+        border-color: var(--input__checkbox_border_color);
+      }
+    }
+  }
+  .required,
+  .mauticform-has-error {
+    input,
+    textarea,
+    select {
+      border-color: var(--input__required);
     }
   }
 
@@ -116,6 +158,67 @@ body.frontend,
     }
   }
 
+  /* 1.6 BUTTONS
+  /––––––––––––––––––––––––*/
+  .wp-block-buttons {
+    .wp-block-button {
+      .wp-block-button__link {
+        color: var(--block__buttons_color);
+        background-color: var(--block__buttons_bgColor);
+        border-color: var(--block__buttons_borderColor);
+        &:hover {
+          color: var(--block__buttonsHover_color);
+          background-color: var(--block__buttonsHover_bgColor);
+          border-color: var(--block__buttonsHover_borderColor);
+        }
+      }
+    }
+  }
+
+  /* 1.7 MAIN MENU
+  /––––––––––––––––––––––––*/
+  #menu-main-container {
+    > ul#menu_main {
+      > li {
+        > a {
+          color: var(--mnav__color);
+          border-color: var(--mnav__border_color);
+          background-color: var(--mnav__background_color);
+          &:hover {
+            color: var(--mnav__color_hover);
+            background-color: var(--mnav__background_color_hover);
+          }
+        }
+        >ul {
+          > li {
+            > a {
+              color: var(--mnav__sub_color);
+              border-color: var(--mnav__sub_border_color);
+              background-color: var(--mnav__sub_background_color);
+              &:hover {
+                color: var(--mnav__sub_color_hover);
+                background-color: var(--mnav__sub_background_color_hover);
+              }
+            }
+            > ul {
+              > li {
+                > a {
+                  color: var(--mnav__subSub_color);
+                  border-color: var(--mnav__subSub_border_color);
+                  background-color: var(--mnav__subSub_background_color);
+                  &:hover {
+                    color: var(--mnav__subSub_color_hover);
+                    background-color: var(--mnav__subSub_background_color_hover);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
 
 
   /*==================================================================================
@@ -136,7 +239,14 @@ body.frontend,
       }
     }
     footer {
+      color: var(--light__footer_color);
       background-color: var(--light__footer_background);
+      a {
+        color: var(--light__footer_link_color);
+        &:hover {
+          color: var(--light__footer_linkHover_color);
+        }
+      }
       .footer-container {
         background-color: var(--light__footercontainer_background);
       }
@@ -202,8 +312,13 @@ body.frontend,
 
     /* 2.9 GUTENBERG BLOCKS
     /––––––––––––––––––––––––*/
+    // seperator
     hr.wp-block-separator {
       color: var(--light__gbSeperator_color);
+    }
+    // list
+    ul.is-style-default li:before {
+      color: var(--light__gbList_marker_color);
     }
 
 
@@ -231,7 +346,14 @@ body.frontend,
       }
     }
     footer {
+      color: var(--dark__footer_color);
       background-color: var(--dark__footer_background);
+      a {
+        color: var(--dark__footer_link_color);
+        &:hover {
+          color: var(--dark__footer_linkHover_color);
+        }
+      }
       .footer-container {
         background-color: var(--dark__footercontainer_background);
       }
@@ -272,10 +394,18 @@ body.frontend,
     /* 3.6 INPUTS
     /––––––––––––––––––––––––*/
     input, select, textarea {
-      &::-webkit-input-placeholder {color: var(--dark__main_color); }
-      &::-moz-placeholder {color: var(--dark__main_color); }
-      &:-ms-input-placeholder {color: var(--dark__main_color); }
-      &:-moz-placeholder {color: var(--dark__main_color); }
+      &::-webkit-input-placeholder {
+        color: var(--input__placeholder_color);
+      }
+      &::-moz-placeholder {
+        color: var(--input__placeholder_color);
+      }
+      &:-ms-input-placeholder {
+        color: var(--input__placeholder_color);
+      }
+      &:-moz-placeholder {
+        color: var(--input__placeholder_color);
+      }
     }
 
     /* 3.7 LOADING
@@ -299,6 +429,10 @@ body.frontend,
     /––––––––––––––––––––––––*/
     hr.wp-block-separator {
       color: var(--dark__gbSeperator_color);
+    }
+    // list
+    ul.is-style-default li:before {
+      color: var(--dark__gbList_marker_color);
     }
 
 

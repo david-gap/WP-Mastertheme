@@ -15,6 +15,7 @@ Table of Contents:
   3 GENERAL
   4.0 BLOCKS
     4.1 ACCORDION
+    4.2 BUTTONS
 =======================================================*/
 
 
@@ -37,19 +38,39 @@ body.frontend,
         }
       }
       #menu-main-container {
+        font-family: var(--mnav__fontfamily);
         font-size: var(--mnav__fontsize);
         line-height: var(--mnav__lineheight);
+        font-weight: var(--mnav__fontWeight);
+        text-transform: var(--mnav__textTransform);
         ul#menu_main {
           > li {
-            > a {
-              font-weight: 700;
-            }
-            ul {
+            > ul {
               > li {
-                font-size: 80%;
+                font-family: var(--mnav__sub_fontfamily);
+                font-size: var(--mnav__sub_fontsize);
+                line-height: var(--mnav__sub_lineheight);
+                font-weight: var(--mnav__sub_fontWeight);
+                text-transform: var(--mnav__sub_textTransform);
+                > ul {
+                  > li {
+                    font-family: var(--mnav__subSub_fontfamily, var(--mnav__sub_fontfamily));
+                    font-size: var(--mnav__subSub_fontsize, var(--mnav__sub_fontsize));
+                    line-height: var(--mnav__subSub_lineheight, var(--mnav__sub_lineheight));
+                    font-weight: var(--mnav__subSub_fontWeight, var(--mnav__sub_fontWeight));
+                    text-transform: var(--mnav__subSub_textTransform, var(--mnav__sub_textTransform));
+                  }
+                }
               }
             }
           }
+        }
+      }
+      .hamburger-container {
+        .menu-title {
+          font-size: var(--hamburger__title_fontSize);
+          line-height: var(--hamburger__title_LineHeight);
+          font-weight: var(--hamburger__title_fontWeight);
         }
       }
     }
@@ -73,26 +94,49 @@ body.frontend,
   /*==================================================================================
     3.0 GENERAL
   ==================================================================================*/
+  font-weight: var(--html__fontweight);
+
+  small {
+    font-size: var(--html__fontsize_small);
+  }
 
   // inputs
   input[type="text"],
   input[type="email"],
-  select,
+  input[type="checkbox"] + label,
+  input[type="radio"] + label,
   textarea {
     &:not(.editor-post-title__input) {
-      font-size: 110%;
-      line-height: 1.5;
+      font-family: var(--input__fontFamily);
+      font-size: var(--input__fontSize);
+      line-height: var(--input__lineHeight);
+      font-weight: var(--input__fontWeight);
     }
   }
-  input[type="submit"] {
-    font-size: 110%;
-    letter-spacing: 1px;
-    line-height: 1.5;
+  .select-container:after {
+    text-align: center;
   }
-  // button
-  button {
-    font-size: 100%;
-    font-family: inherit;
+  select {
+    font-size: var(--input__select_fontSize, var(--input__fontSize));
+    line-height: var(--input__select_lineHeight, var(--input__lineHeight));
+    font-weight: var(--input__select_fontWeight, var(--input__fontWeight));
+  }
+  input[type="checkbox"],
+  input[type="radio"] {
+    + label {
+      font-size: var(--input__checkbox_fontSize, var(--input__fontSize));
+      line-height: var(--input__checkbox_lineHeight, var(--input__lineHeight));
+      font-weight: var(--input__checkbox_fontWeight, var(--input__fontWeight));
+    }
+  }
+  // submit
+  button[type="submit"],
+  input[type="submit"] {
+    font-family: var(--input__submit_fontFamily);
+    font-size: var(--input__submit_fontSize);
+    line-height: var(--input__submit_lineHeight);
+    font-weight: var(--input__submit_fontWeight);
+    text-transform: var(--input__submit_textTransform);
   }
   // fieldset
   fieldset {
@@ -103,6 +147,37 @@ body.frontend,
   .textsearch {
     label {
       font-weight: bold;
+    }
+  }
+  // placeholder
+  input, select, textarea {
+    &::-webkit-input-placeholder {
+      font-family: var(--input__placeholder_fontFamily);
+      font-size: var(--input__placeholder_fontSize);
+      line-height: var(--input__placeholder_lineHeight);
+      font-weight: var(--input__placeholder_fontWeight);
+      text-transform: var(--input__placeholder_textTransform);
+    }
+    &::-moz-placeholder {
+      font-family: var(--input__placeholder_fontFamily);
+      font-size: var(--input__placeholder_fontSize);
+      line-height: var(--input__placeholder_lineHeight);
+      font-weight: var(--input__placeholder_fontWeight);
+      text-transform: var(--input__placeholder_textTransform);
+    }
+    &:-ms-input-placeholder {
+      font-family: var(--input__placeholder_fontFamily);
+      font-size: var(--input__placeholder_fontSize);
+      line-height: var(--input__placeholder_lineHeight);
+      font-weight: var(--input__placeholder_fontWeight);
+      text-transform: var(--input__placeholder_textTransform);
+    }
+    &:-moz-placeholder {
+      font-family: var(--input__placeholder_fontFamily);
+      font-size: var(--input__placeholder_fontSize);
+      line-height: var(--input__placeholder_lineHeight);
+      font-weight: var(--input__placeholder_fontWeight);
+      text-transform: var(--input__placeholder_textTransform);
     }
   }
 
@@ -118,11 +193,26 @@ body.frontend,
     .accordion-item {
       .accordion-label {
         font-size: var(--block__accordion_label_fontsize);
+        font-weight: var(--block__accordion_label_fontweight);
         line-height: var(--block__accordion_label_lineheight);
       }
       .accordion-content {
         font-size: var(--block__accordion_content_fontsize);
         line-height: var(--block__accordion_content_lineheight);
+      }
+    }
+  }
+
+  /* 4.2 BUTTONS
+  /––––––––––––––––––––––––*/
+  .wp-block-buttons {
+    .wp-block-button {
+      .wp-block-button__link {
+        font-family: var(--block__buttons_fontFamily);
+        font-size: var(--block__buttons_fontSize);
+        font-weight: var(--block__buttons_fontWeight);
+        line-height: var(--block__buttons_lineHeight);
+        text-transform: var(--block__buttons_textTransform);
       }
     }
   }

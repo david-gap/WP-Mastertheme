@@ -138,7 +138,7 @@ class prefix_core_Customizer {
           )
         ),
         'desktop' => array(
-          'label' => 'Desktop',
+          'label' => 'Typography',
           'inputs' => array(
             'html__fontfamily' => array(
               'label' => 'Main font family',
@@ -154,12 +154,26 @@ class prefix_core_Customizer {
               'label' => 'Main line height',
               'type' => 'input',
               'default' => '1.4'
+            ),
+            'html__fontweight' => array(
+              'label' => 'Main font weight',
+              'type' => 'input',
+              'default' => '400'
+            ),
+            'html__fontsize_small' => array(
+              'label' => 'Small text size',
+              'type' => 'input',
+              'default' => '70%'
             )
           )
         ),
         'mobile' => array(
           'label' => 'Mobile',
           'inputs' => array(
+            'container__side_mobile' => array(
+              'label' => 'Container side padding',
+              'type' => 'input'
+            ),
             'html__fontsize_mobile' => array(
               'label' => 'Main font size',
               'type' => 'input',
@@ -230,31 +244,267 @@ class prefix_core_Customizer {
         'header_menu' => array(
           'label' => 'Menu',
           'inputs' => array(
+            'mnav__color' => array(
+              'label' => 'Color',
+              'type' => 'color',
+              'default' => '#000'
+            ),
+            'mnav__background_color' => array(
+              'label' => 'Background color',
+              'type' => 'color',
+              'default' => 'transparent'
+            ),
+            'mnav__color_hover' => array(
+              'label' => 'Color (hover)',
+              'type' => 'color',
+              'default' => '#000'
+            ),
+            'mnav__background_color_hover' => array(
+              'label' => 'Background color (hover)',
+              'type' => 'color',
+              'default' => 'transparent'
+            ),
+            'mnav__border_color' => array(
+              'label' => 'Border color',
+              'type' => 'color',
+              'default' => 'transparent'
+            ),
+            'mnav__border_width' => array(
+              'label' => 'Border width',
+              'type' => 'input',
+              'default' => '0'
+            ),
+            'mnav__padding' => array(
+              'label' => 'Padding',
+              'type' => 'input',
+              'default' => '0px'
+            ),
+            'mnav__margin' => array(
+              'label' => 'Margin',
+              'type' => 'input',
+              'default' => '0px'
+            ),
+            'mnav__fontfamily' => array(
+              'label' => 'Font family',
+              'type' => 'input',
+              'default' => 'inherit'
+            ),
             'mnav__fontsize' => array(
-              'label' => 'Main menu font size',
+              'label' => 'Font size',
               'type' => 'input',
               'default' => '100%'
             ),
+            'mnav__fontWeight' => array(
+              'label' => 'Font weight',
+              'type' => 'input',
+              'default' => '700'
+            ),
             'mnav__lineheight' => array(
-              'label' => 'Main menu line height',
+              'label' => 'Line height',
               'type' => 'input',
               'default' => '1.4'
             ),
+            'mnav__textTransform' => array(
+              'label' => 'Text transform',
+              'type' => 'input',
+              'default' => 'uppercase'
+            ),
             'mnav__fontsize_mobile' => array(
-              'label' => 'Main menu font size (mobile)',
+              'label' => 'Font size (mobile)',
               'type' => 'input',
               'default' => '120%'
             ),
             'mnav__lineheight_mobile' => array(
-              'label' => 'Main menu line height (mobile)',
+              'label' => 'Line height (mobile)',
               'type' => 'input',
               'default' => '1.3'
+            ),
+            'mnav__padding_mobile' => array(
+              'label' => 'Padding (mobile)',
+              'type' => 'input'
+            ),
+            'mnav__margin_mobile' => array(
+              'label' => 'Margin (mobile)',
+              'type' => 'input'
+            ),
+            'mnav__sub_color' => array(
+              'label' => 'Submenu color',
+              'type' => 'color',
+              'default' => '#000'
+            ),
+            'mnav__sub_background_color' => array(
+              'label' => 'Submenu background color',
+              'type' => 'color',
+              'default' => 'transparent'
+            ),
+            'mnav__sub_color_hover' => array(
+              'label' => 'Submenu color (hover)',
+              'type' => 'color',
+              'default' => '#000'
+            ),
+            'mnav__sub_background_color_hover' => array(
+              'label' => 'Submenu background color (hover)',
+              'type' => 'color',
+              'default' => 'transparent'
+            ),
+            'mnav__sub_border_color' => array(
+              'label' => 'Submenu border color',
+              'type' => 'color',
+              'default' => 'transparent'
+            ),
+            'mnav__sub_border_width' => array(
+              'label' => 'Submenu border width',
+              'type' => 'input',
+              'default' => '0'
+            ),
+            'mnav__sub_padding' => array(
+              'label' => 'Submenu padding',
+              'type' => 'input',
+              'default' => '0px'
+            ),
+            'mnav__sub_margin' => array(
+              'label' => 'Submenu margin',
+              'type' => 'input',
+              'default' => '0px'
+            ),
+            'mnav__sub_fontfamily' => array(
+              'label' => 'Submenu font family',
+              'type' => 'input',
+              'default' => 'inherit'
+            ),
+            'mnav__sub_fontsize' => array(
+              'label' => 'Submenu font size',
+              'type' => 'input',
+              'default' => '80%'
+            ),
+            'mnav__sub_fontWeight' => array(
+              'label' => 'Submenu font weight',
+              'type' => 'input',
+              'default' => '500'
+            ),
+            'mnav__sub_lineheight' => array(
+              'label' => 'Submenu line height',
+              'type' => 'input',
+              'default' => 'inherit'
+            ),
+            'mnav__sub_textTransform' => array(
+              'label' => 'Submenu text transform',
+              'type' => 'input',
+              'default' => 'none'
+            ),
+            'mnav__sub_fontsize_mobile' => array(
+              'label' => 'Submenu font size (mobile)',
+              'type' => 'input'
+            ),
+            'mnav__sub_lineheight_mobile' => array(
+              'label' => 'Submenu line height (mobile)',
+              'type' => 'input'
+            ),
+            'mnav__sub_padding_mobile' => array(
+              'label' => 'Submenu padding (mobile)',
+              'type' => 'input'
+            ),
+            'mnav__sub_margin_mobile' => array(
+              'label' => 'Submenu margin (mobile)',
+              'type' => 'input'
+            ),
+            'mnav__subSub_color' => array(
+              'label' => 'Subsubmenu color',
+              'type' => 'color',
+              'default' => '#000'
+            ),
+            'mnav__subSub_background_color' => array(
+              'label' => 'Subsubmenu background color',
+              'type' => 'color',
+              'default' => 'transparent'
+            ),
+            'mnav__subSub_color_hover' => array(
+              'label' => 'Subsubmenu color (hover)',
+              'type' => 'color',
+              'default' => '#000'
+            ),
+            'mnav__subSub_background_color_hover' => array(
+              'label' => 'Subsubmenu background color (hover)',
+              'type' => 'color',
+              'default' => 'transparent'
+            ),
+            'mnav__subSub_border_color' => array(
+              'label' => 'Subsubmenu border color',
+              'type' => 'color',
+              'default' => 'transparent'
+            ),
+            'mnav__subSub_border_width' => array(
+              'label' => 'Subsubmenu border width',
+              'type' => 'input',
+              'default' => '0'
+            ),
+            'mnav__subSub_padding' => array(
+              'label' => 'Subsubmenu padding',
+              'type' => 'input',
+              'default' => '0px'
+            ),
+            'mnav__subSub_margin' => array(
+              'label' => 'Subsubmenu margin',
+              'type' => 'input',
+              'default' => '0px'
+            ),
+            'mnav__subSub_fontfamily' => array(
+              'label' => 'Subsubmenu font family',
+              'type' => 'input',
+              'default' => 'inherit'
+            ),
+            'mnav__subSub_fontsize' => array(
+              'label' => 'Subsubmenu font size',
+              'type' => 'input'
+            ),
+            'mnav__subSub_fontWeight' => array(
+              'label' => 'Subsubmenu font weight',
+              'type' => 'input'
+            ),
+            'mnav__subSub_lineheight' => array(
+              'label' => 'Subsubmenu line height',
+              'type' => 'input'
+            ),
+            'mnav__subSub_textTransform' => array(
+              'label' => 'Subsubmenu text transform',
+              'type' => 'input'
+            ),
+            'mnav__subSub_fontsize_mobile' => array(
+              'label' => 'Subsubmenu font size (mobile)',
+              'type' => 'input'
+            ),
+            'mnav__subSub_lineheight_mobile' => array(
+              'label' => 'Subsubmenu line height (mobile)',
+              'type' => 'input'
+            ),
+            'mnav__subSub_padding_mobile' => array(
+              'label' => 'Subsubmenu padding (mobile)',
+              'type' => 'input'
+            ),
+            'mnav__subSub_margin_mobile' => array(
+              'label' => 'Subsubmenu margin (mobile)',
+              'type' => 'input'
             )
           )
         ),
         'hamburger' => array(
           'label' => 'Hamburger',
           'inputs' => array(
+            'hamburger__container_width' => array(
+              'label' => 'Width',
+              'type' => 'input',
+              'default' => '40px'
+            ),
+            'hamburger__container_height' => array(
+              'label' => 'Height',
+              'type' => 'input',
+              'default' => '40px'
+            ),
+            'hamburger__size' => array(
+              'label' => 'Size',
+              'type' => 'input',
+              'default' => '4px'
+            ),
             'light__hamburger_color' => array(
               'label' => 'Hamburger color',
               'type' => 'color',
@@ -279,6 +529,70 @@ class prefix_core_Customizer {
               'label' => 'Blur Content while hamburger navigation is open',
               'type' => 'input',
               'default' => '0px'
+            ),
+            'hamburger__title_space' => array(
+              'label' => 'Title spacing',
+              'type' => 'input',
+              'default' => '0 0 0 10px'
+            ),
+            'hamburger__title_fontSize' => array(
+              'label' => 'Title font size',
+              'type' => 'input',
+              'default' => 'inherit'
+            ),
+            'hamburger__title_LineHeight' => array(
+              'label' => 'Title line height',
+              'type' => 'input',
+              'default' => 'inherit'
+            ),
+            'hamburger__title_fontWeight' => array(
+              'label' => 'Title spacing',
+              'type' => 'input',
+              'default' => 'inherit'
+            ),
+            'hamburger__container_width_mobile' => array(
+              'label' => 'Width (mobile)',
+              'type' => 'input'
+            ),
+            'hamburger__container_height_mobile' => array(
+              'label' => 'Height (mobile)',
+              'type' => 'input'
+            )
+          )
+        ),
+        'header_desktop' => array(
+          'label' => 'Desktop',
+          'inputs' => array(
+            'header__paddingTop' => array(
+              'label' => 'Container padding top',
+              'type' => 'input',
+              'default' => '10px'
+            ),
+            'header__paddingBottom' => array(
+              'label' => 'Container padding bottom',
+              'type' => 'input',
+              'default' => '10px'
+            ),
+            'header__itemSpacingHorizontal' => array(
+              'label' => 'Vertical spacing between items',
+              'type' => 'input'
+            )
+          )
+        ),
+        'header_mobile' => array(
+          'label' => 'Mobile',
+          'inputs' => array(
+            'header__paddingTop_mobile' => array(
+              'label' => 'Container padding top',
+              'type' => 'input'
+            ),
+            'header__paddingBottom_mobile' => array(
+              'label' => 'Container padding bottom',
+              'type' => 'input'
+            ),
+            'header__itemSpacingHorizontal_mobile' => array(
+              'label' => 'Vertical spacing between items',
+              'type' => 'input'
             )
           )
         )
@@ -295,11 +609,6 @@ class prefix_core_Customizer {
               'type' => 'input',
               'default' => '20px'
             ),
-            'input__padding' => array(
-              'label' => 'Input padding',
-              'type' => 'input',
-              'default' => '7px 10px'
-            ),
             'html__anchor' => array(
               'label' => 'Anchor position',
               'type' => 'input',
@@ -315,15 +624,278 @@ class prefix_core_Customizer {
               'type' => 'input',
               'default' => '20px'
             ),
-            'input__padding_mobile' => array(
-              'label' => 'Input padding',
-              'type' => 'input',
-              'default' => '7px 10px'
-            ),
             'html__anchor_mobile' => array(
               'label' => 'Anchor position',
               'type' => 'input',
               'default' => '120px'
+            )
+          )
+        ),
+        'inputs' => array(
+          'label' => 'Input fields',
+          'inputs' => array(
+            'input__color' => array(
+              'label' => 'Input color',
+              'type' => 'color'
+            ),
+            'input__bg_color' => array(
+              'label' => 'Input background color',
+              'type' => 'color',
+              'default' => '#fff'
+            ),
+            'input__border_width' => array(
+              'label' => 'Input border width',
+              'type' => 'input',
+              'default' => '1px'
+            ),
+            'input__border_color' => array(
+              'label' => 'Input border color',
+              'type' => 'color',
+              'default' => '#000'
+            ),
+            'input__fontFamily' => array(
+              'label' => 'Input font family',
+              'type' => 'input',
+              'default' => 'inherit'
+            ),
+            'input__fontSize' => array(
+              'label' => 'Input font size',
+              'type' => 'input',
+              'default' => 'inherit'
+            ),
+            'input__lineHeight' => array(
+              'label' => 'Input line height',
+              'type' => 'input',
+              'default' => 'inherit'
+            ),
+            'input__fontWeight' => array(
+              'label' => 'Input font weight',
+              'type' => 'input',
+              'default' => 'inherit'
+            ),
+            'input__fontSize_mobile' => array(
+              'label' => 'Input font size (mobile)',
+              'type' => 'input',
+              'default' => 'inherit'
+            ),
+            'input__lineHeight_mobile' => array(
+              'label' => 'Input line height (mobile)',
+              'type' => 'input',
+              'default' => 'inherit'
+            ),
+            'input__borderRadius' => array(
+              'label' => 'Input border radius',
+              'type' => 'input',
+              'default' => '0px'
+            ),
+            'input__padding' => array(
+              'label' => 'Input padding',
+              'type' => 'input',
+              'default' => '7px 10px'
+            ),
+            'input__padding_mobile' => array(
+              'label' => 'Input padding mobile',
+              'type' => 'input',
+              'default' => '7px 10px'
+            ),
+            'input__checkbox_bg' => array(
+              'label' => 'Checkbox/Radio background color',
+              'type' => 'color',
+              'default' => '#fff'
+            ),
+            'input__checkbox_fontSize' => array(
+              'label' => 'Checkbox/Radio font size',
+              'type' => 'input',
+              'default' => 'inherit'
+            ),
+            'input__checkbox_lineHeight' => array(
+              'label' => 'Checkbox/Radio line height',
+              'type' => 'input',
+              'default' => 'inherit'
+            ),
+            'input__checkbox_fontWeight' => array(
+              'label' => 'Checkbox/Radio font weight',
+              'type' => 'input',
+              'default' => 'inherit'
+            ),
+            'input__checkbox_fontSize_mobile' => array(
+              'label' => 'Checkbox/Radio font size (mobile)',
+              'type' => 'input',
+              'default' => 'inherit'
+            ),
+            'input__checkbox_lineHeight_mobile' => array(
+              'label' => 'Checkbox/Radio line height (mobile)',
+              'type' => 'input',
+              'default' => 'inherit'
+            ),
+            'input__checkbox_width' => array(
+              'label' => 'Checkbox/Radio width/height',
+              'type' => 'input',
+              'default' => '20px'
+            ),
+            'input__checkbox_border_width' => array(
+              'label' => 'Checkbox/Radio border',
+              'type' => 'input',
+              'default' => '1px'
+            ),
+            'input__checkbox_space' => array(
+              'label' => 'Checkbox/Radio space to text',
+              'type' => 'input',
+              'default' => '20px'
+            ),
+            'input__checkbox_border_color' => array(
+              'label' => 'Checkbox/Radio border color',
+              'type' => 'color',
+              'default' => '#0175bc'
+            ),
+            'input__checkbox_bg_checked' => array(
+              'label' => 'Checkbox/Radio background color (checked)',
+              'type' => 'color',
+              'default' => '#0175bc'
+            ),
+            'input__submit_fontFamily' => array(
+              'label' => 'Submit font family',
+              'type' => 'input',
+              'default' => 'inherit'
+            ),
+            'input__submit_fontSize' => array(
+              'label' => 'Submit/button font size',
+              'type' => 'input',
+              'default' => 'inherit'
+            ),
+            'input__submit_lineHeight' => array(
+              'label' => 'Submit/button line height',
+              'type' => 'input',
+              'default' => 'inherit'
+            ),
+            'input__submit_fontWeight' => array(
+              'label' => 'Submit/button font weight',
+              'type' => 'input',
+              'default' => 'inherit'
+            ),
+            'input__submit_textTransform' => array(
+              'label' => 'Submit/button text transform',
+              'type' => 'input'
+            ),
+            'input__submit_fontSize_mobile' => array(
+              'label' => 'Submit/button font size (mobile)',
+              'type' => 'input',
+              'default' => 'inherit'
+            ),
+            'input__submit_lineHeight_mobile' => array(
+              'label' => 'Submit/button line height (mobile)',
+              'type' => 'input',
+              'default' => 'inherit'
+            ),
+            'input__submit_bg_color' => array(
+              'label' => 'Submit/button background color',
+              'type' => 'color',
+              'default' => '#0175bc'
+            ),
+            'input__submit_color' => array(
+              'label' => 'Submit/button text color',
+              'type' => 'color',
+              'default' => '#fff'
+            ),
+            'input__submit_border_color' => array(
+              'label' => 'Submit/button border color',
+              'type' => 'color',
+              'default' => '#0175bc'
+            ),
+            'input__submit_bg_color_hover' => array(
+              'label' => 'Submit/button background color (hover)',
+              'type' => 'color',
+              'default' => '#0175bc'
+            ),
+            'input__submit_border_color_hover' => array(
+              'label' => 'Submit/button border color (hover)',
+              'type' => 'color',
+              'default' => '#0175bc'
+            ),
+            'input__submit_color_hover' => array(
+              'label' => 'Submit/button text color (hover)',
+              'type' => 'color',
+              'default' => '#fff'
+            ),
+            'input__submit_borderRadius' => array(
+              'label' => 'Submit/button border radius',
+              'type' => 'input',
+              'default' => '0px'
+            ),
+            'input__submit_padding' => array(
+              'label' => 'Submit/button padding',
+              'type' => 'input',
+              'default' => '10px 20px'
+            ),
+            'input__submit_padding_mobile' => array(
+              'label' => 'Submit/button padding (mobile)',
+              'type' => 'input'
+            ),
+            'input__select_bg_color' => array(
+              'label' => 'Select background color',
+              'type' => 'color'
+            ),
+            'input__select_color' => array(
+              'label' => 'Select text color',
+              'type' => 'color'
+            ),
+            'input__select_border_color' => array(
+              'label' => 'Select border color',
+              'type' => 'color'
+            ),
+            'input__select_padding' => array(
+              'label' => 'Select padding',
+              'type' => 'input'
+            ),
+            'input__select_border_width' => array(
+              'label' => 'Select border width',
+              'type' => 'input'
+            ),
+            'input__select_padding_mobile' => array(
+              'label' => 'Select padding (mobile)',
+              'type' => 'input'
+            ),
+            'input__select_fontSize' => array(
+              'label' => 'Select font size',
+              'type' => 'input'
+            ),
+            'input__select_lineHeight' => array(
+              'label' => 'Select line height',
+              'type' => 'input'
+            ),
+            'input__select_fontWeight' => array(
+              'label' => 'Select font weight',
+              'type' => 'input'
+            ),
+            'input__select_fontSize_mobile' => array(
+              'label' => 'Select font size (mobile)',
+              'type' => 'input'
+            ),
+            'input__select_lineHeight_mobile' => array(
+              'label' => 'Select line height (mobile)',
+              'type' => 'input'
+            ),
+            'input__selectContainer_color' => array(
+              'label' => 'Select container text color',
+              'type' => 'color'
+            ),
+            'input__selectContainer_bg_color' => array(
+              'label' => 'Select container background color',
+              'type' => 'color'
+            ),
+            'input__selectContainer_width' => array(
+              'label' => 'Select container size',
+              'type' => 'input',
+              'default' => '30px'
+            ),
+            'input__selectContainer_width_mobile' => array(
+              'label' => 'Select container size (mobile)',
+              'type' => 'input'
+            ),
+            'input__required' => array(
+              'label' => 'Required color',
+              'type' => 'color',
+              'default' => '#a53737'
             )
           )
         )
@@ -335,6 +907,19 @@ class prefix_core_Customizer {
         'gutenberg_seperator' => array(
           'label' => 'Seperator',
           'inputs' => array(
+            'block__separator_width' => array(
+              'label' => 'Height',
+              'type' => 'input',
+              'default' => '1px'
+            ),
+            'block__separator_marginTop' => array(
+              'label' => 'Margin top',
+              'type' => 'input'
+            ),
+            'block__separator_marginBottom' => array(
+              'label' => 'Margin bottom',
+              'type' => 'input'
+            ),
             'light__gbSeperator_color' => array(
               'label' => 'Default color',
               'type' => 'color',
@@ -344,12 +929,172 @@ class prefix_core_Customizer {
               'label' => 'Default color (dark mode)',
               'type' => 'color',
               'default' => '#343434'
+            ),
+            'block__separator_width_mobile' => array(
+              'label' => 'Height (mobile)',
+              'type' => 'input'
+            ),
+            'block__separator_marginTop_mobile' => array(
+              'label' => 'Margin top (mobile)',
+              'type' => 'input'
+            ),
+            'block__separator_marginBottom_mobile' => array(
+              'label' => 'Margin bottom (mobile)',
+              'type' => 'input'
+            )
+          )
+        ),
+        'columns' => array(
+          'label' => 'Columns',
+          'inputs' => array(
+            'wp--style--block-gap' => array(
+              'label' => 'Space between',
+              'type' => 'input',
+              'default' => '20px'
+            )
+          )
+        ),
+        'buttons' => array(
+          'label' => 'Buttons',
+          'inputs' => array(
+            'block__buttons_spacing' => array(
+              'label' => 'Space between buttons',
+              'type' => 'input',
+              'default' => '20px'
+            ),
+            'block__buttons_fontFamily' => array(
+              'label' => 'Font',
+              'type' => 'input',
+              'default' => 'inherit'
+            ),
+            'block__buttons_fontSize' => array(
+              'label' => 'Font size',
+              'type' => 'input',
+              'default' => 'inherit'
+            ),
+            'block__buttons_fontWeight' => array(
+              'label' => 'Font weight',
+              'type' => 'input',
+              'default' => 'inherit'
+            ),
+            'block__buttons_lineHeight' => array(
+              'label' => 'Line height',
+              'type' => 'input',
+              'default' => 'inherit'
+            ),
+            'block__buttons_textTransform' => array(
+              'label' => 'Text transform',
+              'type' => 'input',
+              'default' => 'inherit'
+            ),
+            'block__buttons_padding' => array(
+              'label' => 'Padding',
+              'type' => 'input',
+              'default' => '10px 20px'
+            ),
+            'block__buttons_borderWidth' => array(
+              'label' => 'Border width',
+              'type' => 'input',
+              'default' => '1px'
+            ),
+            'block__buttons_borderRadius' => array(
+              'label' => 'Border radius',
+              'type' => 'input',
+              'default' => '0px'
+            ),
+            'block__buttons_color' => array(
+              'label' => 'Text color',
+              'type' => 'color'
+            ),
+            'block__buttons_bgColor' => array(
+              'label' => 'Background color',
+              'type' => 'color'
+            ),
+            'block__buttons_borderColor' => array(
+              'label' => 'Border color',
+              'type' => 'color'
+            ),
+            'block__buttonsHover_color' => array(
+              'label' => 'Text color (hover)',
+              'type' => 'color'
+            ),
+            'block__buttonsHover_bgColor' => array(
+              'label' => 'Background color (hover)',
+              'type' => 'color'
+            ),
+            'block__buttonsHover_borderColor' => array(
+              'label' => 'Border color (hover)',
+              'type' => 'color'
+            ),
+            'block__buttons_fontSize_mobile' => array(
+              'label' => 'Font size (mobile)',
+              'type' => 'input'
+            ),
+            'block__buttons_lineHeight_mobile' => array(
+              'label' => 'Line height (mobile)',
+              'type' => 'input'
+            ),
+            'block__buttons_textTransform_mobile' => array(
+              'label' => 'Text transform (mobile)',
+              'type' => 'input'
+            ),
+            'block__buttons_padding_mobile' => array(
+              'label' => 'Padding (mobile)',
+              'type' => 'input'
+            ),
+            'block__buttons_borderWidth_mobile' => array(
+              'label' => 'Border width (mobile)',
+              'type' => 'input'
+            ),
+            'block__buttons_borderRadius_mobile' => array(
+              'label' => 'Border radius (mobile)',
+              'type' => 'input'
+            )
+          )
+        ),
+        'list' => array(
+          'label' => 'List',
+          'inputs' => array(
+            'block__list_marker_value' => array(
+              'label' => 'Marker value',
+              'type' => 'input',
+              'default' => '•',
+              'quotemark' => '1'
+            ),
+            'block__list_marker_size' => array(
+              'label' => 'Marker size',
+              'type' => 'input',
+              'default' => '150%'
+            ),
+            'block__list_marker_space' => array(
+              'label' => 'Marker spacing',
+              'type' => 'input',
+              'default' => '20px'
+            ),
+            'block__list_marker_space_mobile' => array(
+              'label' => 'Marker spacing (mobile)',
+              'type' => 'input'
+            ),
+            'light__gbList_marker_color' => array(
+              'label' => 'Marker color',
+              'type' => 'color',
+              'default' => 'inherit'
+            ),
+            'dark__gbList_marker_color' => array(
+              'label' => 'Marker color (dark mode)',
+              'type' => 'color',
+              'default' => 'inherit'
             )
           )
         ),
         'gutenberg_accordion' => array(
           'label' => 'Accordion',
           'inputs' => array(
+            'block__accordion_separator' => array(
+              'label' => 'Space between accordions',
+              'type' => 'input',
+              'default' => '20px'
+            ),
             'block__accordion_label_bg' => array(
               'label' => 'Label background color',
               'type' => 'color',
@@ -370,10 +1115,23 @@ class prefix_core_Customizer {
               'type' => 'input',
               'default' => 'inherit'
             ),
+            'block__accordion_label_fontweight' => array(
+              'label' => 'Label font weight',
+              'type' => 'input',
+              'default' => 'inherit'
+            ),
             'block__accordion_label_lineheight' => array(
               'label' => 'Label line-height',
               'type' => 'input',
               'default' => 'inherit'
+            ),
+            'block__accordion_label_fontsize_mobile' => array(
+              'label' => 'Label font-size (mobile)',
+              'type' => 'input'
+            ),
+            'block__accordion_label_lineheight_mobile' => array(
+              'label' => 'Label line-height (mobile)',
+              'type' => 'input'
             ),
             'block__accordion_iconbox_bg' => array(
               'label' => 'Iconbox background color',
@@ -436,12 +1194,22 @@ class prefix_core_Customizer {
               'default' => '20px 10px'
             ),
             'block__accordion_content_fontsize' => array(
-              'label' => 'Content font-size',
+              'label' => 'Content font size',
               'type' => 'input',
               'default' => 'inherit'
             ),
             'block__accordion_content_lineheight' => array(
-              'label' => 'Content line-height',
+              'label' => 'Content line height',
+              'type' => 'input',
+              'default' => 'inherit'
+            ),
+            'block__accordion_content_fontsize_mobile' => array(
+              'label' => 'Content font size (mobile)',
+              'type' => 'input',
+              'default' => 'inherit'
+            ),
+            'block__accordion_content_lineheight_mobile' => array(
+              'label' => 'Content line height (mobile)',
               'type' => 'input',
               'default' => 'inherit'
             )
@@ -465,6 +1233,18 @@ class prefix_core_Customizer {
               'type' => 'color',
               'default' => '#f9f9f9'
             ),
+            'light__footer_color' => array(
+              'label' => 'Text color',
+              'type' => 'color'
+            ),
+            'light__footer_link_color' => array(
+              'label' => 'Link color',
+              'type' => 'color'
+            ),
+            'light__footer_linkHover_color' => array(
+              'label' => 'Link hover color',
+              'type' => 'color'
+            ),
             'dark__footer_background' => array(
               'label' => 'Footer background (dark mode)',
               'type' => 'color',
@@ -474,6 +1254,18 @@ class prefix_core_Customizer {
               'label' => 'Footer container background (dark mode)',
               'type' => 'color',
               'default' => '#1d1e1f'
+            ),
+            'dark__footer_color' => array(
+              'label' => 'Text color (dark mode)',
+              'type' => 'color'
+            ),
+            'dark__footer_link_color' => array(
+              'label' => 'Link color (dark mode)',
+              'type' => 'color'
+            ),
+            'dark__footer_linkHover_color' => array(
+              'label' => 'Link hover color (dark mode)',
+              'type' => 'color'
             )
           )
         ),
@@ -489,6 +1281,21 @@ class prefix_core_Customizer {
               'label' => 'Footer line height',
               'type' => 'input',
               'default' => '1.7'
+            ),
+            'footer__paddingTop' => array(
+              'label' => 'Container padding top',
+              'type' => 'input',
+              'default' => '40px'
+            ),
+            'footer__paddingBottom' => array(
+              'label' => 'Container padding bottom',
+              'type' => 'input',
+              'default' => '20px'
+            ),
+            'footer_itemSpacing' => array(
+              'label' => 'Item Spacing (vertical)',
+              'type' => 'input',
+              'default' => '20px'
             )
           )
         ),
@@ -504,6 +1311,18 @@ class prefix_core_Customizer {
               'label' => 'Footer line height',
               'type' => 'input',
               'default' => '1.7'
+            ),
+            'footer__paddingTop_mobile' => array(
+              'label' => 'Container padding top',
+              'type' => 'input'
+            ),
+            'footer__paddingBottom_mobile' => array(
+              'label' => 'Container padding bottom',
+              'type' => 'input'
+            ),
+            'footer_itemSpacing_mobile' => array(
+              'label' => 'Item Spacing (vertical)',
+              'type' => 'input'
             )
           )
         )
@@ -519,6 +1338,7 @@ class prefix_core_Customizer {
     add_action( 'customize_register', array($this, 'extendCustomizer') );
     // frontend css/js files
     add_action('wp_enqueue_scripts', array( $this, 'customizerEnqueue' ));
+    add_action('admin_enqueue_scripts', array( $this, 'customizerEnqueue' ));
     // add preview css to customizer
     add_action( 'customize_preview_init', array($this, 'customizerPreview') );
     // create new customizer file after saving customizer
@@ -542,10 +1362,11 @@ class prefix_core_Customizer {
       __('Font color (dark mode)', 'devTheme'),
       __('Marker text color', 'devTheme'),
       __('Marker background color', 'devTheme'),
-      __('Desktop', 'devTheme'),
+      __('Typography', 'devTheme'),
       __('Main font family', 'devTheme'),
       __('Main font size', 'devTheme'),
       __('Main line height', 'devTheme'),
+      __('Main font weight', 'devTheme'),
       __('Mobile', 'devTheme'),
       __('Main font size', 'devTheme'),
       __('Main line height', 'devTheme'),
@@ -570,11 +1391,17 @@ class prefix_core_Customizer {
       __('Hamburger navigation background color', 'devTheme'),
       __('Hamburger color (dark mode)', 'devTheme'),
       __('Hamburger navigation background color (dark mode)', 'devTheme'),
+      __('Title spacing', 'devTheme'),
       __('Blur Content while hamburger navigation is open', 'devTheme'),
       __('Content area', 'devTheme'),
       __('Desktop', 'devTheme'),
       __('Content spacing', 'devTheme'),
-      __('Input padding', 'devTheme'),
+      __('Background color', 'devTheme'),
+      __('Border width', 'devTheme'),
+      __('Border color', 'devTheme'),
+      __('Required color', 'devTheme'),
+      __('Padding', 'devTheme'),
+      __('Padding mobile', 'devTheme'),
       __('Anchor position', 'devTheme'),
       __('Mobile', 'devTheme'),
       __('Content spacing', 'devTheme'),
@@ -608,12 +1435,19 @@ class prefix_core_Customizer {
       __('Colors', 'devTheme'),
       __('Footer background color', 'devTheme'),
       __('Footer container background color', 'devTheme'),
+      __('Text color', 'devTheme'),
+      __('Link color', 'devTheme'),
+      __('Link hover color', 'devTheme'),
       __('Footer background (dark mode)', 'devTheme'),
       __('Footer container background (dark mode)', 'devTheme'),
+      __('Text color (dark mode)', 'devTheme'),
+      __('Link color (dark mode)', 'devTheme'),
+      __('Link hover color (dark mode)', 'devTheme'),
       __('Desktop', 'devTheme'),
       __('Footer font size', 'devTheme'),
       __('Footer line height', 'devTheme'),
-      __('Mobile', 'devTheme'),
+      __('Container padding top', 'devTheme'),
+      __('Container padding bottom', 'devTheme'),
       __('Footer font size', 'devTheme'),
       __('Footer line height', 'devTheme')
     );
@@ -750,11 +1584,15 @@ class prefix_core_Customizer {
       foreach ($this->defaultValues as $panelKey => $panelValues) {
         foreach ($panelValues["sections"] as $sectionKey => $sectionValues) {
           foreach ($sectionValues["inputs"] as $valueKey => $ValueSettings) {
-            if (strpos($valueKey, '_mobile') !== false):
-              $mobileOutput .= '--' . str_replace('_mobile', '', $valueKey) . ': ' . get_theme_mod($valueKey, $ValueSettings["default"]) . ';';
-            else:
-              // move to mobile
-              $output .= '--' . $valueKey . ': ' . get_theme_mod($valueKey, $ValueSettings["default"]) . ';';
+            $quotemark = array_key_exists("quotemark",$ValueSettings) && $ValueSettings["quotemark"]  == '1' ? '"' : '';
+            $insert = htmlspecialchars(get_theme_mod($valueKey, $ValueSettings["default"]));
+            if($insert !== ''):
+              if (strpos($valueKey, '_mobile') !== false):
+                $mobileOutput .= '--' . str_replace('_mobile', '', $valueKey) . ': ' . $quotemark . $insert . $quotemark . ';';
+              else:
+                // move to mobile
+                $output .= '--' . $valueKey . ': ' . $quotemark . $insert . $quotemark . ';';
+              endif;
             endif;
           }
         }

@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 1.46.28 | 21.02.2022 <customizer options, var fallback>
+* add direction attribute to menu shortcode
+* new customizer styling options
+* Override language call in base function for configuration translation
+* Add String to hamburger menu
+* Add fallback value to sizing variables
+* menu shortcode direction
+* footer menu direction support
+
 ## 1.45.28 | 04.02.2022 <config translation>
 * add translation support to configuration area
 * make addressblock settings to translation

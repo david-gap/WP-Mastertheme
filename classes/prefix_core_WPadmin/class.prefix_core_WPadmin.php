@@ -4,7 +4,7 @@
  *
  * Backend area to manage configuration file
  * Author:      David Voglgsnag
- * @version     1.4.5
+ * @version     1.4.6
  *
  */
 
@@ -419,16 +419,23 @@ class prefix_core_WPadmin {
 
     // TRANSLATE
     if($translate !== '' && $translationValue !== ''):
-      $languages = get_available_languages();
+      if (class_exists('SitePress')):
+        $languages = icl_get_languages();
+      elseif(function_exists('pll_the_languages')):
+        $languages = icl_get_languages();
+      else:
+        $languages = get_available_languages();
+      endif;
       $db_option = get_option('WPadmin_configuration') ? get_option('WPadmin_configuration') : array();
       $output .= '<span class="translations"><span>T</span><ul>';
         foreach ($languages as $key => $lang) {
+          $languageCode = is_array($lang) ? $key : $lang;
           // check if value exisits
-          $langTranslations = array_key_exists($lang, $db_option) ? $db_option[$lang] : array();
+          $langTranslations = array_key_exists($languageCode, $db_option) ? $db_option[$languageCode] : array();
           $value = array_key_exists($translationName, $langTranslations) ? $langTranslations[$translationName] : '';
           //
           $output .= '<li>';
-            $output .= $lang . ': ' . str_replace(array('langid', 'value=""'), array($lang, 'value="' . $value . '"'), $translationValue);
+            $output .= $languageCode . ': ' . str_replace(array('langid', 'value=""'), array($languageCode, 'value="' . htmlspecialchars($value) . '"'), $translationValue);
           $output .= '</li>';
         }
       $output .= '</ul></span>';

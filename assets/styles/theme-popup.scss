@@ -40,7 +40,7 @@
   .popup-next-preview,
   .popup-back-preview {
     position: absolute;
-    width: var(--popup__width);
+    width: var(--popup__width, 800px);
     line-height: 0;
     img {
       opacity: .4;
@@ -50,17 +50,17 @@
     }
   }
   .popup-back-preview {
-    left: calc(var(--popup_prev_visible) - var(--popup__width));
+    left: calc(var(--popup_prev_visible, 0) - var(--popup__width, 800px));
   }
   .popup-next-preview {
-    right: calc(var(--popup_prev_visible) - var(--popup__width));
+    right: calc(var(--popup_prev_visible, 0) - var(--popup__width, 800px));
   }
   .popup-container {
     width: 100%;
     width: fit-content;
-    max-width: var(--popup__width);
+    max-width: var(--popup__width, 800px);
     min-width: 304px;
-    margin: 40px var(--popup__space);
+    margin: var(--popup__space, 40px);
     max-height: 100%;
     &:not(.popup-preview) {
       position: relative;

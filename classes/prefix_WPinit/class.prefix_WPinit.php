@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.13.11
+ * @version     2.14.11
  *
 */
 
@@ -78,8 +78,8 @@ class prefix_WPinit {
     private $WPinit_css_version        = 1.0;
     private $WPinit_css_path           = "/dist/style.min.css";
     private $WPinit_admin_css_path     = "/dist/style_backend.min.css";
-    private $WPinit_theme_js_version   = 1.3;
-    private $WPinit_theme_css_version  = 1.4;
+    private $WPinit_theme_js_version   = 1.4;
+    private $WPinit_theme_css_version  = 1.5;
     private $WPinit_js                 = 1;
     private $WPinit_js_version         = 1.0;
     private $WPinit_js_path            = "/dist/script.min.js";
@@ -615,7 +615,9 @@ class prefix_WPinit {
       'slug' => 'mainmenu',
       'css' => '',
       'container' => '0',
-      'nav' => '1'
+      'nav' => '1',
+      'direction' => 'vertical',
+      'seperator' => '0'
     ), $atts );
     $output = '';
     if ( has_nav_menu( $config['slug'] ) ) :
@@ -625,12 +627,23 @@ class prefix_WPinit {
       else:
         $container = false;
       endif;
+      // css
+      $css = 'wp-menu';
+      if($config['css'] !== ''):
+        $css .= ' ' . $config['css'];
+      endif;
+      if($config['direction'] == 'h' || $config['direction'] == 'horizontal'):
+        $css .= ' horizontal';
+      endif;
+      if($config['seperator'] == 1):
+        $css .= ' menu-seperated';
+      endif;
       // output
       if($config['nav']):
         $output .= '<nav>';
       endif;
         $output .= wp_nav_menu([
-          'menu_class'=> $config['css'],
+          'menu_class'=> $css,
           'menu_id' => 'menu_' . $config['slug'],
           'container'=> $container,
           'theme_location' => $config['slug'],

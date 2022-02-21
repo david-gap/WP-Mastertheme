@@ -5,8 +5,8 @@ body.frontend {
   main {
     .alignfull {
       &.wp-block-group.is-style-content-container {
-        margin-left: calc(var(--container__side) * -1);
-        margin-right: calc(var(--container__side) * -1);
+        margin-left: calc(var(--container__side, 20px) * -1);
+        margin-right: calc(var(--container__side, 20px) * -1);
       }
     }
   }

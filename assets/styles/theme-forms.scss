@@ -14,29 +14,72 @@ body.frontend,
   select,
   textarea {
     width: 100%;
-    max-width: calc(100% - var(--input__padding) - var(--input__padding) - 2px);
-    padding: var(--input__padding);
-    border-radius: 0;
-    border-width: 1px;
-    min-height: 20px;
-    appearance: none;
+    padding: var(--input__padding, 8px 12px);
+    border-radius: var(--input__borderRadius, 0);
+    border-style: solid;
+    border-width: var(--input__border_width, 1px);
+  }
+
+  .select-container {
+    position: relative;
+    select {
+      appearance: none;
+    }
+    &:after {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      content: '';
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      right: 0;
+      width: var(--input__selectContainer_width, 30px);
+      height: 100%;
+    }
+  }
+  select {
+    width: 100%;
+    padding: var(--input__select_padding, 8px 12px);
+    border-width: var(--input__select_border_width, 1px);
+  }
+
+  input[type="checkbox"],
+  input[type="radio"] {
+    display: none;
+    &:checked {
+      + label:before {
+        background-color: var(--input__checkbox_bg_checked);
+      }
+    }
+    + label {
+      display: flex;
+      flex-wrap: nowrap;
+      &:before {
+        display: inline-block;
+        content: "";
+        border-width: var(--input__checkbox_border_width, 1px);
+        min-width: var(--input__checkbox_width, 30px);
+        height: var(--input__checkbox_width, 30px);
+        margin-right: var(--input__checkbox_space, 5px);
+      }
+    }
+  }
+  input[type="radio"] {
+    + label {
+      &:before {
+        border-radius: 50%;
+      }
+    }
   }
 
   input[type="submit"],
   button[type="submit"] {
-    border-radius: 0;
-    padding: var(--input__padding);
+    border-radius: var(--input__submit_borderRadius, 0);
+    border-style: solid;
+    padding: var(--input__submit_padding, 8px 12px);
     appearance: none;
     cursor: pointer;
   }
-
-  input, select, textarea {
-    &::-webkit-input-placeholder { text-transform: uppercase; }
-    &::-moz-placeholder { text-transform: uppercase; }
-    &:-ms-input-placeholder { text-transform: uppercase; }
-    &:-moz-placeholder { text-transform: uppercase; }
-  }
-
-
 
 }

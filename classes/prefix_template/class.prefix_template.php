@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.23.16
+ * @version     2.24.16
  *
 */
 
@@ -96,6 +96,7 @@ class prefix_template {
     * @param static int $template_footer_active: activate footer
     * @param static string $template_footer_cr: copyright text
     * @param static string $template_footer_custom: custom html
+    * @param static string $template_footer_menu: footer menu settings
     * @param static array $template_footer_sort: Sort and activate blocks inside footer builder
     * @param static string $template_footer_before: html code before footer
     * @param static string $template_searchform_autocomplete: configure the autocomplete in the search form
@@ -222,6 +223,11 @@ class prefix_template {
   static $template_footer_active               = 1;
   static $template_footer_cr                   = "";
   static $template_footer_custom               = "";
+  static $template_footer_menu                 = array(
+    'direction' => 'vertical',
+    'seperator' => '0',
+    'css' => ''
+  );
   static $template_footer_sort                 = array(
     "container_start" => 1,
     "menu" => 1,
@@ -461,7 +467,7 @@ class prefix_template {
             "alt" => array(
               "label" => "Alternative text",
               "type" => "text",
-              "translation" => 'template_address_logo_alt'
+              "translation" => 'template_address_logo_alt',
             )
           )
         ),
@@ -677,7 +683,8 @@ class prefix_template {
         ),
         "hmenu_text" => array(
           "label" => "Hamburger text",
-          "type" => "switchbutton"
+          "type" => "text",
+          "translation" => "template_header_hmenu_text"
         ),
         "hmenu_visible_head" => array(
           "label" => "Visible header while menu is active",
@@ -717,7 +724,8 @@ class prefix_template {
             ),
             "alt" => array(
               "label" => "Alternative text",
-              "type" => "text"
+              "type" => "text",
+              "translation" => "template_header_logo_desktop_alt"
             )
           )
         ),
@@ -957,6 +965,25 @@ class prefix_template {
           "label" => "Custom Element",
           "type" => "textarea"
         ),
+        "menu" => array(
+          "label" => "Menu",
+          "type" => "multiple",
+          "value" => array(
+            "custom" => array(
+              "label" => "Additional CSS",
+              "type" => "text"
+            ),
+            "direction" => array(
+              "label" => "Menu direction",
+              "type" => "select",
+              "value" => array('vertical','horizontal')
+            ),
+            "seperator" => array(
+              "label" => "Seperate horizontal menu with line",
+              "type" => "switchbutton"
+            )
+          )
+        ),
         "sort" => array(
           "label" => "Sort and activate",
           "type" => "multiple",
@@ -1133,6 +1160,7 @@ class prefix_template {
           SELF::$template_footer_active = array_key_exists('active', $footer) ? $footer['active'] : SELF::$template_footer_active;
           SELF::$template_footer_cr = array_key_exists('copyright', $footer) ? $footer['copyright'] : SELF::$template_footer_cr;
           SELF::$template_footer_custom = array_key_exists('custom', $footer) ? $footer['custom'] : SELF::$template_footer_custom;
+          SELF::$template_footer_menu = array_key_exists('menu', $footer) ? $footer['menu'] : SELF::$template_footer_menu;
           SELF::$template_footer_sort = array_key_exists('sort', $footer) ? $footer['sort'] : SELF::$template_footer_sort;
           SELF::$template_footer_before = array_key_exists('before_footer', $footer) ? $footer['before_footer'] : SELF::$template_footer_before;
           SELF::$template_footer_after = array_key_exists('after_footer', $footer) ? $footer['after_footer'] : SELF::$template_footer_after;
@@ -1613,7 +1641,7 @@ class prefix_template {
         $desktop_add = '';
         $desktop_add .= array_key_exists('width', $desktop) && $desktop['width'] !== "" ? ' width="' . $desktop['width'] . '"' : '';
         $desktop_add .= array_key_exists('height', $desktop) && $desktop['height'] !== "" ? ' height="' . $desktop['height'] . '"' : '';
-        $desktop_add .= $desktop['alt'] !== "" ? ' alt="' . $desktop['alt'] . '"' : '';
+        $desktop_add .= $desktop['alt'] !== "" ? ' alt="' . prefix_core_BaseFunctions::getConfigTranslation('template_header_logo_desktop_alt', $desktop['alt']) . '"' : '';
         $output .= '<img src="' . $img_desktop[0] . '" ' . $add_desktop . $desktop_add . '>';
         $mobile_add = '';
         $mobile_add .= array_key_exists('width', $mobile) && $mobile['width'] !== "" ? ' width="' . $mobile['width'] . '"' : '';
@@ -1621,7 +1649,7 @@ class prefix_template {
         $mobile_add .= $mobile['alt'] !== "" ? ' alt="' . $mobile['alt'] . '"' : '';
         $output .= $img_mobile !== "" ? '<img src="' . $img_mobile[0] . '" class="mobile"' . $mobile_add . '>' : '';
       else:
-        $output .= $page_name;
+        $output .= $desktop['alt'] !== "" ? prefix_core_BaseFunctions::getConfigTranslation('template_header_logo_desktop_alt', $desktop['alt']) : $page_name;
       endif;
       $output .= '</a>';
 
@@ -1631,7 +1659,7 @@ class prefix_template {
 
     /* 3.7 CHECK IF MAINMENU IS ACTIVE
     /------------------------*/
-    public static function WP_MainMenu(int $active = 1, string $request = '', string $direction = '', string $hamburgerStyle = '', int $submenutoggle = 0, int $headvisibility, int $hamburgerText = 0){
+    public static function WP_MainMenu(int $active = 1, string $request = '', string $direction = '', string $hamburgerStyle = '', int $submenutoggle = 0, int $headvisibility, string $hamburgerText = ''){
       if($active === 1):
         $menu_active = 'hidden_mobile';
         $hamburger_active = 'mobile';
@@ -1667,14 +1695,14 @@ class prefix_template {
         endif;
         // get hamburger
         if($request !== 'menu'):
-          if($hamburgerText === 1):
+          if($hamburgerText !== ''):
             $output .= '<div class="hamburger-container">';
-              $output .= '<span>' . __('Open Menu', 'devTheme') . '</span>';
           endif;
             $output .= '<button class="hamburger ' . $hamburger_active . '" aria-label="Main Menu">';
-              $output .= '<span>&nbsp;</span>';
+              $output .= '<span class="menu-icon">&nbsp;</span>';
             $output .= '</button>';
-          if($hamburgerText === 1):
+          if($hamburgerText !== ''):
+              $output .= '<span class="menu-title">' . prefix_core_BaseFunctions::getConfigTranslation('template_header_hmenu_text', $hamburgerText) . '</span>';
             $output .= '</div>';
           endif;
         endif;
@@ -1832,9 +1860,21 @@ class prefix_template {
     /------------------------*/
     public static function WP_FooterMenu(bool $active = true){
       if ( has_nav_menu( 'footermenu' ) && $active === true ) :
+        // css
+        $css = 'wp-menu';
+        if(SELF::$template_footer_menu['css'] !== ''):
+          $css .= ' ' . SELF::$template_footer_menu['css'];
+        endif;
+        if(SELF::$template_footer_menu['direction'] == 'h' || SELF::$template_footer_menu['direction'] == 'horizontal'):
+          $css .= ' horizontal';
+        endif;
+        if(SELF::$template_footer_menu['seperator'] == 1):
+          $css .= ' menu-seperated';
+        endif;
+        // output
         echo '<nav>';
           echo wp_nav_menu([
-            'menu_class'=> '',
+            'menu_class'=> $css,
             'menu_id' => 'menu_footer',
             'container'=> false,
             'depth' => 2,

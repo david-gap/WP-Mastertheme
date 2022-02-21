@@ -23,6 +23,7 @@ const root = document.querySelector('html'),
       header = body.querySelector('header'),
       mainMenu = header.querySelector('#menu-main-container'),
       hamburger = header.querySelector('.hamburger'),
+      hamburgertitle = header.querySelector('.hamburger-container .menu-title'),
       main = body.querySelector('main'),
       emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
 
@@ -290,6 +291,10 @@ function MenuToggler() {
 }
 if(hamburger) {
   hamburger.addEventListener('click', MenuToggler);
+  // check for hamburger title
+  if(hamburgertitle){
+    hamburgertitle.addEventListener('click', MenuToggler);
+  }
 }
 
 
@@ -316,7 +321,7 @@ if(mainMenu) {
 /------------------------*/
 function closeHamburgerMenu(e){
   const target = e.target;
-  if (target.closest("#menu-main-container") == null && target.closest(".hamburger") == null && body.classList.contains('active-menu')) {
+  if (target.closest("#menu-main-container") == null && target.closest(".hamburger") == null && target.closest(".menu-title") == null && body.classList.contains('active-menu')) {
     MenuToggler();
   }
 }
