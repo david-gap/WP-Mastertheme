@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 1.47.28 | 25.02.2022 <>
+## 1.47.28 | 25.02.2022 <breadcrumbs, customizer options>
 * Add breadcrumbs
 * Menu stretch option
 * new customizer styling options
