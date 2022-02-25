@@ -17,6 +17,8 @@ Table of Contents:
     1.5 GALLERY
     1.6 VIMEO
     1.7 LIST
+    1.8 CONTAINER
+    1.9 COVER
   2.0 BLOCK STYLINGS
     2.1 BACKEND HIGHLIGHTS
     2.2 COLUMNS
@@ -446,6 +448,23 @@ body.frontend,
           margin: 0;
           padding: 0;
         }
+      }
+    }
+
+
+    /* 1.8 CONTAINER
+    /––––––––––––––––––––––––*/
+
+
+    /* 1.9 COVER
+    /––––––––––––––––––––––––*/
+    div.wp-block-cover {
+      padding: 0;
+      .wp-block-cover__inner-container {
+        padding-left: var(--container__side, 20px);
+        padding-right: var(--container__side, 20px);
+        padding-top: var(--block__cover_container_paddingTop, 20px);
+        padding-bottom: var(--block__cover_container_paddingBottom, 20px);
       }
     }
 

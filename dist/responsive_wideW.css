@@ -1,1 +1,1 @@
-body.frontend main .alignwide{margin-left:calc(var(--wide__left) * -1);margin-right:calc(var(--wide__right) * -1)}
+body.frontend main .alignwide{margin-left:calc(var(--wide__left,200px) * -1);margin-right:calc(var(--wide__right,200px) * -1)}

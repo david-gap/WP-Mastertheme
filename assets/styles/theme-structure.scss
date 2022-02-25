@@ -17,6 +17,8 @@ Table of Contents:
   3.0 MAIN
     3.1 SPACING
     3.2 BLOG & SEARCH
+    3.3 MENU STYLING OPTIONS
+    3.4 BREADCRUMBS
   4.0 SCROLL TO TOP
   5.0 FOOTER
 =======================================================*/
@@ -71,6 +73,16 @@ body.frontend,
   /*==================================================================================
   2.0 HEADER
   ==================================================================================*/
+  &.scrolled {
+    > header {
+      nav {
+        .header-container {
+            padding-top: var(--header__paddingTop_sticky);
+            padding-bottom: var(--header__paddingBottom_sticky);
+        }
+      }
+    }
+  }
   > header {
     transition: .7s;
     position: relative;
@@ -229,7 +241,6 @@ body.frontend,
   #search-results,
   #home,
   #archive {
-    margin-top: 20px;
     article {
       &.flex {
         display: flex;
@@ -253,9 +264,6 @@ body.frontend,
           line-height: 0,
         }
       }
-      + article {
-        margin-top: 40px;
-      }
       .post-meta {}
       .list-category {
         display: flex;
@@ -265,6 +273,24 @@ body.frontend,
       }
     }
   }
+  #search-results {
+    .results {
+      + .pagination {
+        margin: var(--search__pagination_margin);
+      }
+      article {
+        margin: var(--search__article_margin, 40px);
+        padding: var(--search__article_padding, 0);
+        border-style: solid;
+        border-width: var(--search__article_border, 0);
+        h2 {
+          margin: var(--search__article_title_margin, 0);
+          padding: var(--search__article_title_padding, 0);
+        }
+      }
+    }
+  }
+
 
 
   /* 3.3 MENU STYLING OPTIONS
@@ -289,6 +315,17 @@ body.frontend,
       }
     }
   }
+
+
+  /* 3.4 BREADCRUMBS
+  /––––––––––––––––––––––––*/
+  nav.breadcrumbs {
+    padding: var(--bc__padding, 20px 0);
+  }
+
+
+
+
 
 
 

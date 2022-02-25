@@ -1,9 +1,10 @@
-**Version 2.24.16** (21.02.2022)
+**Version 2.25.16** (25.02.2022)
 
 Custom class "template" with template parts and header / footer builder
 
 ## CONFIGURATION OPTIONS
 * $template_container_header: activate container for the header
+* $template_container_breadcrumbs: activate container for the breadcrumbs
 * $template_container: activate container for the content
 * $template_container_footer: activate container for the footer
 * $template_coloring: template coloring (dark/light)
@@ -36,7 +37,12 @@ Custom class "template" with template parts and header / footer builder
 * $template_footer_custom: custom html
 * $template_footer_sort: Sort and activate blocks inside footer builder
 * $template_footer_before: html code before footer
-$template_searchform_autocomplete: configure the autocomplete in the search form
+* $template_searchform_autocomplete: configure the autocomplete in the search form
+* $template_breadcrumbs_active: activate breadcrumbs
+* $template_breadcrumbs_active: activate breadcrumbs
+* template_breadcrumbs_intro: Show introduction text
+* template_breadcrumbs_home: Show home link
+* template_breadcrumbs_separator: Separate crumbs by string
 
 ## CONFIGURATION FILE
 ```

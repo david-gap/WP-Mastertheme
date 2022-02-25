@@ -36,6 +36,7 @@ body.frontend,
       right: 0;
       width: var(--input__selectContainer_width, 30px);
       height: 100%;
+      pointer-events: none;
     }
   }
   select {
@@ -77,6 +78,7 @@ body.frontend,
   button[type="submit"] {
     border-radius: var(--input__submit_borderRadius, 0);
     border-style: solid;
+    border-width: var(--input__submit_borderWidth, var(--input__border_width, 1px));
     padding: var(--input__submit_padding, 8px 12px);
     appearance: none;
     cursor: pointer;

@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.24.16
+ * @version     2.25.16
  *
 */
 
@@ -46,6 +46,7 @@ Table of Contents:
   3.18 SCROLL TO TOP BUTTON
   3.19 MAIN MENU SEARCH FORM
   3.20 RETURN WIDGET
+  3.21 BREADCRUMBS
 =======================================================*/
 
 
@@ -60,6 +61,7 @@ class prefix_template {
   /**
     * default vars
     * @param static int $template_container_header: activate container for the header
+    * @param static int $template_container_breadcrumbs: activate container for the breadcrumbs
     * @param static int $template_container: activate container for the content
     * @param static int $template_container_totop: activate container for the scroll to top button
     * @param static int $template_container_footer: activate container for the footer
@@ -77,6 +79,7 @@ class prefix_template {
     * @param static string $template_header_menu_style: Select menu direction (options: horizontal/vertical)
     * @param static string $template_header_hmenu_style: Select hamburger menu style (options: fullscreen, top, top_contained, left, left_contained, right, right_contained)
     * @param static int $template_header_hmenu_text: Show text on hamburger menu button
+    * @param static int $template_header_hmenu_streched: Strech main menu verticaly
     * @param static int $template_header_hmenu_visible_head: Define if header is visible on active hamburger menu
     * @param static int $template_header_hmenu_scroll: Define if hamburger menu close by scrolling (Desktop only)
     * @param static string $template_header_hmenu_toggle: Hamburger Menü toggle able submenus
@@ -100,8 +103,14 @@ class prefix_template {
     * @param static array $template_footer_sort: Sort and activate blocks inside footer builder
     * @param static string $template_footer_before: html code before footer
     * @param static string $template_searchform_autocomplete: configure the autocomplete in the search form
+    * @param static int $template_breadcrumbs_active: activate breadcrumbs
+    * @param static int $template_breadcrumbs_inside: Place breadcrumbs inside page content and if first element is image than after image
+    * @param static int template_breadcrumbs_intro: Show introduction text
+    * @param static int template_breadcrumbs_home: Show home link
+    * @param static string template_breadcrumbs_separator: Separate crumbs by string
   */
   static $template_container_header            = 1;
+  static $template_container_breadcrumbs       = 1;
   static $template_container                   = 1;
   static $template_container_totop             = 1;
   static $template_container_footer            = 1;
@@ -159,6 +168,7 @@ class prefix_template {
   static $template_header_hmenu_style          = 'fullscreen';
   static $template_header_hmenu_visible_head   = 0;
   static $template_header_hmenu_text           = 0;
+  static $template_header_hmenu_streched       = 0;
   static $template_header_hmenu_scroll         = 0;
   static $template_header_hmenu_toggle         = 0;
   static $template_header_custom               = "";
@@ -244,6 +254,11 @@ class prefix_template {
   static $template_footer_before               = "";
   static $template_footer_after                = "";
   static $template_searchform_autocomplete     = 0;
+  static $template_breadcrumbs_active          = 0;
+  static $template_breadcrumbs_inside          = 0;
+  static $template_breadcrumbs_intro           = 0;
+  static $template_breadcrumbs_home            = 1;
+  static $template_breadcrumbs_separator       = '&raquo;';
 
 
   /* 1.2 ON LOAD RUN
@@ -275,10 +290,15 @@ class prefix_template {
     if(SELF::$template_header_menusearchform == 1):
       add_filter('wp_nav_menu_items', array( $this, 'addSearchFormToMainmenu' ), 10, 2);
     endif;
+    // add breadcrumbs to content
+    if(SELF::$template_breadcrumbs_inside == 1):
+      add_filter( 'the_content', array( $this, 'breadcrumbNavigation' ), 50 );
+    endif;
     // register strings
     $backendStrings = array(
       __('Template', 'devTheme'),
       __('Activate header container', 'devTheme'),
+      __('Activate breadcrumbs container', 'devTheme'),
       __('Activate main container', 'devTheme'),
       __('Activate scroll to top container', 'devTheme'),
       __('Activate footer container', 'devTheme'),
@@ -413,7 +433,13 @@ class prefix_template {
       __('Custom content before footer', 'devTheme'),
       __('Custom content after footer', 'devTheme'),
       __('Search form', 'devTheme'),
-      __('Autocomplete', 'devTheme')
+      __('Autocomplete', 'devTheme'),
+      __('Activate breadcrumbs', 'devTheme'),
+      __('Place breadcrumbs inside content and after img (if its the first element)', 'devTheme'),
+      __('Show introduction text', 'devTheme'),
+      __('Show home link', 'devTheme'),
+      __('Separate by', 'devTheme'),
+      __('Strech main menu verticaly', 'devTheme')
     );
   }
 
@@ -425,6 +451,10 @@ class prefix_template {
   static $backend = array(
     "container_header" => array(
       "label" => "Activate header container",
+      "type" => "switchbutton"
+    ),
+    "container_breadcrumbs" => array(
+      "label" => "Activate breadcrumbs container",
       "type" => "switchbutton"
     ),
     "container" => array(
@@ -686,6 +716,10 @@ class prefix_template {
           "type" => "text",
           "translation" => "template_header_hmenu_text"
         ),
+        "hmenu_streched" => array(
+          "label" => "Strech main menu verticaly",
+          "type" => "switchbutton"
+        ),
         "hmenu_visible_head" => array(
           "label" => "Visible header while menu is active",
           "type" => "switchbutton"
@@ -805,6 +839,33 @@ class prefix_template {
         "after_header" => array(
           "label" => "Custom content after header",
           "type" => "textarea"
+        )
+      )
+    ),
+    "breadcrumbs" => array(
+      "label" => "Breadcrumbs",
+      "type" => "multiple",
+      "value" => array(
+        "active" => array(
+          "label" => "Activate breadcrumbs",
+          "type" => "switchbutton"
+        ),
+        "inside_content" => array(
+          "label" => "Place breadcrumbs inside content and after img (if its the first element)",
+          "type" => "switchbutton"
+        ),
+        "introduction" => array(
+          "label" => "Show introduction text",
+          "type" => "switchbutton"
+        ),
+        "home" => array(
+          "label" => "Show home link",
+          "type" => "switchbutton"
+        ),
+        "seperator" => array(
+          "label" => "Separate by",
+          "type" => "text",
+          "placeholder" => "&raquo;"
         )
       )
     ),
@@ -1107,6 +1168,7 @@ class prefix_template {
         $myConfig = $configuration['template'];
         // update vars
         SELF::$template_container_header = array_key_exists('container_header', $myConfig) ? $myConfig['container_header'] : SELF::$template_container_header;
+        SELF::$template_container_breadcrumbs = array_key_exists('container_breadcrumbs', $myConfig) ? $myConfig['container_breadcrumbs'] : SELF::$template_container_breadcrumbs;
         SELF::$template_container = array_key_exists('container', $myConfig) ? $myConfig['container'] : SELF::$template_container;
         SELF::$template_container_totop = array_key_exists('container_scrolltotop', $myConfig) ? $myConfig['container_scrolltotop'] : SELF::$template_container_totop;
         SELF::$template_container_footer = array_key_exists('container_footer', $myConfig) ? $myConfig['container_footer'] : SELF::$template_container_footer;
@@ -1132,6 +1194,7 @@ class prefix_template {
           SELF::$template_header_hmenu_style = array_key_exists('hmenu_style', $header) ? $header['hmenu_style'] : SELF::$template_header_hmenu_style;
           SELF::$template_header_hmenu_visible_head = array_key_exists('hmenu_visible_head', $header) ? $header['hmenu_visible_head'] : SELF::$template_header_hmenu_visible_head;
           SELF::$template_header_hmenu_text = array_key_exists('hmenu_text', $header) ? $header['hmenu_text'] : SELF::$template_header_hmenu_text;
+          SELF::$template_header_hmenu_streched = array_key_exists('hmenu_streched', $header) ? $header['hmenu_streched'] : SELF::$template_header_hmenu_streched;
           SELF::$template_header_hmenu_scroll = array_key_exists('hmenu_scroll', $header) ? $header['hmenu_scroll'] : SELF::$template_header_hmenu_scroll;
           SELF::$template_header_hmenu_toggle = array_key_exists('hmenu_toggle', $header) ? $header['hmenu_toggle'] : SELF::$template_header_hmenu_toggle;
           SELF::$template_header_custom = array_key_exists('custom', $header) ? $header['custom'] : SELF::$template_header_custom;
@@ -1164,6 +1227,17 @@ class prefix_template {
           SELF::$template_footer_sort = array_key_exists('sort', $footer) ? $footer['sort'] : SELF::$template_footer_sort;
           SELF::$template_footer_before = array_key_exists('before_footer', $footer) ? $footer['before_footer'] : SELF::$template_footer_before;
           SELF::$template_footer_after = array_key_exists('after_footer', $footer) ? $footer['after_footer'] : SELF::$template_footer_after;
+        endif;
+        if($configuration && array_key_exists('breadcrumbs', $myConfig)):
+          $breadcrumbs = $myConfig['breadcrumbs'];
+          SELF::$template_breadcrumbs_active = array_key_exists('active', $breadcrumbs) ? $breadcrumbs['active'] : SELF::$template_breadcrumbs_active;
+          SELF::$template_breadcrumbs_inside = array_key_exists('inside_content', $breadcrumbs) ? $breadcrumbs['inside_content'] : SELF::$template_breadcrumbs_inside;
+          SELF::$template_breadcrumbs_intro = array_key_exists('introduction', $breadcrumbs) ? $breadcrumbs['introduction'] : SELF::$template_breadcrumbs_intro;
+          SELF::$template_breadcrumbs_home = array_key_exists('home', $breadcrumbs) ? $breadcrumbs['home'] : SELF::$template_breadcrumbs_home;
+          SELF::$template_breadcrumbs_separator = array_key_exists('seperator', $breadcrumbs) ? $breadcrumbs['seperator'] : SELF::$template_breadcrumbs_separator;
+
+
+
         endif;
         if($configuration && array_key_exists('searchform', $myConfig)):
           $searchform = $myConfig['searchform'];
@@ -1374,10 +1448,10 @@ class prefix_template {
             endif;
             break;
           case 'menu':
-            echo $value == 1 ? SELF::WP_MainMenu(SELF::$template_header_dmenu, 'menu', SELF::$template_header_menu_style, SELF::$template_header_hmenu_style, SELF::$template_header_hmenu_toggle, SELF::$template_header_hmenu_visible_head, SELF::$template_header_hmenu_text) : '';
+            echo $value == 1 ? SELF::WP_MainMenu(SELF::$template_header_dmenu, 'menu', SELF::$template_header_menu_style, SELF::$template_header_hmenu_style, SELF::$template_header_hmenu_toggle, SELF::$template_header_hmenu_visible_head, SELF::$template_header_hmenu_text, SELF::$template_header_hmenu_streched) : '';
             break;
           case 'hamburger':
-            echo $value == 1 ? SELF::WP_MainMenu(SELF::$template_header_dmenu, 'hamburger', SELF::$template_header_menu_style, SELF::$template_header_hmenu_style, SELF::$template_header_hmenu_toggle, SELF::$template_header_hmenu_visible_head, SELF::$template_header_hmenu_text) : '';
+            echo $value == 1 ? SELF::WP_MainMenu(SELF::$template_header_dmenu, 'hamburger', SELF::$template_header_menu_style, SELF::$template_header_hmenu_style, SELF::$template_header_hmenu_toggle, SELF::$template_header_hmenu_visible_head, SELF::$template_header_hmenu_text, SELF::$template_header_hmenu_streched) : '';
             break;
           case 'logo':
             echo $value == 1 ? SELF::Logo(SELF::$template_header_logo_link, SELF::$template_header_logo_d, SELF::$template_header_logo_m) : '';
@@ -1659,7 +1733,7 @@ class prefix_template {
 
     /* 3.7 CHECK IF MAINMENU IS ACTIVE
     /------------------------*/
-    public static function WP_MainMenu(int $active = 1, string $request = '', string $direction = '', string $hamburgerStyle = '', int $submenutoggle = 0, int $headvisibility, string $hamburgerText = ''){
+    public static function WP_MainMenu(int $active = 1, string $request = '', string $direction = '', string $hamburgerStyle = '', int $submenutoggle = 0, int $headvisibility, string $hamburgerText = '', int $menu_stretched = 0){
       if($active === 1):
         $menu_active = 'hidden_mobile';
         $hamburger_active = 'mobile';
@@ -1679,6 +1753,9 @@ class prefix_template {
       endif;
       if($submenutoggle === 1):
         $menu_active .= ' toggle-submenu';
+      endif;
+      if($menu_stretched === 1):
+        $menu_active .= ' stretch';
       endif;
       // output
       $output = '';
@@ -2078,6 +2155,10 @@ class prefix_template {
         $classes .= $options && is_array($options) && in_array('darkmode', $options) && SELF::$template_page_options['darkmode'] == 1 ? ' dark' : '';
         $classes .= $options && is_array($options) && in_array('header_fixed', $options) && SELF::$template_page_options['header_fixed'] == 1 ? ' fixed' : '';
       endif;
+      // detect home page
+      if(is_front_page()):
+        $classes .= ' is-front-page';
+      endif;
       // apply filter
       $classes .= ' ' . apply_filters( 'template_BodyCSS', $classes );
       // return classes
@@ -2149,6 +2230,174 @@ class prefix_template {
       if(is_active_sidebar( $key )):
           dynamic_sidebar( $key );
       endif;
+    }
+
+
+    /* 3.21 BREADCRUMBS
+    /------------------------*/
+    function breadcrumbNavigation($content = ''){
+      $output = '';
+      $bc_output = '';
+      // check if breadcrumbs are active and build breadcrumbs
+      if(prefix_template::$template_breadcrumbs_active || $content == 'bcOnly'):
+        if ( !is_home() && !is_front_page() || is_paged() ):
+          // vars
+          global $post;
+          $homeLink = get_bloginfo('url');
+
+          $delimiter = '<span class="bc-separate">' . prefix_template::$template_breadcrumbs_separator . '</span>';
+          $before = '<span class="current-page">';
+          $after = '</span>';
+
+          $bc_output .= '<nav class="breadcrumbs">';
+            $bc_output .= prefix_template::AddContainer(prefix_template::$template_container_breadcrumbs, false) == 'container' ? '<div ' . prefix_template::AddContainer(prefix_template::$template_container_breadcrumbs, true) . '>' : '';
+                // introduction
+                $bc_output .= prefix_template::$template_breadcrumbs_intro ? '<span class="introduction">' . __('You are here:', 'devTheme') . ' </span>' : '';
+                // home page
+                $bc_output .= prefix_template::$template_breadcrumbs_home ? '<a href="' . $homeLink . '">' . __('Home', 'devTheme') . '</a> ' . $delimiter . ' ' : '';
+                // additional structure
+                if(is_category()):
+                  // category
+                  global $wp_query;
+                  $cat_obj = $wp_query->get_queried_object();
+                  $thisCat = $cat_obj->term_id;
+                  $thisCat = get_category($thisCat);
+                  $parentCat = get_category($thisCat->parent);
+                  // check for parents
+                  if ($thisCat->parent != 0):
+                    $bc_output .= get_category_parents($parentCat, TRUE, ' ' . $delimiter . ' ');
+                  endif;
+                  // current taxonomy
+                  $bc_output .= $before . single_cat_title('', false) . $after;
+                elseif(is_day()):
+                  // date day structure
+                  $bc_output .= '<a href="' . get_year_link(get_the_time('Y')) . '">' . get_the_time('Y') . '</a> ' . $delimiter . ' ';
+                  $bc_output .= '<a href="' . get_month_link(get_the_time('Y'),get_the_time('m')) . '">' . get_the_time('F') . '</a> ' . $delimiter . ' ';
+                  $bc_output .= $before . get_the_time('d') . $after;
+                elseif (is_month()):
+                  // date month structure
+                  $bc_output .= '<a href="' . get_year_link(get_the_time('Y')) . '">' . get_the_time('Y') . '</a> ' . $delimiter . ' ';
+                  $bc_output .= $before . get_the_time('F') . $after;
+                elseif (is_year()):
+                  // date year structure
+                  $bc_output .= $before . get_the_time('Y') . $after;
+                elseif (is_single() && !is_attachment()):
+                  // detail page
+                  if (get_post_type() != 'post'):
+                    $post_type = get_post_type_object(get_post_type());
+                    $slug = $post_type->rewrite;
+                    $bc_output .= '<a href="' . $homeLink . '/' . $slug['slug'] . '/">' . $post_type->labels->singular_name . '</a> ' . $delimiter . ' ';
+                    $bc_output .= $before. get_the_title() . $after;
+                  else:
+                    $cat = get_the_category(); $cat = $cat[0];
+                    $bc_output .= get_category_parents($cat, TRUE, ' ' . $delimiter . ' ');
+                    $bc_output .= $before . get_the_title() . $after;
+                  endif;
+                elseif(is_search()):
+                  // search results
+                  $bc_output .= $before . __('Search:', 'devTheme') . ' "' . get_search_query() . '"' . $after;
+                elseif(is_tag()):
+                  // tags
+                  $bc_output .= $before . __('Posts with the tag', 'devTheme') . ' "' . single_tag_title('', false) . '"' . $after;
+                elseif(is_404()):
+                  // 404 page
+                  $bc_output .= $before . __('404', 'devTheme') . $after;
+                elseif(!is_single() && !is_page() && get_post_type() != 'post' && !is_404()):
+                  // custom post types
+                  $post_type = get_post_type_object(get_post_type());
+                  $bc_output .= $before . $post_type->labels->singular_name . $after;
+                elseif(is_attachment()):
+                  // media attachments
+                  $parent = get_post($post->post_parent);
+                  $cat = get_the_category($parent->ID); $cat = $cat[0];
+                  $bc_output .= get_category_parents($cat, TRUE, ' ' . $delimiter . ' ');
+                  $bc_output .= '<a href="' . get_permalink($parent) . '">' . $parent->post_title . '</a> ' . $delimiter . ' ';
+                  $bc_output .= $before . get_the_title() . $after;
+                elseif (is_page() && !$post->post_parent):
+                  // page without parents
+                  $bc_output .= $before . get_the_title() . $after;
+                elseif(is_page() && $post->post_parent):
+                  // page with parents
+                  $parent_id = $post->post_parent;
+                  $breadcrumbs = array();
+                  while($parent_id):
+                    $page = get_page($parent_id);
+                    $breadcrumbs[] = '<a href="' . get_permalink($page->ID) . '">' . get_the_title($page->ID) . '</a>';
+                    $parent_id = $page->post_parent;
+                  endwhile;
+                  $breadcrumbs = array_reverse($breadcrumbs);
+                  foreach($breadcrumbs as $crumb):
+                    $bc_output .= $crumb . ' ' . $delimiter . ' ';
+                  endforeach;
+                  $bc_output .= $before . get_the_title() . $after;
+                endif;
+                // pagination
+                if(get_query_var('paged') ):
+                  if(is_category() || is_day() || is_month() || is_year() || is_search() || is_tag() || is_author()):
+                    $bc_output .= ' (' . __('site') . ' ' . get_query_var('paged') . ')';
+                  endif;
+                endif;
+            $bc_output .= prefix_template::AddContainer(prefix_template::$template_container_breadcrumbs, false) == 'container' ? '</div>' : '';
+          $bc_output .= '</nav>';
+        endif;
+        // define output
+        if(str_contains($content, 'FilterBreadcrumbs')):
+          $output .= str_replace('FilterBreadcrumbs', '', $content);
+        elseif($content == 'bcOnly' || SELF::$template_breadcrumbs_inside == 0 && $content == ''):
+          // only breadcrumbs
+          $output .= $bc_output;
+        elseif(SELF::$template_breadcrumbs_inside == 0 && $content !== '' && doing_filter( 'the_content' )):
+          // filter fallback - the_content
+          $output .= $content;
+        elseif(SELF::$template_breadcrumbs_inside && $content !== '' && doing_filter( 'the_content' )):
+          // filter - the_content
+          if(is_single() || is_page()):
+            // insert breadcrumbs after first block (if its cover or image)
+            global $post;
+            $blocks = parse_blocks( $post->post_content );
+            if('core/cover' === $blocks[0]['blockName'] || 'core/image' === $blocks[0]['blockName']):
+              $rendered = apply_filters('the_content', 'FilterBreadcrumbs' . render_block($blocks[0]));
+              if (str_contains($rendered, '</figure>')):
+                $pos = strpos($content,'</figure>');
+                if($pos !== false):
+                  $output .= substr_replace($content, '</figure>' . $bc_output, $pos, strlen('</figure>'));
+                endif;
+              else:
+                $pos = strpos($content,'</div>');
+                if($pos !== false):
+                  $output .= substr_replace($content, '</div></div>' . $bc_output, $pos, strlen('</div></div>'));
+                endif;
+              endif;
+            else:
+              $output .= $bc_output;
+              $output .= $content;
+            endif;
+
+            // $count = 1;
+            // foreach($blocks as $block):
+            //   $rendered = render_block( $block );
+            //   $sc = do_shortcode($rendered);
+            //   if($count === 1):
+            //     if('core/cover' === $block['blockName'] || 'core/image' === $block['blockName']):
+            //       $output .= $block['innerHTML'];
+            //       $output .= $bc_output;
+            //     else:
+            //       $output .= $bc_output;
+            //       $output .= $block['innerHTML'];
+            //     endif;
+            //   else:
+            //     $output .= $block['innerHTML'];
+            //   endif;
+            //   $count++;
+            // endforeach;
+          else:
+            // if its not the page return return only content
+            $output .= $content;
+          endif;
+        endif;
+      endif;
+
+      return $output;
     }
 
 

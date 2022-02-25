@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.47.28 | 25.02.2022 <>
+* Add breadcrumbs
+* Menu stretch option
+* new customizer styling options
+
 ## 1.46.28 | 21.02.2022 <customizer options, var fallback>
 * add direction attribute to menu shortcode
 * new customizer styling options

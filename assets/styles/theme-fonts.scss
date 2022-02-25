@@ -10,12 +10,16 @@
 /*=======================================================
 Table of Contents:
 –––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-  1 HEADER
-  2 FOOTER
-  3 GENERAL
-  4.0 BLOCKS
-    4.1 ACCORDION
-    4.2 BUTTONS
+  1.0 HEADER
+  2.0 MAIN
+    2.1 BREADCRUMBS
+    2.2 SEARCH RESULTS
+  3.0 FOOTER
+  4.0 GENERAL
+  5.0 BLOCKS
+    5.1 ACCORDION
+    5.2 BUTTONS
+    5.3 TABLES
 =======================================================*/
 
 
@@ -79,7 +83,39 @@ body.frontend,
 
 
   /*==================================================================================
-    2.0 FOOTER
+    2.0 MAIN
+  ==================================================================================*/
+
+  /* 2.1 BREADCRUMBS
+  /––––––––––––––––––––––––*/
+  nav.breadcrumbs {
+    font-family: var(--bc__fontfamily, inherit);
+    font-size: var(--bc__fontsize, inherit);
+    font-weight: var(--bc__fontWeight, inherit);
+    line-height: var(--bc__lineheight, inherit);
+    text-transform: var(--bc__textTransform, inherit);
+  }
+
+  /* 2.2 SEARCH RESULTS
+  /––––––––––––––––––––––––*/
+  #search-results {
+    .results {
+      article {
+        h2 {
+          font-family: var(--search__article_title_fontFamily, inherit);
+          font-size: var(--search__article_title_fontSize, inherit);
+          line-height: var(--search__article_title_lineHeight, inherit);
+          font-weight: var(--search__article_title_fontWeight, inherit);
+          text-transform: var(--search__article_title_textTransform, inherit);
+        }
+      }
+    }
+  }
+
+
+
+  /*==================================================================================
+    3.0 FOOTER
   ==================================================================================*/
 
   > footer {
@@ -92,7 +128,7 @@ body.frontend,
 
 
   /*==================================================================================
-    3.0 GENERAL
+    4.0 GENERAL
   ==================================================================================*/
   font-weight: var(--html__fontweight);
 
@@ -103,40 +139,39 @@ body.frontend,
   // inputs
   input[type="text"],
   input[type="email"],
-  input[type="checkbox"] + label,
-  input[type="radio"] + label,
   textarea {
     &:not(.editor-post-title__input) {
-      font-family: var(--input__fontFamily);
-      font-size: var(--input__fontSize);
-      line-height: var(--input__lineHeight);
-      font-weight: var(--input__fontWeight);
+      font-family: var(--input__fontFamily, inherit);
+      font-size: var(--input__fontSize, inherit);
+      line-height: var(--input__lineHeight, inherit);
+      font-weight: var(--input__fontWeight, inherit);
     }
   }
   .select-container:after {
     text-align: center;
   }
   select {
-    font-size: var(--input__select_fontSize, var(--input__fontSize));
-    line-height: var(--input__select_lineHeight, var(--input__lineHeight));
-    font-weight: var(--input__select_fontWeight, var(--input__fontWeight));
+    font-size: var(--input__select_fontSize, var(--input__fontSize, inherit));
+    line-height: var(--input__select_lineHeight, var(--input__lineHeight, inherit));
+    font-weight: var(--input__select_fontWeight, var(--input__fontWeight, inherit));
   }
   input[type="checkbox"],
   input[type="radio"] {
     + label {
-      font-size: var(--input__checkbox_fontSize, var(--input__fontSize));
-      line-height: var(--input__checkbox_lineHeight, var(--input__lineHeight));
-      font-weight: var(--input__checkbox_fontWeight, var(--input__fontWeight));
+      font-size: var(--input__checkbox_fontSize, var(--input__fontSize, inherit));
+      line-height: var(--input__checkbox_lineHeight, var(--input__lineHeight, inherit));
+      font-weight: var(--input__checkbox_fontWeight, var(--input__fontWeight, inherit));
     }
   }
   // submit
   button[type="submit"],
   input[type="submit"] {
-    font-family: var(--input__submit_fontFamily);
-    font-size: var(--input__submit_fontSize);
-    line-height: var(--input__submit_lineHeight);
-    font-weight: var(--input__submit_fontWeight);
-    text-transform: var(--input__submit_textTransform);
+    font-family: var(--input__submit_fontFamily, var(--input__fontFamily, inherit));
+    font-size: var(--input__submit_fontSize, var(--input__fontSize, inherit));
+    line-height: var(--input__submit_lineHeight, var(--input__lineHeight, inherit));
+    font-weight: var(--input__submit_fontWeight, var(--input__fontWeight, inherit));
+    text-transform: var(--input__submit_textTransform, uppercase);
+    letter-spacing: var(--input__submit_letterSpacing, 0px);
   }
   // fieldset
   fieldset {
@@ -152,42 +187,42 @@ body.frontend,
   // placeholder
   input, select, textarea {
     &::-webkit-input-placeholder {
-      font-family: var(--input__placeholder_fontFamily);
-      font-size: var(--input__placeholder_fontSize);
-      line-height: var(--input__placeholder_lineHeight);
-      font-weight: var(--input__placeholder_fontWeight);
-      text-transform: var(--input__placeholder_textTransform);
+      font-family: var(--input__placeholder_fontFamily, inherit);
+      font-size: var(--input__placeholder_fontSize, inherit);
+      line-height: var(--input__placeholder_lineHeight, inherit);
+      font-weight: var(--input__placeholder_fontWeight, inherit);
+      text-transform: var(--input__placeholder_textTransform, inherit);
     }
     &::-moz-placeholder {
-      font-family: var(--input__placeholder_fontFamily);
-      font-size: var(--input__placeholder_fontSize);
-      line-height: var(--input__placeholder_lineHeight);
-      font-weight: var(--input__placeholder_fontWeight);
-      text-transform: var(--input__placeholder_textTransform);
+      font-family: var(--input__placeholder_fontFamily, inherit);
+      font-size: var(--input__placeholder_fontSize, inherit);
+      line-height: var(--input__placeholder_lineHeight, inherit);
+      font-weight: var(--input__placeholder_fontWeight, inherit);
+      text-transform: var(--input__placeholder_textTransform, inherit);
     }
     &:-ms-input-placeholder {
-      font-family: var(--input__placeholder_fontFamily);
-      font-size: var(--input__placeholder_fontSize);
-      line-height: var(--input__placeholder_lineHeight);
-      font-weight: var(--input__placeholder_fontWeight);
-      text-transform: var(--input__placeholder_textTransform);
+      font-family: var(--input__placeholder_fontFamily, inherit);
+      font-size: var(--input__placeholder_fontSize, inherit);
+      line-height: var(--input__placeholder_lineHeight, inherit);
+      font-weight: var(--input__placeholder_fontWeight, inherit);
+      text-transform: var(--input__placeholder_textTransform, inherit);
     }
     &:-moz-placeholder {
-      font-family: var(--input__placeholder_fontFamily);
-      font-size: var(--input__placeholder_fontSize);
-      line-height: var(--input__placeholder_lineHeight);
-      font-weight: var(--input__placeholder_fontWeight);
-      text-transform: var(--input__placeholder_textTransform);
+      font-family: var(--input__placeholder_fontFamily, inherit);
+      font-size: var(--input__placeholder_fontSize, inherit);
+      line-height: var(--input__placeholder_lineHeight, inherit);
+      font-weight: var(--input__placeholder_fontWeight, inherit);
+      text-transform: var(--input__placeholder_textTransform, inherit);
     }
   }
 
 
 
   /*==================================================================================
-    4.0 BLOCKS
+    5.0 BLOCKS
   ==================================================================================*/
 
-  /* 4.1 ACCORDION
+  /* 5.1 ACCORDION
   /––––––––––––––––––––––––*/
   .block-accordion {
     .accordion-item {
@@ -203,7 +238,7 @@ body.frontend,
     }
   }
 
-  /* 4.2 BUTTONS
+  /* 5.2 BUTTONS
   /––––––––––––––––––––––––*/
   .wp-block-buttons {
     .wp-block-button {
@@ -213,6 +248,23 @@ body.frontend,
         font-weight: var(--block__buttons_fontWeight);
         line-height: var(--block__buttons_lineHeight);
         text-transform: var(--block__buttons_textTransform);
+      }
+    }
+  }
+
+  /* 5.3 TABLES
+  /––––––––––––––––––––––––*/
+  figure.wp-block-table {
+    table {
+      tr {
+        th {
+          font-family: var(--block__table_fontFamily, inherit);
+          font-size: var(--block__table_fontSize, inherit);
+          line-height: var(--block__table_lineHeight, inherit);
+          font-weight: var(--block__table_fontWeight, inherit);
+          text-transform: var(--block__table_textTransform, none);
+          letter-spacing: var(--block__table_letterSpacing, 0px);
+        }
       }
     }
   }

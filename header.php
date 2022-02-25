@@ -39,3 +39,4 @@
       endif;
     ?>
     <main>
+      <?php echo prefix_template::breadcrumbNavigation(); ?>

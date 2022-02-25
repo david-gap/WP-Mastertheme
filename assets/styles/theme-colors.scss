@@ -17,6 +17,9 @@ Table of Contents:
     1.4 MARKED TEXT
     1.5 ACCORDEON
     1.6 BUTTONS
+    1.7 MAIN MENU
+    1.8 BREADCRUMBS
+    1.9 SEARCH RESULTS
   2.0 LIGHT COLORING
     2.1 MAIN BG
     2.2 LOGO TEXT
@@ -67,6 +70,11 @@ body.frontend,
     color:  var(--input__color);
     background-color: var(--input__bg_color);
     border-color: var(--input__border_color);
+    // placeholder
+    &::-webkit-input-placeholder {color: var(--input__placeholder_color);}
+    &::-moz-placeholder {color: var(--input__placeholder_color);}
+    &:-ms-input-placeholder {color: var(--input__placeholder_color);}
+    &:-moz-placeholder {color: var(--input__placeholder_color);}
   }
   select {
     background-color: var(--input__select_bg_color);
@@ -180,6 +188,11 @@ body.frontend,
   #menu-main-container {
     > ul#menu_main {
       > li {
+        &.current-menu-ancestor > a,
+        &.current-menu-item > a {
+          color: var(--mnav__color_active);
+          background-color: var(--mnav__background_color_active);
+        }
         > a {
           color: var(--mnav__color);
           border-color: var(--mnav__border_color);
@@ -191,6 +204,11 @@ body.frontend,
         }
         >ul {
           > li {
+            &.current-menu-ancestor > a,
+            &.current-menu-item > a {
+              color: var(--mnav__sub_color_active);
+              background-color: var(--mnav__sub_background_color_active);
+            }
             > a {
               color: var(--mnav__sub_color);
               border-color: var(--mnav__sub_border_color);
@@ -202,6 +220,11 @@ body.frontend,
             }
             > ul {
               > li {
+                &.current-menu-ancestor > a,
+                &.current-menu-item > a {
+                  color: var(--mnav__subSub_color_active);
+                  background-color: var(--mnav__subSub_background_color_active);
+                }
                 > a {
                   color: var(--mnav__subSub_color);
                   border-color: var(--mnav__subSub_border_color);
@@ -219,6 +242,32 @@ body.frontend,
     }
   }
 
+  /* 1.8 BREADCRUMBS
+  /––––––––––––––––––––––––*/
+  nav.breadcrumbs {
+    color: var(--bc__color, inherit);
+    background-color: var(--bc__background_color, inherit);
+    a {
+      color: var(--bc__link_color, inherit);
+      &:hover {
+        color: var(--bc__link_color_hover, inherit);
+      }
+    }
+    .current-page {
+      color: var(--bc__color_active, inherit);
+    }
+  }
+
+  /* 1.9 SEARCH RESULTS
+  /––––––––––––––––––––––––*/
+  #search-results {
+    .results {
+      article {
+        border-color: var(--search__article_borderColor, inherit);
+      }
+    }
+  }
+
 
 
   /*==================================================================================
@@ -232,7 +281,7 @@ body.frontend,
     /––––––––––––––––––––––––*/
     background-color: var(--light__main_background);
     color: var(--light__main_color);
-    header {
+    > header {
       background-color: var(--light__header_background);
       .header-container {
         background-color: var(--light__headercontainer_background);
@@ -339,7 +388,7 @@ body.frontend,
     /––––––––––––––––––––––––*/
     background-color: var(--dark__main_background);
     color: var(--dark__main_color);
-    header {
+    > header {
       background-color: var(--dark__header_background);
       .header-container {
         background-color: var(--dark__headercontainer_background);
