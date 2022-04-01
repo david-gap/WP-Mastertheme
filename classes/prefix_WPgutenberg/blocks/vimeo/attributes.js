@@ -3,6 +3,10 @@ const attributes = {
     type: 'string',
     default: '',
   },
+  posterVideoID: {
+    type: 'string',
+    default: '',
+  },
   videoAutoPlay: {
     type: 'boolean',
     default: true,

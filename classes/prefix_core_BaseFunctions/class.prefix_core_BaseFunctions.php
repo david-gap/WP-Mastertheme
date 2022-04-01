@@ -4,7 +4,7 @@
  *
  * Base dev functions - parent for all custom classes
  * Author:      David Voglgsnag
- * @version     2.14.7
+ * @version     2.15.7
  *
  */
 
@@ -30,6 +30,7 @@
    1.16 INSERT TO ARRAY AT SPACIFIC POSITION
    1.17 DETECT MOBILE DEVICE
    1.18 CONFIGURATOR TRANSLATIONS
+   1.19 GET CLIENT IP ADDRESS
  2.0 DATES
    2.1 CHECK IF VARS ARE OUT OF DATE
    2.2 DATE RANGE FORMAT
@@ -480,7 +481,7 @@ class prefix_core_BaseFunctions {
       * @param string $default: Default return, if translation does not exist
       * @return string
     */
-    function getConfigTranslation(string $key = '', string $default = ''){
+    static function getConfigTranslation(string $key = '', string $default = ''){
       $output = '';
       // if key is not empty
       if($key !== ''):
@@ -501,6 +502,47 @@ class prefix_core_BaseFunctions {
     }
 
 
+    /* 1.19 GET CLIENT IP ADDRESS
+    /------------------------*/
+    /**
+      * @return string
+    */
+    static function getClientIpAddress(){
+      $output = '';
+      if(!empty($_SERVER['HTTP_CLIENT_IP']) && SELF::validIpAddress($_SERVER['HTTP_CLIENT_IP'])):
+        // check for shared ISP IP
+        $output = $_SERVER['HTTP_CLIENT_IP'];
+      elseif(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])):
+        // check for IPs passing through proxy servers
+        // check if multiple IP addresses are set and take the first one
+        $ipAddressList = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+        foreach($ipAddressList as $ip){
+          if(SELF::validIpAddress($ip)):
+            $output = $ip;
+            break;
+          endif;
+        }
+      elseif(!empty($_SERVER['HTTP_X_FORWARDED']) && SELF::validIpAddress($_SERVER['HTTP_X_FORWARDED'])):
+        $output = $_SERVER['HTTP_X_FORWARDED'];
+      elseif(!empty($_SERVER['HTTP_X_CLUSTER_CLIENT_IP']) && SELF::validIpAddress($_SERVER['HTTP_X_CLUSTER_CLIENT_IP'])):
+        $output = $_SERVER['HTTP_X_CLUSTER_CLIENT_IP'];
+      elseif(!empty($_SERVER['HTTP_FORWARDED_FOR']) && SELF::validIpAddress($_SERVER['HTTP_FORWARDED_FOR'])):
+        $output = $_SERVER['HTTP_FORWARDED_FOR'];
+      elseif(!empty($_SERVER['HTTP_FORWARDED']) && SELF::validIpAddress($_SERVER['HTTP_FORWARDED'])):
+        $output = $_SERVER['HTTP_FORWARDED'];
+      elseif(!empty($_SERVER['REMOTE_ADDR']) && SELF::validIpAddress($_SERVER['REMOTE_ADDR'])):
+        $output = $_SERVER['REMOTE_ADDR'];
+      endif;
+      return $output;
+    }
+    public function validIpAddress($ip){
+      if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6 | FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) === false):
+        return false;
+      endif;
+      return true;
+    }
+
+
 
   /*==================================================================================
   2.0 DATES
@@ -515,10 +557,13 @@ class prefix_core_BaseFunctions {
   */
   public static function DateCheck(string $start = "", string $end = "", string $factor = "between"){
     // vars
+    date_default_timezone_set(get_option('timezone_string'));
     // $current_date = time();
-    $getCurrentTime = new DateTime("now", new DateTimeZone(get_option('timezone_string')) );
-    $formatCurrentTime = $getCurrentTime->format('Y-m-d H:i:s');
-    $current_date = strtotime($formatCurrentTime);
+    $current_date = current_time('Y-m-d H:i:s');
+    // $getCurrentTime = new DateTime("now", new DateTimeZone(get_option('timezone_string')) );
+    // $getCurrentTime = new DateTime("now", new DateTimeZone(get_option('timezone_string')) );
+    // $formatCurrentTime = $getCurrentTime->format('Y-m-d H:i:s');
+    $current_date = strtotime($current_date);
     $startdate = strtotime($start);
     $enddate = strtotime($end);
     // check start date
@@ -987,41 +1032,67 @@ class prefix_core_BaseFunctions {
     * @param int $postID: post id
     * @param array $metas: meta list, key is the name value is a array with label and type
   */
-  public function metaBoxes(int $postID = 0, array $metas = array()) {
-    echo '<div class="metaboxes">';
+  public function metaBoxes(int $postID = 0, array $metas = array(), string $type = 'cpt') {
+    if($type == 'tax'):
+      $t_id = $postID;
+      $term_meta = get_option( "taxonomy_term_$t_id" );
+      $output = '';
+
       foreach( $metas as $metafield => $metafeildValues ){
-        if(array_key_exists('label', $metafeildValues) && array_key_exists('type', $metafeildValues)):
-          $value = get_post_meta($postID, $metafield, true);
-          echo '<div class="components-panel__row edit-post-post-visibility" data-id="' . $metafield . '">';
-            echo '<label for="' . $metafield . '"><strong>' . __( $metafeildValues["label"], 'devTheme' ) . '</strong></label><br />';
-              if($metafeildValues["type"] == "wysiwig"):
-                wp_editor($value, $metafield, array(
-                            'wpautop'       => true,
-                            'media_buttons' => false,
-                            'textarea_name' => $metafield,
-                            'textarea_rows' => 10,
-                            'teeny'         => true
-                ));
-              elseif($metafeildValues["type"] == "image"):
-                echo '<input type="hidden" class="img-saved" id="' . $metafield . '" name="' . $metafield . '" value="' . $value . '" style="margin-top:5px; width:100%;">';
-                echo '<button class="wp-single-media" data-action="WPadmin">' . __('Select images','devTheme') . '</button>';
-                // img
-                echo '<span class="img-selected">';
-                  if($value !== false && $value !== ''):
-                    echo '<span class="remove_image"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24.9 24.9" xml:space="preserve"><rect x="-3.7" y="10.9" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1549 12.4451)" fill="#000" width="32.2" height="3"/><rect x="10.9" y="-3.7" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1549 12.4451)" fill="#000" width="3" height="32.2"/></svg></span>';
-                    echo '<img src="' . wp_get_attachment_thumb_url($value) . '">';
-                  endif;
-                echo '</span>';
-              elseif($metafeildValues["type"] == "checkbox"):
-                echo '<input type="checkbox" id="' . $metafield . '" name="' . $metafield . '" value="1" style="margin-top:5px;" ' . SELF::setChecked($value, '1') . '>';
-              else:
-                echo '<input type="text" id="' . $metafield . '" name="' . $metafield . '" value="' . $value . '" style="margin-top:5px; width:100%;">';
-              endif;
-          echo '</div>';
-          echo '<hr style="margin: 20px 0;" />';
-        endif;
+        $value = $term_meta[$metafield] ? $term_meta[$metafield] : '';
+        $output .= '<tr class="form-field">';
+          $output .= '<th scope="row" valign="top">';
+            $output .= '<label for="' . $metafield . '">' . $metafeildValues['label'] . '</label>';
+          $output .= '</th>';
+          $output .= '<td>';
+            if($metafeildValues['type'] == 'textarea'):
+              $output .= '<textarea name="term_meta[' . $metafield . ']" id="term_meta[' . $metafield . ']" rows="5" size="25">' . stripslashes($value) . '</textarea><br />';
+            else:
+              $output .= '<input type="' . $metafeildValues['type'] . '" name="term_meta[' . $metafield . ']" id="term_meta[' . $metafield . ']" size="25" value="' . $value . '"><br />';
+            endif;
+            $output .= array_key_exists('desciption', $metafeildValues) && $metafeildValues['desciption'] !== '' ? '<span class="description">' . $metafeildValues['desciption'] . '</span>' : '';
+          $output .= '</td>';
+        $output .= '</tr>';
       }
-    echo '</div>';
+      echo $output;
+    else:
+      echo '<div class="metaboxes">';
+        foreach( $metas as $metafield => $metafeildValues ){
+          if(array_key_exists('label', $metafeildValues) && array_key_exists('type', $metafeildValues)):
+            $value = get_post_meta($postID, $metafield, true);
+            echo '<div class="components-panel__row edit-post-post-visibility" data-id="' . $metafield . '">';
+              echo '<label for="' . $metafield . '"><strong>' . __( $metafeildValues["label"], 'devTheme' ) . '</strong></label><br />';
+                if($metafeildValues["type"] == "wysiwig"):
+                  wp_editor($value, $metafield, array(
+                              'wpautop'       => true,
+                              'media_buttons' => false,
+                              'textarea_name' => $metafield,
+                              'textarea_rows' => 10,
+                              'teeny'         => true
+                  ));
+                elseif($metafeildValues["type"] == "textarea"):
+                  echo '<textarea type="hidden" id="' . $metafield . '" name="' . $metafield . '" row="5" style="margin-top:5px; width:100%;">' . $value . '</textarea>';
+                elseif($metafeildValues["type"] == "image"):
+                  echo '<input type="hidden" class="img-saved" id="' . $metafield . '" name="' . $metafield . '" value="' . $value . '" style="margin-top:5px; width:100%;">';
+                  echo '<button class="wp-single-media" data-action="WPadmin">' . __('Select images','devTheme') . '</button>';
+                  // img
+                  echo '<span class="img-selected">';
+                    if($value !== false && $value !== ''):
+                      echo '<span class="remove_image"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24.9 24.9" xml:space="preserve"><rect x="-3.7" y="10.9" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1549 12.4451)" fill="#000" width="32.2" height="3"/><rect x="10.9" y="-3.7" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1549 12.4451)" fill="#000" width="3" height="32.2"/></svg></span>';
+                      echo '<img src="' . wp_get_attachment_thumb_url($value) . '">';
+                    endif;
+                  echo '</span>';
+                elseif($metafeildValues["type"] == "checkbox"):
+                  echo '<input type="checkbox" id="' . $metafield . '" name="' . $metafield . '" value="1" style="margin-top:5px;" ' . SELF::setChecked($value, '1') . '>';
+                else:
+                  echo '<input type="text" id="' . $metafield . '" name="' . $metafield . '" value="' . $value . '" style="margin-top:5px; width:100%;">';
+                endif;
+            echo '</div>';
+            echo '<hr style="margin: 20px 0;" />';
+          endif;
+        }
+      echo '</div>';
+    endif;
   }
 
 

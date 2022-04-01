@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.25.16
+ * @version     2.26.16
  *
 */
 
@@ -88,6 +88,8 @@ class prefix_template {
     * @param static string $template_header_logo_link: Logo link with wordpress fallback
     * @param static array $template_header_logo_d: desktop logo configuration
     * @param static array $template_header_logo_m: mobile logo configuration
+    * @param static array $template_header_logo_scrolled: scrolled logo configuration
+    * @param static array $template_header_logo_svg: Insert SVG code as logo
     * @param static string $template_header_after: html code after header
     * @param static int $template_page_active: activate page options
     * @param static array $template_page_options: show/hide template elements
@@ -198,6 +200,13 @@ class prefix_template {
     "height" => "",
     "alt" => ""
   );
+  static $template_header_logo_scrolled        = array(
+    "img" => "",
+    "width" => "",
+    "height" => "",
+    "alt" => ""
+  );
+  static $template_header_logo_svg             = "";
   static $template_header_after                = "";
   static $template_page_active                 = 1;
   static $template_page_options                = array(
@@ -305,6 +314,8 @@ class prefix_template {
       __('Body css (light/dark)', 'devTheme'),
       __('Addressblock information', 'devTheme'),
       __('Logo', 'devTheme'),
+      __('SVG Logo', 'devTheme'),
+      __('Logo on scrolled', 'devTheme'),
       __('URL', 'devTheme'),
       __('Width', 'devTheme'),
       __('Height', 'devTheme'),
@@ -785,6 +796,32 @@ class prefix_template {
             )
           )
         ),
+        "logo_scrolled" => array(
+          "label" => "Logo on scrolled",
+          "type" => "multiple",
+          "value" => array(
+            "img" => array(
+              "label" => "URL",
+              "type" => "img"
+            ),
+            "width" => array(
+              "label" => "Width",
+              "type" => "text"
+            ),
+            "height" => array(
+              "label" => "Height",
+              "type" => "text"
+            ),
+            "alt" => array(
+              "label" => "Alternative text",
+              "type" => "text"
+            )
+          )
+        ),
+        "logo_svg" => array(
+          "label" => "SVG Logo",
+          "type" => "textarea"
+        ),
         "sort" => array(
           "label" => "Sort and activate",
           "type" => "multiple",
@@ -1202,6 +1239,8 @@ class prefix_template {
           SELF::$template_header_logo_link = array_key_exists('logo_link', $header) ? $header['logo_link'] : SELF::$template_header_logo_link;
           SELF::$template_header_logo_d = array_key_exists('logo_desktop', $header) ? $header['logo_desktop'] : SELF::$template_header_logo_d;
           SELF::$template_header_logo_m = array_key_exists('logo_mobile', $header) ? $header['logo_mobile'] : SELF::$template_header_logo_m;
+          SELF::$template_header_logo_scrolled = array_key_exists('logo_scrolled', $header) ? $header['logo_scrolled'] : SELF::$template_header_logo_scrolled;
+          SELF::$template_header_logo_svg = array_key_exists('logo_svg', $header) ? $header['logo_svg'] : SELF::$template_header_logo_svg;
           SELF::$template_header_after = array_key_exists('after_header', $header) ? $header['after_header'] : SELF::$template_header_after;
         endif;
         if($configuration && array_key_exists('page', $myConfig)):
@@ -1454,7 +1493,7 @@ class prefix_template {
             echo $value == 1 ? SELF::WP_MainMenu(SELF::$template_header_dmenu, 'hamburger', SELF::$template_header_menu_style, SELF::$template_header_hmenu_style, SELF::$template_header_hmenu_toggle, SELF::$template_header_hmenu_visible_head, SELF::$template_header_hmenu_text, SELF::$template_header_hmenu_streched) : '';
             break;
           case 'logo':
-            echo $value == 1 ? SELF::Logo(SELF::$template_header_logo_link, SELF::$template_header_logo_d, SELF::$template_header_logo_m) : '';
+            echo $value == 1 ? SELF::Logo(SELF::$template_header_logo_link, SELF::$template_header_logo_d, SELF::$template_header_logo_m, SELF::$template_header_logo_scrolled, SELF::$template_header_logo_svg) : '';
             break;
           case 'socialmedia':
             echo $value == 1 ? SELF::SocialMedia() : '';
@@ -1700,7 +1739,7 @@ class prefix_template {
 
     /* 3.6 LOGO
     /------------------------*/
-    public static function Logo(string $link = "", array $desktop = array(), array $mobile = array()){
+    public static function Logo(string $link = "", array $desktop = array(), array $mobile = array(), array $scrolled = array(), $svg = ''){
       // vars
       $output = '';
       $page_name = get_bloginfo();
@@ -1709,22 +1748,33 @@ class prefix_template {
       $add_container = array_key_exists('img', $desktop) && $desktop['img'] == "" && $mobile['img'] == "" ? ' text_logo' : '';
       $img_desktop = array_key_exists('img', $desktop) && $desktop['img'] !== '' ? wp_get_attachment_image_src($desktop['img'], 'full') : '';
       $img_mobile = array_key_exists('img', $mobile) && $mobile['img'] !== '' ? wp_get_attachment_image_src($mobile['img'], 'full') : '';
+      $img_scrolled = array_key_exists('img', $scrolled) && $scrolled['img'] !== '' ? wp_get_attachment_image_src($scrolled['img'], 'full') : '';
       // output
       $output .= '<a href="' . $link . '" class="logo' . $add_container .'">';
-      if($img_desktop !== ""):
-        $desktop_add = '';
-        $desktop_add .= array_key_exists('width', $desktop) && $desktop['width'] !== "" ? ' width="' . $desktop['width'] . '"' : '';
-        $desktop_add .= array_key_exists('height', $desktop) && $desktop['height'] !== "" ? ' height="' . $desktop['height'] . '"' : '';
-        $desktop_add .= $desktop['alt'] !== "" ? ' alt="' . prefix_core_BaseFunctions::getConfigTranslation('template_header_logo_desktop_alt', $desktop['alt']) . '"' : '';
-        $output .= '<img src="' . $img_desktop[0] . '" ' . $add_desktop . $desktop_add . '>';
-        $mobile_add = '';
-        $mobile_add .= array_key_exists('width', $mobile) && $mobile['width'] !== "" ? ' width="' . $mobile['width'] . '"' : '';
-        $mobile_add .= array_key_exists('height', $mobile) && $mobile['height'] !== "" ? ' height="' . $mobile['height'] . '"' : '';
-        $mobile_add .= $mobile['alt'] !== "" ? ' alt="' . $mobile['alt'] . '"' : '';
-        $output .= $img_mobile !== "" ? '<img src="' . $img_mobile[0] . '" class="mobile"' . $mobile_add . '>' : '';
-      else:
-        $output .= $desktop['alt'] !== "" ? prefix_core_BaseFunctions::getConfigTranslation('template_header_logo_desktop_alt', $desktop['alt']) : $page_name;
-      endif;
+        if($svg !== ''):
+          $output .= $svg;
+        else:
+          if($img_desktop !== ""):
+            $desktop_add = '';
+            $desktop_add .= array_key_exists('width', $desktop) && $desktop['width'] !== "" ? ' width="' . $desktop['width'] . '"' : '';
+            $desktop_add .= array_key_exists('height', $desktop) && $desktop['height'] !== "" ? ' height="' . $desktop['height'] . '"' : '';
+            $desktop_add .= array_key_exists('alt', $desktop) && $desktop['alt'] !== "" ? ' alt="' . prefix_core_BaseFunctions::getConfigTranslation('template_header_logo_desktop_alt', $desktop['alt']) . '"' : '';
+            $output .= '<img src="' . $img_desktop[0] . '" ' . $add_desktop . $desktop_add . '>';
+            $mobile_add = '';
+            $mobile_add .= array_key_exists('width', $mobile) && $mobile['width'] !== "" ? ' width="' . $mobile['width'] . '"' : '';
+            $mobile_add .= array_key_exists('height', $mobile) && $mobile['height'] !== "" ? ' height="' . $mobile['height'] . '"' : '';
+            $mobile_add .= array_key_exists('alt', $mobile) && $mobile['alt'] !== "" ? ' alt="' . $mobile['alt'] . '"' : '';
+            $output .= $img_mobile !== "" ? '<img src="' . $img_mobile[0] . '" class="mobile"' . $mobile_add . '>' : '';
+
+            $scrolled_add = '';
+            $scrolled_add .= array_key_exists('width', $scrolled) && $scrolled['width'] !== "" ? ' width="' . $scrolled['width'] . '"' : '';
+            $scrolled_add .= array_key_exists('height', $scrolled) && $scrolled['height'] !== "" ? ' height="' . $scrolled['height'] . '"' : '';
+            $scrolled_add .= array_key_exists('alt', $scrolled) && $scrolled['alt'] !== "" ? ' alt="' . $scrolled['alt'] . '"' : '';
+            $output .= $img_scrolled !== "" ? '<img src="' . $img_scrolled[0] . '" class="show-on-scrolled"' . $scrolled_add . '>' : '';
+          else:
+            $output .= $desktop['alt'] !== "" ? prefix_core_BaseFunctions::getConfigTranslation('template_header_logo_desktop_alt', $desktop['alt']) : $page_name;
+          endif;
+        endif;
       $output .= '</a>';
 
       return $output;
@@ -1939,7 +1989,7 @@ class prefix_template {
       if ( has_nav_menu( 'footermenu' ) && $active === true ) :
         // css
         $css = 'wp-menu';
-        if(SELF::$template_footer_menu['css'] !== ''):
+        if(array_key_exists('css', SELF::$template_footer_menu) && SELF::$template_footer_menu['css'] !== ''):
           $css .= ' ' . SELF::$template_footer_menu['css'];
         endif;
         if(SELF::$template_footer_menu['direction'] == 'h' || SELF::$template_footer_menu['direction'] == 'horizontal'):
@@ -2142,8 +2192,8 @@ class prefix_template {
       $page_id = get_queried_object_id();
       // base classes
       $classes = 'frontend';
-      $classes .= $obj && array_key_exists('post_type', $obj) ? ' pt-' . $obj->post_type : '';
-      $classes .= $obj && array_key_exists('name', $obj) ? ' pt-' . $obj->name : '';
+      $classes .= $obj && property_exists($obj, 'post_type') ? ' pt-' . $obj->post_type : '';
+      $classes .= $obj && property_exists($obj, 'name') ? ' pt-' . $obj->name : '';
       $classes .= prefix_template::$template_coloring !== '' ? ' ' . prefix_template::$template_coloring : '';
       $classes .= prefix_template::CheckSticky(prefix_template::$template_header_sticky, prefix_template::$template_header_stickyload);
       // dark mode
@@ -2235,7 +2285,7 @@ class prefix_template {
 
     /* 3.21 BREADCRUMBS
     /------------------------*/
-    function breadcrumbNavigation($content = ''){
+    static function breadcrumbNavigation($content = ''){
       $output = '';
       $bc_output = '';
       // check if breadcrumbs are active and build breadcrumbs
@@ -2341,7 +2391,7 @@ class prefix_template {
           $bc_output .= '</nav>';
         endif;
         // define output
-        if(str_contains($content, 'FilterBreadcrumbs')):
+        if(strpos($content, 'FilterBreadcrumbs') !== false):
           $output .= str_replace('FilterBreadcrumbs', '', $content);
         elseif($content == 'bcOnly' || SELF::$template_breadcrumbs_inside == 0 && $content == ''):
           // only breadcrumbs
@@ -2357,15 +2407,20 @@ class prefix_template {
             $blocks = parse_blocks( $post->post_content );
             if('core/cover' === $blocks[0]['blockName'] || 'core/image' === $blocks[0]['blockName']):
               $rendered = apply_filters('the_content', 'FilterBreadcrumbs' . render_block($blocks[0]));
-              if (str_contains($rendered, '</figure>')):
+              $rendered = str_replace('<p></p>', '', $blocks[0]['innerHTML']);
+              if('core/image' === $blocks[0]['blockName']):
                 $pos = strpos($content,'</figure>');
                 if($pos !== false):
                   $output .= substr_replace($content, '</figure>' . $bc_output, $pos, strlen('</figure>'));
+                else:
+                  $output .= $content;
                 endif;
               else:
-                $pos = strpos($content,'</div>');
+                $pos = strpos($content,'</div></div>');
                 if($pos !== false):
                   $output .= substr_replace($content, '</div></div>' . $bc_output, $pos, strlen('</div></div>'));
+                else:
+                  $output .= $content;
                 endif;
               endif;
             else:

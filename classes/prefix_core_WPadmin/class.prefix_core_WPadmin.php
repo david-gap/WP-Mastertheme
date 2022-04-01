@@ -4,7 +4,7 @@
  *
  * Backend area to manage configuration file
  * Author:      David Voglgsnag
- * @version     1.4.6
+ * @version     1.4.7
  *
  */
 
@@ -427,7 +427,7 @@ class prefix_core_WPadmin {
         $languages = get_available_languages();
       endif;
       $db_option = get_option('WPadmin_configuration') ? get_option('WPadmin_configuration') : array();
-      $output .= '<span class="translations"><span>T</span><ul>';
+      $output .= '<span class="config-translations"><span>T</span><ul>';
         foreach ($languages as $key => $lang) {
           $languageCode = is_array($lang) ? $key : $lang;
           // check if value exisits

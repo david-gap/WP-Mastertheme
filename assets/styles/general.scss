@@ -161,10 +161,10 @@ body.frontend {
 }
 
 
-.editor-styles-wrapper *::before,
-.editor-styles-wrapper *::after,
-*::before,
-*::after {
+.edit-post-visual-editor .editor-styles-wrapper *::before,
+.edit-post-visual-editor .editor-styles-wrapper *::after,
+body.frontend *::before,
+body.frontend *::after {
   box-sizing: border-box!important;
   margin: 0;
   padding: 0;
@@ -173,8 +173,8 @@ body.frontend {
   background-size: contain;
   -webkit-tap-highlight-color: transparent;
 }
-.editor-styles-wrapper *,
-* {
+.edit-post-visual-editor .editor-styles-wrapper *,
+body.frontend * {
   box-sizing: border-box!important;
 }
 

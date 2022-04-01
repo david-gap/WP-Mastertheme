@@ -47,6 +47,7 @@ body.frontend,
         line-height: var(--mnav__lineheight);
         font-weight: var(--mnav__fontWeight);
         text-transform: var(--mnav__textTransform);
+        letter-spacing: var(--mnav__letterSpacing, 0);
         ul#menu_main {
           > li {
             > ul {
@@ -56,6 +57,7 @@ body.frontend,
                 line-height: var(--mnav__sub_lineheight);
                 font-weight: var(--mnav__sub_fontWeight);
                 text-transform: var(--mnav__sub_textTransform);
+                letter-spacing: var(--mnav__sub_letterSpacing, 0);
                 > ul {
                   > li {
                     font-family: var(--mnav__subSub_fontfamily, var(--mnav__sub_fontfamily));
@@ -63,6 +65,7 @@ body.frontend,
                     line-height: var(--mnav__subSub_lineheight, var(--mnav__sub_lineheight));
                     font-weight: var(--mnav__subSub_fontWeight, var(--mnav__sub_fontWeight));
                     text-transform: var(--mnav__subSub_textTransform, var(--mnav__sub_textTransform));
+                    letter-spacing: var(--mnav__subSub_letterSpacing, var(--mnav__sub_letterSpacing));
                   }
                 }
               }
@@ -133,7 +136,11 @@ body.frontend,
   font-weight: var(--html__fontweight);
 
   small {
-    font-size: var(--html__fontsize_small);
+    font-size: var(--html__fontsize_small, 70%);
+  }
+
+  sub, sup {
+    font-size: var(--html__fontsize_subsup, 80%);
   }
 
   // inputs
@@ -157,7 +164,8 @@ body.frontend,
   }
   input[type="checkbox"],
   input[type="radio"] {
-    + label {
+    + label,
+    + .wpcf7-list-item-label {
       font-size: var(--input__checkbox_fontSize, var(--input__fontSize, inherit));
       line-height: var(--input__checkbox_lineHeight, var(--input__lineHeight, inherit));
       font-weight: var(--input__checkbox_fontWeight, var(--input__fontWeight, inherit));
@@ -227,13 +235,14 @@ body.frontend,
   .block-accordion {
     .accordion-item {
       .accordion-label {
-        font-size: var(--block__accordion_label_fontsize);
-        font-weight: var(--block__accordion_label_fontweight);
-        line-height: var(--block__accordion_label_lineheight);
+        font-family: var(--block__accordion_label_fontfamily, inherit);
+        font-size: var(--block__accordion_label_fontsize, inherit);
+        font-weight: var(--block__accordion_label_fontweight, inherit);
+        line-height: var(--block__accordion_label_lineheight, inherit);
       }
       .accordion-content {
-        font-size: var(--block__accordion_content_fontsize);
-        line-height: var(--block__accordion_content_lineheight);
+        font-size: var(--block__accordion_content_fontsize, inherit);
+        line-height: var(--block__accordion_content_lineheight, inherit);
       }
     }
   }
@@ -256,14 +265,20 @@ body.frontend,
   /––––––––––––––––––––––––*/
   figure.wp-block-table {
     table {
+      font-family: var(--block__table_fontFamily, inherit);
+      font-size: var(--block__table_fontSize, inherit);
+      line-height: var(--block__table_lineHeight, inherit);
+      font-weight: var(--block__table_fontWeight, inherit);
+      text-transform: var(--block__table_textTransform, none);
+      letter-spacing: var(--block__table_letterSpacing, 0px);
       tr {
         th {
-          font-family: var(--block__table_fontFamily, inherit);
-          font-size: var(--block__table_fontSize, inherit);
-          line-height: var(--block__table_lineHeight, inherit);
-          font-weight: var(--block__table_fontWeight, inherit);
-          text-transform: var(--block__table_textTransform, none);
-          letter-spacing: var(--block__table_letterSpacing, 0px);
+          font-family: var(--block__tableHead_fontFamily, inherit);
+          font-size: var(--block__tableHead_fontSize, inherit);
+          line-height: var(--block__tableHead_lineHeight, inherit);
+          font-weight: var(--block__tableHead_fontWeight, inherit);
+          text-transform: var(--block__tableHead_textTransform, none);
+          letter-spacing: var(--block__tableHead_letterSpacing, 0px);
         }
       }
     }

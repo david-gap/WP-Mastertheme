@@ -214,6 +214,9 @@ body.frontend,
                   width: 100%;
                   height: auto;
                   max-width: 100%;
+                  line {
+                    stroke-width: var(--submenu__toggle_strokeWidth, 1px);
+                  }
                 }
               }
             }

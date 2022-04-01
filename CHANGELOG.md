@@ -1,5 +1,22 @@
 # CHANGELOG
 
+## 1.48.28 | 01.04.2022 <customizer options, clean blocks, security>
+* add class to improve page security
+* fix gutenberg scadule functionality
+* vimeo block privew video
+* clean blocks
+* fix javascript is_function function (remove jquery isFunction)
+* new php function to get clients ip address
+* fix get config translation function
+* fix filter breadcrumbs contained query
+* fix css body property check
+* fix footer menu custom css query
+* logo on scrolled
+* show on scroll functionality
+* extand customizer
+* fix backend styling bugs
+
+
 ## 1.47.28 | 25.02.2022 <breadcrumbs, customizer options>
 * Add breadcrumbs
 * Menu stretch option

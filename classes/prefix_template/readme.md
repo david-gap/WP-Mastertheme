@@ -1,4 +1,4 @@
-**Version 2.25.16** (25.02.2022)
+**Version 2.26.16** (01.04.2022)
 
 Custom class "template" with template parts and header / footer builder
 
@@ -26,6 +26,7 @@ Custom class "template" with template parts and header / footer builder
 * $template_header_logo_link: Logo link with wordpress fallback
 * $template_header_logo_d: desktop logo configuration
 * $template_header_logo_m: mobile logo configuration
+* $template_header_logo_svg: Insert SVG code as logo
 * $template_header_after: html code after header
 * $template_page_active: activate page options
 * $template_page_options: show/hide template elements

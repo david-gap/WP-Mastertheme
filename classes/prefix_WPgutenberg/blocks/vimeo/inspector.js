@@ -37,6 +37,7 @@ export default class Inspector extends Component {
     const {
       attributes: {
         videoID,
+        posterVideoID,
         videoAutoPlay,
         videoBackgroud,
         videoLoop,
@@ -62,6 +63,12 @@ export default class Inspector extends Component {
                 help={__("example: https://player.vimeo.com/video/xxxxxxxxx", "devTheme")}
                 value={videoID}
                 onChange={videoID => setAttributes({ videoID })}
+              />
+              <TextControl
+                label={__("Poster Video ID", "devTheme")}
+                help={__("example: https://player.vimeo.com/video/xxxxxxxxx", "devTheme")}
+                value={posterVideoID}
+                onChange={posterVideoID => setAttributes({ posterVideoID })}
               />
               <TextControl
                 label={__("Width", "devTheme")}

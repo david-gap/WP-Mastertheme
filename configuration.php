@@ -86,7 +86,7 @@ Table of Contents:
   function prefix_RunClassesInit(){
     global $additionalClasses;
     // basic classes
-    $basicClasses = array('core_BaseFunctions', 'core_WPadmin', 'core_Customizer', 'WPinit', 'template');
+    $basicClasses = array('core_BaseFunctions', 'core_WPadmin', 'core_Customizer', 'Security', 'WPinit', 'template');
     $runClasses = array_merge($basicClasses, $additionalClasses);
     // init classes
     foreach ($runClasses as $key => $class) {

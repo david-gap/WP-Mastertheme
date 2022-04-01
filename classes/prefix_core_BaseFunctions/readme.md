@@ -1,4 +1,4 @@
-**Version 2.14.8** (21.02.2022)
+**Version 2.15.7** (01.04.2022)
 
 Custom class "prefix_core_BaseFunctions" used as a library for useful functions
 
@@ -156,9 +156,14 @@ if(core_BaseFunctions::isMobileDevice()):
 endif;
 ```
 
-### CONFIGURATOR TRANSLATIONS
+### 1.18 CONFIGURATOR TRANSLATIONS
 ```php
 core_BaseFunctions::getConfigTranslation('key', 'default value');
+```
+
+### 1.19 GET CLIENT IP ADDRESS
+```php
+echo core_BaseFunctions::getClientIpAddress();
 ```
 
 

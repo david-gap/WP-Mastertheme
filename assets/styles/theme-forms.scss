@@ -49,17 +49,23 @@ body.frontend,
   input[type="radio"] {
     display: none;
     &:checked {
-      + label:before {
-        background-color: var(--input__checkbox_bg_checked);
+      + label,
+      + .wpcf7-list-item-label {
+        &:before {
+          background-color: var(--input__checkbox_bg_checked);
+        }
       }
     }
-    + label {
+    + label,
+    + .wpcf7-list-item-label {
       display: flex;
       flex-wrap: nowrap;
+      cursor: pointer;
       &:before {
         display: inline-block;
         content: "";
         border-width: var(--input__checkbox_border_width, 1px);
+        border-style: solid;
         min-width: var(--input__checkbox_width, 30px);
         height: var(--input__checkbox_width, 30px);
         margin-right: var(--input__checkbox_space, 5px);
@@ -67,7 +73,8 @@ body.frontend,
     }
   }
   input[type="radio"] {
-    + label {
+    + label,
+    + .wpcf7-list-item-label {
       &:before {
         border-radius: 50%;
       }
@@ -82,6 +89,18 @@ body.frontend,
     padding: var(--input__submit_padding, 8px 12px);
     appearance: none;
     cursor: pointer;
+  }
+
+  /* CF7 SUPPORT
+  /––––––––––––––––––––––––*/
+  .wpcf7 {
+    .wpcf7-checkbox {
+      display: block;
+    }
+    .wpcf7-list-item {
+      display: block;
+      margin: 0;
+    }
   }
 
 }

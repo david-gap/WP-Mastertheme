@@ -90,11 +90,15 @@ body.frontend,
   input[type="checkbox"],
   input[type="radio"] {
     &:checked {
-      + label:before {
-        background-color: var(--input__checkbox_bg_checked);
+      + label,
+      + .wpcf7-list-item-label {
+        &:before {
+          background-color: var(--input__checkbox_bg_checked);
+        }
       }
     }
-    + label {
+    + label,
+    + .wpcf7-list-item-label {
       &:before {
         background-color: var(--input__checkbox_bg);
         border-color: var(--input__checkbox_border_color);
@@ -344,8 +348,10 @@ body.frontend,
 
     /* 2.7 LOADING
     /––––––––––––––––––––––––*/
-    .loading:before {
-      color: var(--light__main_color);
+    .loading {
+      &:before {
+        color: var(--light__main_color);
+      }
     }
 
     /* 2.8 VIMEO TABLE OF CONTENT
@@ -366,8 +372,10 @@ body.frontend,
       color: var(--light__gbSeperator_color);
     }
     // list
-    ul.is-style-default li:before {
-      color: var(--light__gbList_marker_color);
+    ul.is-style-default li {
+      &:before {
+        color: var(--light__gbList_marker_color);
+      }
     }
 
 
@@ -459,8 +467,10 @@ body.frontend,
 
     /* 3.7 LOADING
     /––––––––––––––––––––––––*/
-    .loading:before {
-      color: var(--dark__main_color);
+    .loading {
+      &:before {
+        color: var(--dark__main_color);
+      }
     }
 
     /* 3.8 VIMEO TABLE OF CONTENT
@@ -480,8 +490,10 @@ body.frontend,
       color: var(--dark__gbSeperator_color);
     }
     // list
-    ul.is-style-default li:before {
-      color: var(--dark__gbList_marker_color);
+    ul.is-style-default li {
+      &:before {
+        color: var(--dark__gbList_marker_color);
+      }
     }
 
 

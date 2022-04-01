@@ -69,7 +69,11 @@ let uniqueID = () => {
 /* Check if function exists
 /------------------------*/
 function is_function(func) {
-  return typeof window[func] !== 'undefined' && $.isFunction(window[func]);
+  if (typeof func !== 'undefined') {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 
@@ -189,6 +193,48 @@ function ajaxCall(getdata) {
         eval(results.action + '(' + this.response + ')');
       } else {
         // DEBUG: console.log("Action not defined in ajax function");
+      }
+      // download file
+      if(results.file){
+        // check for requiredproperties
+        if(results.file.hasOwnProperty("name") && results.file.hasOwnProperty("type") && results.file.hasOwnProperty("data")){
+          var fileData = '';
+          if(results.file.type == 'csv'){
+            var separator = ',',
+                hrefData = 'text/csv';
+            // change column seperation
+            if(results.file.hasOwnProperty("separator")){
+              var separator = results.file.separator;
+            }
+            // build file content
+            if(Array.isArray(results.file.data)){
+              results.file.data.forEach(function(row){
+                fileData += row.join(separator);
+                fileData += "\n";
+              });
+            } else {
+              console.log("file download: content is not a array");
+            }
+          } else {
+            console.log("file download: given type " + results.file.type + " is not supported");
+          }
+          if(results.file.hasOwnProperty("name") && fileData !== ''){
+            if(results.file.hasOwnProperty("charset")){
+              var charset = results.file.charset;
+            } else {
+              var charset = "utf-8";
+            }
+            if(results.file.hasOwnProperty("hrefData")){
+              var hrefData = results.file.hrefData;
+            }
+            // trigger download
+            var hiddenElement = document.createElement('a');
+            hiddenElement.href = 'data:' + hrefData + ';charset=' + charset + ',' + encodeURI(fileData);
+            hiddenElement.target = '_blank';
+            hiddenElement.download = results.file.name;
+            hiddenElement.click();
+          }
+        }
       }
       // rerun event listeners
       runEventListeners();
@@ -317,15 +363,34 @@ if(mainMenu) {
 }
 
 
-/* Close Menu if click outside of menu
+/* close active elements
 /------------------------*/
-function closeHamburgerMenu(e){
+function closeActiveElement(e){
   const target = e.target;
+  // main menu
   if (target.closest("#menu-main-container") == null && target.closest(".hamburger") == null && target.closest(".menu-title") == null && body.classList.contains('active-menu')) {
     MenuToggler();
   }
+  // vimeo block previews
+  if (target.closest(".block-vimeo") == null) {
+    var vimeoPreviews = document.querySelectorAll('.block-vimeo > .video-container.video-preview');
+    if(vimeoPreviews.length !== 0){
+      Array.from(vimeoPreviews).forEach(function(video) {
+        video.classList.remove("active");
+        // get settings
+        let container = video.closest('.block-vimeo'),
+            iframe = container.querySelector('.vimeo-video'),
+            player = new Vimeo.Player(iframe),
+            videoAutoplay = container.getAttribute('data-autoplay');
+        // play if autoplay is true
+        if(videoAutoplay == "true"){
+          player.pause();
+        }
+      });
+    }
+  }
 }
-document.addEventListener('click', closeHamburgerMenu);
+document.addEventListener('click', closeActiveElement);
 
 
 /* Scroll to top
@@ -390,6 +455,18 @@ function getDataAttributes(element) {
 /------------------------*/
 function toggleBlock(){
   this.classList.toggle("active");
+  // video preview - autoplay
+  if (this.classList.contains("video-container")) {
+    // get settings
+    let container = this.closest('.block-vimeo'),
+        iframe = container.querySelector('.vimeo-video'),
+        player = new Vimeo.Player(iframe),
+        videoAutoplay = container.getAttribute('data-autoplay');
+    // play if autoplay is true
+    if(videoAutoplay == "true"){
+      player.play();
+    }
+  }
 }
 
 
@@ -825,6 +902,17 @@ function runEventListeners(){
       },0);
     };
     document.addEventListener('click', checkOverlayContainers);
+  }
+
+  /* close preview video
+  /------------------------*/
+  var vimeoPreviews = document.querySelectorAll('.block-vimeo > .video-container.video-preview');
+  if(vimeoPreviews.length !== 0){
+    // click to toggle
+    Array.from(vimeoPreviews).forEach(function(video) {
+      video.addEventListener('click', toggleBlock);
+      video.addEventListener('keypress', toggleBlock);
+    });
   }
 
 }

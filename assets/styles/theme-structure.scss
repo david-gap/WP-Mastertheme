@@ -73,6 +73,9 @@ body.frontend,
   /*==================================================================================
   2.0 HEADER
   ==================================================================================*/
+  .show-on-scrolled {
+    display: none;
+  }
   &.scrolled {
     > header {
       nav {
@@ -80,7 +83,18 @@ body.frontend,
             padding-top: var(--header__paddingTop_sticky);
             padding-bottom: var(--header__paddingBottom_sticky);
         }
+        .logo {
+          img {
+            display: none;
+            &.show-on-scrolled {
+              display: initial;
+            }
+          }
+        }
       }
+    }
+    .show-on-scrolled {
+      display: initial;
     }
   }
   > header {
@@ -222,7 +236,8 @@ body.frontend,
       & > .block-accordion .accordion-content img,
       & > .block-accordion .accordion-content figure,
       & > .block-posts,
-      & > #search-form {
+      & > #search-form,
+      & > .wpcf7 .wpcf7-form p {
         margin-top: 0;
         margin-bottom: var(--content__space, 30px);
         &:last-child {

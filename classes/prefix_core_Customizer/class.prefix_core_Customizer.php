@@ -4,7 +4,7 @@
  *
  * Customizer extension
  * Author:      David Voglgsnag
- * @version     1.1
+ * @version     1.2
  *
  */
 
@@ -164,6 +164,11 @@ class prefix_core_Customizer {
               'label' => 'Small text size',
               'type' => 'input',
               'default' => '70%'
+            ),
+            'html__fontsize_subsup' => array(
+              'label' => 'sub/sup text size',
+              'type' => 'input',
+              'default' => '80%'
             )
           )
         ),
@@ -188,6 +193,14 @@ class prefix_core_Customizer {
               'label' => 'Gutenberg font scaling',
               'type' => 'input',
               'default' => '.55'
+            ),
+            'html__fontsize_small_mobile' => array(
+              'label' => 'Small text size',
+              'type' => 'input'
+            ),
+            'html__fontsize_subsup_mobile' => array(
+              'label' => 'sub/sup text size',
+              'type' => 'input'
             )
           )
         ),
@@ -277,6 +290,11 @@ class prefix_core_Customizer {
               'type' => 'input',
               'default' => '25px'
             ),
+            'submenu__toggle_strokeWidth' => array(
+              'label' => 'Toggle arrow stroke width',
+              'type' => 'input',
+              'default' => '1px'
+            ),
             'submenu__toggle_padding' => array(
               'label' => 'Toggle arrow container padding',
               'type' => 'input',
@@ -284,6 +302,10 @@ class prefix_core_Customizer {
             ),
             'submenu__toggle_width_mobile' => array(
               'label' => 'Toggle arrow container width (mobile)',
+              'type' => 'input'
+            ),
+            'submenu__toggle_strokeWidth_mobile' => array(
+              'label' => 'Toggle arrow stroke width (mobile)',
               'type' => 'input'
             ),
             'submenu__toggle_padding_mobile' => array(
@@ -364,6 +386,11 @@ class prefix_core_Customizer {
               'label' => 'Text transform',
               'type' => 'input',
               'default' => 'uppercase'
+            ),
+            'mnav__letterSpacing' => array(
+              'label' => 'Letter spacing',
+              'type' => 'input',
+              'default' => '0'
             ),
             'mnav__fontsize_mobile' => array(
               'label' => 'Font size (mobile)',
@@ -458,6 +485,10 @@ class prefix_core_Customizer {
               'type' => 'input',
               'default' => 'none'
             ),
+            'mnav__sub_letterSpacing' => array(
+              'label' => 'Letter spacing',
+              'type' => 'input'
+            ),
             'mnav__sub_fontsize_mobile' => array(
               'label' => 'Submenu font size (mobile)',
               'type' => 'input'
@@ -543,6 +574,10 @@ class prefix_core_Customizer {
             ),
             'mnav__subSub_textTransform' => array(
               'label' => 'Subsubmenu text transform',
+              'type' => 'input'
+            ),
+            'mnav__subSub_letterSpacing' => array(
+              'label' => 'Letter spacing',
               'type' => 'input'
             ),
             'mnav__subSub_fontsize_mobile' => array(
@@ -1392,40 +1427,76 @@ class prefix_core_Customizer {
         'gutenberg_table' => array(
           'label' => 'Table',
           'inputs' => array(
-            'block__table_fontFamily' => array(
+            'block__tableHead_fontFamily' => array(
               'label' => 'Head font family',
               'type' => 'input'
             ),
-            'block__table_fontSize' => array(
+            'block__tableHead_fontSize' => array(
               'label' => 'Head font size',
               'type' => 'input'
             ),
-            'block__table_lineHeight' => array(
+            'block__tableHead_lineHeight' => array(
               'label' => 'Head line height',
               'type' => 'input'
             ),
-            'block__table_fontWeight' => array(
+            'block__tableHead_fontWeight' => array(
               'label' => 'Head font weight',
               'type' => 'input'
             ),
-            'block__table_textTransform' => array(
+            'block__tableHead_textTransform' => array(
               'label' => 'Head text transform',
               'type' => 'input'
             ),
-            'block__table_letterSpacing' => array(
+            'block__tableHead_letterSpacing' => array(
               'label' => 'Head letter spacing',
               'type' => 'input'
             ),
-            'block__table_fontSize_mobile' => array(
+            'block__tableHead_fontSize_mobile' => array(
               'label' => 'Head font size (mobile)',
               'type' => 'input'
             ),
-            'block__table_lineHeight_mobile' => array(
+            'block__tableHead_lineHeight_mobile' => array(
               'label' => 'Head line height (mobile)',
               'type' => 'input'
             ),
-            'block__table_letterSpacing_mobile' => array(
+            'block__tableHead_letterSpacing_mobile' => array(
               'label' => 'Head letter spacing (mobile)',
+              'type' => 'input'
+            ),
+            'block__table_fontFamily' => array(
+              'label' => 'font family',
+              'type' => 'input'
+            ),
+            'block__table_fontSize' => array(
+              'label' => 'font size',
+              'type' => 'input'
+            ),
+            'block__table_lineHeight' => array(
+              'label' => 'line height',
+              'type' => 'input'
+            ),
+            'block__table_fontWeight' => array(
+              'label' => 'font weight',
+              'type' => 'input'
+            ),
+            'block__table_textTransform' => array(
+              'label' => 'text transform',
+              'type' => 'input'
+            ),
+            'block__table_letterSpacing' => array(
+              'label' => 'letter spacing',
+              'type' => 'input'
+            ),
+            'block__table_fontSize_mobile' => array(
+              'label' => 'font size (mobile)',
+              'type' => 'input'
+            ),
+            'block__table_lineHeight_mobile' => array(
+              'label' => 'line height (mobile)',
+              'type' => 'input'
+            ),
+            'block__table_letterSpacing_mobile' => array(
+              'label' => 'letter spacing (mobile)',
               'type' => 'input'
             )
           )
@@ -1452,6 +1523,11 @@ class prefix_core_Customizer {
               'label' => 'Space inside label',
               'type' => 'input',
               'default' => '20px 10px'
+            ),
+            'block__accordion_label_fontfamily' => array(
+              'label' => 'Label font family',
+              'type' => 'input',
+              'default' => 'inherit'
             ),
             'block__accordion_label_fontsize' => array(
               'label' => 'Label font-size',
@@ -1500,6 +1576,14 @@ class prefix_core_Customizer {
               'label' => 'Placeholder between text and icon',
               'type' => 'input',
               'default' => '20px'
+            ),
+            'block__accordion_icon_width_mobile' => array(
+              'label' => 'Iconbox width (mobile)',
+              'type' => 'input'
+            ),
+            'block__accordion_icon_height_mobile' => array(
+              'label' => 'Iconbox height (mobile)',
+              'type' => 'input'
             ),
             'block__accordion_label_arrow' => array(
               'label' => 'Plus sign color',
