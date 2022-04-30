@@ -2,7 +2,7 @@
  * All template base javascript functions
  *
  * @author      David Voglgsang
- * @version     1.2
+ * @version     1.3
  *
  */
 
@@ -249,6 +249,25 @@ function ajaxCall(getdata) {
 }
 
 
+/* get element style
+Example:
+var element = document.querySelector('div.target');
+var marginRight = getStyle(element, 'margin-right');
+/------------------------*/
+var getStyle = function(e, styleName) {
+  var styleValue = "";
+  if (document.defaultView && document.defaultView.getComputedStyle) {
+    styleValue = document.defaultView.getComputedStyle(e, "").getPropertyValue(styleName);
+  } else if (e.currentStyle) {
+    styleName = styleName.replace(/\-(\w)/g, function(strMatch, p1) {
+      return p1.toUpperCase();
+    });
+    styleValue = e.currentStyle[styleName];
+  }
+  return styleValue;
+}
+
+
 
 /*==================================================================================
  THEME FUNCTIONS
@@ -407,6 +426,57 @@ if(scrollToTopButtons.length !== 0){
 }
 
 
+/* List all data attributes
+/------------------------*/
+function getDataAttributes(element) {
+    var data = {};
+    [].forEach.call(element.attributes, function(attr) {
+        if (/^data-/.test(attr.name)) {
+            var camelCaseName = attr.name.substr(5).replace(/-(.)/g, function ($0, $1) {
+                return $1.toUpperCase();
+            });
+            data[camelCaseName] = attr.value;
+        }
+    });
+    return data;
+}
+
+
+/* Load content after consent
+/------------------------*/
+function consentGiven(e) {
+  // get clicked element
+  var e = e || window.event,
+      cookie = e.target.getAttribute('data-cookie'),
+      reload = e.target.getAttribute('data-reload'),
+      affectedEl = document.querySelectorAll('[data-cookie="' + cookie + '"]');
+  // update cookie
+  document.cookie = cookie + "=yes; path=/";
+  // load content
+  if(reload == 1){
+    location.reload();
+  } else {
+    if(affectedEl.length !== 0){
+      Array.from(affectedEl).forEach(function(element) {
+        // get embed value
+        var embed = element.getAttribute('data-embed');
+        embed.replaceAll('&amp;', '&');
+        embed.replaceAll('&lt;', '<');
+        embed.replaceAll('&gt;', '>');
+        embed.replaceAll('&quot;', '"');
+        // create new element and insert embed code
+        var temp = document.createElement('div');
+        temp.innerHTML = embed;
+        // apply code
+        var toInsert = temp.querySelector(':first-child');
+        element.closest('.consent-request').replaceWith(toInsert);
+      });
+      runEventListeners();
+    }
+  }
+}
+
+
 /* Action Links
 /------------------------*/
 // example: <span class="funcCall" data-ajax-action="true" data-action="DEMO" data-id="page">DEMO</span>
@@ -427,22 +497,6 @@ function funcCall(){
     // run function
     eval(get_action + '()');
   }
-}
-
-
-/* List all data attributes
-/------------------------*/
-function getDataAttributes(element) {
-    var data = {};
-    [].forEach.call(element.attributes, function(attr) {
-        if (/^data-/.test(attr.name)) {
-            var camelCaseName = attr.name.substr(5).replace(/-(.)/g, function ($0, $1) {
-                return $1.toUpperCase();
-            });
-            data[camelCaseName] = attr.value;
-        }
-    });
-    return data;
 }
 
 

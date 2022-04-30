@@ -113,10 +113,12 @@ function WPgutenberg_posts_ContentRow($value, $id){
 }
 
 // post builder
-function WPgutenberg_posts_PostBuilder(array $attr, $id){
+function WPgutenberg_posts_PostBuilder(array $attr, $id, $currentId){
+
+  $addClass = $currentId === $id ? ' class="current-item"' : '';
 
   $output = '';
-  $output .= '<li data-id="' . $id . '">';
+  $output .= '<li data-id="' . $id . '"' . $addClass . '>';
     $get_url = get_post_meta($id, 'BlockUrl', true) ? get_post_meta($id, 'BlockUrl', true) : get_the_permalink($id);
     $linkOpen = $get_url && $get_url !== '' ? '<a href="' . $get_url . '">' : '';
     $linkClose = $get_url && $get_url !== '' ? '</a>' : '';
@@ -273,6 +275,10 @@ function WPgutenberg_posts_getResultsAndSort(array $attr, string $source = 'firs
     // apply filter to resulted ids
     $allPosts = apply_filters( 'WPgutenberg_filter_posts_results', $allPosts, $attr );
 
+    // current page
+    $obj = get_queried_object();
+    $currentId = $obj && property_exists($obj, 'ID') ? $obj->ID : 0;
+
     if($terms):
       // sort query by taxonomy
       $termsGroup = array();
@@ -305,16 +311,15 @@ function WPgutenberg_posts_getResultsAndSort(array $attr, string $source = 'firs
         if(is_array($termgroup) && !empty($termgroup)):
           foreach ($termgroup as $idkey => $id) {
             // taxonomy is not empty
-            $output .= WPgutenberg_posts_PostBuilder($attr, $id);
+            $output .= WPgutenberg_posts_PostBuilder($attr, $id, $currentId);
           }
         endif;
       }
     else:
       foreach ($allPosts as $key => $postID) {
-        $output .= WPgutenberg_posts_PostBuilder($attr, $postID);
+        $output .= WPgutenberg_posts_PostBuilder($attr, $postID, $currentId);
       }
     endif;
-
 
     // grid fixer
     // if(array_key_exists('postSwiper', $attr) && $attr['postSwiper'] !== true && array_key_exists('postColumns', $attr) && $attr['postColumns'] > 1):

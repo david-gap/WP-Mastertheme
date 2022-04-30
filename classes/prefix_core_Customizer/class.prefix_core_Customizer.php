@@ -15,6 +15,7 @@
    1.1 CONFIGURATION
    1.2 ON LOAD RUN
    1.3 EXTEND CUSTOMIZER
+   1.4 THEME MOD UPDATE
  2.0 FUNCTIONS
    2.1 ENQUEUE SCRIPTS/STYLES
    2.2 GENERATE THE CUSTOMIZER FILE
@@ -105,23 +106,23 @@ class prefix_core_Customizer {
               'type' => 'color',
               'default' => '#89c0ff'
             ),
-            'light__main_color' => array(
+            'main_color' => array(
               'label' => 'Font color',
               'type' => 'color',
               'default' => '#343434'
             ),
-            'light__main_background' => array(
+            'main_background' => array(
               'label' => 'Background color',
               'type' => 'color',
               'default' => '#f9f9f9'
             ),
             'dark__main_background' => array(
-              'label' => 'Background color (dark mode)',
+              'label' => 'Background color',
               'type' => 'color',
               'default' => '#1d1e1f'
             ),
             'dark__main_color' => array(
-              'label' => 'Font color (dark mode)',
+              'label' => 'Font color',
               'type' => 'color',
               'default' => '#c7cacc'
             ),
@@ -142,33 +143,27 @@ class prefix_core_Customizer {
           'inputs' => array(
             'html__fontfamily' => array(
               'label' => 'Main font family',
-              'type' => 'input',
-              'default' => 'sans-serif'
+              'type' => 'input'
             ),
             'html__fontsize' => array(
               'label' => 'Main font size',
-              'type' => 'input',
-              'default' => '12px'
+              'type' => 'input'
             ),
             'html__lineheight' => array(
               'label' => 'Main line height',
-              'type' => 'input',
-              'default' => '1.4'
+              'type' => 'input'
             ),
             'html__fontweight' => array(
               'label' => 'Main font weight',
-              'type' => 'input',
-              'default' => '400'
+              'type' => 'input'
             ),
             'html__fontsize_small' => array(
               'label' => 'Small text size',
-              'type' => 'input',
-              'default' => '70%'
+              'type' => 'input'
             ),
             'html__fontsize_subsup' => array(
               'label' => 'sub/sup text size',
-              'type' => 'input',
-              'default' => '80%'
+              'type' => 'input'
             )
           )
         ),
@@ -181,13 +176,11 @@ class prefix_core_Customizer {
             ),
             'html__fontsize_mobile' => array(
               'label' => 'Main font size',
-              'type' => 'input',
-              'default' => '14px'
+              'type' => 'input'
             ),
             'html__lineheight_mobile' => array(
               'label' => 'Main line height',
-              'type' => 'input',
-              'default' => '1.3'
+              'type' => 'input'
             ),
             'gutenberg__font_scale' => array(
               'label' => 'Gutenberg font scaling',
@@ -232,25 +225,25 @@ class prefix_core_Customizer {
         'header_coloring' => array(
           'label' => 'Colors',
           'inputs' => array(
-            'light__header_background' => array(
+            'header_background' => array(
               'label' => 'Header background color',
               'type' => 'color',
               'default' => '#f9f9f9'
             ),
-            'light__headercontainer_background' => array(
+            'headercontainer_background' => array(
               'label' => 'Header container background color',
               'type' => 'color',
-              'default' => '#f9f9f9'
+              'default' => 'transparent'
             ),
             'dark__header_background' => array(
-              'label' => 'Header background (dark mode)',
+              'label' => 'Header background',
               'type' => 'color',
               'default' => '#1d1e1f'
             ),
             'dark__headercontainer_background' => array(
-              'label' => 'header container background (dark mode)',
+              'label' => 'header container background',
               'type' => 'color',
-              'default' => '#1d1e1f'
+              'default' => 'transparent'
             )
           )
         ),
@@ -259,57 +252,50 @@ class prefix_core_Customizer {
           'inputs' => array(
             'mnav__ul_paddingTop' => array(
               'label' => 'Padding top',
-              'type' => 'input',
-              'default' => '20px'
+              'type' => 'input'
             ),
             'mnav__ul_paddingBottom' => array(
               'label' => 'Padding bottom',
-              'type' => 'input',
-              'default' => '80px'
+              'type' => 'input'
             ),
             'mnav__ul_paddingTop_mobile' => array(
-              'label' => 'Padding top (mobile)',
-              'type' => 'input',
-              'default' => '20px'
+              'label' => 'Padding top',
+              'type' => 'input'
             ),
             'mnav__ul_paddingBottom_mobile' => array(
-              'label' => 'Padding bottom (mobile)',
-              'type' => 'input',
-              'default' => '80px'
+              'label' => 'Padding bottom',
+              'type' => 'input'
             ),
             'mnav__ul_lastChild_marginBottom' => array(
               'label' => 'Last child margin bottom',
               'type' => 'input'
             ),
             'mnav__ul_lastChild_marginBottom_mobile' => array(
-              'label' => 'Last child margin bottom (mobile)',
+              'label' => 'Last child margin bottom',
               'type' => 'input'
             ),
             'submenu__toggle_width' => array(
               'label' => 'Toggle arrow container width',
-              'type' => 'input',
-              'default' => '25px'
+              'type' => 'input'
             ),
             'submenu__toggle_strokeWidth' => array(
               'label' => 'Toggle arrow stroke width',
-              'type' => 'input',
-              'default' => '1px'
+              'type' => 'input'
             ),
             'submenu__toggle_padding' => array(
               'label' => 'Toggle arrow container padding',
-              'type' => 'input',
-              'default' => '0px'
+              'type' => 'input'
             ),
             'submenu__toggle_width_mobile' => array(
-              'label' => 'Toggle arrow container width (mobile)',
+              'label' => 'Toggle arrow container width',
               'type' => 'input'
             ),
             'submenu__toggle_strokeWidth_mobile' => array(
-              'label' => 'Toggle arrow stroke width (mobile)',
+              'label' => 'Toggle arrow stroke width',
               'type' => 'input'
             ),
             'submenu__toggle_padding_mobile' => array(
-              'label' => 'Toggle arrow container padding (mobile)',
+              'label' => 'Toggle arrow container padding',
               'type' => 'input'
             ),
             'mnav__color' => array(
@@ -349,65 +335,54 @@ class prefix_core_Customizer {
             ),
             'mnav__border_width' => array(
               'label' => 'Border width',
-              'type' => 'input',
-              'default' => '0'
+              'type' => 'input'
             ),
             'mnav__padding' => array(
               'label' => 'Padding',
-              'type' => 'input',
-              'default' => '0px'
+              'type' => 'input'
             ),
             'mnav__margin' => array(
               'label' => 'Margin',
-              'type' => 'input',
-              'default' => '0px'
+              'type' => 'input'
             ),
             'mnav__fontfamily' => array(
               'label' => 'Font family',
-              'type' => 'input',
-              'default' => 'inherit'
+              'type' => 'input'
             ),
             'mnav__fontsize' => array(
               'label' => 'Font size',
-              'type' => 'input',
-              'default' => '100%'
+              'type' => 'input'
             ),
             'mnav__fontWeight' => array(
               'label' => 'Font weight',
-              'type' => 'input',
-              'default' => '700'
+              'type' => 'input'
             ),
             'mnav__lineheight' => array(
               'label' => 'Line height',
-              'type' => 'input',
-              'default' => '1.4'
+              'type' => 'input'
             ),
             'mnav__textTransform' => array(
               'label' => 'Text transform',
-              'type' => 'input',
-              'default' => 'uppercase'
+              'type' => 'input'
             ),
             'mnav__letterSpacing' => array(
               'label' => 'Letter spacing',
-              'type' => 'input',
-              'default' => '0'
+              'type' => 'input'
             ),
             'mnav__fontsize_mobile' => array(
-              'label' => 'Font size (mobile)',
-              'type' => 'input',
-              'default' => '120%'
+              'label' => 'Font size',
+              'type' => 'input'
             ),
             'mnav__lineheight_mobile' => array(
-              'label' => 'Line height (mobile)',
-              'type' => 'input',
-              'default' => '1.3'
+              'label' => 'Line height',
+              'type' => 'input'
             ),
             'mnav__padding_mobile' => array(
-              'label' => 'Padding (mobile)',
+              'label' => 'Padding',
               'type' => 'input'
             ),
             'mnav__margin_mobile' => array(
-              'label' => 'Margin (mobile)',
+              'label' => 'Margin',
               'type' => 'input'
             ),
             'mnav__sub_color' => array(
@@ -447,62 +422,54 @@ class prefix_core_Customizer {
             ),
             'mnav__sub_border_width' => array(
               'label' => 'Submenu border width',
-              'type' => 'input',
-              'default' => '0'
+              'type' => 'input'
             ),
             'mnav__sub_padding' => array(
               'label' => 'Submenu padding',
-              'type' => 'input',
-              'default' => '0px'
+              'type' => 'input'
             ),
             'mnav__sub_margin' => array(
               'label' => 'Submenu margin',
-              'type' => 'input',
-              'default' => '0px'
+              'type' => 'input'
             ),
             'mnav__sub_fontfamily' => array(
               'label' => 'Submenu font family',
-              'type' => 'input',
-              'default' => 'inherit'
+              'type' => 'input'
             ),
             'mnav__sub_fontsize' => array(
               'label' => 'Submenu font size',
-              'type' => 'input',
-              'default' => '80%'
-            ),
-            'mnav__sub_fontWeight' => array(
-              'label' => 'Submenu font weight',
-              'type' => 'input',
-              'default' => '500'
+              'type' => 'input'
             ),
             'mnav__sub_lineheight' => array(
               'label' => 'Submenu line height',
-              'type' => 'input',
-              'default' => 'inherit'
+              'type' => 'input'
+            ),
+            'mnav__sub_fontWeight' => array(
+              'label' => 'Submenu font weight',
+              'type' => 'input'
             ),
             'mnav__sub_textTransform' => array(
               'label' => 'Submenu text transform',
-              'type' => 'input',
-              'default' => 'none'
+              'type' => 'input'
             ),
             'mnav__sub_letterSpacing' => array(
               'label' => 'Letter spacing',
               'type' => 'input'
             ),
             'mnav__sub_fontsize_mobile' => array(
-              'label' => 'Submenu font size (mobile)',
+              'label' => 'Submenu font size',
               'type' => 'input'
             ),
             'mnav__sub_lineheight_mobile' => array(
-              'label' => 'Submenu line height (mobile)',
+              'label' => 'Submenu line height',
               'type' => 'input'
             ),
             'mnav__sub_padding_mobile' => array(
-              'label' => 'Submenu padding (mobile)',
+              'label' => 'Submenu padding',
               'type' => 'input'
             ),
             'mnav__sub_margin_mobile' => array(
-              'label' => 'Submenu margin (mobile)',
+              'label' => 'Submenu margin',
               'type' => 'input'
             ),
             'mnav__subSub_color' => array(
@@ -542,23 +509,19 @@ class prefix_core_Customizer {
             ),
             'mnav__subSub_border_width' => array(
               'label' => 'Subsubmenu border width',
-              'type' => 'input',
-              'default' => '0'
+              'type' => 'input'
             ),
             'mnav__subSub_padding' => array(
               'label' => 'Subsubmenu padding',
-              'type' => 'input',
-              'default' => '0px'
+              'type' => 'input'
             ),
             'mnav__subSub_margin' => array(
               'label' => 'Subsubmenu margin',
-              'type' => 'input',
-              'default' => '0px'
+              'type' => 'input'
             ),
             'mnav__subSub_fontfamily' => array(
               'label' => 'Subsubmenu font family',
-              'type' => 'input',
-              'default' => 'inherit'
+              'type' => 'input'
             ),
             'mnav__subSub_fontsize' => array(
               'label' => 'Subsubmenu font size',
@@ -581,19 +544,19 @@ class prefix_core_Customizer {
               'type' => 'input'
             ),
             'mnav__subSub_fontsize_mobile' => array(
-              'label' => 'Subsubmenu font size (mobile)',
+              'label' => 'Subsubmenu font size',
               'type' => 'input'
             ),
             'mnav__subSub_lineheight_mobile' => array(
-              'label' => 'Subsubmenu line height (mobile)',
+              'label' => 'Subsubmenu line height',
               'type' => 'input'
             ),
             'mnav__subSub_padding_mobile' => array(
-              'label' => 'Subsubmenu padding (mobile)',
+              'label' => 'Subsubmenu padding',
               'type' => 'input'
             ),
             'mnav__subSub_margin_mobile' => array(
-              'label' => 'Subsubmenu margin (mobile)',
+              'label' => 'Subsubmenu margin',
               'type' => 'input'
             )
           )
@@ -603,70 +566,62 @@ class prefix_core_Customizer {
           'inputs' => array(
             'hamburger__container_width' => array(
               'label' => 'Width',
-              'type' => 'input',
-              'default' => '40px'
+              'type' => 'input'
             ),
             'hamburger__container_height' => array(
               'label' => 'Height',
-              'type' => 'input',
-              'default' => '40px'
+              'type' => 'input'
             ),
             'hamburger__size' => array(
               'label' => 'Size',
-              'type' => 'input',
-              'default' => '4px'
+              'type' => 'input'
             ),
-            'light__hamburger_color' => array(
+            'hamburger_color' => array(
               'label' => 'Hamburger color',
               'type' => 'color',
               'default' => '#000'
             ),
-            'light__mnav_background' => array(
+            'mnav_background' => array(
               'label' => 'Hamburger navigation background color',
               'type' => 'color',
               'default' => '#f9f9f9'
             ),
             'dark__hamburger_color' => array(
-              'label' => 'Hamburger color (dark mode)',
+              'label' => 'Hamburger color',
               'type' => 'color',
               'default' => '#fff'
             ),
             'dark__mnav_background' => array(
-              'label' => 'Hamburger navigation background color (dark mode)',
+              'label' => 'Hamburger navigation background color',
               'type' => 'color',
               'default' => '#1d1e1f'
             ),
             'content__blur_activemenu' => array(
               'label' => 'Blur Content while hamburger navigation is open',
-              'type' => 'input',
-              'default' => '0px'
+              'type' => 'input'
             ),
             'hamburger__title_space' => array(
               'label' => 'Title spacing',
-              'type' => 'input',
-              'default' => '0 0 0 10px'
+              'type' => 'input'
             ),
             'hamburger__title_fontSize' => array(
               'label' => 'Title font size',
-              'type' => 'input',
-              'default' => 'inherit'
+              'type' => 'input'
             ),
             'hamburger__title_LineHeight' => array(
               'label' => 'Title line height',
-              'type' => 'input',
-              'default' => 'inherit'
+              'type' => 'input'
             ),
             'hamburger__title_fontWeight' => array(
               'label' => 'Title spacing',
-              'type' => 'input',
-              'default' => 'inherit'
+              'type' => 'input'
             ),
             'hamburger__container_width_mobile' => array(
-              'label' => 'Width (mobile)',
+              'label' => 'Width',
               'type' => 'input'
             ),
             'hamburger__container_height_mobile' => array(
-              'label' => 'Height (mobile)',
+              'label' => 'Height',
               'type' => 'input'
             )
           )
@@ -676,20 +631,18 @@ class prefix_core_Customizer {
           'inputs' => array(
             'header__paddingTop' => array(
               'label' => 'Container padding top',
-              'type' => 'input',
-              'default' => '10px'
+              'type' => 'input'
             ),
             'header__paddingBottom' => array(
               'label' => 'Container padding bottom',
-              'type' => 'input',
-              'default' => '10px'
+              'type' => 'input'
             ),
             'header__paddingTop_sticky' => array(
-              'label' => 'Container padding top (sticky)',
+              'label' => 'Container padding top',
               'type' => 'input'
             ),
             'header__paddingBottom_sticky' => array(
-              'label' => 'Container padding bottom (sticky)',
+              'label' => 'Container padding bottom',
               'type' => 'input'
             ),
             'header__itemSpacingHorizontal' => array(
@@ -710,11 +663,11 @@ class prefix_core_Customizer {
               'type' => 'input'
             ),
             'header__paddingTop_sticky_mobile' => array(
-              'label' => 'Container padding top (sticky)',
+              'label' => 'Container padding top',
               'type' => 'input'
             ),
             'header__paddingBottom_sticky_mobile' => array(
-              'label' => 'Container padding bottom (sticky)',
+              'label' => 'Container padding bottom',
               'type' => 'input'
             ),
             'header__itemSpacingHorizontal_mobile' => array(
@@ -733,8 +686,7 @@ class prefix_core_Customizer {
           'inputs' => array(
             'content__space' => array(
               'label' => 'Content spacing',
-              'type' => 'input',
-              'default' => '20px'
+              'type' => 'input'
             ),
             'html__anchor' => array(
               'label' => 'Anchor position',
@@ -748,8 +700,7 @@ class prefix_core_Customizer {
           'inputs' => array(
             'content__space_mobile' => array(
               'label' => 'Content spacing',
-              'type' => 'input',
-              'default' => '20px'
+              'type' => 'input'
             ),
             'html__anchor_mobile' => array(
               'label' => 'Anchor position',
@@ -788,44 +739,38 @@ class prefix_core_Customizer {
             ),
             'bc__padding' => array(
               'label' => 'Padding',
-              'type' => 'input',
-              'default' => '20px 0'
+              'type' => 'input'
             ),
             'bc__fontfamily' => array(
               'label' => 'Font family',
-              'type' => 'input',
-              'default' => 'inherit'
+              'type' => 'input'
             ),
             'bc__fontsize' => array(
               'label' => 'Font size',
-              'type' => 'input',
-              'default' => '100%'
+              'type' => 'input'
             ),
             'bc__fontWeight' => array(
               'label' => 'Font weight',
-              'type' => 'input',
-              'default' => 'inherit'
+              'type' => 'input'
             ),
             'bc__lineheight' => array(
               'label' => 'Line height',
-              'type' => 'input',
-              'default' => 'inherit'
+              'type' => 'input'
             ),
             'bc__textTransform' => array(
               'label' => 'Text transform',
-              'type' => 'input',
-              'default' => 'inherit'
+              'type' => 'input'
             ),
             'bc__fontsize_mobile' => array(
-              'label' => 'Font size (mobile)',
+              'label' => 'Font size',
               'type' => 'input'
             ),
             'bc__lineheight_mobile' => array(
-              'label' => 'Line height (mobile)',
+              'label' => 'Line height',
               'type' => 'input'
             ),
             'bc__padding_mobile' => array(
-              'label' => 'Padding (mobile)',
+              'label' => 'Padding',
               'type' => 'input'
             )
           )
@@ -844,8 +789,7 @@ class prefix_core_Customizer {
             ),
             'input__border_width' => array(
               'label' => 'Input border width',
-              'type' => 'input',
-              'default' => '1px'
+              'type' => 'input'
             ),
             'input__border_color' => array(
               'label' => 'Input border color',
@@ -854,48 +798,39 @@ class prefix_core_Customizer {
             ),
             'input__fontFamily' => array(
               'label' => 'Input font family',
-              'type' => 'input',
-              'default' => 'inherit'
+              'type' => 'input'
             ),
             'input__fontSize' => array(
               'label' => 'Input font size',
-              'type' => 'input',
-              'default' => 'inherit'
+              'type' => 'input'
             ),
             'input__lineHeight' => array(
               'label' => 'Input line height',
-              'type' => 'input',
-              'default' => 'inherit'
+              'type' => 'input'
             ),
             'input__fontWeight' => array(
               'label' => 'Input font weight',
-              'type' => 'input',
-              'default' => 'inherit'
+              'type' => 'input'
             ),
             'input__fontSize_mobile' => array(
-              'label' => 'Input font size (mobile)',
-              'type' => 'input',
-              'default' => 'inherit'
+              'label' => 'Input font size',
+              'type' => 'input'
             ),
             'input__lineHeight_mobile' => array(
-              'label' => 'Input line height (mobile)',
-              'type' => 'input',
-              'default' => 'inherit'
+              'label' => 'Input line height',
+              'type' => 'input'
             ),
             'input__borderRadius' => array(
               'label' => 'Input border radius',
-              'type' => 'input',
-              'default' => '0px'
+              'type' => 'input'
             ),
             'input__padding' => array(
               'label' => 'Input padding',
-              'type' => 'input',
-              'default' => '7px 10px'
+              'type' => 'input'
             ),
             'input__padding_mobile' => array(
               'label' => 'Input padding mobile',
-              'type' => 'input',
-              'default' => '7px 10px'
+              'type' => 'input'
             ),
             'input__checkbox_bg' => array(
               'label' => 'Checkbox/Radio background color',
@@ -904,43 +839,35 @@ class prefix_core_Customizer {
             ),
             'input__checkbox_fontSize' => array(
               'label' => 'Checkbox/Radio font size',
-              'type' => 'input',
-              'default' => 'inherit'
+              'type' => 'input'
             ),
             'input__checkbox_lineHeight' => array(
               'label' => 'Checkbox/Radio line height',
-              'type' => 'input',
-              'default' => 'inherit'
+              'type' => 'input'
             ),
             'input__checkbox_fontWeight' => array(
               'label' => 'Checkbox/Radio font weight',
-              'type' => 'input',
-              'default' => 'inherit'
+              'type' => 'input'
             ),
             'input__checkbox_fontSize_mobile' => array(
-              'label' => 'Checkbox/Radio font size (mobile)',
-              'type' => 'input',
-              'default' => 'inherit'
+              'label' => 'Checkbox/Radio font size',
+              'type' => 'input'
             ),
             'input__checkbox_lineHeight_mobile' => array(
-              'label' => 'Checkbox/Radio line height (mobile)',
-              'type' => 'input',
-              'default' => 'inherit'
+              'label' => 'Checkbox/Radio line height',
+              'type' => 'input'
             ),
             'input__checkbox_width' => array(
               'label' => 'Checkbox/Radio width/height',
-              'type' => 'input',
-              'default' => '20px'
+              'type' => 'input'
             ),
             'input__checkbox_border_width' => array(
               'label' => 'Checkbox/Radio border',
-              'type' => 'input',
-              'default' => '1px'
+              'type' => 'input'
             ),
             'input__checkbox_space' => array(
               'label' => 'Checkbox/Radio space to text',
-              'type' => 'input',
-              'default' => '20px'
+              'type' => 'input'
             ),
             'input__checkbox_border_color' => array(
               'label' => 'Checkbox/Radio border color',
@@ -973,7 +900,11 @@ class prefix_core_Customizer {
               'type' => 'input'
             ),
             'input__select_padding_mobile' => array(
-              'label' => 'Select padding (mobile)',
+              'label' => 'Select padding',
+              'type' => 'input'
+            ),
+            'input__select_fontFamily' => array(
+              'label' => 'Input font family',
               'type' => 'input'
             ),
             'input__select_fontSize' => array(
@@ -989,11 +920,11 @@ class prefix_core_Customizer {
               'type' => 'input'
             ),
             'input__select_fontSize_mobile' => array(
-              'label' => 'Select font size (mobile)',
+              'label' => 'Select font size',
               'type' => 'input'
             ),
             'input__select_lineHeight_mobile' => array(
-              'label' => 'Select line height (mobile)',
+              'label' => 'Select line height',
               'type' => 'input'
             ),
             'input__selectContainer_color' => array(
@@ -1006,11 +937,10 @@ class prefix_core_Customizer {
             ),
             'input__selectContainer_width' => array(
               'label' => 'Select container size',
-              'type' => 'input',
-              'default' => '30px'
+              'type' => 'input'
             ),
             'input__selectContainer_width_mobile' => array(
-              'label' => 'Select container size (mobile)',
+              'label' => 'Select container size',
               'type' => 'input'
             ),
             'input__required' => array(
@@ -1019,38 +949,36 @@ class prefix_core_Customizer {
               'default' => '#a53737'
             ),
             'input__placeholder_color' => array(
-              'label' => 'Palceholder color',
+              'label' => 'Placeholder color',
               'type' => 'color'
             ),
             'input__placeholder_fontFamily' => array(
-              'label' => 'Palceholder font family',
+              'label' => 'Placeholder font family',
               'type' => 'input'
             ),
             'input__placeholder_fontSize' => array(
-              'label' => 'Palceholder font size',
+              'label' => 'Placeholder font size',
               'type' => 'input'
             ),
             'input__placeholder_lineHeight' => array(
-              'label' => 'Palceholder line height',
+              'label' => 'Placeholder line height',
               'type' => 'input'
             ),
             'input__placeholder_fontWeight' => array(
-              'label' => 'Palceholder font weight',
+              'label' => 'Placeholder font weight',
               'type' => 'input'
             ),
             'input__placeholder_textTransform' => array(
-              'label' => 'Palceholder text transform',
+              'label' => 'Placeholder text transform',
               'type' => 'input'
             ),
             'input__submit_fontFamily' => array(
               'label' => 'Submit font family',
-              'type' => 'input',
-              'default' => 'inherit'
+              'type' => 'input'
             ),
             'input__submit_fontSize' => array(
               'label' => 'Submit/button font size',
-              'type' => 'input',
-              'default' => 'inherit'
+              'type' => 'input'
             ),
             'input__submit_letterSpacing' => array(
               'label' => 'Submit/button letter spacing',
@@ -1058,30 +986,26 @@ class prefix_core_Customizer {
             ),
             'input__submit_lineHeight' => array(
               'label' => 'Submit/button line height',
-              'type' => 'input',
-              'default' => 'inherit'
+              'type' => 'input'
             ),
             'input__submit_fontWeight' => array(
               'label' => 'Submit/button font weight',
-              'type' => 'input',
-              'default' => 'inherit'
+              'type' => 'input'
             ),
             'input__submit_textTransform' => array(
               'label' => 'Submit/button text transform',
               'type' => 'input'
             ),
             'input__submit_fontSize_mobile' => array(
-              'label' => 'Submit/button font size (mobile)',
-              'type' => 'input',
-              'default' => 'inherit'
+              'label' => 'Submit/button font size',
+              'type' => 'input'
             ),
             'input__submit_lineHeight_mobile' => array(
-              'label' => 'Submit/button line height (mobile)',
-              'type' => 'input',
-              'default' => 'inherit'
+              'label' => 'Submit/button line height',
+              'type' => 'input'
             ),
             'input__submit_letterSpacing_mobile' => array(
-              'label' => 'Submit/button letter spacing (mobile)',
+              'label' => 'Submit/button letter spacing',
               'type' => 'input'
             ),
             'input__submit_bg_color' => array(
@@ -1116,8 +1040,7 @@ class prefix_core_Customizer {
             ),
             'input__submit_borderRadius' => array(
               'label' => 'Submit/button border radius',
-              'type' => 'input',
-              'default' => '0px'
+              'type' => 'input'
             ),
             'input__submit_borderWidth' => array(
               'label' => 'Submit/button border width',
@@ -1125,11 +1048,10 @@ class prefix_core_Customizer {
             ),
             'input__submit_padding' => array(
               'label' => 'Submit/button padding',
-              'type' => 'input',
-              'default' => '10px 20px'
+              'type' => 'input'
             ),
             'input__submit_padding_mobile' => array(
-              'label' => 'Submit/button padding (mobile)',
+              'label' => 'Submit/button padding',
               'type' => 'input'
             )
           )
@@ -1158,11 +1080,11 @@ class prefix_core_Customizer {
               'type' => 'color'
             ),
             'search__article_margin_mobile' => array(
-              'label' => 'Article margin (mobile)',
+              'label' => 'Article margin',
               'type' => 'input'
             ),
             'search__article_padding_mobile' => array(
-              'label' => 'Article padding (mobile)',
+              'label' => 'Article padding',
               'type' => 'input'
             ),
             'search__article_title_margin' => array(
@@ -1194,19 +1116,141 @@ class prefix_core_Customizer {
               'type' => 'input'
             ),
             'search__article_title_fontSize_mobile' => array(
-              'label' => 'Article title font size (mobile)',
+              'label' => 'Article title font size',
               'type' => 'input'
             ),
             'search__article_title_lineHeight_mobile' => array(
-              'label' => 'Article title line height (mobile)',
+              'label' => 'Article title line height',
               'type' => 'input'
             ),
             'search__article_title_margin_mobile' => array(
-              'label' => 'Article title margin (mobile)',
+              'label' => 'Article title margin',
               'type' => 'input'
             ),
             'search__article_title_padding_mobile' => array(
-              'label' => 'Article title padding (mobile)',
+              'label' => 'Article title padding',
+              'type' => 'input'
+            )
+          )
+        ),
+        'postTitle' => array(
+          'label' => 'Post title',
+          'inputs' => array(
+            'postTitle__color' => array(
+              'label' => 'Color',
+              'type' => 'color'
+            ),
+            'postTitle__bg' => array(
+              'label' => 'Background color',
+              'type' => 'color'
+            ),
+            'postTitle__fontFamily' => array(
+              'label' => 'Title font family',
+              'type' => 'input'
+            ),
+            'postTitle__fontSize' => array(
+              'label' => 'Title font size',
+              'type' => 'input'
+            ),
+            'postTitle__lineHeight' => array(
+              'label' => 'Title line height',
+              'type' => 'input'
+            ),
+            'postTitle__padding' => array(
+              'label' => 'padding',
+              'type' => 'input'
+            ),
+            'postTitle__margin' => array(
+              'label' => 'Title margin',
+              'type' => 'input'
+            ),
+            'postTitle__fontWeight' => array(
+              'label' => 'Title font weight',
+              'type' => 'input'
+            ),
+            'postTitle__textTransform' => array(
+              'label' => 'Title text transform',
+              'type' => 'input'
+            ),
+            'postTitle__letterSpacing' => array(
+              'label' => 'Title text transform',
+              'type' => 'input'
+            ),
+            'postTitle__fontSize_mobile' => array(
+              'label' => 'Title font size',
+              'type' => 'input'
+            ),
+            'postTitle__lineHeight_mobile' => array(
+              'label' => 'Title line height',
+              'type' => 'input'
+            ),
+            'postTitle__padding_mobile' => array(
+              'label' => 'padding',
+              'type' => 'input'
+            ),
+            'postTitle__margin_mobile' => array(
+              'label' => 'Title margin',
+              'type' => 'input'
+            )
+          )
+        ),
+        '404' => array(
+          'label' => '404 Page',
+          'inputs' => array(
+            'error__padding' => array(
+              'label' => 'Article padding',
+              'type' => 'input'
+            ),
+            'error__margin' => array(
+              'label' => 'Article margin',
+              'type' => 'input'
+            ),
+            'error__title_fontFamily' => array(
+              'label' => 'Title font family',
+              'type' => 'input'
+            ),
+            'error__title_fontSize' => array(
+              'label' => 'Title font size',
+              'type' => 'input'
+            ),
+            'error__title_lineHeight' => array(
+              'label' => 'Title line height',
+              'type' => 'input'
+            ),
+            'error__title_padding' => array(
+              'label' => 'Title padding',
+              'type' => 'input'
+            ),
+            'error__title_margin' => array(
+              'label' => 'Title margin',
+              'type' => 'input'
+            ),
+            'error__title_fontWeight' => array(
+              'label' => 'Title font weight',
+              'type' => 'input'
+            ),
+            'error__title_textTransform' => array(
+              'label' => 'Title text transform',
+              'type' => 'input'
+            ),
+            'error__title_letterSpacing' => array(
+              'label' => 'Title text transform',
+              'type' => 'input'
+            ),
+            'error__title_fontSize_mobile' => array(
+              'label' => 'Title font size',
+              'type' => 'input'
+            ),
+            'error__title_lineHeight_mobile' => array(
+              'label' => 'Title line height',
+              'type' => 'input'
+            ),
+            'error__title_padding_mobile' => array(
+              'label' => 'Title padding',
+              'type' => 'input'
+            ),
+            'error__title_margin_mobile' => array(
+              'label' => 'Title margin',
               'type' => 'input'
             )
           )
@@ -1221,8 +1265,7 @@ class prefix_core_Customizer {
           'inputs' => array(
             'block__separator_width' => array(
               'label' => 'Height',
-              'type' => 'input',
-              'default' => '1px'
+              'type' => 'input'
             ),
             'block__separator_marginTop' => array(
               'label' => 'Margin top',
@@ -1232,26 +1275,34 @@ class prefix_core_Customizer {
               'label' => 'Margin bottom',
               'type' => 'input'
             ),
-            'light__gbSeperator_color' => array(
+            'gbSeperator_color' => array(
               'label' => 'Default color',
               'type' => 'color',
               'default' => '#dddddd'
             ),
             'dark__gbSeperator_color' => array(
-              'label' => 'Default color (dark mode)',
+              'label' => 'Default color',
               'type' => 'color',
               'default' => '#343434'
             ),
             'block__separator_width_mobile' => array(
-              'label' => 'Height (mobile)',
+              'label' => 'Height',
               'type' => 'input'
             ),
             'block__separator_marginTop_mobile' => array(
-              'label' => 'Margin top (mobile)',
+              'label' => 'Margin top',
               'type' => 'input'
             ),
             'block__separator_marginBottom_mobile' => array(
-              'label' => 'Margin bottom (mobile)',
+              'label' => 'Margin bottom',
+              'type' => 'input'
+            ),
+            'block__separatorDots_fontSize' => array(
+              'label' => 'Dots font size',
+              'type' => 'input'
+            ),
+            'block__separatorDots_fontSize_mobile' => array(
+              'label' => 'Dots font size',
               'type' => 'input'
             )
           )
@@ -1266,53 +1317,81 @@ class prefix_core_Customizer {
             )
           )
         ),
+        'gutenberg_image' => array(
+          'label' => 'Image',
+          'inputs' => array(
+            'block__imageFigcaption_fontSize' => array(
+              'label' => 'Figcaption font size',
+              'type' => 'input'
+            ),
+            'block__imageFigcaption_lineHeight' => array(
+              'label' => 'Figcaption line height',
+              'type' => 'input'
+            ),
+            'block__imageFigcaption_margin' => array(
+              'label' => 'Figcaption margin',
+              'type' => 'input'
+            ),
+            'block__imageFigcaption_padding' => array(
+              'label' => 'Figcaption padding',
+              'type' => 'input'
+            ),
+            'block__imageFigcaption_fontSize_mobile' => array(
+              'label' => 'Figcaption font size',
+              'type' => 'input'
+            ),
+            'block__imageFigcaption_lineHeight_mobile' => array(
+              'label' => 'Figcaption line height',
+              'type' => 'input'
+            ),
+            'block__imageFigcaption_margin_mobile' => array(
+              'label' => 'Figcaption margin',
+              'type' => 'input'
+            ),
+            'block__imageFigcaption_padding_mobile' => array(
+              'label' => 'Figcaption padding',
+              'type' => 'input'
+            )
+          )
+        ),
         'gutenberg_buttons' => array(
           'label' => 'Buttons',
           'inputs' => array(
             'block__buttons_spacing' => array(
               'label' => 'Space between buttons',
-              'type' => 'input',
-              'default' => '20px'
+              'type' => 'input'
             ),
             'block__buttons_fontFamily' => array(
               'label' => 'Font',
-              'type' => 'input',
-              'default' => 'inherit'
+              'type' => 'input'
             ),
             'block__buttons_fontSize' => array(
               'label' => 'Font size',
-              'type' => 'input',
-              'default' => 'inherit'
+              'type' => 'input'
             ),
             'block__buttons_fontWeight' => array(
               'label' => 'Font weight',
-              'type' => 'input',
-              'default' => 'inherit'
+              'type' => 'input'
             ),
             'block__buttons_lineHeight' => array(
               'label' => 'Line height',
-              'type' => 'input',
-              'default' => 'inherit'
+              'type' => 'input'
             ),
             'block__buttons_textTransform' => array(
               'label' => 'Text transform',
-              'type' => 'input',
-              'default' => 'inherit'
+              'type' => 'input'
             ),
             'block__buttons_padding' => array(
               'label' => 'Padding',
-              'type' => 'input',
-              'default' => '10px 20px'
+              'type' => 'input'
             ),
             'block__buttons_borderWidth' => array(
               'label' => 'Border width',
-              'type' => 'input',
-              'default' => '1px'
+              'type' => 'input'
             ),
             'block__buttons_borderRadius' => array(
               'label' => 'Border radius',
-              'type' => 'input',
-              'default' => '0px'
+              'type' => 'input'
             ),
             'block__buttons_color' => array(
               'label' => 'Text color',
@@ -1339,27 +1418,27 @@ class prefix_core_Customizer {
               'type' => 'color'
             ),
             'block__buttons_fontSize_mobile' => array(
-              'label' => 'Font size (mobile)',
+              'label' => 'Font size',
               'type' => 'input'
             ),
             'block__buttons_lineHeight_mobile' => array(
-              'label' => 'Line height (mobile)',
+              'label' => 'Line height',
               'type' => 'input'
             ),
             'block__buttons_textTransform_mobile' => array(
-              'label' => 'Text transform (mobile)',
+              'label' => 'Text transform',
               'type' => 'input'
             ),
             'block__buttons_padding_mobile' => array(
-              'label' => 'Padding (mobile)',
+              'label' => 'Padding',
               'type' => 'input'
             ),
             'block__buttons_borderWidth_mobile' => array(
-              'label' => 'Border width (mobile)',
+              'label' => 'Border width',
               'type' => 'input'
             ),
             'block__buttons_borderRadius_mobile' => array(
-              'label' => 'Border radius (mobile)',
+              'label' => 'Border radius',
               'type' => 'input'
             )
           )
@@ -1380,20 +1459,19 @@ class prefix_core_Customizer {
             ),
             'block__list_marker_space' => array(
               'label' => 'Marker spacing',
-              'type' => 'input',
-              'default' => '20px'
-            ),
-            'block__list_marker_space_mobile' => array(
-              'label' => 'Marker spacing (mobile)',
               'type' => 'input'
             ),
-            'light__gbList_marker_color' => array(
+            'block__list_marker_space_mobile' => array(
+              'label' => 'Marker spacing',
+              'type' => 'input'
+            ),
+            'gbList_marker_color' => array(
               'label' => 'Marker color',
               'type' => 'color',
               'default' => 'inherit'
             ),
             'dark__gbList_marker_color' => array(
-              'label' => 'Marker color (dark mode)',
+              'label' => 'Marker color',
               'type' => 'color',
               'default' => 'inherit'
             )
@@ -1404,23 +1482,19 @@ class prefix_core_Customizer {
           'inputs' => array(
             'block__cover_container_paddingTop' => array(
               'label' => 'Container padding top',
-              'type' => 'input',
-              'default' => '20px'
+              'type' => 'input'
             ),
             'block__cover_container_paddingBottom' => array(
               'label' => 'Container padding bottom',
-              'type' => 'input',
-              'default' => '20px'
+              'type' => 'input'
             ),
             'block__cover_container_paddingTop_mobile' => array(
-              'label' => 'Container padding top (mobile)',
-              'type' => 'input',
-              'default' => '20px'
+              'label' => 'Container padding top',
+              'type' => 'input'
             ),
             'block__cover_container_paddingBottom_mobile' => array(
-              'label' => 'Container padding bottom (mobile)',
-              'type' => 'input',
-              'default' => '20px'
+              'label' => 'Container padding bottom',
+              'type' => 'input'
             )
           )
         ),
@@ -1452,15 +1526,15 @@ class prefix_core_Customizer {
               'type' => 'input'
             ),
             'block__tableHead_fontSize_mobile' => array(
-              'label' => 'Head font size (mobile)',
+              'label' => 'Head font size',
               'type' => 'input'
             ),
             'block__tableHead_lineHeight_mobile' => array(
-              'label' => 'Head line height (mobile)',
+              'label' => 'Head line height',
               'type' => 'input'
             ),
             'block__tableHead_letterSpacing_mobile' => array(
-              'label' => 'Head letter spacing (mobile)',
+              'label' => 'Head letter spacing',
               'type' => 'input'
             ),
             'block__table_fontFamily' => array(
@@ -1488,15 +1562,15 @@ class prefix_core_Customizer {
               'type' => 'input'
             ),
             'block__table_fontSize_mobile' => array(
-              'label' => 'font size (mobile)',
+              'label' => 'font size',
               'type' => 'input'
             ),
             'block__table_lineHeight_mobile' => array(
-              'label' => 'line height (mobile)',
+              'label' => 'line height',
               'type' => 'input'
             ),
             'block__table_letterSpacing_mobile' => array(
-              'label' => 'letter spacing (mobile)',
+              'label' => 'letter spacing',
               'type' => 'input'
             )
           )
@@ -1506,8 +1580,7 @@ class prefix_core_Customizer {
           'inputs' => array(
             'block__accordion_separator' => array(
               'label' => 'Space between accordions',
-              'type' => 'input',
-              'default' => '20px'
+              'type' => 'input'
             ),
             'block__accordion_label_bg' => array(
               'label' => 'Label background color',
@@ -1521,35 +1594,30 @@ class prefix_core_Customizer {
             ),
             'block__accordion_label_spacing' => array(
               'label' => 'Space inside label',
-              'type' => 'input',
-              'default' => '20px 10px'
+              'type' => 'input'
             ),
             'block__accordion_label_fontfamily' => array(
               'label' => 'Label font family',
-              'type' => 'input',
-              'default' => 'inherit'
+              'type' => 'input'
             ),
             'block__accordion_label_fontsize' => array(
               'label' => 'Label font-size',
-              'type' => 'input',
-              'default' => 'inherit'
+              'type' => 'input'
             ),
             'block__accordion_label_fontweight' => array(
               'label' => 'Label font weight',
-              'type' => 'input',
-              'default' => 'inherit'
+              'type' => 'input'
             ),
             'block__accordion_label_lineheight' => array(
               'label' => 'Label line-height',
-              'type' => 'input',
-              'default' => 'inherit'
+              'type' => 'input'
             ),
             'block__accordion_label_fontsize_mobile' => array(
-              'label' => 'Label font-size (mobile)',
+              'label' => 'Label font-size',
               'type' => 'input'
             ),
             'block__accordion_label_lineheight_mobile' => array(
-              'label' => 'Label line-height (mobile)',
+              'label' => 'Label line-height',
               'type' => 'input'
             ),
             'block__accordion_iconbox_bg' => array(
@@ -1559,30 +1627,26 @@ class prefix_core_Customizer {
             ),
             'block__accordion_icon_borderRadius' => array(
               'label' => 'Iconbox radius',
-              'type' => 'input',
-              'default' => '4px'
+              'type' => 'input'
             ),
             'block__accordion_icon_width' => array(
               'label' => 'Iconbox width',
-              'type' => 'input',
-              'default' => '30px'
+              'type' => 'input'
             ),
             'block__accordion_icon_height' => array(
               'label' => 'Iconbox height',
-              'type' => 'input',
-              'default' => '30px'
+              'type' => 'input'
             ),
             'block__accordion_icon_seperator' => array(
               'label' => 'Placeholder between text and icon',
-              'type' => 'input',
-              'default' => '20px'
+              'type' => 'input'
             ),
             'block__accordion_icon_width_mobile' => array(
-              'label' => 'Iconbox width (mobile)',
+              'label' => 'Iconbox width',
               'type' => 'input'
             ),
             'block__accordion_icon_height_mobile' => array(
-              'label' => 'Iconbox height (mobile)',
+              'label' => 'Iconbox height',
               'type' => 'input'
             ),
             'block__accordion_label_arrow' => array(
@@ -1592,18 +1656,15 @@ class prefix_core_Customizer {
             ),
             'block__accordion_icon_plusSize' => array(
               'label' => 'Plus sign size',
-              'type' => 'input',
-              'default' => '50%'
+              'type' => 'input'
             ),
             'block__accordion_icon_plusRadius' => array(
               'label' => 'Plus sign radius',
-              'type' => 'input',
-              'default' => '1px'
+              'type' => 'input'
             ),
             'block__accordion_icon_plusWeight' => array(
               'label' => 'Plus sign weight',
-              'type' => 'input',
-              'default' => '4px'
+              'type' => 'input'
             ),
             'block__accordion_content_bg' => array(
               'label' => 'toggled content background color',
@@ -1617,28 +1678,23 @@ class prefix_core_Customizer {
             ),
             'block__accordion_content_spacing' => array(
               'label' => 'Space inside toggled content',
-              'type' => 'input',
-              'default' => '20px 10px'
+              'type' => 'input'
             ),
             'block__accordion_content_fontsize' => array(
               'label' => 'Content font size',
-              'type' => 'input',
-              'default' => 'inherit'
+              'type' => 'input'
             ),
             'block__accordion_content_lineheight' => array(
               'label' => 'Content line height',
-              'type' => 'input',
-              'default' => 'inherit'
+              'type' => 'input'
             ),
             'block__accordion_content_fontsize_mobile' => array(
-              'label' => 'Content font size (mobile)',
-              'type' => 'input',
-              'default' => 'inherit'
+              'label' => 'Content font size',
+              'type' => 'input'
             ),
             'block__accordion_content_lineheight_mobile' => array(
-              'label' => 'Content line height (mobile)',
-              'type' => 'input',
-              'default' => 'inherit'
+              'label' => 'Content line height',
+              'type' => 'input'
             )
           )
         )
@@ -1650,48 +1706,48 @@ class prefix_core_Customizer {
         'footer_colors' => array(
           'label' => 'Colors',
           'inputs' => array(
-            'light__footer_background' => array(
+            'footer_background' => array(
               'label' => 'Footer background color',
               'type' => 'color',
               'default' => '#f9f9f9'
             ),
-            'light__footercontainer_background' => array(
+            'footercontainer_background' => array(
               'label' => 'Footer container background color',
               'type' => 'color',
-              'default' => '#f9f9f9'
+              'default' => 'transparent'
             ),
-            'light__footer_color' => array(
+            'footer_color' => array(
               'label' => 'Text color',
               'type' => 'color'
             ),
-            'light__footer_link_color' => array(
+            'footer_link_color' => array(
               'label' => 'Link color',
               'type' => 'color'
             ),
-            'light__footer_linkHover_color' => array(
+            'footer_linkHover_color' => array(
               'label' => 'Link hover color',
               'type' => 'color'
             ),
             'dark__footer_background' => array(
-              'label' => 'Footer background (dark mode)',
+              'label' => 'Footer background',
               'type' => 'color',
               'default' => '#1d1e1f'
             ),
             'dark__footercontainer_background' => array(
-              'label' => 'Footer container background (dark mode)',
+              'label' => 'Footer container background',
               'type' => 'color',
-              'default' => '#1d1e1f'
+              'default' => 'transparent'
             ),
             'dark__footer_color' => array(
-              'label' => 'Text color (dark mode)',
+              'label' => 'Text color',
               'type' => 'color'
             ),
             'dark__footer_link_color' => array(
-              'label' => 'Link color (dark mode)',
+              'label' => 'Link color',
               'type' => 'color'
             ),
             'dark__footer_linkHover_color' => array(
-              'label' => 'Link hover color (dark mode)',
+              'label' => 'Link hover color',
               'type' => 'color'
             )
           )
@@ -1701,28 +1757,23 @@ class prefix_core_Customizer {
           'inputs' => array(
             'footer__fontsize' => array(
               'label' => 'Footer font size',
-              'type' => 'input',
-              'default' => '10px'
+              'type' => 'input'
             ),
             'footer__lineheight' => array(
               'label' => 'Footer line height',
-              'type' => 'input',
-              'default' => '1.7'
+              'type' => 'input'
             ),
             'footer__paddingTop' => array(
               'label' => 'Container padding top',
               'type' => 'input',
-              'default' => '40px'
             ),
             'footer__paddingBottom' => array(
               'label' => 'Container padding bottom',
-              'type' => 'input',
-              'default' => '20px'
+              'type' => 'input'
             ),
             'footer_itemSpacing' => array(
               'label' => 'Item Spacing (vertical)',
-              'type' => 'input',
-              'default' => '20px'
+              'type' => 'input'
             )
           )
         ),
@@ -1731,13 +1782,11 @@ class prefix_core_Customizer {
           'inputs' => array(
             'footer__fontsize_mobile' => array(
               'label' => 'Footer font size',
-              'type' => 'input',
-              'default' => '10px'
+              'type' => 'input'
             ),
             'footer__lineheight_mobile' => array(
               'label' => 'Footer line height',
-              'type' => 'input',
-              'default' => '1.7'
+              'type' => 'input'
             ),
             'footer__paddingTop_mobile' => array(
               'label' => 'Container padding top',
@@ -1770,6 +1819,8 @@ class prefix_core_Customizer {
     add_action( 'customize_preview_init', array($this, 'customizerPreview') );
     // create new customizer file after saving customizer
     add_action( 'customize_save_after', array($this, 'generateCusomizerFile') );
+    // update DB
+    add_action( 'admin_init', array($this, 'updateThemeMods') );
     // register strings
     $backendStrings = array(
       __('Label', 'devTheme'),
@@ -1785,8 +1836,8 @@ class prefix_core_Customizer {
       __('Scondary color', 'devTheme'),
       __('Font color', 'devTheme'),
       __('Background color', 'devTheme'),
-      __('Background color (dark mode)', 'devTheme'),
-      __('Font color (dark mode)', 'devTheme'),
+      __('Background color', 'devTheme'),
+      __('Font color', 'devTheme'),
       __('Marker text color', 'devTheme'),
       __('Marker background color', 'devTheme'),
       __('Typography', 'devTheme'),
@@ -1806,18 +1857,18 @@ class prefix_core_Customizer {
       __('Colors', 'devTheme'),
       __('Header background color', 'devTheme'),
       __('Header container background color', 'devTheme'),
-      __('Header background (dark mode)', 'devTheme'),
-      __('header container background (dark mode)', 'devTheme'),
+      __('Header background', 'devTheme'),
+      __('header container background', 'devTheme'),
       __('Menu', 'devTheme'),
       __('Main menu font size', 'devTheme'),
       __('Main menu line height', 'devTheme'),
-      __('Main menu font size (mobile)', 'devTheme'),
-      __('Main menu line height (mobile)', 'devTheme'),
+      __('Main menu font size', 'devTheme'),
+      __('Main menu line height', 'devTheme'),
       __('Hamburger', 'devTheme'),
       __('Hamburger color', 'devTheme'),
       __('Hamburger navigation background color', 'devTheme'),
-      __('Hamburger color (dark mode)', 'devTheme'),
-      __('Hamburger navigation background color (dark mode)', 'devTheme'),
+      __('Hamburger color', 'devTheme'),
+      __('Hamburger navigation background color', 'devTheme'),
       __('Title spacing', 'devTheme'),
       __('Blur Content while hamburger navigation is open', 'devTheme'),
       __('Content area', 'devTheme'),
@@ -1837,7 +1888,7 @@ class prefix_core_Customizer {
       __('Gutenberg Blocks', 'devTheme'),
       __('Seperator', 'devTheme'),
       __('Default color', 'devTheme'),
-      __('Default color (dark mode)', 'devTheme'),
+      __('Default color', 'devTheme'),
       __('Accordion', 'devTheme'),
       __('Label background color', 'devTheme'),
       __('Label text color', 'devTheme'),
@@ -1865,11 +1916,11 @@ class prefix_core_Customizer {
       __('Text color', 'devTheme'),
       __('Link color', 'devTheme'),
       __('Link hover color', 'devTheme'),
-      __('Footer background (dark mode)', 'devTheme'),
-      __('Footer container background (dark mode)', 'devTheme'),
-      __('Text color (dark mode)', 'devTheme'),
-      __('Link color (dark mode)', 'devTheme'),
-      __('Link hover color (dark mode)', 'devTheme'),
+      __('Footer background', 'devTheme'),
+      __('Footer container background', 'devTheme'),
+      __('Text color', 'devTheme'),
+      __('Link color', 'devTheme'),
+      __('Link hover color', 'devTheme'),
       __('Desktop', 'devTheme'),
       __('Footer font size', 'devTheme'),
       __('Footer line height', 'devTheme'),
@@ -1945,6 +1996,27 @@ class prefix_core_Customizer {
   }
   // build input fields
   function buildInput($wp_customize, $inputKey, $inputValues, $sectionKey){
+
+    // label addOns
+    $activeLabels = array();
+    $labelAdd = '';
+    // add labels
+    if (strpos($inputKey, 'dark__') !== false):
+      $activeLabels[] = __( 'dark mode', 'customizer' );
+    endif;
+    if (strpos($inputKey, '_sticky') !== false):
+      $activeLabels[] = __( 'sticky', 'customizer' );
+    endif;
+    if (strpos($inputKey, '_mobile') !== false):
+      $activeLabels[] = __( 'mobile', 'customizer' );
+    endif;
+    // build labels
+    if(!empty($activeLabels)):
+      $labelAdd .= ' [';
+        $labelAdd .= implode(" | ",$activeLabels);
+      $labelAdd .= ']';
+    endif;
+
     // add featured category settings and controls.
     // https://developer.wordpress.org/reference/classes/wp_customize_control/__construct/
     if($inputValues["type"] == 'color'):
@@ -1954,7 +2026,7 @@ class prefix_core_Customizer {
         'sanitize_callback' => 'sanitize_hex_color',
       ));
       $wp_customize->add_control(new WP_Customize_Color_Control( $wp_customize, $inputKey, array(
-       'label'    => __( $inputValues["label"], 'customizer' ),
+       'label'    => __( $inputValues["label"], 'customizer' ) . $labelAdd,
        'section'  => $sectionKey,
        'priority' => 1
      )));
@@ -1965,12 +2037,48 @@ class prefix_core_Customizer {
         'sanitize_callback' => 'wp_filter_nohtml_kses',
       ));
      $wp_customize->add_control($inputKey, array(
-      'label'    => __( $inputValues["label"], 'customizer' ),
+      'label'    => __( $inputValues["label"], 'customizer' ) . $labelAdd,
       'section'  => $sectionKey,
       'type'     => 'input',
       'priority' => 1
      ));
     endif;
+  }
+
+
+  /* 1.4 THEME MOD UPDATE
+  /------------------------*/
+  function updateThemeMods(){
+    $getModsUpdate = get_option( 'theme_mods_childtheme_update' ) ? get_option('theme_mods_childtheme_update') : 0;
+    // check if update exists
+    if($getModsUpdate == 0):
+      // get mod options
+      $getMods = get_option( 'theme_mods_childtheme' ) ? get_option('theme_mods_childtheme') : false;
+      if($getMods):
+        $updateMods = array();
+        foreach ($getMods as $key => $mod) {
+
+          // 1. update (remove light__ from keys)
+          if($getModsUpdate < 1):
+            if(strpos($key, 'light__') !== false):
+              $newKey = str_replace('light__', '', $key);
+              $updateMods[$newKey] = $mod;
+            else:
+              $updateMods[$key] = $mod;
+            endif;
+          endif;
+
+        }
+        update_option('theme_mods_childtheme', $updateMods, false);
+        // update the update nr.
+        update_option('theme_mods_childtheme_update', 1, false);
+      endif;
+    endif;
+
+
+
+    // check if value exists
+
   }
 
 
@@ -2005,6 +2113,8 @@ class prefix_core_Customizer {
     $popup_space = preg_split('/(?<=[0-9])(?=[a-z]+)/i',get_theme_mod('popup__space', $this->defaultValues['settings']['sections']['theme_popup']['values']['popup__space']['default']));
     $popup_breakpoint = $popup_width[0] + $popup_space[0] + $popup_space[0];
     // build new file content
+    $mobileDarkOutput = '';
+    $darkOutput = '';
     $mobileOutput = '';
     $output = '';
     $output .= ':root {';
@@ -2014,16 +2124,31 @@ class prefix_core_Customizer {
             $quotemark = array_key_exists("quotemark",$ValueSettings) && $ValueSettings["quotemark"]  == '1' ? '"' : '';
             $insert = htmlspecialchars(get_theme_mod($valueKey, $ValueSettings["default"]));
             if($insert !== ''):
-              if (strpos($valueKey, '_mobile') !== false):
+              if(strpos($valueKey, 'dark__') !== false && strpos($valueKey, '_mobile') !== false):
+                // move to mobile dark mode
+                $mobileDarkOutput .= '--' . str_replace(arrray('dark__', '_mobile'), array('', ''), $valueKey) . ': ' . $quotemark . $insert . $quotemark . ';';
+              elseif(strpos($valueKey, 'dark__') !== false):
+                // move to dark mode
+                $darkOutput .= '--' . str_replace('dark__', '', $valueKey) . ': ' . $quotemark . $insert . $quotemark . ';';
+              elseif (strpos($valueKey, '_mobile') !== false):
+                // move to mobile
                 $mobileOutput .= '--' . str_replace('_mobile', '', $valueKey) . ': ' . $quotemark . $insert . $quotemark . ';';
               else:
-                // move to mobile
-                $output .= '--' . $valueKey . ': ' . $quotemark . $insert . $quotemark . ';';
+                if($valueKey == 'gutenberg__font_scale'):
+                  $output .= '--' . $valueKey . ': ' . $quotemark . '1' . $quotemark . ';';
+                  $mobileOutput .= '--' . $valueKey . ': ' . $quotemark . $insert . $quotemark . ';';
+                else:
+                  $output .= '--' . $valueKey . ': ' . $quotemark . $insert . $quotemark . ';';
+                endif;
               endif;
             endif;
           }
         }
       }
+    $output .= '}';
+    // dark mode
+    $output .= '.dark {';
+      $output .= $darkOutput;
     $output .= '}';
     // wide
     $output .= '@media screen and (min-width: ' . $wide_reset . $container_width[1] . ') {';
@@ -2054,6 +2179,11 @@ class prefix_core_Customizer {
       if($mobileOutput !== ''):
         $output .= ':root {';
           $output .= $mobileOutput;
+        $output .= '}';
+      endif;
+      if($mobileDarkOutput !== ''):
+        $output .= '.dark {';
+          $output .= $mobileDarkOutput;
         $output .= '}';
       endif;
       if(file_exists(get_template_directory() . "/dist/responsive_mobile.css")):

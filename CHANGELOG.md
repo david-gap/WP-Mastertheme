@@ -1,5 +1,25 @@
 # CHANGELOG
 
+## 1.49.28 | 30.04.2022 <customizer options, dsgvo support>
+* new js function, to get element style
+* new js function, to get all data attributes
+* new js function, to load third party content after consent
+* fix swiper and lightbox after WP update 5.9
+* fix font size scaler
+* fix hamburger
+* split sidebar by post types
+* add current post class to posts block
+* fix input border for shortcode block in backend
+* hide empty paragraph in header widgets
+* remove figure line-height
+* additional customizer settings
+* rebuild color separation between light and dark
+* fix mobile menu visibility
+* add page option to hide thumbnail
+* register sidebar for posts
+* add beta function to run class custom action on configurator publish
+* new class to support dsgvo requirements
+
 ## 1.48.28 | 01.04.2022 <customizer options, clean blocks, security>
 * add class to improve page security
 * fix gutenberg scadule functionality
@@ -15,7 +35,6 @@
 * show on scroll functionality
 * extand customizer
 * fix backend styling bugs
-
 
 ## 1.47.28 | 25.02.2022 <breadcrumbs, customizer options>
 * Add breadcrumbs

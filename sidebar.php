@@ -14,8 +14,8 @@ $options = $obj && property_exists($obj, 'ID') ? prefix_template::PageOptions($o
 if(!in_array('sidebar', $options)): ?>
   <aside id="sidebar">
     <?php
-      if(is_active_sidebar('sidebar')):
-        dynamic_sidebar('sidebar');
+      if(is_active_sidebar('sidebar-' . $obj->post_type)):
+        dynamic_sidebar('sidebar-' . $obj->post_type);
       endif;
     ?>
   </aside>

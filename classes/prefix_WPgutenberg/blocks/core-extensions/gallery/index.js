@@ -58,9 +58,9 @@
   /------------------------*/
   function applyExtraClass( extraProps, blockType, attributes ) {
     const { addSwiper, addPopUp, addPopUpPreview } = attributes;
-    if ( typeof addSwiper !== 'undefined' && addSwiper && allowedBlocks.includes( blockType.name ) ) {
-      extraProps.className = classnames( extraProps.className, 'gallery-swiper' );
-    }
+    // if ( typeof addSwiper !== 'undefined' && addSwiper && allowedBlocks.includes( blockType.name ) ) {
+    //   extraProps.className = classnames( extraProps.className, 'gallery-swiper' );
+    // }
     if ( typeof addPopUp !== 'undefined' && addPopUp && allowedBlocks.includes( blockType.name ) ) {
       extraProps.className = classnames( extraProps.className, 'add-popup' );
     }
@@ -68,6 +68,22 @@
       extraProps.className = classnames( extraProps.className, 'popup-preview' );
     }
     return extraProps;
+  }
+
+
+  /* add a div container
+  /------------------------*/
+  function galleryModifyGetSaveContentExtraProps( element, blockType, attributes ) {
+    const { addSwiper, addPopUp, addPopUpPreview } = attributes;
+    if (typeof addSwiper !== 'undefined' && addSwiper && allowedBlocks.includes(blockType.name)) {
+      return (
+        <div className='wp-block-gallery-container gallery-swiper'>
+          { element }
+        </div>
+      );
+    } else {
+      return element;
+    }
   }
 
 
@@ -87,4 +103,9 @@
     'blocks.getSaveContent.extraProps',
     'template/applyExtraClass',
     applyExtraClass
+  );
+  addFilter(
+    'blocks.getSaveElement',
+    'template/modify-get-save-content-extra-props',
+    galleryModifyGetSaveContentExtraProps
   );

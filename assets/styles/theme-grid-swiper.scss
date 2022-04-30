@@ -6,66 +6,28 @@
 */
 
 
-// frontend only
-body.frontend {
-
-  /* SWIPER
-  /––––––––––––––––––––––––*/
-  .gallery-swiper {
-    > ul {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-      &::-webkit-scrollbar {
-          display: none;
-      }
-    }
-  }
-
-}
+/*=======================================================
+Table of Contents:
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+  1.0 SWIPER BLOCKS
+    1.1 SWIPER DEFAULTS
+    1.2 BLOCK STYLES
+    1.3 SWIPER NAVIGATION ARROWS
+  2.0 FRONTEND ONLY
+    2.1 SWIPER
+=======================================================*/
 
 
+/*==================================================================================
+  1.0 SWIPER BLOCKS
+==================================================================================*/
 body.frontend,
 .block-editor .editor-styles-wrapper {
 
-  /* SWIPER
-  /––––––––––––––––––––––––*/
   .gallery-swiper {
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-  }
 
-}
-
-
-
-body.frontend,
-.block-editor .editor-styles-wrapper {
-
-  .add-popup {
-    ul {
-      li {
-        img {
-          cursor: pointer;
-        }
-      }
-    }
-  }
-
-  /* GRID
-  /––––––––––––––––––––––––*/
-  .gallery-grid {
-    ul {
-      list-style: none;
-    }
-  }
-
-
-  /* SWIPER
-  /––––––––––––––––––––––––*/
-  .gallery-swiper {
+    /* 1.1 SWIPER DEFAULTS
+    /––––––––––––––––––––––––*/
     position: relative;
     overflow: hidden;
     &:hover {
@@ -74,6 +36,9 @@ body.frontend,
       }
     }
     > ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
       display: flex;
       flex-direction: row;
       flex-wrap: nowrap;
@@ -103,40 +68,137 @@ body.frontend,
         img {
           width: 100%;
           height: auto;
-          object-fit: unset!important;
         }
       }
     }
+
+
+    /* 1.2 BLOCK STYLES
+    /––––––––––––––––––––––––*/
+    > .wp-block-gallery {
+      &.columns-1 {
+        --postColumns: 1;
+        --postColumnsSpace: 0;
+        > figure {
+          flex: 0 0 100%!important;
+          max-width: 100%!important;
+          width: 100%!important;
+          flex-basis: 100%!important;
+        }
+      }
+      &.columns-2 {
+        --postColumns: 2;
+        --postColumnsSpace: var(--gallery-block--gutter-size,16px);
+      }
+      &.columns-3 {
+        --postColumns: 3;
+        --postColumnsSpace: var(--gallery-block--gutter-size,16px);
+      }
+      &.columns-4 {
+        --postColumns: 4;
+        --postColumnsSpace: var(--gallery-block--gutter-size,16px);
+      }
+      --columnSpacing: calc(var(--postColumns) - 1);
+      --spaceFixer: calc(var(--postColumnsSpace) * var(--columnSpacing));
+      --containerwidth: calc(100% - var(--spaceFixer));
+      --childwidth: calc(var(--containerwidth) / var(--postColumns));
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: stretch;
+      overflow-x: scroll;
+      scroll-snap-type: x mandatory;
+      scroll-snap-align: start;
+      overflow-y: hidden;
+      width: 100%;
+      > figure {
+        flex: 0 0 var(--childwidth);
+        flex-basis: var(--childwidth);
+        width: var(--childwidth)!important;
+        max-width: var(--childwidth);
+        margin-bottom: 0;
+        margin-right: var(--postColumnsSpace)!important;
+        &:last-child {
+          margin-right: 0!important;
+        }
+      }
+    }
+    &.block-posts {
+      > ul {
+        justify-content: flex-start;
+        li {
+          flex: 0 0 var(--childwidth);
+          flex-basis: var(--childwidth);
+          width: var(--childwidth);
+          max-width: var(--childwidth);
+          margin-bottom: 0;
+          margin-right: var(--postColumnsSpace);
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+    &.gallery-block {}
+
+
+    /* 1.3 SWIPER NAVIGATION ARROWS
+    /––––––––––––––––––––––––*/
+    > .arrow {
+      cursor: pointer;
+      display: block;
+      position: absolute;
+      z-index: 1;
+      top: calc(50% - 35px);
+      border: solid transparent;
+      border-width: 5px 10px;
+      width: 40px;
+      height: 70px;
+      transition: .3s;
+      opacity: 0;
+      &.back {
+        left: 20px;
+      }
+      &.next {
+        transform: rotate(180deg);
+        right: 20px;
+      }
+      &.hidden {
+        opacity: 0;
+      }
+      svg {
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+
   }
 
 
-  /* SWIPER NAVIGATION ARROWS
+  /* 1.2 POSTS BLOCK
   /––––––––––––––––––––––––*/
-  .gallery-swiper .arrow {
-    cursor: pointer;
-    display: block;
-    position: absolute;
-    z-index: 1;
-    top: calc(50% - 35px);
-    border: solid transparent;
-    border-width: 5px 10px;
-    width: 40px;
-    height: 70px;
-    transition: .3s;
-    opacity: 0;
-    &.back {
-      left: 20px;
-    }
-    &.next {
-      transform: rotate(180deg);
-      right: 20px;
-    }
-    &.hidden {
-      opacity: 0;
-    }
-    svg {
-      max-width: 100%;
-      max-height: 100%;
+  .gallery-swiper {
+
+  }
+
+
+}
+
+/*==================================================================================
+  2.0 FRONTEND ONLY
+==================================================================================*/
+body.frontend {
+
+  /* 2.1 SWIPER
+  /––––––––––––––––––––––––*/
+  .gallery-swiper {
+    > .wp-block-gallery,
+    > ul {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      &::-webkit-scrollbar {
+          display: none;
+      }
     }
   }
 

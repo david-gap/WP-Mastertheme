@@ -7,39 +7,39 @@
  *
 */
 $video = '';
-$content = do_shortcode(apply_filters('the_content', get_the_content()));
-$embeds = get_media_embedded_in_content($content);
-if (!empty($embeds)):
-  //check what is the first embed containg video tag, youtube or vimeo
-  foreach ($embeds as $embed) {
-    $wrapper = true;
-    // css
-    if(strpos($embed, 'youtube')):
-      $video_css = 'wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube';
-    elseif(strpos($embed, 'vimeo')):
-      $video_css = 'wp-block-embed-vimeo wp-block-embed is-type-video is-provider-vimeo';
-    elseif(strpos($embed, 'dailymotion')):
-      $video_css = 'wp-block-embed-dailymotion wp-block-embed is-type-video is-provider-dailymotion';
-    elseif(strpos($embed, 'vine')):
-      $video_css = 'wp-block-embed-vine wp-block-embed is-type-video is-provider-vine';
-    elseif(strpos($embed, 'wordPress.tv')):
-      $video_css = 'wp-block-embed-wordPress-Tv wp-block-embed is-type-video is-provider-wordPress-Tv';
-    elseif(strpos($embed, 'hulu')):
-      $video_css = 'wp-block-embed-hulu wp-block-embed is-type-video is-provider-hulu';
-    elseif(strpos($embed, 'video')):
-        $wrapper = false;
-        $video_css = 'wp-block-video';
-    endif;
-    // return
-    if (strpos($embed, 'video') || strpos($embed, 'youtube') || strpos($embed, 'vimeo') || strpos($embed, 'dailymotion') || strpos($embed, 'vine') || strpos($embed, 'wordPress.tv') || strpos($embed, 'hulu')):
-      $video .= '<figure class="' . $video_css . '">';
-        $video .= $wrapper !== false ? '' : '<div class"wp-block-embed__wrapper">';
-          $video .= $embed;
-        $video .= $wrapper !== false ? '' : '</div>';
-      $video .= '</figure>';
+// check for blocks
+if(has_blocks()):
+  $supportedBlocks = array("core/embed", "templates/vimeo");
+  $blocks = parse_blocks( $post->post_content );
+  foreach ($blocks as $blockKey => $block) {
+    if(in_array($block['blockName'], $supportedBlocks)):
+        $video .= '<div class="gb-block">' . render_block($block) . '</div>';
       break;
     endif;
   }
+else:
+  $content = get_the_content();
+  $embeds = get_media_embedded_in_content($content);
+  if (!empty($embeds)):
+    //check what is the first embed containg video tag, youtube or vimeo
+    if(prefix_DSGVOsupport::$dsgvo_active == 1):
+      $video .= '<div class="gb-block">' . prefix_DSGVOsupport::fiterEmbeds($embeds[0]) . '</div>';
+    else:
+      $wrapper = true;
+      $blockWidth = 16;
+      if (preg_match("/width=\"(\\d+)/", $embeds[0], $matches)):
+        $blockWidth = $matches[1] * 1;
+      endif;
+      $blockHeight = 9;
+      if (preg_match("/height=\"(\\d+)/", $embeds[0], $matches)):
+        $blockHeight = $matches[1] * 1;
+      endif;
+      $paddingTop = 100 / $blockWidth * $blockHeight;
+      $blockAdds .= ' style="padding-top: ' . $paddingTop . '%"';
+      $blockClasses .= ' video-embed';
+      $video .= '<div class="gb-block"><div class="resp_video"' . $blockAdds . '>' . $embeds[0] . '</div></div>';
+    endif;
+  endif;
 endif;
 
 $css = 'temp-' . get_post_type() . '-video';

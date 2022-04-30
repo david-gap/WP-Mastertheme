@@ -28,7 +28,7 @@ html {
     padding: 0;
     font-family: var(--html__fontfamily, Arial);
     font-size: var(--html__fontsize, 12px);
-    line-height: var(--html__lineheight, 1.6);
+    line-height: var(--html__lineheight, 1.4);
     margin: 0;
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
@@ -51,14 +51,18 @@ body.frontend {
   // overflow-x: hidden;
   font-family: var(--html__fontfamily, Arial);
   font-size: var(--html__fontsize, 12px);
-  line-height: var(--html__lineheight, 1.6);
+  line-height: var(--html__lineheight, 1.4);
+  * {
+    /* Gutenberg font size
+    /––––––––––––––––––––––––*/
+    font-size: calc(var(--font-size) * var(--gutenberg__font_scale, 1));
+    line-height: calc(var(--font-size) * var(--gutenberg__font_scale, 1) * var(--html__lineheight, 1.4));
+    // font-size: var(--font-size);
+    // line-height: calc(var(--font-size) * var(--html__lineheight));
+  }
 
   main {
     * {
-      /* Gutenberg font size
-      /––––––––––––––––––––––––*/
-      font-size: var(--font-size);
-      line-height: calc(var(--font-size) * var(--html__lineheight));
       /* Anchor position
       /––––––––––––––––––––––––*/
       // anchors are not allowed to have top spacing
@@ -371,9 +375,15 @@ html[data-touch="false"] .call {
 /* DEFAULT FONT SIZE
 /––––––––––––––––––––––––*/
 .editor-styles-wrapper {
-  font-family: var(--html__fontfamily) !important;
-  font-size: var(--html__fontsize) !important;
-  line-height: var(--html__lineheight) !important;
+  font-family: var(--html__fontfamily, Arial)!important;
+  font-size: var(--html__fontsize, 12px)!important;
+  line-height: var(--html__lineheight, 1.4)!important;
+  * {
+    /* Gutenberg font size
+    /––––––––––––––––––––––––*/
+    font-size: calc(var(--font-size) * var(--gutenberg__font_scale, 1));
+    line-height: calc(var(--font-size) * var(--gutenberg__font_scale, 1) * var(--html__lineheight, 1.4));
+  }
 }
 
 

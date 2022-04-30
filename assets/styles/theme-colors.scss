@@ -11,35 +11,31 @@
 Table of Contents:
 –––––––––––––––––––––––––––––––––––––––––––––––––––––––––
   1.0 GENERAL
-    1.1 INPUTS
+    1.1 BACKGROUND
     1.2 LINKS
-    1.3 SOCIAL MEDIA
-    1.4 MARKED TEXT
-    1.5 ACCORDEON
-    1.6 BUTTONS
-    1.7 MAIN MENU
-    1.8 BREADCRUMBS
-    1.9 SEARCH RESULTS
-  2.0 LIGHT COLORING
-    2.1 MAIN BG
+    1.3 MARKER
+    1.4 INPUTS
+    1.5 BREADCRUMBS
+    1.6 LOADING
+  2.0 HEADER
+    2.1 BACKGROUND
     2.2 LOGO TEXT
     2.3 HAMBURGER
-    2.4 ACTIVE MENU
-    2.5 DIVIDER
-    2.6 INPUTS
-    2.7 LOADING
-    2.8 VIMEO TABLE OF CONTENT
-    2.9 GUTENBERG BLOCKS
-  3.0 DARK COLORING
-    3.1 MAIN BG
-    3.2 LOGO TEXT
-    3.3 HAMBURGER
-    3.4 ACTIVE MENU
-    3.5 DIVIDER
-    3.6 INPUTS
-    3.7 LOADING
-    3.8 VIMEO TABLE OF CONTENT
-    3.9 GUTENBERG BLOCKS
+    2.4 DIVIDER
+    2.5 MAIN MENU
+    2.6 ACTIVE MENU
+  3.0 MAIN
+    3.1 SEARCH RESULTS
+  4.0 BLOCKS
+    4.1 ACCORDION
+    4.2 BUTTONS
+    4.3 EXTENDED VIMEO
+    4.4 SEPERATOR
+    4.5 LIST
+    4.6 SOCIAL MEDIA
+  5.0 FOOTER
+    5.1 BACKGROUND
+    5.2 LINKS
 =======================================================*/
 
 
@@ -51,7 +47,40 @@ body.frontend,
     1.0 GENERAL
   ==================================================================================*/
 
-  /* 1.1 INPUTS
+  /* 1.1 BACKGROUND
+  /––––––––––––––––––––––––*/
+  background-color: var(--main_background);
+  color: var(--main_color);
+
+
+  /* 1.2 LINKS
+  /––––––––––––––––––––––––*/
+  a {
+    color: var(--color__main);
+    text-decoration: none;
+    &:hover {
+      color: var(--color__secondary);
+    }
+  }
+
+
+  /* 1.3 MARKER
+  /––––––––––––––––––––––––*/
+  mark {
+    background: var(--text__marked_bg);
+    color: var(--text__marked);
+  }
+  ::selection {
+    background: var(--text__marked_bg);
+    color: var(--text__marked);
+  }
+  ::-moz-selection {
+    background: var(--text__marked_bg);
+    color: var(--text__marked);
+  }
+
+
+  /* 1.4 INPUTS
   /––––––––––––––––––––––––*/
   input[type="submit"],
   button[type="submit"] {
@@ -71,10 +100,10 @@ body.frontend,
     background-color: var(--input__bg_color);
     border-color: var(--input__border_color);
     // placeholder
-    &::-webkit-input-placeholder {color: var(--input__placeholder_color);}
-    &::-moz-placeholder {color: var(--input__placeholder_color);}
-    &:-ms-input-placeholder {color: var(--input__placeholder_color);}
-    &:-moz-placeholder {color: var(--input__placeholder_color);}
+    &::-webkit-input-placeholder {color: var(--input__placeholder_color, var(--main_color));}
+    &::-moz-placeholder {color: var(--input__placeholder_color, var(--main_color));}
+    &:-ms-input-placeholder {color: var(--input__placeholder_color, var(--main_color));}
+    &:-moz-placeholder {color: var(--input__placeholder_color, var(--main_color));}
   }
   select {
     background-color: var(--input__select_bg_color);
@@ -114,41 +143,175 @@ body.frontend,
     }
   }
 
-  /* 1.2 LINKS
+
+  /* 1.5 BREADCRUMBS
   /––––––––––––––––––––––––*/
-  a {
-    color: var(--color__main);
-    text-decoration: none;
-    &:hover {
-      color: var(--color__secondary);
+  nav.breadcrumbs {
+    color: var(--bc__color, inherit);
+    background-color: var(--bc__background_color, inherit);
+    a {
+      color: var(--bc__link_color, inherit);
+      &:hover {
+        color: var(--bc__link_color_hover, inherit);
+      }
+    }
+    .current-page {
+      color: var(--bc__color_active, inherit);
     }
   }
 
-  /* 1.3 SOCIAL MEDIA
+
+  /* 1.6 LOADING
   /––––––––––––––––––––––––*/
-  .socialmedia li a svg {
-    fill: var(--color__main);
-  }
-  .socialmedia li a:hover svg {
-    fill: var(--color__secondary);
+  .loading {
+    &:before {
+      color: var(--main_color);
+    }
   }
 
-  /* 1.4 MARKER
-  /––––––––––––––––––––––––*/
-  mark {
-    background: var(--text__marked_bg);
-    color: var(--text__marked);
-  }
-  ::selection {
-    background: var(--text__marked_bg);
-    color: var(--text__marked);
-  }
-  ::-moz-selection {
-    background: var(--text__marked_bg);
-    color: var(--text__marked);
+
+
+  /*==================================================================================
+    2.0 HEADER
+  ==================================================================================*/
+
+  > header {
+
+    /* 2.1 BACKGROUND
+    /––––––––––––––––––––––––*/
+    background-color: var(--header_background);
+    .header-container {
+      background-color: var(--headercontainer_background);
+    }
+
+
+    /* 2.2 LOGO TEXT
+    /––––––––––––––––––––––––*/
+    .text_logo {
+      color: var(--color__main);
+    }
+
+
+    /* 2.3 HAMBURGER
+    /––––––––––––––––––––––––*/
+    .hamburger {
+      span {
+        background: var(--hamburger_color);
+        &:before,
+        &:after {
+            background: var(--hamburger_color);
+        }
+      }
+    }
+
+    /* 2.4 DIVIDER
+    /––––––––––––––––––––––––*/
+    > hr.divider {
+       border-color: var(--main_color);
+    }
+
+
+    /* 2.5 MAIN MENU
+    /––––––––––––––––––––––––*/
+    #menu-main-container {
+      > ul#menu_main {
+        > li {
+          &.current-menu-ancestor > a,
+          &.current-menu-item > a {
+            color: var(--mnav__color_active);
+            background-color: var(--mnav__background_color_active);
+          }
+          > a {
+            color: var(--mnav__color);
+            border-color: var(--mnav__border_color);
+            background-color: var(--mnav__background_color);
+            &:hover {
+              color: var(--mnav__color_hover);
+              background-color: var(--mnav__background_color_hover);
+            }
+          }
+          >ul {
+            > li {
+              &.current-menu-ancestor > a,
+              &.current-menu-item > a {
+                color: var(--mnav__sub_color_active);
+                background-color: var(--mnav__sub_background_color_active);
+              }
+              > a {
+                color: var(--mnav__sub_color);
+                border-color: var(--mnav__sub_border_color);
+                background-color: var(--mnav__sub_background_color);
+                &:hover {
+                  color: var(--mnav__sub_color_hover);
+                  background-color: var(--mnav__sub_background_color_hover);
+                }
+              }
+              > ul {
+                > li {
+                  &.current-menu-ancestor > a,
+                  &.current-menu-item > a {
+                    color: var(--mnav__subSub_color_active);
+                    background-color: var(--mnav__subSub_background_color_active);
+                  }
+                  > a {
+                    color: var(--mnav__subSub_color);
+                    border-color: var(--mnav__subSub_border_color);
+                    background-color: var(--mnav__subSub_background_color);
+                    &:hover {
+                      color: var(--mnav__subSub_color_hover);
+                      background-color: var(--mnav__subSub_background_color_hover);
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
   }
 
-  /* 1.5 ACCORDION
+
+  /* 2.6 ACTIVE MENU
+  /––––––––––––––––––––––––*/
+  &.active-menu {
+    #menu-main-container {
+      background-color: var(--mnav_background);
+    }
+  }
+
+
+
+  /*==================================================================================
+    3.0 MAIN
+  ==================================================================================*/
+
+  /* 3.1 SEARCH RESULTS
+  /––––––––––––––––––––––––*/
+  #search-results {
+    .results {
+      article {
+        border-color: var(--search__article_borderColor, inherit);
+      }
+    }
+  }
+
+
+  /* 3.5 POST TITLE
+  /––––––––––––––––––––––––*/
+  .post-title {
+    color: var(--postTitle__color, inherit);
+    background-color: var(--postTitle__bg, inherit);
+  }
+
+
+
+  /*==================================================================================
+    4.0 BLOCKS
+  ==================================================================================*/
+
+  /* 4.1 ACCORDION
   /––––––––––––––––––––––––*/
   .block-accordion {
     .accordion-item {
@@ -170,333 +333,84 @@ body.frontend,
     }
   }
 
-  /* 1.6 BUTTONS
-  /––––––––––––––––––––––––*/
-  .wp-block-buttons {
-    .wp-block-button {
-      .wp-block-button__link {
-        color: var(--block__buttons_color);
-        background-color: var(--block__buttons_bgColor);
-        border-color: var(--block__buttons_borderColor);
-        &:hover {
-          color: var(--block__buttonsHover_color);
-          background-color: var(--block__buttonsHover_bgColor);
-          border-color: var(--block__buttonsHover_borderColor);
-        }
-      }
-    }
-  }
 
-  /* 1.7 MAIN MENU
+  /* 4.2 BUTTONS
   /––––––––––––––––––––––––*/
-  #menu-main-container {
-    > ul#menu_main {
-      > li {
-        &.current-menu-ancestor > a,
-        &.current-menu-item > a {
-          color: var(--mnav__color_active);
-          background-color: var(--mnav__background_color_active);
-        }
-        > a {
-          color: var(--mnav__color);
-          border-color: var(--mnav__border_color);
-          background-color: var(--mnav__background_color);
-          &:hover {
-            color: var(--mnav__color_hover);
-            background-color: var(--mnav__background_color_hover);
-          }
-        }
-        >ul {
-          > li {
-            &.current-menu-ancestor > a,
-            &.current-menu-item > a {
-              color: var(--mnav__sub_color_active);
-              background-color: var(--mnav__sub_background_color_active);
-            }
-            > a {
-              color: var(--mnav__sub_color);
-              border-color: var(--mnav__sub_border_color);
-              background-color: var(--mnav__sub_background_color);
-              &:hover {
-                color: var(--mnav__sub_color_hover);
-                background-color: var(--mnav__sub_background_color_hover);
-              }
-            }
-            > ul {
-              > li {
-                &.current-menu-ancestor > a,
-                &.current-menu-item > a {
-                  color: var(--mnav__subSub_color_active);
-                  background-color: var(--mnav__subSub_background_color_active);
-                }
-                > a {
-                  color: var(--mnav__subSub_color);
-                  border-color: var(--mnav__subSub_border_color);
-                  background-color: var(--mnav__subSub_background_color);
-                  &:hover {
-                    color: var(--mnav__subSub_color_hover);
-                    background-color: var(--mnav__subSub_background_color_hover);
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
-  /* 1.8 BREADCRUMBS
-  /––––––––––––––––––––––––*/
-  nav.breadcrumbs {
-    color: var(--bc__color, inherit);
-    background-color: var(--bc__background_color, inherit);
-    a {
-      color: var(--bc__link_color, inherit);
+  .wp-block-button {
+    .wp-block-button__link {
+      color: var(--block__buttons_color);
+      background-color: var(--block__buttons_bgColor);
+      border-color: var(--block__buttons_borderColor);
       &:hover {
-        color: var(--bc__link_color_hover, inherit);
+        color: var(--block__buttonsHover_color);
+        background-color: var(--block__buttonsHover_bgColor);
+        border-color: var(--block__buttonsHover_borderColor);
       }
-    }
-    .current-page {
-      color: var(--bc__color_active, inherit);
     }
   }
 
-  /* 1.9 SEARCH RESULTS
+
+  /* 4.3 EXTENDED VIMEO
   /––––––––––––––––––––––––*/
-  #search-results {
-    .results {
-      article {
-        border-color: var(--search__article_borderColor, inherit);
+  .block-vimeo {
+    .arrow-toggle {
+      .label,
+      .table-of-content {
+        background-color: var(--main_background);
       }
     }
+  }
+
+
+  /* 4.4 SEPERATOR
+  /––––––––––––––––––––––––*/
+  hr.wp-block-separator {
+    color: var(--gbSeperator_color);
+  }
+
+
+  /* 4.5 LIST
+  /––––––––––––––––––––––––*/
+  ul.is-style-default li {
+    &:before {
+      color: var(--gbList_marker_color);
+    }
+  }
+
+  /* 4.6 SOCIAL MEDIA
+  /––––––––––––––––––––––––*/
+  .socialmedia li a svg {
+    fill: var(--color__main);
+  }
+  .socialmedia li a:hover svg {
+    fill: var(--color__secondary);
   }
 
 
 
   /*==================================================================================
-    2.0 LIGHT COLORING
+    5.0 FOOTER
   ==================================================================================*/
 
-  &.light,
-  &:not(.dark) {
+  footer {
 
-    /* 2.1 MAIN BG
+    /* 5.1 BACKGROUND
     /––––––––––––––––––––––––*/
-    background-color: var(--light__main_background);
-    color: var(--light__main_color);
-    > header {
-      background-color: var(--light__header_background);
-      .header-container {
-        background-color: var(--light__headercontainer_background);
-      }
-    }
-    footer {
-      color: var(--light__footer_color);
-      background-color: var(--light__footer_background);
-      a {
-        color: var(--light__footer_link_color);
-        &:hover {
-          color: var(--light__footer_linkHover_color);
-        }
-      }
-      .footer-container {
-        background-color: var(--light__footercontainer_background);
-      }
+    color: var(--footer_color);
+    background-color: var(--footer_background);
+    .footer-container {
+      background-color: var(--footercontainer_background);
     }
 
-    /* 2.2 LOGO TEXT
+
+    /* 5.2 LINKS
     /––––––––––––––––––––––––*/
-    .text_logo {
-      color: var(--color__main);
-    }
-
-    /* 2.3 HAMBURGER
-    /––––––––––––––––––––––––*/
-     header .hamburger {
-      span {
-        background: var(--light__hamburger_color);
-        &:before,
-        &:after {
-            background: var(--light__hamburger_color);
-        }
+    a {
+      color: var(--footer_link_color);
+      &:hover {
+        color: var(--footer_linkHover_color);
       }
     }
-
-    /* 2.4 ACTIVE MENU
-    /––––––––––––––––––––––––*/
-    &.active-menu {
-      #menu-main-container {
-        background-color: var(--light__mnav_background);
-      }
-    }
-
-    /* 2.5 DIVIDER
-    /––––––––––––––––––––––––*/
-     header > hr.divider {
-       border-color: var(--light__main_color);
-    }
-
-    /* 2.6 INPUTS
-    /––––––––––––––––––––––––*/
-    input, select, textarea {
-      &::-webkit-input-placeholder {color: var(--light__main_color); }
-      &::-moz-placeholder {color: var(--light__main_color); }
-      &:-ms-input-placeholder {color: var(--light__main_color); }
-      &:-moz-placeholder {color: var(--light__main_color); }
-    }
-
-    /* 2.7 LOADING
-    /––––––––––––––––––––––––*/
-    .loading {
-      &:before {
-        color: var(--light__main_color);
-      }
-    }
-
-    /* 2.8 VIMEO TABLE OF CONTENT
-    /––––––––––––––––––––––––*/
-    .block-vimeo {
-      .arrow-toggle {
-        .label,
-        .table-of-content {
-          background-color: var(--light__main_background);
-        }
-      }
-    }
-
-    /* 2.9 GUTENBERG BLOCKS
-    /––––––––––––––––––––––––*/
-    // seperator
-    hr.wp-block-separator {
-      color: var(--light__gbSeperator_color);
-    }
-    // list
-    ul.is-style-default li {
-      &:before {
-        color: var(--light__gbList_marker_color);
-      }
-    }
-
-
-
-  }
-
-
-
-  /*==================================================================================
-    3.0 DARK COLORING
-  ==================================================================================*/
-
-  /* 3.2 DARK THEME
-  /––––––––––––––––––––––––*/
-  &.dark {
-
-    /* 3.1 MAIN BG
-    /––––––––––––––––––––––––*/
-    background-color: var(--dark__main_background);
-    color: var(--dark__main_color);
-    > header {
-      background-color: var(--dark__header_background);
-      .header-container {
-        background-color: var(--dark__headercontainer_background);
-      }
-    }
-    footer {
-      color: var(--dark__footer_color);
-      background-color: var(--dark__footer_background);
-      a {
-        color: var(--dark__footer_link_color);
-        &:hover {
-          color: var(--dark__footer_linkHover_color);
-        }
-      }
-      .footer-container {
-        background-color: var(--dark__footercontainer_background);
-      }
-    }
-
-    /* 3.2 LOGO TEXT
-    /––––––––––––––––––––––––*/
-    .text_logo {
-      color: var(--color__secondary);
-    }
-
-    /* 3.3 HAMBURGER
-    /––––––––––––––––––––––––*/
-    header .hamburger {
-      span {
-        background: var(--dark__hamburger_color);
-        &:before,
-        &:after {
-            background: var(--dark__hamburger_color);
-        }
-      }
-    }
-
-    /* 3.4 ACTIVE MENU
-    /––––––––––––––––––––––––*/
-    &.active-menu {
-      #menu-main-container {
-        background-color: var(--dark__mnav_background);
-      }
-    }
-
-    /* 3.5 DIVIDER
-    /––––––––––––––––––––––––*/
-     header > hr.divider {
-       border-color: var(--dark__main_color);
-    }
-
-    /* 3.6 INPUTS
-    /––––––––––––––––––––––––*/
-    input, select, textarea {
-      &::-webkit-input-placeholder {
-        color: var(--input__placeholder_color);
-      }
-      &::-moz-placeholder {
-        color: var(--input__placeholder_color);
-      }
-      &:-ms-input-placeholder {
-        color: var(--input__placeholder_color);
-      }
-      &:-moz-placeholder {
-        color: var(--input__placeholder_color);
-      }
-    }
-
-    /* 3.7 LOADING
-    /––––––––––––––––––––––––*/
-    .loading {
-      &:before {
-        color: var(--dark__main_color);
-      }
-    }
-
-    /* 3.8 VIMEO TABLE OF CONTENT
-    /––––––––––––––––––––––––*/
-    .block-vimeo {
-      .arrow-toggle {
-        .label,
-        .table-of-content {
-          background-color: var(--dark__main_background);
-        }
-      }
-    }
-
-    /* 3.9 GUTENBERG BLOCKS
-    /––––––––––––––––––––––––*/
-    hr.wp-block-separator {
-      color: var(--dark__gbSeperator_color);
-    }
-    // list
-    ul.is-style-default li {
-      &:before {
-        color: var(--dark__gbList_marker_color);
-      }
-    }
-
-
 
   }
 

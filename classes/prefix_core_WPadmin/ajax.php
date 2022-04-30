@@ -79,6 +79,13 @@ if($run_action) {
         'type' => 'error'
       );
     endif;
+    // check for classes actions on publish
+    // $registered_classes = get_declared_classes();
+    // foreach ($registered_classes as $class_key => $classname) {
+    //   if(strpos($classname, 'prefix_') === 0 && strpos($classname, '_core_') == false && method_exists($classname, 'returnCustomPublishAction')):
+    //     $return['message'] .= $classname::returnCustomPublishAction();
+    //   endif;
+    // }
     echo json_encode($return);
   }
 

@@ -2,7 +2,7 @@
  * Swiper & Grid gallery with popup
  *
  * @author      David Voglgsang
- * @version     1.2
+ * @version     1.3
  *
  */
 
@@ -18,10 +18,9 @@ const galleryArrow = '<svg xmlns="http://www.w3.org/2000/svg" width="60.043" hei
       galleryArrowAfter = '<span class="arrow next hidden">' + galleryArrow + '</span>';
 
 
-
 /* Add ID to gallery
 /------------------------*/
-var activeGalleries = document.querySelectorAll('.gallery-swiper, .gallery-grid');
+var activeGalleries = document.querySelectorAll('.gallery-swiper, .gallery-grid, .wp-block-gallery.add-popup');
 if(activeGalleries.length > 0){
   Array.from(activeGalleries).forEach(function(gallery) {
     // open pop-up
@@ -43,7 +42,11 @@ function addNavArrows(gallery){
   var getcolumnssum    = gallery.closest(".gallery-swiper").getAttribute('data-columns'),
       columnssum       = getcolumnssum === null ? 1 : parseInt(getcolumnssum);
   // show next arrow if more elements exist
-  var galleryChildren = gallery.querySelectorAll('ul li');
+  if(gallery.classList.contains('wp-block-gallery-container')){
+    var galleryChildren = gallery.querySelectorAll('figure figure');
+  } else {
+    var galleryChildren = gallery.querySelectorAll('ul li');
+  }
   if (galleryChildren.length > 1 && columnssum < galleryChildren.length) {
     var arrowNext = gallery.querySelector('.next');
     arrowNext.classList.remove('hidden');
@@ -64,26 +67,48 @@ function addNavArrows(gallery){
 function clickArrow(){
   // get values
   var parent           = this.closest(".gallery-swiper"),
+      parentID         = parent.getAttribute('data-id'),
       getcolumnssum    = this.closest(".gallery-swiper").getAttribute('data-columns'),
       getcolumnspacing = this.closest(".gallery-swiper").getAttribute('data-columnspace'),
-      container        = parent.getElementsByTagName('ul'),
       arrowBack        = parent.querySelector('.back'),
       arrowNext        = parent.querySelector('.next');
+  // get container
+  if(parent.classList.contains('wp-block-gallery-container')){
+    // define column spacing
+    var container = document.querySelector('[data-id="' + parentID + '"] > figure');
+    var getMarginRight = getStyle(container.children.[0], 'margin-right');
+    getcolumnspacing = getMarginRight.replace(/\D/g,'');
+    // define column sum
+    if(container.classList.contains('columns-4')){
+      var getcolumnssum = 4;
+    } else if (container.classList.contains('columns-3')) {
+      var getcolumnssum = 3;
+    } else if (container.classList.contains('columns-2')) {
+      var getcolumnssum = 2;
+    } else if (container.classList.contains('columns-1')) {
+      var getcolumnssum = 1;
+    } else {
+      var getcolumnssum = 1;
+    }
+  } else {
+    var container = document.querySelector('[data-id="' + parentID + '"] > ul');
+  }
   // do math
   var columnssum       = getcolumnssum === null ? 1 : parseInt(getcolumnssum),
-      columnspacing    = columnspacing === null ? 0 : parseInt(getcolumnspacing),
-      totalWidth       = container.[0].scrollWidth,
-      stepSize         = container.[0].children.[0].clientWidth + (isNaN(columnspacing) ? 0 : columnspacing),
-      backStep         = container.[0].scrollLeft - stepSize,
-      nextStep         = container.[0].scrollLeft + stepSize,
+      columnspacing    = getcolumnspacing === null ? 0 : parseInt(getcolumnspacing),
+      totalWidth       = container.scrollWidth,
+      stepSize         = container.children.[0].clientWidth + (isNaN(columnspacing) ? 0 : columnspacing),
+      backStep         = container.scrollLeft - stepSize,
+      nextStep         = container.scrollLeft + stepSize,
       maxRight         = totalWidth - (stepSize * columnssum);
+      // noRight          = totalWidth - maxRight - stepSize;
   // move slider
   if (this.classList.contains('back')) {
     var offset = backStep;
   } else if (this.classList.contains('next')) {
     var offset = nextStep;
   }
-  container.[0].scroll({
+  container.scroll({
     left: offset,
     behavior: 'smooth'
   })
@@ -99,13 +124,15 @@ function clickArrow(){
     arrowNext.classList.remove('hidden');
   }
   // debug
+  // console.log("total width: " + totalWidth);
   // console.log("columns: " + columnssum);
   // console.log("columns spacing: " + columnspacing);
+  // console.log("child size: " + container.children.[0].clientWidth);
   // console.log("step size: " + stepSize);
   // console.log("offset: " + offset);
   // console.log("max right: " + maxRight);
-  // console.log("step size: " + stepSize);
 }
+
 
 /* Check for active swipers
 /------------------------*/
@@ -116,6 +143,8 @@ if(activeSwipers.length > 0){
     addNavArrows(swiper);
   });
 }
+
+
 
 /*==================================================================================
 POP-UP
@@ -133,12 +162,13 @@ function checkImgArrows(imgParent){
     popupArrowBack.classList.remove('hidden');
   }
   // next
-  if (imgParent.nextSibling === null) {
+  if (imgParent.nextElementSibling === null) {
     popupArrowNext.classList.add('hidden');
   } else {
     popupArrowNext.classList.remove('hidden');
   }
 }
+
 
 /* Get next image
 /------------------------*/
@@ -148,14 +178,20 @@ function getNextImg(){
       currentPopUpID = currentPopUp.getAttribute('data-id'),
       currentImg = document.querySelector('.popup > .popup-container > .popup-content > img, .popup > .popup-container > .popup-content > audio, .popup > .popup-container > .popup-content > video'),
       currentImgID = currentImg.getAttribute('data-id'),
-      imgInGallery = document.querySelector('[data-id="' + currentPopUpID + '"] li[data-id="' + currentImgID + '"] figure'),
-      imgInGalleryParent = imgInGallery.closest('li');
+      currentImgParent = document.querySelector('[data-id="' + currentPopUpID + '"]');
+
+  if(currentImgParent.classList.contains('wp-block-gallery')){
+    var imgInGallery = document.querySelector('[data-id="' + currentPopUpID + '"] figure img[data-id="' + currentImgID + '"]'),
+        imgInGalleryParent = imgInGallery.closest('figure');
+  } else {
+    var imgInGallery = document.querySelector('[data-id="' + currentPopUpID + '"] li[data-id="' + currentImgID + '"] figure'),
+        imgInGalleryParent = imgInGallery.closest('li');
+  }
   // get next img
   if(this.classList.contains('next')){
-    var newImgParent = imgInGalleryParent.nextSibling;
-
+    var newImgParent = imgInGalleryParent.nextElementSibling;
   } else if (this.classList.contains('back')) {
-    var newImgParent = imgInGalleryParent.previousSibling;
+    var newImgParent = imgInGalleryParent.previousElementSibling;
   }
   var newImg = newImgParent.querySelector('img, audio, video');
   document.querySelector('.popup > .popup-container > .popup-content').innerHTML = '';
@@ -163,19 +199,35 @@ function getNextImg(){
   // update arrows
   checkImgArrows(newImgParent);
   // update preview images
-  PreviewImages(newImg);
+  if(currentImgParent.classList.contains('popup-preview')){
+    if(currentImgParent.classList.contains('wp-block-gallery')){
+      var newImgID = newImgParent.querySelector('img').getAttribute('data-id');
+    } else {
+      var newImgID = newImgParent.getAttribute('data-id');
+    }
+    PreviewImages(newImgID, currentPopUpID);
+  }
 }
+
 
 /* Get preview images
 /------------------------*/
-function PreviewImages(currentImg){
+function PreviewImages(imgID, galleryID){
+  var gallery = document.querySelector('[data-id="' + galleryID + '"]');
   // get images
-  var imgInGalleryParent = currentImg.closest('li');
-  var nextImg = imgInGalleryParent.nextSibling;
-  var prevImg = imgInGalleryParent.previousSibling;
-
+  if(gallery.classList.contains('wp-block-gallery')){
+    var currentImg = gallery.querySelector('figure img[data-id="' + imgID + '"]'),
+        imgInGalleryParent = currentImg.closest('figure');
+  } else {
+    var currentImg = gallery.querySelector('li[data-id="' + imgID + '"] figure'),
+        imgInGalleryParent = currentImg.closest('li');
+  }
+  var nextImg = imgInGalleryParent.nextElementSibling;
+  var prevImg = imgInGalleryParent.previousElementSibling;
+  // preview containers
   var popupNextPreview = document.querySelector('.popup > .popup-next-preview');
   var popupBackPreview = document.querySelector('.popup > .popup-back-preview');
+  // reset preview
   if(popupNextPreview){
     // reset next preview image
     document.querySelector('.popup > .popup-next-preview').innerHTML = '';
@@ -218,10 +270,20 @@ function loadGalleryPopUp(){
       // define popup to be with preview
       document.querySelector('.popup > .popup-container').classList.add('popup-preview');
       // get preview images
-      PreviewImages(self);
+      if(currentGallery.classList.contains('wp-block-gallery')){
+        var imgID = self.getAttribute('data-id');
+      } else {
+        var imgID = self.closest('li').getAttribute('data-id');
+      }
+      PreviewImages(imgID, currentGallery.getAttribute('data-id'));
     }
-    // show arrows
-    var parentLi = self.closest('li');
+    // check popup arrows
+    if(currentGallery.classList.contains('wp-block-gallery')){
+      var parentLi = self.closest('figure');
+    } else {
+      var parentLi = self.closest('li');
+    }
+    checkImgArrows(parentLi);
     // event for arrows
     var arrows = document.querySelectorAll('.popup > .popup-container > .arrow');
     if(arrows.length > 0){
@@ -230,15 +292,13 @@ function loadGalleryPopUp(){
         arrow.addEventListener('keypress', getNextImg);
       });
     }
-    // update arrows
-    checkImgArrows(parentLi);
   }, 100, this);
 }
 
 
 /* Check for active swipers/grid without url
 /------------------------*/
-var activeGalleryPopUps = document.querySelectorAll('.add-popup > ul > li > figure > img');
+var activeGalleryPopUps = document.querySelectorAll('.add-popup figure > img');
 if(activeGalleryPopUps.length > 0){
   Array.from(activeGalleryPopUps).forEach(function(popup) {
     // open pop-up

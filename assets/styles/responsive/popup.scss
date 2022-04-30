@@ -4,10 +4,10 @@
     width: calc(100vw - var(--popup__space, 40px) - var(--popup__space, 40px));
   }
   .popup-back-preview {
-    left: calc(var(--popup_prev_visible, 0px) + var(--popup__space, 40px) + var(--popup__space, 40px) - 100%);
+    left: calc(var(--popup_prev_visible, 30px) + var(--popup__space, 40px) + var(--popup__space, 40px) - 100%);
   }
   .popup-next-preview {
-    right: calc(var(--popup_prev_visible, 0px) + var(--popup__space, 40px) + var(--popup__space, 40px) - 100%);
+    right: calc(var(--popup_prev_visible, 30px) + var(--popup__space, 40px) + var(--popup__space, 40px) - 100%);
   }
   .popup-container {
     &:not(.popup-preview) {

@@ -16,10 +16,14 @@ get_header();
   <?php if ( have_posts() ) : ?>
     <div class="results">
       <?php while ( have_posts() ) : the_post();
-        if(get_post_type() == "post"):
+        if(get_post_type() == "post" || post_type_supports(get_post_type(), 'post-formats')):
           // blog output
-          $blog_type = get_post_meta($id, 'template_blog_type', true) ? get_post_meta($id, 'template_blog_type', true) : "default";
-          get_template_part('template_parts/' . get_post_type() . '_' . $blog_type);
+          $blog_type = get_post_format();
+          if(locate_template('template_parts/' . get_post_type() . '_' . $blog_type)):
+            get_template_part('template_parts/' . get_post_type() . '_' . $blog_type);
+          else:
+            get_template_part('template_parts/post_' . $blog_type);
+          endif;
         else:
           // default output
           get_template_part('template_parts/post_default');

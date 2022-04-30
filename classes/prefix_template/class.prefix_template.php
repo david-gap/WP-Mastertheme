@@ -215,6 +215,7 @@ class prefix_template {
     "time" => 0,
     "author" => 0,
     "title" => 1,
+    "thumbnail" => 1,
     "comments" => 1,
     "sidebar" => 1,
     "scrolltotop" => 0,
@@ -402,6 +403,7 @@ class prefix_template {
       __('Page options', 'devTheme'),
       __('Hide header', 'devTheme'),
       __('Hide date', 'devTheme'),
+      __('Hide thumbnail', 'devTheme'),
       __('Hide time', 'devTheme'),
       __('Hide author', 'devTheme'),
       __('Hide title', 'devTheme'),
@@ -952,6 +954,10 @@ class prefix_template {
               "label" => "Hide author",
               "type" => "switchbutton"
             ),
+            "thumbnail" => array(
+              "label" => "Hide thumbnail",
+              "type" => "switchbutton"
+            ),
             "title" => array(
               "label" => "Hide title",
               "type" => "switchbutton"
@@ -1373,8 +1379,18 @@ class prefix_template {
       // page
       register_sidebar( array(
         'name'          => __( 'Page Sidebar', 'devTheme' ),
-        'id'            => 'sidebar',
-        'description'   => __( 'Sidebar Widget for Pages', 'devTheme' ),
+        'id'            => 'sidebar-page',
+        'description'   => __( 'Sidebar Widget for pages', 'devTheme' ),
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h5 class="sidebar-widget">',
+        'after_title'   => '</h5>',
+      ) );
+      // posts
+      register_sidebar( array(
+        'name'          => __( 'Posts Sidebar', 'devTheme' ),
+        'id'            => 'sidebar-post',
+        'description'   => __( 'Sidebar Widget for posts', 'devTheme' ),
         'before_widget' => '<div id="%1$s" class="widget %2$s">',
         'after_widget'  => '</div>',
         'before_title'  => '<h5 class="sidebar-widget">',
@@ -1823,7 +1839,8 @@ class prefix_template {
         // get hamburger
         if($request !== 'menu'):
           if($hamburgerText !== ''):
-            $output .= '<div class="hamburger-container">';
+            $output .= '<div class="hamburger-container ' . $hamburger_active . '">';
+            $hamburger_active = '';
           endif;
             $output .= '<button class="hamburger ' . $hamburger_active . '" aria-label="Main Menu">';
               $output .= '<span class="menu-icon">&nbsp;</span>';

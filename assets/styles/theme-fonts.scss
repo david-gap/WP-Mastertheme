@@ -14,6 +14,9 @@ Table of Contents:
   2.0 MAIN
     2.1 BREADCRUMBS
     2.2 SEARCH RESULTS
+    2.3 RESET LINE-HEIGHT
+    2.4 POST TITLE
+    2.5 404 PAGE
   3.0 FOOTER
   4.0 GENERAL
   5.0 BLOCKS
@@ -42,30 +45,30 @@ body.frontend,
         }
       }
       #menu-main-container {
-        font-family: var(--mnav__fontfamily);
-        font-size: var(--mnav__fontsize);
-        line-height: var(--mnav__lineheight);
-        font-weight: var(--mnav__fontWeight);
-        text-transform: var(--mnav__textTransform);
+        font-family: var(--mnav__fontfamily, inherit);
+        font-size: var(--mnav__fontsize, 100%);
+        line-height: var(--mnav__lineheight, 1.4);
+        font-weight: var(--mnav__fontWeight, 700);
+        text-transform: var(--mnav__textTransform, uppercase);
         letter-spacing: var(--mnav__letterSpacing, 0);
         ul#menu_main {
           > li {
             > ul {
               > li {
-                font-family: var(--mnav__sub_fontfamily);
-                font-size: var(--mnav__sub_fontsize);
-                line-height: var(--mnav__sub_lineheight);
-                font-weight: var(--mnav__sub_fontWeight);
-                text-transform: var(--mnav__sub_textTransform);
+                font-family: var(--mnav__sub_fontfamily, inherit);
+                font-size: var(--mnav__sub_fontsize, 80%);
+                line-height: var(--mnav__sub_lineheight, inherit);
+                font-weight: var(--mnav__sub_fontWeight, 500);
+                text-transform: var(--mnav__sub_textTransform, none);
                 letter-spacing: var(--mnav__sub_letterSpacing, 0);
                 > ul {
                   > li {
-                    font-family: var(--mnav__subSub_fontfamily, var(--mnav__sub_fontfamily));
-                    font-size: var(--mnav__subSub_fontsize, var(--mnav__sub_fontsize));
-                    line-height: var(--mnav__subSub_lineheight, var(--mnav__sub_lineheight));
-                    font-weight: var(--mnav__subSub_fontWeight, var(--mnav__sub_fontWeight));
-                    text-transform: var(--mnav__subSub_textTransform, var(--mnav__sub_textTransform));
-                    letter-spacing: var(--mnav__subSub_letterSpacing, var(--mnav__sub_letterSpacing));
+                    font-family: var(--mnav__subSub_fontfamily, var(--mnav__sub_fontfamily, inherit));
+                    font-size: var(--mnav__subSub_fontsize, var(--mnav__sub_fontsize, 80%));
+                    line-height: var(--mnav__subSub_lineheight, var(--mnav__sub_lineheight, inherit));
+                    font-weight: var(--mnav__subSub_fontWeight, var(--mnav__sub_fontWeight, 500));
+                    text-transform: var(--mnav__subSub_textTransform, var(--mnav__sub_textTransform, none));
+                    letter-spacing: var(--mnav__subSub_letterSpacing, var(--mnav__sub_letterSpacing, 0));
                   }
                 }
               }
@@ -75,9 +78,9 @@ body.frontend,
       }
       .hamburger-container {
         .menu-title {
-          font-size: var(--hamburger__title_fontSize);
-          line-height: var(--hamburger__title_LineHeight);
-          font-weight: var(--hamburger__title_fontWeight);
+          font-size: var(--hamburger__title_fontSize, inherit);
+          line-height: var(--hamburger__title_LineHeight, inherit);
+          font-weight: var(--hamburger__title_fontWeight, inherit);
         }
       }
     }
@@ -99,6 +102,7 @@ body.frontend,
     text-transform: var(--bc__textTransform, inherit);
   }
 
+
   /* 2.2 SEARCH RESULTS
   /––––––––––––––––––––––––*/
   #search-results {
@@ -116,6 +120,47 @@ body.frontend,
   }
 
 
+  /* 2.3 RESET LINE-HEIGHT
+  /––––––––––––––––––––––––*/
+  .wp-block-image,
+  #search-results .results article > figure,
+  #home article > figure,
+  .block-posts ul > li > figure,
+  .block-posts ul > li > a > figure,
+  .block-postsfilter .results > div > figure,
+  .block-postsfilter .results > div > a > figure {
+    line-height: 0;
+  }
+
+
+  /* 2.4 POST TITLE
+  /––––––––––––––––––––––––*/
+  .post-title {
+    font-family: var(--postTitle__fontFamily, inherit);
+    font-size: var(--postTitle__fontSize, inherit);
+    line-height: var(--postTitle__lineHeight, inherit);
+    font-weight: var(--postTitle__fontWeight, inherit);
+    text-transform: var(--postTitle__textTransform, inherit);
+    letter-spacing: var(--postTitle__letterSpacing, inherit);
+  }
+
+
+  /* 2.5 404 PAGE
+  /––––––––––––––––––––––––*/
+  #error-page {
+    article {
+      h1.post-title {
+        font-family: var(--error__title_fontFamily, var(--postTitle__fontFamily, inherit));
+        font-size: var(--error__title_fontSize, var(--postTitle__fontSize, inherit));
+        line-height: var(--error__title_lineHeight, var(--postTitle__lineHeight, inherit));
+        font-weight: var(--error__title_fontWeight, var(--postTitle__fontWeight, inherit));
+        text-transform: var(--error__title_textTransform, var(--postTitle__textTransform, inherit));
+        letter-spacing: var(--error__title_letterSpacing, var(--postTitle__letterSpacing, inherit));
+      }
+    }
+  }
+
+
 
   /*==================================================================================
     3.0 FOOTER
@@ -123,8 +168,8 @@ body.frontend,
 
   > footer {
     .footer-container {
-      font-size: var(--footer__fontsize);
-      line-height: var(--footer__lineheight);
+      font-size: var(--footer__fontsize, 10px);
+      line-height: var(--footer__lineheight, 1.4);
     }
   }
 
@@ -133,7 +178,7 @@ body.frontend,
   /*==================================================================================
     4.0 GENERAL
   ==================================================================================*/
-  font-weight: var(--html__fontweight);
+  font-weight: var(--html__fontweight, 400);
 
   small {
     font-size: var(--html__fontsize_small, 70%);
@@ -158,6 +203,7 @@ body.frontend,
     text-align: center;
   }
   select {
+    font-family: var(--input__select_fontFamily, var(--input__fontFamily, inherit));
     font-size: var(--input__select_fontSize, var(--input__fontSize, inherit));
     line-height: var(--input__select_lineHeight, var(--input__lineHeight, inherit));
     font-weight: var(--input__select_fontWeight, var(--input__fontWeight, inherit));
@@ -252,11 +298,11 @@ body.frontend,
   .wp-block-buttons {
     .wp-block-button {
       .wp-block-button__link {
-        font-family: var(--block__buttons_fontFamily);
-        font-size: var(--block__buttons_fontSize);
-        font-weight: var(--block__buttons_fontWeight);
-        line-height: var(--block__buttons_lineHeight);
-        text-transform: var(--block__buttons_textTransform);
+        font-family: var(--block__buttons_fontFamily, inherit);
+        font-size: var(--block__buttons_fontSize, inherit);
+        font-weight: var(--block__buttons_fontWeight, inherit);
+        line-height: var(--block__buttons_lineHeight, inherit);
+        text-transform: var(--block__buttons_textTransform, inherit);
       }
     }
   }
@@ -281,6 +327,39 @@ body.frontend,
           letter-spacing: var(--block__tableHead_letterSpacing, 0px);
         }
       }
+    }
+  }
+
+  /* 5.3 SEPARATORS
+  /––––––––––––––––––––––––*/
+  hr.wp-block-separator {
+    &.is-style-dots {
+      line-height: 1;
+      &:before {
+        font-size: var(--block__separatorDots_fontSize, inherit);
+      }
+    }
+  }
+
+  /* 5.4 POSTS
+  /––––––––––––––––––––––––*/
+  .block-posts {
+    > ul {
+      > li {
+        > figure,
+        > a > figure {
+          line-height: 0;
+        }
+      }
+    }
+  }
+
+  /* 5.5 IMAGE
+  /––––––––––––––––––––––––*/
+  .wp-block-image {
+    figcaption {
+      font-size: var(--block__imageFigcaption_fontSize, inherit);
+      line-height: var(--block__imageFigcaption_lineHeight, inherit);
     }
   }
 
