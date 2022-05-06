@@ -26,6 +26,8 @@ Table of Contents:
     2.6 ACTIVE MENU
   3.0 MAIN
     3.1 SEARCH RESULTS
+    3.2 POST TITLE
+    3.3 LEAD
   4.0 BLOCKS
     4.1 ACCORDION
     4.2 BUTTONS
@@ -298,11 +300,21 @@ body.frontend,
   }
 
 
-  /* 3.5 POST TITLE
+  /* 3.2 POST TITLE
   /––––––––––––––––––––––––*/
-  .post-title {
+  .post-title,
+  .is-style-post-title {
     color: var(--postTitle__color, inherit);
     background-color: var(--postTitle__bg, inherit);
+  }
+
+
+  /* 3.3 LEAD
+  /––––––––––––––––––––––––*/
+  .leadtext,
+  .is-style-lead {
+    color: var(--leadText__color, inherit);
+    background-color: var(--leadText__bg, inherit);
   }
 
 

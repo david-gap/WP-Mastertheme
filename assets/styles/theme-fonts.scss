@@ -16,7 +16,8 @@ Table of Contents:
     2.2 SEARCH RESULTS
     2.3 RESET LINE-HEIGHT
     2.4 POST TITLE
-    2.5 404 PAGE
+    2.5 LEAD
+    2.6 404 PAGE
   3.0 FOOTER
   4.0 GENERAL
   5.0 BLOCKS
@@ -135,7 +136,8 @@ body.frontend,
 
   /* 2.4 POST TITLE
   /––––––––––––––––––––––––*/
-  .post-title {
+  .post-title,
+  .is-style-post-title {
     font-family: var(--postTitle__fontFamily, inherit);
     font-size: var(--postTitle__fontSize, inherit);
     line-height: var(--postTitle__lineHeight, inherit);
@@ -145,7 +147,20 @@ body.frontend,
   }
 
 
-  /* 2.5 404 PAGE
+  /* 2.5 LEAD
+  /––––––––––––––––––––––––*/
+  .leadtext,
+  .is-style-lead {
+    font-family: var(--leadText__fontFamily, inherit);
+    font-size: var(--leadText__fontSize, inherit);
+    line-height: var(--leadText__lineHeight, inherit);
+    font-weight: var(--leadText__fontWeight, inherit);
+    text-transform: var(--leadText__textTransform, inherit);
+    letter-spacing: var(--leadText__letterSpacing, inherit);
+  }
+
+
+  /* 2.6 404 PAGE
   /––––––––––––––––––––––––*/
   #error-page {
     article {
@@ -303,6 +318,7 @@ body.frontend,
         font-weight: var(--block__buttons_fontWeight, inherit);
         line-height: var(--block__buttons_lineHeight, inherit);
         text-transform: var(--block__buttons_textTransform, inherit);
+        letter-spacing: var(--block__buttons_letterSpacing, inherit);
       }
     }
   }

@@ -4,7 +4,7 @@
  *
  * Customizer extension
  * Author:      David Voglgsnag
- * @version     1.2
+ * @version     1.3
  *
  */
 
@@ -1149,47 +1149,100 @@ class prefix_core_Customizer {
               'type' => 'input'
             ),
             'postTitle__fontSize' => array(
-              'label' => 'Title font size',
+              'label' => 'Font size',
               'type' => 'input'
             ),
             'postTitle__lineHeight' => array(
-              'label' => 'Title line height',
+              'label' => 'Line height',
               'type' => 'input'
             ),
             'postTitle__padding' => array(
-              'label' => 'padding',
+              'label' => 'Padding',
               'type' => 'input'
             ),
             'postTitle__margin' => array(
-              'label' => 'Title margin',
+              'label' => 'Margin',
               'type' => 'input'
             ),
             'postTitle__fontWeight' => array(
-              'label' => 'Title font weight',
+              'label' => 'Font weight',
               'type' => 'input'
             ),
             'postTitle__textTransform' => array(
-              'label' => 'Title text transform',
+              'label' => 'Text transform',
               'type' => 'input'
             ),
             'postTitle__letterSpacing' => array(
-              'label' => 'Title text transform',
+              'label' => 'Letter spacing',
               'type' => 'input'
             ),
             'postTitle__fontSize_mobile' => array(
-              'label' => 'Title font size',
+              'label' => 'Font size',
               'type' => 'input'
             ),
             'postTitle__lineHeight_mobile' => array(
-              'label' => 'Title line height',
+              'label' => 'Line height',
               'type' => 'input'
             ),
             'postTitle__padding_mobile' => array(
-              'label' => 'padding',
+              'label' => 'Padding',
               'type' => 'input'
             ),
             'postTitle__margin_mobile' => array(
-              'label' => 'Title margin',
+              'label' => 'Margin',
+              'type' => 'input'
+            )
+          )
+        ),
+        'leadText' => array(
+          'label' => 'Lead Text',
+          'inputs' => array(
+            'leadText__color' => array(
+              'label' => 'Color',
+              'type' => 'color'
+            ),
+            'leadText__bg' => array(
+              'label' => 'Background color',
+              'type' => 'color'
+            ),
+            'leadText__fontFamily' => array(
+              'label' => 'Lead font family',
+              'type' => 'input'
+            ),
+            'leadText__fontSize' => array(
+              'label' => 'Lead font size',
+              'type' => 'input'
+            ),
+            'leadText__lineHeight' => array(
+              'label' => 'Line height',
+              'type' => 'input'
+            ),
+            'leadText__padding' => array(
+              'label' => 'Padding',
+              'type' => 'input'
+            ),
+            'leadText__fontWeight' => array(
+              'label' => 'Font weight',
+              'type' => 'input'
+            ),
+            'leadText__textTransform' => array(
+              'label' => 'Text transform',
+              'type' => 'input'
+            ),
+            'leadText__letterSpacing' => array(
+              'label' => 'Letter spacing',
+              'type' => 'input'
+            ),
+            'leadText__fontSize_mobile' => array(
+              'label' => 'Font size',
+              'type' => 'input'
+            ),
+            'leadText__lineHeight_mobile' => array(
+              'label' => 'Line height',
+              'type' => 'input'
+            ),
+            'leadText__padding_mobile' => array(
+              'label' => 'Padding',
               'type' => 'input'
             )
           )
@@ -1234,7 +1287,7 @@ class prefix_core_Customizer {
               'type' => 'input'
             ),
             'error__title_letterSpacing' => array(
-              'label' => 'Title text transform',
+              'label' => 'Title letter spacing',
               'type' => 'input'
             ),
             'error__title_fontSize_mobile' => array(
@@ -1379,6 +1432,10 @@ class prefix_core_Customizer {
             ),
             'block__buttons_textTransform' => array(
               'label' => 'Text transform',
+              'type' => 'input'
+            ),
+            'block__buttons_letterSpacing' => array(
+              'label' => 'Text letter spacing',
               'type' => 'input'
             ),
             'block__buttons_padding' => array(

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.50.28 | 30.04.2022 <customizer options, print defaults>
+* fix width on print
+* add lead and is style to customizer
+* fix wp-menu separator break
+* add 404 to customizer
+
 ## 1.49.28 | 30.04.2022 <customizer options, dsgvo support>
 * new js function, to get element style
 * new js function, to get all data attributes

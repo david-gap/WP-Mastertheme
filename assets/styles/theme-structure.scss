@@ -20,7 +20,8 @@ Table of Contents:
     3.3 MENU STYLING OPTIONS
     3.4 BREADCRUMBS
     3.5 POST TITLE
-    3.6 404 PAGE
+    3.6 LEAD
+    3.7 404 PAGE
   4.0 SCROLL TO TOP
   5.0 FOOTER
 =======================================================*/
@@ -323,9 +324,12 @@ body.frontend,
     &.horizontal {
       display: flex;
       flex-direction: row;
+      flex-wrap: wrap;
     }
     &.menu-seperated {
       li {
+        display: flex;
+        flex-wrap: nowrap;
         &:last-child {
           &::after {
             display: none;
@@ -350,13 +354,22 @@ body.frontend,
 
   /* 3.5 POST TITLE
   /––––––––––––––––––––––––*/
-  .post-title {
+  .post-title,
+  .is-style-post-title {
     margin: var(--postTitle__margin, 0);
     padding: var(--postTitle__padding, 0);
   }
 
 
-  /* 3.6 404 PAGE
+  /* 3.6 LEAD
+  /––––––––––––––––––––––––*/
+  .leadtext,
+  .is-style-lead {
+    padding: var(--leadText__padding, 0);
+  }
+
+
+  /* 3.7 404 PAGE
   /––––––––––––––––––––––––*/
   #error-page {
     article {
