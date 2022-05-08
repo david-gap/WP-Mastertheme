@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 1.51.28 | 30.04.2022 <import/export, >
+## 1.51.28 | 08.05.2022 <import/export, config button position>
 * update configurator button positions
 * add cutomizer and configurator export and import possibility
 * date check set timezone if option is given
