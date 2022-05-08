@@ -15,11 +15,12 @@
    1.1 CONFIGURATION
    1.2 ON LOAD RUN
  2.0 FUNCTIONS
-   2.1 ADD BACKEND PAGE
+   2.1 ADD BACKEND PAGES
    2.2 ENQUEUE BACKEND SCRIPTS/STYLES
  3.0 OUTPUT
    3.1 CONFIGURATOR FORM
    3.2 BUILD INPUT
+   3.3 EXPORT PAGE
  =======================================================*/
 
 
@@ -51,7 +52,7 @@ class prefix_core_WPadmin {
     2.0 FUNCTIONS
   ==================================================================================*/
 
-  /* 2.1 ADD BACKEND PAGE
+  /* 2.1 ADD BACKEND PAGES
   /------------------------*/
   function WPadmin_BackendPage() {
     add_menu_page(
@@ -61,6 +62,15 @@ class prefix_core_WPadmin {
       'configuration',
       array( $this, 'WPadmin_Configurator' ),
       '',
+      100
+    );
+    add_submenu_page(
+      'configuration',
+      __('Export configuration','devTheme'),
+      __('Import / Export','devTheme'),
+      'page_configuration',
+      'configurationImportExport',
+      array( $this, 'WPadmin_ConfiguratorImportExport' ),
       100
     );
     // give access to administrator
@@ -104,8 +114,6 @@ class prefix_core_WPadmin {
       // output
       $output .= '<div class="wrap" id="configuration">';
         $output .= '<h1 class="wp-heading-inline">' . __('Page Configurator','devTheme') . '</h1>';
-        $output .= '<br><button class="page-title-action ajax-action" data-action="GenerateConfigFile">' . __('Generate configuration file','devTheme') . '</button>';
-        $output .= '<br><button class="page-title-action ajax-action" data-action="GenerateCssFile">' . __('Download css file','devTheme') . '</button>';
         $output .= '<span id="config-message"></span>';
         $output .= '<div id="settings-group">';
           $output .= '<ul id="configuration-navigation">';
@@ -120,6 +128,10 @@ class prefix_core_WPadmin {
             }
           $output .= '</ul>';
           $output .= '<form>';
+            $output .= '<div class="configSubmit">';
+              $output .= '<button class="page-title-action ajax-action" data-action="GenerateConfigFile">' . __('Generate configuration file','devTheme') . '</button>';
+              $output .= '<input type="submit" class="button button-primary" data-action="SaveFormInput" value="' . __( 'Save', 'devTheme' ) . '">';
+            $output .= '</div>';
             foreach ($registered_classes as $class_key => $classname) {
               if(strpos($classname, 'prefix_') === 0 && strpos($classname, '_core_') == false):
                 // for each registered custom class
@@ -176,7 +188,6 @@ class prefix_core_WPadmin {
                 endif;
               endif;
             }
-            $output .= '<input type="submit" class="button button-primary" data-action="SaveFormInput" value="' . __( 'Save', 'devTheme' ) . '">';
           $output .= '</form>';
         $output .= '</div>';
       $output .= '</div>';
@@ -443,6 +454,36 @@ class prefix_core_WPadmin {
 
 
     return $output;
+  }
+
+  /* 3.3 EXPORT PAGE
+  /------------------------*/
+  function WPadmin_ConfiguratorImportExport(){
+    if ( !current_user_can( 'page_configuration' ) )  {
+      wp_die( __( 'You do not have sufficient permissions to access this page.', 'devTheme' ) );
+    }
+    // vars
+    $output = '';
+    // output
+    $output .= '<div class="wrap" id="configurationImportExport">';
+      $output .= '<h1 class="wp-heading-inline">' . __('Export page','devTheme') . '</h1>';
+      $output .= '<span id="config-message"></span>';
+      $output .= '<h2>' . __('Export options','devTheme') . '</h2>';
+      $output .= '<button class="page-title-action ajax-action" data-action="ExportConfigSettings">' . __('Download configuration settings','devTheme') . '</button>';
+      $output .= '<br><button class="page-title-action ajax-action" data-action="ExportCustomizerSettings">' . __('Download customizer settings','devTheme') . '</button>';
+      $output .= '<br><button class="page-title-action ajax-action" data-action="GenerateCssFile">' . __('Download css file','devTheme') . '</button>';
+      $output .= '<br><br><h2>' . __('Import configuration','devTheme') . '</h2>';
+      $output .= '<form>';
+        $output .= '<input type="file" accept="application/json" name="uploadFile">';
+        $output .= '<input type="submit" class="button button-primary" data-action="uploadConfigurationSettings" value="' . __( 'Upload', 'devTheme' ) . '">';
+      $output .= '</form>';
+      $output .= '<br><br><h2>' . __('Import customizer','devTheme') . '</h2>';
+      $output .= '<form>';
+        $output .= '<input type="file" accept="application/json" name="uploadFile">';
+        $output .= '<input type="submit" class="button button-primary" data-action="uploadCustomizerSettings" value="' . __( 'Upload', 'devTheme' ) . '">';
+      $output .= '</form>';
+    $output .= '</div>';
+    echo $output;
   }
 
 }

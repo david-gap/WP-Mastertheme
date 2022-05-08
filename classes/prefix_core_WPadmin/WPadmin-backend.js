@@ -46,24 +46,24 @@ jQuery(document).ready(function($){
         success: function(data) {
           // DEBUG: console.log("Ajax update success");
           // DEBUG: console.log(data);
-          $('#configuration').removeClass('loading');
+          $(getdata.parent).removeClass('loading');
           // console
           if(data.log){
             console.log(data.log);
           }
           // message
           if(data.message){
-            $('#configuration #config-message').html(data.message);
+            $(getdata.parent + ' #config-message').html(data.message);
           }
           // css
           if(data.type){
-            $('#configuration #config-message').attr('class', data.type);
+            $(getdata.parent + ' #config-message').attr('class', data.type);
           }
           // css
           if(data.file && data.name){
             var $a = $("<a>");
             $a.attr("href",data.file);
-            $("#configuration #config-message").append($a);
+            $(getdata.parent + " #config-message").append($a);
             $a.attr("download",data.name);
             $a[0].click();
             $a.remove();
@@ -77,7 +77,7 @@ jQuery(document).ready(function($){
 
     /* page options
     /––––––––––––––––––––––––*/
-    function updatePageUptions() {
+    function updatePageOptions() {
       // get selected page options
       var page_options = $('#WPtemplate').find('input:checked').map(function(_, el) {return $(el).val();}).get();
       // dark mode
@@ -94,7 +94,7 @@ jQuery(document).ready(function($){
       }
     }
     setTimeout(function(){
-      updatePageUptions();
+      updatePageOptions();
     },2000);
 
 
@@ -106,7 +106,7 @@ jQuery(document).ready(function($){
     /* recheck dark mode
     /––––––––––––––––––––––––*/
     $(document).on('click', '#WPtemplate input', function (event) {
-      updatePageUptions();
+      updatePageOptions();
     });
 
     /* save form
@@ -117,12 +117,47 @@ jQuery(document).ready(function($){
       var get_formData = $('#configuration form').serialize();
       // build data array
       var data = {
+        parent: '#configuration',
         action: get_action,
         formdata: get_formData
       };
       $('#configuration').addClass('loading');
       event.preventDefault();
       ajaxCall(data);
+    });
+
+    /* import form
+    /––––––––––––––––––––––––*/
+    $(document).on('click', '#configurationImportExport input[type="submit"]', function (event) {
+      event.preventDefault();
+      $('#configurationImportExport').addClass('loading');
+      // get content
+      var get_action = $(this).data('action');
+      var file_data = $(this).parent('form').find('input[name="uploadFile"]').prop("files")[0];
+      // run if
+      if(file_data){
+        var readFile = new FileReader();
+        readFile.onload = function(e){
+          var contents = e.target.result;
+          var jsonContent = JSON.parse(contents);
+          var get_formData = jsonContent;
+          // build data array
+          var data = {
+            parent: '#configurationImportExport',
+            action: get_action,
+            formdata: get_formData
+          };
+          ajaxCall(data);
+        };
+        readFile.readAsText(file_data);
+      } else {
+        var data = {
+          parent: '#configurationImportExport',
+          action: get_action,
+          formdata: ''
+        };
+        ajaxCall(data);
+      }
     });
 
 
@@ -199,12 +234,19 @@ jQuery(document).ready(function($){
 
     /* Generate configuration file
     /––––––––––––––––––––––––*/
-    $(document).on('click', '#configuration button.ajax-action', function (event) {
+    $(document).on('click', '#configuration button.ajax-action, #configurationImportExport button.ajax-action', function (event) {
       event.preventDefault();
       // vars
       var get_action = $(this).attr('data-action');
+      if($('#configurationImportExport').length > 0){
+        get_parent = '#configurationImportExport';
+      } else if($('#configuration').length > 0) {
+        get_parent = '#configuration';
+      }
+      console.log(get_parent);
       // build data array
       var data = {
+        parent: get_parent,
         action: get_action
       };
       // run ajax

@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.51.28 | 30.04.2022 <import/export, >
+* update configurator button positions
+* add cutomizer and configurator export and import possibility
+* date check set timezone if option is given
+
 ## 1.50.28 | 30.04.2022 <customizer options, print defaults>
 * fix width on print
 * add lead and is style to customizer
