@@ -386,177 +386,264 @@ class prefix_core_Customizer {
               'type' => 'input'
             ),
             'mnav__sub_color' => array(
-              'label' => 'Submenu color',
+              'label' => 'Level 2 - color',
               'type' => 'color',
               'default' => '#000'
             ),
             'mnav__sub_background_color' => array(
-              'label' => 'Submenu background color',
+              'label' => 'Level 2 - background color',
               'type' => 'color',
               'default' => 'transparent'
             ),
             'mnav__sub_color_hover' => array(
-              'label' => 'Submenu color (hover)',
+              'label' => 'Level 2 - color (hover)',
               'type' => 'color',
               'default' => '#000'
             ),
             'mnav__sub_background_color_hover' => array(
-              'label' => 'Submenu background color (hover)',
+              'label' => 'Level 2 - background color (hover)',
               'type' => 'color',
               'default' => 'transparent'
             ),
             'mnav__sub_color_active' => array(
-              'label' => 'Submenu color (active)',
+              'label' => 'Level 2 - color (active)',
               'type' => 'color',
               'default' => 'transparent'
             ),
             'mnav__sub_background_color_active' => array(
-              'label' => 'Submenu background color (active)',
+              'label' => 'Level 2 - background color (active)',
               'type' => 'color',
               'default' => 'transparent'
             ),
             'mnav__sub_border_color' => array(
-              'label' => 'Submenu border color',
+              'label' => 'Level 2 - border color',
               'type' => 'color',
               'default' => 'transparent'
             ),
             'mnav__sub_border_width' => array(
-              'label' => 'Submenu border width',
+              'label' => 'Level 2 - border width',
               'type' => 'input'
             ),
             'mnav__sub_padding' => array(
-              'label' => 'Submenu padding',
+              'label' => 'Level 2 - padding',
               'type' => 'input'
             ),
             'mnav__sub_margin' => array(
-              'label' => 'Submenu margin',
+              'label' => 'Level 2 - margin',
               'type' => 'input'
             ),
             'mnav__sub_fontfamily' => array(
-              'label' => 'Submenu font family',
+              'label' => 'Level 2 - font family',
               'type' => 'input'
             ),
             'mnav__sub_fontsize' => array(
-              'label' => 'Submenu font size',
+              'label' => 'Level 2 - font size',
               'type' => 'input'
             ),
             'mnav__sub_lineheight' => array(
-              'label' => 'Submenu line height',
+              'label' => 'Level 2 - line height',
               'type' => 'input'
             ),
             'mnav__sub_fontWeight' => array(
-              'label' => 'Submenu font weight',
+              'label' => 'Level 2 - font weight',
               'type' => 'input'
             ),
             'mnav__sub_textTransform' => array(
-              'label' => 'Submenu text transform',
+              'label' => 'Level 2 - text transform',
               'type' => 'input'
             ),
             'mnav__sub_letterSpacing' => array(
-              'label' => 'Letter spacing',
+              'label' => 'Level 2 - Letter spacing',
               'type' => 'input'
             ),
             'mnav__sub_fontsize_mobile' => array(
-              'label' => 'Submenu font size',
+              'label' => 'Level 2 - font size',
               'type' => 'input'
             ),
             'mnav__sub_lineheight_mobile' => array(
-              'label' => 'Submenu line height',
+              'label' => 'Level 2 - line height',
               'type' => 'input'
             ),
             'mnav__sub_padding_mobile' => array(
-              'label' => 'Submenu padding',
+              'label' => 'Level 2 - padding',
               'type' => 'input'
             ),
             'mnav__sub_margin_mobile' => array(
-              'label' => 'Submenu margin',
+              'label' => 'Level 2 - margin',
               'type' => 'input'
             ),
             'mnav__subSub_color' => array(
-              'label' => 'Subsubmenu color',
+              'label' => 'Level 3 - color',
               'type' => 'color',
               'default' => '#000'
             ),
             'mnav__subSub_background_color' => array(
-              'label' => 'Subsubmenu background color',
+              'label' => 'Level 3 - background color',
               'type' => 'color',
               'default' => 'transparent'
             ),
             'mnav__subSub_color_hover' => array(
-              'label' => 'Subsubmenu color (hover)',
+              'label' => 'Level 3 - color (hover)',
               'type' => 'color',
               'default' => '#000'
             ),
             'mnav__subSub_background_color_hover' => array(
-              'label' => 'Subsubmenu background color (hover)',
+              'label' => 'Level 3 - background color (hover)',
               'type' => 'color',
               'default' => 'transparent'
             ),
             'mnav__subSub_color_active' => array(
-              'label' => 'Subsubmenu color (active)',
+              'label' => 'Level 3 - color (active)',
               'type' => 'color',
               'default' => 'transparent'
             ),
             'mnav__subSub_background_color_active' => array(
-              'label' => 'Subsubmenu background color (active)',
+              'label' => 'Level 3 - background color (active)',
               'type' => 'color',
               'default' => 'transparent'
             ),
             'mnav__subSub_border_color' => array(
-              'label' => 'Subsubmenu border color',
+              'label' => 'Level 3 - border color',
               'type' => 'color',
               'default' => 'transparent'
             ),
             'mnav__subSub_border_width' => array(
-              'label' => 'Subsubmenu border width',
+              'label' => 'Level 3 - border width',
               'type' => 'input'
             ),
             'mnav__subSub_padding' => array(
-              'label' => 'Subsubmenu padding',
+              'label' => 'Level 3 - padding',
               'type' => 'input'
             ),
             'mnav__subSub_margin' => array(
-              'label' => 'Subsubmenu margin',
+              'label' => 'Level 3 - margin',
               'type' => 'input'
             ),
             'mnav__subSub_fontfamily' => array(
-              'label' => 'Subsubmenu font family',
+              'label' => 'Level 3 - font family',
               'type' => 'input'
             ),
             'mnav__subSub_fontsize' => array(
-              'label' => 'Subsubmenu font size',
+              'label' => 'Level 3 - font size',
               'type' => 'input'
             ),
             'mnav__subSub_fontWeight' => array(
-              'label' => 'Subsubmenu font weight',
+              'label' => 'Level 3 - font weight',
               'type' => 'input'
             ),
             'mnav__subSub_lineheight' => array(
-              'label' => 'Subsubmenu line height',
+              'label' => 'Level 3 - line height',
               'type' => 'input'
             ),
             'mnav__subSub_textTransform' => array(
-              'label' => 'Subsubmenu text transform',
+              'label' => 'Level 3 - text transform',
               'type' => 'input'
             ),
             'mnav__subSub_letterSpacing' => array(
-              'label' => 'Letter spacing',
+              'label' => 'Level 3 - Letter spacing',
               'type' => 'input'
             ),
             'mnav__subSub_fontsize_mobile' => array(
-              'label' => 'Subsubmenu font size',
+              'label' => 'Level 3 - font size',
               'type' => 'input'
             ),
             'mnav__subSub_lineheight_mobile' => array(
-              'label' => 'Subsubmenu line height',
+              'label' => 'Level 3 - line height',
               'type' => 'input'
             ),
             'mnav__subSub_padding_mobile' => array(
-              'label' => 'Subsubmenu padding',
+              'label' => 'Level 3 - padding',
               'type' => 'input'
             ),
             'mnav__subSub_margin_mobile' => array(
-              'label' => 'Subsubmenu margin',
+              'label' => 'Level 3 - margin',
+              'type' => 'input'
+            ),
+            'mnav__subSubSub_color' => array(
+              'label' => 'Level 4 - color',
+              'type' => 'color',
+              'default' => '#000'
+            ),
+            'mnav__subSubSub_background_color' => array(
+              'label' => 'Level 4 - background color',
+              'type' => 'color',
+              'default' => 'transparent'
+            ),
+            'mnav__subSubSub_color_hover' => array(
+              'label' => 'Level 4 - color (hover)',
+              'type' => 'color',
+              'default' => '#000'
+            ),
+            'mnav__subSubSub_background_color_hover' => array(
+              'label' => 'Level 4 - background color (hover)',
+              'type' => 'color',
+              'default' => 'transparent'
+            ),
+            'mnav__subSubSub_color_active' => array(
+              'label' => 'Level 4 - color (active)',
+              'type' => 'color',
+              'default' => 'transparent'
+            ),
+            'mnav__subSubSub_background_color_active' => array(
+              'label' => 'Level 4 - background color (active)',
+              'type' => 'color',
+              'default' => 'transparent'
+            ),
+            'mnav__subSubSub_border_color' => array(
+              'label' => 'Level 4 - border color',
+              'type' => 'color',
+              'default' => 'transparent'
+            ),
+            'mnav__subSubSub_border_width' => array(
+              'label' => 'Level 4 - border width',
+              'type' => 'input'
+            ),
+            'mnav__subSubSub_padding' => array(
+              'label' => 'Level 4 - padding',
+              'type' => 'input'
+            ),
+            'mnav__subSubSub_margin' => array(
+              'label' => 'Level 4 - margin',
+              'type' => 'input'
+            ),
+            'mnav__subSubSub_fontfamily' => array(
+              'label' => 'Level 4 - font family',
+              'type' => 'input'
+            ),
+            'mnav__subSubSub_fontsize' => array(
+              'label' => 'Level 4 - font size',
+              'type' => 'input'
+            ),
+            'mnav__subSubSub_fontWeight' => array(
+              'label' => 'Level 4 - font weight',
+              'type' => 'input'
+            ),
+            'mnav__subSubSub_lineheight' => array(
+              'label' => 'Level 4 - line height',
+              'type' => 'input'
+            ),
+            'mnav__subSubSub_textTransform' => array(
+              'label' => 'Level 4 - text transform',
+              'type' => 'input'
+            ),
+            'mnav__subSubSub_letterSpacing' => array(
+              'label' => 'Level 4 - Letsubter spacing',
+              'type' => 'input'
+            ),
+            'mnav__subSubSub_fontsize_mobile' => array(
+              'label' => 'Level 4 - font size',
+              'type' => 'input'
+            ),
+            'mnav__subSubSub_lineheight_mobile' => array(
+              'label' => 'Level 4 - line height',
+              'type' => 'input'
+            ),
+            'mnav__subSubSub_padding_mobile' => array(
+              'label' => 'Level 4 - padding',
+              'type' => 'input'
+            ),
+            'mnav__subSubSub_margin_mobile' => array(
+              'label' => 'Level 4 - margin',
               'type' => 'input'
             )
           )
@@ -581,6 +668,10 @@ class prefix_core_Customizer {
               'type' => 'color',
               'default' => '#000'
             ),
+            'hamburger_text_color' => array(
+              'label' => 'Hamburger text color',
+              'type' => 'color'
+            ),
             'mnav_background' => array(
               'label' => 'Hamburger navigation background color',
               'type' => 'color',
@@ -590,6 +681,10 @@ class prefix_core_Customizer {
               'label' => 'Hamburger color',
               'type' => 'color',
               'default' => '#fff'
+            ),
+            'dark__hamburger_text_color' => array(
+              'label' => 'Hamburger text color',
+              'type' => 'color'
             ),
             'dark__mnav_background' => array(
               'label' => 'Hamburger navigation background color',
@@ -613,7 +708,7 @@ class prefix_core_Customizer {
               'type' => 'input'
             ),
             'hamburger__title_fontWeight' => array(
-              'label' => 'Title spacing',
+              'label' => 'Title font weight',
               'type' => 'input'
             ),
             'hamburger__container_width_mobile' => array(
@@ -622,6 +717,18 @@ class prefix_core_Customizer {
             ),
             'hamburger__container_height_mobile' => array(
               'label' => 'Height',
+              'type' => 'input'
+            ),
+            'hamburger__title_space_mobile' => array(
+              'label' => 'Title spacing',
+              'type' => 'input'
+            ),
+            'hamburger__title_fontSize_mobile' => array(
+              'label' => 'Title font size',
+              'type' => 'input'
+            ),
+            'hamburger__title_LineHeight_mobile' => array(
+              'label' => 'Title line height',
               'type' => 'input'
             )
           )
@@ -688,6 +795,10 @@ class prefix_core_Customizer {
               'label' => 'Content spacing',
               'type' => 'input'
             ),
+            'content__space_last' => array(
+              'label' => 'Content last spacing',
+              'type' => 'input'
+            ),
             'html__anchor' => array(
               'label' => 'Anchor position',
               'type' => 'input',
@@ -700,6 +811,10 @@ class prefix_core_Customizer {
           'inputs' => array(
             'content__space_mobile' => array(
               'label' => 'Content spacing',
+              'type' => 'input'
+            ),
+            'content__space_last_mobile' => array(
+              'label' => 'Content last spacing',
               'type' => 'input'
             ),
             'html__anchor_mobile' => array(
@@ -772,6 +887,91 @@ class prefix_core_Customizer {
             'bc__padding_mobile' => array(
               'label' => 'Padding',
               'type' => 'input'
+            )
+          )
+        ),
+        'languageswitcher' => array(
+          'label' => 'Language switcher',
+          'inputs' => array(
+            'ls__background_color' => array(
+              'label' => 'Background Image',
+              'type' => 'color'
+            ),
+            'ls__color_active' => array(
+              'label' => 'Active language color',
+              'type' => 'color'
+            ),
+            'ls__link_color' => array(
+              'label' => 'Link color',
+              'type' => 'color'
+            ),
+            'ls__link_color_hover' => array(
+              'label' => 'Link hover color',
+              'type' => 'color'
+            ),
+            'ls__link_fontfamily' => array(
+              'label' => 'Link font family',
+              'type' => 'input'
+            ),
+            'ls__link_fontsize' => array(
+              'label' => 'Link font size',
+              'type' => 'input'
+            ),
+            'ls__link_lineheight' => array(
+              'label' => 'Link line height',
+              'type' => 'input'
+            ),
+            'ls__link_fontWeight' => array(
+              'label' => 'Link font weight',
+              'type' => 'input'
+            ),
+            'ls__link_textTransform' => array(
+              'label' => 'Link text transform',
+              'type' => 'input'
+            ),
+            'ls__link_letterSpacing' => array(
+              'label' => 'Link letter spacing',
+              'type' => 'input'
+            ),
+            'ls__link_margin' => array(
+              'label' => 'Link margin',
+              'type' => 'input'
+            ),
+            'ls__link_padding' => array(
+              'label' => 'Link padding',
+              'type' => 'input'
+            ),
+            'ls__link_fontsize_mobile' => array(
+              'label' => 'Link font size',
+              'type' => 'input'
+            ),
+            'ls__link_lineheight_mobile' => array(
+              'label' => 'Link line height',
+              'type' => 'input'
+            ),
+            'ls__link_margin_mobile' => array(
+              'label' => 'Link margin',
+              'type' => 'input'
+            ),
+            'ls__link_padding_mobile' => array(
+              'label' => 'Link padding',
+              'type' => 'input'
+            ),
+            'dark__ls__background_color' => array(
+              'label' => 'Background Image',
+              'type' => 'color'
+            ),
+            'dark__ls__color_active' => array(
+              'label' => 'Active language color',
+              'type' => 'color'
+            ),
+            'dark__ls__link_color' => array(
+              'label' => 'Link color',
+              'type' => 'color'
+            ),
+            'dark__ls__link_color_hover' => array(
+              'label' => 'Link hover color',
+              'type' => 'color'
             )
           )
         ),
@@ -1313,6 +1513,36 @@ class prefix_core_Customizer {
     'gutenberg' => array(
       'label' => 'Gutenberg Blocks',
       'sections' => array(
+        'gutenberg_group' => array(
+          'label' => 'Group',
+          'inputs' => array(
+            'block__group_hasBackground_paddingTop' => array(
+              'label' => 'Padding top',
+              'type' => 'input'
+            ),
+            'block__group_hasBackground_paddingBottom' => array(
+              'label' => 'Padding bottom',
+              'type' => 'input'
+            ),
+            'block__group_hasBackground_paddingTop_mobile' => array(
+              'label' => 'Padding top',
+              'type' => 'input'
+            ),
+            'block__group_hasBackground_paddingBottom_mobile' => array(
+              'label' => 'Padding bottom',
+              'type' => 'input'
+            )
+          )
+        ),
+        'gutenberg_imageGallery' => array(
+          'label' => 'Image gallery',
+          'inputs' => array(
+            'gallery-block--gutter-size' => array(
+              'label' => 'Space between',
+              'type' => 'input'
+            )
+          )
+        ),
         'gutenberg_seperator' => array(
           'label' => 'Seperator',
           'inputs' => array(
@@ -1367,6 +1597,14 @@ class prefix_core_Customizer {
               'label' => 'Space between',
               'type' => 'input',
               'default' => '20px'
+            ),
+            'block__columns_hasBackground_padding' => array(
+              'label' => 'Padding',
+              'type' => 'input'
+            ),
+            'block__columns_hasBackground_gap' => array(
+              'label' => 'Space between',
+              'type' => 'input'
             )
           )
         ),
@@ -1514,11 +1752,11 @@ class prefix_core_Customizer {
               'type' => 'input',
               'default' => '150%'
             ),
-            'block__list_marker_space' => array(
-              'label' => 'Marker spacing',
+            'block__list_lineHeight' => array(
+              'label' => 'Marker line height',
               'type' => 'input'
             ),
-            'block__list_marker_space_mobile' => array(
+            'block__list_marker_space' => array(
               'label' => 'Marker spacing',
               'type' => 'input'
             ),
@@ -1531,18 +1769,58 @@ class prefix_core_Customizer {
               'label' => 'Marker color',
               'type' => 'color',
               'default' => 'inherit'
+            ),
+            'block__list_marker_size_mobile' => array(
+              'label' => 'Marker size',
+              'type' => 'input'
+            ),
+            'block__list_lineHeight_mobile' => array(
+              'label' => 'Marker line height',
+              'type' => 'input'
+            ),
+            'block__list_marker_space_mobile' => array(
+              'label' => 'Marker spacing',
+              'type' => 'input'
             )
           )
         ),
         'gutenberg_cover' => array(
           'label' => 'Cover',
           'inputs' => array(
+            'block__cover_minHeight' => array(
+              'label' => 'Minimum height',
+              'type' => 'input'
+            ),
+            'block__cover_alignfull_minHeight' => array(
+              'label' => 'Minimum height',
+              'type' => 'input'
+            ),
+            'block__cover_alignwide_minHeight' => array(
+              'label' => 'Minimum height',
+              'type' => 'input'
+            ),
             'block__cover_container_paddingTop' => array(
               'label' => 'Container padding top',
               'type' => 'input'
             ),
             'block__cover_container_paddingBottom' => array(
               'label' => 'Container padding bottom',
+              'type' => 'input'
+            ),
+            'block__cover_zoomer_scale' => array(
+              'label' => 'Background image zoom animation',
+              'type' => 'input'
+            ),
+            'block__cover_minHeight_mobile' => array(
+              'label' => 'Minimum height',
+              'type' => 'input'
+            ),
+            'block__cover_alignfull_minHeight_mobile' => array(
+              'label' => 'Minimum height',
+              'type' => 'input'
+            ),
+            'block__cover_alignwide_minHeight_mobile' => array(
+              'label' => 'Minimum height',
               'type' => 'input'
             ),
             'block__cover_container_paddingTop_mobile' => array(
@@ -1858,6 +2136,51 @@ class prefix_core_Customizer {
               'type' => 'input'
             )
           )
+        ),
+        'footerMenu' => array(
+          'label' => 'Menu',
+          'inputs' => array(
+            'footer__menu_link_color' => array(
+              'label' => 'Link color',
+              'type' => 'color'
+            ),
+            'footer__menu_linkHover_color' => array(
+              'label' => 'Link hover color',
+              'type' => 'color'
+            ),
+            'footer__menu_link_fontfamily' => array(
+              'label' => 'Link font family',
+              'type' => 'input'
+            ),
+            'footer__menu_link_fontsize' => array(
+              'label' => 'Link font size',
+              'type' => 'input'
+            ),
+            'footer__menu_link_lineheight' => array(
+              'label' => 'Link line height',
+              'type' => 'input'
+            ),
+            'footer__menu_link_fontWeight' => array(
+              'label' => 'Link font weight',
+              'type' => 'input'
+            ),
+            'footer__menu_link_textTransform' => array(
+              'label' => 'Link text transform',
+              'type' => 'input'
+            ),
+            'footer__menu_link_letterSpacing' => array(
+              'label' => 'Link letter spacing',
+              'type' => 'input'
+            ),
+            'footer__menu_link_fontsize_mobile' => array(
+              'label' => 'Link font size',
+              'type' => 'input'
+            ),
+            'footer__menu_link_lineheight_mobile' => array(
+              'label' => 'Link line height',
+              'type' => 'input'
+            )
+          )
         )
       )
     )
@@ -2064,6 +2387,15 @@ class prefix_core_Customizer {
     if (strpos($inputKey, '_sticky') !== false):
       $activeLabels[] = __( 'sticky', 'customizer' );
     endif;
+    if (strpos($inputKey, '_alignfull') !== false):
+      $activeLabels[] = __( 'alignfull', 'customizer' );
+    endif;
+    if (strpos($inputKey, '_alignwide') !== false):
+      $activeLabels[] = __( 'alignwide', 'customizer' );
+    endif;
+    if (strpos($inputKey, '_hasBackground') !== false):
+      $activeLabels[] = __( 'has background', 'customizer' );
+    endif;
     if (strpos($inputKey, '_mobile') !== false):
       $activeLabels[] = __( 'mobile', 'customizer' );
     endif;
@@ -2175,6 +2507,7 @@ class prefix_core_Customizer {
     $mobileOutput = '';
     $output = '';
     $output .= ':root {';
+      $output .= '--wideWidth: ' . $wide_reset . 'px;';
       foreach ($this->defaultValues as $panelKey => $panelValues) {
         foreach ($panelValues["sections"] as $sectionKey => $sectionValues) {
           foreach ($sectionValues["inputs"] as $valueKey => $ValueSettings) {
@@ -2236,6 +2569,9 @@ class prefix_core_Customizer {
       if($mobileOutput !== ''):
         $output .= ':root {';
           $output .= $mobileOutput;
+        $output .= '}';
+        $output .= '.wp-block-columns:not(.is-not-stacked-on-mobile) {';
+          $output .= '--block__columns_hasBackground_gap: 0;';
         $output .= '}';
       endif;
       if($mobileDarkOutput !== ''):

@@ -18,12 +18,17 @@ Table of Contents:
     2.4 POST TITLE
     2.5 LEAD
     2.6 404 PAGE
+    2.7 LANGUAGE SWITCHER
   3.0 FOOTER
   4.0 GENERAL
   5.0 BLOCKS
     5.1 ACCORDION
     5.2 BUTTONS
     5.3 TABLES
+    5.4 SEPARATORS
+    5.5 POSTS
+    5.6 IMAGE
+    5.7 LISTS
 =======================================================*/
 
 
@@ -70,6 +75,16 @@ body.frontend,
                     font-weight: var(--mnav__subSub_fontWeight, var(--mnav__sub_fontWeight, 500));
                     text-transform: var(--mnav__subSub_textTransform, var(--mnav__sub_textTransform, none));
                     letter-spacing: var(--mnav__subSub_letterSpacing, var(--mnav__sub_letterSpacing, 0));
+                    > ul {
+                      > li {
+                        font-family: var(--mnav__subSubSub_fontfamily, var(--mnav__subSub_fontfamily, inherit));
+                        font-size: var(--mnav__subSubSub_fontsize, var(--mnav__subSub_fontsize, 80%));
+                        line-height: var(--mnav__subSubSub_lineheight, var(--mnav__subSub_lineheight, inherit));
+                        font-weight: var(--mnav__subSubSub_fontWeight, var(--mnav__subSub_fontWeight, 500));
+                        text-transform: var(--mnav__subSubSub_textTransform, var(--mnav__subSub_textTransform, none));
+                        letter-spacing: var(--mnav__subSubSub_letterSpacing, var(--mnav__subSub_letterSpacing, 0));
+                      }
+                    }
                   }
                 }
               }
@@ -176,6 +191,25 @@ body.frontend,
   }
 
 
+  /* 2.7 LANGUAGE SWITCHER
+  /––––––––––––––––––––––––*/
+  .language-switcher {
+    font-size: var(--ls__link_fontsize, inherit);
+    font-weight: var(--ls__link_fontWeight, inherit);
+    line-height: var(--ls__link_lineheight, inherit);
+    li {
+      a {
+        font-family: var(--ls__link_fontfamily, inherit);
+        font-size: var(--ls__link_fontsize, inherit);
+        font-weight: var(--ls__link_fontWeight, inherit);
+        line-height: var(--ls__link_lineheight, inherit);
+        text-transform: var(--ls__link_textTransform, inherit);
+        letter-spacing: var(--ls__link_letterSpacing, inherit);
+      }
+    }
+  }
+
+
 
   /*==================================================================================
     3.0 FOOTER
@@ -185,6 +219,18 @@ body.frontend,
     .footer-container {
       font-size: var(--footer__fontsize, 10px);
       line-height: var(--footer__lineheight, 1.4);
+      #menu_footer {
+        font-family: var(--footer__menu_link_fontfamily, inherit);
+        font-size: var(--footer__menu_link_fontsize, var(--footer__fontsize, 10px));
+        line-height: var(--footer__menu_link_lineheight, var(--footer__lineheight, 1.4));
+        font-weight: var(--footer__menu_link_fontWeight, inherit);
+        li {
+          a {
+            text-transform: var(--footer__menu_link_textTransform, inherit);
+            letter-spacing: var(--footer__menu_link_letterSpacing, inherit);
+          }
+        }
+      }
     }
   }
 
@@ -346,7 +392,7 @@ body.frontend,
     }
   }
 
-  /* 5.3 SEPARATORS
+  /* 5.4 SEPARATORS
   /––––––––––––––––––––––––*/
   hr.wp-block-separator {
     &.is-style-dots {
@@ -357,7 +403,7 @@ body.frontend,
     }
   }
 
-  /* 5.4 POSTS
+  /* 5.5 POSTS
   /––––––––––––––––––––––––*/
   .block-posts {
     > ul {
@@ -370,7 +416,7 @@ body.frontend,
     }
   }
 
-  /* 5.5 IMAGE
+  /* 5.6 IMAGE
   /––––––––––––––––––––––––*/
   .wp-block-image {
     figcaption {
@@ -378,6 +424,18 @@ body.frontend,
       line-height: var(--block__imageFigcaption_lineHeight, inherit);
     }
   }
+
+  /* 5.7 LISTS
+  /––––––––––––––––––––––––*/
+  ul.is-style-default {
+    li {
+      &:before {
+        line-height: var(--block__list_lineHeight, 1);
+      }
+    }
+  }
+
+
 
 
 }

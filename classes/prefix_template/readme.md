@@ -1,4 +1,4 @@
-**Version 2.26.16** (01.04.2022)
+**Version 2.27.16** (16.05.2022)
 
 Custom class "template" with template parts and header / footer builder
 
@@ -41,9 +41,12 @@ Custom class "template" with template parts and header / footer builder
 * $template_searchform_autocomplete: configure the autocomplete in the search form
 * $template_breadcrumbs_active: activate breadcrumbs
 * $template_breadcrumbs_active: activate breadcrumbs
-* template_breadcrumbs_intro: Show introduction text
-* template_breadcrumbs_home: Show home link
-* template_breadcrumbs_separator: Separate crumbs by string
+* $template_breadcrumbs_intro: Show introduction text
+* $template_breadcrumbs_home: Show home link
+* $template_breadcrumbs_separator: Separate crumbs by string
+* $template_languageSwitcher_separat: Separat languages
+* $template_languageSwitcher_direction: Select direction
+* $template_languageSwitcher_nameDisplay: Select what should be displayed in the language switcher
 
 ## CONFIGURATION FILE
 ```
@@ -332,6 +335,21 @@ echo prefix_template::IconBlock($icons, $settings);
 ## FILTERS
 To Add custom options by Template (ACF for example)
 template_PageOptions
+
+Add header content filter
+template_HeaderContent
+
+Add logo filter
+template_Logo
+
+Add custom header filter
+template_header_custom
+
+Add footer content filter
+template_FooterContent
+
+Add custom footer filter
+template_footer_custom
 
 Add Custom CSS by template
 template_BodyCSS

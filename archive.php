@@ -11,10 +11,20 @@ get_header();
 ?>
 <section id="archive" <?php echo prefix_template::AddContainer(prefix_template::$template_container, true); ?>>
   <div>
-    <?php if (have_posts() ) : while (have_posts()) : the_post();
-      $blog_type = get_post_format(get_the_ID()) ? get_post_format(get_the_ID()) : "default";
-      get_template_part('template_parts/' . get_post_type() . '_' . $blog_type);
-    endwhile; endif; ?>
+    <?php while ( have_posts() ) : the_post();
+      if(get_post_type() == "post" || post_type_supports(get_post_type(), 'post-formats')):
+        // blog output
+        $blog_type = get_post_format();
+        if(locate_template('template_parts/' . get_post_type() . '_' . $blog_type)):
+          get_template_part('template_parts/' . get_post_type() . '_' . $blog_type);
+        else:
+          get_template_part('template_parts/post_' . $blog_type);
+        endif;
+      else:
+        // default output
+        get_template_part('template_parts/post_default');
+      endif;
+    endwhile;	?>
   </div>
   <?php get_sidebar(); ?>
 </section>

@@ -20,6 +20,12 @@ body.frontend,
       align-items: center;
       justify-content: space-between;
       cursor: pointer;
+      &.vertical {
+        flex-direction: column;
+        .menu-title {
+          margin: var(--hamburger__title_space, 10px 0 0);
+        }
+      }
       > * {
         align-self: center;
       }
@@ -240,6 +246,8 @@ body.frontend,
         > ul#menu_main {
           flex-direction: column;
           margin: 0;
+          padding-left: var(--container__side, 20px);
+          padding-right: var(--container__side, 20px);
           padding-top: var(--mnav__ul_paddingTop, 20px);
           padding-bottom: var(--mnav__ul_paddingBottom, 80px);
           > li {

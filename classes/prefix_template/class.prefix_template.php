@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.26.16
+ * @version     2.27.16
  *
 */
 
@@ -32,7 +32,7 @@ Table of Contents:
   3.4 PAGE OPTIONS
   3.5 PLACEHOLDER
   3.6 LOGO
-  3.7 CHECK IF MAINMENU IS ACTIVE
+  3.7 MAIN MENU
   3.8 ADDRESS BLOCK
   3.9 DIVIDE HEADER FROM CONTENT
   3.10 FOOTER MENU
@@ -110,17 +110,22 @@ class prefix_template {
     * @param static int template_breadcrumbs_intro: Show introduction text
     * @param static int template_breadcrumbs_home: Show home link
     * @param static string template_breadcrumbs_separator: Separate crumbs by string
+    * @param static int template_languageSwitcher_separat: Separat languages
+    * @param static string template_languageSwitcher_direction: Select direction
+    * @param static string template_languageSwitcher_nameDisplay: Select what should be displayed in the language switcher
   */
-  static $template_container_header            = 1;
-  static $template_container_breadcrumbs       = 1;
-  static $template_container                   = 1;
-  static $template_container_totop             = 1;
-  static $template_container_footer            = 1;
-  static $template_coloring                    = "light";
-  static $template_ph_active                   = true;
-  static $template_ph_address                  = true;
-  static $template_ph_custom                   = "";
-  static $template_address                     = array(
+  static $template_container_header                = 1;
+  static $template_container_breadcrumbs           = 1;
+  static $template_container                       = 1;
+  static $template_container_totop                 = 1;
+  static $template_container_footer                = 1;
+  static $template_container_header_wide           = 0;
+  static $template_container_footer_wide           = 0;
+  static $template_coloring                        = "light";
+  static $template_ph_active                       = true;
+  static $template_ph_address                      = true;
+  static $template_ph_custom                       = "";
+  static $template_address                         = array(
     'logo' => array(
       "img" => "",
       "width" => "",
@@ -152,29 +157,30 @@ class prefix_template {
       'email' => ''
     )
   );
-  static $template_socialmedia                 = array(
+  static $template_socialmedia                     = array(
     "facebook" => "",
     "instagram" => ""
   );
-  static $template_contactblock                = array(
+  static $template_contactblock                    = array(
     "phone" => "",
     "mail" => "",
     "whatsapp" => ""
   );
-  static $template_header_divider              = 1;
-  static $template_header_sticky               = 1;
-  static $template_header_stickyload           = 0;
-  static $template_header_dmenu                = 1;
-  static $template_header_menusearchform       = 0;
-  static $template_header_menu_style           = 'horizontal';
-  static $template_header_hmenu_style          = 'fullscreen';
-  static $template_header_hmenu_visible_head   = 0;
-  static $template_header_hmenu_text           = 0;
-  static $template_header_hmenu_streched       = 0;
-  static $template_header_hmenu_scroll         = 0;
-  static $template_header_hmenu_toggle         = 0;
-  static $template_header_custom               = "";
-  static $template_header_sort                 = array(
+  static $template_header_divider                  = 1;
+  static $template_header_sticky                   = 1;
+  static $template_header_stickyload               = 0;
+  static $template_header_dmenu                    = 1;
+  static $template_header_menusearchform           = 0;
+  static $template_header_menu_style               = 'horizontal';
+  static $template_header_hmenu_style              = 'fullscreen';
+  static $template_header_hmenu_visible_head       = 0;
+  static $template_header_hmenu_text               = '';
+  static $template_header_hmenu_containerDirection = 'horizontal';
+  static $template_header_hmenu_streched           = 0;
+  static $template_header_hmenu_scroll             = 0;
+  static $template_header_hmenu_toggle             = 0;
+  static $template_header_custom                   = "";
+  static $template_header_sort                     = array(
     "container_start" => 1,
     "logo" => 1,
     "menu" => 1,
@@ -182,34 +188,35 @@ class prefix_template {
     "socialmedia" => 0,
     "custom" => 0,
     "searchform" => 0,
+    "languages" => 0,
     "container_end" => 1,
     "widget_one" => 0,
     "widget_two" => 0,
     "widget_three" => 0
   );
-  static $template_header_logo_link            = "";
-  static $template_header_logo_d               = array(
+  static $template_header_logo_link                = "";
+  static $template_header_logo_d                   = array(
     "img" => "",
     "width" => "",
     "height" => "",
     "alt" => ""
   );
-  static $template_header_logo_m               = array(
+  static $template_header_logo_m                   = array(
     "img" => "",
     "width" => "",
     "height" => "",
     "alt" => ""
   );
-  static $template_header_logo_scrolled        = array(
+  static $template_header_logo_scrolled            = array(
     "img" => "",
     "width" => "",
     "height" => "",
     "alt" => ""
   );
-  static $template_header_logo_svg             = "";
-  static $template_header_after                = "";
-  static $template_page_active                 = 1;
-  static $template_page_options                = array(
+  static $template_header_logo_svg                 = "";
+  static $template_header_after                    = "";
+  static $template_page_active                     = 1;
+  static $template_page_options                    = array(
     "header" => 1,
     "date" => 0,
     "time" => 0,
@@ -225,50 +232,54 @@ class prefix_template {
     "beforeMain" => 1,
     "afterMain" => 1
   );
-  static $template_page_metablock              = array(
+  static $template_page_metablock                  = array(
     "page" => 0,
     "post" => 0
   );
-  static $template_page_metablockAdds          = array();
-  static $template_blog_type                   = 1;
-  static $template_blog_type_parts             = array(
+  static $template_page_metablockAdds              = array();
+  static $template_blog_type                       = 1;
+  static $template_blog_type_parts                 = array(
     "author" => 0,
     "date" => 0,
     "time" => 0,
     "categories" => 0
   );
-  static $template_blog_dateformat             = 'd.m.Y';
-  static $template_page_additional             = array();
-  static $template_scrolltotop_active          = 0;
-  static $template_footer_active               = 1;
-  static $template_footer_cr                   = "";
-  static $template_footer_custom               = "";
-  static $template_footer_menu                 = array(
+  static $template_blog_dateformat                 = 'd.m.Y';
+  static $template_page_additional                 = array();
+  static $template_scrolltotop_active              = 0;
+  static $template_footer_active                   = 1;
+  static $template_footer_cr                       = "";
+  static $template_footer_custom                   = "";
+  static $template_footer_menu                     = array(
     'direction' => 'vertical',
     'seperator' => '0',
     'css' => ''
   );
-  static $template_footer_sort                 = array(
+  static $template_footer_sort                     = array(
     "container_start" => 1,
     "menu" => 1,
     "socialmedia" => 1,
     "copyright" => 1,
     "address" => 1,
     "custom" => 0,
+    "languages" => 0,
     "searchform" => 0,
     "container_end" => 1,
     "widget_one" => 0,
     "widget_two" => 0,
     "widget_three" => 0
   );
-  static $template_footer_before               = "";
-  static $template_footer_after                = "";
-  static $template_searchform_autocomplete     = 0;
-  static $template_breadcrumbs_active          = 0;
-  static $template_breadcrumbs_inside          = 0;
-  static $template_breadcrumbs_intro           = 0;
-  static $template_breadcrumbs_home            = 1;
-  static $template_breadcrumbs_separator       = '&raquo;';
+  static $template_footer_before                   = "";
+  static $template_footer_after                    = "";
+  static $template_searchform_autocomplete         = 0;
+  static $template_breadcrumbs_active              = 0;
+  static $template_breadcrumbs_inside              = 0;
+  static $template_breadcrumbs_intro               = 0;
+  static $template_breadcrumbs_home                = 1;
+  static $template_breadcrumbs_separator           = '&raquo;';
+  static $template_languageSwitcher_separat        = 0;
+  static $template_languageSwitcher_direction      = 'horizontal';
+  static $template_languageSwitcher_nameDisplay    = 'slug';
 
 
   /* 1.2 ON LOAD RUN
@@ -288,6 +299,7 @@ class prefix_template {
     // shortcodes
     add_shortcode( 'socialmedia', array( $this, 'SocialMedia' ) );
     add_shortcode( 'copyright', array( $this, 'Copyright' ) );
+    add_shortcode('languages', array( $this, 'languageSwitcher') );
     // add post formats
     if(SELF::$template_blog_type == 1):
       add_theme_support( 'post-formats', array( 'image', 'video', 'audio' ) );
@@ -480,6 +492,14 @@ class prefix_template {
     ),
     "container_footer" => array(
       "label" => "Activate footer container",
+      "type" => "switchbutton"
+    ),
+    "container_header_wide" => array(
+      "label" => "Activate header wide container",
+      "type" => "switchbutton"
+    ),
+    "container_footer_wide" => array(
+      "label" => "Activate footer wide container",
       "type" => "switchbutton"
     ),
     "coloring" => array(
@@ -724,6 +744,11 @@ class prefix_template {
           "type" => "select",
           "value" => array('fullscreen','top_contained','left','left_contained','right','right_contained')
         ),
+        "hmenu_containerDirection" => array(
+          "label" => "Hamburger container direction",
+          "type" => "select",
+          "value" => array('horizontal','vertical')
+        ),
         "hmenu_text" => array(
           "label" => "Hamburger text",
           "type" => "text",
@@ -851,6 +876,10 @@ class prefix_template {
             ),
             "searchform" => array(
               "label" => "Search form",
+              "type" => "switchbutton"
+            ),
+            "languages" => array(
+              "label" => "Language switcher",
               "type" => "switchbutton"
             ),
             "custom" => array(
@@ -1121,6 +1150,10 @@ class prefix_template {
               "label" => "Search form",
               "type" => "switchbutton"
             ),
+            "languages" => array(
+              "label" => "Language switcher",
+              "type" => "switchbutton"
+            ),
             "widget_one" => array(
               "label" => "Widget 1",
               "type" => "switchbutton"
@@ -1156,6 +1189,26 @@ class prefix_template {
         "autocomplete" => array(
           "label" => "Autocomplete",
           "type" => "switchbutton"
+        )
+      )
+    ),
+    "languageSwitcher" => array(
+      "label" => "Language Switcher",
+      "type" => "multiple",
+      "value" => array(
+        "direction" => array(
+          "label" => "Menu direction",
+          "type" => "select",
+          "value" => array('horizontal','vertical')
+        ),
+        "separator" => array(
+          "label" => "Seperate horizontal with line",
+          "type" => "switchbutton"
+        ),
+        "nameDisplay" => array(
+          "label" => "Name display",
+          "type" => "select",
+          "value" => array('slug','name')
         )
       )
     )
@@ -1215,6 +1268,8 @@ class prefix_template {
         SELF::$template_container = array_key_exists('container', $myConfig) ? $myConfig['container'] : SELF::$template_container;
         SELF::$template_container_totop = array_key_exists('container_scrolltotop', $myConfig) ? $myConfig['container_scrolltotop'] : SELF::$template_container_totop;
         SELF::$template_container_footer = array_key_exists('container_footer', $myConfig) ? $myConfig['container_footer'] : SELF::$template_container_footer;
+        SELF::$template_container_header_wide = array_key_exists('container_header_wide', $myConfig) ? $myConfig['container_header_wide'] : SELF::$template_container_header_wide;
+        SELF::$template_container_footer_wide = array_key_exists('container_footer_wide', $myConfig) ? $myConfig['container_footer_wide'] : SELF::$template_container_footer_wide;
         SELF::$template_coloring = array_key_exists('coloring', $myConfig) ? $myConfig['coloring'] : SELF::$template_coloring;
         SELF::$template_address = array_key_exists('address', $myConfig) ? $myConfig['address'] : SELF::$template_address;
         SELF::$template_socialmedia = array_key_exists('socialmedia', $myConfig) ? $myConfig['socialmedia'] : SELF::$template_socialmedia;
@@ -1236,6 +1291,8 @@ class prefix_template {
           SELF::$template_header_menu_style = array_key_exists('menu_style', $header) ? $header['menu_style'] : SELF::$template_header_menu_style;
           SELF::$template_header_hmenu_style = array_key_exists('hmenu_style', $header) ? $header['hmenu_style'] : SELF::$template_header_hmenu_style;
           SELF::$template_header_hmenu_visible_head = array_key_exists('hmenu_visible_head', $header) ? $header['hmenu_visible_head'] : SELF::$template_header_hmenu_visible_head;
+
+          SELF::$template_header_hmenu_containerDirection = array_key_exists('hmenu_containerDirection', $header) ? $header['hmenu_containerDirection'] : SELF::$template_header_hmenu_containerDirection;
           SELF::$template_header_hmenu_text = array_key_exists('hmenu_text', $header) ? $header['hmenu_text'] : SELF::$template_header_hmenu_text;
           SELF::$template_header_hmenu_streched = array_key_exists('hmenu_streched', $header) ? $header['hmenu_streched'] : SELF::$template_header_hmenu_streched;
           SELF::$template_header_hmenu_scroll = array_key_exists('hmenu_scroll', $header) ? $header['hmenu_scroll'] : SELF::$template_header_hmenu_scroll;
@@ -1280,13 +1337,16 @@ class prefix_template {
           SELF::$template_breadcrumbs_intro = array_key_exists('introduction', $breadcrumbs) ? $breadcrumbs['introduction'] : SELF::$template_breadcrumbs_intro;
           SELF::$template_breadcrumbs_home = array_key_exists('home', $breadcrumbs) ? $breadcrumbs['home'] : SELF::$template_breadcrumbs_home;
           SELF::$template_breadcrumbs_separator = array_key_exists('seperator', $breadcrumbs) ? $breadcrumbs['seperator'] : SELF::$template_breadcrumbs_separator;
-
-
-
         endif;
         if($configuration && array_key_exists('searchform', $myConfig)):
           $searchform = $myConfig['searchform'];
           SELF::$template_searchform_autocomplete = array_key_exists('autocomplete', $searchform) ? $searchform['autocomplete'] : SELF::$template_searchform_autocomplete;
+        endif;
+        if($configuration && array_key_exists('languageSwitcher', $myConfig)):
+          $languageSwitcher = $myConfig['languageSwitcher'];
+          SELF::$template_languageSwitcher_direction = array_key_exists('direction', $languageSwitcher) ? $languageSwitcher['direction'] : SELF::$template_languageSwitcher_direction;
+          SELF::$template_languageSwitcher_separat = array_key_exists('separator', $languageSwitcher) ? $languageSwitcher['separator'] : SELF::$template_languageSwitcher_separat;
+          SELF::$template_languageSwitcher_nameDisplay = array_key_exists('nameDisplay', $languageSwitcher) ? $languageSwitcher['nameDisplay'] : SELF::$template_languageSwitcher_nameDisplay;
         endif;
       endif;
     }
@@ -1466,6 +1526,7 @@ class prefix_template {
     static public function HeaderContent(){
       // vars
       $order = SELF::$template_header_sort;
+      $order = apply_filters( 'template_HeaderContent', $order );
       $counter = 0;
       $container = '<div class="header-container ' . prefix_template::AddContainer(prefix_template::$template_container_header, false) . '">';
       $container_open = false;
@@ -1520,6 +1581,9 @@ class prefix_template {
           case 'searchform':
             echo $value == 1 ? SELF::buildSearchForm() : '';
             break;
+          case 'languages':
+            echo $value == 1 ? SELF::languageSwitcher(array()) : '';
+            break;
           case 'widget_one':
             echo $value == 1 ? SELF::getWidget('header_' . $key) : '';
             break;
@@ -1532,10 +1596,12 @@ class prefix_template {
           case 'custom':
             // WP check
             if (function_exists('do_shortcode')):
-              echo $value == 1 ? do_shortcode(str_replace("'", '"', SELF::$template_header_custom)) : '';
+              $headerCustom = $value == 1 ? do_shortcode(str_replace("'", '"', SELF::$template_header_custom)) : '';
             else:
-              echo $value == 1 ? str_replace("'", '"', SELF::$template_header_custom) : '';
+              $headerCustom = $value == 1 ? str_replace("'", '"', SELF::$template_header_custom) : '';
             endif;
+            $headerCustom = apply_filters( 'template_header_custom', $headerCustom );
+            echo $headerCustom;
             break;
 
           default:
@@ -1560,6 +1626,7 @@ class prefix_template {
     static public function FooterContent(){
       // vars
       $order = SELF::$template_footer_sort;
+      $order = apply_filters( 'template_FooterContent', $order );
       $counter = 0;
       $container = '<div class="footer-container ' . prefix_template::AddContainer(prefix_template::$template_container_footer, false) . '">';
       $container_open = false;
@@ -1614,6 +1681,9 @@ class prefix_template {
           case 'searchform':
             echo $value == 1 ? SELF::buildSearchForm() : '';
             break;
+          case 'languages':
+            echo $value == 1 ? SELF::languageSwitcher(array()) : '';
+            break;
           case 'widget_one':
             echo $value == 1 ? SELF::getWidget('footer_' . $key) : '';
             break;
@@ -1626,10 +1696,12 @@ class prefix_template {
           case 'custom':
             // WP check
             if (function_exists('do_shortcode')):
-              echo $value == 1 ? do_shortcode(str_replace("'", '"', SELF::$template_footer_custom)) : '';
+              $footerCustom = $value == 1 ? do_shortcode(str_replace("'", '"', SELF::$template_footer_custom)) : '';
             else:
-              echo $value == 1 ? str_replace("'", '"', SELF::$template_footer_custom) : '';
+              $footerCustom = $value == 1 ? str_replace("'", '"', SELF::$template_footer_custom) : '';
             endif;
+            $footerCustom = apply_filters( 'template_footer_custom', $footerCustom );
+            echo $footerCustom;
             break;
 
           default:
@@ -1758,13 +1830,17 @@ class prefix_template {
     public static function Logo(string $link = "", array $desktop = array(), array $mobile = array(), array $scrolled = array(), $svg = ''){
       // vars
       $output = '';
+      $addCss = '';
       $page_name = get_bloginfo();
       $link = function_exists("get_bloginfo") && $link == "" ? get_bloginfo('url') : $link;
-      $add_desktop = array_key_exists('img', $mobile) && $mobile['img'] !== "" ? 'class="desktop"' : '';
+      $add_desktop = array_key_exists('img', $mobile) && $mobile['img'] !== "" ? 'desktop' : '';
       $add_container = array_key_exists('img', $desktop) && $desktop['img'] == "" && $mobile['img'] == "" ? ' text_logo' : '';
       $img_desktop = array_key_exists('img', $desktop) && $desktop['img'] !== '' ? wp_get_attachment_image_src($desktop['img'], 'full') : '';
       $img_mobile = array_key_exists('img', $mobile) && $mobile['img'] !== '' ? wp_get_attachment_image_src($mobile['img'], 'full') : '';
       $img_scrolled = array_key_exists('img', $scrolled) && $scrolled['img'] !== '' ? wp_get_attachment_image_src($scrolled['img'], 'full') : '';
+      if($img_scrolled !== ""):
+        $addCss .= ' hide-on-scrolled';
+      endif;
       // output
       $output .= '<a href="' . $link . '" class="logo' . $add_container .'">';
         if($svg !== ''):
@@ -1775,12 +1851,12 @@ class prefix_template {
             $desktop_add .= array_key_exists('width', $desktop) && $desktop['width'] !== "" ? ' width="' . $desktop['width'] . '"' : '';
             $desktop_add .= array_key_exists('height', $desktop) && $desktop['height'] !== "" ? ' height="' . $desktop['height'] . '"' : '';
             $desktop_add .= array_key_exists('alt', $desktop) && $desktop['alt'] !== "" ? ' alt="' . prefix_core_BaseFunctions::getConfigTranslation('template_header_logo_desktop_alt', $desktop['alt']) . '"' : '';
-            $output .= '<img src="' . $img_desktop[0] . '" ' . $add_desktop . $desktop_add . '>';
+            $output .= '<img src="' . $img_desktop[0] . '" class="' . $add_desktop . $addCss . '"' . $desktop_add . '>';
             $mobile_add = '';
             $mobile_add .= array_key_exists('width', $mobile) && $mobile['width'] !== "" ? ' width="' . $mobile['width'] . '"' : '';
             $mobile_add .= array_key_exists('height', $mobile) && $mobile['height'] !== "" ? ' height="' . $mobile['height'] . '"' : '';
             $mobile_add .= array_key_exists('alt', $mobile) && $mobile['alt'] !== "" ? ' alt="' . $mobile['alt'] . '"' : '';
-            $output .= $img_mobile !== "" ? '<img src="' . $img_mobile[0] . '" class="mobile"' . $mobile_add . '>' : '';
+            $output .= $img_mobile !== "" ? '<img src="' . $img_mobile[0] . '" class="mobile' . $addCss . '"' . $mobile_add . '>' : '';
 
             $scrolled_add = '';
             $scrolled_add .= array_key_exists('width', $scrolled) && $scrolled['width'] !== "" ? ' width="' . $scrolled['width'] . '"' : '';
@@ -1793,11 +1869,13 @@ class prefix_template {
         endif;
       $output .= '</a>';
 
+      $output = apply_filters( 'template_Logo', $output );
+
       return $output;
     }
 
 
-    /* 3.7 CHECK IF MAINMENU IS ACTIVE
+    /* 3.7 MAIN MENU
     /------------------------*/
     public static function WP_MainMenu(int $active = 1, string $request = '', string $direction = '', string $hamburgerStyle = '', int $submenutoggle = 0, int $headvisibility, string $hamburgerText = '', int $menu_stretched = 0){
       if($active === 1):
@@ -1839,7 +1917,7 @@ class prefix_template {
         // get hamburger
         if($request !== 'menu'):
           if($hamburgerText !== ''):
-            $output .= '<div class="hamburger-container ' . $hamburger_active . '">';
+            $output .= '<div class="hamburger-container ' . $hamburger_active . ' ' . prefix_template::$template_header_hmenu_containerDirection . '">';
             $hamburger_active = '';
           endif;
             $output .= '<button class="hamburger ' . $hamburger_active . '" aria-label="Main Menu">';
@@ -2226,6 +2304,9 @@ class prefix_template {
       if(is_front_page()):
         $classes .= ' is-front-page';
       endif;
+      // header/footer wide setting
+      $classes .= prefix_template::$template_container_header_wide == 1 ? ' header-is-wide' : '';
+      $classes .= prefix_template::$template_container_footer_wide == 1 ? ' footer-is-wide' : '';
       // apply filter
       $classes .= ' ' . apply_filters( 'template_BodyCSS', $classes );
       // return classes
@@ -2300,7 +2381,35 @@ class prefix_template {
     }
 
 
-    /* 3.21 BREADCRUMBS
+    /* 3.21 LANGUAGE SWITCHER
+    /------------------------*/
+    function languageSwitcher($atts){
+      $output = '';
+      $config = shortcode_atts( array(
+        'echo' => 0,
+        'display_names_as' => SELF::$template_languageSwitcher_nameDisplay,
+        'hide_if_empty' => 0
+      ), $atts );
+      // css
+      $css = "language-switcher wp-menu";
+      if(SELF::$template_languageSwitcher_direction == 'h' || SELF::$template_languageSwitcher_direction == 'horizontal'):
+        $css .= ' horizontal';
+      endif;
+      if(SELF::$template_languageSwitcher_separat == 1):
+        $css .= ' menu-seperated';
+      endif;
+      // build output
+      $output .= '<ul class="' . $css . '">';
+        if (class_exists('SitePress')):
+        elseif(function_exists('pll_the_languages')):
+          $output .= pll_the_languages($config);
+        endif;
+      $output .= '</ul>';
+      return $output;
+    }
+
+
+    /* 3.22 BREADCRUMBS
     /------------------------*/
     static function breadcrumbNavigation($content = ''){
       $output = '';

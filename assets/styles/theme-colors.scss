@@ -17,6 +17,7 @@ Table of Contents:
     1.4 INPUTS
     1.5 BREADCRUMBS
     1.6 LOADING
+    1.7 LANGUAGE SWITCHER
   2.0 HEADER
     2.1 BACKGROUND
     2.2 LOGO TEXT
@@ -172,20 +173,44 @@ body.frontend,
   }
 
 
+  /* 1.7 LANGUAGE SWITCHER
+  /––––––––––––––––––––––––*/
+  .language-switcher {
+    background-color: var(--ls__background_color, inherit);
+    color: var(--ls__link_color, inherit);
+    li {
+      &.current-lang a {
+        color: var(--ls__color_active, inherit);
+      }
+      a {
+        color: var(--ls__link_color, inherit);
+        &:hover {
+          color: var(--ls__link_color_hover, inherit);
+        }
+      }
+    }
+  }
+
+
 
   /*==================================================================================
     2.0 HEADER
   ==================================================================================*/
 
-  > header {
-
-    /* 2.1 BACKGROUND
-    /––––––––––––––––––––––––*/
-    background-color: var(--header_background);
-    .header-container {
-      background-color: var(--headercontainer_background);
+  /* 2.1 BACKGROUND
+  /––––––––––––––––––––––––*/
+  &:not(.fixed),
+  &.scrolled {
+    > header {
+      background-color: var(--header_background);
+      .header-container {
+        background-color: var(--headercontainer_background);
+      }
     }
+  }
 
+
+  > header {
 
     /* 2.2 LOGO TEXT
     /––––––––––––––––––––––––*/
@@ -197,6 +222,9 @@ body.frontend,
     /* 2.3 HAMBURGER
     /––––––––––––––––––––––––*/
     .hamburger {
+      + .menu-title {
+        color: var(--hamburger_text_color, var(--hamburger_color));
+      }
       span {
         background: var(--hamburger_color);
         &:before,
@@ -264,6 +292,24 @@ body.frontend,
                       background-color: var(--mnav__subSub_background_color_hover);
                     }
                   }
+                  > ul {
+                    > li {
+                      &.current-menu-ancestor > a,
+                      &.current-menu-item > a {
+                        color: var(--mnav__subSubSub_color_active);
+                        background-color: var(--mnav__subSubSub_background_color_active);
+                      }
+                      > a {
+                        color: var(--mnav__subSubSub_color);
+                        border-color: var(--mnav__subSubSub_border_color);
+                        background-color: var(--mnav__subSubSub_background_color);
+                        &:hover {
+                          color: var(--mnav__subSubSub_color_hover);
+                          background-color: var(--mnav__subSubSub_background_color_hover);
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -304,8 +350,12 @@ body.frontend,
   /––––––––––––––––––––––––*/
   .post-title,
   .is-style-post-title {
-    color: var(--postTitle__color, inherit);
-    background-color: var(--postTitle__bg, inherit);
+    &:not(.has-text-color){
+      color: var(--postTitle__color, inherit);
+    }
+    &:not(.has-background){
+      background-color: var(--postTitle__bg, inherit);
+    }
   }
 
 
@@ -313,8 +363,12 @@ body.frontend,
   /––––––––––––––––––––––––*/
   .leadtext,
   .is-style-lead {
-    color: var(--leadText__color, inherit);
-    background-color: var(--leadText__bg, inherit);
+    &:not(.has-text-color){
+      color: var(--leadText__color, inherit);
+    }
+    &:not(.has-background){
+      background-color: var(--leadText__bg, inherit);
+    }
   }
 
 
@@ -421,6 +475,20 @@ body.frontend,
       color: var(--footer_link_color);
       &:hover {
         color: var(--footer_linkHover_color);
+      }
+    }
+
+
+    /* 5.3 MENU
+    /––––––––––––––––––––––––*/
+    #menu_footer {
+      li {
+        a {
+          color: var(--footer__menu_link_color, var(--footer_link_color));
+          &:hover {
+            color: var(--footer__menu_linkHover_color, var(--footer_linkHover_color));
+          }
+        }
       }
     }
 

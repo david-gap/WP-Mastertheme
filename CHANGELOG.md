@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## 1.52.28 | 16.05.2022 <customizer, lang-switch, wide options>
+* header & footer wide option
+* Language switcher with polylang support
+* fix menu direction
+* add filter for the Logo, custom header, custom footer, header selection annd footer selection
+* update customizer menu labels
+* additional customizer styles
+* fullwidth group & cover content wide position
+* hamburger vertical support
+* header background color reset if is fixed
+* return archive by post format
+* fix sticky logo display
+
+
 ## 1.51.28 | 08.05.2022 <import/export, config button position>
 * update configurator button positions
 * add cutomizer and configurator export and import possibility

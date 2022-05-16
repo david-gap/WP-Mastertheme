@@ -1,6 +1,7 @@
 /* GENERAL */
 
 body.frontend {
+
   .mobile {
     display: none!important;
   }
@@ -8,4 +9,18 @@ body.frontend {
   .hidden_desktop {
     opacity: 0;
   }
+
+  &.active-menu {
+    > header nav {
+      #menu-main-container {
+        &.horizontal {
+          > ul#menu_main {
+            flex-direction: row;
+            align-items: flex-start;
+          }
+        }
+      }
+    }
+  }
+
 }

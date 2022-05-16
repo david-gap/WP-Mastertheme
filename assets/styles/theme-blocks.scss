@@ -23,6 +23,8 @@ Table of Contents:
     2.3 BUTTONS
     2.4 FULL HEIGHT GROUP
     2.5 IMAGE
+    2.6 GROUP
+    2.7 COLUMNS
   3.0 ADDITIONAL STYLINGS
     3.1 BACKEND HIGHLIGHTS
     3.2 COLUMNS
@@ -473,6 +475,13 @@ body.frontend,
     /––––––––––––––––––––––––*/
     div.wp-block-cover {
       padding: 0;
+      min-height: var(--block__cover_minHeight, 0);
+      &.alignfull {
+        min-height: var(--block__cover_alignfull_minHeight, var(--block__cover_minHeight, 0));
+      }
+      &.alignwide {
+        min-height: var(--block__cover_alignwide_minHeight, var(--block__cover_minHeight, 0));
+      }
       .wp-block-cover__inner-container {
         padding-left: var(--container__side, 20px);
         padding-right: var(--container__side, 20px);
@@ -491,6 +500,16 @@ body.frontend,
         }
       }
     }
+    .wp-block[data-align="full"] {
+      div.wp-block-cover {
+        min-height: var(--block__cover_alignfull_minHeight, var(--block__cover_minHeight, 0));
+      }
+    }
+    .wp-block[data-align="wide"] {
+      div.wp-block-cover {
+        min-height: var(--block__cover_alignwide_minHeight, var(--block__cover_minHeight, 0));
+      }
+    }
 
 
 
@@ -500,7 +519,8 @@ body.frontend,
 
   /* 2.1 LIST
   /––––––––––––––––––––––––*/
-  ul.is-style-default {
+  ul.is-style-default,
+  ul.is-style-default ul {
     list-style: none;
     margin-top: 0;
     padding: 0;
@@ -510,7 +530,6 @@ body.frontend,
         display: block;
         content: var(--block__list_marker_value, "•");
         font-size: var(--block__list_marker_size, 150%);
-        line-height: 1;
         position: absolute;
         margin-left: calc(var(--block__list_marker_space, 20px) * -1);
       }
@@ -559,6 +578,37 @@ body.frontend,
     figcaption {
       margin: var(--block__imageFigcaption_margin, 10px 0 0);
       padding: var(--block__imageFigcaption_padding, 0);
+    }
+  }
+
+  /* 2.6 GROUP
+  /––––––––––––––––––––––––*/
+  .wp-block-group {
+    &.has-background {
+      .wp-block-group__inner-container {
+        padding-top: var(--block__group_hasBackground_paddingTop, var(--content__space, 30px));
+        padding-bottom: var(--block__group_hasBackground_paddingBottom, var(--content__space, 30px));
+      }
+    }
+  }
+
+  /* 2.7 COLUMNS
+  /––––––––––––––––––––––––*/
+  .wp-block-columns {
+    &.is-style-columns-has-background-gap {
+      .wp-block-column {
+        + .wp-block-column {
+          margin-left: var(--block__columns_hasBackground_gap, var(--wp--style--block-gap,2em));
+        }
+      }
+    }
+    .wp-block-column {
+      &.has-background {
+        padding: var(--block__columns_hasBackground_padding, var(--content__space, 30px));
+        + .wp-block-column.has-background {
+          margin-left: var(--block__columns_hasBackground_gap, var(--wp--style--block-gap,2em));
+        }
+      }
     }
   }
 
@@ -769,5 +819,23 @@ body.frontend,
         }
       }
     }
+
+    /* 3.5 COVER ZOOM ANIMATION
+    /––––––––––––––––––––––––*/
+  .wp-block-cover {
+    &.is-style-cover-zoomer {
+      overflow: hidden;
+      &:hover {
+        img {
+          transform: scale(1);
+          transition: all .5s linear;
+        }
+      }
+      img {
+        transform: var(--block__cover_zoomer_scale, scale(1.12));
+        transition: all .5s linear;
+      }
+    }
+  }
 
 }
