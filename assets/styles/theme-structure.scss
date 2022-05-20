@@ -281,6 +281,7 @@ body.frontend,
       & > .wp-block-columns .wp-block-column figure,
       & > .wp-block-media-text p,
       & > .post-password-form p,
+      & > .block-vimeo,
       & > .block-accordion,
       & > .block-accordion .accordion-content p,
       & > .block-accordion .accordion-content ol,
@@ -313,6 +314,7 @@ body.frontend,
       & > .wp-block-media-text p,
       & > .post-password-form p,
       & > .block-accordion,
+      & > .block-vimeo,
       & > .block-posts,
       & > #search-form,
       & > .wp-block-gallery-container,
@@ -332,12 +334,11 @@ body.frontend,
   }
 
   main {
-    > section > article {
-      > * {
-        &:last-child {
-
-        }
-      }
+    > section {
+      margin-top: var(--mainSection__marginTop, 0);
+      margin-bottom: var(--mainSection__marginBottom, 0);
+      padding-top: var(--mainSection__paddingTop, 0);
+      padding-bottom: var(--mainSection__paddingBottom, 0);
     }
   }
 
@@ -402,6 +403,8 @@ body.frontend,
   /* 3.3 MENU STYLING OPTIONS
   /––––––––––––––––––––––––*/
   .wp-menu {
+    margin: 0;
+    padding: 0;
     &.horizontal {
       display: flex;
       flex-direction: row;

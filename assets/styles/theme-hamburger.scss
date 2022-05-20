@@ -93,9 +93,9 @@ body.frontend,
     /* Main Menu
     /––––––––––––––––––––––––*/
     #menu-main-container {
-      &.fullscreen {
-        top: 0;
-      }
+      // &.fullscreen {
+      //   top: 0;
+      // }
       &.top_contained {
         top: 100%;
         margin-left: calc(var(--container__side, 20px) * -1)!important;

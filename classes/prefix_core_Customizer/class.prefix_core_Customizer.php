@@ -824,6 +824,47 @@ class prefix_core_Customizer {
             )
           )
         ),
+        'mainSection' => array(
+          'label' => 'Main section',
+          'inputs' => array(
+            'mainSection__bgColor' => array(
+              'label' => 'Background color',
+              'type' => 'color'
+            ),
+            'mainSection__marginTop' => array(
+              'label' => 'Margin top',
+              'type' => 'input'
+            ),
+            'mainSection__marginBottom' => array(
+              'label' => 'Margin bottom',
+              'type' => 'input'
+            ),
+            'mainSection__paddingTop' => array(
+              'label' => 'Padding top',
+              'type' => 'input'
+            ),
+            'mainSection__paddingBottom' => array(
+              'label' => 'Padding bottom',
+              'type' => 'input'
+            ),
+            'mainSection__marginTop_mobile' => array(
+              'label' => 'Margin top',
+              'type' => 'input'
+            ),
+            'mainSection__marginBottom_mobile' => array(
+              'label' => 'Margin bottom',
+              'type' => 'input'
+            ),
+            'mainSection__paddingTop_mobile' => array(
+              'label' => 'Padding top',
+              'type' => 'input'
+            ),
+            'mainSection__paddingBottom_mobile' => array(
+              'label' => 'Padding bottom',
+              'type' => 'input'
+            )
+          )
+        ),
         'breadcrumbs' => array(
           'label' => 'Breadcrumbs',
           'inputs' => array(

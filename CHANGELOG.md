@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 1.53.28 | 20.05.2022 <section customizer, color and spacing>
+* add section styles to customizer
+* fix hidden desktop click bug
+* fix custom coloring override
+* fix swiper block sroll on mobile
+* vimeo block spacing
+* fix wp menu spacing
+
 ## 1.52.28 | 16.05.2022 <customizer, lang-switch, wide options>
 * header & footer wide option
 * Language switcher with polylang support

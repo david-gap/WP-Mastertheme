@@ -54,6 +54,11 @@ body.frontend,
   /––––––––––––––––––––––––*/
   background-color: var(--main_background);
   color: var(--main_color);
+  main {
+    > section {
+      background-color: var(--mainSection__bgColor, transparent);
+    }
+  }
 
 
   /* 1.2 LINKS
@@ -176,16 +181,16 @@ body.frontend,
   /* 1.7 LANGUAGE SWITCHER
   /––––––––––––––––––––––––*/
   .language-switcher {
-    background-color: var(--ls__background_color, inherit);
-    color: var(--ls__link_color, inherit);
+    background-color: var(--ls__background_color, initial);
+    color: var(--ls__link_color, initial);
     li {
       &.current-lang a {
-        color: var(--ls__color_active, inherit);
+        color: var(--ls__color_active, initial);
       }
       a {
-        color: var(--ls__link_color, inherit);
+        color: var(--ls__link_color, initial);
         &:hover {
-          color: var(--ls__link_color_hover, inherit);
+          color: var(--ls__link_color_hover, initial);
         }
       }
     }
@@ -351,10 +356,10 @@ body.frontend,
   .post-title,
   .is-style-post-title {
     &:not(.has-text-color){
-      color: var(--postTitle__color, inherit);
+      color: var(--postTitle__color, initial);
     }
     &:not(.has-background){
-      background-color: var(--postTitle__bg, inherit);
+      background-color: var(--postTitle__bg, initial);
     }
   }
 
@@ -364,10 +369,10 @@ body.frontend,
   .leadtext,
   .is-style-lead {
     &:not(.has-text-color){
-      color: var(--leadText__color, inherit);
+      color: var(--leadText__color, initial);
     }
     &:not(.has-background){
-      background-color: var(--leadText__bg, inherit);
+      background-color: var(--leadText__bg, initial);
     }
   }
 
@@ -404,12 +409,20 @@ body.frontend,
   /––––––––––––––––––––––––*/
   .wp-block-button {
     .wp-block-button__link {
-      color: var(--block__buttons_color);
-      background-color: var(--block__buttons_bgColor);
+      &:not(.has-text-color){
+        color: var(--block__buttons_color);
+      }
+      &:not(.has-background){
+        background-color: var(--block__buttons_bgColor);
+      }
       border-color: var(--block__buttons_borderColor);
       &:hover {
-        color: var(--block__buttonsHover_color);
-        background-color: var(--block__buttonsHover_bgColor);
+        &:not(.has-text-color){
+          color: var(--block__buttonsHover_color);
+        }
+        &:not(.has-background){
+          background-color: var(--block__buttonsHover_bgColor);
+        }
         border-color: var(--block__buttonsHover_borderColor);
       }
     }
@@ -463,9 +476,9 @@ body.frontend,
     /* 5.1 BACKGROUND
     /––––––––––––––––––––––––*/
     color: var(--footer_color);
-    background-color: var(--footer_background);
+    background-color: var(--footer_background, transparent);
     .footer-container {
-      background-color: var(--footercontainer_background);
+      background-color: var(--footercontainer_background, transparent);
     }
 
 
