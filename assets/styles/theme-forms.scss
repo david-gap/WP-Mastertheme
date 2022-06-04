@@ -86,6 +86,16 @@ body.frontend,
     cursor: pointer;
   }
 
+  input[type="reset"],
+  button[type="reset"] {
+    border-radius: var(--input__reset_borderRadius, 0);
+    border-style: solid;
+    border-width: var(--input__reset_borderWidth, var(--input__border_width, 1px));
+    padding: var(--input__reset_padding, 10px 20px);
+    appearance: none;
+    cursor: pointer;
+  }
+
   /* CF7 SUPPORT
   /––––––––––––––––––––––––*/
   .wpcf7 {

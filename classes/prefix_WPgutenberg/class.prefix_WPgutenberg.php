@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.14.13
+ * @version     2.15.13
  */
 
 /*=======================================================

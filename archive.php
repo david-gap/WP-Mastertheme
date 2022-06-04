@@ -13,9 +13,9 @@ get_header();
   <div>
     <?php while ( have_posts() ) : the_post();
       if(get_post_type() == "post" || post_type_supports(get_post_type(), 'post-formats')):
+        $blog_type = get_post_format(get_the_ID()) ? get_post_format(get_the_ID()) : "default";
         // blog output
-        $blog_type = get_post_format();
-        if(locate_template('template_parts/' . get_post_type() . '_' . $blog_type)):
+        if(locate_template('template_parts/' . get_post_type() . '_' . $blog_type . '.php')):
           get_template_part('template_parts/' . get_post_type() . '_' . $blog_type);
         else:
           get_template_part('template_parts/post_' . $blog_type);

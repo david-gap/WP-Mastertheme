@@ -369,6 +369,10 @@ class prefix_core_Customizer {
               'label' => 'Letter spacing',
               'type' => 'input'
             ),
+            'mnav__border_width_mobile' => array(
+              'label' => 'Border width',
+              'type' => 'input'
+            ),
             'mnav__fontsize_mobile' => array(
               'label' => 'Font size',
               'type' => 'input'
@@ -454,6 +458,10 @@ class prefix_core_Customizer {
             ),
             'mnav__sub_letterSpacing' => array(
               'label' => 'Level 2 - Letter spacing',
+              'type' => 'input'
+            ),
+            'mnav__sub_border_width_mobile' => array(
+              'label' => 'Level 2 - border width',
               'type' => 'input'
             ),
             'mnav__sub_fontsize_mobile' => array(
@@ -543,6 +551,10 @@ class prefix_core_Customizer {
               'label' => 'Level 3 - Letter spacing',
               'type' => 'input'
             ),
+            'mnav__subSub_border_width_mobile' => array(
+              'label' => 'Level 3 - border width',
+              'type' => 'input'
+            ),
             'mnav__subSub_fontsize_mobile' => array(
               'label' => 'Level 3 - font size',
               'type' => 'input'
@@ -628,6 +640,10 @@ class prefix_core_Customizer {
             ),
             'mnav__subSubSub_letterSpacing' => array(
               'label' => 'Level 4 - Letsubter spacing',
+              'type' => 'input'
+            ),
+            'mnav__subSubSub_border_width_mobile' => array(
+              'label' => 'Level 4 - border width',
               'type' => 'input'
             ),
             'mnav__subSubSub_fontsize_mobile' => array(
@@ -744,6 +760,10 @@ class prefix_core_Customizer {
               'label' => 'Container padding bottom',
               'type' => 'input'
             ),
+            'header__negativTopPosition_sticky' => array(
+              'label' => 'Top negativ position',
+              'type' => 'input'
+            ),
             'header__paddingTop_sticky' => array(
               'label' => 'Container padding top',
               'type' => 'input'
@@ -767,6 +787,10 @@ class prefix_core_Customizer {
             ),
             'header__paddingBottom_mobile' => array(
               'label' => 'Container padding bottom',
+              'type' => 'input'
+            ),
+            'header__negativTopPosition_sticky_mobile' => array(
+              'label' => 'Top negativ position',
               'type' => 'input'
             ),
             'header__paddingTop_sticky_mobile' => array(
@@ -861,6 +885,35 @@ class prefix_core_Customizer {
             ),
             'mainSection__paddingBottom_mobile' => array(
               'label' => 'Padding bottom',
+              'type' => 'input'
+            )
+          )
+        ),
+        'thumbnail' => array(
+          'label' => 'Thumbnail',
+          'inputs' => array(
+            'thumbnail__height' => array(
+              'label' => 'Height',
+              'type' => 'input'
+            ),
+            'thumbnail__marginTop' => array(
+              'label' => 'Margin top',
+              'type' => 'input'
+            ),
+            'thumbnail__marginBottom' => array(
+              'label' => 'Margin bottom',
+              'type' => 'input'
+            ),
+            'thumbnail__height_mobile' => array(
+              'label' => 'Height',
+              'type' => 'input'
+            ),
+            'thumbnail__marginTop_mobile' => array(
+              'label' => 'Margin top',
+              'type' => 'input'
+            ),
+            'thumbnail__marginBottom_mobile' => array(
+              'label' => 'Margin bottom',
               'type' => 'input'
             )
           )
@@ -1294,6 +1347,88 @@ class prefix_core_Customizer {
             'input__submit_padding_mobile' => array(
               'label' => 'Submit/button padding',
               'type' => 'input'
+            ),
+            'input__reset_fontFamily' => array(
+              'label' => 'Reset font family',
+              'type' => 'input'
+            ),
+            'input__reset_fontSize' => array(
+              'label' => 'Reset/button font size',
+              'type' => 'input'
+            ),
+            'input__reset_letterSpacing' => array(
+              'label' => 'Reset/button letter spacing',
+              'type' => 'input'
+            ),
+            'input__reset_lineHeight' => array(
+              'label' => 'Reset/button line height',
+              'type' => 'input'
+            ),
+            'input__reset_fontWeight' => array(
+              'label' => 'Reset/button font weight',
+              'type' => 'input'
+            ),
+            'input__reset_textTransform' => array(
+              'label' => 'Reset/button text transform',
+              'type' => 'input'
+            ),
+            'input__reset_fontSize_mobile' => array(
+              'label' => 'Reset/button font size',
+              'type' => 'input'
+            ),
+            'input__reset_lineHeight_mobile' => array(
+              'label' => 'Reset/button line height',
+              'type' => 'input'
+            ),
+            'input__reset_letterSpacing_mobile' => array(
+              'label' => 'Reset/button letter spacing',
+              'type' => 'input'
+            ),
+            'input__reset_bg_color' => array(
+              'label' => 'Reset/button background color',
+              'type' => 'color',
+              'default' => '#0175bc'
+            ),
+            'input__reset_color' => array(
+              'label' => 'Reset/button text color',
+              'type' => 'color',
+              'default' => '#fff'
+            ),
+            'input__reset_border_color' => array(
+              'label' => 'Reset/button border color',
+              'type' => 'color',
+              'default' => '#0175bc'
+            ),
+            'input__reset_bg_color_hover' => array(
+              'label' => 'Reset/button background color (hover)',
+              'type' => 'color',
+              'default' => '#0175bc'
+            ),
+            'input__reset_border_color_hover' => array(
+              'label' => 'Reset/button border color (hover)',
+              'type' => 'color',
+              'default' => '#0175bc'
+            ),
+            'input__reset_color_hover' => array(
+              'label' => 'Reset/button text color (hover)',
+              'type' => 'color',
+              'default' => '#fff'
+            ),
+            'input__reset_borderRadius' => array(
+              'label' => 'Reset/button border radius',
+              'type' => 'input'
+            ),
+            'input__reset_borderWidth' => array(
+              'label' => 'Reset/button border width',
+              'type' => 'input'
+            ),
+            'input__reset_padding' => array(
+              'label' => 'Reset/button padding',
+              'type' => 'input'
+            ),
+            'input__reset_padding_mobile' => array(
+              'label' => 'Reset/button padding',
+              'type' => 'input'
             )
           )
         ),
@@ -1443,6 +1578,14 @@ class prefix_core_Customizer {
               'type' => 'color'
             ),
             'leadText__bg' => array(
+              'label' => 'Background color',
+              'type' => 'color'
+            ),
+            'dark__leadText__color' => array(
+              'label' => 'Color',
+              'type' => 'color'
+            ),
+            'dark__leadText__bg' => array(
               'label' => 'Background color',
               'type' => 'color'
             ),
@@ -1776,6 +1919,30 @@ class prefix_core_Customizer {
             'block__buttons_borderRadius_mobile' => array(
               'label' => 'Border radius',
               'type' => 'input'
+            ),
+            'dark__block__buttons_color' => array(
+              'label' => 'Text color',
+              'type' => 'color'
+            ),
+            'dark__block__buttons_bgColor' => array(
+              'label' => 'Background color',
+              'type' => 'color'
+            ),
+            'dark__block__buttons_borderColor' => array(
+              'label' => 'Border color',
+              'type' => 'color'
+            ),
+            'dark__block__buttonsHover_color' => array(
+              'label' => 'Text color (hover)',
+              'type' => 'color'
+            ),
+            'dark__block__buttonsHover_bgColor' => array(
+              'label' => 'Background color (hover)',
+              'type' => 'color'
+            ),
+            'dark__block__buttonsHover_borderColor' => array(
+              'label' => 'Border color (hover)',
+              'type' => 'color'
             )
           )
         ),
@@ -1974,6 +2141,14 @@ class prefix_core_Customizer {
             ),
             'block__accordion_label_fontfamily' => array(
               'label' => 'Label font family',
+              'type' => 'input'
+            ),
+            'block__accordion_label_textTransform' => array(
+              'label' => 'Label text transform',
+              'type' => 'input'
+            ),
+            'block__accordion_label_letterSpacing' => array(
+              'label' => 'Label letter spacing',
               'type' => 'input'
             ),
             'block__accordion_label_fontsize' => array(

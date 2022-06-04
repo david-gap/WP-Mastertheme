@@ -12,28 +12,36 @@ $thumb = isset($matches[1][0]) ? '<img src="' . $matches[1][0] . '">' : $thumb;
 
 $css = 'temp-' . get_post_type() . '-image';
 $css .= $thumb ? ' flex' : '';
+// disable content loading
+if($args['mediaOnly'] && $args['mediaOnly'] == 1):
+  $returnExcerpt = false;
+else:
+  $returnExcerpt = true;
+endif;
 ?>
 
 <article class="<?php echo $css; ?>">
   <?php
-    if($thumb):
-      echo '<div>';
-    else:
-      echo '';
-    endif;
+    if($returnExcerpt):
+      if($thumb):
+        echo '<div>';
+      else:
+        echo '';
+      endif;
   ?>
 
-    <?php get_template_part('template_parts/header'); ?>
-    <div class="entry-content">
-      <?php the_excerpt(); ?>
-    </div>
-    <?php get_template_part('template_parts/footer'); ?>
+      <?php get_template_part('template_parts/header'); ?>
+      <div class="entry-content">
+        <?php the_excerpt(); ?>
+      </div>
+      <?php get_template_part('template_parts/footer'); ?>
 
   <?php
-    if($thumb):
-      echo '</div>';
-    else:
-      echo '';
+      if($thumb):
+        echo '</div>';
+      else:
+        echo '';
+      endif;
     endif;
   ?>
 

@@ -1,4 +1,4 @@
-**Version 2.27.16** (16.05.2022)
+**Version 2.28.16** (04.06.2022)
 
 Custom class "template" with template parts and header / footer builder
 
@@ -13,6 +13,7 @@ Custom class "template" with template parts and header / footer builder
 * $template_ph_custom: placeholder custom content
 * $template_address: address block content
 * $template_socialmedia: social media
+* $template_header_wrap: Allow the header content to wrap
 * $template_header_divider: Activate header divider
 * $template_header_sticky: activate sticky header
 * $template_header_stickyload: activate sticky header on load
@@ -34,6 +35,7 @@ Custom class "template" with template parts and header / footer builder
 * $template_page_metablock: activate metablock on detail page
 * $template_page_metablockAdds: Add metabox to CPT by slugs
 * $template_footer_active: activate footer
+* $template_footer_wrap: Allow the footer content to wrap
 * $template_footer_cr: copyright text
 * $template_footer_custom: custom html
 * $template_footer_sort: Sort and activate blocks inside footer builder
@@ -47,6 +49,10 @@ Custom class "template" with template parts and header / footer builder
 * $template_languageSwitcher_separat: Separat languages
 * $template_languageSwitcher_direction: Select direction
 * $template_languageSwitcher_nameDisplay: Select what should be displayed in the language switcher
+* $template_thumbnail_div: return thumbnail in a div to repeat it
+* $template_thumbnail_align: align all thumbnails
+* $template_404_align: align 404 page thumbnail
+* $template_search_align: align search results page thumbnail
 
 ## CONFIGURATION FILE
 ```

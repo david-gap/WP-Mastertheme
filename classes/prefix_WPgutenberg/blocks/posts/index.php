@@ -258,6 +258,10 @@ function WPgutenberg_posts_getResultsAndSort(array $attr, string $source = 'firs
       $queryArgs['tag_id'] = $tagsToQuery;
     endif;
   endif;
+  // language
+  if($source == 'ajax' && array_key_exists('language', $attr) && $attr['language'] !== ""):
+    $queryArgs['lang'] = $attr['language'];
+  endif;
   // apply query filter
   $queryArgs = apply_filters( 'WPgutenberg_filter_posts_query', $queryArgs );
   // call posts
@@ -382,6 +386,7 @@ function WPgutenberg_posts_blockRender($attr){
           }
           // fields to resort
           $output .= '<form class="thefilter">';
+            $output .= '<input type="hidden" name="language" value="' . prefix_core_BaseFunctions::getCurrentLang() . '">';
             if(array_key_exists('postTaxonomyFilter', $attr)):
               $output .= '<input type="hidden" name="postTaxonomyFilter" value="' . implode('__', $attr['postTaxonomyFilter']) . '">';
             endif;

@@ -105,6 +105,18 @@ body.frontend,
     }
   }
 
+  .post-thumb {
+    height: var(--thumbnail__height, auto);
+    margin-top: var(--thumbnail__marginTop, 0);
+    margin-bottom: var(--thumbnail__marginBottom, 0);
+  }
+  div.post-thumb {
+    min-width: 100%;
+    background-size: auto 100%;
+    background-repeat: repeat-x;
+    background-position: center;
+  }
+
 
 
   /*==================================================================================
@@ -115,10 +127,11 @@ body.frontend,
   }
   &.scrolled {
     > header {
+      top: calc(var(--header__negativTopPosition_sticky, 0) * -1);
       nav {
         .header-container {
-            padding-top: var(--header__paddingTop_sticky, var(--header__paddingTop, 10px));
-            padding-bottom: var(--header__paddingBottom_sticky, var(--header__paddingBottom, 10px));
+          padding-top: var(--header__paddingTop_sticky, var(--header__paddingTop, 10px));
+          padding-bottom: var(--header__paddingBottom_sticky, var(--header__paddingBottom, 10px));
         }
         .logo {
           img {
@@ -145,10 +158,15 @@ body.frontend,
         display: flex;
         justify-content: space-between;
         align-items: center;
+        &.wrap {
+          flex-wrap: wrap;
+        }
         > * {
-          margin-right: var(--header__itemSpacingHorizontal, 40px);
-          &:last-child {
-            margin-right: 0;
+          &:not(.post-thumb){
+            margin-right: var(--header__itemSpacingHorizontal, 40px);
+            &:last-child {
+              margin-right: 0;
+            }
           }
         }
         > *:last-child {
@@ -279,6 +297,7 @@ body.frontend,
       & > .wp-block-columns .wp-block-column ul,
       & > .wp-block-columns .wp-block-column img,
       & > .wp-block-columns .wp-block-column figure,
+      & > .wp-block-columns .wp-block-column .wp-block-cover,
       & > .wp-block-media-text p,
       & > .post-password-form p,
       & > .block-vimeo,
@@ -518,6 +537,9 @@ body.frontend,
       justify-content: space-between;
       padding-top: var(--footer__paddingTop, 40px);
       padding-bottom: var(--footer__paddingBottom, 20px);
+      &.wrap {
+        flex-wrap: wrap;
+      }
       > *:last-child {
         text-align: right;
       }

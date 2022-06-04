@@ -241,6 +241,18 @@
   }
 
 
+  /* return reset button
+  /------------------------*/
+  function getResetButton(atts) {
+    if(atts["postTaxonomyFilterOptions"] && atts["postTaxonomyFilterOptions"].includes('restButton')){
+      let output = '<input type="rest" value="' + __( 'Reset', 'devTheme' ) + '">';
+      return (
+        htmlToElem( output )
+      );
+    }
+  }
+
+
   /* build taxonomy fieldset
   /------------------------*/
   function taxonomyFiedset(taxonomy, atts) {
@@ -438,6 +450,7 @@ REGISTER BLOCK
           <form class="thefilter">
             {searchBox(attributes)}
             {getTaxonomyFiedset(attributes)}
+            {getResetButton(attributes)}
           </form>
           <div className={postListTemplate} style={{'--postColumns': columnSum, '--postColumnsSpace': columnSpacing + 'px'}} data-columnspace={columnSpacing} data-columns={columnSum}>
             { posts.map(

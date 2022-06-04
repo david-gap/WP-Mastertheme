@@ -1,4 +1,4 @@
-**Version 2.15.8** (08.05.2022)
+**Version 2.16.8** (04.06.2022)
 
 Custom class "prefix_core_BaseFunctions" used as a library for useful functions
 
@@ -285,9 +285,21 @@ static $metaFields = array(
     'label' => 'Text field for URL',
     'type' => 'text'
   ),
-  'BlockUrl' => array(
+  'checkBox' => array(
     'label' => 'Checkbox field',
     'type' => 'checkbox'
+  ),
+  'staticSelection' => array(
+    'label' => 'Select field',
+    'type' => 'select',
+    'values' => array(
+      'option_value' => 'option label'
+    )
+  ),
+  'cptOrTaxSelection' => array(
+    'label' => 'Select field',
+    'type' => 'select',
+    'values' => 'tax__taxonomyName'
   )
 );
 core_BaseFunctions::metaBoxes("post_id", $metaFields);

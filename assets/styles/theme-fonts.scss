@@ -288,6 +288,16 @@ body.frontend,
     text-transform: var(--input__submit_textTransform, uppercase);
     letter-spacing: var(--input__submit_letterSpacing, 0px);
   }
+  // reset
+  button[type="reset"],
+  input[type="reset"] {
+    font-family: var(--input__reset_fontFamily, var(--input__fontFamily, inherit));
+    font-size: var(--input__reset_fontSize, var(--input__fontSize, inherit));
+    line-height: var(--input__reset_lineHeight, var(--input__lineHeight, inherit));
+    font-weight: var(--input__reset_fontWeight, var(--input__fontWeight, inherit));
+    text-transform: var(--input__reset_textTransform, uppercase);
+    letter-spacing: var(--input__reset_letterSpacing, 0px);
+  }
   // fieldset
   fieldset {
     legend {
@@ -346,6 +356,8 @@ body.frontend,
         font-size: var(--block__accordion_label_fontsize, inherit);
         font-weight: var(--block__accordion_label_fontweight, inherit);
         line-height: var(--block__accordion_label_lineheight, inherit);
+        text-transform: var(--block__accordion_label_textTransform, none);
+        letter-spacing: var(--block__accordion_label_letterSpacing, 0);
       }
       .accordion-content {
         font-size: var(--block__accordion_content_fontsize, inherit);

@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.27.16
+ * @version     2.28.16
  *
 */
 
@@ -46,7 +46,9 @@ Table of Contents:
   3.18 SCROLL TO TOP BUTTON
   3.19 MAIN MENU SEARCH FORM
   3.20 RETURN WIDGET
-  3.21 BREADCRUMBS
+  3.21 LANGUAGE SWITCHER
+  3.22 THUMBNAIL
+  3.23 BREADCRUMBS
 =======================================================*/
 
 
@@ -71,6 +73,7 @@ class prefix_template {
     * @param static string $template_ph_custom: placeholder custom content
     * @param static array $template_address: address block content
     * @param static array $template_socialmedia: social media
+    * @param static int $template_header_wrap: Allow the header content to wrap
     * @param static int $template_header_divider: Activate header divider
     * @param static int $template_header_sticky: activate sticky header
     * @param static int $template_header_stickyload: activate sticky header on load
@@ -99,6 +102,7 @@ class prefix_template {
     * @param static array $template_page_options: show/hide template elements
     * @param static int $template_scrolltotop_active: activate scroll to top
     * @param static int $template_footer_active: activate footer
+    * @param static int $template_footer_wrap: Allow the footer content to wrap
     * @param static string $template_footer_cr: copyright text
     * @param static string $template_footer_custom: custom html
     * @param static string $template_footer_menu: footer menu settings
@@ -107,12 +111,16 @@ class prefix_template {
     * @param static string $template_searchform_autocomplete: configure the autocomplete in the search form
     * @param static int $template_breadcrumbs_active: activate breadcrumbs
     * @param static int $template_breadcrumbs_inside: Place breadcrumbs inside page content and if first element is image than after image
-    * @param static int template_breadcrumbs_intro: Show introduction text
-    * @param static int template_breadcrumbs_home: Show home link
-    * @param static string template_breadcrumbs_separator: Separate crumbs by string
-    * @param static int template_languageSwitcher_separat: Separat languages
-    * @param static string template_languageSwitcher_direction: Select direction
-    * @param static string template_languageSwitcher_nameDisplay: Select what should be displayed in the language switcher
+    * @param static int $template_breadcrumbs_intro: Show introduction text
+    * @param static int $template_breadcrumbs_home: Show home link
+    * @param static string $template_breadcrumbs_separator: Separate crumbs by string
+    * @param static int $template_languageSwitcher_separat: Separat languages
+    * @param static string $template_languageSwitcher_direction: Select direction
+    * @param static string $template_languageSwitcher_nameDisplay: Select what should be displayed in the language switcher
+    * @param static int $template_thumbnail_div: return thumbnail in a div to repeat it
+    * @param static string $template_thumbnail_align: align all thumbnails
+    * @param static string $template_404_align: align 404 page thumbnail
+    * @param static string $template_search_align: align search results page thumbnail
   */
   static $template_container_header                = 1;
   static $template_container_breadcrumbs           = 1;
@@ -167,6 +175,7 @@ class prefix_template {
     "whatsapp" => ""
   );
   static $template_header_divider                  = 1;
+  static $template_header_wrap                     = 0;
   static $template_header_sticky                   = 1;
   static $template_header_stickyload               = 0;
   static $template_header_dmenu                    = 1;
@@ -189,10 +198,11 @@ class prefix_template {
     "custom" => 0,
     "searchform" => 0,
     "languages" => 0,
-    "container_end" => 1,
     "widget_one" => 0,
     "widget_two" => 0,
-    "widget_three" => 0
+    "widget_three" => 0,
+    "thumbnail" => 0,
+    "container_end" => 1
   );
   static $template_header_logo_link                = "";
   static $template_header_logo_d                   = array(
@@ -228,6 +238,9 @@ class prefix_template {
     "scrolltotop" => 0,
     "footer" => 1,
     "darkmode" => 1,
+    "titleWide" => 0,
+    "thumbnailWide" => 0,
+    "thumbnailFull" => 0,
     "header_fixed" => 1,
     "beforeMain" => 1,
     "afterMain" => 1
@@ -248,6 +261,7 @@ class prefix_template {
   static $template_page_additional                 = array();
   static $template_scrolltotop_active              = 0;
   static $template_footer_active                   = 1;
+  static $template_footer_wrap                     = 0;
   static $template_footer_cr                       = "";
   static $template_footer_custom                   = "";
   static $template_footer_menu                     = array(
@@ -280,6 +294,12 @@ class prefix_template {
   static $template_languageSwitcher_separat        = 0;
   static $template_languageSwitcher_direction      = 'horizontal';
   static $template_languageSwitcher_nameDisplay    = 'slug';
+  static $template_thumbnail_div                   = 0;
+  static $template_thumbnail_404                   = 0;
+  static $template_thumbnail_search                = 0;
+  static $template_thumbnail_align                 = 'normal';
+  static $template_404_align                       = 'normal';
+  static $template_search_align                    = 'normal';
 
 
   /* 1.2 ON LOAD RUN
@@ -718,6 +738,10 @@ class prefix_template {
           "label" => "Activate divider",
           "type" => "switchbutton"
         ),
+        "wrap" => array(
+          "label" => "Allow wrap",
+          "type" => "switchbutton"
+        ),
         "sticky" => array(
           "label" => "Sticky header",
           "type" => "switchbutton"
@@ -898,6 +922,10 @@ class prefix_template {
               "label" => "Widget 3",
               "type" => "switchbutton"
             ),
+            "thumbnail" => array(
+              "label" => "Thumbnail",
+              "type" => "switchbutton"
+            ),
             "container_end" => array(
               "label" => "Container end",
               "type" => "hr"
@@ -1011,6 +1039,18 @@ class prefix_template {
               "label" => "Darkmode",
               "type" => "switchbutton"
             ),
+            "titleWide" => array(
+              "label" => "Title wide",
+              "type" => "switchbutton"
+            ),
+            "thumbnailWide" => array(
+              "label" => "Thumbnail wide",
+              "type" => "switchbutton"
+            ),
+            "thumbnailFull" => array(
+              "label" => "Thumbnail full",
+              "type" => "switchbutton"
+            ),
             "header_fixed" => array(
               "label" => "Header fixed",
               "type" => "switchbutton"
@@ -1088,6 +1128,10 @@ class prefix_template {
       "value" => array(
         "active" => array(
           "label" => "Activate footer",
+          "type" => "switchbutton"
+        ),
+        "wrap" => array(
+          "label" => "Allow wrap",
           "type" => "switchbutton"
         ),
         "copyright" => array(
@@ -1211,6 +1255,39 @@ class prefix_template {
           "value" => array('slug','name')
         )
       )
+    ),
+    'thumbnail' => array(
+      "label" => "Thumbnail settings",
+      "type" => "multiple",
+      "value" => array(
+        "div" => array(
+          "label" => "Insert IMG into DIV",
+          "type" => "switchbutton"
+        ),
+        "404" => array(
+          "label" => "404 Page thumbnail",
+          "type" => "img"
+        ),
+        "search" => array(
+          "label" => "Search results page thumbnail",
+          "type" => "img"
+        ),
+        "align" => array(
+          "label" => "Align all thumbnail",
+          "type" => "select",
+          "value" => array('normal','wide','full')
+        ),
+        "404_align" => array(
+          "label" => "404 align thumbnail",
+          "type" => "select",
+          "value" => array('normal','wide','full')
+        ),
+        "search_align" => array(
+          "label" => "404 align thumbnail",
+          "type" => "select",
+          "value" => array('normal','wide','full')
+        )
+      )
     )
   );
 
@@ -1283,6 +1360,7 @@ class prefix_template {
         endif;
         if($configuration && array_key_exists('header', $myConfig)):
           $header = $myConfig['header'];
+          SELF::$template_header_wrap = array_key_exists('wrap', $header) ? $header['wrap'] : SELF::$template_header_wrap;
           SELF::$template_header_divider = array_key_exists('divider', $header) ? $header['divider'] : SELF::$template_header_divider;
           SELF::$template_header_sticky = array_key_exists('sticky', $header) ? $header['sticky'] : SELF::$template_header_sticky;
           SELF::$template_header_stickyload = array_key_exists('sticky_onload', $header) ? $header['sticky_onload'] : SELF::$template_header_stickyload;
@@ -1323,6 +1401,7 @@ class prefix_template {
         if($configuration && array_key_exists('footer', $myConfig)):
           $footer = $myConfig['footer'];
           SELF::$template_footer_active = array_key_exists('active', $footer) ? $footer['active'] : SELF::$template_footer_active;
+          SELF::$template_footer_wrap = array_key_exists('wrap', $footer) ? $footer['wrap'] : SELF::$template_footer_wrap;
           SELF::$template_footer_cr = array_key_exists('copyright', $footer) ? $footer['copyright'] : SELF::$template_footer_cr;
           SELF::$template_footer_custom = array_key_exists('custom', $footer) ? $footer['custom'] : SELF::$template_footer_custom;
           SELF::$template_footer_menu = array_key_exists('menu', $footer) ? $footer['menu'] : SELF::$template_footer_menu;
@@ -1347,6 +1426,15 @@ class prefix_template {
           SELF::$template_languageSwitcher_direction = array_key_exists('direction', $languageSwitcher) ? $languageSwitcher['direction'] : SELF::$template_languageSwitcher_direction;
           SELF::$template_languageSwitcher_separat = array_key_exists('separator', $languageSwitcher) ? $languageSwitcher['separator'] : SELF::$template_languageSwitcher_separat;
           SELF::$template_languageSwitcher_nameDisplay = array_key_exists('nameDisplay', $languageSwitcher) ? $languageSwitcher['nameDisplay'] : SELF::$template_languageSwitcher_nameDisplay;
+        endif;
+        if($configuration && array_key_exists('thumbnail', $myConfig)):
+          $thumbnail = $myConfig['thumbnail'];
+          SELF::$template_thumbnail_div = array_key_exists('div', $thumbnail) ? $thumbnail['div'] : SELF::$template_thumbnail_div;
+          SELF::$template_thumbnail_404 = array_key_exists('404', $thumbnail) ? $thumbnail['404'] : SELF::$template_thumbnail_404;
+          SELF::$template_thumbnail_search = array_key_exists('search', $thumbnail) ? $thumbnail['search'] : SELF::$template_thumbnail_search;
+          SELF::$template_thumbnail_align = array_key_exists('align', $thumbnail) ? $thumbnail['align'] : SELF::$template_thumbnail_align;
+          SELF::$template_404_align = array_key_exists('404_align', $thumbnail) ? $thumbnail['404_align'] : SELF::$template_404_align;
+          SELF::$template_search_align = array_key_exists('search_align', $thumbnail) ? $thumbnail['search_align'] : SELF::$template_search_align;
         endif;
       endif;
     }
@@ -1527,8 +1615,10 @@ class prefix_template {
       // vars
       $order = SELF::$template_header_sort;
       $order = apply_filters( 'template_HeaderContent', $order );
+      $css = '';
+      $css .= SELF::$template_header_wrap == 1 ? ' wrap' : '';
       $counter = 0;
-      $container = '<div class="header-container ' . prefix_template::AddContainer(prefix_template::$template_container_header, false) . '">';
+      $container = '<div class="header-container ' . prefix_template::AddContainer(prefix_template::$template_container_header, false) . $css . '">';
       $container_open = false;
       $container_closed = false;
 
@@ -1562,6 +1652,9 @@ class prefix_template {
               // open after container
               echo '<div class="after-container">';
             endif;
+            break;
+          case 'thumbnail':
+            echo $value == 1 ? SELF::get_thumbnail() : '';
             break;
           case 'menu':
             echo $value == 1 ? SELF::WP_MainMenu(SELF::$template_header_dmenu, 'menu', SELF::$template_header_menu_style, SELF::$template_header_hmenu_style, SELF::$template_header_hmenu_toggle, SELF::$template_header_hmenu_visible_head, SELF::$template_header_hmenu_text, SELF::$template_header_hmenu_streched) : '';
@@ -1627,8 +1720,10 @@ class prefix_template {
       // vars
       $order = SELF::$template_footer_sort;
       $order = apply_filters( 'template_FooterContent', $order );
+      $css = '';
+      $css .= SELF::$template_footer_wrap == 1 ? ' wrap' : '';
       $counter = 0;
-      $container = '<div class="footer-container ' . prefix_template::AddContainer(prefix_template::$template_container_footer, false) . '">';
+      $container = '<div class="footer-container ' . prefix_template::AddContainer(prefix_template::$template_container_footer, false) . $css . '">';
       $container_open = false;
       $container_closed = false;
 
@@ -2409,7 +2504,36 @@ class prefix_template {
     }
 
 
-    /* 3.22 BREADCRUMBS
+    /* 3.22 THUMBNAIL
+    /------------------------*/
+    function get_thumbnail(){
+      $output = '';
+      $obj = get_queried_object();
+      $id = $obj && property_exists($obj, 'ID') ? $obj->ID : 0;
+      $id = is_404() ? SELF::$template_thumbnail_404 : $id;
+      $id = is_search() ? SELF::$template_thumbnail_search : $id;
+      $options = $obj && property_exists($obj, 'ID') ? prefix_template::PageOptions($obj->ID) : array();
+
+      if(in_array('thumbnailWide', $options) || SELF::$template_thumbnail_align && SELF::$template_thumbnail_align == 'wide' || is_404() && SELF::$template_404_align && SELF::$template_404_align == 'wide' || is_search() && SELF::$template_search_align && SELF::$template_search_align == 'wide'):
+        $thumbnailCss = 'post-thumb alignwide';
+      elseif(in_array('thumbnailFull', $options) || SELF::$template_thumbnail_align && SELF::$template_thumbnail_align == 'full' || is_404() && SELF::$template_404_align && SELF::$template_404_align == 'full' || is_search() && SELF::$template_search_align && SELF::$template_search_align == 'full'):
+        $thumbnailCss = 'post-thumb alignfull';
+      else:
+        $thumbnailCss = 'post-thumb';
+       endif;
+
+      if($id > 0):
+        $output .= SELF::$template_thumbnail_div == 0 ? get_the_post_thumbnail($id, 'full', ['class' => $thumbnailCss]) : '';
+        $output .= SELF::$template_thumbnail_div == 0 && is_404() || SELF::$template_thumbnail_div == 0 && is_search() ? wp_get_attachment_image($id, 'full', ['class' => $thumbnailCss]) : '';
+        $img_url = is_404() || is_search() ? wp_get_attachment_image_url($id, 'full') : get_the_post_thumbnail_url($id, 'full');
+        $output .= SELF::$template_thumbnail_div == 1 && $img_url ? '<div class="' . $thumbnailCss . '" style="background-image: url(' . $img_url . ')"></div>' : '';
+      endif;
+
+      return $output;
+    }
+
+
+    /* 3.23 BREADCRUMBS
     /------------------------*/
     static function breadcrumbNavigation($content = ''){
       $output = '';

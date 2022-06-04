@@ -10,6 +10,7 @@
 get_header();
 ?>
 <section id="search-results" <?php echo prefix_template::AddContainer(prefix_template::$template_container, true); ?>>
+  <?php echo prefix_template::get_thumbnail(); ?>
   <h1 class="post-title">
     <?php echo $wp_query->found_posts; ?> <?php _e('Search results for','devTheme'); ?>: "<?php the_search_query(); ?>"
   </h1>

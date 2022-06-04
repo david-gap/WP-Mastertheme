@@ -76,6 +76,44 @@ function WPgutenberg_postsfilter_ContentRow($value, $id){
     case "date":
       return get_the_date('d.m.Y', $id);
       break;
+    case "template":
+      ob_start();
+      if(get_post_type($id) == "post" || post_type_supports(get_post_type($id), 'post-formats')):
+        $blog_type = get_post_format($id) ? get_post_format($id) : "default";
+        global $post;
+        $post = get_post($id);
+        setup_postdata($post);
+        // blog output
+        if(locate_template('template_parts/' . get_post_type($id) . '_' . $blog_type . '.php')):
+          get_template_part('template_parts/' . get_post_type($id) . '_' . $blog_type);
+        else:
+          get_template_part('template_parts/post_' . $blog_type);
+        endif;
+      else:
+        // default output
+        get_template_part('template_parts/post_default');
+      endif;
+      return ob_get_clean();
+      break;
+    case "templateMedia":
+      ob_start();
+      if(get_post_type($id) == "post" || post_type_supports(get_post_type($id), 'post-formats')):
+        $blog_type = get_post_format($id) ? get_post_format($id) : "default";
+        global $post;
+        $post = get_post($id);
+        setup_postdata($post);
+        // blog output
+        if(locate_template('template_parts/' . get_post_type($id) . '_' . $blog_type . '.php')):
+          get_template_part('template_parts/' . get_post_type($id) . '_' . $blog_type, '', array('mediaOnly' => 1));
+        else:
+          get_template_part('template_parts/post_' . $blog_type, '', array('mediaOnly' => 1));
+        endif;
+      else:
+        // default output
+        get_template_part('template_parts/post_default', '', array('mediaOnly' => 1));
+      endif;
+      return ob_get_clean();
+      break;
     case "excerpt":
       return get_the_excerpt($id);
       break;
@@ -109,14 +147,14 @@ function WPgutenberg_postsfilter_PostBuilder(array $attr, $id){
       $output .= $linkOpen;
     endif;
       // add post thumbnail
-      if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_img', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
-        $output .= $linkOpen;
-      endif;
-        if(array_key_exists('postThumb', $attr) && $attr['postThumb'] !== false && $attr['postThumb'] !== ''):
-          $output .= get_the_post_thumbnail($id) ? '<figure>' . get_the_post_thumbnail($id, 'full', array("data-id" => $id)) . '</figure>' : '';
+      if(array_key_exists('postThumb', $attr) && $attr['postThumb'] !== false && $attr['postThumb'] !== ''):
+        if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_img', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
+          $output .= $linkOpen;
         endif;
-      if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_img', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
-        $output .= $linkClose;
+        $output .= get_the_post_thumbnail($id) ? '<figure>' . get_the_post_thumbnail($id, 'full', array("data-id" => $id)) . '</figure>' : '';
+        if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_img', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
+          $output .= $linkClose;
+        endif;
       endif;
       // add content
       $output .= '<div class="post-content">';
@@ -245,6 +283,10 @@ function WPgutenberg_postsfilter_getResultsAndSort(array $attr, string $source =
     $queryArgs['s'] = $_GET['textsearch'];
   elseif($source == 'ajax' && array_key_exists('textsearch', $attr) && $attr['textsearch'] !== ""):
     $queryArgs['s'] = $attr['textsearch'];
+  endif;
+  // language
+  if($source == 'ajax' && array_key_exists('language', $attr) && $attr['language'] !== ""):
+    $queryArgs['lang'] = $attr['language'];
   endif;
   // apply query filter
   $queryArgs = apply_filters( 'WPgutenberg_filter_postsfilter_query', $queryArgs );
@@ -405,6 +447,7 @@ function WPgutenberg_postsfilter_blockRender($attr){
         }
       endif;
       // filter settings
+      $output .= '<input type="hidden" name="language" value="' . prefix_core_BaseFunctions::getCurrentLang() . '">';
       if(array_key_exists('postTaxonomyFilter', $attr)):
         $output .= '<input type="hidden" name="postTaxonomyFilter" value="' . implode('__', $attr['postTaxonomyFilter']) . '">';
       endif;
@@ -419,6 +462,9 @@ function WPgutenberg_postsfilter_blockRender($attr){
       $output .= '<input type="hidden" name="postTextTwo" value="' . $attr['postTextTwo'] . '">';
       $output .= '<input type="hidden" name="postThumb" value="' . $attr['postThumb'] . '">';
       $output .= '<input type="hidden" name="postColumns" value="' . $columns . '">';
+      if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('restButton', $attr['postTaxonomyFilterOptions'])):
+        $output .= '<div id="resetSelection" class="hidden"><input type="reset" name="resetSelection" value="Reset"></div>';
+      endif;
     $output .= '</form>';
     $output .= '<div class="results ' . $attr['postListTemplate'] . '" data-columnspace="' . $spacing . '" data-columns="' . $columns . '" style="' . $inlinecss . '">';
       $output .= WPgutenberg_postsfilter_getResultsAndSort($attr);

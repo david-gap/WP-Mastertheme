@@ -74,7 +74,9 @@ export default class Inspector extends Component {
       { value: "", label: "-" },
       { value: "title", label: __( 'Title', 'devTheme' ) },
       { value: "date", label: __( 'Date', 'devTheme' ) },
-      { value: "excerpt", label: __( 'Excerpt', 'devTheme' ) }
+      { value: "excerpt", label: __( 'Excerpt', 'devTheme' ) },
+      { value: "template", label: __( 'Post template', 'devTheme' ) },
+      { value: "templateMedia", label: __( 'Post template (media only)', 'devTheme' ) }
     ];
     const query = {
       'status': 'publish',
@@ -197,6 +199,7 @@ export default class Inspector extends Component {
     // options
     const postOptions = [
       { value: "legend", label: __( 'Show taxonomy legend', 'devTheme' ) },
+      { value: "restButton", label: __( 'Show reset button', 'devTheme' ) },
       { value: "hirarchical", label: __( 'Hirarchical taxonomies', 'devTheme' ) },
       { value: "emptytax", label: __( 'Show empty taxonomies', 'devTheme' ) },
       { value: "link_img", label: __( 'Link image', 'devTheme' ) },
@@ -368,7 +371,7 @@ export default class Inspector extends Component {
             </PanelRow>
             <PanelRow>
               <div>
-                <label><strong>{ __( 'Show', 'devTheme' ) }</strong></label>
+                <label><strong>{ __( 'Additional options', 'devTheme' ) }</strong></label>
                   <ul>
                 { postOptions.map(
                   (options, setState) => {

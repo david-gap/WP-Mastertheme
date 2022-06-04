@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## 1.54.28 | 04.06.2022 <thumbnail, language, small addons>
+* Add thumbnail to header option
+* Add align wide option to post title
+* Add post template output to post & postfilter block (output not supported in backend)
+* Add reset button option to postfilter block
+* fix posts & postfilter block language output
+* extend form values to ajax function with select options
+* Add language switcher to template (polylang only)
+* Add thumbnail alignment
+* Add header & footer wrap option
+* Add Thumbnail for search results & 404 page
+* Additional customizer options
+* add metabox select option
+* Update post template output
+
 ## 1.53.28 | 20.05.2022 <section customizer, color and spacing>
 * add section styles to customizer
 * fix hidden desktop click bug

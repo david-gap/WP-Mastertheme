@@ -101,6 +101,17 @@ body.frontend,
       color: var(--input__submit_color_hover);
     }
   }
+  input[type="reset"],
+  button[type="reset"] {
+    background-color: var(--input__reset_bg_color);
+    border-color: var(--input__reset_border_color);
+    color: var(--input__reset_color);
+    &:hover {
+      background-color: var(--input__reset_bg_color_hover);
+      border-color: var(--input__reset_border_color_hover);
+      color: var(--input__reset_color_hover);
+    }
+  }
   input,
   textarea,
   select {
@@ -414,16 +425,16 @@ body.frontend,
       }
       &:not(.has-background){
         background-color: var(--block__buttons_bgColor);
+        border-color: var(--block__buttons_borderColor);
       }
-      border-color: var(--block__buttons_borderColor);
       &:hover {
         &:not(.has-text-color){
           color: var(--block__buttonsHover_color);
         }
         &:not(.has-background){
           background-color: var(--block__buttonsHover_bgColor);
+          border-color: var(--block__buttonsHover_borderColor);
         }
-        border-color: var(--block__buttonsHover_borderColor);
       }
     }
   }

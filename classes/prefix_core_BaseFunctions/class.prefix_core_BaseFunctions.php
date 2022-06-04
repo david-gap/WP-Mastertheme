@@ -4,7 +4,7 @@
  *
  * Base dev functions - parent for all custom classes
  * Author:      David Voglgsnag
- * @version     2.15.8
+ * @version     2.16.8
  *
  */
 
@@ -1049,6 +1049,41 @@ class prefix_core_BaseFunctions {
           $output .= '<td>';
             if($metafeildValues['type'] == 'textarea'):
               $output .= '<textarea name="term_meta[' . $metafield . ']" id="term_meta[' . $metafield . ']" rows="5" size="25">' . stripslashes($value) . '</textarea><br />';
+            elseif($metafeildValues["type"] == "select"):
+              $output .= '<select name="term_meta[' . $metafield . ']" id="term_meta[' . $metafield . ']">';
+                if(array_key_exists('allowEmpty', $metafeildValues) && $metafeildValues["allowEmpty"] == 1):
+                  $output .= '<option>-</option>';
+                endif;
+                if(array_key_exists('values', $metafeildValues) && is_array($metafeildValues["values"])):
+                  foreach ($metafeildValues["values"] as $key => $option) {
+                    $output .= '<option value="' . $key . '" ' . SELF::setSelected($value, $key) . '>' . $option . '</option>';
+                  }
+                elseif(array_key_exists('values', $metafeildValues) && !is_array($metafeildValues["values"])):
+                  $splitValue = explode('__', $metafeildValues["values"]);
+                  if($splitValue[0] == 'tax'):
+                    $terms = get_terms( array(
+                      'taxonomy' => $splitValue[1],
+                      'hide_empty' => false,
+                    ) );
+                    foreach ($terms as $term){
+                      $output .= '<option value="' . $term->term_id . '" ' . SELF::setSelected($value, $term->term_id) . '>' . $term->name . '</option>';
+                    }
+                  else:
+                    $cpt_args = array(
+                      'posts_per_page' => -1,
+                      'post_type' => $splitValue[1],
+                      'order' => 'ASC'
+                    );
+                    $cpt_query = new WP_Query( $cpt_args );
+                    if ( $cpt_query->have_posts() ) :
+                      while ( $cpt_query->have_posts() ) : $cpt_query->the_post();
+                        $output .= '<option value="' . get_the_id() . '" ' . SELF::setSelected($value, get_the_id()) . '>' . get_the_title() . '</option>';
+                      endwhile;
+                      wp_reset_postdata();
+                    endif;
+                  endif;
+                endif;
+              $output .= '</select>';
             else:
               $output .= '<input type="' . $metafeildValues['type'] . '" name="term_meta[' . $metafield . ']" id="term_meta[' . $metafield . ']" size="25" value="' . $value . '"><br />';
             endif;
@@ -1084,6 +1119,41 @@ class prefix_core_BaseFunctions {
                       echo '<img src="' . wp_get_attachment_thumb_url($value) . '">';
                     endif;
                   echo '</span>';
+                elseif($metafeildValues["type"] == "select"):
+                  echo '<select id="' . $metafield . '" name="' . $metafield . '">';
+                    if(array_key_exists('allowEmpty', $metafeildValues) && $metafeildValues["allowEmpty"] == 1):
+                      echo '<option>-</option>';
+                    endif;
+                    if(array_key_exists('values', $metafeildValues) && is_array($metafeildValues["values"])):
+                      foreach ($metafeildValues["values"] as $key => $option) {
+                        echo '<option value="' . $key . '" ' . SELF::setSelected($value, $key) . '>' . $option . '</option>';
+                      }
+                    elseif(array_key_exists('values', $metafeildValues) && !is_array($metafeildValues["values"])):
+                      $splitValue = explode('__', $metafeildValues["values"]);
+                      if($splitValue[0] == 'tax'):
+                        $terms = get_terms( array(
+                          'taxonomy' => $splitValue[1],
+                          'hide_empty' => false,
+                        ) );
+                        foreach ($terms as $term){
+                          echo '<option value="' . $term->term_id . '" ' . SELF::setSelected($value, $term->term_id) . '>' . $term->name . '</option>';
+                        }
+                      else:
+                        $cpt_args = array(
+                          'posts_per_page' => -1,
+                          'post_type' => $splitValue[1],
+                          'order' => 'ASC'
+                        );
+                        $cpt_query = new WP_Query( $cpt_args );
+                        if ( $cpt_query->have_posts() ) :
+                          while ( $cpt_query->have_posts() ) : $cpt_query->the_post();
+                            echo '<option value="' . get_the_id() . '" ' . SELF::setSelected($value, get_the_id()) . '>' . get_the_title() . '</option>';
+                          endwhile;
+                          wp_reset_postdata();
+                        endif;
+                      endif;
+                    endif;
+                  echo '</select>';
                 elseif($metafeildValues["type"] == "checkbox"):
                   echo '<input type="checkbox" id="' . $metafield . '" name="' . $metafield . '" value="1" style="margin-top:5px;" ' . SELF::setChecked($value, '1') . '>';
                 else:

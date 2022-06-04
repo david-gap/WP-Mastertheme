@@ -603,6 +603,11 @@ function runPostFilter(input){
   config['path'] = '../mastertheme/classes/prefix_WPgutenberg/blocks/postsfilter/ajax.php';
   config['action'] = 'loadPosts';
   config['id'] = id;
+  if(input.closest(".block-postsfilter").querySelectorAll('input[type="checkbox"]:checked').length >= 1 || input.closest(".block-postsfilter").querySelector('#textsearch') && input.closest(".block-postsfilter").querySelector('#textsearch').value !== ""){
+    input.closest(".block-postsfilter").querySelector('#resetSelection').classList.remove('hidden');
+  } else {
+    input.closest(".block-postsfilter").querySelector('#resetSelection').classList.add('hidden');
+  }
   // run ajax function
   ajaxCall(config);
 }
@@ -622,6 +627,19 @@ if(postFilterInputs.length !== 0){
          runPostFilter(input);
       });
     }
+  });
+}
+var postFilterReset = document.querySelectorAll('.block-postsfilter input[type="reset"], .block-postsfilter input[type="submit"]');
+if(postFilterReset.length !== 0){
+  Array.from(postFilterReset).forEach(function(button) {
+    button.addEventListener("click", function(){
+      button.closest("form").reset();
+      runPostFilter(button);
+    });
+    button.addEventListener("keypress", function(){
+      button.closest("form").reset();
+      runPostFilter(button);
+    });
   });
 }
 
@@ -752,8 +770,23 @@ function formValuesToAjax(form){
       array[input.name] = input.value;
     });
   }
+  // add select options
+  const formSelect = form.querySelectorAll('select');
+  if(formSelect.length !== 0){
+    Array.from(formSelect).forEach(function(select) {
+      const selectOptions = select.querySelectorAll('option:checked');
+      if(selectOptions.length !== 0){
+        let selectArray = [];
+        Array.from(selectOptions).forEach(function(input) {
+          selectArray.push(input.value);
+        });
+        array[select.name] = selectArray.join('__');
+      // array[input.name] = input.value;});
+      }
+    });
+  }
   // add radio and checkbox values in fieldsets
-  const formFieldsets = form.querySelectorAll('fieldset');
+  const formFieldsets = form.querySelectorAll('fieldset, .radio-group, .checkbox-group');
   if(formFieldsets.length !== 0){
     Array.from(formFieldsets).forEach(function(fieldset) {
       const fieldsetInputs = fieldset.querySelectorAll('input');
