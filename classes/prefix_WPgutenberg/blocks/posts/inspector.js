@@ -67,7 +67,9 @@ export default class Inspector extends Component {
       { value: "", label: "-" },
       { value: "title", label: __( 'Title', 'devTheme' ) },
       { value: "date", label: __( 'Date', 'devTheme' ) },
-      { value: "excerpt", label: __( 'Excerpt', 'devTheme' ) }
+      { value: "excerpt", label: __( 'Excerpt', 'devTheme' ) },
+      { value: "template", label: __( 'Post template', 'devTheme' ) },
+      { value: "templateMedia", label: __( 'Post template (media only)', 'devTheme' ) }
     ];
     const query = {
       'status': 'publish',

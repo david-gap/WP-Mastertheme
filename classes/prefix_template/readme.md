@@ -1,4 +1,4 @@
-**Version 2.28.16** (04.06.2022)
+**Version 2.29.16** (06.06.2022)
 
 Custom class "template" with template parts and header / footer builder
 
@@ -31,6 +31,7 @@ Custom class "template" with template parts and header / footer builder
 * $template_header_after: html code after header
 * $template_page_active: activate page options
 * $template_page_options: show/hide template elements
+* $template_page_bgColor: Activate custom background color
 * $template_page_additional: additional custom fields template elements
 * $template_page_metablock: activate metablock on detail page
 * $template_page_metablockAdds: Add metabox to CPT by slugs
@@ -359,3 +360,6 @@ template_footer_custom
 
 Add Custom CSS by template
 template_BodyCSS
+
+Add custom attributes to body tag
+template_BodyAttr

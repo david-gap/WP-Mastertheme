@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 1.55.28 | 06.06.2022 <GIT URI, WPadmin checkboxes, template>
+* Add checkboxes input type to WPadmin
+* Change WPgutenberg allowed core blocks from select to checkboxes
+* Add Github URI
+* Add template parts to Rest API
+* Add backed post template output to post & postfilter block
+* Add custom background color page option
+
 ## 1.54.28 | 04.06.2022 <thumbnail, language, small addons>
 * Add thumbnail to header option
 * Add align wide option to post title

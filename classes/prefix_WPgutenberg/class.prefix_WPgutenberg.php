@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.15.13
+ * @version     2.16.13
  */
 
 /*=======================================================
@@ -151,7 +151,7 @@ class prefix_WPgutenberg {
       "AllowedBlocks" => array(
         "label" => "Allowed core blocks",
         "css" => "multiple",
-        "type" => "select",
+        "type" => "checkboxes",
         "value" => array(
           "core/paragraph",
           "core/image",

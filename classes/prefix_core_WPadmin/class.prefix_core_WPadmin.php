@@ -208,7 +208,7 @@ class prefix_core_WPadmin {
   function BuildInput(string $type = 'text', $multiple = '', string $name = '', string $id = '', string $css = "", $value = false, $placeholder = '', $translate = ''){
     // vars
     $attr   = '';
-    $attr   .= $name !== '' && $type !== 'select' ? ' name="' . $name . '"' : '';
+    $attr   .= $name !== '' && $type !== 'select' && $type !== 'checkboxes' ? ' name="' . $name . '"' : '';
     $attr   .= $id !== '' && $type !== 'switchbutton' ? ' id="' . $id . '"' : '';
     $attr   .= $placeholder !== '' ? ' placeholder="' . $placeholder . '"' : '';
     $output = '';
@@ -219,6 +219,17 @@ class prefix_core_WPadmin {
       case "checkbox":
         $attr .= $value !== false ? prefix_core_BaseFunctions::setChecked('1', $value) : '';
         $output .= '<input type="checkbox"' . $attr . ' value="1">';
+        break;
+
+      case "checkboxes":
+        $attr .= $name !== '' ? ' name="' . $name . '[]"' : '';
+        foreach ($multiple as $multiple_key => $multiple_input) {
+          $selected = $value !== false ? prefix_core_BaseFunctions::setChecked($multiple_input, $value) : '';
+          $output .= '<label><input type="checkbox"' . $attr . ' value="' . $multiple_input . '" ' . $selected . '>' . $multiple_input . '</label><br>';
+          // $output .= '<option value="' . $multiple_input . '" ' . $selected . '>';
+          //   $output .= $multiple_input;
+          // $output .= '</option>';
+        }
         break;
 
       case "switchbutton":

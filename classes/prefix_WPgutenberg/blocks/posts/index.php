@@ -83,6 +83,44 @@ function WPgutenberg_posts_ContentRow($value, $id){
     case "date":
       return get_the_date('d.m.Y', $id);
       break;
+    case "template":
+      ob_start();
+      if(get_post_type($id) == "post" || post_type_supports(get_post_type($id), 'post-formats')):
+        $blog_type = get_post_format($id) ? get_post_format($id) : "default";
+        global $post;
+        $post = get_post($id);
+        setup_postdata($post);
+        // blog output
+        if(locate_template('template_parts/' . get_post_type($id) . '_' . $blog_type . '.php')):
+          get_template_part('template_parts/' . get_post_type($id) . '_' . $blog_type);
+        else:
+          get_template_part('template_parts/post_' . $blog_type);
+        endif;
+      else:
+        // default output
+        get_template_part('template_parts/post_default');
+      endif;
+      return ob_get_clean();
+      break;
+    case "templateMedia":
+      ob_start();
+      if(get_post_type($id) == "post" || post_type_supports(get_post_type($id), 'post-formats')):
+        $blog_type = get_post_format($id) ? get_post_format($id) : "default";
+        global $post;
+        $post = get_post($id);
+        setup_postdata($post);
+        // blog output
+        if(locate_template('template_parts/' . get_post_type($id) . '_' . $blog_type . '.php')):
+          get_template_part('template_parts/' . get_post_type($id) . '_' . $blog_type, '', array('mediaOnly' => 1));
+        else:
+          get_template_part('template_parts/post_' . $blog_type, '', array('mediaOnly' => 1));
+        endif;
+      else:
+        // default output
+        get_template_part('template_parts/post_default', '', array('mediaOnly' => 1));
+      endif;
+      return ob_get_clean();
+      break;
     case "excerpt":
       return get_the_excerpt($id);
       break;

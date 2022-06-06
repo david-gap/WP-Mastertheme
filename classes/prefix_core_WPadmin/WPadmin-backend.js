@@ -97,6 +97,19 @@ jQuery(document).ready(function($){
       updatePageOptions();
     },2000);
 
+    /* page background color
+    /––––––––––––––––––––––––*/
+    function setBackgroundColor(){
+      var getPageColorElement = document.getElementById("template_page_bgColor");
+      if(getPageColorElement.length !== 0){
+        var pageColor = getPageColorElement.value;
+        document.querySelector(".editor-styles-wrapper").style.backgroundColor = pageColor;
+      }
+    }
+    setTimeout(function(){
+      setBackgroundColor();
+    },2000);
+
 
 
     /*==================================================================================
@@ -107,6 +120,12 @@ jQuery(document).ready(function($){
     /––––––––––––––––––––––––*/
     $(document).on('click', '#WPtemplate input', function (event) {
       updatePageOptions();
+    });
+
+    /* change background color
+    /––––––––––––––––––––––––*/
+    $("#template_page_bgColor").change(function() {
+      setBackgroundColor();
     });
 
     /* save form
@@ -307,7 +326,17 @@ jQuery(document).ready(function($){
     /------------------------*/
     function RunColorPicker(){
       $('.colorpicker').each(function(){
-        $(this).wpColorPicker();
+        $(this).wpColorPicker({
+          change: function(event, ui){
+            var theColor = ui.color.toString();
+            var inputID = $(this).attr('id');
+            document.getElementById(inputID).setAttribute('value',theColor);
+            if('template_page_bgColor' == inputID){
+              document.querySelector(".editor-styles-wrapper").style.backgroundColor = theColor;
+            }
+          }
+        }
+        );
       });
     }
     RunColorPicker();

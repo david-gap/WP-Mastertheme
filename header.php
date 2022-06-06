@@ -17,7 +17,7 @@
     // page options
     $options = $obj && property_exists($obj, 'ID') ? prefix_template::PageOptions($obj->ID) : array();
   ?>
-  <body class="<?php prefix_template::BodyCSS(); ?>">
+  <body class="<?php prefix_template::BodyCSS(); ?>"<?php prefix_template::BodyAttr(); ?>>
     <?php echo prefix_WPseo::GoogleTracking(true); ?>
     <?php if(!in_array('header', $options)): ?>
       <header>

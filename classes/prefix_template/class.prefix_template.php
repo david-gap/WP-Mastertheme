@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.28.16
+ * @version     2.29.16
  *
 */
 
@@ -25,6 +25,7 @@ Table of Contents:
   2.4 SAVE METABOXES
   2.5 REGISTER WIDGETS
   2.6 REBUILD SEARCH FORM
+  2.7 ADD VALUES TO REST API
 3.0 OUTPUT
   3.1 SORTABLE HEADER CONTENT
   3.2 SORTABLE FOOTER CONTENT
@@ -42,13 +43,15 @@ Table of Contents:
   3.14 ICON BLOCK
   3.15 CONTENT BLOCK
   3.16 BODY CSS
-  3.17 POST META
-  3.18 SCROLL TO TOP BUTTON
-  3.19 MAIN MENU SEARCH FORM
-  3.20 RETURN WIDGET
-  3.21 LANGUAGE SWITCHER
-  3.22 THUMBNAIL
-  3.23 BREADCRUMBS
+  3.17 BODY ATTRIBUTES
+  3.18 POST META
+  3.19 SCROLL TO TOP BUTTON
+  3.20 MAIN MENU SEARCH FORM
+  3.21 RETURN WIDGET
+  3.22 LANGUAGE SWITCHER
+  3.23 THUMBNAIL
+  3.24 BREADCRUMBS
+  3.25 ARRAY OF ALL TEMPLATE PARTS
 =======================================================*/
 
 
@@ -95,11 +98,11 @@ class prefix_template {
     * @param static array $template_header_logo_svg: Insert SVG code as logo
     * @param static string $template_header_after: html code after header
     * @param static int $template_page_active: activate page options
-    * @param static array $template_page_options: show/hide template elements
     * @param static array $template_page_additional: additional custom fields template elements
     * @param static array $template_page_metablock: activate metablock on detail page/posts
     * @param static array $template_page_metablockAdds: Add metabox to CPT by slugs
     * @param static array $template_page_options: show/hide template elements
+    * @param static array $template_page_bgColor: Activate custom background color
     * @param static int $template_scrolltotop_active: activate scroll to top
     * @param static int $template_footer_active: activate footer
     * @param static int $template_footer_wrap: Allow the footer content to wrap
@@ -245,6 +248,7 @@ class prefix_template {
     "beforeMain" => 1,
     "afterMain" => 1
   );
+  static $template_page_bgColor                    = 0;
   static $template_page_metablock                  = array(
     "page" => 0,
     "post" => 0
@@ -308,7 +312,7 @@ class prefix_template {
     // update default vars with configuration file
     SELF::updateVars();
     // add page options to backend
-    if(SELF::$template_page_active == 1):
+    if(SELF::$template_page_active == 1 || SELF::$template_page_bgColor == 1):
       // metabox for option selection
       add_action( 'add_meta_boxes', array( $this, 'WPtemplate_Metabox' ) );
       // update custom fields
@@ -486,6 +490,8 @@ class prefix_template {
       __('Separate by', 'devTheme'),
       __('Strech main menu verticaly', 'devTheme')
     );
+    // REST API
+    add_action( 'rest_api_init', array($this, 'addContentToRestApi') );
   }
 
 
@@ -973,6 +979,10 @@ class prefix_template {
           "label" => "Activate page options",
           "type" => "switchbutton"
         ),
+        "bgColor" => array(
+          "label" => "Activate custom background color",
+          "type" => "switchbutton"
+        ),
         "metablock" => array(
           "label" => "Activate metablock",
           "type" => "multiple",
@@ -1390,6 +1400,7 @@ class prefix_template {
           SELF::$template_page_metablock = array_key_exists('metablock', $page) ? $page['metablock'] : SELF::$template_page_metablock;
           SELF::$template_page_metablockAdds = array_key_exists('add_metablock', $page) ? $page['add_metablock'] : SELF::$template_page_metablockAdds;
           SELF::$template_page_options = array_key_exists('options', $page) ? array_merge(SELF::$template_page_options, $page['options']) : SELF::$template_page_options;
+          SELF::$template_page_bgColor = array_key_exists('bgColor', $page) ? $page['bgColor'] : SELF::$template_page_bgColor;
           SELF::$template_page_additional = array_key_exists('additional', $page) ? array_merge(SELF::$template_page_additional, $page['additional']) : SELF::$template_page_additional;
         endif;
         if($configuration && array_key_exists('blog', $myConfig)):
@@ -1487,8 +1498,12 @@ class prefix_template {
         //$options = $_POST['template_page_options'] !== '' ? serialize($_POST['template_page_options']) : '';
         //$options = esc_html($get_options);
         update_post_meta($post_id, 'template_page_options', $_POST['template_page_options']);
-      else:
-        update_post_meta($post_id, 'template_page_options', '');
+      // else:
+      //   update_post_meta($post_id, 'template_page_options', '');
+      endif;
+      // save page background color
+      if(isset($_POST['template_page_bgColor'])):
+        update_post_meta($post_id, 'template_page_bgColor', $_POST['template_page_bgColor']);
       endif;
     }
 
@@ -1600,6 +1615,35 @@ class prefix_template {
       $output .= $containerEnd;
 
       return $output;
+    }
+
+
+    /* 2.7 ADD VALUES TO REST API
+    /------------------------*/
+    public function addContentToRestApi(){
+      // get core post types
+      $core_args = array(
+        'public' => true,
+        '_builtin' => true
+      );
+      $core_pt = get_post_types( $core_args );
+      // get custom post types
+      $custom_args = array(
+        'publicly_queryable' => true
+      );
+      $custom_pt = get_post_types($custom_args);
+      // merge & clean post types
+      $post_types = array_merge($core_pt, $custom_pt);
+      // unset($post_types['attachment']);
+      unset($post_types['nav_menu_item']);
+      // Add the plaintext content to GET requests for individual posts
+      register_rest_field(
+        $post_types,
+        'templateParts',
+        array(
+          'get_callback' => array($this, 'getAllTemplateParts'),
+        )
+      );
     }
 
 
@@ -1822,58 +1866,67 @@ class prefix_template {
         // vars
         $output = '';
         $options = get_post_meta($post->ID, 'template_page_options', true);
+        $bgColor = get_post_meta($post->ID, 'template_page_bgColor', true);
         if(is_string($options)):
           $options = unserialize($options);
         endif;
         // output
         echo '<div class="wrap" id="WPtemplate">';
           // page options
-          echo '<p><b>' . __( 'Page options', 'devTheme' ) . '</b></p>';
-          echo '<ul>';
-            $exeptions = array('beforeMain', 'afterMain');
+          if(SELF::$template_page_active == 1):
+            echo '<p><b>' . __( 'Page options', 'devTheme' ) . '</b></p>';
+            echo '<ul>';
+              $exeptions = array('beforeMain', 'afterMain');
+              foreach (SELF::$template_page_options as $key => $value) {
+                // check if option is active
+                if($value == 1 && !in_array($key, $exeptions)):
+                  $active = prefix_core_BaseFunctions::setChecked($key, $options);
+                  // rule for metabox before output
+                  if(in_array($key, array('date', 'time', 'author'))):
+                    if(in_array($post->post_type, array('page', 'post')) && SELF::$template_page_metablock[$post->post_type] == 1 || !empty(SELF::$template_page_metablockAdds) && in_array($post->post_type, SELF::$template_page_metablockAdds)):
+                      $show = true;
+                    else:
+                      $show = false;
+                    endif;
+                  else:
+                    $show = true;
+                  endif;
+                  // output
+                  if($show == true):
+                    echo '<li><label><input type="checkbox" name="template_page_options[]" value="' . $key . '" ' . $active . '>' . SELF::$backend['page']['value']['options']['value'][$key]["label"] . '</label></li>';
+                  endif;
+                endif;
+              }
+              foreach (SELF::$template_page_additional as $key => $additional) {
+                // check if additional option are available
+                if(array_key_exists('key', $additional) && array_key_exists('value', $additional)):
+                  $active = prefix_core_BaseFunctions::setChecked($additional["key"], $options);
+                  echo '<li><label><input type="checkbox" name="template_page_options[]" value="' . $additional["key"] . '" ' . $active . '>' . $additional["value"] . '</label></li>';
+                endif;
+              }
+            echo '</ul>';
+            // return exeptions
             foreach (SELF::$template_page_options as $key => $value) {
               // check if option is active
-              if($value == 1 && !in_array($key, $exeptions)):
-                $active = prefix_core_BaseFunctions::setChecked($key, $options);
-                // rule for metabox before output
-                if(in_array($key, array('date', 'time', 'author'))):
-                  if(in_array($post->post_type, array('page', 'post')) && SELF::$template_page_metablock[$post->post_type] == 1 || !empty(SELF::$template_page_metablockAdds) && in_array($post->post_type, SELF::$template_page_metablockAdds)):
-                    $show = true;
-                  else:
-                    $show = false;
-                  endif;
-                else:
-                  $show = true;
+              if($value == 1 && in_array($key, $exeptions)):
+                if($key == 'beforeMain'):
+                  $customLabel = 'Code before main block';
+                elseif($key == 'afterMain'):
+                  $customLabel = 'Code after main block';
                 endif;
-                // output
-                if($show == true):
-                  echo '<li><label><input type="checkbox" name="template_page_options[]" value="' . $key . '" ' . $active . '>' . SELF::$backend['page']['value']['options']['value'][$key]["label"] . '</label></li>';
-                endif;
+                echo '<div class="exeption">';
+                  echo '<p><label for="exeption-' . $key . '"><b>' . __( $customLabel, 'devTheme' ) . '</b></label></p>';
+                  echo '<textarea id="exeption-' . $key . '" name="template_page_options[' . $key . ']">' . $options[$key] . '</textarea>';
+                echo '</div>';
               endif;
             }
-            foreach (SELF::$template_page_additional as $key => $additional) {
-              // check if additional option are available
-              if(array_key_exists('key', $additional) && array_key_exists('value', $additional)):
-                $active = prefix_core_BaseFunctions::setChecked($additional["key"], $options);
-                echo '<li><label><input type="checkbox" name="template_page_options[]" value="' . $additional["key"] . '" ' . $active . '>' . $additional["value"] . '</label></li>';
-              endif;
-            }
-          echo '</ul>';
-          // return exeptions
-          foreach (SELF::$template_page_options as $key => $value) {
-            // check if option is active
-            if($value == 1 && in_array($key, $exeptions)):
-              if($key == 'beforeMain'):
-                $customLabel = 'Code before main block';
-              elseif($key == 'afterMain'):
-                $customLabel = 'Code after main block';
-              endif;
-              echo '<div class="exeption">';
-                echo '<p><label for="exeption-' . $key . '"><b>' . __( $customLabel, 'devTheme' ) . '</b></label></p>';
-                echo '<textarea id="exeption-' . $key . '" name="template_page_options[' . $key . ']">' . $options[$key] . '</textarea>';
-              echo '</div>';
-            endif;
-          }
+          endif;
+
+          if(SELF::$template_page_bgColor == 1):
+            wp_enqueue_style( 'wp-color-picker' );
+            echo '<p><b>' . __( 'Background color', 'devTheme' ) . '</b></p>';
+            echo '<input type="text" id="template_page_bgColor" name="template_page_bgColor" value="' . $bgColor . '" class="colorpicker"></input>';
+          endif;
         echo '</div>';
     }
 
@@ -2409,7 +2462,24 @@ class prefix_template {
     }
 
 
-    /* 3.17 POST META
+    /* 3.17 BODY ATTRIBUTES
+    /------------------------*/
+    public static function BodyAttr(){
+      $page_id = get_queried_object_id();
+      $output = '';
+      // add background color
+      if($page_id > 0):
+        $bgColor = get_post_meta($page_id, 'template_page_bgColor', true);
+        $output .= $bgColor && $bgColor !== '' ? ' style="--main_background:' . $bgColor . ';"' : '';
+      endif;
+      // apply filter
+      $output .= ' ' . apply_filters( 'template_BodyAttr', $output );
+      // return output
+      echo $output;
+    }
+
+
+    /* 3.18 POST META
     /------------------------*/
     public static function postMeta($pt, $options){
       $output = '';
@@ -2442,7 +2512,7 @@ class prefix_template {
     }
 
 
-    /* 3.18 SCROLL TO TOP BUTTON
+    /* 3.19 SCROLL TO TOP BUTTON
     /------------------------*/
     static public function scrollToTop(){
       $output = '';
@@ -2455,7 +2525,7 @@ class prefix_template {
     }
 
 
-    /* 3.19 MAIN MENU SEARCH FORM
+    /* 3.20 MAIN MENU SEARCH FORM
     /------------------------*/
     function addSearchFormToMainmenu($items, $args) {
       if ($args->theme_location == 'mainmenu'):
@@ -2467,7 +2537,7 @@ class prefix_template {
     }
 
 
-    /* 3.20 RETURN WIDGET
+    /* 3.21 RETURN WIDGET
     /------------------------*/
     function getWidget($key) {
       if(is_active_sidebar( $key )):
@@ -2476,7 +2546,7 @@ class prefix_template {
     }
 
 
-    /* 3.21 LANGUAGE SWITCHER
+    /* 3.22 LANGUAGE SWITCHER
     /------------------------*/
     function languageSwitcher($atts){
       $output = '';
@@ -2504,7 +2574,7 @@ class prefix_template {
     }
 
 
-    /* 3.22 THUMBNAIL
+    /* 3.23 THUMBNAIL
     /------------------------*/
     function get_thumbnail(){
       $output = '';
@@ -2533,7 +2603,7 @@ class prefix_template {
     }
 
 
-    /* 3.23 BREADCRUMBS
+    /* 3.24 BREADCRUMBS
     /------------------------*/
     static function breadcrumbNavigation($content = ''){
       $output = '';
@@ -2701,6 +2771,53 @@ class prefix_template {
           endif;
         endif;
       endif;
+
+      return $output;
+    }
+
+
+    /* 3.25 ARRAY OF ALL TEMPLATE PARTS
+    /------------------------*/
+    function getAllTemplateParts($object) {
+      $output = array();
+
+      ob_start();
+      if(get_post_type($id) == "post" || post_type_supports(get_post_type($id), 'post-formats')):
+        $blog_type = get_post_format($id) ? get_post_format($id) : "default";
+        global $post;
+        $post = get_post($id);
+        setup_postdata($post);
+        // blog output
+        if(locate_template('template_parts/' . get_post_type($id) . '_' . $blog_type . '.php')):
+          get_template_part('template_parts/' . get_post_type($id) . '_' . $blog_type);
+        else:
+          get_template_part('template_parts/post_' . $blog_type);
+        endif;
+      else:
+        // default output
+        get_template_part('template_parts/post_default');
+      endif;
+      $output['content'] = ob_get_contents();
+      ob_end_clean();
+
+      ob_start();
+      if(get_post_type($id) == "post" || post_type_supports(get_post_type($id), 'post-formats')):
+        $blog_type = get_post_format($id) ? get_post_format($id) : "default";
+        global $post;
+        $post = get_post($id);
+        setup_postdata($post);
+        // blog output
+        if(locate_template('template_parts/' . get_post_type($id) . '_' . $blog_type . '.php')):
+          get_template_part('template_parts/' . get_post_type($id) . '_' . $blog_type, '', array('mediaOnly' => 1));
+        else:
+          get_template_part('template_parts/post_' . $blog_type, '', array('mediaOnly' => 1));
+        endif;
+      else:
+        // default output
+        get_template_part('template_parts/post_default', '', array('mediaOnly' => 1));
+      endif;
+      $output['media'] = ob_get_contents();
+      ob_end_clean();
 
       return $output;
     }

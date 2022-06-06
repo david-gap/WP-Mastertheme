@@ -134,6 +134,28 @@
           value += '</a>';
         }
         break;
+      case "template":
+        if (post.hasOwnProperty("templateParts") && post.templateParts.hasOwnProperty('content')) {
+          if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+            value += '<a href="#">';
+          }
+            value += post.templateParts.content;
+          if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+            value += '</a>';
+          }
+        }
+        break;
+      case "templateMedia":
+        if (post.hasOwnProperty("templateParts") && post.templateParts.hasOwnProperty('media')) {
+          if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+            value += '<a href="#">';
+          }
+            value += post.templateParts.media;
+          if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+            value += '</a>';
+          }
+        }
+        break;
       case "excerpt":
         if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes(row) && postTaxonomyFilterOptions.indexOf('link_box') < 1){
           value += '<a href="#">';
