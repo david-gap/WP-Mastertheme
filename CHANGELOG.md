@@ -1,5 +1,25 @@
 # CHANGELOG
 
+## 1.56.28 | 29.06.2022 <blocks and new functions>
+* Fix backend background color if section color is given
+* Search results page pagination position
+* fix get template part id
+* Open accordion on load if its been called
+* Open accordion on anchor link
+* fix accordion icon width
+* fix menu position
+* fix 404 & search results page thumbnail output
+* Option to disable wordpress image scaling
+* Reactivate file type to uploader
+* JS function to locate child element inside parent
+* JS function to remove all numbers from string
+* Ajax function extended with content target
+* Gutenberg Block with image and pins
+* Add custom background image page option
+* close secondary gutenberg block panels on default
+* fix widget container output
+* add title and quote styles to customizer
+
 ## 1.55.28 | 06.06.2022 <GIT URI, WPadmin checkboxes, template>
 * Add checkboxes input type to WPadmin
 * Change WPgutenberg allowed core blocks from select to checkboxes
