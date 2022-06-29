@@ -6,6 +6,11 @@
  * @version     1.0.1
  *
 */
+if($args['id'] && $args['id'] !== 0):
+  global $post;
+  $post = get_post($args['id']);
+endif;
+
 $thumb = get_the_post_thumbnail();
 $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', get_the_content(), $matches);
 $thumb = isset($matches[1][0]) ? '<img src="' . $matches[1][0] . '">' : $thumb;

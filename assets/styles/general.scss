@@ -66,11 +66,12 @@ body.frontend {
       /* Anchor position
       /––––––––––––––––––––––––*/
       // anchors are not allowed to have top spacing
-      &[id]:target {
+      &[id] {
         // scroll-margin-top: var(--html__anchor);
         // scroll-snap-margin-top: var(--html__anchor);
-        padding-top: var(--html__anchor, 0);
-        margin-top: calc(var(--html__anchor, 0) * -1);
+        // padding-top: var(--html__anchor, 0);
+        // margin-top: calc(var(--html__anchor, 0) * -1);
+        scroll-margin-top: var(--html__anchor, 0);
       }
     }
 
@@ -125,7 +126,7 @@ body.frontend {
   .alignwide {
     margin-left: calc(-100vw / 2 + 100% / 2);
     margin-right: calc(-100vw / 2 + 100% / 2);
-    max-width: 100vw;
+    max-width: calc(var(--wideWidth, 1400px) - var(--container__side,20px) - var(--container__side,20px));
     width: unset;
   }
   .alignfull {
@@ -369,6 +370,13 @@ html[data-touch="false"] .call {
   &:not([data-align="full"]){
     &:not([data-align="wide"]){
       max-width: var(--container_content);
+    }
+  }
+}
+.editor-styles-wrapper .wp-block-group__inner-container .wp-block {
+  &:not([data-align="full"]){
+    &:not([data-align="wide"]){
+      max-width: var(--wideWidth,1400px);
     }
   }
 }

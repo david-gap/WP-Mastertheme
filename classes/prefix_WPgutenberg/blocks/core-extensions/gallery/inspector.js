@@ -45,7 +45,7 @@ export default class Inspector extends Component {
 
     return (
       <InspectorControls>
-          <PanelBody title={ __( 'Swiper & Lightbox', 'devTheme' ) } >
+          <PanelBody title={ __( 'Swiper & Lightbox', 'devTheme' ) } initialOpen={ false } >
               <PanelRow>
                 <ToggleControl
                     id="add-swiper"

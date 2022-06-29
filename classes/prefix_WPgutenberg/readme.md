@@ -1,4 +1,4 @@
-**Version 2.16.13** (06.06.2022)
+**Version 2.17.13** (29.06.2022)
 
 Custom class "WPgutenberg" to select allowed guttenberg blocks and add style options
 
@@ -172,3 +172,11 @@ to modify the postsfilter block sorting inside the taxonomy term.
 additional sorting inside postsfilter block if its getting sorted by a taxonomy and there is a wish to sort the posts inside the taxonomy.
 There are two parameters inside this query. First parameter is the multidimensional array with the post ids (tax id is the array key) and the second is a array with the the block arguments.
 WPgutenberg_filter_postsfilter_taxSorting
+
+to replace the given Pin SVG.
+There are two parameters inside this query. First parameter is the pin himself and the second is the block attributes.
+WPgutenberg_imagepins_pin
+
+to replace the given Pin close info window SVG.
+There are two parameters inside this query. First parameter is the pin himself and the second is the block attributes.
+WPgutenberg_imagepins_pinclose

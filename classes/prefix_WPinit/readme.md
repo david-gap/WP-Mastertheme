@@ -1,4 +1,4 @@
-**Version 2.14.11** (21.02.2022)
+**Version 2.15.11** (29.06.2022)
 
 Custom class "WPinit" basic functions
 
@@ -21,6 +21,7 @@ Custom class "WPinit" basic functions
 * $WPinit_typekit_id: typekit fonts
 * $WPinit_google_fonts: google fonts
 * $WPinit_HeaderCss: Load cutom theme css in header
+* $WPinit_imgScaling: Disable default image scaling
 
 ## CONFIGURATION FILE
 ```

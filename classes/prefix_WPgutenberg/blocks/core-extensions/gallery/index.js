@@ -58,9 +58,9 @@
   /------------------------*/
   function applyExtraClass( extraProps, blockType, attributes ) {
     const { addSwiper, addPopUp, addPopUpPreview } = attributes;
-    // if ( typeof addSwiper !== 'undefined' && addSwiper && allowedBlocks.includes( blockType.name ) ) {
-    //   extraProps.className = classnames( extraProps.className, 'gallery-swiper' );
-    // }
+    if ( typeof addSwiper !== 'undefined' && addSwiper && allowedBlocks.includes( blockType.name ) ) {
+      extraProps.className = classnames( extraProps.className, 'inside-gallery-swiper' );
+    }
     if ( typeof addPopUp !== 'undefined' && addPopUp && allowedBlocks.includes( blockType.name ) ) {
       extraProps.className = classnames( extraProps.className, 'add-popup' );
     }
@@ -74,10 +74,17 @@
   /* add a div container
   /------------------------*/
   function galleryModifyGetSaveContentExtraProps( element, blockType, attributes ) {
-    const { addSwiper, addPopUp, addPopUpPreview } = attributes;
+    const { addSwiper, addPopUp, addPopUpPreview, align } = attributes;
     if (typeof addSwiper !== 'undefined' && addSwiper && allowedBlocks.includes(blockType.name)) {
+      if(align == 'wide' || align == 'full'){
+        var addCss = 'align' + align;
+      } else {
+        var addCss = '';
+      }
       return (
-        <div className='wp-block-gallery-container gallery-swiper'>
+        <div className={classnames(
+          'wp-block-gallery-container gallery-swiper', addCss
+        )} >
           { element }
         </div>
       );

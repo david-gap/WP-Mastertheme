@@ -48,7 +48,7 @@ export default class Inspector extends Component {
 
     return (
       <InspectorControls>
-          <PanelBody title={ __( 'Visibility', 'devTheme' ) } >
+          <PanelBody title={ __( 'Visibility', 'devTheme' ) } initialOpen={ false } >
               <PanelRow>
                 <ToggleControl
                     id="hide-desktop"
@@ -74,7 +74,7 @@ export default class Inspector extends Component {
                 />
               </PanelRow>
           </PanelBody>
-          <PanelBody title={ __( 'Schedule', 'devTheme' ) } >
+          <PanelBody title={ __( 'Schedule', 'devTheme' ) } initialOpen={ false } >
             <PanelRow>
               {__("Start", "devTheme")}{<br />}
               {__("If block availability starts on this date", "devTheme")}

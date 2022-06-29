@@ -2,7 +2,7 @@
  * All template base javascript functions
  *
  * @author      David Voglgsang
- * @version     1.3
+ * @version     1.4
  *
  */
 
@@ -34,6 +34,28 @@ let position = root.scrollTop,
 /* Touch Device
 /------------------------*/
 root.setAttribute('data-touch', isTouch);
+
+
+/* Open accordion on load if its been called
+/------------------------*/
+if (window.location.hash) {
+  var hash = window.location.hash;
+  var toToggleOnLoad = document.querySelector(hash);
+  if(toToggleOnLoad && toToggleOnLoad.classList.contains('accordion-item')){
+    toToggleOnLoad.querySelector('.accordion-label').classList.add('active');
+  }
+}
+
+
+/* Open accordion on anchor link
+/------------------------*/
+function openAccordionByAnchor(){
+  var target = this.getAttribute("href");
+  var accordionToOpen = document.querySelector(target);
+  if(accordionToOpen && accordionToOpen.classList.contains('accordion-item')){
+    accordionToOpen.querySelector('.accordion-label').classList.add('active');
+  }
+}
 
 
 
@@ -152,6 +174,49 @@ function isInViewport(el) {
 }
 
 
+/* Clean string from letters and convert lefting numbers into int
+/------------------------*/
+function stringToNumberCoverter(string){
+  string = string.replace(/\D/g,'');
+  return parseInt(string);
+}
+
+
+/* Check if element overflows parent element
+/------------------------*/
+function checkChildPosition(parent, child, action = 'statement') {
+  // get elements position
+  var box1coords = parent.getBoundingClientRect();
+  var box2coords = child.getBoundingClientRect();
+  // check if child overflows parent
+  var spacer = 10;
+  if(action == 'update'){
+    if(box2coords.top < box1coords.top) {
+      // child.style.top = '';
+    }
+    if(box2coords.right > box1coords.right && box2coords.left > box1coords.left) {
+      var currentLeft = stringToNumberCoverter(getStyle(child, 'left'));
+      var newLeft =  box1coords.right - box2coords.right - currentLeft - spacer;
+      child.style.left = newLeft + "px";
+    }
+    if(box2coords.bottom > box1coords.bottom && box2coords.top > box1coords.top) {
+      child.style.bottom = "calc(100% + " + spacer + "px)";
+    }
+    if(box2coords.left < box1coords.left && box2coords.right < box1coords.right) {
+      var currentLeft = stringToNumberCoverter(getStyle(child, 'left'));
+      var newLeft =  box1coords.left - box2coords.left - currentLeft + spacer;
+      child.style.left = newLeft + "px";
+    }
+  } else {
+    // give statement
+    if(box2coords.top < box1coords.top || box2coords.right > box1coords.right || box2coords.bottom > box1coords.bottom || box2coords.left < box1coords.left) {
+      return true;
+    }
+    return false;
+  }
+}
+
+
 /* AJAX function
 Example of calling ajax:
 var configuration = {
@@ -194,6 +259,14 @@ function ajaxCall(getdata) {
       } else {
         // DEBUG: console.log("Action not defined in ajax function");
       }
+      // inset content to element
+      if(results.content && results.targetContent && results.targetContent !== ''){
+        var signsResult = document.querySelector(results.targetContent);
+        if(signsResult){
+          signsResult.classList.remove('dn');
+          signsResult.innerHTML = results.content;
+        }
+      }
       // download file
       if(results.file){
         // check for requiredproperties
@@ -215,6 +288,8 @@ function ajaxCall(getdata) {
             } else {
               console.log("file download: content is not a array");
             }
+          } else if(results.file.type == 'string'){
+            fileData += results.file.data;
           } else {
             console.log("file download: given type " + results.file.type + " is not supported");
           }
@@ -735,6 +810,42 @@ if(allVimeoVideos.length !== 0){
 }
 
 
+/* Image pins
+/------------------------*/
+// to open/close clickable info windows
+function imagePinsToggle(){
+  var currentID = this.closest('.block-image-pin').getAttribute("data-id");
+  var imgPins = document.querySelectorAll('.block-image-pins .pins .block-image-pin');
+  if(imgPins.length !== 0){
+    Array.from(imgPins).forEach(function(pin) {
+      var pinId = pin.getAttribute("data-id"),
+          pinInfo = pin.getAttribute("data-info");
+      if(pinId == currentID && pinInfo == 'click'){
+        pin.classList.toggle("active");
+      } else {
+        pin.classList.remove("active");
+      }
+    });
+  }
+}
+// close clickable info window
+function imgPinsInfoClose(){
+  this.closest('.block-image-pin').classList.remove("active");
+}
+// load the content inside block
+function imagePinsLoadContent(){
+  var currentID = this.closest('.block-image-pin').getAttribute("data-id"),
+      container = this.closest('.block-image-pins').getAttribute("data-id");
+  // run ajax function
+  var config = {
+    action: 'loadPageContent',
+    targetContent: '.block-image-pins[data-id="' + container + '"] .pin-target',
+    id: currentID
+  };
+  ajaxCall(config);
+}
+
+
 
 /*==================================================================================
   FORM
@@ -751,7 +862,7 @@ function deselectRadioButtons(rootElement) {
     obj.checked = window.radioChecked != obj;
     window.radioChecked = obj.checked ? obj : null;
   }
-  rootElement.querySelectorAll("input[type='radio']").forEach( radio => {
+  rootElement.querySelectorAll("input[type='radio'].deselect").forEach( radio => {
     radio.setAttribute("onclick", "radioClick(event)");
     radio.setAttribute("onkeyup", "radioClick(event)");
   });
@@ -953,6 +1064,24 @@ if(activeImagePopUps.length > 0){
 /------------------------*/
 function runEventListeners(){
 
+  /* Browser support - columns gap
+  /------------------------*/
+  var allColumnsContainer = document.querySelectorAll('.wp-block-columns');
+  if(allColumnsContainer.length !== 0){
+    Array.from(allColumnsContainer).forEach(function(columnsContainer) {
+      // add columns children sum
+      var allColumns = columnsContainer.querySelectorAll('.wp-block-column');
+      if(allColumns.length !== 0){
+        columnsContainer.setAttribute('data-columns', allColumns.length);
+      }
+      // has background gap
+      if (columnsContainer.querySelectorAll(".wp-block-column.has-background").length > 0){
+        columnsContainer.classList.add("is-style-columns-has-background-gap");
+      }
+    });
+  }
+
+
   /* Action Links
   /------------------------*/
   var actionButtons = document.querySelectorAll('.funcCall');
@@ -970,6 +1099,54 @@ function runEventListeners(){
     Array.from(toggleButtons).forEach(function(element) {
       element.addEventListener('click', toggleBlock);
       element.addEventListener('keypress', toggleBlock);
+    });
+  }
+
+  /* Image pins
+  /------------------------*/
+  // add data-id to container
+  var activeImageWithPins = document.querySelectorAll('.block-image-pins');
+  if(activeImageWithPins.length > 0){
+    Array.from(activeImageWithPins).forEach(function(container) {
+      container.setAttribute('data-id', uniqueID());
+    });
+  }
+  // info window
+  var imgPinsInfoToggle = document.querySelectorAll('.block-image-pins .pins .block-image-pin > span');
+  if(imgPinsInfoToggle.length !== 0){
+    Array.from(imgPinsInfoToggle).forEach(function(element) {
+      element.addEventListener('click', imagePinsToggle);
+      element.addEventListener('keypress', imagePinsToggle);
+      // update position
+      if (element.nextElementSibling !== null) {
+        checkChildPosition(element.closest('.pins'), element.nextElementSibling, "update");
+      }
+    });
+  }
+  // info window close
+  var imgPinsInfoToClose = document.querySelectorAll('.block-image-pins .pins .block-image-pin .pin-info .close');
+  if(imgPinsInfoToClose.length !== 0){
+    Array.from(imgPinsInfoToClose).forEach(function(element) {
+      element.addEventListener('click', imgPinsInfoClose);
+      element.addEventListener('keypress', imgPinsInfoClose);
+    });
+  }
+  // load content
+  var imgPinsToLoadContent = document.querySelectorAll('.block-image-pins .pins .block-image-pin [data-load="content"]');
+  if(imgPinsToLoadContent.length !== 0){
+    Array.from(imgPinsToLoadContent).forEach(function(element) {
+      element.addEventListener('click', imagePinsLoadContent);
+      element.addEventListener('keypress', imagePinsLoadContent);
+    });
+  }
+
+  /* Open accordion on anchor link
+  /------------------------*/
+  var toggleAnchors = document.querySelectorAll('a[href^="#"]');
+  if(toggleAnchors.length !== 0){
+    Array.from(toggleAnchors).forEach(function(anchor) {
+      anchor.addEventListener('click', openAccordionByAnchor);
+      anchor.addEventListener('keypress', openAccordionByAnchor);
     });
   }
 

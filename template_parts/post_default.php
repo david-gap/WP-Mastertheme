@@ -6,6 +6,11 @@
  * @version     1.0.1
  *
 */
+if($args['id'] && $args['id'] !== 0):
+  global $post;
+  $post = get_post($args['id']);
+endif;
+
 $thumb = get_the_post_thumbnail();
 
 $css = 'temp-' . get_post_type() . '-default';

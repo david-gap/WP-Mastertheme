@@ -97,21 +97,24 @@ body.frontend,
       //   top: 0;
       // }
       &.top_contained {
-        top: 100%;
+        top: 0;
         margin-left: calc(var(--container__side, 20px) * -1)!important;
       }
       &.left,
       &.left_contained {
-        top: 100%;
+        top: 0;
         left: -2000px;
       }
       &.right,
       &.right_contained {
-        top: 100%;
+        top: 0;
         right: -2000px;
       }
       &.hidden_desktop {
         position: fixed;
+      }
+      &.showHeader {
+        top: 100%;
       }
     }
   }
@@ -196,8 +199,8 @@ body.frontend,
           justify-content: flex-end;
         }
         &.showHeader {
-          top: 100%;
           position: absolute;
+          top: 100%;
           max-height: calc(100vh - 100%);
           &.stretch {
             height: calc(100vh - 100%);

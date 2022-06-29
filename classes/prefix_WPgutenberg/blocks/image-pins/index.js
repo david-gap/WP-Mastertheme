@@ -12,6 +12,12 @@
   const { __ } = wp.i18n;
   const { registerBlockType } = wp.blocks;
   const { RichText, InnerBlocks } = wp.editor;
+  const { select, withSelect } = wp.data;
+
+  const ALLOWED_BLOCKS = [ 'templates/image-pins-item', 'core/buttons' ];
+  // const getCount = memoize( ( count ) => {
+  // 	return times( count, () => [ 'templates/accordion-item' ] );
+  // } );
 
 
   /* atts changed from attributes, see below
@@ -41,6 +47,24 @@
   }
 
 
+  /* Get the selected image
+  /------------------------*/
+  function getImage(id, media){
+    if(media){
+      let themedia = media;
+      return (
+        <img src={themedia} data-id={ id } width="100%" />
+      );
+    } else {
+      return (
+        <div class="placeholder">
+          {__( 'Select Image', 'devTheme' )}
+        </div>
+      );
+    }
+  }
+
+
 
 /*==================================================================================
 REGISTER BLOCK
@@ -48,67 +72,79 @@ REGISTER BLOCK
 
   /* register
   /------------------------*/
-  export default registerBlockType( 'templates/gallery-item', {
-    title: __( 'Swiper Item', 'devTheme' ),
-    description: __( 'Insert a gallery item', 'devTheme' ),
+  export default registerBlockType( 'templates/image-pins', {
+    title: __( 'Image Pins', 'devTheme' ),
+    description: __( 'Image Pins', 'devTheme' ),
     category: 'media',
-    icon: 'format-image',
+    icon: 'embed-post',
     keywords: [
-      __( 'Swiper item', 'devTheme' ),
-      __( 'Images', 'devTheme' ),
-      __( 'Item', 'devTheme' )
+      __( 'Image', 'devTheme' ),
+      __( 'Posts', 'devTheme' ),
+      __( 'Pins', 'devTheme' )
     ],
-    parent: [ 'templates/gallery' ],
     supports: {
       html: false,                // Remove support for an HTML mode
       anchor: true,               // Declare support for anchor links
       customClassName: true,      // Remove the support for the custom className
       className: false,           // Remove the support for the generated className
-      align: false,                // Declare support for block's alignment
-      alignWide: false,            // Remove the support for wide alignment
+      align: true,                // Declare support for block's alignment
+      alignWide: true,            // Remove the support for wide alignment
       defaultStylePicker: false,  // Remove the Default Style picker
       inserter: true,             // Hide this block from the inserter
       multiple: true,             // Use the block just once per post
       reusable: true              // Don't allow the block to be converted into a reusable block
-  	},
+    },
     attributes,
     edit: props => {
       const {
-        attributes: {},
+        attributes: { anchor, imageId, imageURL, pinsTarget, pinsInfo, pinsInfoRowOne, pinsInfoRowTwo, pinsInfoTrigger },
         attributes,
         className,
         setAttributes
       } = props;
 
       let settings = getSettings(attributes);
-
-      const MY_TEMPLATE = [
-          [ 'core/image', {} ]
-      ];
+      let returnImage = getImage(imageId, imageURL);
 
       return [
         <Inspector {...{ setAttributes, ...props }} />,
-        <li className={classnames(
-          'gallery-item', className
+        <div className={classnames(
+          'block-image-pins', className
         )}>
-          <InnerBlocks
-            template={ MY_TEMPLATE }
-          />
-        </li>
+          <figure>
+            {returnImage}
+            <div class="pins">
+              <InnerBlocks
+                allowedBlocks={ ALLOWED_BLOCKS }
+              />
+            </div>
+          </figure>
+          <div class="wp-block-group pin-target dn"><div class="wp-block-group__inner-container"></div></div>
+        </div>
       ];
     },
     save: props => {
       const {
-        attributes: {},
+        attributes: { anchor, imageId, imageURL, pinsTarget, pinsInfo, pinsInfoRowOne, pinsInfoRowTwo, pinsInfoTrigger },
+        className,
         attributes
       } = props;
 
+      let settings = getSettings(attributes);
+      let returnImage = getImage(imageId, imageURL);
+
       return (
-        <li className={classnames(
-          'gallery-item'
+        <div className={classnames(
+          'block-image-pins'
         )}>
-          <InnerBlocks.Content />
-        </li>
+          <figure>
+            {returnImage}
+            <div class="pins">
+              <InnerBlocks.Content />
+            </div>
+          </figure>
+          <div class="wp-block-group pin-target dn"><div class="wp-block-group__inner-container"></div></div>
+        </div>
       );
     }
 

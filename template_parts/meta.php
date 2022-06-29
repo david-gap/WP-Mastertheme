@@ -6,6 +6,10 @@
  * @version     1.0
  *
 */
+if($args['id'] && $args['id'] !== 0):
+  global $post;
+  $post = get_post($args['id']);
+endif;
 ?>
 
 <?php

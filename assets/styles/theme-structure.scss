@@ -23,6 +23,8 @@ Table of Contents:
     3.6 LEAD
     3.7 404 PAGE
     3.8 LANGUAGE SWITCHER
+    3.9 TITLE SIZES
+    3.10 QUOTE
   4.0 SCROLL TO TOP
   5.0 FOOTER
 =======================================================*/
@@ -30,6 +32,12 @@ Table of Contents:
 
 body.frontend,
 .block-editor .editor-styles-wrapper {
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-image: var(--main_backgroundImg, none);
 
   /*==================================================================================
   1.0 GENERAL
@@ -52,7 +60,8 @@ body.frontend,
   .wide-container,
   .is-style-wide-container,
   .is-style-content-wide-container > .wp-block-group__inner-container,
-  .is-style-content-wide-container > .wp-block-cover__inner-container {
+  .is-style-content-wide-container > .wp-block-cover__inner-container,
+  .is-style-content-wide-container > .wp-block-cover__inner-container .wp-block {
     max-width: var(--wideWidth, 1400px);
   }
   .wp-block-cover.is-style-content-wide-container.is-position-bottom-left > .wp-block-cover__inner-container,
@@ -127,7 +136,7 @@ body.frontend,
   }
   &.scrolled {
     > header {
-      top: calc(var(--header__negativTopPosition_sticky, 0) * -1);
+      top: calc(var(--header__negativTopPosition_sticky, 0px) * -1);
       nav {
         .header-container {
           padding-top: var(--header__paddingTop_sticky, var(--header__paddingTop, 10px));
@@ -274,50 +283,52 @@ body.frontend,
 
   /* 3.1 SPACING
   /––––––––––––––––––––––––*/
-  > main {
-    margin: 0;
-    section,
-    article,
-    .wp-block-container,
-    .wp-block-group__inner-container,
-    .wp-block-cover__inner-container,
-    .consent-request-container {
-      & > p,
-      & > ol,
-      & > ul,
-      & > figure,
-      & > blockquote,
-      & > .wp-block-button,
-      & > .wp-block-cover,
-      & > .wp-block-file,
-      & > .wp-block-buttons,
-      & > .wp-block-columns,
-      & > .wp-block-columns .wp-block-column p,
-      & > .wp-block-columns .wp-block-column ol,
-      & > .wp-block-columns .wp-block-column ul,
-      & > .wp-block-columns .wp-block-column img,
-      & > .wp-block-columns .wp-block-column figure,
-      & > .wp-block-columns .wp-block-column .wp-block-cover,
-      & > .wp-block-media-text p,
-      & > .post-password-form p,
-      & > .block-vimeo,
-      & > .block-accordion,
-      & > .block-accordion .accordion-content p,
-      & > .block-accordion .accordion-content ol,
-      & > .block-accordion .accordion-content ul,
-      & > .block-accordion .accordion-content img,
-      & > .block-accordion .accordion-content figure,
-      & > .block-posts,
-      & > #search-form,
-      & > .wp-block-gallery-container,
-      & > .wpcf7 .wpcf7-form p {
-        margin-top: 0;
-        margin-bottom: var(--content__space, 30px);
-        &:last-child {
-          margin-bottom: 0;
-        }
+  > header .widget,
+  > main section,
+  > main article,
+  > main .wp-block-container,
+  > main .wp-block-group__inner-container,
+  > main .wp-block-cover__inner-container,
+  > main .consent-request-container,
+  > footer .widget {
+    & > p,
+    & > ol,
+    & > ul,
+    & > figure,
+    & > blockquote,
+    & > .wp-block-button,
+    & > .wp-block-cover,
+    & > .wp-block-file,
+    & > .wp-block-buttons,
+    & > .wp-block-columns,
+    & > .wp-block-columns .wp-block-column p,
+    & > .wp-block-columns .wp-block-column ol,
+    & > .wp-block-columns .wp-block-column ul,
+    & > .wp-block-columns .wp-block-column img,
+    & > .wp-block-columns .wp-block-column figure,
+    & > .wp-block-columns .wp-block-column .wp-block-cover,
+    & > .wp-block-media-text p,
+    & > .post-password-form p,
+    & > .block-vimeo,
+    & > .block-accordion,
+    & > .block-accordion .accordion-content p,
+    & > .block-accordion .accordion-content ol,
+    & > .block-accordion .accordion-content ul,
+    & > .block-accordion .accordion-content img,
+    & > .block-accordion .accordion-content figure,
+    & > .block-posts,
+    & > #search-form,
+    & > .wp-block-gallery-container,
+    & > .wpcf7 .wpcf7-form p {
+      margin-top: 0;
+      margin-bottom: var(--content__space, 30px);
+      &:last-child {
+        margin-bottom: 0;
       }
     }
+  }
+  > main {
+    margin: 0;
     section,
     article {
       & > p,
@@ -366,7 +377,9 @@ body.frontend,
   /––––––––––––––––––––––––*/
   #search-results,
   #home,
-  #archive {
+  #archive,
+  .block-posts,
+  .block-postsfilter {
     article {
       &.flex {
         display: flex;
@@ -460,6 +473,8 @@ body.frontend,
   .post-title,
   .is-style-post-title {
     margin: var(--postTitle__margin, 0);
+    margin-left: auto;
+    margin-right: auto;
     padding: var(--postTitle__padding, 0);
   }
 
@@ -480,6 +495,8 @@ body.frontend,
       padding: var(--error__padding, 0);
       h1.post-title {
         margin: var(--error__title_margin, var(--postTitle__margin, 0));
+        margin-left: auto;
+        margin-right: auto;
         padding: var(--error__title_padding, var(--postTitle__padding, 0));
       }
     }
@@ -498,6 +515,37 @@ body.frontend,
         margin: var(--ls__link_margin, 0);
         padding: var(--ls__link_padding, 0);
       }
+    }
+  }
+
+
+  /* 3.9 TITLE SIZES
+  /––––––––––––––––––––––––*/
+  .is-style-title-one {
+    margin-top: var(--titleOne__marginTop, 0);
+    margin-bottom: var(--titleOne__marginBottom, 0);
+    padding: var(--titleOne__padding, 0);
+  }
+  .is-style-title-two {
+    margin-top: var(--titleTwo__marginTop, 0);
+    margin-bottom: var(--titleTwo__marginTop, 0);
+    padding: var(--titleTwo__padding, 0);
+  }
+  .is-style-title-three {
+    margin-top: var(--titleThree__marginTop, 0);
+    margin-bottom: var(--titleThree__marginTop, 0);
+    padding: var(--titleThree__padding, 0);
+  }
+
+
+  /* 3.10 QUOTE
+  /––––––––––––––––––––––––*/
+  .wp-block-quote {
+    margin-left: 0;
+    margin-right: 0;
+    padding: var(--block__quote_padding, 0);
+    cite {
+      padding: var(--block__quote_cite_padding, 0);
     }
   }
 

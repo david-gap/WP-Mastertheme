@@ -85,13 +85,13 @@ function WPgutenberg_postsfilter_ContentRow($value, $id){
         setup_postdata($post);
         // blog output
         if(locate_template('template_parts/' . get_post_type($id) . '_' . $blog_type . '.php')):
-          get_template_part('template_parts/' . get_post_type($id) . '_' . $blog_type);
+          get_template_part('template_parts/' . get_post_type($id) . '_' . $blog_type, '', array('id' => $id));
         else:
-          get_template_part('template_parts/post_' . $blog_type);
+          get_template_part('template_parts/post_' . $blog_type, '', array('id' => $id));
         endif;
       else:
         // default output
-        get_template_part('template_parts/post_default');
+        get_template_part('template_parts/post_default', '', array('id' => $id));
       endif;
       return ob_get_clean();
       break;
@@ -104,13 +104,13 @@ function WPgutenberg_postsfilter_ContentRow($value, $id){
         setup_postdata($post);
         // blog output
         if(locate_template('template_parts/' . get_post_type($id) . '_' . $blog_type . '.php')):
-          get_template_part('template_parts/' . get_post_type($id) . '_' . $blog_type, '', array('mediaOnly' => 1));
+          get_template_part('template_parts/' . get_post_type($id) . '_' . $blog_type, '', array('id' => $id, 'mediaOnly' => 1));
         else:
-          get_template_part('template_parts/post_' . $blog_type, '', array('mediaOnly' => 1));
+          get_template_part('template_parts/post_' . $blog_type, '', array('id' => $id, 'mediaOnly' => 1));
         endif;
       else:
         // default output
-        get_template_part('template_parts/post_default', '', array('mediaOnly' => 1));
+        get_template_part('template_parts/post_default', '', array('id' => $id, 'mediaOnly' => 1));
       endif;
       return ob_get_clean();
       break;

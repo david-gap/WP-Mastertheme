@@ -45,7 +45,7 @@ export default class Inspector extends Component {
 
     return (
       <InspectorControls>
-          <PanelBody title={ __( 'Lightbox', 'WPgutenberg' ) } >
+          <PanelBody title={ __( 'Lightbox', 'WPgutenberg' ) } initialOpen={ false } >
               <PanelRow>
                 <ToggleControl
                     id="add-popup"

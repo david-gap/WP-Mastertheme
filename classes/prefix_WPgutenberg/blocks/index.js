@@ -15,3 +15,5 @@ import "./accordion";
 import "./accordion-item";
 import "./gallery";
 import "./gallery-item";
+import "./image-pins";
+import "./image-pins-item";

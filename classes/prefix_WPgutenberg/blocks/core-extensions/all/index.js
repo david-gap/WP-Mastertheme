@@ -71,7 +71,10 @@
         <BlockListBlock {...props} wrapperProps={{
           'data-disabled': props.attributes.disabledValue,
           'data-ismobile': props.attributes.hideOnDesktop,
-          'data-isdesktop': props.attributes.hideOnMobile
+          'data-isdesktop': props.attributes.hideOnMobile,
+          'data-swiper': props.attributes.addSwiper,
+          'data-popup': props.attributes.addPopUp,
+          'data-popuppreview': props.attributes.addPopUpPreview
         }} />
       );
     };

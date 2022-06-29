@@ -97,17 +97,29 @@ jQuery(document).ready(function($){
       updatePageOptions();
     },2000);
 
-    /* page background color
+    /* page background color & img
     /––––––––––––––––––––––––*/
     function setBackgroundColor(){
       var getPageColorElement = document.getElementById("template_page_bgColor");
-      if(getPageColorElement.length !== 0){
+      if(getPageColorElement){
         var pageColor = getPageColorElement.value;
         document.querySelector(".editor-styles-wrapper").style.backgroundColor = pageColor;
       }
     }
+    function setBackgroundImage(){
+      if(document.querySelector('div[data-id="template_page_bgImg"]')){
+        var getPageImgElement = document.querySelector('div[data-id="template_page_bgImg"] .img-selected img');
+        if(getPageImgElement){
+          var pageBgImg = getPageImgElement.src;
+          document.querySelector(".editor-styles-wrapper").style.backgroundImage = "url('" + pageBgImg + "')";
+        } else {
+          document.querySelector(".editor-styles-wrapper").style.backgroundImage = "none";
+        }
+      }
+    }
     setTimeout(function(){
       setBackgroundColor();
+      setBackgroundImage();
     },2000);
 
 
@@ -122,7 +134,7 @@ jQuery(document).ready(function($){
       updatePageOptions();
     });
 
-    /* change background color
+    /* change background color & img
     /––––––––––––––––––––––––*/
     $("#template_page_bgColor").change(function() {
       setBackgroundColor();
@@ -233,6 +245,9 @@ jQuery(document).ready(function($){
                   $('div[data-id="' + container + '"]').find('.img-saved').val(metadataString);
                   $('div[data-id="' + container + '"]').find('.img-selected').html(imageHTML);
                 }
+                if("template_page_bgImg" == input_id){
+                  setBackgroundImage();
+                }
         });
         // Finally, open the modal
         meta_gallery_frame.open();
@@ -247,6 +262,7 @@ jQuery(document).ready(function($){
       if (confirm('Are you sure you want to remove this image?')) {
         $(this).parents('.img-selected').siblings('.img-saved').val('');
         $(this).parents('.img-selected').html('');
+        setBackgroundImage();
       }
     });
 
@@ -344,8 +360,8 @@ jQuery(document).ready(function($){
 
     /* sortable multi fields
     /------------------------*/
-    if($('.sortable').length!==0){
-      $('.sortable').sortable({
+    if($('ul.sortable').length!==0){
+      $('ul.sortable').sortable({
         update: function( event, ui ) {
           // create array
           // var img_ids = [];
@@ -361,6 +377,14 @@ jQuery(document).ready(function($){
         }
       });
     }
+
+
+    /* drag and drop pins
+    /------------------------*/
+    $( ".block-image-pins" ).draggable({
+      appendTo: ".block-editor-block-list__layout"
+    });
+
 
 
 });

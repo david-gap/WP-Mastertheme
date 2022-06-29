@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.16.13
+ * @version     2.17.13
  */
 
 /*=======================================================
@@ -103,6 +103,11 @@ class prefix_WPgutenberg {
       add_action( 'init', array($this, 'WPgutenbergFixApiSort'), 99 );
       // filter blocks before dom
       add_filter('render_block',  array($this, 'FilterBlocks'), 10, 2 );
+      // remove inline styles
+      // remove_filter( 'render_block', 'wp_render_layout_support_flag', 10, 2 );
+      // remove_filter( 'render_block', 'gutenberg_render_layout_support_flag', 10, 2 );
+      // remove_filter( 'render_block', 'wp_render_elements_support', 10, 2 );
+      // remove_filter( 'render_block', 'gutenberg_render_elements_support', 10, 2 );
       // register strings
       $backendStrings = array(
         __('Gutenberg', 'devTheme'),
@@ -229,7 +234,9 @@ class prefix_WPgutenberg {
           "templates/accordion",
           "templates/accordion-item",
           "templates/gallery",
-          "templates/gallery-item"
+          "templates/gallery-item",
+          "templates/image-pins",
+          "templates/image-pins-item"
         )
       ),
       "CustomAllowedBlocks" => array(
@@ -409,6 +416,7 @@ class prefix_WPgutenberg {
     }
     include 'blocks/posts/index.php';
     include 'blocks/postsfilter/index.php';
+    include 'blocks/image-pins-item/index.php';
   }
 
 

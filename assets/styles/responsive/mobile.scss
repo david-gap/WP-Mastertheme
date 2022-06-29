@@ -102,19 +102,14 @@ body.frontend,
         > *:last-child {
           text-align: left;
         }
-      }
-    }
-  }
-  > main {
-    section,
-    article,
-    .wp-block-container,
-    .wp-block-group__inner-container,
-    .wp-block-cover__inner-container {
-      & > .wp-block-columns .wp-block-column {
-        margin-bottom: var(--content__space, 30px);
-        &:last-child {
-          margin-bottom: 0;
+        #menu-main-container {
+          &.horizontal {
+            > ul#menu_main {
+              align-items: flex-start;
+              flex-direction: row;
+              flex-wrap: wrap;
+            }
+          }
         }
       }
     }

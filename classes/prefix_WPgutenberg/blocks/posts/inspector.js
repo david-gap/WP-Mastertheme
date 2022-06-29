@@ -122,7 +122,7 @@ export default class Inspector extends Component {
     }
     // update post type selection options
     let postTypes = [];
-    const getposttypes = select('core').getPostTypes();
+    const getposttypes = select('core').getPostTypes({ per_page: -1 });
     if(getposttypes){
       getposttypes.forEach( type => {
         if(type.slug !== "wp_block"){

@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.29.16
+ * @version     2.30.16
  *
 */
 
@@ -102,7 +102,8 @@ class prefix_template {
     * @param static array $template_page_metablock: activate metablock on detail page/posts
     * @param static array $template_page_metablockAdds: Add metabox to CPT by slugs
     * @param static array $template_page_options: show/hide template elements
-    * @param static array $template_page_bgColor: Activate custom background color
+    * @param static int $template_page_bgColor: Activate custom background color
+    * @param static int $template_page_bgImg: Activate custom background image
     * @param static int $template_scrolltotop_active: activate scroll to top
     * @param static int $template_footer_active: activate footer
     * @param static int $template_footer_wrap: Allow the footer content to wrap
@@ -249,6 +250,7 @@ class prefix_template {
     "afterMain" => 1
   );
   static $template_page_bgColor                    = 0;
+  static $template_page_bgImg                      = 0;
   static $template_page_metablock                  = array(
     "page" => 0,
     "post" => 0
@@ -312,7 +314,7 @@ class prefix_template {
     // update default vars with configuration file
     SELF::updateVars();
     // add page options to backend
-    if(SELF::$template_page_active == 1 || SELF::$template_page_bgColor == 1):
+    if(SELF::$template_page_active == 1 || SELF::$template_page_bgColor == 1 || SELF::$template_page_bgImg == 1):
       // metabox for option selection
       add_action( 'add_meta_boxes', array( $this, 'WPtemplate_Metabox' ) );
       // update custom fields
@@ -983,6 +985,10 @@ class prefix_template {
           "label" => "Activate custom background color",
           "type" => "switchbutton"
         ),
+        "bgImage" => array(
+          "label" => "Activate custom background image",
+          "type" => "switchbutton"
+        ),
         "metablock" => array(
           "label" => "Activate metablock",
           "type" => "multiple",
@@ -1293,7 +1299,7 @@ class prefix_template {
           "value" => array('normal','wide','full')
         ),
         "search_align" => array(
-          "label" => "404 align thumbnail",
+          "label" => "Search results page align thumbnail",
           "type" => "select",
           "value" => array('normal','wide','full')
         )
@@ -1401,6 +1407,7 @@ class prefix_template {
           SELF::$template_page_metablockAdds = array_key_exists('add_metablock', $page) ? $page['add_metablock'] : SELF::$template_page_metablockAdds;
           SELF::$template_page_options = array_key_exists('options', $page) ? array_merge(SELF::$template_page_options, $page['options']) : SELF::$template_page_options;
           SELF::$template_page_bgColor = array_key_exists('bgColor', $page) ? $page['bgColor'] : SELF::$template_page_bgColor;
+          SELF::$template_page_bgImg = array_key_exists('bgImage', $page) ? $page['bgImage'] : SELF::$template_page_bgImg;
           SELF::$template_page_additional = array_key_exists('additional', $page) ? array_merge(SELF::$template_page_additional, $page['additional']) : SELF::$template_page_additional;
         endif;
         if($configuration && array_key_exists('blog', $myConfig)):
@@ -1505,6 +1512,10 @@ class prefix_template {
       if(isset($_POST['template_page_bgColor'])):
         update_post_meta($post_id, 'template_page_bgColor', $_POST['template_page_bgColor']);
       endif;
+      // sage page backgound img
+      if(isset($_POST['template_page_bgImg'])):
+        update_post_meta($post_id, 'template_page_bgImg', $_POST['template_page_bgImg']);
+      endif;
     }
 
 
@@ -1516,76 +1527,92 @@ class prefix_template {
         'name'          => __( 'Header 1', 'devTheme' ),
         'id'            => 'header_widget_one',
         'description'   => __( 'Widget for the header', 'devTheme' ),
-        'before_widget' => '<div id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</div>',
+        'before_sidebar' => '<div id="%1$s" class="widget %2$s">',
+        'after_sidebar'  => '</div>',
         'before_title'  => '<h5 class="header-widget">',
         'after_title'   => '</h5>',
+        'before_widget' => '',
+        'after_widget'  => '',
       ) );
       register_sidebar( array(
         'name'          => __( 'Header 2', 'devTheme' ),
         'id'            => 'header_widget_two',
         'description'   => __( 'Widget for the header', 'devTheme' ),
-        'before_widget' => '<div id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</div>',
+        'before_sidebar' => '<div id="%1$s" class="widget %2$s">',
+        'after_sidebar'  => '</div>',
         'before_title'  => '<h5 class="header-widget">',
         'after_title'   => '</h5>',
+        'before_widget' => '',
+        'after_widget'  => '',
       ) );
       register_sidebar( array(
         'name'          => __( 'Header 3', 'devTheme' ),
         'id'            => 'header_widget_three',
         'description'   => __( 'Widget for the header', 'devTheme' ),
-        'before_widget' => '<div id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</div>',
+        'before_sidebar' => '<div id="%1$s" class="widget %2$s">',
+        'after_sidebar'  => '</div>',
         'before_title'  => '<h5 class="header-widget">',
         'after_title'   => '</h5>',
+        'before_widget' => '',
+        'after_widget'  => '',
       ) );
       // page
       register_sidebar( array(
         'name'          => __( 'Page Sidebar', 'devTheme' ),
         'id'            => 'sidebar-page',
         'description'   => __( 'Sidebar Widget for pages', 'devTheme' ),
-        'before_widget' => '<div id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</div>',
+        'before_sidebar' => '<div id="%1$s" class="widget %2$s">',
+        'after_sidebar'  => '</div>',
         'before_title'  => '<h5 class="sidebar-widget">',
         'after_title'   => '</h5>',
+        'before_widget' => '',
+        'after_widget'  => '',
       ) );
       // posts
       register_sidebar( array(
         'name'          => __( 'Posts Sidebar', 'devTheme' ),
         'id'            => 'sidebar-post',
         'description'   => __( 'Sidebar Widget for posts', 'devTheme' ),
-        'before_widget' => '<div id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</div>',
+        'before_sidebar' => '<div id="%1$s" class="widget %2$s">',
+        'after_sidebar'  => '</div>',
         'before_title'  => '<h5 class="sidebar-widget">',
         'after_title'   => '</h5>',
+        'before_widget' => '',
+        'after_widget'  => '',
       ) );
       // footer
       register_sidebar( array(
         'name'          => __( 'Footer 1', 'devTheme' ),
         'id'            => 'footer_widget_one',
         'description'   => __( 'Widget for the footer', 'devTheme' ),
-        'before_widget' => '<div id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</div>',
+        'before_sidebar' => '<div id="%1$s" class="widget %2$s">',
+        'after_sidebar'  => '</div>',
         'before_title'  => '<h5 class="footer-widget">',
         'after_title'   => '</h5>',
+        'before_widget' => '',
+        'after_widget'  => '',
       ) );
       register_sidebar( array(
         'name'          => __( 'Footer 2', 'devTheme' ),
         'id'            => 'footer_widget_two',
         'description'   => __( 'Widget for the footer', 'devTheme' ),
-        'before_widget' => '<div id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</div>',
+        'before_sidebar' => '<div id="%1$s" class="widget %2$s">',
+        'after_sidebar'  => '</div>',
         'before_title'  => '<h5 class="footer-widget">',
         'after_title'   => '</h5>',
+        'before_widget' => '',
+        'after_widget'  => '',
       ) );
       register_sidebar( array(
         'name'          => __( 'Footer 3', 'devTheme' ),
         'id'            => 'footer_widget_three',
         'description'   => __( 'Widget for the footer', 'devTheme' ),
-        'before_widget' => '<div id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</div>',
+        'before_sidebar' => '<div id="%1$s" class="widget %2$s">',
+        'after_sidebar'  => '</div>',
         'before_title'  => '<h5 class="footer-widget">',
         'after_title'   => '</h5>',
+        'before_widget' => '',
+        'after_widget'  => '',
       ) );
     }
 
@@ -1867,11 +1894,12 @@ class prefix_template {
         $output = '';
         $options = get_post_meta($post->ID, 'template_page_options', true);
         $bgColor = get_post_meta($post->ID, 'template_page_bgColor', true);
+        $bgImg = get_post_meta($post->ID, 'template_page_bgImg', true);
         if(is_string($options)):
           $options = unserialize($options);
         endif;
         // output
-        echo '<div class="wrap" id="WPtemplate">';
+        echo '<div class="wrap metaboxes" id="WPtemplate">';
           // page options
           if(SELF::$template_page_active == 1):
             echo '<p><b>' . __( 'Page options', 'devTheme' ) . '</b></p>';
@@ -1927,6 +1955,22 @@ class prefix_template {
             echo '<p><b>' . __( 'Background color', 'devTheme' ) . '</b></p>';
             echo '<input type="text" id="template_page_bgColor" name="template_page_bgColor" value="' . $bgColor . '" class="colorpicker"></input>';
           endif;
+
+          if(SELF::$template_page_bgImg == 1):
+            echo '<div data-id="template_page_bgImg">';
+              echo '<p><b>' . __( 'Background image', 'devTheme' ) . '</b></p>';
+              echo '<input type="hidden" class="img-saved" id="template_page_bgImg" name="template_page_bgImg" value="' . $bgImg . '" style="margin-top:5px; width:100%;">';
+              echo '<button class="wp-single-media" data-action="WPadmin">' . __('Select images','devTheme') . '</button>';
+              // img
+              echo '<span class="img-selected">';
+                if($bgImg !== false && $bgImg !== ''):
+                  echo '<span class="remove_image"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24.9 24.9" xml:space="preserve"><rect x="-3.7" y="10.9" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1549 12.4451)" fill="#000" width="32.2" height="3"/><rect x="10.9" y="-3.7" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1549 12.4451)" fill="#000" width="3" height="32.2"/></svg></span>';
+                  echo '<img src="' . wp_get_attachment_thumb_url($bgImg) . '">';
+                endif;
+              echo '</span>';
+            echo '</div>';
+          endif;
+
         echo '</div>';
     }
 
@@ -2467,10 +2511,16 @@ class prefix_template {
     public static function BodyAttr(){
       $page_id = get_queried_object_id();
       $output = '';
-      // add background color
+      // add background styles
       if($page_id > 0):
         $bgColor = get_post_meta($page_id, 'template_page_bgColor', true);
-        $output .= $bgColor && $bgColor !== '' ? ' style="--main_background:' . $bgColor . ';"' : '';
+        $bgImg = get_post_meta($page_id, 'template_page_bgImg', true);
+        if($bgColor && $bgColor !== '' || $bgImg && $bgImg !== ''):
+          $output .= ' style="';
+            $output .= $bgColor && $bgColor !== '' ? '--main_background:' . $bgColor . '; ' : '';
+            $output .= $bgImg && $bgImg !== '' ? '--main_backgroundImg: url(' . wp_get_attachment_thumb_url($bgImg) . '); ' : '';
+          $output .= '"';
+        endif;
       endif;
       // apply filter
       $output .= ' ' . apply_filters( 'template_BodyAttr', $output );
@@ -2780,6 +2830,7 @@ class prefix_template {
     /------------------------*/
     function getAllTemplateParts($object) {
       $output = array();
+      $id = $object["id"];
 
       ob_start();
       if(get_post_type($id) == "post" || post_type_supports(get_post_type($id), 'post-formats')):
@@ -2789,13 +2840,13 @@ class prefix_template {
         setup_postdata($post);
         // blog output
         if(locate_template('template_parts/' . get_post_type($id) . '_' . $blog_type . '.php')):
-          get_template_part('template_parts/' . get_post_type($id) . '_' . $blog_type);
+          get_template_part('template_parts/' . get_post_type($id) . '_' . $blog_type, '', array('id' => $id));
         else:
-          get_template_part('template_parts/post_' . $blog_type);
+          get_template_part('template_parts/post_' . $blog_type, '', array('id' => $id));
         endif;
       else:
         // default output
-        get_template_part('template_parts/post_default');
+        get_template_part('template_parts/post_default', '', array('id' => $id));
       endif;
       $output['content'] = ob_get_contents();
       ob_end_clean();
@@ -2808,13 +2859,13 @@ class prefix_template {
         setup_postdata($post);
         // blog output
         if(locate_template('template_parts/' . get_post_type($id) . '_' . $blog_type . '.php')):
-          get_template_part('template_parts/' . get_post_type($id) . '_' . $blog_type, '', array('mediaOnly' => 1));
+          get_template_part('template_parts/' . get_post_type($id) . '_' . $blog_type, '', array('id' => $id, 'mediaOnly' => 1));
         else:
-          get_template_part('template_parts/post_' . $blog_type, '', array('mediaOnly' => 1));
+          get_template_part('template_parts/post_' . $blog_type, '', array('id' => $id, 'mediaOnly' => 1));
         endif;
       else:
         // default output
-        get_template_part('template_parts/post_default', '', array('mediaOnly' => 1));
+        get_template_part('template_parts/post_default', '', array('id' => $id, 'mediaOnly' => 1));
       endif;
       $output['media'] = ob_get_contents();
       ob_end_clean();

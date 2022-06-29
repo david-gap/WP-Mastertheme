@@ -210,6 +210,34 @@ body.frontend,
   }
 
 
+  /* 2.4 TITLE SIZES
+  /––––––––––––––––––––––––*/
+  .is-style-title-one {
+    font-family: var(--titleOne__fontFamily, inherit);
+    font-size: var(--titleOne__fontSize, inherit);
+    line-height: var(--titleOne__lineHeight, inherit);
+    font-weight: var(--titleOne__fontWeight, inherit);
+    text-transform: var(--titleOne__textTransform, inherit);
+    letter-spacing: var(--titleOne__letterSpacing, inherit);
+  }
+  .is-style-title-two {
+    font-family: var(--titleTwo__fontFamily, inherit);
+    font-size: var(--titleTwo__fontSize, inherit);
+    line-height: var(--titleTwo__lineHeight, inherit);
+    font-weight: var(--titleTwo__fontWeight, inherit);
+    text-transform: var(--titleTwo__textTransform, inherit);
+    letter-spacing: var(--titleTwo__letterSpacing, inherit);
+  }
+  .is-style-title-three {
+    font-family: var(--titleThree__fontFamily, inherit);
+    font-size: var(--titleThree__fontSize, inherit);
+    line-height: var(--titleThree__lineHeight, inherit);
+    font-weight: var(--titleThree__fontWeight, inherit);
+    text-transform: var(--titleThree__textTransform, inherit);
+    letter-spacing: var(--titleThree__letterSpacing, inherit);
+  }
+
+
 
   /*==================================================================================
     3.0 FOOTER
@@ -447,6 +475,37 @@ body.frontend,
     }
   }
 
+
+  /* 4.7 IMAGE PINS
+  /––––––––––––––––––––––––*/
+  .block-image-pins {
+    figure {
+      line-height: 0;
+      .pins {
+        line-height: var(--html__lineheight, 1.4);
+      }
+    }
+  }
+
+
+  /* 4.8 QUOTE
+  /––––––––––––––––––––––––*/
+  .wp-block-quote {
+    font-family: var(--block__quote_fontFamily, inherit);
+    font-size: var(--block__quote_fontSize, inherit);
+    line-height: var(--block__quote_lineHeight, inherit);
+    font-weight: var(--block__quote_fontWeight, inherit);
+    text-transform: var(--block__quote_textTransform, inherit);
+    letter-spacing: var(--block__quote_letterSpacing, inherit);
+    cite {
+      font-family: var(--block__quote_cite_fontFamily, var(--block__quote_fontFamily, inherit));
+      font-size: var(--block__quote_cite_fontSize, var(--block__quote_fontSize, inherit));
+      line-height: var(--block__quote_cite_lineHeight, var(--block__quote_lineHeight, inherit));
+      font-weight: var(--block__quote_cite_fontWeight, var(--block__quote_fontWeight, inherit));
+      text-transform: var(--block__quote_cite_textTransform, var(--block__quote_textTransform, inherit));
+      letter-spacing: var(--block__quote_cite_letterSpacing, var(--block__quote_letterSpacing, inherit));
+    }
+  }
 
 
 

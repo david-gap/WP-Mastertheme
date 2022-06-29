@@ -24,7 +24,8 @@ Table of Contents:
 body.frontend,
 .block-editor .editor-styles-wrapper {
 
-  .gallery-swiper {
+  .gallery-swiper,
+  .wp-block-gallery[data-swiper="true"] {
 
     /* 1.1 SWIPER DEFAULTS
     /––––––––––––––––––––––––*/
@@ -75,6 +76,7 @@ body.frontend,
 
     /* 1.2 BLOCK STYLES
     /––––––––––––––––––––––––*/
+    &[data-swiper="true"],
     > .wp-block-gallery {
       &.columns-1 {
         --postColumns: 1;

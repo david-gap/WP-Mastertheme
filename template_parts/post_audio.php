@@ -6,6 +6,11 @@
  * @version     1.0.1
  *
 */
+if($args['id'] && $args['id'] !== 0):
+  global $post;
+  $post = get_post($args['id']);
+endif;
+
 $audio = '';
 $content = do_shortcode(apply_filters('the_content', get_the_content()));
 $embeds = get_media_embedded_in_content($content);

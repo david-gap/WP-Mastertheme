@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.14.11
+ * @version     2.15.11
  *
 */
 
@@ -70,6 +70,7 @@ class prefix_WPinit {
       * @param private string $WPinit_typekit_id: typekit fonts
       * @param private array $WPinit_google_fonts: google fonts
       * @param private array $WPinit_HeaderCss: Load cutom theme css in header
+      * @param private int $WPinit_imgScaling: Disable default image scaling
     */
     private $WPinit_support            = array("title-tag", "menus", "html5", "post-thumbnails", "custom-line-height");
     private $WPinit_css                = 1;
@@ -104,6 +105,7 @@ class prefix_WPinit {
     private $WPinit_typekit_id       = '';
     private $WPinit_google_fonts     = array();
     private $WPinit_HeaderCss        = 0;
+    private $WPinit_imgScaling       = 0;
 
 
     /* 1.2 ON LOAD RUN
@@ -138,7 +140,7 @@ class prefix_WPinit {
       // shortcodes
       add_shortcode( 'menu', array( $this, 'WPinit_GetMenu' ) );
       // enable upload types
-      // add_filter( 'upload_mimes', array( $this, 'AddUploadTypes' ), 1, 1 );
+      add_filter( 'upload_mimes', array( $this, 'AddUploadTypes' ) );
       // backend css/js files
       add_action('admin_enqueue_scripts', array( $this, 'WPinit_enqueue' ));
       add_action( 'admin_head', array( $this, 'GoogleFonts' ) );
@@ -149,6 +151,10 @@ class prefix_WPinit {
       // return css inside head
       if($this->WPinit_HeaderCss == 1):
         add_action( 'wp_head', array( $this, 'BuildCustomCSS' ), 10, 1 );
+      endif;
+      // disable image scaling
+      if($this->WPinit_imgScaling == 0):
+        add_filter( 'big_image_size_threshold', '__return_false' );
       endif;
       // show backend menu for editors
       if (current_user_can('editor')):
@@ -231,6 +237,10 @@ class prefix_WPinit {
       "js_version" => array(
         "label" => "JS Version",
         "type" => "text"
+      ),
+      "imgSacaling" => array(
+        "label" => "IMG scaling",
+        "type" => "switchbutton"
       ),
       // "css_path" => array(
       //   "label" => "CSS file path",
@@ -336,6 +346,7 @@ class prefix_WPinit {
         $this->WPinit_upload_svg = array_key_exists('upload_svg', $myConfig) ? $myConfig['upload_svg'] : $this->WPinit_upload_svg;
         $this->WPinit_upload_types = array_key_exists('upload_types', $myConfig) ? $myConfig['upload_types'] : $this->WPinit_upload_types;
         $this->WPinit_HeaderCss = array_key_exists('HeaderCss', $myConfig) ? $myConfig['HeaderCss'] : $this->WPinit_HeaderCss;
+        $this->WPinit_imgScaling = array_key_exists('imgSacaling', $myConfig) ? $myConfig['imgSacaling'] : $this->WPinit_imgScaling;
       endif;
     }
 
