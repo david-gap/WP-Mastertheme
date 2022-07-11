@@ -322,6 +322,21 @@ body.frontend,
     & > .wpcf7 .wpcf7-form p {
       margin-top: 0;
       margin-bottom: var(--content__space, 30px);
+      &.spacing-one {
+        margin-bottom: var(--content__space_one, var(--content__space, 30px));
+        &.no-spacing,
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+      &.spacing-two {
+        margin-bottom: var(--content__space_two, var(--content__space, 30px));
+        &.no-spacing,
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+      &.no-spacing,
       &:last-child {
         margin-bottom: 0;
       }
@@ -369,6 +384,29 @@ body.frontend,
       margin-bottom: var(--mainSection__marginBottom, 0);
       padding-top: var(--mainSection__paddingTop, 0);
       padding-bottom: var(--mainSection__paddingBottom, 0);
+    }
+  }
+
+  .block-editor-block-list__layout {
+    .wp-block {
+      margin-top: 0;
+      margin-bottom: var(--content__space, 30px);
+      &[data-spacingone="true"] {
+        margin-bottom: 0;
+      }
+      &[data-spacingone="true"] {
+        margin-bottom: var(--content__space_one, var(--content__space, 30px));
+      }
+      &[data-spacingtwo="true"] {
+        margin-bottom: var(--content__space_two, var(--content__space, 30px));
+      }
+      &:last-child {
+        &:not(.has-background.alignfull){
+          &:not(.wp-block-cover.alignfull){
+            margin-bottom: var(--content__space_last, 0);
+          }
+        }
+      }
     }
   }
 

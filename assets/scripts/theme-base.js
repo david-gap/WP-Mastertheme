@@ -6,9 +6,21 @@
  *
  */
 
+ /*=======================================================
+ Table of Contents:
+ –––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+   1.0 SETTINGS
+   2.0 BASE FUNCTIONS
+   3.0 THEME FUNCTIONS
+   4.0 THEME BLOCKS
+   5.0 FORM
+   6.0 POP UP
+   7.0 EVENT LISTENERS
+ =======================================================*/
+
 
 /*==================================================================================
-  SETTINGS
+  1.0 SETTINGS
 ==================================================================================*/
 
 'use strict';
@@ -60,7 +72,7 @@ function openAccordionByAnchor(){
 
 
 /*==================================================================================
- BASE FUNCTIONS
+ 2.0 BASE FUNCTIONS
 ==================================================================================*/
 
 /* Debounce function
@@ -345,7 +357,7 @@ var getStyle = function(e, styleName) {
 
 
 /*==================================================================================
- THEME FUNCTIONS
+ 3.0 THEME FUNCTIONS
 ==================================================================================*/
 
 /* Settings from configuration file
@@ -577,7 +589,7 @@ function funcCall(){
 
 
 /*==================================================================================
-  THEME BLOCKS
+  4.0 THEME BLOCKS
 ==================================================================================*/
 
 /* Toggle
@@ -846,9 +858,38 @@ function imagePinsLoadContent(){
 }
 
 
+/* Video JS
+/------------------------*/
+function runVideoJS(videoblock){
+  var video = videoblock.querySelector('video');
+  if(video){
+    // fallback for video source
+    if(video.hasAttribute("src")){
+      var source = document.createElement('source');
+      source.setAttribute('src', video.getAttribute('src'));
+      video.appendChild(source);
+    }
+    // center play button
+    if(videoblock.classList.contains("jvs-bigplay-centered")){
+      video.classList.add('vjs-big-play-centered');
+    }
+    // run video js
+    video.classList.add('video-js');
+    var player = videojs(video);
+    // var videoWidth = video.offsetWidth;
+    // var videoHeight = video.offsetHeight;
+    // if(videoWidth && videoHeight){
+    //   // make video responsive
+    //   var responsive = 100 / videoWidth * videoHeight;
+    //   videoblock.style.paddingTop = responsive + '%';
+    // }
+  }
+}
+
+
 
 /*==================================================================================
-  FORM
+  5.0 FORM
 ==================================================================================*/
 
 /* deselect radio button
@@ -984,7 +1025,7 @@ function adjustHeight(el){
 
 
 /*==================================================================================
-  POP UP
+  6.0 POP UP
 ==================================================================================*/
 
 /* Create
@@ -1057,7 +1098,7 @@ if(activeImagePopUps.length > 0){
 
 
 /*==================================================================================
-  EVENT LISTENERS
+  7.0 EVENT LISTENERS
 ==================================================================================*/
 
 /* load all event listeners for blocks on load or after ajax
@@ -1179,5 +1220,16 @@ function runEventListeners(){
     });
   }
 
+
+  /* Video JS
+  /------------------------*/
+  var selectVideoBlocks = document.querySelectorAll('.wp-block-video.jvs-active');
+  if(selectVideoBlocks.length !== 0){
+    // click to toggle
+    Array.from(selectVideoBlocks).forEach(function(videoblock) {
+      runVideoJS(videoblock);
+    });
+  }
+
 }
-runEventListeners();
+// runEventListeners();

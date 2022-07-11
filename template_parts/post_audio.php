@@ -28,11 +28,11 @@ if (!empty($embeds)):
 endif;
 
 $css = 'temp-' . get_post_type() . '-image';
-$css .= $audio ? ' flex' : '';
 // disable content loading
 if($args['mediaOnly'] && $args['mediaOnly'] == 1):
   $returnExcerpt = false;
 else:
+  $css .= $audio ? ' flex' : '';
   $returnExcerpt = true;
 endif;
 ?>

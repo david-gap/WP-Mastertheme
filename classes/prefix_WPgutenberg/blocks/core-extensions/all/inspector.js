@@ -41,10 +41,36 @@ export default class Inspector extends Component {
         hideOnMobile,
         disabledValue,
         scaduleStart,
-        scaduleEnd
+        scaduleEnd,
+        removeSpacing,
+        additionalSpacingOne,
+        additionalSpacingTwo
       },
       setAttributes
     } = this.props;
+
+    // spacing
+    const updateSpacing = (check) => {
+      if(check){
+        setAttributes({ removeSpacing: check, additionalSpacingOne: false, additionalSpacingTwo: false});
+      } else {
+        setAttributes({ removeSpacing: check });
+      }
+    }
+    const updateAdditionalSpacingOne = (check) => {
+      if(check){
+        setAttributes({ removeSpacing: false, additionalSpacingOne: check, additionalSpacingTwo: false});
+      } else {
+        setAttributes({ additionalSpacingOne: check });
+      }
+    }
+    const updateAdditionalSpacingTwo = (check) => {
+      if(check){
+        setAttributes({ removeSpacing: false, additionalSpacingOne: false, additionalSpacingTwo: check});
+      } else {
+        setAttributes({ additionalSpacingTwo: check });
+      }
+    }
 
     return (
       <InspectorControls>
@@ -74,6 +100,32 @@ export default class Inspector extends Component {
                 />
               </PanelRow>
           </PanelBody>
+              <PanelBody title={ __( 'Spacing', 'devTheme' ) } initialOpen={ false } >
+                  <PanelRow>
+                    <ToggleControl
+                        id="no-margin"
+                        label={ __( 'Remove bottom margin', 'devTheme' ) }
+                        checked={ removeSpacing }
+                        onChange={updateSpacing}
+                    />
+                  </PanelRow>
+                  <PanelRow>
+                    <ToggleControl
+                        id="additional-spacing-one"
+                        label={ __( 'Override bottom margin 1', 'devTheme' ) }
+                        checked={ additionalSpacingOne }
+                        onChange={updateAdditionalSpacingOne}
+                    />
+                  </PanelRow>
+                  <PanelRow>
+                    <ToggleControl
+                        id="additional-spacing-two"
+                        label={ __( 'Override bottom margin 2', 'devTheme' ) }
+                        checked={ additionalSpacingTwo }
+                        onChange={updateAdditionalSpacingTwo}
+                    />
+                  </PanelRow>
+              </PanelBody>
           <PanelBody title={ __( 'Schedule', 'devTheme' ) } initialOpen={ false } >
             <PanelRow>
               {__("Start", "devTheme")}{<br />}

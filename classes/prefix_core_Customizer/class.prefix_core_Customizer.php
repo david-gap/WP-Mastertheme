@@ -301,7 +301,7 @@ class prefix_core_Customizer {
             'mnav__color' => array(
               'label' => 'Color',
               'type' => 'color',
-              'default' => '#000'
+              'default' => '#000000'
             ),
             'mnav__background_color' => array(
               'label' => 'Background color',
@@ -311,7 +311,7 @@ class prefix_core_Customizer {
             'mnav__color_hover' => array(
               'label' => 'Color (hover)',
               'type' => 'color',
-              'default' => '#000'
+              'default' => '#000000'
             ),
             'mnav__background_color_hover' => array(
               'label' => 'Background color (hover)',
@@ -392,7 +392,7 @@ class prefix_core_Customizer {
             'mnav__sub_color' => array(
               'label' => 'Level 2 - color',
               'type' => 'color',
-              'default' => '#000'
+              'default' => '#000000'
             ),
             'mnav__sub_background_color' => array(
               'label' => 'Level 2 - background color',
@@ -402,7 +402,7 @@ class prefix_core_Customizer {
             'mnav__sub_color_hover' => array(
               'label' => 'Level 2 - color (hover)',
               'type' => 'color',
-              'default' => '#000'
+              'default' => '#000000'
             ),
             'mnav__sub_background_color_hover' => array(
               'label' => 'Level 2 - background color (hover)',
@@ -483,7 +483,7 @@ class prefix_core_Customizer {
             'mnav__subSub_color' => array(
               'label' => 'Level 3 - color',
               'type' => 'color',
-              'default' => '#000'
+              'default' => '#000000'
             ),
             'mnav__subSub_background_color' => array(
               'label' => 'Level 3 - background color',
@@ -493,7 +493,7 @@ class prefix_core_Customizer {
             'mnav__subSub_color_hover' => array(
               'label' => 'Level 3 - color (hover)',
               'type' => 'color',
-              'default' => '#000'
+              'default' => '#000000'
             ),
             'mnav__subSub_background_color_hover' => array(
               'label' => 'Level 3 - background color (hover)',
@@ -574,7 +574,7 @@ class prefix_core_Customizer {
             'mnav__subSubSub_color' => array(
               'label' => 'Level 4 - color',
               'type' => 'color',
-              'default' => '#000'
+              'default' => '#000000'
             ),
             'mnav__subSubSub_background_color' => array(
               'label' => 'Level 4 - background color',
@@ -584,7 +584,7 @@ class prefix_core_Customizer {
             'mnav__subSubSub_color_hover' => array(
               'label' => 'Level 4 - color (hover)',
               'type' => 'color',
-              'default' => '#000'
+              'default' => '#000000'
             ),
             'mnav__subSubSub_background_color_hover' => array(
               'label' => 'Level 4 - background color (hover)',
@@ -682,7 +682,7 @@ class prefix_core_Customizer {
             'hamburger_color' => array(
               'label' => 'Hamburger color',
               'type' => 'color',
-              'default' => '#000'
+              'default' => '#000000'
             ),
             'hamburger_text_color' => array(
               'label' => 'Hamburger text color',
@@ -696,7 +696,7 @@ class prefix_core_Customizer {
             'dark__hamburger_color' => array(
               'label' => 'Hamburger color',
               'type' => 'color',
-              'default' => '#fff'
+              'default' => '#ffffff'
             ),
             'dark__hamburger_text_color' => array(
               'label' => 'Hamburger text color',
@@ -819,6 +819,14 @@ class prefix_core_Customizer {
               'label' => 'Content spacing',
               'type' => 'input'
             ),
+            'content__space_one' => array(
+              'label' => 'Override content spacing 1',
+              'type' => 'input'
+            ),
+            'content__space_two' => array(
+              'label' => 'Override content spacing 2',
+              'type' => 'input'
+            ),
             'content__space_last' => array(
               'label' => 'Content last spacing',
               'type' => 'input'
@@ -835,6 +843,14 @@ class prefix_core_Customizer {
           'inputs' => array(
             'content__space_mobile' => array(
               'label' => 'Content spacing',
+              'type' => 'input'
+            ),
+            'content__space_one_mobile' => array(
+              'label' => 'Override content spacing 1',
+              'type' => 'input'
+            ),
+            'content__space_two_mobile' => array(
+              'label' => 'Override content spacing 2',
               'type' => 'input'
             ),
             'content__space_last_mobile' => array(
@@ -1079,7 +1095,7 @@ class prefix_core_Customizer {
             'input__bg_color' => array(
               'label' => 'Input background color',
               'type' => 'color',
-              'default' => '#fff'
+              'default' => '#ffffff'
             ),
             'input__border_width' => array(
               'label' => 'Input border width',
@@ -1088,7 +1104,7 @@ class prefix_core_Customizer {
             'input__border_color' => array(
               'label' => 'Input border color',
               'type' => 'color',
-              'default' => '#000'
+              'default' => '#000000'
             ),
             'input__fontFamily' => array(
               'label' => 'Input font family',
@@ -1129,7 +1145,7 @@ class prefix_core_Customizer {
             'input__checkbox_bg' => array(
               'label' => 'Checkbox/Radio background color',
               'type' => 'color',
-              'default' => '#fff'
+              'default' => '#ffffff'
             ),
             'input__checkbox_fontSize' => array(
               'label' => 'Checkbox/Radio font size',
@@ -1310,7 +1326,7 @@ class prefix_core_Customizer {
             'input__submit_color' => array(
               'label' => 'Submit/button text color',
               'type' => 'color',
-              'default' => '#fff'
+              'default' => '#ffffff'
             ),
             'input__submit_border_color' => array(
               'label' => 'Submit/button border color',
@@ -1330,7 +1346,7 @@ class prefix_core_Customizer {
             'input__submit_color_hover' => array(
               'label' => 'Submit/button text color (hover)',
               'type' => 'color',
-              'default' => '#fff'
+              'default' => '#ffffff'
             ),
             'input__submit_borderRadius' => array(
               'label' => 'Submit/button border radius',
@@ -1392,7 +1408,7 @@ class prefix_core_Customizer {
             'input__reset_color' => array(
               'label' => 'Reset/button text color',
               'type' => 'color',
-              'default' => '#fff'
+              'default' => '#ffffff'
             ),
             'input__reset_border_color' => array(
               'label' => 'Reset/button border color',
@@ -1412,7 +1428,7 @@ class prefix_core_Customizer {
             'input__reset_color_hover' => array(
               'label' => 'Reset/button text color (hover)',
               'type' => 'color',
-              'default' => '#fff'
+              'default' => '#ffffff'
             ),
             'input__reset_borderRadius' => array(
               'label' => 'Reset/button border radius',
@@ -2529,7 +2545,7 @@ class prefix_core_Customizer {
             'block__accordion_label_bg' => array(
               'label' => 'Label background color',
               'type' => 'color',
-              'default' => '0175bc'
+              'default' => '#0175bc'
             ),
             'block__accordion_label' => array(
               'label' => 'Label text color',
@@ -2707,6 +2723,152 @@ class prefix_core_Customizer {
             ),
             'imagePins__pinInfo_closeSize' => array(
               'label' => 'Pin width',
+              'type' => 'input'
+            )
+          )
+        ),
+        'gutenberg_video' => array(
+          'label' => 'Video',
+          'inputs' => array(
+            'block__videojs_iconFont' => array(
+              'label' => 'VideoJS Icons font family',
+              'type' => 'input',
+              'default' => 'VideoJS'
+            ),
+            'block__videojs_coverStart_bgColor' => array(
+              'label' => 'VideoJS cover background color on start',
+              'type' => 'color'
+            ),
+            'block__videojs_coverStart_opacity' => array(
+              'label' => 'VideoJS cover opacity on start',
+              'type' => 'input'
+            ),
+            'block__videojs_coverPause_bgColor' => array(
+              'label' => 'VideoJS cover background color on pause',
+              'type' => 'color'
+            ),
+            'block__videojs_coverPause_opacity' => array(
+              'label' => 'VideoJS cover opacity on pause',
+              'type' => 'input'
+            ),
+            'block__videojs_firstPlay_bgColor' => array(
+              'label' => 'VideoJS big play button background color',
+              'type' => 'color'
+            ),
+            'block__videojs_firstPlay_borderColor' => array(
+              'label' => 'VideoJS big play button border color',
+              'type' => 'color'
+            ),
+            'block__videojs_firstPlay_color' => array(
+              'label' => 'VideoJS big play button icon color',
+              'type' => 'color'
+            ),
+            'block__videojs_firstPlay_bgColor_hover' => array(
+              'label' => 'VideoJS big play button background color',
+              'type' => 'color'
+            ),
+            'block__videojs_firstPlay_borderColor_hover' => array(
+              'label' => 'VideoJS big play button border color',
+              'type' => 'color'
+            ),
+            'block__videojs_firstPlay_color_hover' => array(
+              'label' => 'VideoJS big play button icon color',
+              'type' => 'color'
+            ),
+            'block__videojs_firstPlay_size' => array(
+              'label' => 'VideoJS big play button icon size',
+              'type' => 'input'
+            ),
+            'block__videojs_firstPlay_padding' => array(
+              'label' => 'VideoJS big play button padding',
+              'type' => 'input'
+            ),
+            'block__videojs_firstPlay_borderWidth' => array(
+              'label' => 'VideoJS big play button border width',
+              'type' => 'input'
+            ),
+            'block__videojs_firstPlay_borderRadius' => array(
+              'label' => 'VideoJS big play button border radius',
+              'type' => 'input'
+            ),
+            'block__videojs_controlBar_bgColor' => array(
+              'label' => 'VideoJS control bar background color',
+              'type' => 'color'
+            ),
+            'block__videojs_controlBar_spacing' => array(
+              'label' => 'VideoJS control bar spacing',
+              'type' => 'input'
+            ),
+            'block__videojs_controlBar_borderRadius' => array(
+              'label' => 'VideoJS control bar border radius',
+              'type' => 'input'
+            ),
+            'block__videojs_controlBar_padding' => array(
+              'label' => 'VideoJS control bar padding',
+              'type' => 'input'
+            ),
+            'block__videojs_controlBar_gap' => array(
+              'label' => 'VideoJS control bar gap',
+              'type' => 'input'
+            ),
+            'block__videojs_controlBarButton_color' => array(
+              'label' => 'VideoJS control bar icon color',
+              'type' => 'color'
+            ),
+            'block__videojs_controlBarButton_color_hover' => array(
+              'label' => 'VideoJS control bar icon color',
+              'type' => 'color'
+            ),
+            'block__videojs_controlBarButton_fontSize' => array(
+              'label' => 'VideoJS Icons icon size',
+              'type' => 'input'
+            ),
+            'block__videojs_progress_bgColor' => array(
+              'label' => 'VideoJS progress bar background color',
+              'type' => 'color'
+            ),
+            'block__videojs_progress_height' => array(
+              'label' => 'VideoJS progress bar height',
+              'type' => 'input'
+            ),
+            'block__videojs_progress_button_color' => array(
+              'label' => 'VideoJS progress bar button',
+              'type' => 'color'
+            ),
+            'block__videojs_progress_button_fontSize' => array(
+              'label' => 'VideoJS progress bar button size',
+              'type' => 'input'
+            ),
+            'block__videojs_progress_passed_bgColor' => array(
+              'label' => 'VideoJS passed progress bar',
+              'type' => 'color'
+            ),
+            'block__videojs_progress_remainingTime_color' => array(
+              'label' => 'VideoJS remaining time color',
+              'type' => 'color'
+            ),
+            'block__videojs_progress_remainingTime_fontSize' => array(
+              'label' => 'VideoJS remaining time font size',
+              'type' => 'input'
+            ),
+            'block__videojs_tooltip_bgColor' => array(
+              'label' => 'VideoJS tooltip background color',
+              'type' => 'color'
+            ),
+            'block__videojs_tooltip_Color' => array(
+              'label' => 'VideoJS tooltip color',
+              'type' => 'color'
+            ),
+            'bblock__videojs_tooltip_fontSize' => array(
+              'label' => 'VideoJS tooltip font size',
+              'type' => 'input'
+            ),
+            'bblock__videojs_tooltip_lineHeight' => array(
+              'label' => 'VideoJS tooltip line height',
+              'type' => 'input'
+            ),
+            'block__videojs_tooltip_decoSize' => array(
+              'label' => 'VideoJS tooltip decoration size',
               'type' => 'input'
             )
           )
@@ -3077,6 +3239,9 @@ class prefix_core_Customizer {
     if (strpos($inputKey, '_mobile') !== false):
       $activeLabels[] = __( 'mobile', 'customizer' );
     endif;
+    if (strpos($inputKey, '_hover') !== false):
+      $activeLabels[] = __( 'hover', 'customizer' );
+    endif;
     // build labels
     if(!empty($activeLabels)):
       $labelAdd .= ' [';
@@ -3089,7 +3254,7 @@ class prefix_core_Customizer {
     if($inputValues["type"] == 'color'):
       $wp_customize->add_setting($inputKey, array(
         'transport'         => 'refresh',
-        'default'           => $inputValues["default"],
+        'default'           => array_key_exists('default', $inputValues) ? $inputValues["default"] : '',
         'sanitize_callback' => 'sanitize_hex_color',
       ));
       $wp_customize->add_control(new WP_Customize_Color_Control( $wp_customize, $inputKey, array(
@@ -3100,7 +3265,7 @@ class prefix_core_Customizer {
     else:
       $wp_customize->add_setting($inputKey, array(
         'transport'         => 'refresh',
-        'default'           => $inputValues["default"],
+        'default'           => array_key_exists('default', $inputValues) ? $inputValues["default"] : '',
         'sanitize_callback' => 'wp_filter_nohtml_kses',
       ));
      $wp_customize->add_control($inputKey, array(

@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.17.13
+ * @version     2.18.14
  */
 
 /*=======================================================
@@ -30,6 +30,7 @@ Table of Contents:
   3.1 RETURN CUSTOM CSS
   3.2 CHANGE INLINE FONT SIZE
   3.3 FILTER BLOCKS BEFORE DOM
+  3.4 EXTENTION FILES
 =======================================================*/
 
 class prefix_WPgutenberg {
@@ -103,6 +104,8 @@ class prefix_WPgutenberg {
       add_action( 'init', array($this, 'WPgutenbergFixApiSort'), 99 );
       // filter blocks before dom
       add_filter('render_block',  array($this, 'FilterBlocks'), 10, 2 );
+      // extension files
+      add_action( 'enqueue_block_assets', array($this, 'embedExtentionFiles') );
       // remove inline styles
       // remove_filter( 'render_block', 'wp_render_layout_support_flag', 10, 2 );
       // remove_filter( 'render_block', 'gutenberg_render_layout_support_flag', 10, 2 );
@@ -339,11 +342,19 @@ class prefix_WPgutenberg {
   /* 2.5 ADD STYLES OPTIONS
   /------------------------*/
   function AddBackendStyleOptions(){
-    $path = get_stylesheet_directory_uri() . '/gutenberg-editor.js';
-    if(prefix_core_BaseFunctions::CheckFileExistence($path)):
+    $templatePath = get_template_directory_uri() . '/classes/prefix_WPgutenberg/gutenberg-editor.js';
+    if(prefix_core_BaseFunctions::CheckFileExistence($templatePath)):
+      wp_enqueue_script(
+        'backend-gutenberg-template-css-classes',
+        $templatePath,
+        ['wp-i18n', 'wp-element', 'wp-blocks']
+      );
+    endif;
+    $childPath = get_stylesheet_directory_uri() . '/gutenberg-editor.js';
+    if(prefix_core_BaseFunctions::CheckFileExistence($childPath)):
       wp_enqueue_script(
         'backend-gutenberg-css-classes',
-        $path,
+        $childPath,
         ['wp-i18n', 'wp-element', 'wp-blocks']
       );
     endif;
@@ -524,6 +535,31 @@ class prefix_WPgutenberg {
     endif;
 
     return $blockContent;
+  }
+
+
+  /* 3.4 EXTENTION FILES
+  /------------------------*/
+  function embedExtentionFiles() {
+    if (is_singular()) {
+      $id = get_the_ID();
+      if (has_block('core/video', $id)) {
+        wp_enqueue_script(
+          'video-js',
+          'https://vjs.zencdn.net/7.19.2/video.min.js',
+          [],
+          '7.19.2'
+        );
+      }
+      if (has_block('templates/vimeo', $id)) {
+        wp_enqueue_script(
+          'vimeo-player',
+          'https://player.vimeo.com/api/player.js',
+          [],
+          '2.17.1'
+        );
+      }
+    }
   }
 
 

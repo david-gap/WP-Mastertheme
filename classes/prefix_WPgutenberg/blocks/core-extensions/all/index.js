@@ -34,6 +34,9 @@
         hideOnDesktop,
         hideOnMobile,
         disabledValue,
+        removeSpacing,
+        additionalSpacingOne,
+        additionalSpacingTwo,
       } = attributes;
       return (
         <Fragment>
@@ -50,12 +53,21 @@
   /* add custom element class in save element
   /------------------------*/
   function applyExtraClass( extraProps, blockType, attributes ) {
-    const { hideOnDesktop, hideOnMobile } = attributes;
+    const { hideOnDesktop, hideOnMobile, removeSpacing, additionalSpacingOne, additionalSpacingTwo } = attributes;
     if ( typeof hideOnDesktop !== 'undefined' && hideOnDesktop ) {
       extraProps.className = classnames( extraProps.className, 'mobile' );
     }
     if ( typeof hideOnMobile !== 'undefined' && hideOnMobile ) {
       extraProps.className = classnames( extraProps.className, 'desktop' );
+    }
+    if ( typeof removeSpacing !== 'undefined' && removeSpacing ) {
+      extraProps.className = classnames( extraProps.className, 'no-spacing' );
+    }
+    if ( typeof additionalSpacingOne !== 'undefined' && additionalSpacingOne ) {
+      extraProps.className = classnames( extraProps.className, 'spacing-one' );
+    }
+    if ( typeof additionalSpacingTwo !== 'undefined' && additionalSpacingTwo ) {
+      extraProps.className = classnames( extraProps.className, 'spacing-two' );
     }
     return extraProps;
   }
@@ -72,6 +84,9 @@
           'data-disabled': props.attributes.disabledValue,
           'data-ismobile': props.attributes.hideOnDesktop,
           'data-isdesktop': props.attributes.hideOnMobile,
+          'data-marginBottom': props.attributes.removeSpacing,
+          'data-spacingOne': props.attributes.additionalSpacingOne,
+          'data-spacingTwo': props.attributes.additionalSpacingTwo,
           'data-swiper': props.attributes.addSwiper,
           'data-popup': props.attributes.addPopUp,
           'data-popuppreview': props.attributes.addPopUpPreview

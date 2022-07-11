@@ -113,7 +113,7 @@ export default class Inspector extends Component {
                 />
               </PanelRow>
             </PanelBody>
-            <PanelBody title={ __( 'Table of content (by chapters)', 'devTheme' ) } >
+            <PanelBody title={ __( 'Table of content (by chapters)', 'devTheme' ) } initialOpen={ false } >
               <PanelRow>
                 <ToggleControl
                     id="vimeoblock-TOC"
@@ -160,7 +160,7 @@ export default class Inspector extends Component {
                 />
               </PanelRow>
           </PanelBody>
-          <PanelBody title={ __( 'Video Link (background video only)', 'devTheme' ) } >
+          <PanelBody title={ __( 'Video Link (background video only)', 'devTheme' ) } initialOpen={ false } >
             <PanelRow>
               <TextControl
                 label={__("Link", "devTheme")}

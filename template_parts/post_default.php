@@ -14,11 +14,11 @@ endif;
 $thumb = get_the_post_thumbnail();
 
 $css = 'temp-' . get_post_type() . '-default';
-$css .= $thumb ? ' flex' : '';
 // disable content loading
 if($args['mediaOnly'] && $args['mediaOnly'] == 1):
   $returnExcerpt = false;
 else:
+  $css .= $thumb ? ' flex' : '';
   $returnExcerpt = true;
 endif;
 ?>

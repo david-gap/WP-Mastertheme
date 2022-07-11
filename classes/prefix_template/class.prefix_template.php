@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.30.16
+ * @version     2.30.17
  *
 */
 
@@ -977,18 +977,6 @@ class prefix_template {
       "label" => "Page",
       "type" => "multiple",
       "value" => array(
-        "active" => array(
-          "label" => "Activate page options",
-          "type" => "switchbutton"
-        ),
-        "bgColor" => array(
-          "label" => "Activate custom background color",
-          "type" => "switchbutton"
-        ),
-        "bgImage" => array(
-          "label" => "Activate custom background image",
-          "type" => "switchbutton"
-        ),
         "metablock" => array(
           "label" => "Activate metablock",
           "type" => "multiple",
@@ -1002,6 +990,18 @@ class prefix_template {
               "type" => "switchbutton"
             )
           )
+        ),
+        "active" => array(
+          "label" => "Activate page options",
+          "type" => "switchbutton"
+        ),
+        "bgColor" => array(
+          "label" => "Activate custom background color",
+          "type" => "switchbutton"
+        ),
+        "bgImage" => array(
+          "label" => "Activate custom background image",
+          "type" => "switchbutton"
         ),
         "add_metablock" => array(
           "label" => "Metablock for CPT",
@@ -1500,13 +1500,17 @@ class prefix_template {
       if( ! current_user_can( 'edit_post', $post_id ) ):
         return;
       endif;
+      // Don't update on Quick Edit
+      if (defined('DOING_AJAX') ):
+        return;
+      endif;
       // save page optons
       if(isset($_POST['template_page_options'])):
         //$options = $_POST['template_page_options'] !== '' ? serialize($_POST['template_page_options']) : '';
         //$options = esc_html($get_options);
         update_post_meta($post_id, 'template_page_options', $_POST['template_page_options']);
-      // else:
-      //   update_post_meta($post_id, 'template_page_options', '');
+      else:
+        update_post_meta($post_id, 'template_page_options', '');
       endif;
       // save page background color
       if(isset($_POST['template_page_bgColor'])):
@@ -2178,6 +2182,7 @@ class prefix_template {
       $output .= '<address>';
         if(!empty($config["logo"])):
           // logo
+          $logoAttributes = '';
           $logo_img = array_key_exists('img', $config["logo"]) && $config["logo"]['img'] !== '' ? wp_get_attachment_image_src(prefix_core_BaseFunctions::getConfigTranslation('template_address_logo_img', $config["logo"]['img']), 'full') : '';
             $logoAttributes .= array_key_exists('width', $config["logo"]) && $config["logo"]['width'] !== "" ? ' width="' . $config["logo"]['width'] . '"' : '';
             $logoAttributes .= array_key_exists('height', $config["logo"]) && $config["logo"]['height'] !== "" ? ' height="' . $config["logo"]['height'] . '"' : '';
@@ -2598,7 +2603,7 @@ class prefix_template {
 
     /* 3.22 LANGUAGE SWITCHER
     /------------------------*/
-    function languageSwitcher($atts){
+    static function languageSwitcher($atts){
       $output = '';
       $config = shortcode_atts( array(
         'echo' => 0,
@@ -2626,7 +2631,7 @@ class prefix_template {
 
     /* 3.23 THUMBNAIL
     /------------------------*/
-    function get_thumbnail(){
+    static function get_thumbnail(){
       $output = '';
       $obj = get_queried_object();
       $id = $obj && property_exists($obj, 'ID') ? $obj->ID : 0;

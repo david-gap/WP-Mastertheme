@@ -16,11 +16,11 @@ $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', get_the_content(
 $thumb = isset($matches[1][0]) ? '<img src="' . $matches[1][0] . '">' : $thumb;
 
 $css = 'temp-' . get_post_type() . '-image';
-$css .= $thumb ? ' flex' : '';
 // disable content loading
 if($args['mediaOnly'] && $args['mediaOnly'] == 1):
   $returnExcerpt = false;
 else:
+  $css .= $thumb ? ' flex' : '';
   $returnExcerpt = true;
 endif;
 ?>

@@ -48,11 +48,11 @@ else:
 endif;
 
 $css = 'temp-' . get_post_type() . '-video';
-$css .= $video ? ' flex' : '';
 // disable content loading
 if($args['mediaOnly'] && $args['mediaOnly'] == 1):
   $returnExcerpt = false;
 else:
+  $css .= $video ? ' flex' : '';
   $returnExcerpt = true;
 endif;
 ?>

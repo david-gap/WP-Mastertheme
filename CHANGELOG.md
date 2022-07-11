@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## 1.57.28 | 11.07.2022 <video js, small fixes>
+* Fix metabox delete on quik edit
+* Add table of content to base js file
+* Video JS extension
+* Video JS styling added in the customizer
+* Add block option to remove spacing
+* Add block option for two custom spacings
+* Remove vimeo player script from block and add it on enqueue_block_assets if block is active
+* Fix template parts flex
+* Move theme gutenberg editor classes to master
+
 ## 1.56.28 | 29.06.2022 <blocks and new functions>
 * Fix backend background color if section color is given
 * Search results page pagination position

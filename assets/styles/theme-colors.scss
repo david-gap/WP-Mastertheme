@@ -40,6 +40,7 @@ Table of Contents:
     4.7 IMAGE PINS
     4.8 QUOTE
     4.9 GALLERY
+    4.10 VIDEO
   5.0 FOOTER
     5.1 BACKGROUND
     5.2 LINKS
@@ -589,6 +590,67 @@ body.frontend,
       svg {
         path {
           fill: var(--block__imagegallery_arrow_color, inherit);
+        }
+      }
+    }
+  }
+
+
+  /* 4.10 VIDEO
+  /––––––––––––––––––––––––*/
+  .wp-block-video {
+    .video-js {
+      &:not(.vjs-has-started) {
+        .vjs-text-track-display {
+          background-color: var(--block__videojs_coverStart_bgColor, transparent);
+        }
+      }
+      &.vjs-paused.vjs-has-started {
+        .vjs-text-track-display {
+          background-color: var(--block__videojs_coverPause_bgColor, transparent);
+        }
+      }
+      &:hover .vjs-big-play-button,
+      .vjs-big-play-button:focus {
+        background-color: var(--block__videojs_firstPlay_bgColor_hover, var(--block__videojs_firstPlay_bgColor, transparent));
+        border-color: var(--block__videojs_firstPlay_borderColor_hover, var(--block__videojs_firstPlay_borderColor, #fff));
+        color: var(--block__videojs_firstPlay_color_hover, var(--block__videojs_firstPlay_color, #fff));
+        transition: all 0s;
+      }
+      .vjs-big-play-button {
+        background-color: var(--block__videojs_firstPlay_bgColor, transparent);
+        border-color: var(--block__videojs_firstPlay_borderColor, #fff);
+        color: var(--block__videojs_firstPlay_color, #fff);
+      }
+      .vjs-control-bar {
+        background-color: var(--block__videojs_controlBar_bgColor, #fff);
+      }
+      .vjs-remaining-time {
+        color: var(--block__videojs_progress_remainingTime_color, inherit);
+      }
+      button {
+        background-color: transparent;
+        color: var(--block__videojs_controlBarButton_color, var(--color__main));
+        &:hover {
+          color: var(--block__videojs_controlBarButton_color_hover, var(--color__secondary));
+        }
+      }
+      .vjs-slider {
+        background-color: var(--block__videojs_progress_bgColor, #73859f);
+      }
+      .vjs-volume-level,
+      .vjs-play-progress {
+        background-color: var(--block__videojs_progress_passed_bgColor, var(--color__main));
+        &:before {
+          color: var(--block__videojs_progress_button_color, var(--block__videojs_progress_passed_bgColor, var(--color__main)));
+        }
+      }
+      .vjs-mouse-display .vjs-volume-tooltip,
+      .vjs-time-tooltip {
+        background-color: var(--block__videojs_tooltip_bgColor, #fff);
+        color: var(--block__videojs_tooltip_Color, inherit);
+        &:after {
+          border-color: var(--block__videojs_tooltip_bgColor, #fff) transparent transparent transparent;
         }
       }
     }

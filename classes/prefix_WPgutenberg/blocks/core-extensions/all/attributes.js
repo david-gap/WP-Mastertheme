@@ -1,23 +1,35 @@
 const attributes = {
   hideOnDesktop: {
     type: 'boolean',
-    default: false,
+    default: false
   },
   hideOnMobile: {
     type: 'boolean',
-    default: false,
+    default: false
   },
   disabledValue: {
     type: 'boolean',
-    default: false,
+    default: false
   },
   scaduleStart: {
     type: 'string',
-    default: '',
+    default: ''
   },
   scaduleEnd: {
     type: 'string',
-    default: '',
+    default: ''
+  },
+  removeSpacing: {
+    type: 'boolean',
+    default: false
+  },
+  additionalSpacingOne: {
+    type: 'boolean',
+    default: false
+  },
+  additionalSpacingTwo: {
+    type: 'boolean',
+    default: false
   }
 }
 

@@ -191,7 +191,6 @@
                 // <ul>{settings}</ul>
               }
               <iframe src={videoURL} frameborder="0" class="vimeo-video" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-              <script src="https://player.vimeo.com/api/player.js"></script>
             </div>
             {attributes.videoBackgroud > 0 && (
               <div class="video-cover">
@@ -237,7 +236,6 @@
                 // <ul>{settings}</ul>
               }
               <iframe src={videoURL} frameborder="0" class="vimeo-video" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-              <script src="https://player.vimeo.com/api/player.js"></script>
             </div>
             {attributes.videoBackgroud > 0 && (
               <div class="video-cover">

@@ -4,6 +4,7 @@
 import "./core-extensions/all";
 import "./core-extensions/image";
 import "./core-extensions/gallery";
+import "./core-extensions/video";
 
 /**
  * Import custom blocks

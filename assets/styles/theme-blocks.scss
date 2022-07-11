@@ -28,6 +28,7 @@ Table of Contents:
     2.7 COLUMNS
     2.8 QUOTE
     2.9 GALLERY
+    2.10 VIDEO - VIDEO JS
   3.0 ADDITIONAL STYLINGS
     3.1 BACKEND HIGHLIGHTS
     3.2 COLUMNS
@@ -860,6 +861,144 @@ body.frontend,
   }
 
 
+  /* 2.10 VIDEO - VIDEO JS
+  /––––––––––––––––––––––––*/
+  .wp-block-video {
+    position: relative;
+    .video-js {
+      position: relative;
+      top: unset;
+      left: unset;
+      width: 100%;
+      height: unset;
+      .vjs-volume-panel .vjs-volume-control.vjs-slider-active.vjs-volume-horizontal,
+      .vjs-volume-panel .vjs-volume-control:active.vjs-volume-horizontal,
+      .vjs-volume-panel.vjs-hover .vjs-mute-control~.vjs-volume-control.vjs-volume-horizontal,
+      .vjs-volume-panel.vjs-hover .vjs-volume-control.vjs-volume-horizontal,
+      .vjs-volume-panel:active .vjs-volume-control.vjs-volume-horizontal,
+      .vjs-volume-panel:focus .vjs-volume-control.vjs-volume-horizontal {
+        height: var(--block__videojs_progress_height, 5px);
+      }
+      &.vjs-big-play-centered .vjs-big-play-button {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin-top: 0;
+        margin-left: 0;
+      }
+      &:not(.vjs-has-started) {
+        .vjs-text-track-display {
+          opacity: var(--block__videojs_coverStart_opacity, .3);
+        }
+      }
+      &.vjs-paused.vjs-has-started {
+        .vjs-text-track-display {
+          opacity: var(--block__videojs_coverPause_opacity, .3);
+        }
+      }
+      .vjs-text-track-display {
+        bottom: 0;
+      }
+      video {
+        position: relative;
+        top: unset;
+        left: unset;
+        width: 100%;
+        height: auto;
+      }
+      .vjs-control-bar {
+        left: var(--block__videojs_controlBar_spacing, 0);
+        right: var(--block__videojs_controlBar_spacing, 0);
+        bottom: var(--block__videojs_controlBar_spacing, 0);
+        gap: var(--block__videojs_controlBar_gap, 5px);
+        border-radius: var(--block__videojs_controlBar_borderRadius, 0);
+        padding: var(--block__videojs_controlBar_padding, 5px 10px);
+        max-width: calc(100% - var(--block__videojs_controlBar_spacing, 0) - var(--block__videojs_controlBar_spacing, 0));
+        height: auto;
+        align-items: center;
+        .vjs-control {
+          width: auto;
+        }
+        .vjs-icon-placeholder {
+          width: auto;
+          &:before {
+            position: inherit;
+          }
+        }
+      }
+      .vjs-volume-bar.vjs-slider-horizontal {
+        height: var(--block__videojs_progress_height, 5px);
+        .vjs-volume-level {
+          height: var(--block__videojs_progress_height, 5px);
+        }
+      }
+      .vjs-progress-control {
+        .vjs-progress-holder {
+          margin: 0;
+          height: var(--block__videojs_progress_height, 5px);
+        }
+      }
+      .vjs-volume-panel {
+        align-items: center;
+        .vjs-volume-control {
+          width: 1px;
+          margin-right: 0;
+          &.vjs-volume-horizontal {
+            align-items: center;
+            .vjs-volume-bar {
+              margin: 0 0 0 10px;
+            }
+          }
+        }
+      }
+      .vjs-time-control {
+        padding-left: 0;
+        padding-right: 0;
+      }
+      .vjs-big-play-button {
+        height: auto;
+        width: auto;
+        top: var(--container__side, 20px);
+        left: var(--container__side, 20px);
+        padding: var(--block__videojs_firstPlay_padding, 20px 30px);
+        border-width: var(--block__videojs_firstPlay_borderWidth, 1px);
+        border-radius: var(--block__videojs_firstPlay_borderRadius, 5px);
+        .vjs-icon-placeholder {
+          position: relative;
+          height: auto;
+          width: auto;
+          &:before {
+            position: inherit;
+          }
+        }
+      }
+      .vjs-slider-horizontal .vjs-play-progress:before,
+      .vjs-slider-horizontal .vjs-volume-level:before {
+        top: calc(100% - var(--block__videojs_progress_height, 5px));
+      }
+      .vjs-mouse-display .vjs-volume-tooltip,
+      .vjs-time-tooltip {
+        padding: var(--block__videojs_tooltip_padding, 3px);
+        border-radius: var(--block__videojs_tooltip_borderRadius, 0);
+        &:after {
+          position: absolute;
+          display: block;
+          content: "";
+          width: 0;
+          height: 0;
+          -webkit-transform: rotate(0);
+          border-style: solid;
+          position: absolute;
+          display: block;
+          bottom: calc(var(--block__videojs_tooltip_decoSize, 0) * -1);
+          left: calc(50% - var(--block__videojs_tooltip_decoSize, 0));
+          border-width: var(--block__videojs_tooltip_decoSize, 0) var(--block__videojs_tooltip_decoSize, 0) 0 var(--block__videojs_tooltip_decoSize, 0);
+        }
+      }
+    }
+  }
+
+
 
   /*==================================================================================
     2.0 ADDITIONAL STYLINGS
@@ -1088,12 +1227,12 @@ body.frontend,
     &.is-style-cover-zoomer {
       overflow: hidden;
       &:hover {
-        img {
+        img.wp-block-cover__image-background {
           transform: scale(1);
           transition: all .5s linear;
         }
       }
-      img {
+      img.wp-block-cover__image-background {
         transform: var(--block__cover_zoomer_scale, scale(1.12));
         transition: all .5s linear;
       }
