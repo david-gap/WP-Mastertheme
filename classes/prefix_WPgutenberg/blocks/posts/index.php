@@ -70,6 +70,14 @@ register_block_type(
         'type' => 'boolean',
         'default' => false
       ),
+      'postsInsideLoad' => array(
+        'type' => 'boolean',
+        'default' => false
+      ),
+      'postsInsideLoadFirst' => array(
+        'type' => 'boolean',
+        'default' => false
+      ),
     ),
     'render_callback' => 'WPgutenberg_posts_blockRender'
   )
@@ -158,8 +166,13 @@ function WPgutenberg_posts_PostBuilder(array $attr, $id, $currentId){
   $output = '';
   $output .= '<li data-id="' . $id . '"' . $addClass . '>';
     $get_url = get_post_meta($id, 'BlockUrl', true) ? get_post_meta($id, 'BlockUrl', true) : get_the_permalink($id);
-    $linkOpen = $get_url && $get_url !== '' ? '<a href="' . $get_url . '">' : '';
-    $linkClose = $get_url && $get_url !== '' ? '</a>' : '';
+    if(array_key_exists('postsInsideLoad', $attr) && $attr['postsInsideLoad'] !== false && $attr['postsInsideLoad'] !== 0):
+      $linkOpen = '<span data-load="content">';
+      $linkClose = '</span>';
+    else:
+      $linkOpen = $get_url && $get_url !== '' ? '<a href="' . $get_url . '">' : '';
+      $linkClose = $get_url && $get_url !== '' ? '</a>' : '';
+    endif;
     if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_box', $attr['postTaxonomyFilterOptions'])):
       $output .= $linkOpen;
     endif;
@@ -242,6 +255,9 @@ function WPgutenberg_posts_getResultsAndSort(array $attr, string $source = 'firs
           $filter[$stringToArray[0]][] = $stringToArray[1];
         }
       endif;
+      if($attr['postTaxonomyFilterOptions'] !== ''):
+        $attr['postTaxonomyFilterOptions'] = explode("__", $attr['postTaxonomyFilterOptions']);
+      endif;
     endif;
   endif;
   if(!empty($filter)):
@@ -313,14 +329,12 @@ function WPgutenberg_posts_getResultsAndSort(array $attr, string $source = 'firs
       $allPosts[$key] = get_the_ID();
     endwhile;
     wp_reset_postdata();
-
     // apply filter to resulted ids
     $allPosts = apply_filters( 'WPgutenberg_filter_posts_results', $allPosts, $attr );
 
     // current page
     $obj = get_queried_object();
     $currentId = $obj && property_exists($obj, 'ID') ? $obj->ID : 0;
-
     if($terms):
       // sort query by taxonomy
       $termsGroup = array();
@@ -362,7 +376,6 @@ function WPgutenberg_posts_getResultsAndSort(array $attr, string $source = 'firs
         $output .= WPgutenberg_posts_PostBuilder($attr, $postID, $currentId);
       }
     endif;
-
     // grid fixer
     // if(array_key_exists('postSwiper', $attr) && $attr['postSwiper'] !== true && array_key_exists('postColumns', $attr) && $attr['postColumns'] > 1):
     //   for ($x = 1; $x < $attr['postColumns']; $x++) {
@@ -372,6 +385,7 @@ function WPgutenberg_posts_getResultsAndSort(array $attr, string $source = 'firs
   else:
     $output .= '<li class="wide"><p class="no-results">' . __( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'devTheme' ) . '</p></li>';
   endif;
+
   return $output;
 }
 
@@ -440,6 +454,8 @@ function WPgutenberg_posts_blockRender($attr){
             $output .= '<input type="hidden" name="postTextTwo" value="' . $attr['postTextTwo'] . '">';
             $output .= '<input type="hidden" name="postThumb" value="' . $attr['postThumb'] . '">';
             $output .= '<input type="hidden" name="postColumns" value="' . $columns . '">';
+            $output .= '<input type="hidden" name="postsInsideLoad" value="' . $attr['postsInsideLoad'] . '">';
+            $output .= '<input type="hidden" name="postsInsideLoadFirst" value="' . $attr['postsInsideLoadFirst'] . '">';
           $output .= '</form>';
         endif;
       $output .= '</div>';
@@ -448,6 +464,14 @@ function WPgutenberg_posts_blockRender($attr){
     $output .= '<ul>';
       $output .= WPgutenberg_posts_getResultsAndSort($attr);
     $output .= '</ul>';
+    // container to load posts content into it
+    if(array_key_exists('postsInsideLoad', $attr) && $attr['postsInsideLoad'] === true):
+      $postsTargetAttr = '';
+      $postsTargetAttr .= array_key_exists('postsInsideLoadFirst', $attr) && $attr['postsInsideLoadFirst'] === true ? 'data-load="true"' : 'data-load="false"';
+      $postsTargetCss = array_key_exists('postsInsideLoadFirst', $attr) && $attr['postsInsideLoadFirst'] === true ? ' loading' : ' dn';
+      $output .= '<div class="wp-block-group posts-target"><div class="wp-block-group__inner-container' . $postsTargetCss . '"' . $postsTargetAttr . '>';
+      $output .= '</div></div>';
+    endif;
   $output .= '</div>';
 
   return $output;

@@ -276,6 +276,7 @@ function ajaxCall(getdata) {
         var signsResult = document.querySelector(results.targetContent);
         if(signsResult){
           signsResult.classList.remove('dn');
+          signsResult.classList.remove('loading');
           signsResult.innerHTML = results.content;
         }
       }
@@ -677,6 +678,22 @@ if(postSortLabel.length !== 0){
     label.addEventListener('click', runPostSorting);
     label.addEventListener('keypress', runPostSorting);
   });
+}
+
+
+/* Post load content inside block
+/------------------------*/
+function loadPostsContent(){
+  var currentID = this.closest('li').getAttribute("data-id"),
+      container = this.closest('.block-posts').getAttribute("data-id");
+  this.closest('.block-posts').querySelector('.posts-target .wp-block-group__inner-container').classList.add('loading');
+  // run ajax function
+  var config = {
+    action: 'loadPageContent',
+    targetContent: '.block-posts[data-id="' + container + '"] .posts-target .wp-block-group__inner-container',
+    id: currentID
+  };
+  ajaxCall(config);
 }
 
 
@@ -1172,7 +1189,7 @@ function runEventListeners(){
       element.addEventListener('keypress', imgPinsInfoClose);
     });
   }
-  // load content
+  // load pins content
   var imgPinsToLoadContent = document.querySelectorAll('.block-image-pins .pins .block-image-pin [data-load="content"]');
   if(imgPinsToLoadContent.length !== 0){
     Array.from(imgPinsToLoadContent).forEach(function(element) {
@@ -1180,6 +1197,37 @@ function runEventListeners(){
       element.addEventListener('keypress', imagePinsLoadContent);
     });
   }
+
+
+  /* Posts block
+  /------------------------*/
+  // load target content inside block
+  var postsLoadContent = document.querySelectorAll('.block-posts li [data-load="content"]');
+  if(postsLoadContent.length !== 0){
+    Array.from(postsLoadContent).forEach(function(post) {
+      post.addEventListener('click', loadPostsContent);
+      post.addEventListener('keypress', loadPostsContent);
+    });
+  }
+  // load first post content inside block
+  var postsLoadContentTarget = document.querySelectorAll('.block-posts .posts-target .wp-block-group__inner-container');
+  if(postsLoadContentTarget.length !== 0){
+    Array.from(postsLoadContentTarget).forEach(function(target) {
+      if(target.getAttribute('data-load') && target.getAttribute('data-load') == 'true'){
+        var currentID = target.closest('.block-posts').querySelector('ul > li').getAttribute("data-id"),
+        container = target.closest('.block-posts').getAttribute("data-id");
+        target.setAttribute("data-load", "false");
+        // run ajax function
+        var config = {
+          action: 'loadPageContent',
+          targetContent: '.block-posts[data-id="' + container + '"] .posts-target .wp-block-group__inner-container',
+          id: currentID
+        };
+        ajaxCall(config);
+      }
+    });
+  }
+
 
   /* Open accordion on anchor link
   /------------------------*/

@@ -52,6 +52,8 @@ export default class Inspector extends Component {
         postPopUp,
         postPopUpNav,
         postSortNav,
+        postsInsideLoad,
+        postsInsideLoadFirst,
         postSortNavOptions,
         postColumnsSpace,
         postTaxonomyFilter,
@@ -349,28 +351,6 @@ export default class Inspector extends Component {
                 max={101}
               />
             </PanelRow>
-            <PanelRow>
-              <div>
-                <label><strong>{ __( 'Show', 'devTheme' ) }</strong></label>
-                  <ul>
-                { postOptions.map(
-                  (options, setState) => {
-                  return(
-                    <li>
-                      <CheckboxControl
-                        label={options.label}
-                        key={options.value}
-                        value={options.value}
-                        name='getpostTaxonomyFilterOptions[]'
-                        checked={ checkOptions(options.value) }
-                        onChange={ onchangeOptions }
-                      />
-                    </li>
-                  );
-                }) }
-                </ul>
-              </div>
-            </PanelRow>
           </PanelBody>
           <PanelBody title={ __( 'Layout', 'devTheme' ) } >
             <PanelRow>
@@ -434,6 +414,44 @@ export default class Inspector extends Component {
                   checked={ postSortNav }
                   onChange={postSortNav => setAttributes({ postSortNav })}
               />
+            </PanelRow>
+            <PanelRow>
+              <ToggleControl
+                  id="posts-inside-block"
+                  label={ __( 'Load selected post inside block', 'devTheme' ) }
+                  checked={ postsInsideLoad }
+                  onChange={postsInsideLoad => setAttributes({ postsInsideLoad })}
+              />
+            </PanelRow>
+            <PanelRow>
+              <ToggleControl
+                  id="posts-inside-block"
+                  label={ __( 'Load first result inside block', 'devTheme' ) }
+                  checked={ postsInsideLoadFirst }
+                  onChange={postsInsideLoadFirst => setAttributes({ postsInsideLoadFirst })}
+              />
+            </PanelRow>
+            <PanelRow>
+              <div>
+                <label><strong>{ __( 'Linking', 'devTheme' ) }</strong></label>
+                  <ul>
+                { postOptions.map(
+                  (options, setState) => {
+                  return(
+                    <li>
+                      <CheckboxControl
+                        label={options.label}
+                        key={options.value}
+                        value={options.value}
+                        name='getpostTaxonomyFilterOptions[]'
+                        checked={ checkOptions(options.value) }
+                        onChange={ onchangeOptions }
+                      />
+                    </li>
+                  );
+                }) }
+                </ul>
+              </div>
             </PanelRow>
             <PanelRow>
               <FormTokenField

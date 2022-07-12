@@ -119,12 +119,27 @@ body.frontend,
             margin-right: 0;
             width: 100%;
           }
+          [data-load="content"] {
+            cursor: pointer;
+          }
           figure {
             margin: 0;
             audio,
             video {
               max-width: 100%;
             }
+          }
+        }
+      }
+      .posts-target {
+        .wp-block-group__inner-container.loading {
+          min-height: 100px;
+          &:before {
+            top: 60px;
+          }
+          > * {
+            opacity: .3;
+            transition: .3s;
           }
         }
       }
@@ -565,12 +580,14 @@ body.frontend,
             width: 100%;
             height: 100%;
             pointer-events: none;
+            max-width: 100%;
           }
           .block-image-pin {
             position: absolute;
             z-index: 4;
             left: 50%;
             top: 50%;
+            transform: translate(-50%, -50%);
             pointer-events: all;
             &.active,
             &[data-info="hover"]:hover {
@@ -608,6 +625,7 @@ body.frontend,
               border-width: var(--imagePins__pinInfo_borderWidth, 0px);
               border-style: solid;
               border-radius: var(--imagePins__pinInfo_borderRadius, 0px);
+              pointer-events: none;
               .close {
                 position: absolute;
                 top: 5px;

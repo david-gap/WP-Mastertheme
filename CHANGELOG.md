@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.57.28 | 12.07.2022 <pins block pos, post block in block loading>
+* Update pins block pin position
+* Fix pins block fullwidth buttons and pins position
+* Fix pins block infobox hover
+* Add option to load post block content inside block div
+
 ## 1.57.28 | 11.07.2022 <video js, small fixes>
 * Fix metabox delete on quik edit
 * Add table of content to base js file

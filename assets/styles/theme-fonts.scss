@@ -512,6 +512,12 @@ body.frontend,
         line-height: var(--html__lineheight, 1.4);
       }
     }
+    .block-image-pin {
+      > a,
+      > span {
+        line-height: 1;
+      }
+    }
   }
 
 

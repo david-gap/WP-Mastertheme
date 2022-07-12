@@ -69,7 +69,15 @@ const attributes = {
   },
   postTaxonomyFilterOptions: {
     type: 'array'
-  }
+  },
+  postsInsideLoad: {
+    type: 'boolean',
+    default: false,
+  },
+  postsInsideLoadFirst: {
+    type: 'boolean',
+    default: false,
+  },
 }
 
 export default attributes;
