@@ -593,6 +593,20 @@ body.frontend,
         }
       }
     }
+    > .bullet-navigation {
+      ul {
+        li {
+          background-color: var(--swiper__bulletNav_item_bg, var(--color__main));
+          color: var(--swiper__bulletNav_item_color, var(--color__main));
+          border-color: var(--swiper__bulletNav_item_borderColor, var(--color__main));
+          &.active {
+            background-color: var(--swiper__bulletNav_itemActive_bg, var(--color__secondary));
+            color: var(--swiper__bulletNav_itemActive_color, var(--color__secondary));
+            border-color: var(--swiper__bulletNav_itemActive_borderColor, var(--color__secondary));
+          }
+        }
+      }
+    }
   }
 
 

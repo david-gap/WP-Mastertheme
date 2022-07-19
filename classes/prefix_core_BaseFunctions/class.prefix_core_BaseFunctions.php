@@ -399,28 +399,28 @@ class prefix_core_BaseFunctions {
     /* 1.14 CLEAN ARRAY
     /------------------------*/
     /**
-      * @param array $array: array to sort
-      * @param string $on: select column to sort by
-      * @param string $order: order direction
-      * @param bool $date: if sort value is a date
+      * @param array $array: array to clean
+      * @param string $fields: array content
+      * @param string $repeat: define how many times the cleaning should be repeated
+      * @param bool $stripslashes: activate stripslashes values
       * @return array sorted array
     */
-    public static function CleanArray(array $fields = array(), int $repeat = 0){
+    public static function CleanArray(array $fields = array(), int $repeat = 0, int $stripslashes = 0){
       $new_fields = array();
       foreach ($fields as $key => $value) {
         if(is_array($value)):
           if(strlen(implode($value)) !== 0):
-            $new_fields[$key] = SELF::CleanArray($value);
+            $new_fields[$key] = SELF::CleanArray($value, 0, $stripslashes);
           endif;
         else:
           if($value !== NULL && $value !== FALSE && $value !== ''):
-            $new_fields[$key] = $value;
+            $new_fields[$key] = $stripslashes !== 0 ? stripslashes($value) : $value;
           endif;
         endif;
       }
       if($repeat >= 1):
         $repeat--;
-        $new_fields = SELF::CleanArray($new_fields, $repeat);
+        $new_fields = SELF::CleanArray($new_fields, $repeat, $stripslashes);
       endif;
       return $new_fields;
     }

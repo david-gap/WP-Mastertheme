@@ -3,6 +3,10 @@ const attributes = {
     type: 'boolean',
     default: false,
   },
+  addBulletNav: {
+    type: 'boolean',
+    default: false,
+  },
   addPopUp: {
     type: 'boolean',
     default: false,

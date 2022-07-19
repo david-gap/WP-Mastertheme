@@ -39,6 +39,7 @@
       } = props;
       const {
         addSwiper,
+        addBulletNav,
         addPopUp,
         addPopUpPreview,
       } = attributes;
@@ -74,12 +75,15 @@
   /* add a div container
   /------------------------*/
   function galleryModifyGetSaveContentExtraProps( element, blockType, attributes ) {
-    const { addSwiper, addPopUp, addPopUpPreview, align } = attributes;
+    const { addSwiper, addBulletNav, addPopUp, addPopUpPreview, align } = attributes;
     if (typeof addSwiper !== 'undefined' && addSwiper && allowedBlocks.includes(blockType.name)) {
       if(align == 'wide' || align == 'full'){
         var addCss = 'align' + align;
       } else {
         var addCss = '';
+      }
+      if ( typeof addBulletNav !== 'undefined' && addBulletNav ) {
+        var addCss = addCss + ' bullet-nav';
       }
       return (
         <div className={classnames(

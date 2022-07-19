@@ -139,7 +139,9 @@ function WPgutenberg_postsfilter_ContentRow($value, $id){
 // post results
 function WPgutenberg_postsfilter_PostBuilder(array $attr, $id){
   $output = '';
-  $get_url = get_post_meta($id, 'BlockUrl', true) ? get_post_meta($id, 'BlockUrl', true) : get_the_permalink($id);
+  $pageOptions = prefix_template::PageOptions($id);
+  $defaultUrl = !in_array('disableDetailpage', $pageOptions) ? get_the_permalink($id) : '';
+  $get_url = get_post_meta($id, 'BlockUrl', true) ? get_post_meta($id, 'BlockUrl', true) : $defaultUrl;
   $linkOpen = $get_url && $get_url !== '' ? '<a href="' . $get_url . '">' : '';
   $linkClose = $get_url && $get_url !== '' ? '</a>' : '';
   $output .= '<div data-id="' . $id . '">';

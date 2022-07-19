@@ -162,8 +162,11 @@ class prefix_DSGVOsupport {
           if(!empty(SELF::$dsgvo_addRules) && !empty($block["attrs"]) && array_key_exists('className', $block["attrs"])):
             foreach (SELF::$dsgvo_addRules as $ruleKey => $rule) {
               if(str_contains($block["attrs"]["className"], $rule["cssClass"])):
-                $consent = false;
-                $consentRequest = $rule["cookieName"];
+                if(isset($_COOKIE[$rule["cookieName"]]) && $_COOKIE[$rule["cookieName"]] == 'yes'):
+                else:
+                  $consent = false;
+                  $consentRequest = $rule["cookieName"];
+                endif;
                 break;
               endif;
             }
@@ -188,7 +191,7 @@ class prefix_DSGVOsupport {
       $blockAdds = '';
       if("templates/vimeo" == $block['blockName']):
         $paddingTop = 100 / $block["attrs"]["videoDimensionX"] * $block["attrs"]["videoDimensionY"];
-        $blockAdds .= ' style="padding-top: ' . $paddingTop . '%"';
+        $blockAdds .= ' style="padding-top: ' . str_replace(",", ".", $paddingTop) . '%"';
         $blockClasses .= ' video-embed';
       endif;
       if("core/embed" == $block['blockName'] && $block["attrs"]["providerNameSlug"] == "vimeo" || $block["attrs"]["providerNameSlug"] == "youtube"):
@@ -201,7 +204,7 @@ class prefix_DSGVOsupport {
           $blockHeight = $matches[1] * 1;
         endif;
         $paddingTop = 100 / $blockWidth * $blockHeight;
-        $blockAdds .= ' style="padding-top: ' . $paddingTop . '%"';
+        $blockAdds .= ' style="padding-top: ' . str_replace(",", ".", $paddingTop) . '%"';
         $blockClasses .= ' video-embed';
       endif;
       // container additions
@@ -212,9 +215,17 @@ class prefix_DSGVOsupport {
       $output = '';
       $output .= '<div class="consent-request' . $blockClasses . '"' . $blockAdds . '>';
         $output .= '<div class="consent-request-container"' . $containerAdds . '>';
-          $output .= '<p>' . __('Current value is connecting to a third party and you....', 'DSGVO support') . '</p>';
+          $output .= '<p>';
+            if(strpos($block_content, 'youtube') !== false):
+              $output .= __('This content is provided by YouTube.com. YouTube.com is a service of the Google group. To view the content, cookies from YouTube.com must be accepted. By clicking the button, you agree to the use of these cookies by YouTube.com. The provider of this website has no influence on the information loaded by YouTube.com. No information is sent to YouTube.com from this website. For more information, see the <a href="https://policies.google.com/privacy" target="_blank">privacy policy</a> of Google.com.', 'DSGVO support');
+            elseif(strpos($block_content, 'vimeo') !== false):
+              $output .= __('This content is provided by Vimeo.com. To view the content, cookies must be accepted by Vimeo.com. By clicking the button, you agree to the use of these cookies and the execution of a script by Vimeo.com. The provider of this website has no influence on the information loaded by Vimeo.com. No information is sent to Vimeo.com from this website. For more information, see the <a href="https://vimeo.com/privacy" tatget="_blank">privacy policy</a> of Vimeo.com.', 'DSGVO support');
+            else:
+              $output .= __('This content is provided by a third party provider. To view the content, cookies from this provider must be accepted. By clicking the button, you agree to the use of these cookies. The provider of this website has no influence on the information loaded by the third-party provider. No information is sent from this website to the third-party provider.', 'DSGVO support');
+            endif;
+          $output .= '</p>';
           $output .= '<button class="funcCall" data-action="consentGiven" data-cookie="' . $consentRequest . '" data-embed="' . $toInsert . '" data-reload="' . SELF::$dsgvo_reloadAfterConsent . '">';
-            $output .= __('Give consent', 'DSGVO support');
+            $output .= __('Accept cookies', 'DSGVO support');
           $output .= '</button>';
         $output .= '</div>';
       $output .= '</div>';
@@ -285,7 +296,7 @@ class prefix_DSGVOsupport {
           $blockHeight = $matches[1] * 1;
         endif;
         $paddingTop = 100 / $blockWidth * $blockHeight;
-        $blockAdds .= ' style="padding-top: ' . $paddingTop . '%"';
+        $blockAdds .= ' style="padding-top: ' . str_replace(",", ".", $paddingTop) . '%"';
         $blockClasses .= ' video-embed';
       endif;
       // container additions
@@ -296,9 +307,17 @@ class prefix_DSGVOsupport {
         // build output
         $output .= '<div class="consent-request' . $blockClasses . '"' . $blockAdds . '>';
           $output .= '<div class="consent-request-container"' . $containerAdds . '>';
-            $output .= '<p>' . __('Current value is connecting to a third party and you....', 'DSGVO support') . '</p>';
+            $output .= '<p>';
+              if(strpos($embed, 'youtube') !== false):
+                $output .= __('This content is provided by YouTube.com. YouTube.com is a service of the Google group. To view the content, cookies from YouTube.com must be accepted. By clicking the button, you agree to the use of these cookies by YouTube.com. The provider of this website has no influence on the information loaded by YouTube.com. No information is sent to YouTube.com from this website. For more information, see the <a href="https://policies.google.com/privacy" target="_blank">privacy policy</a> of Google.com.', 'DSGVO support');
+              elseif(strpos($embed, 'vimeo') !== false):
+                $output .= __('This content is provided by Vimeo.com. To view the content, cookies must be accepted by Vimeo.com. By clicking the button, you agree to the use of these cookies and the execution of a script by Vimeo.com. The provider of this website has no influence on the information loaded by Vimeo.com. No information is sent to Vimeo.com from this website. For more information, see the <a href="https://vimeo.com/privacy" tatget="_blank">privacy policy</a> of Vimeo.com.', 'DSGVO support');
+              else:
+                $output .= __('This content is provided by a third party provider. To view the content, cookies from this provider must be accepted. By clicking the button, you agree to the use of these cookies. The provider of this website has no influence on the information loaded by the third-party provider. No information is sent from this website to the third-party provider.', 'DSGVO support');
+              endif;
+            $output .= '</p>';
             $output .= '<button class="funcCall" data-action="consentGiven" data-cookie="' . $consentRequest . '" data-embed="' . $toInsert . '" data-reload="' . SELF::$dsgvo_reloadAfterConsent . '">';
-              $output .= __('Give consent', 'DSGVO support');
+              $output .= __('Accept cookies', 'DSGVO support');
             $output .= '</button>';
           $output .= '</div>';
         $output .= '</div>';

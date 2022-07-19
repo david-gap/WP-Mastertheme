@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.19.14
+ * @version     2.20.14
  */
 
 /*=======================================================
@@ -99,8 +99,7 @@ class prefix_WPgutenberg {
         // register custom blocks
         add_action( 'init', array($this, 'WPgutenbergRegisterCustomBlocks') );
       endif;
-      // Fix rest api
-      // register custom blocks
+      // Fix rest api sort
       add_action( 'init', array($this, 'WPgutenbergFixApiSort'), 99 );
       // filter blocks before dom
       add_filter('render_block',  array($this, 'FilterBlocks'), 10, 2 );

@@ -169,14 +169,14 @@ if($run_action) {
   }
 
 
-  /* DEMO
+  /* UPLOAD CONFIGURATOR SETTINGS
   /------------------------*/
   function uploadConfigurationSettings(){
     if($_POST['formdata'] && is_array($_POST['formdata']) && !empty($_POST['formdata'])):
       // check if option exists
       $fields = $_POST['formdata'];
       // clean array
-      $fields = prefix_core_BaseFunctions::CleanArray($fields, 3);
+      $fields = prefix_core_BaseFunctions::CleanArray($fields, 3, 1);
       $db_option = get_option('WPadmin_configuration') ? true : false;
       // save values
       if($db_option !== false):
@@ -203,7 +203,7 @@ if($run_action) {
   }
 
 
-  /* DEMO
+  /* UPLOAD CUSTOMIZER SETTINGS
   /------------------------*/
   function uploadCustomizerSettings(){
     if($_POST['formdata'] && is_array($_POST['formdata']) && !empty($_POST['formdata'])):

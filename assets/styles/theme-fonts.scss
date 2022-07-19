@@ -32,6 +32,7 @@ Table of Contents:
     5.8 IMAGE PINS
     5.9 QUOTE
     5.10 VIDEO
+    5.11 GALLERY
 =======================================================*/
 
 
@@ -645,6 +646,22 @@ body.frontend,
       .vjs-time-tooltip {
         font-size: var(--bblock__videojs_tooltip_fontSize, inherit);
         line-height: var(--bblock__videojs_tooltip_lineHeight, inherit);
+      }
+    }
+  }
+
+
+  /* 5.11 GALLERY
+  /––––––––––––––––––––––––*/
+  .gallery-block,
+  .wp-block-gallery-container {
+    > .bullet-navigation {
+      ul {
+        li {
+          font-size: var(--swiper__bulletNav_item_fontSize, inherit);
+          line-height: 1;
+          text-align: center;
+        }
       }
     }
   }

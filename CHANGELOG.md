@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## 1.58.28 | 12.07.2022 <🐛 FIX: customizer prev, Import 📦 NEW: bullet nav>
+* Add bullet navigation as option for the swiper gallery
+* Extand JS checkChildPosition function
+* Fixed customizer live preview
+* Fixed configurator import
+* Fixed DSGVO custom consent loading
+* Fix loading CPT names sum in pin item block
+* Option to redirect detail page
+* Extend CleanArray function, to activate stripslash
+* Add option to define gap in the checkChildPosition JS function
+* Extend checkChildPosition JS function to check if child is not overflowing the parent
+* Change gallery margin between images to gap
+
 ## 1.57.28 | 12.07.2022 <pins block pos, post block in block loading>
 * Update pins block pin position
 * Fix pins block fullwidth buttons and pins position

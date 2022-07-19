@@ -196,35 +196,45 @@ function stringToNumberCoverter(string){
 
 /* Check if element overflows parent element
 /------------------------*/
-function checkChildPosition(parent, child, action = 'statement') {
+function checkChildPosition(parent, child, action = 'statement', gap = 0) {
   // get elements position
   var box1coords = parent.getBoundingClientRect();
   var box2coords = child.getBoundingClientRect();
   // check if child overflows parent
-  var spacer = 10;
   if(action == 'update'){
     if(box2coords.top < box1coords.top) {
       // child.style.top = '';
     }
     if(box2coords.right > box1coords.right && box2coords.left > box1coords.left) {
       var currentLeft = stringToNumberCoverter(getStyle(child, 'left'));
-      var newLeft =  box1coords.right - box2coords.right - currentLeft - spacer;
+      var newLeft =  box1coords.right - box2coords.right - currentLeft - gap;
       child.style.left = newLeft + "px";
     }
     if(box2coords.bottom > box1coords.bottom && box2coords.top > box1coords.top) {
-      child.style.bottom = "calc(100% + " + spacer + "px)";
+      child.style.bottom = "calc(100% + " + gap + "px)";
     }
     if(box2coords.left < box1coords.left && box2coords.right < box1coords.right) {
       var currentLeft = stringToNumberCoverter(getStyle(child, 'left'));
-      var newLeft =  box1coords.left - box2coords.left - currentLeft + spacer;
+      var newLeft =  box1coords.left - box2coords.left - currentLeft + gap;
       child.style.left = newLeft + "px";
+    }
+  } else if(action == 'inside') {
+    if(
+      box2coords.top >= box1coords.top &&
+      box2coords.right <= box1coords.right &&
+      box2coords.bottom <= box1coords.bottom &&
+      box2coords.left + 1 >= box1coords.left) {
+      return true;
+    } else {
+      return false;
     }
   } else {
     // give statement
     if(box2coords.top < box1coords.top || box2coords.right > box1coords.right || box2coords.bottom > box1coords.bottom || box2coords.left < box1coords.left) {
       return true;
+    } else {
+      return false;
     }
-    return false;
   }
 }
 
@@ -1177,7 +1187,7 @@ function runEventListeners(){
       element.addEventListener('keypress', imagePinsToggle);
       // update position
       if (element.nextElementSibling !== null) {
-        checkChildPosition(element.closest('.pins'), element.nextElementSibling, "update");
+        checkChildPosition(element.closest('.pins'), element.nextElementSibling, "update", 10);
       }
     });
   }
@@ -1278,6 +1288,11 @@ function runEventListeners(){
       runVideoJS(videoblock);
     });
   }
+
+
+  /* Run theme-grid-swiper event listeners
+  /------------------------*/
+  allGalleryEventListeners();
 
 }
 // runEventListeners();

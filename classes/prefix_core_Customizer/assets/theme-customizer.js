@@ -1,201 +1,701 @@
-// ( function( api ) {
-//     'use strict';
-// console.log("inside");
-//     api.bind( 'ready', function() {
-// console.log("ready bin");
-//         api( 'theme_sizes', function(setting) {
-//           console.log("theming here");
-//           console.log(settings);
-//             // var linkSettingValueToControlActiveState;
-//             //
-//             // /**
-//             //  * Update a control's active state according to the boxed_body setting's value.
-//             //  *
-//             //  * @param {api.Control} control Boxed body control.
-//             //  */
-//             // linkSettingValueToControlActiveState = function( control ) {
-//             //     var visibility = function() {
-//             //         if ( true === setting.get() || 1 === setting.get() ) {
-//             //             control.container.slideDown( 180 );
-//             //         } else {
-//             //             control.container.slideUp( 180 );
-//             //         }
-//             //     };
-//             //
-//             //     // Set initial active state.
-//             //     visibility();
-//             //     //Update activate state whenever the setting is changed.
-//             //     setting.bind( visibility );
-//             // };
-//             //
-//             // // Call linkSettingValueToControlActiveState on the border controls when they exist.
-//             // api.control( 'boxed_body_border_width', linkSettingValueToControlActiveState );
-//             // api.control( 'boxed_body_border_color', linkSettingValueToControlActiveState );
-//             // api.control( 'boxed_body_border_style', linkSettingValueToControlActiveState );
-//         });
-//
-//     });
-//
-// }( wp.customize ) );
-
-
-
 ( function( $ ) {
-  console.log("new");
-    /* Link Color */
-    wp.customize( 'wide__left', function( value ) {
-      console.log("inside");
-        value.bind( function( to ) {
-            $( 'body' ).css( 'padding-left', to );
-            console.log("binded");
-        } );
-    } );
+  var allSettings = [
+    'container__width',
+    'container__side',
+    'wide__left',
+    'wide__right',
+    'mobile_breakpoint',
+    'color__main',
+    'color__secondary',
+    'main_color',
+    'main_background',
+    'dark__main_background',
+    'dark__main_color',
+    'text__marked',
+    'text__marked_bg',
+    'html__fontfamily',
+    'html__fontsize',
+    'html__lineheight',
+    'html__fontweight',
+    'html__fontsize_small',
+    'html__fontsize_subsup',
+    'container__side_mobile',
+    'html__fontsize_mobile',
+    'html__lineheight_mobile',
+    'gutenberg__font_scale',
+    'html__fontsize_small_mobile',
+    'html__fontsize_subsup_mobile',
+    'popup__width',
+    'popup__space',
+    'popup_prev_visible',
+    'header_background',
+    'headercontainer_background',
+    'dark__header_background',
+    'dark__headercontainer_background',
+    'mnav__ul_paddingTop',
+    'mnav__ul_paddingBottom',
+    'mnav__ul_paddingTop_mobile',
+    'mnav__ul_paddingBottom_mobile',
+    'mnav__ul_lastChild_marginBottom',
+    'mnav__ul_lastChild_marginBottom_mobile',
+    'submenu__toggle_width',
+    'submenu__toggle_strokeWidth',
+    'submenu__toggle_padding',
+    'submenu__toggle_width_mobile',
+    'submenu__toggle_strokeWidth_mobile',
+    'submenu__toggle_padding_mobile',
+    'mnav__color',
+    'mnav__background_color',
+    'mnav__color_hover',
+    'mnav__background_color_hover',
+    'mnav__color_active',
+    'mnav__background_color_active',
+    'mnav__border_color',
+    'mnav__border_width',
+    'mnav__padding',
+    'mnav__margin',
+    'mnav__fontfamily',
+    'mnav__fontsize',
+    'mnav__fontWeight',
+    'mnav__lineheight',
+    'mnav__textTransform',
+    'mnav__letterSpacing',
+    'mnav__border_width_mobile',
+    'mnav__fontsize_mobile',
+    'mnav__lineheight_mobile',
+    'mnav__padding_mobile',
+    'mnav__margin_mobile',
+    'mnav__sub_color',
+    'mnav__sub_background_color',
+    'mnav__sub_color_hover',
+    'mnav__sub_background_color_hover',
+    'mnav__sub_color_active',
+    'mnav__sub_background_color_active',
+    'mnav__sub_border_color',
+    'mnav__sub_border_width',
+    'mnav__sub_padding',
+    'mnav__sub_margin',
+    'mnav__sub_fontfamily',
+    'mnav__sub_fontsize',
+    'mnav__sub_lineheight',
+    'mnav__sub_fontWeight',
+    'mnav__sub_textTransform',
+    'mnav__sub_letterSpacing',
+    'mnav__sub_border_width_mobile',
+    'mnav__sub_fontsize_mobile',
+    'mnav__sub_lineheight_mobile',
+    'mnav__sub_padding_mobile',
+    'mnav__sub_margin_mobile',
+    'mnav__subSub_color',
+    'mnav__subSub_background_color',
+    'mnav__subSub_color_hover',
+    'mnav__subSub_background_color_hover',
+    'mnav__subSub_color_active',
+    'mnav__subSub_background_color_active',
+    'mnav__subSub_border_color',
+    'mnav__subSub_border_width',
+    'mnav__subSub_padding',
+    'mnav__subSub_margin',
+    'mnav__subSub_fontfamily',
+    'mnav__subSub_fontsize',
+    'mnav__subSub_fontWeight',
+    'mnav__subSub_lineheight',
+    'mnav__subSub_textTransform',
+    'mnav__subSub_letterSpacing',
+    'mnav__subSub_border_width_mobile',
+    'mnav__subSub_fontsize_mobile',
+    'mnav__subSub_lineheight_mobile',
+    'mnav__subSub_padding_mobile',
+    'mnav__subSub_margin_mobile',
+    'mnav__subSubSub_color',
+    'mnav__subSubSub_background_color',
+    'mnav__subSubSub_color_hover',
+    'mnav__subSubSub_background_color_hover',
+    'mnav__subSubSub_color_active',
+    'mnav__subSubSub_background_color_active',
+    'mnav__subSubSub_border_color',
+    'mnav__subSubSub_border_width',
+    'mnav__subSubSub_padding',
+    'mnav__subSubSub_margin',
+    'mnav__subSubSub_fontfamily',
+    'mnav__subSubSub_fontsize',
+    'mnav__subSubSub_fontWeight',
+    'mnav__subSubSub_lineheight',
+    'mnav__subSubSub_textTransform',
+    'mnav__subSubSub_letterSpacing',
+    'mnav__subSubSub_border_width_mobile',
+    'mnav__subSubSub_fontsize_mobile',
+    'mnav__subSubSub_lineheight_mobile',
+    'mnav__subSubSub_padding_mobile',
+    'mnav__subSubSub_margin_mobile',
+    'hamburger__container_width',
+    'hamburger__container_height',
+    'hamburger__size',
+    'hamburger_color',
+    'hamburger_text_color',
+    'mnav_background',
+    'dark__hamburger_color',
+    'dark__hamburger_text_color',
+    'dark__mnav_background',
+    'content__blur_activemenu',
+    'hamburger__title_space',
+    'hamburger__title_fontSize',
+    'hamburger__title_LineHeight',
+    'hamburger__title_fontWeight',
+    'hamburger__container_width_mobile',
+    'hamburger__container_height_mobile',
+    'hamburger__title_space_mobile',
+    'hamburger__title_fontSize_mobile',
+    'hamburger__title_LineHeight_mobile',
+    'header__paddingTop',
+    'header__paddingBottom',
+    'header__negativTopPosition_sticky',
+    'header__paddingTop_sticky',
+    'header__paddingBottom_sticky',
+    'header__itemSpacingHorizontal',
+    'header__paddingTop_mobile',
+    'header__paddingBottom_mobile',
+    'header__negativTopPosition_sticky_mobile',
+    'header__paddingTop_sticky_mobile',
+    'header__paddingBottom_sticky_mobile',
+    'header__itemSpacingHorizontal_mobile',
+    'content__space',
+    'content__space_one',
+    'content__space_two',
+    'content__space_last',
+    'html__anchor',
+    'content__space_mobile',
+    'content__space_one_mobile',
+    'content__space_two_mobile',
+    'content__space_last_mobile',
+    'html__anchor_mobile',
+    'mainSection__bgColor',
+    'mainSection__marginTop',
+    'mainSection__marginBottom',
+    'mainSection__paddingTop',
+    'mainSection__paddingBottom',
+    'mainSection__marginTop_mobile',
+    'mainSection__marginBottom_mobile',
+    'mainSection__paddingTop_mobile',
+    'mainSection__paddingBottom_mobile',
+    'thumbnail__height',
+    'thumbnail__marginTop',
+    'thumbnail__marginBottom',
+    'thumbnail__height_mobile',
+    'thumbnail__marginTop_mobile',
+    'thumbnail__marginBottom_mobile',
+    'bc__color',
+    'bc__background_color',
+    'bc__link_color',
+    'bc__link_color_hover',
+    'bc__color_active',
+    'bc__padding',
+    'bc__fontfamily',
+    'bc__fontsize',
+    'bc__fontWeight',
+    'bc__lineheight',
+    'bc__textTransform',
+    'bc__fontsize_mobile',
+    'bc__lineheight_mobile',
+    'bc__padding_mobile',
+    'ls__background_color',
+    'ls__color_active',
+    'ls__link_color',
+    'ls__link_color_hover',
+    'ls__link_fontfamily',
+    'ls__link_fontsize',
+    'ls__link_lineheight',
+    'ls__link_fontWeight',
+    'ls__link_textTransform',
+    'ls__link_letterSpacing',
+    'ls__link_margin',
+    'ls__link_padding',
+    'ls__link_fontsize_mobile',
+    'ls__link_lineheight_mobile',
+    'ls__link_margin_mobile',
+    'ls__link_padding_mobile',
+    'dark__ls__background_color',
+    'dark__ls__color_active',
+    'dark__ls__link_color',
+    'dark__ls__link_color_hover',
+    'input__color',
+    'input__bg_color',
+    'input__border_width',
+    'input__border_color',
+    'input__fontFamily',
+    'input__fontSize',
+    'input__lineHeight',
+    'input__fontWeight',
+    'input__fontSize_mobile',
+    'input__lineHeight_mobile',
+    'input__borderRadius',
+    'input__padding',
+    'input__padding_mobile',
+    'input__checkbox_bg',
+    'input__checkbox_fontSize',
+    'input__checkbox_lineHeight',
+    'input__checkbox_fontWeight',
+    'input__checkbox_fontSize_mobile',
+    'input__checkbox_lineHeight_mobile',
+    'input__checkbox_width',
+    'input__checkbox_border_width',
+    'input__checkbox_space',
+    'input__checkbox_border_color',
+    'input__checkbox_bg_checked',
+    'input__select_bg_color',
+    'input__select_color',
+    'input__select_border_color',
+    'input__select_padding',
+    'input__select_border_width',
+    'input__select_padding_mobile',
+    'input__select_fontFamily',
+    'input__select_fontSize',
+    'input__select_lineHeight',
+    'input__select_fontWeight',
+    'input__select_fontSize_mobile',
+    'input__select_lineHeight_mobile',
+    'input__selectContainer_color',
+    'input__selectContainer_bg_color',
+    'input__selectContainer_width',
+    'input__selectContainer_width_mobile',
+    'input__required',
+    'input__placeholder_color',
+    'input__placeholder_fontFamily',
+    'input__placeholder_fontSize',
+    'input__placeholder_lineHeight',
+    'input__placeholder_fontWeight',
+    'input__placeholder_textTransform',
+    'input__submit_fontFamily',
+    'input__submit_fontSize',
+    'input__submit_letterSpacing',
+    'input__submit_lineHeight',
+    'input__submit_fontWeight',
+    'input__submit_textTransform',
+    'input__submit_fontSize_mobile',
+    'input__submit_lineHeight_mobile',
+    'input__submit_letterSpacing_mobile',
+    'input__submit_bg_color',
+    'input__submit_color',
+    'input__submit_border_color',
+    'input__submit_bg_color_hover',
+    'input__submit_border_color_hover',
+    'input__submit_color_hover',
+    'input__submit_borderRadius',
+    'input__submit_borderWidth',
+    'input__submit_padding',
+    'input__submit_padding_mobile',
+    'input__reset_fontFamily',
+    'input__reset_fontSize',
+    'input__reset_letterSpacing',
+    'input__reset_lineHeight',
+    'input__reset_fontWeight',
+    'input__reset_textTransform',
+    'input__reset_fontSize_mobile',
+    'input__reset_lineHeight_mobile',
+    'input__reset_letterSpacing_mobile',
+    'input__reset_bg_color',
+    'input__reset_color',
+    'input__reset_border_color',
+    'input__reset_bg_color_hover',
+    'input__reset_border_color_hover',
+    'input__reset_color_hover',
+    'input__reset_borderRadius',
+    'input__reset_borderWidth',
+    'input__reset_padding',
+    'input__reset_padding_mobile',
+    'search__pagination_margin',
+    'search__article_margin',
+    'search__article_padding',
+    'search__article_border',
+    'search__article_borderColor',
+    'search__article_margin_mobile',
+    'search__article_padding_mobile',
+    'search__article_title_margin',
+    'search__article_title_padding',
+    'search__article_title_fontFamily',
+    'search__article_title_fontSize',
+    'search__article_title_lineHeight',
+    'search__article_title_fontWeight',
+    'search__article_title_textTransform',
+    'search__article_title_fontSize_mobile',
+    'search__article_title_lineHeight_mobile',
+    'search__article_title_margin_mobile',
+    'search__article_title_padding_mobile',
+    'postTitle__color',
+    'postTitle__bg',
+    'postTitle__fontFamily',
+    'postTitle__fontSize',
+    'postTitle__lineHeight',
+    'postTitle__padding',
+    'postTitle__margin',
+    'postTitle__fontWeight',
+    'postTitle__textTransform',
+    'postTitle__letterSpacing',
+    'postTitle__fontSize_mobile',
+    'postTitle__lineHeight_mobile',
+    'postTitle__padding_mobile',
+    'postTitle__margin_mobile',
+    'titleOne__color',
+    'titleOne__bg',
+    'titleOne__fontFamily',
+    'titleOne__fontSize',
+    'titleOne__lineHeight',
+    'titleOne__padding',
+    'titleOne__marginTop',
+    'titleOne__marginBottom',
+    'titleOne__fontWeight',
+    'titleOne__textTransform',
+    'titleOne__letterSpacing',
+    'titleOne__fontSize_mobile',
+    'titleOne__lineHeight_mobile',
+    'titleOne__padding_mobile',
+    'titleOne__marginTop_mobile',
+    'titleOne__marginBottom_mobile',
+    'titleTwo__color',
+    'titleTwo__bg',
+    'titleTwo__fontFamily',
+    'titleTwo__fontSize',
+    'titleTwo__lineHeight',
+    'titleTwo__padding',
+    'titleTwo__marginTop',
+    'titleTwo__marginBottom',
+    'titleTwo__fontWeight',
+    'titleTwo__textTransform',
+    'titleTwo__letterSpacing',
+    'titleTwo__fontSize_mobile',
+    'titleTwo__lineHeight_mobile',
+    'titleTwo__padding_mobile',
+    'titleTwo__marginTop_mobile',
+    'titleTwo__marginBottom_mobile',
+    'titleThree__color',
+    'titleThree__bg',
+    'titleThree__fontFamily',
+    'titleThree__fontSize',
+    'titleThree__lineHeight',
+    'titleThree__padding',
+    'titleThree__marginTop',
+    'titleThree__marginBottom',
+    'titleThree__fontWeight',
+    'titleThree__textTransform',
+    'titleThree__letterSpacing',
+    'titleThree__fontSize_mobile',
+    'titleThree__lineHeight_mobile',
+    'titleThree__padding_mobile',
+    'titleThree__marginTop_mobile',
+    'titleThree__marginBottom_mobile',
+    'leadText__color',
+    'leadText__bg',
+    'dark__leadText__color',
+    'dark__leadText__bg',
+    'leadText__fontFamily',
+    'leadText__fontSize',
+    'leadText__lineHeight',
+    'leadText__padding',
+    'leadText__fontWeight',
+    'leadText__textTransform',
+    'leadText__letterSpacing',
+    'leadText__fontSize_mobile',
+    'leadText__lineHeight_mobile',
+    'leadText__padding_mobile',
+    'error__padding',
+    'error__margin',
+    'error__title_fontFamily',
+    'error__title_fontSize',
+    'error__title_lineHeight',
+    'error__title_padding',
+    'error__title_margin',
+    'error__title_fontWeight',
+    'error__title_textTransform',
+    'error__title_letterSpacing',
+    'error__title_fontSize_mobile',
+    'error__title_lineHeight_mobile',
+    'error__title_padding_mobile',
+    'error__title_margin_mobile',
+    'block__group_hasBackground_paddingTop',
+    'block__group_hasBackground_paddingBottom',
+    'block__group_hasBackground_paddingTop_mobile',
+    'block__group_hasBackground_paddingBottom_mobile',
+    'gallery-block--gutter-size',
+    'block__imagegallery_arrow_position',
+    'block__imagegallery_arrow_position_mobile',
+    'block__imagegallery_arrow_color',
+    'block__imagegallery_arrow_opacity',
+    'swiper__bulletNav_position',
+    'swiper__bulletNav_position_mobile',
+    'swiper__bulletNav_gap',
+    'swiper__bulletNav_item_bg',
+    'swiper__bulletNav_item_color',
+    'swiper__bulletNav_item_borderColor',
+    'swiper__bulletNav_item_borderRadius',
+    'swiper__bulletNav_item_borderWidth',
+    'swiper__bulletNav_item_fontSize',
+    'swiper__bulletNav_item_width',
+    'swiper__bulletNav_item_height',
+    'swiper__bulletNav_item_width_mobile',
+    'swiper__bulletNav_item_height_mobile',
+    'swiper__bulletNav_itemActive_bg',
+    'swiper__bulletNav_itemActive_color',
+    'swiper__bulletNav_itemActive_borderColor',
+    'block__separator_width',
+    'block__separator_marginTop',
+    'block__separator_marginBottom',
+    'gbSeperator_color',
+    'dark__gbSeperator_color',
+    'block__separator_width_mobile',
+    'block__separator_marginTop_mobile',
+    'block__separator_marginBottom_mobile',
+    'block__separatorDots_fontSize',
+    'block__separatorDots_fontSize_mobile',
+    'wp--style--block-gap',
+    'block__columns_hasBackground_padding',
+    'block__columns_hasBackground_gap',
+    'wp--style--block-gap_mobile',
+    'block__columns_hasBackground_padding_mobile',
+    'block__columns_hasBackground_gap_mobile',
+    'block__columns_3columns_gap',
+    'block__columns_3columns_hasBackground_gap',
+    'block__columns_3columns_gap_mobile',
+    'block__columns_3columns_hasBackground_gap_mobile',
+    'block__columns_4columns_gap',
+    'block__columns_4columns_hasBackground_gap',
+    'block__columns_4columns_gap_mobile',
+    'block__columns_4columns_hasBackground_gap_mobile',
+    'block__columns_5columns_gap',
+    'block__columns_5columns_hasBackground_gap',
+    'block__columns_5columns_gap_mobile',
+    'block__columns_5columns_hasBackground_gap_mobile',
+    'block__columns_6columns_gap',
+    'block__columns_6columns_hasBackground_gap',
+    'block__columns_6columns_gap_mobile',
+    'block__columns_6columns_hasBackground_gap_mobile',
+    'block__imageFigcaption_fontSize',
+    'block__imageFigcaption_lineHeight',
+    'block__imageFigcaption_margin',
+    'block__imageFigcaption_padding',
+    'block__imageFigcaption_fontSize_mobile',
+    'block__imageFigcaption_lineHeight_mobile',
+    'block__imageFigcaption_margin_mobile',
+    'block__imageFigcaption_padding_mobile',
+    'block__buttons_spacing',
+    'block__buttons_fontFamily',
+    'block__buttons_fontSize',
+    'block__buttons_fontWeight',
+    'block__buttons_lineHeight',
+    'block__buttons_textTransform',
+    'block__buttons_letterSpacing',
+    'block__buttons_padding',
+    'block__buttons_borderWidth',
+    'block__buttons_borderRadius',
+    'block__buttons_color',
+    'block__buttons_bgColor',
+    'block__buttons_borderColor',
+    'block__buttonsHover_color',
+    'block__buttonsHover_bgColor',
+    'block__buttonsHover_borderColor',
+    'block__buttons_fontSize_mobile',
+    'block__buttons_lineHeight_mobile',
+    'block__buttons_textTransform_mobile',
+    'block__buttons_padding_mobile',
+    'block__buttons_borderWidth_mobile',
+    'block__buttons_borderRadius_mobile',
+    'dark__block__buttons_color',
+    'dark__block__buttons_bgColor',
+    'dark__block__buttons_borderColor',
+    'dark__block__buttonsHover_color',
+    'dark__block__buttonsHover_bgColor',
+    'dark__block__buttonsHover_borderColor',
+    'block__list_marker_value',
+    'block__list_marker_size',
+    'block__list_lineHeight',
+    'block__list_marker_space',
+    'gbList_marker_color',
+    'dark__gbList_marker_color',
+    'block__list_marker_size_mobile',
+    'block__list_lineHeight_mobile',
+    'block__list_marker_space_mobile',
+    'block__cover_minHeight',
+    'block__cover_alignfull_minHeight',
+    'block__cover_alignwide_minHeight',
+    'block__cover_container_paddingTop',
+    'block__cover_container_paddingBottom',
+    'block__cover_zoomer_scale',
+    'block__cover_minHeight_mobile',
+    'block__cover_alignfull_minHeight_mobile',
+    'block__cover_alignwide_minHeight_mobile',
+    'block__cover_container_paddingTop_mobile',
+    'block__cover_container_paddingBottom_mobile',
+    'block__tableHead_fontFamily',
+    'block__tableHead_fontSize',
+    'block__tableHead_lineHeight',
+    'block__tableHead_fontWeight',
+    'block__tableHead_textTransform',
+    'block__tableHead_letterSpacing',
+    'block__tableHead_fontSize_mobile',
+    'block__tableHead_lineHeight_mobile',
+    'block__tableHead_letterSpacing_mobile',
+    'block__table_fontFamily',
+    'block__table_fontSize',
+    'block__table_lineHeight',
+    'block__table_fontWeight',
+    'block__table_textTransform',
+    'block__table_letterSpacing',
+    'block__table_fontSize_mobile',
+    'block__table_lineHeight_mobile',
+    'block__table_letterSpacing_mobile',
+    'block__quote_color',
+    'block__quote_bg',
+    'block__quote_borderColor',
+    'block__quote_borderWidth',
+    'block__quote_padding',
+    'block__quote_fontFamily',
+    'block__quote_fontSize',
+    'block__quote_lineHeight',
+    'block__quote_fontWeight',
+    'block__quote_textTransform',
+    'block__quote_letterSpacing',
+    'block__quote_padding_mobile',
+    'block__quote_fontSize_mobile',
+    'block__quote_lineHeight_mobile',
+    'block__quote_cite_color',
+    'block__quote_cite_bg',
+    'block__quote_cite_padding',
+    'block__quote_cite_fontFamily',
+    'block__quote_cite_fontSize',
+    'block__quote_cite_lineHeight',
+    'block__quote_cite_fontWeight',
+    'block__quote_cite_textTransform',
+    'block__quote_cite_letterSpacing',
+    'block__quote_cite_padding_mobile',
+    'block__quote_cite_fontSize_mobile',
+    'block__quote_cite_lineHeight_mobile',
+    'block__accordion_separator',
+    'block__accordion_label_bg',
+    'block__accordion_label',
+    'block__accordion_label_spacing',
+    'block__accordion_label_fontfamily',
+    'block__accordion_label_textTransform',
+    'block__accordion_label_letterSpacing',
+    'block__accordion_label_fontsize',
+    'block__accordion_label_fontweight',
+    'block__accordion_label_lineheight',
+    'block__accordion_label_spacing_mobile',
+    'block__accordion_label_fontsize_mobile',
+    'block__accordion_label_lineheight_mobile',
+    'block__accordion_iconbox_bg',
+    'block__accordion_icon_borderRadius',
+    'block__accordion_icon_width',
+    'block__accordion_icon_height',
+    'block__accordion_icon_seperator',
+    'block__accordion_icon_width_mobile',
+    'block__accordion_icon_height_mobile',
+    'block__accordion_label_arrow',
+    'block__accordion_icon_plusSize',
+    'block__accordion_icon_plusRadius',
+    'block__accordion_icon_plusWeight',
+    'block__accordion_content_bg',
+    'block__accordion_content',
+    'block__accordion_content_spacing',
+    'block__accordion_content_fontsize',
+    'block__accordion_content_lineheight',
+    'block__accordion_content_spacing_mobile',
+    'block__accordion_content_fontsize_mobile',
+    'block__accordion_content_lineheight_mobile',
+    'imagePins__pinColor',
+    'imagePins__pinColor_hover',
+    'imagePins__pinSize',
+    'imagePins__pinInfo_bc',
+    'imagePins__pinInfo_borderColor',
+    'imagePins__pinInfo_width',
+    'imagePins__pinInfo_padding',
+    'imagePins__pinInfo_borderWidth',
+    'imagePins__pinInfo_borderRadius',
+    'imagePins__pinInfo_closeColor',
+    'imagePins__pinInfo_closeColor_hover',
+    'imagePins__pinInfo_closeSize',
+    'block__videojs_iconFont',
+    'block__videojs_coverStart_bgColor',
+    'block__videojs_coverStart_opacity',
+    'block__videojs_coverPause_bgColor',
+    'block__videojs_coverPause_opacity',
+    'block__videojs_firstPlay_bgColor',
+    'block__videojs_firstPlay_borderColor',
+    'block__videojs_firstPlay_color',
+    'block__videojs_firstPlay_bgColor_hover',
+    'block__videojs_firstPlay_borderColor_hover',
+    'block__videojs_firstPlay_color_hover',
+    'block__videojs_firstPlay_size',
+    'block__videojs_firstPlay_size_mobile',
+    'block__videojs_firstPlay_padding',
+    'block__videojs_firstPlay_borderWidth',
+    'block__videojs_firstPlay_borderWidth_mobile',
+    'block__videojs_firstPlay_borderRadius',
+    'block__videojs_controlBar_bgColor',
+    'block__videojs_controlBar_spacing',
+    'block__videojs_controlBar_borderRadius',
+    'block__videojs_controlBar_padding',
+    'block__videojs_controlBar_gap',
+    'block__videojs_controlBarButton_color',
+    'block__videojs_controlBarButton_color_hover',
+    'block__videojs_controlBarButton_fontSize',
+    'block__videojs_progress_bgColor',
+    'block__videojs_progress_height',
+    'block__videojs_progress_button_color',
+    'block__videojs_progress_button_fontSize',
+    'block__videojs_progress_passed_bgColor',
+    'block__videojs_progress_remainingTime_color',
+    'block__videojs_progress_remainingTime_fontSize',
+    'block__videojs_tooltip_bgColor',
+    'block__videojs_tooltip_Color',
+    'bblock__videojs_tooltip_fontSize',
+    'bblock__videojs_tooltip_lineHeight',
+    'block__videojs_tooltip_decoSize',
+    'footer_background',
+    'footercontainer_background',
+    'footer_color',
+    'footer_link_color',
+    'footer_linkHover_color',
+    'dark__footer_background',
+    'dark__footercontainer_background',
+    'dark__footer_color',
+    'dark__footer_link_color',
+    'dark__footer_linkHover_color',
+    'footer__fontsize',
+    'footer__lineheight',
+    'footer__paddingTop',
+    'footer__paddingBottom',
+    'footer_itemSpacing',
+    'footer__fontsize_mobile',
+    'footer__lineheight_mobile',
+    'footer__paddingTop_mobile',
+    'footer__paddingBottom_mobile',
+    'footer_itemSpacing_mobile',
+    'footer__menu_link_color',
+    'footer__menu_linkHover_color',
+    'footer__menu_link_fontfamily',
+    'footer__menu_link_fontsize',
+    'footer__menu_link_lineheight',
+    'footer__menu_link_fontWeight',
+    'footer__menu_link_textTransform',
+    'footer__menu_link_letterSpacing',
+    'footer__menu_link_fontsize_mobile',
+    'footer__menu_link_lineheight_mobile'
+  ];
 
-    /* Site Title Color */
-    wp.customize( 'wide__right', function( value ) {
-        value.bind( function( to ) {
-            $( 'body' ).css( 'padding-right', to );
-        } );
-    } );
-
-    wp.customize( 'container__width', function( value ) {
-    value.bind( function( to ) {
-    var footer = $( 'header' );
-
-     footer.attr( 'data-baba', to );
-
-    } );
-} );
+  Array.from(allSettings).forEach(function(setting) {
+    wp.customize(
+      setting,
+      function ( value ) {
+        value.bind(
+          function ( to ) {
+            if(setting.includes('dark__')){
+              $( 'body.dark' ).get(0).style.setProperty( '--' + setting.replace('dark__',''), to );
+            } else {
+              $( ':root' ).get(0).style.setProperty( '--' + setting, to );
+            }
+          }
+        );
+      }
+    );
+  });
 
 } )( jQuery );
-
-
-
-
-( function( $ ) {
-
-    /* Link Color */
-    wp.customize( 'wide__left', function( value ) {
-      console.log("lefti no?");
-        value.bind( function( to ) {
-            var color_link_css = 'body{padding-left:' +  to + '}';
-            $( '#my-link-color-css' ).html( color_link_css );
-        } );
-    } );
-
-    /* Site Title Color */
-    wp.customize( 'wide__right', function( value ) {
-        value.bind( function( to ) {
-            var site_title_css = 'body{padding-right:' +  to + '}';
-            $( '#my-site-title-color-css' ).html( site_title_css );
-        } );
-    } );
-
-} )( jQuery );
-
-
-
-
-
-
-
-
-
-
-// "use strict";
-//
-// const optionsList = [
-//   'container__width',
-//   'container__side',
-//   'content__space',
-//   'input__padding',
-//   'wide__left',
-//   'wide__right',
-//   'html__anchor',
-//   'html__anchor_mobile',
-//   'html__fontfamily',
-//   'html__fontsize',
-//   'html__lineheight',
-//   'html__mobile_fontsize',
-//   'html__mobile_lineheight',
-//   'gutenberg__font_scale',
-//   'mnav__fontsize',
-//   'mnav__lineheight',
-//   'mnav__mobile_fontsize',
-//   'mnav__mobile_lineheight',
-//   'footer__fontsize',
-//   'footer__lineheight',
-//   'color__main',
-//   'color__secondary',
-//   'light__hamburger_color',
-//   'light__main_background',
-//   'light__main_color',
-//   'light__header_background',
-//   'light__headercontainer_background',
-//   'light__mnav_background',
-//   'light__footer_background',
-//   'light__footercontainer_background',
-//   'dark__hamburger_color',
-//   'dark__main_background',
-//   'dark__main_color',
-//   'dark__header_background',
-//   'dark__headercontainer_background',
-//   'dark__mnav_background',
-//   'dark__footer_background',
-//   'dark__footercontainer_background',
-//   'popup__width',
-//   'popup__space',
-//   'popup_prev_visible'
-// ];
-
-
-// var yourval = wp.customize.value( 'container__width' )();
-//
-// console.log(yourval);
-
-// console.log(wp.customize._value.container__width);
-//
-// console.log("davor");
-// if(typeof wp.customize._value.container__width === 'function'){
-//     console.log("sowas aber auch");
-// }
-// console.log("danac");
-
-
-// (function( $ ) {
-//   console.log(wp.customize('container__width').get());
-// })( jQuery );
-// console.log(wp.customize.value('container__width')());
-
-
-// Array.from(optionsList).forEach(function(option) {
-//   wp.customize( option, function( value ) {
-//     console.log(value);
-//     value.bind( function( to ) {
-//       console.log(option + ': ' + to);
-//       document.querySelector('body').css( 'backgroundColor', to );
-//       document.documentElement.style.setProperty(option, to);
-//     } );
-//   });
-// });
-
-
-
-
-
-// (function( $ ) {
-//
-//     console.log(optionsList);
-//
-//     Array.from(optionsList).forEach(function(option) {
-//       wp.customize( option, function( value ) {
-//         value.bind( function( to ) {
-//           console.log(option + ': ' + to);
-//           // $( '.site-header' ).css( 'backgroundColor', to );
-//           document.documentElement.style.setProperty(option, to);
-//         } );
-//       });
-//     });
-//
-//
-// })( jQuery );

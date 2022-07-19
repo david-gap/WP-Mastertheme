@@ -162,10 +162,12 @@ function WPgutenberg_posts_ContentRow($value, $id){
 function WPgutenberg_posts_PostBuilder(array $attr, $id, $currentId){
 
   $addClass = $currentId === $id ? ' class="current-item"' : '';
+  $pageOptions = prefix_template::PageOptions($id);
 
   $output = '';
   $output .= '<li data-id="' . $id . '"' . $addClass . '>';
-    $get_url = get_post_meta($id, 'BlockUrl', true) ? get_post_meta($id, 'BlockUrl', true) : get_the_permalink($id);
+    $defaultUrl = !in_array('disableDetailpage', $pageOptions) ? get_the_permalink($id) : '';
+    $get_url = get_post_meta($id, 'BlockUrl', true) ? get_post_meta($id, 'BlockUrl', true) : $defaultUrl;
     if(array_key_exists('postsInsideLoad', $attr) && $attr['postsInsideLoad'] !== false && $attr['postsInsideLoad'] !== 0):
       $linkOpen = '<span data-load="content">';
       $linkClose = '</span>';

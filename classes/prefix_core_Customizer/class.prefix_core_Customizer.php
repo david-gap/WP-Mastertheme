@@ -4,7 +4,7 @@
  *
  * Customizer extension
  * Author:      David Voglgsnag
- * @version     1.3
+ * @version     1.4
  *
  */
 
@@ -1948,6 +1948,14 @@ class prefix_core_Customizer {
               'label' => 'Space between',
               'type' => 'input'
             ),
+            'block__imagegallery_arrow_position' => array(
+              'label' => 'Swiper arrow position from sides',
+              'type' => 'input'
+            ),
+            'block__imagegallery_arrow_position_mobile' => array(
+              'label' => 'Swiper arrow position from sides',
+              'type' => 'input'
+            ),
             'block__imagegallery_arrow_color' => array(
               'label' => 'Swiper arrow color',
               'type' => 'color'
@@ -1955,6 +1963,70 @@ class prefix_core_Customizer {
             'block__imagegallery_arrow_opacity' => array(
               'label' => 'Swiper arrow opacity',
               'type' => 'input'
+            ),
+            'swiper__bulletNav_position' => array(
+              'label' => 'Bullet navigation position from bottom',
+              'type' => 'input'
+            ),
+            'swiper__bulletNav_position_mobile' => array(
+              'label' => 'Bullet navigation position from bottom',
+              'type' => 'input'
+            ),
+            'swiper__bulletNav_gap' => array(
+              'label' => 'Bullet navigation gap',
+              'type' => 'input'
+            ),
+            'swiper__bulletNav_item_bg' => array(
+              'label' => 'Bullet navigation item backgorund color',
+              'type' => 'color'
+            ),
+            'swiper__bulletNav_item_color' => array(
+              'label' => 'Bullet navigation item color',
+              'type' => 'color'
+            ),
+            'swiper__bulletNav_item_borderColor' => array(
+              'label' => 'Bullet navigation active item border color',
+              'type' => 'color'
+            ),
+            'swiper__bulletNav_item_borderRadius' => array(
+              'label' => 'Bullet navigation item border radius',
+              'type' => 'input'
+            ),
+            'swiper__bulletNav_item_borderWidth' => array(
+              'label' => 'Bullet navigation item border width',
+              'type' => 'input'
+            ),
+            'swiper__bulletNav_item_fontSize' => array(
+              'label' => 'Bullet navigation item font size',
+              'type' => 'input'
+            ),
+            'swiper__bulletNav_item_width' => array(
+              'label' => 'Bullet navigation item width',
+              'type' => 'input'
+            ),
+            'swiper__bulletNav_item_height' => array(
+              'label' => 'Bullet navigation item height',
+              'type' => 'input'
+            ),
+            'swiper__bulletNav_item_width_mobile' => array(
+              'label' => 'Bullet navigation item width',
+              'type' => 'input'
+            ),
+            'swiper__bulletNav_item_height_mobile' => array(
+              'label' => 'Bullet navigation item height',
+              'type' => 'input'
+            ),
+            'swiper__bulletNav_itemActive_bg' => array(
+              'label' => 'Bullet navigation active item backgorund color',
+              'type' => 'color'
+            ),
+            'swiper__bulletNav_itemActive_color' => array(
+              'label' => 'Bullet navigation active item color',
+              'type' => 'color'
+            ),
+            'swiper__bulletNav_itemActive_borderColor' => array(
+              'label' => 'Bullet navigation active item border color',
+              'type' => 'color'
             )
           )
         ),
@@ -2779,11 +2851,19 @@ class prefix_core_Customizer {
               'label' => 'VideoJS big play button icon size',
               'type' => 'input'
             ),
+            'block__videojs_firstPlay_size_mobile' => array(
+              'label' => 'VideoJS big play button icon size',
+              'type' => 'input'
+            ),
             'block__videojs_firstPlay_padding' => array(
               'label' => 'VideoJS big play button padding',
               'type' => 'input'
             ),
             'block__videojs_firstPlay_borderWidth' => array(
+              'label' => 'VideoJS big play button border width',
+              'type' => 'input'
+            ),
+            'block__videojs_firstPlay_borderWidth_mobile' => array(
               'label' => 'VideoJS big play button border width',
               'type' => 'input'
             ),
@@ -3253,7 +3333,7 @@ class prefix_core_Customizer {
     // https://developer.wordpress.org/reference/classes/wp_customize_control/__construct/
     if($inputValues["type"] == 'color'):
       $wp_customize->add_setting($inputKey, array(
-        'transport'         => 'refresh',
+        'transport'         => 'postMessage',
         'default'           => array_key_exists('default', $inputValues) ? $inputValues["default"] : '',
         'sanitize_callback' => 'sanitize_hex_color',
       ));
@@ -3264,7 +3344,7 @@ class prefix_core_Customizer {
      )));
     else:
       $wp_customize->add_setting($inputKey, array(
-        'transport'         => 'refresh',
+        'transport'         => 'postMessage',
         'default'           => array_key_exists('default', $inputValues) ? $inputValues["default"] : '',
         'sanitize_callback' => 'wp_filter_nohtml_kses',
       ));
@@ -3432,20 +3512,20 @@ class prefix_core_Customizer {
     $css_dir = get_stylesheet_directory() . '/';
     // directory depends on multisite
     if(is_multisite()):
-        $aq_uploads_dir = trailingslashit($uploads['basedir']);
+      $aq_uploads_dir = trailingslashit($uploads['basedir']);
     else:
-        $aq_uploads_dir = $css_dir;
+      $aq_uploads_dir = $css_dir;
     endif;
     // initialise wordpress filesystem
     global $wp_filesystem;
-    if (empty($wp_filesystem)) {
-        require_once(ABSPATH .'/wp-admin/includes/file.php');
-        WP_Filesystem();
-    }
+    if (empty($wp_filesystem)):
+      require_once(ABSPATH .'/wp-admin/includes/file.php');
+      WP_Filesystem();
+    endif;
     // save file
-    if ( ! $wp_filesystem->put_contents( $aq_uploads_dir . 'customizer.css', $output, FS_CHMOD_FILE) ) {
-        return true;
-    }
+    if ( ! $wp_filesystem->put_contents( $aq_uploads_dir . 'customizer.css', $output, FS_CHMOD_FILE) ):
+      return true;
+    endif;
   }
 
 
@@ -3457,7 +3537,7 @@ class prefix_core_Customizer {
   /* 3.1 PREVIEW CUSTOMIZER CHANGES
   /------------------------*/
   function customizerPreview() {
-    wp_enqueue_script('theme/customizer', get_template_directory_uri() . '/classes/prefix_core_Customizer/assets/theme-customizer.js', array( 'jquery', 'customize-preview' ), '0.1', true);
+    wp_enqueue_script('theme/customizer', get_template_directory_uri() . '/classes/prefix_core_Customizer/assets/theme-customizer.js', ['jquery', 'customize-preview'], '0.1', true);
   }
 
 }

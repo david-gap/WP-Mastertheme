@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.30.17
+ * @version     2.31.17
  *
 */
 
@@ -26,6 +26,7 @@ Table of Contents:
   2.5 REGISTER WIDGETS
   2.6 REBUILD SEARCH FORM
   2.7 ADD VALUES TO REST API
+  2.8 REDIRECT DETAIL PAGE
 3.0 OUTPUT
   3.1 SORTABLE HEADER CONTENT
   3.2 SORTABLE FOOTER CONTENT
@@ -231,21 +232,22 @@ class prefix_template {
   static $template_header_after                    = "";
   static $template_page_active                     = 1;
   static $template_page_options                    = array(
+    "disableDetailpage" => 0,
     "header" => 1,
+    "header_fixed" => 1,
     "date" => 0,
     "time" => 0,
     "author" => 0,
     "title" => 1,
+    "titleWide" => 0,
     "thumbnail" => 1,
+    "thumbnailWide" => 0,
+    "thumbnailFull" => 0,
     "comments" => 1,
     "sidebar" => 1,
     "scrolltotop" => 0,
     "footer" => 1,
     "darkmode" => 1,
-    "titleWide" => 0,
-    "thumbnailWide" => 0,
-    "thumbnailFull" => 0,
-    "header_fixed" => 1,
     "beforeMain" => 1,
     "afterMain" => 1
   );
@@ -342,6 +344,8 @@ class prefix_template {
     if(SELF::$template_breadcrumbs_inside == 1):
       add_filter( 'the_content', array( $this, 'breadcrumbNavigation' ), 50 );
     endif;
+    // redirect detail pages
+    add_action( 'template_redirect', array($this, 'redirectDetailPage') );
     // register strings
     $backendStrings = array(
       __('Template', 'devTheme'),
@@ -1011,8 +1015,16 @@ class prefix_template {
           "label" => "Page options",
           "type" => "multiple",
           "value" => array(
+            "disableDetailpage" => array(
+              "label" => "Disable link to detail page & redirect detail page to home",
+              "type" => "switchbutton"
+            ),
             "header" => array(
               "label" => "Hide header",
+              "type" => "switchbutton"
+            ),
+            "header_fixed" => array(
+              "label" => "Header fixed",
               "type" => "switchbutton"
             ),
             "date" => array(
@@ -1031,8 +1043,20 @@ class prefix_template {
               "label" => "Hide thumbnail",
               "type" => "switchbutton"
             ),
+            "thumbnailWide" => array(
+              "label" => "Thumbnail wide",
+              "type" => "switchbutton"
+            ),
+            "thumbnailFull" => array(
+              "label" => "Thumbnail full",
+              "type" => "switchbutton"
+            ),
             "title" => array(
               "label" => "Hide title",
+              "type" => "switchbutton"
+            ),
+            "titleWide" => array(
+              "label" => "Title wide",
               "type" => "switchbutton"
             ),
             "comments" => array(
@@ -1053,22 +1077,6 @@ class prefix_template {
             ),
             "darkmode" => array(
               "label" => "Darkmode",
-              "type" => "switchbutton"
-            ),
-            "titleWide" => array(
-              "label" => "Title wide",
-              "type" => "switchbutton"
-            ),
-            "thumbnailWide" => array(
-              "label" => "Thumbnail wide",
-              "type" => "switchbutton"
-            ),
-            "thumbnailFull" => array(
-              "label" => "Thumbnail full",
-              "type" => "switchbutton"
-            ),
-            "header_fixed" => array(
-              "label" => "Header fixed",
               "type" => "switchbutton"
             ),
             "beforeMain" => array(
@@ -1676,6 +1684,18 @@ class prefix_template {
         )
       );
     }
+
+
+    /* 2.8 REDIRECT DETAIL PAGE
+    /------------------------*/
+    function redirectDetailPage() {
+      $pageOptions = prefix_template::PageOptions(get_the_id());
+      if(is_single() && in_array('disableDetailpage', $pageOptions)):
+        wp_redirect( home_url(), 301 );
+        exit;
+      endif;
+    }
+
 
 
 

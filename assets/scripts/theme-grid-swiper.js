@@ -18,17 +18,6 @@ const galleryArrow = '<svg xmlns="http://www.w3.org/2000/svg" width="60.043" hei
       galleryArrowAfter = '<span class="arrow next hidden">' + galleryArrow + '</span>';
 
 
-/* Add ID to gallery
-/------------------------*/
-var activeGalleries = document.querySelectorAll('.gallery-swiper, .gallery-grid, .wp-block-gallery.add-popup');
-if(activeGalleries.length > 0){
-  Array.from(activeGalleries).forEach(function(gallery) {
-    // open pop-up
-    gallery.setAttribute('data-id', uniqueID());
-  });
-}
-
-
 
 /*==================================================================================
   SWIPER
@@ -76,7 +65,7 @@ function clickArrow(){
   if(parent.classList.contains('wp-block-gallery-container')){
     // define column spacing
     var container = document.querySelector('[data-id="' + parentID + '"] > figure');
-    var getMarginRight = getStyle(container.children.[0], 'margin-right');
+    var getMarginRight = getStyle(container, 'gap');
     getcolumnspacing = getMarginRight.replace(/\D/g,'');
     // define column sum
     if(container.classList.contains('columns-4')){
@@ -100,7 +89,7 @@ function clickArrow(){
       stepSize         = container.children.[0].clientWidth + (isNaN(columnspacing) ? 0 : columnspacing),
       backStep         = container.scrollLeft - stepSize,
       nextStep         = container.scrollLeft + stepSize,
-      maxRight         = totalWidth - (stepSize * columnssum);
+      maxRight         = totalWidth - columnspacing - (stepSize * columnssum);
       // noRight          = totalWidth - maxRight - stepSize;
   // move slider
   if (this.classList.contains('back')) {
@@ -111,9 +100,9 @@ function clickArrow(){
   container.scroll({
     left: offset,
     behavior: 'smooth'
-  })
+  });
   // toggle arrow visibility
-  if(offset == 0 || offset < stepSize){
+  if(offset == 0 || this.classList.contains('back') && offset == -1){
     arrowBack.classList.add('hidden');
   } else {
     arrowBack.classList.remove('hidden');
@@ -131,17 +120,82 @@ function clickArrow(){
   // console.log("step size: " + stepSize);
   // console.log("offset: " + offset);
   // console.log("max right: " + maxRight);
+  // bullet navigation update active statement
+  if(parent.classList.contains('bullet-nav')){
+    setTimeout(function() {
+      bulletNavCheckItemActive(parentID, 1);
+    }, 400);
+  }
 }
 
 
-/* Check for active swipers
+
+/*==================================================================================
+BULLET NAVIGATION
+==================================================================================*/
+
+/* Update active bullet items
 /------------------------*/
-var activeSwipers = document.querySelectorAll('.gallery-swiper');
-if(activeSwipers.length > 0){
-  Array.from(activeSwipers).forEach(function(swiper) {
-    // add arrows to dom
-    addNavArrows(swiper);
+function bulletNavCheckItemActive(parentID, repeat = 0){
+  var container = document.querySelector('[data-id="' + parentID + '"]'),
+      imgItems = container.querySelectorAll('.wp-block-image');
+  // check which img is currently active
+  if(repeat > 0){
+    setTimeout(function() {
+      bulletNavCheckItemActive(parentID, 0);
+    }, 400);
+  } else {
+    if(imgItems.length > 0){
+      let itemsCounter = 0;
+      Array.from(imgItems).forEach(function(imgItem) {
+        if(checkChildPosition(container, imgItem, 'inside')){
+          container.querySelectorAll('.bullet-navigation ul li')[itemsCounter].classList.add('active');
+        } else {
+          container.querySelectorAll('.bullet-navigation ul li')[itemsCounter].classList.remove('active');
+        }
+        itemsCounter++;
+      });
+    }
+  }
+}
+
+/* Update active bullet items
+/------------------------*/
+function clickBulletNavItem(){
+  var container = this.closest('.gallery-swiper'),
+      parentID = container.getAttribute('data-id'),
+      scrollContainer = container.querySelector('.wp-block-gallery'),
+      scrollToNum = parseInt(this.innerHTML) - 1,
+      scrollToEl = this.closest('.gallery-swiper').querySelectorAll('.wp-block-gallery .wp-block-image')[scrollToNum];
+  // update scroll position
+  var getMarginRight = getStyle(scrollContainer, 'gap'),
+  getcolumnspacing = getMarginRight.replace(/\D/g,'');
+  if(scrollToNum == 0){
+    var offset = 0;
+  } else if(!this.nextSibling){
+    var offset = scrollContainer.scrollWidth - scrollToEl.scrollWidth;
+  } else {
+    var offset = (scrollToEl.scrollWidth + parseInt(getcolumnspacing)) * scrollToNum;
+  }
+  scrollContainer.scroll({
+    left: offset,
+    behavior: 'smooth'
   });
+  // update bullet nav
+  setTimeout(function() {
+    bulletNavCheckItemActive(parentID, 1);
+  }, 400);
+  // update arrows
+  if (!this.nextSibling) {
+    container.querySelector('.arrow.next').classList.add('hidden');
+  } else {
+    container.querySelector('.arrow.next').classList.remove('hidden');
+  }
+  if (!this.previousSibling) {
+    container.querySelector('.arrow.back').classList.add('hidden');
+  } else {
+    container.querySelector('.arrow.back').classList.remove('hidden');
+  }
 }
 
 
@@ -296,13 +350,87 @@ function loadGalleryPopUp(){
 }
 
 
-/* Check for active swipers/grid without url
-/------------------------*/
-var activeGalleryPopUps = document.querySelectorAll('.add-popup figure > img');
-if(activeGalleryPopUps.length > 0){
-  Array.from(activeGalleryPopUps).forEach(function(popup) {
-    // open pop-up
-    popup.addEventListener('click', loadGalleryPopUp);
-    popup.addEventListener('keypress', loadGalleryPopUp);
-  });
+
+/*==================================================================================
+EVENTS
+==================================================================================*/
+
+function allGalleryEventListeners(){
+
+  /* Add ID to gallery
+  /------------------------*/
+  var activeGalleries = document.querySelectorAll('.gallery-swiper, .gallery-grid, .wp-block-gallery.add-popup');
+    if(activeGalleries.length > 0){
+    Array.from(activeGalleries).forEach(function(gallery) {
+      // open pop-up
+      gallery.setAttribute('data-id', uniqueID());
+    });
+  }
+
+
+  /* SWIPER - Check for active swipers
+  /------------------------*/
+  var activeSwipers = document.querySelectorAll('.gallery-swiper');
+  if(activeSwipers.length > 0){
+    Array.from(activeSwipers).forEach(function(swiper) {
+      // add arrows to dom
+      addNavArrows(swiper);
+      if(swiper.classList.contains('wp-block-gallery-container')){
+        swiper.querySelector('.wp-block-gallery').addEventListener("scroll", function(){
+          var parentID = swiper.getAttribute('data-id');
+          bulletNavCheckItemActive(parentID, 1);
+        }, false);
+      };
+    });
+  }
+
+
+  /* BULLET NAVIGATION - Check for active swipers with bullet navigation
+  /------------------------*/
+  var activeBulletGalleries = document.querySelectorAll('.gallery-swiper.bullet-nav');
+  if(activeBulletGalleries.length > 0){
+    Array.from(activeBulletGalleries).forEach(function(gallery) {
+      // all children
+      var items = '';
+      let itemsCounter = 0;
+      var galleryItems = gallery.querySelectorAll('.wp-block-gallery .wp-block-image');
+      if(galleryItems.length > 0){
+        Array.from(galleryItems).forEach(function(item) {
+          itemsCounter++;
+          if(checkChildPosition(gallery, item, 'inside')){
+            var activeStatement = ' class="active"';
+          } else {
+            var activeStatement = '';
+          }
+          items += '<li' + activeStatement + '>' + itemsCounter + '</li>';
+        });
+      }
+      // build output
+      var bulletNav = '<div class="bullet-navigation"><ul>';
+      bulletNav += items;
+      bulletNav += '</ul></div>';
+      gallery.insertAdjacentHTML('beforeend', bulletNav);
+      // add events to each arrow
+      var arrows = document.querySelectorAll('.bullet-navigation ul li');
+      if(arrows.length > 0){
+        Array.from(arrows).forEach(function(arrow) {
+          arrow.addEventListener('click', clickBulletNavItem);
+          arrow.addEventListener('keypress', clickBulletNavItem);
+        });
+      }
+    });
+  }
+
+
+  /* POPUP - Check for active swipers/grid without url
+  /------------------------*/
+  var activeGalleryPopUps = document.querySelectorAll('.add-popup figure > img');
+  if(activeGalleryPopUps.length > 0){
+    Array.from(activeGalleryPopUps).forEach(function(popup) {
+      // open pop-up
+      popup.addEventListener('click', loadGalleryPopUp);
+      popup.addEventListener('keypress', loadGalleryPopUp);
+    });
+  }
+
 }

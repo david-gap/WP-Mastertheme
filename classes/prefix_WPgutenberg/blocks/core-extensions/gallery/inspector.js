@@ -37,6 +37,7 @@ export default class Inspector extends Component {
     const {
       attributes: {
         addSwiper,
+        addBulletNav,
         addPopUp,
         addPopUpPreview
       },
@@ -52,6 +53,14 @@ export default class Inspector extends Component {
                     label={ __( 'Activate Swiper', 'devTheme' ) }
                     checked={ addSwiper }
                     onChange={addSwiper => setAttributes({ addSwiper })}
+                />
+              </PanelRow>
+              <PanelRow>
+                <ToggleControl
+                    id="add-bulletnav"
+                    label={ __( 'Activate bullet navigation', 'devTheme' ) }
+                    checked={ addBulletNav }
+                    onChange={addBulletNav => setAttributes({ addBulletNav })}
                 />
               </PanelRow>
               <PanelRow>

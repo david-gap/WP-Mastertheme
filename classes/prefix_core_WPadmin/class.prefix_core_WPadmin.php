@@ -253,7 +253,7 @@ class prefix_core_WPadmin {
         break;
 
       case "text":
-        $attr .= $value !== false ? 'value="' . $value . '"' : '';
+        $attr .= $value !== false ? "value='" . stripslashes($value) . "'" : '';
         $attr .= $css !== '' ? ' ' . ' class="' . $css . '"' : '';
         $output .= '<input type="text"' . $attr . '>';
         // translation option
@@ -262,7 +262,7 @@ class prefix_core_WPadmin {
 
       case "textarea":
         $output .= '<textarea' . $attr . '>';
-          $output .= $value !== false ? $value : '';
+          $output .= $value !== false ? stripslashes($value) : '';
         $output .= '</textarea>';
         break;
 

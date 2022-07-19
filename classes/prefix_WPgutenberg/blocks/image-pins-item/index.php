@@ -152,6 +152,10 @@ function WPgutenberg_pin_blockRender($attr){
   $posL = $attr['pinPostion']['x'] * 100;
   $inlinecss .= 'top: ' . $posT . '%;';
   $inlinecss .= ' left: ' . $posL . '%;';
+  // link
+  $pageOptions = prefix_template::PageOptions($attr['pinPostId']);
+  $defaultUrl = !in_array('disableDetailpage', $pageOptions) ? get_the_permalink($attr['pinPostId']) : '';
+  $get_url = get_post_meta($id, 'BlockUrl', true) ? get_post_meta($id, 'BlockUrl', true) : $defaultUrl;
   // define pin
   $pin = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><g transform="translate(111 -41)"><circle cx="5" cy="5" r="5" transform="translate(-107 45)" class="pin-fill" /><g transform="translate(-111 41)" fill="none" class="pin-stroke" stroke-width="2"><circle cx="9" cy="9" r="9" stroke="none"/><circle cx="9" cy="9" r="8" fill="none"/></g></g></svg>';
   $pinImg = array_key_exists('pinImgId', $attr) ? wp_get_attachment_image_src($attr['pinImgId'], 'full') : '';
@@ -166,11 +170,11 @@ function WPgutenberg_pin_blockRender($attr){
   //
   switch ($attr['pinTarget']) {
     case 'link':
-        $pinOpen = '<a href="' . get_permalink($attr['pinPostId']) . '">';
+        $pinOpen = '<a href="' . $get_url . '">';
         $pinClose = '</a>';
       break;
     case 'window':
-        $pinOpen = '<a href="' . get_permalink($attr['pinPostId']) . '" target="_blank">';
+        $pinOpen = '<a href="' . $get_url . '" target="_blank">';
         $pinClose = '</a>';
       break;
     default:
