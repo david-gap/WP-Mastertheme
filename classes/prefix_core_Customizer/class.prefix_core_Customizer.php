@@ -1459,6 +1459,38 @@ class prefix_core_Customizer {
         'blog' => array(
           'label' => 'Blog & Archive',
           'inputs' => array(
+            'blog__marginTop' => array(
+              'label' => 'Margin top',
+              'type' => 'input'
+            ),
+            'blog__marginBottom' => array(
+              'label' => 'Margin bottom',
+              'type' => 'input'
+            ),
+            'blog__paddingTop' => array(
+              'label' => 'Padding top',
+              'type' => 'input'
+            ),
+            'blog__paddingBottom' => array(
+              'label' => 'Padding bottom',
+              'type' => 'input'
+            ),
+            'blog__marginTop_mobile' => array(
+              'label' => 'Margin top',
+              'type' => 'input'
+            ),
+            'blog__marginBottom_mobile' => array(
+              'label' => 'Margin bottom',
+              'type' => 'input'
+            ),
+            'blog__paddingTop_mobile' => array(
+              'label' => 'Padding top',
+              'type' => 'input'
+            ),
+            'blog__paddingBottom_mobile' => array(
+              'label' => 'Padding bottom',
+              'type' => 'input'
+            ),
             'blog__pagination_margin' => array(
               'label' => 'Space around pagination',
               'type' => 'input'
@@ -1568,6 +1600,38 @@ class prefix_core_Customizer {
         'searchResults' => array(
           'label' => 'Search results',
           'inputs' => array(
+            'search__marginTop' => array(
+              'label' => 'Margin top',
+              'type' => 'input'
+            ),
+            'search__marginBottom' => array(
+              'label' => 'Margin bottom',
+              'type' => 'input'
+            ),
+            'search__paddingTop' => array(
+              'label' => 'Padding top',
+              'type' => 'input'
+            ),
+            'search__paddingBottom' => array(
+              'label' => 'Padding bottom',
+              'type' => 'input'
+            ),
+            'search__marginTop_mobile' => array(
+              'label' => 'Margin top',
+              'type' => 'input'
+            ),
+            'search__marginBottom_mobile' => array(
+              'label' => 'Margin bottom',
+              'type' => 'input'
+            ),
+            'search__paddingTop_mobile' => array(
+              'label' => 'Padding top',
+              'type' => 'input'
+            ),
+            'search__paddingBottom_mobile' => array(
+              'label' => 'Padding bottom',
+              'type' => 'input'
+            ),
             'search__pagination_margin' => array(
               'label' => 'Space around pagination',
               'type' => 'input'

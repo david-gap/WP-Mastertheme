@@ -489,6 +489,13 @@ body.frontend,
     }
   }
   #home,
+  #archive {
+    margin-top: var(--blog__marginTop, 0);
+    margin-bottom: var(--blog__marginBottom, 0);
+    padding-top: var(--blog__paddingTop, 0);
+    padding-bottom: var(--blog__paddingBottom, 0);
+  }
+  #home,
   #archive,
   .block-posts,
   .block-postsfilter {
