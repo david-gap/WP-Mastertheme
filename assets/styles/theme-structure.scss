@@ -213,6 +213,8 @@ body.frontend,
           margin: 0;
           padding: 0;
           transition: .7s;
+          gap: var(--mnav__ul_gap, 0px);
+          row-gap: var(--mnav__ul_gap, 0px);
           > li {
             > a {
               padding: var(--mnav__padding, 0);

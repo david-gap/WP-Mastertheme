@@ -250,12 +250,20 @@ class prefix_core_Customizer {
         'header_menu' => array(
           'label' => 'Menu',
           'inputs' => array(
+            'mnav__ul_gap' => array(
+              'label' => 'First level gap',
+              'type' => 'input'
+            ),
             'mnav__ul_paddingTop' => array(
               'label' => 'Padding top',
               'type' => 'input'
             ),
             'mnav__ul_paddingBottom' => array(
               'label' => 'Padding bottom',
+              'type' => 'input'
+            ),
+            'mnav__ul_gap_mobile' => array(
+              'label' => 'First level gap',
               'type' => 'input'
             ),
             'mnav__ul_paddingTop_mobile' => array(

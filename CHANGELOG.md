@@ -5,6 +5,7 @@
 * Use blog styles as search results defaults
 * Add pagination to blog and archive pages
 * Add flex settings for blog, archive and search results
+* Add gap styling for main menu
 
 ## 1.59.28 | 28.07.2022 <🐛 FIX: h buttons, TempM 💎 IMPROVE: consent box>
 * Fix TemplateMedia block rendering
