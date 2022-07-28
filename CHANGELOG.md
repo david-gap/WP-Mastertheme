@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.60.28 | 28.07.2022 <💎 IMPROVE: blog & archive stylings>
+* Add blog and archive styles to customizer
+* Use blog styles as search results defaults
+* Add pagination to blog and archive pages
+* Add flex settings for blog, archive and search results
+
 ## 1.59.28 | 28.07.2022 <🐛 FIX: h buttons, TempM 💎 IMPROVE: consent box>
 * Fix TemplateMedia block rendering
 * Send configurator settings to thme JS

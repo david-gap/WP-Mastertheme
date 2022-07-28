@@ -31,6 +31,7 @@ Table of Contents:
     3.3 TITLE SIZES
     3.4 LEAD
     3.5 CONSENT CONTAINER
+    3.6 BLOG & ARCHIVE
   4.0 BLOCKS
     4.1 ACCORDION
     4.2 BUTTONS
@@ -362,7 +363,7 @@ body.frontend,
   #search-results {
     .results {
       article {
-        border-color: var(--search__article_borderColor, inherit);
+        border-color: var(--search__article_borderColor, var(--blog__article_borderColor, inherit));
       }
     }
   }
@@ -438,6 +439,18 @@ body.frontend,
             background-color: var(--consentContainer__Button_bg_hover, var(--block__buttonsHover_bgColor, inherit));
             border-color: var(--consentContainer__Button_borderColor, var(--block__buttonsHover_borderColor, inherit));
         }
+      }
+    }
+  }
+
+
+  /* 3.6 BLOG & ARCHIVE
+  /––––––––––––––––––––––––*/
+  #home,
+  #archive {
+    > div {
+      article {
+        border-color: var(--blog__article_borderColor, inherit);
       }
     }
   }

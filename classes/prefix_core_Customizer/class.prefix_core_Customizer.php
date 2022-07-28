@@ -1448,11 +1448,152 @@ class prefix_core_Customizer {
             )
           )
         ),
+        'blog' => array(
+          'label' => 'Blog & Archive',
+          'inputs' => array(
+            'blog__pagination_margin' => array(
+              'label' => 'Space around pagination',
+              'type' => 'input'
+            ),
+            'blog__article_flexDirection' => array(
+              'label' => 'Article direction',
+              'type' => 'input'
+            ),
+            'blog__article_flexGap' => array(
+              'label' => 'Article gap',
+              'type' => 'input'
+            ),
+            'blog__article_flexDivWidth' => array(
+              'label' => 'Article excerpt width',
+              'type' => 'input'
+            ),
+            'blog__article_flexMediaWidth' => array(
+              'label' => 'Article media width',
+              'type' => 'input'
+            ),
+            'blog__article_flexDirection_mobile' => array(
+              'label' => 'Article direction',
+              'type' => 'input'
+            ),
+            'blog__article_flexGap_mobile' => array(
+              'label' => 'Article gap',
+              'type' => 'input'
+            ),
+            'blog__article_flexDivWidth_mobile' => array(
+              'label' => 'Article excerpt width',
+              'type' => 'input'
+            ),
+            'blog__article_flexMediaWidth_mobile' => array(
+              'label' => 'Article media width',
+              'type' => 'input'
+            ),
+            'blog__article_margin' => array(
+              'label' => 'Article margin',
+              'type' => 'input'
+            ),
+            'blog__article_padding' => array(
+              'label' => 'Article padding',
+              'type' => 'input'
+            ),
+            'blog__article_border' => array(
+              'label' => 'Article border width',
+              'type' => 'input'
+            ),
+            'blog__article_borderColor' => array(
+              'label' => 'Article border color',
+              'type' => 'color'
+            ),
+            'blog__article_margin_mobile' => array(
+              'label' => 'Article margin',
+              'type' => 'input'
+            ),
+            'blog__article_padding_mobile' => array(
+              'label' => 'Article padding',
+              'type' => 'input'
+            ),
+            'blog__article_title_margin' => array(
+              'label' => 'Article title margin',
+              'type' => 'input'
+            ),
+            'blog__article_title_padding' => array(
+              'label' => 'Article title padding',
+              'type' => 'input'
+            ),
+            'blog__article_title_fontFamily' => array(
+              'label' => 'Article title font family',
+              'type' => 'input'
+            ),
+            'blog__article_title_fontSize' => array(
+              'label' => 'Article title font size',
+              'type' => 'input'
+            ),
+            'blog__article_title_lineHeight' => array(
+              'label' => 'Article title line height',
+              'type' => 'input'
+            ),
+            'blog__article_title_fontWeight' => array(
+              'label' => 'Article title font weight',
+              'type' => 'input'
+            ),
+            'blog__article_title_textTransform' => array(
+              'label' => 'Article title text transform',
+              'type' => 'input'
+            ),
+            'blog__article_title_fontSize_mobile' => array(
+              'label' => 'Article title font size',
+              'type' => 'input'
+            ),
+            'blog__article_title_lineHeight_mobile' => array(
+              'label' => 'Article title line height',
+              'type' => 'input'
+            ),
+            'blog__article_title_margin_mobile' => array(
+              'label' => 'Article title margin',
+              'type' => 'input'
+            ),
+            'blog__article_title_padding_mobile' => array(
+              'label' => 'Article title padding',
+              'type' => 'input'
+            )
+          )
+        ),
         'searchResults' => array(
           'label' => 'Search results',
           'inputs' => array(
             'search__pagination_margin' => array(
               'label' => 'Space around pagination',
+              'type' => 'input'
+            ),
+            'search__article_flexDirection' => array(
+              'label' => 'Article direction',
+              'type' => 'input'
+            ),
+            'search__article_flexGap' => array(
+              'label' => 'Article gap',
+              'type' => 'input'
+            ),
+            'search__article_flexDivWidth' => array(
+              'label' => 'Article excerpt width',
+              'type' => 'input'
+            ),
+            'search__article_flexMediaWidth' => array(
+              'label' => 'Article media width',
+              'type' => 'input'
+            ),
+            'search__article_flexDirection_mobile' => array(
+              'label' => 'Article direction',
+              'type' => 'input'
+            ),
+            'search__article_flexGap_mobile' => array(
+              'label' => 'Article gap',
+              'type' => 'input'
+            ),
+            'search__article_flexDivWidth_mobile' => array(
+              'label' => 'Article excerpt width',
+              'type' => 'input'
+            ),
+            'search__article_flexMediaWidth_mobile' => array(
+              'label' => 'Article media width',
               'type' => 'input'
             ),
             'search__article_margin' => array(

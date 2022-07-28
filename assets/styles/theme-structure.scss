@@ -424,13 +424,10 @@ body.frontend,
         justify-content: space-between;
         flex-direction: row;
         flex-wrap: nowrap;
-        gap: var(--wp--style--block-gap, var(--content__space, 30px));
-        row-gap: var(--wp--style--block-gap, var(--content__space, 30px));
         > div:first-child {
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          width: 60%;
           .entry-content {
             flex-grow: 1;
           }
@@ -438,7 +435,6 @@ body.frontend,
         > div.gb-block,
         > img,
         > figure {
-          width: 40%;
           margin: 0;
           .alignwide,
           .alignfull {
@@ -461,16 +457,66 @@ body.frontend,
   #search-results {
     .results {
       + .pagination {
-        margin: var(--search__pagination_margin, 20px 0 0);
+        margin: var(--search__pagination_margin, var(--blog__pagination_margin, 20px 0 0));
       }
       article {
-        margin: var(--search__article_margin, 40px);
-        padding: var(--search__article_padding, 0);
+        margin: var(--search__article_margin, var(--blog__article_margin, 40px));
+        padding: var(--search__article_padding, var(--blog__article_padding, 0));
         border-style: solid;
-        border-width: var(--search__article_border, 0);
+        border-width: var(--search__article_border, var(--blog__article_border, 0));
+        &.flex {
+          flex-direction: var(--search__article_flexDirection, var(--blog__article_flexDirection, row));
+          gap: var(--search__article_flexGap, var(--blog__article_flexGap, var(--wp--style--block-gap, var(--content__space, 30px))));
+          row-gap: var(--search__article_flexGap, var(--blog__article_flexGap, var(--wp--style--block-gap, var(--content__space, 30px))));
+          > div:first-child {
+            width: var(--search__article_flexDivWidth, var(--blog__article_flexDivWidth, 60%));
+            flex-basis: var(--search__article_flexDivWidth, var(--blog__article_flexDivWidth, 60%));
+          }
+          > div.gb-block,
+          > img,
+          > figure {
+            width: var(--search__article_flexMediaWidth, var(--blog__article_flexMediaWidth, 40%));
+            flex-basis: var(--search__article_flexMediaWidth, var(--blog__article_flexMediaWidth, 40%));
+          }
+        }
         h2 {
-          margin: var(--search__article_title_margin, 0);
-          padding: var(--search__article_title_padding, 0);
+          margin: var(--search__article_title_margin, var(--blog__article_title_margin, 0));
+          padding: var(--search__article_title_padding, var(--blog__article_title_padding, 0));
+        }
+      }
+    }
+  }
+  #home,
+  #archive,
+  .block-posts,
+  .block-postsfilter {
+    > div {
+      + .pagination {
+        margin: var(--blog__pagination_margin, 20px 0 0);
+      }
+      article {
+        margin: var(--blog__article_margin, 40px);
+        padding: var(--blog__article_padding, 0);
+        border-style: solid;
+        border-width: var(--blog__article_border, 0);
+        &.flex {
+          flex-direction: var(--blog__article_flexDirection, row);
+          gap: var(--blog__article_flexGap, var(--wp--style--block-gap, var(--content__space, 30px)));
+          row-gap: var(--blog__article_flexGap, var(--wp--style--block-gap, var(--content__space, 30px)));
+          > div:first-child {
+            width: var(--blog__article_flexDivWidth, 60%);
+            flex-basis: var(--blog__article_flexDivWidth, 60%);
+          }
+          > div.gb-block,
+          > img,
+          > figure {
+            width: var(--blog__article_flexMediaWidth, 40%);
+            flex-basis: var(--blog__article_flexMediaWidth, 40%);
+          }
+        }
+        h2 {
+          margin: var(--blog__article_title_margin, 0);
+          padding: var(--blog__article_title_padding, 0);
         }
       }
     }

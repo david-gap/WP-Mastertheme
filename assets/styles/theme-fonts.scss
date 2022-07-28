@@ -21,6 +21,7 @@ Table of Contents:
     2.7 LANGUAGE SWITCHER
     2.8 TITLE SIZES
     2.9 CONSENT CONTAINER
+    2.10 BLOG & ARCHIVE
   3.0 FOOTER
   4.0 GENERAL
   5.0 BLOCKS
@@ -155,11 +156,11 @@ body.frontend,
     .results {
       article {
         h2 {
-          font-family: var(--search__article_title_fontFamily, inherit);
-          font-size: var(--search__article_title_fontSize, inherit);
-          line-height: var(--search__article_title_lineHeight, inherit);
-          font-weight: var(--search__article_title_fontWeight, inherit);
-          text-transform: var(--search__article_title_textTransform, inherit);
+          font-family: var(--search__article_title_fontFamily, var(--blog__article_title_fontFamily, inherit));
+          font-size: var(--search__article_title_fontSize, var(--blog__article_title_fontSize, inherit));
+          line-height: var(--search__article_title_lineHeight, var(--blog__article_title_lineHeight, inherit));
+          font-weight: var(--search__article_title_fontWeight, var(--blog__article_title_fontWeight, inherit));
+          text-transform: var(--search__article_title_textTransform, var(--blog__article_title_textTransform, inherit));
         }
       }
     }
@@ -284,6 +285,24 @@ body.frontend,
         line-height: var(--consentContainer__Button_lineHeight, var(--block__buttons_lineHeight, inherit));
         text-transform: var(--consentContainer__Button_textTransform, var(--block__buttons_textTransform, inherit));
         letter-spacing: var(--consentContainer__Button_letterSpacing, var(--block__buttons_letterSpacing, inherit));
+      }
+    }
+  }
+
+
+  /* 2.10 BLOG & ARCHIVE
+  /––––––––––––––––––––––––*/
+  #home,
+  #archive {
+    > div {
+      article {
+        h2 {
+          font-family: var(--blog__article_title_fontFamily, inherit);
+          font-size: var(--blog__article_title_fontSize, inherit);
+          line-height: var(--blog__article_title_lineHeight, inherit);
+          font-weight: var(--blog__article_title_fontWeight, inherit);
+          text-transform: var(--blog__article_title_textTransform, inherit);
+        }
       }
     }
   }
