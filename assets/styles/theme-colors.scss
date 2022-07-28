@@ -30,6 +30,7 @@ Table of Contents:
     3.2 POST TITLE
     3.3 TITLE SIZES
     3.4 LEAD
+    3.5 CONSENT CONTAINER
   4.0 BLOCKS
     4.1 ACCORDION
     4.2 BUTTONS
@@ -421,6 +422,27 @@ body.frontend,
   }
 
 
+  /* 3.5 CONSENT CONTAINER
+  /––––––––––––––––––––––––*/
+  .consent-request {
+    .consent-request-container {
+      color: var(--consentContainer__color, inherit);
+      background-color: var(--consentContainer__bg, inherit);
+      border-color: var(--consentContainer__borderColor, inherit);
+      button {
+        color: var(--consentContainer__Button_color, var(--block__buttons_color, inherit));
+        background-color: var(--consentContainer__Button_bg, var(--block__buttons_bgColor, inherit));
+        border-color: var(--consentContainer__Button_borderColor, var(--block__buttons_borderColor, inherit));
+        &:hover {
+            color: var(--consentContainer__Button_color_hover, var(--block__buttonsHover_color, inherit));
+            background-color: var(--consentContainer__Button_bg_hover, var(--block__buttonsHover_bgColor, inherit));
+            border-color: var(--consentContainer__Button_borderColor, var(--block__buttonsHover_borderColor, inherit));
+        }
+      }
+    }
+  }
+
+
 
   /*==================================================================================
     4.0 BLOCKS
@@ -515,6 +537,14 @@ body.frontend,
     figure {
       .pins {
         .block-image-pin {
+          &.loadedPin {
+              > span svg .pin-fill {
+                fill: var(--imagePins__pinColor_loaded, var(--imagePins__pinColor, var(--color__main)));
+              }
+              > span svg .pin-stroke {
+                stroke: var(--imagePins__pinColor_loaded, var(--imagePins__pinColor, var(--color__main)));
+              }
+            }
           > span {
             svg {
               &:hover {

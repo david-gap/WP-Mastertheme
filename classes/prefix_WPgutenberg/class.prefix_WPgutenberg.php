@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.20.14
+ * @version     2.21.14
  */
 
 /*=======================================================
@@ -411,8 +411,8 @@ class prefix_WPgutenberg {
     wp_enqueue_script(
       'gutenberg-block',
       $class_path . 'assets/js/gutenberg-blocks.js',
-      [ 'wp-i18n', 'wp-element', 'wp-blocks', 'wp-components', 'wp-editor' ],
-      '0.3'
+      ['wp-i18n', 'wp-element', 'wp-blocks', 'wp-components', 'wp-editor'],
+      '1.0'
     );
   }
 

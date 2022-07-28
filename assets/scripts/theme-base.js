@@ -212,6 +212,11 @@ function checkChildPosition(parent, child, action = 'statement', gap = 0) {
     }
     if(box2coords.bottom > box1coords.bottom && box2coords.top > box1coords.top) {
       child.style.bottom = "calc(100% + " + gap + "px)";
+    } else {
+      var maxPos = box2coords.bottom + box2coords.height + gap;
+      if(maxPos < box1coords.bottom){
+        child.style.bottom = "calc((" + box2coords.height + "px + " + gap + "px) * -1)";
+      }
     }
     if(box2coords.left < box1coords.left && box2coords.right < box1coords.right) {
       var currentLeft = stringToNumberCoverter(getStyle(child, 'left'));
@@ -703,7 +708,22 @@ function loadPostsContent(){
     targetContent: '.block-posts[data-id="' + container + '"] .posts-target .wp-block-group__inner-container',
     id: currentID
   };
+  // if pin content should be loaded too
+  if(this.hasAttribute('data-loadpin')){
+    config['loadPin'] = this.getAttribute("data-loadpin");
+  }
   ajaxCall(config);
+  // active statement for loaded post
+  var allPosts = document.querySelectorAll('.block-posts[data-id="' + container + '"] > ul li');
+  if(allPosts.length !== 0){
+    Array.from(allPosts).forEach(function(post) {
+      if(currentID == post.getAttribute('data-id')){
+        post.classList.add('active');
+      } else {
+        post.classList.remove('active');
+      }
+    });
+  }
 }
 
 
@@ -873,15 +893,46 @@ function imgPinsInfoClose(){
 }
 // load the content inside block
 function imagePinsLoadContent(){
-  var currentID = this.closest('.block-image-pin').getAttribute("data-id"),
-      container = this.closest('.block-image-pins').getAttribute("data-id");
+  var currentID = this.closest('.block-image-pin').getAttribute("data-id");
+  if(this.getAttribute('data-load') == 'parentcontent'){
+    var container = this.closest('.block-posts').getAttribute("data-id");
+    var target = '.block-posts[data-id="' + container + '"] .posts-target .wp-block-group__inner-container';
+  } else {
+    var container = this.closest('.block-image-pins').getAttribute("data-id");
+    var target = '.block-image-pins[data-id="' + container + '"] .pin-target';
+  }
   // run ajax function
   var config = {
     action: 'loadPageContent',
-    targetContent: '.block-image-pins[data-id="' + container + '"] .pin-target',
+    targetContent: target,
     id: currentID
   };
   ajaxCall(config);
+  if(this.getAttribute('data-load') == 'parentcontent'){
+    // active statement for loaded post
+    var allPosts = document.querySelectorAll('.block-posts[data-id="' + container + '"] > ul li');
+    if(allPosts.length !== 0){
+      Array.from(allPosts).forEach(function(post) {
+        if(currentID == post.getAttribute('data-id')){
+          post.classList.add('active');
+        } else {
+          post.classList.remove('active');
+        }
+      });
+    }
+  } else {
+    // active statement for loaded pin
+    var allPins = document.querySelectorAll('.block-image-pins[data-id="' + container + '"] .pins .block-image-pin');
+    if(allPins.length !== 0){
+      Array.from(allPins).forEach(function(pin) {
+        if(currentID == pin.getAttribute('data-id')){
+          pin.classList.add('loadedPin');
+        } else {
+          pin.classList.remove('loadedPin');
+        }
+      });
+    }
+  }
 }
 
 
@@ -1150,6 +1201,34 @@ function runEventListeners(){
   }
 
 
+  /* Toggle consent placeholder
+  /------------------------*/
+  var consentPlaceholder = document.querySelectorAll('.consent-request .dsgvo-placeholder');
+  if(consentPlaceholder.length !== 0){
+    Array.from(consentPlaceholder).forEach(function(placeholder) {
+      placeholder.addEventListener('click', toggleBlock);
+      placeholder.addEventListener('keypress', toggleBlock);
+    });
+  }
+
+
+  /* Reset consent placeholder
+  /------------------------*/
+  function closeActiveConsentElement(e){
+    const target = e.target;
+    // main menu
+    if (target.closest(".consent-request") == null) {
+      var consentPlaceholder = document.querySelectorAll('.consent-request .dsgvo-placeholder');
+      if(consentPlaceholder.length !== 0){
+        Array.from(consentPlaceholder).forEach(function(placeholder) {
+          placeholder.classList.remove('active');
+        });
+      }
+    }
+  }
+  document.addEventListener('click', closeActiveConsentElement);
+
+
   /* Action Links
   /------------------------*/
   var actionButtons = document.querySelectorAll('.funcCall');
@@ -1200,7 +1279,7 @@ function runEventListeners(){
     });
   }
   // load pins content
-  var imgPinsToLoadContent = document.querySelectorAll('.block-image-pins .pins .block-image-pin [data-load="content"]');
+  var imgPinsToLoadContent = document.querySelectorAll('.block-image-pins .pins .block-image-pin [data-load="content"], .block-image-pins .pins .block-image-pin [data-load="parentcontent"]');
   if(imgPinsToLoadContent.length !== 0){
     Array.from(imgPinsToLoadContent).forEach(function(element) {
       element.addEventListener('click', imagePinsLoadContent);
@@ -1227,6 +1306,7 @@ function runEventListeners(){
         var currentID = target.closest('.block-posts').querySelector('ul > li').getAttribute("data-id"),
         container = target.closest('.block-posts').getAttribute("data-id");
         target.setAttribute("data-load", "false");
+        target.closest('.block-posts').querySelector('ul > li').classList.add('active');
         // run ajax function
         var config = {
           action: 'loadPageContent',

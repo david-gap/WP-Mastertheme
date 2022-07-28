@@ -14,11 +14,15 @@ endif;
 $video = '';
 // check for blocks
 if(has_blocks()):
-  $supportedBlocks = array("core/embed", "templates/vimeo");
+  $supportedBlocks = array("core/embed", "templates/vimeo", "core/vimeo");
   $blocks = parse_blocks( $post->post_content );
   foreach ($blocks as $blockKey => $block) {
     if(in_array($block['blockName'], $supportedBlocks)):
         $video .= '<div class="gb-block">' . render_block($block) . '</div>';
+        if("core/embed" === $block['blockName']):
+          $not_embedded = $block['attrs']['url'];
+          $video = str_replace( $not_embedded, wp_oembed_get($not_embedded), $video );
+        endif;
       break;
     endif;
   }

@@ -3,11 +3,14 @@
 */
 const { __ } = wp.i18n;
 const { Component } = wp.element;
-const { registerBlockType } = wp.blocks;
+const { registerBlockType, getBlockDefaultClassName } = wp.blocks;
+const { select, withSelect, setState } = wp.data;
 const {
   ColorPalette,
   PanelColorSettings,
-  ContrastChecker
+  ContrastChecker,
+  MediaUpload,
+  MediaUploadCheck
 } = wp.editor;
 
 const {
@@ -24,7 +27,10 @@ const {
   TextareaControl,
   ToggleControl,
   SelectControl,
-  DateTimePicker
+  DateTimePicker,
+  ResponsiveWrapper,
+  Button,
+  Spinner
 } = wp.components;
 
 /**
@@ -44,7 +50,10 @@ export default class Inspector extends Component {
         scaduleEnd,
         removeSpacing,
         additionalSpacingOne,
-        additionalSpacingTwo
+        additionalSpacingTwo,
+        dsgvoImgId,
+        dsgvoImageURL,
+        dsgvoCookie
       },
       setAttributes
     } = this.props;
@@ -71,6 +80,67 @@ export default class Inspector extends Component {
         setAttributes({ additionalSpacingTwo: check });
       }
     }
+
+
+    /* get saved configurator settings
+    /------------------------*/
+    var dsgvoActive = false;
+    var videoBlock = false;
+    if (this.props.name === "core/embed" || this.props.name === "templates/vimeo") {
+      videoBlock = true;
+    }
+    let cookieOptions = [
+      {value: '', label: '-'},
+      {value: 'cookielawinfo-checkbox-analytics', label: 'Analytics'},
+      {value: 'cookielawinfo-checkbox-functional', label: 'Functional'},
+      {value: 'cookielawinfo-checkbox-advertisement', label: 'Marketing'},
+      {value: 'cookielawinfo-checkbox-performance', label: 'Performance'},
+      {value: 'cookielawinfo-checkbox-thirdparty', label: 'Thirdparty'}
+    ];
+    if(configurations){
+      if(configurations["dsgvo"]){
+        if(configurations["dsgvo"]["activate"] && configurations["dsgvo"]["activate"] == "1"){
+          dsgvoActive = true;
+          if(configurations["dsgvo"]["addRules"]){
+            Array.from(configurations["dsgvo"]["addRules"]).forEach(function(rule) {
+              cookieOptions.push( { value: rule["cssClass"], label: rule["cookieName"] } );
+            });
+          }
+        }
+      }
+    }
+
+
+    /* get image attributes
+    /------------------------*/
+    function getImageInformation(image, target){
+      if(image && target == 'source_url'){
+        return image.source_url;
+      } else if (image && target == 'width') {
+        return image.media_details.width;
+      } else if (image && target == 'height') {
+        return image.media_details.height;
+      }
+    }
+
+    /* dsgvo image
+    /------------------------*/
+    const onUpdateDsgvoImage = ( image ) => {
+      setAttributes( {
+        dsgvoImgId: image.id,
+        dsgvoImageURL: image.url
+      } );
+    };
+
+
+    /* remove dsgvo image
+    /------------------------*/
+    const removeDsgvoMedia = () => {
+      setAttributes( {
+          dsgvoImgId: undefined,
+          dsgvoImageURL: undefined
+      } );
+    };
 
     return (
       <InspectorControls>
@@ -148,6 +218,50 @@ export default class Inspector extends Component {
               />
             </PanelRow>
           </PanelBody>
+          {dsgvoActive &&
+            <PanelBody title={ __( 'DSGVO', 'devTheme' ) } initialOpen={ false } >
+              {! videoBlock &&
+                <PanelRow>
+                  <SelectControl
+                    label={__("Select cookie", "devTheme")}
+                    value={dsgvoCookie}
+                    options={cookieOptions}
+                    onChange={dsgvoCookie => setAttributes({ dsgvoCookie })}
+                  />
+                </PanelRow>
+              }
+              <PanelRow>
+                <MediaUploadCheck>
+                  <MediaUpload
+                    title={ __( 'Selected image', 'devTheme' ) }
+                    onSelect={ onUpdateDsgvoImage }
+                    value={ dsgvoImgId }
+                    render={ ( { open } ) => (
+                      <Button
+                        className={ ! dsgvoImgId ? 'editor-post-featured-image__toggle' : 'editor-post-featured-image__preview' }
+                        onClick={ open }>
+                          { ! dsgvoImgId && ( __( 'Set placeholder image', 'devTheme' ) ) }
+                          { !! dsgvoImgId && dsgvoImageURL == '' && <Spinner /> }
+                          { dsgvoImgId && dsgvoImageURL !== '' &&
+                            <ResponsiveWrapper
+                              naturalWidth={ getImageInformation(select( 'core' ).getMedia( dsgvoImgId ), "width") }
+                              naturalHeight={ getImageInformation(select( 'core' ).getMedia( dsgvoImgId ), "height") }
+                            >
+                              <img src={ dsgvoImageURL } alt={ __( 'Placeholder image', 'devTheme' ) } />
+                            </ResponsiveWrapper>
+                          }
+                      </Button>
+                    ) }
+                  />
+                </MediaUploadCheck>
+                {dsgvoImgId && dsgvoImgId != 0 &&
+                  <MediaUploadCheck>
+                    <Button onClick={removeDsgvoMedia} isLink isDestructive>{__('Remove selected image', 'devTheme')}</Button>
+                  </MediaUploadCheck>
+                }
+              </PanelRow>
+            </PanelBody>
+          }
       </InspectorControls>
     );
   }

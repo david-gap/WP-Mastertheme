@@ -1,6 +1,20 @@
 # CHANGELOG
 
-## 1.58.28 | 12.07.2022 <🐛 FIX: customizer prev, Import 📦 NEW: bullet nav>
+## 1.59.28 | 28.07.2022 <🐛 FIX: h buttons, TempM 💎 IMPROVE: consent box>
+* Fix TemplateMedia block rendering
+* Send configurator settings to thme JS
+* Repeat posts block query until maximum achieved
+* Add pins target option of parent posts block
+* DSGVO image placeholder for each block
+* Option to select custom DSGVO rules inside Gutenberg
+* Fix customizer styles for 404 page visibility
+* add consent container styles to customizer
+* Add active statement for loaded pin
+* Fix search results wp-block alignwide and alignfull
+* Fix posts block line height
+* Fix Safari Bug on absolute left und right buttons
+
+## 1.58.28 | 19.07.2022 <🐛 FIX: customizer prev, Import 📦 NEW: bullet nav>
 * Add bullet navigation as option for the swiper gallery
 * Extand JS checkChildPosition function
 * Fixed customizer live preview

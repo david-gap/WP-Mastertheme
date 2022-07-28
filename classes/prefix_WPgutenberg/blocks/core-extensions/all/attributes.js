@@ -30,6 +30,15 @@ const attributes = {
   additionalSpacingTwo: {
     type: 'boolean',
     default: false
+  },
+  dsgvoImgId: {
+    type: 'number'
+  },
+  dsgvoImageURL: {
+    type: 'string'
+  },
+  dsgvoCookie: {
+    type: 'string'
   }
 }
 

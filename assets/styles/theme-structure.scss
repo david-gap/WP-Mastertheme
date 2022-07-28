@@ -424,12 +424,13 @@ body.frontend,
         justify-content: space-between;
         flex-direction: row;
         flex-wrap: nowrap;
+        gap: var(--wp--style--block-gap, var(--content__space, 30px));
+        row-gap: var(--wp--style--block-gap, var(--content__space, 30px));
         > div:first-child {
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          width: calc(60% - 20px);
-          margin-right: 20px;
+          width: 60%;
           .entry-content {
             flex-grow: 1;
           }
@@ -439,6 +440,13 @@ body.frontend,
         > figure {
           width: 40%;
           margin: 0;
+          .alignwide,
+          .alignfull {
+            margin-left: 0;
+            margin-right: 0;
+            width: 100%;
+            max-width: 100%;
+          }
         }
       }
       .post-meta {}

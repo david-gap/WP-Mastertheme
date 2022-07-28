@@ -42,6 +42,7 @@ export default class Inspector extends Component {
       attributes: {
         postType,
         postSum,
+        postRepeater,
         postSortDirection,
         postSortBy,
         postTextOne,
@@ -352,6 +353,14 @@ export default class Inspector extends Component {
               />
             </PanelRow>
           </PanelBody>
+          <PanelRow>
+            <ToggleControl
+                id="posts-repeater"
+                label={ __( 'Repeat output until maximum item sum is achieded', 'devTheme' ) }
+                checked={ postRepeater }
+                onChange={postRepeater => setAttributes({ postRepeater })}
+            />
+          </PanelRow>
           <PanelBody title={ __( 'Layout', 'devTheme' ) } >
             <PanelRow>
               <RangeControl
@@ -361,7 +370,7 @@ export default class Inspector extends Component {
                 value={postColumns}
                 onChange={postColumns => setAttributes({ postColumns })}
                 min={1}
-                max={10}
+                max={50}
               />
             </PanelRow>
             <PanelRow>

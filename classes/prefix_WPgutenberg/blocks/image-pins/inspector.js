@@ -101,6 +101,7 @@ export default class Inspector extends Component {
     /------------------------*/
     let pinsTargetOptions = [
       { value: "self", label: __( 'Inside block', 'devTheme' ) },
+      { value: "parent", label: __( 'Inside parent posts block', 'devTheme' ) },
       { value: "link", label: __( 'Link', 'devTheme' ) },
       { value: "window", label: __( 'Link to new window', 'devTheme' ) }
     ];

@@ -26,6 +26,10 @@ register_block_type(
         'type' => 'number',
         'default' => 10
       ),
+      'postRepeater' => array(
+        'type' => 'boolean',
+        'default' => true,
+      ),
       'postSortBy' => array(
         'type' => 'string',
         'default' => 'menu_order'
@@ -205,7 +209,7 @@ function WPgutenberg_posts_PostBuilder(array $attr, $id, $currentId){
       // add content
       $output .= '<div class="post-content">';
         if(array_key_exists('postTextOne', $attr) && $attr['postTextOne'] !== ''):
-          $output .= $attr['postTextOne'] == 'title' ? '<h4>' : '<div>';
+          $output .= $attr['postTextOne'] == 'title' ? '<h4>' : '<div class="' . $attr['postTextOne'] . '">';
             if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_row1', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
               $output .= $linkOpen;
             endif;
@@ -216,7 +220,7 @@ function WPgutenberg_posts_PostBuilder(array $attr, $id, $currentId){
           $output .= $attr['postTextOne'] == 'title' ? '</h4>' : '</div>';
         endif;
         if(array_key_exists('postTextTwo', $attr) && $attr['postTextTwo'] !== ''):
-          $output .= $attr['postTextTwo'] == 'title' ? '<h4>' : '<div>';
+          $output .= $attr['postTextTwo'] == 'title' ? '<h4>' : '<div class="' . $attr['postTextTwo'] . '">';
             if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_row2', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
               $output .= $linkOpen;
             endif;
@@ -365,18 +369,51 @@ function WPgutenberg_posts_getResultsAndSort(array $attr, string $source = 'firs
       // set taxonomy filter
       $groupedIds = apply_filters( 'WPgutenberg_filter_posts_taxSorting', $groupedIds, $attr );
       // return by taxonomy
+      $sum = 0;
+
       foreach ($groupedIds as $termkey => $termgroup) {
         if(is_array($termgroup) && !empty($termgroup)):
           foreach ($termgroup as $idkey => $id) {
             // taxonomy is not empty
+            $sum++;
             $output .= WPgutenberg_posts_PostBuilder($attr, $id, $currentId);
           }
         endif;
       }
+      // repeat posts
+      if($attr['postRepeater'] && $sum < $attr['postSum']):
+        while($sum < $attr['postSum']){
+          if(is_array($termgroup) && !empty($termgroup)):
+            foreach ($termgroup as $idkey => $id) {
+              // taxonomy is not empty
+              if($sum < $attr['postSum']):
+                $sum++;
+                $output .= WPgutenberg_posts_PostBuilder($attr, $id, $currentId);
+              else:
+                break;
+              endif;
+            }
+          endif;
+        }
+      endif;
     else:
       foreach ($allPosts as $key => $postID) {
+        $sum++;
         $output .= WPgutenberg_posts_PostBuilder($attr, $postID, $currentId);
       }
+      // repeat posts
+      if($attr['postRepeater'] && $sum < $attr['postSum']):
+        while($sum < $attr['postSum']){
+          foreach ($allPosts as $key => $postID) {
+            if($sum < $attr['postSum']):
+              $sum++;
+              $output .= WPgutenberg_posts_PostBuilder($attr, $postID, $currentId);
+            else:
+            //  break;
+            endif;
+          }
+        }
+      endif;
     endif;
     // grid fixer
     // if(array_key_exists('postSwiper', $attr) && $attr['postSwiper'] !== true && array_key_exists('postColumns', $attr) && $attr['postColumns'] > 1):
@@ -445,6 +482,7 @@ function WPgutenberg_posts_blockRender($attr){
               $output .= '<input type="hidden" name="postTaxonomyFilter" value="' . implode('__', $attr['postTaxonomyFilter']) . '">';
             endif;
             $output .= '<input type="hidden" name="postSum" value="' . $attr['postSum'] . '">';
+            $output .= '<input type="hidden" name="postRepeater" value="' . $attr['postRepeater'] . '">';
             $output .= '<input type="hidden" name="postTaxonomyFilterRelation" value="' . $attr['postTaxonomyFilterRelation'] . '">';
             $output .= '<input type="hidden" name="postType" value="' . $attr['postType'] . '">';
             $output .= '<input type="hidden" name="postSortBy" value="' . $attr['postSortBy'] . '">';

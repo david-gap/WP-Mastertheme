@@ -177,6 +177,10 @@ function WPgutenberg_pin_blockRender($attr){
         $pinOpen = '<a href="' . $get_url . '" target="_blank">';
         $pinClose = '</a>';
       break;
+    case 'parent':
+      $pinOpen = '<span data-load="parentcontent">';
+      $pinClose = '</span>';
+      break;
     default:
       $pinOpen = '<span data-load="content">';
       $pinClose = '</span>';

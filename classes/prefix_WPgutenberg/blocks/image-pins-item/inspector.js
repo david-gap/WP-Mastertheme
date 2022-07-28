@@ -104,6 +104,7 @@ export default class Inspector extends Component {
       { value: "heritage", label: __( 'Heritage from parent', 'devTheme' ) },
       { value: "", label: __( '-', 'devTheme' ) },
       { value: "self", label: __( 'Inside block', 'devTheme' ) },
+      { value: "parent", label: __( 'Inside parent posts block', 'devTheme' ) },
       { value: "link", label: __( 'Link', 'devTheme' ) },
       { value: "window", label: __( 'Link to new window', 'devTheme' ) }
     ];
@@ -282,7 +283,7 @@ export default class Inspector extends Component {
               </MediaUploadCheck>
               {pinImgId && pinImgId != 0 &&
                 <MediaUploadCheck>
-                  <Button onClick={removePinMedia} isLink isDestructive>{__('Remove pin image', 'devTheme')}</Button>
+                  <Button onClick={removePinMedia} isLink isDestructive>{__('Remove selected image', 'devTheme')}</Button>
                 </MediaUploadCheck>
               }
             </PanelRow>

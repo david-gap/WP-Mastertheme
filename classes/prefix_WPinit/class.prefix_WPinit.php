@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.15.11
+ * @version     2.16.11
  *
 */
 
@@ -398,6 +398,16 @@ class prefix_WPinit {
         wp_enqueue_script('theme/scripts');
         # get theme directory for javascript files
         wp_localize_script( 'theme/scripts', 'theme_directory', get_stylesheet_directory_uri());
+        # get configuration settings from config file for javascript files
+        $configuration_file = get_stylesheet_directory_uri() . '/configuration.json';
+        // check if file exists or empty
+        if(file_exists($configuration_file) && filesize($configuration_file) > 0):
+          $configuration_content = file_get_contents($configuration_file);
+          $configuration = json_decode($configuration_content,true);
+        else:
+          $configuration = get_option('WPadmin_configuration') ? get_option('WPadmin_configuration') : false;
+        endif;
+        wp_localize_script( 'theme/scripts', 'configurations', $configuration);
       // template css
         wp_enqueue_style('theme/styles', get_template_directory_uri() . '' . $this->WPinit_css_path, false, $this->WPinit_theme_css_version);
       // jQuery (from wp core)

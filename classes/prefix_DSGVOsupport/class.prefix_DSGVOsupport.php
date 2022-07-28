@@ -4,7 +4,7 @@
  *
  * Backend area to manage configuration file
  * Author:      David Voglgsnag
- * @version     1.4.7
+ * @version     1.4.8
  *
  */
 
@@ -183,6 +183,7 @@ class prefix_DSGVOsupport {
       return $output;
     }
 
+
     /* 3.2 BLOCK CONSANT REQUEST
     /------------------------*/
     public static function returnConsentRequest($consentRequest, $block_content, $block){
@@ -210,10 +211,15 @@ class prefix_DSGVOsupport {
       // container additions
       $containerAdds = '';
       // convert data-embed
-      $toInsert = str_replace(array('&', '<', '>', '"'), array('&amp;', '&lt;', '&gt;', '&quot;'), $block_content);
+      $not_embedded = $block['attrs']['url'];
+      $toInsert = str_replace( $not_embedded, wp_oembed_get($not_embedded), $block_content );
+      $toInsert = str_replace(array('&', '<', '>', '"', '«', '»'), array('&amp;', '&lt;', '&gt;', '&quot;', '&quot;', '&quot;'), $toInsert);
       // build output
       $output = '';
       $output .= '<div class="consent-request' . $blockClasses . '"' . $blockAdds . '>';
+        if(array_key_exists('dsgvoImgId', $block["attrs"])):
+          $output .= '<img src="' . wp_get_attachment_image_src($block["attrs"]["dsgvoImgId"], 'full')[0] . '" class="dsgvo-placeholder">';
+        endif;
         $output .= '<div class="consent-request-container"' . $containerAdds . '>';
           $output .= '<p>';
             if(strpos($block_content, 'youtube') !== false):
@@ -231,6 +237,7 @@ class prefix_DSGVOsupport {
       $output .= '</div>';
       return $output;
     }
+
 
     /* 3.3 FILTER CONTENT
     /------------------------*/

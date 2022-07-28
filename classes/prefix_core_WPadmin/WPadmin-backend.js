@@ -37,7 +37,7 @@ jQuery(document).ready(function($){
 
     /* AJAX
     /––––––––––––––––––––––––*/
-    function ajaxCall(getdata) {
+    function adminAjaxCall(getdata) {
       $.ajax({
         url: Ajax_File,
         type: 'POST',
@@ -154,7 +154,7 @@ jQuery(document).ready(function($){
       };
       $('#configuration').addClass('loading');
       event.preventDefault();
-      ajaxCall(data);
+      adminAjaxCall(data);
     });
 
     /* import form
@@ -178,7 +178,7 @@ jQuery(document).ready(function($){
             action: get_action,
             formdata: get_formData
           };
-          ajaxCall(data);
+          adminAjaxCall(data);
         };
         readFile.readAsText(file_data);
       } else {
@@ -187,7 +187,7 @@ jQuery(document).ready(function($){
           action: get_action,
           formdata: ''
         };
-        ajaxCall(data);
+        adminAjaxCall(data);
       }
     });
 
@@ -285,7 +285,7 @@ jQuery(document).ready(function($){
         action: get_action
       };
       // run ajax
-      ajaxCall(data);
+      adminAjaxCall(data);
     });
 
 

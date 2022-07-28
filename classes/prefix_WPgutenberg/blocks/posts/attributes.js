@@ -20,6 +20,10 @@ const attributes = {
     type: 'number',
     default: 10
   },
+  postRepeater: {
+    type: 'boolean',
+    default: false,
+  },
   postSortBy: {
     type: 'string',
     default: 'menu_order'

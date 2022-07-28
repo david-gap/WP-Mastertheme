@@ -38,8 +38,8 @@ const attributes = {
   },
   pinInfoTrigger: {
     type: 'array'
-  }
-  ,parentAttributes: {
+  },
+  parentAttributes: {
     type: 'object'
   }
 }

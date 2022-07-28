@@ -430,7 +430,7 @@ REGISTER BLOCK
     } )( props => {
       // set values
       const {
-        attributes: { postType, postTaxonomyFilter, postIdFilter, postTaxonomyFilterRelation, postSum, postSortDirection, postSortBy, postTextOne, postTextTwo, postColumns, anchor, postThumb, postSwiper, postPopUp, postPopUpNav, postSortNav, postSortNavOptions, postColumnsSpace, postTaxonomyFilterOptions, postsInsideLoad, postsInsideLoadFirst },
+        attributes: { postType, postTaxonomyFilter, postIdFilter, postTaxonomyFilterRelation, postSum, postRepeater, postSortDirection, postSortBy, postTextOne, postTextTwo, postColumns, anchor, postThumb, postSwiper, postPopUp, postPopUpNav, postSortNav, postSortNavOptions, postColumnsSpace, postTaxonomyFilterOptions, postsInsideLoad, postsInsideLoadFirst },
         attributes,
         className,
         setAttributes,
@@ -506,7 +506,7 @@ REGISTER BLOCK
     } ),
     save: props => {
       const {
-        attributes: { postType, postTaxonomyFilter, postIdFilter, postTaxonomyFilterRelation, postSum, postSortDirection, postSortBy, postTextOne, postTextTwo, postColumns, anchor, postThumb, postSwiper, postPopUp, postPopUpNav, postSortNav, postSortNavOptions, postColumnsSpace, postTaxonomyFilterOptions, postsInsideLoad, postsInsideLoadFirst },
+        attributes: { postType, postTaxonomyFilter, postIdFilter, postTaxonomyFilterRelation, postSum, postRepeater, postSortDirection, postSortBy, postTextOne, postTextTwo, postColumns, anchor, postThumb, postSwiper, postPopUp, postPopUpNav, postSortNav, postSortNavOptions, postColumnsSpace, postTaxonomyFilterOptions, postsInsideLoad, postsInsideLoadFirst },
         attributes
       } = props;
 

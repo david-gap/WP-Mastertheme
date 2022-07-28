@@ -19,6 +19,8 @@ Table of Contents:
     2.5 LEAD
     2.6 404 PAGE
     2.7 LANGUAGE SWITCHER
+    2.8 TITLE SIZES
+    2.9 CONSENT CONTAINER
   3.0 FOOTER
   4.0 GENERAL
   5.0 BLOCKS
@@ -238,7 +240,7 @@ body.frontend,
   }
 
 
-  /* 2.4 TITLE SIZES
+  /* 2.8 TITLE SIZES
   /––––––––––––––––––––––––*/
   .is-style-title-one {
     font-family: var(--titleOne__fontFamily, inherit);
@@ -263,6 +265,27 @@ body.frontend,
     font-weight: var(--titleThree__fontWeight, inherit);
     text-transform: var(--titleThree__textTransform, inherit);
     letter-spacing: var(--titleThree__letterSpacing, inherit);
+  }
+
+
+  /* 2.9 CONSENT CONTAINER
+  /––––––––––––––––––––––––*/
+  .consent-request {
+    .consent-request-container {
+      font-family: var(--consentContainer__fontFamily, inherit);
+      font-size: var(--consentContainer__fontSize, inherit);
+      line-height: var(--consentContainer__lineHeight, inherit);
+      font-weight: var(--consentContainer__fontWeight, inherit);
+      text-align: var(--consentContainer__textAlign, center);
+      button {
+        font-family: var(--consentContainer__Button_fontFamily, var(--block__buttons_fontFamily, inherit));
+        font-size: var(--consentContainer__Button_fontSize, var(--block__buttons_fontSize, inherit));
+        font-weight: var(--consentContainer__Button_fontWeight, var(--block__buttons_fontWeight, inherit));
+        line-height: var(--consentContainer__Button_lineHeight, var(--block__buttons_lineHeight, inherit));
+        text-transform: var(--consentContainer__Button_textTransform, var(--block__buttons_textTransform, inherit));
+        letter-spacing: var(--consentContainer__Button_letterSpacing, var(--block__buttons_letterSpacing, inherit));
+      }
+    }
   }
 
 
@@ -477,8 +500,12 @@ body.frontend,
     > ul {
       > li {
         > figure,
-        > a > figure {
+        > a > figure,
+        .templateMedia {
           line-height: 0;
+          .consent-request * {
+            line-height: var(--html__lineheight,1.4);
+          }
         }
       }
     }

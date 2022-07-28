@@ -1854,7 +1854,7 @@ class prefix_core_Customizer {
             )
           )
         ),
-        '404' => array(
+        'page404' => array(
           'label' => '404 Page',
           'inputs' => array(
             'error__padding' => array(
@@ -1911,6 +1911,139 @@ class prefix_core_Customizer {
             ),
             'error__title_margin_mobile' => array(
               'label' => 'Title margin',
+              'type' => 'input'
+            )
+          )
+        ),
+        'consentContainer' => array(
+          'label' => 'DSGVO consent container',
+          'inputs' => array(
+            'consentContainer__bg' => array(
+              'label' => 'Background color',
+              'type' => 'color'
+            ),
+            'consentContainer__color' => array(
+              'label' => 'Text color',
+              'type' => 'color'
+            ),
+            'consentContainer__borderColor' => array(
+              'label' => 'Border color',
+              'type' => 'color'
+            ),
+            'consentContainer__fontFamily' => array(
+              'label' => 'Font family',
+              'type' => 'input'
+            ),
+            'consentContainer__fontSize' => array(
+              'label' => 'Font size',
+              'type' => 'input'
+            ),
+            'consentContainer__lineHeight' => array(
+              'label' => 'Line height',
+              'type' => 'input'
+            ),
+            'consentContainer__fontWeight' => array(
+              'label' => 'Font weight',
+              'type' => 'input'
+            ),
+            'consentContainer__textAlign' => array(
+              'label' => 'Text align',
+              'type' => 'input'
+            ),
+            'consentContainer__padding' => array(
+              'label' => 'Padding',
+              'type' => 'input'
+            ),
+            'consentContainer__borderWidth' => array(
+              'label' => 'Border width',
+              'type' => 'input'
+            ),
+            'consentContainer__borderRadius' => array(
+              'label' => 'Border radius',
+              'type' => 'input'
+            ),
+            'consentContainer__fontSize_mobile' => array(
+              'label' => 'Font size',
+              'type' => 'input'
+            ),
+            'consentContainer__lineHeight_mobile' => array(
+              'label' => 'Line height',
+              'type' => 'input'
+            ),
+            'consentContainer__padding_mobile' => array(
+              'label' => 'Padding',
+              'type' => 'input'
+            ),
+            'consentContainer__Button_bg' => array(
+              'label' => 'Button background color',
+              'type' => 'color'
+            ),
+            'consentContainer__Button_color' => array(
+              'label' => 'Button text color',
+              'type' => 'color'
+            ),
+            'consentContainer__Button_borderColor' => array(
+              'label' => 'Button border color',
+              'type' => 'color'
+            ),
+            'consentContainer__Button_bg_hover' => array(
+              'label' => 'Button background color',
+              'type' => 'color'
+            ),
+            'consentContainer__Button_color_hover' => array(
+              'label' => 'Button text color',
+              'type' => 'color'
+            ),
+            'consentContainer__Button_borderColor_hover' => array(
+              'label' => 'Button border color',
+              'type' => 'color'
+            ),
+            'consentContainer__Button_fontFamily' => array(
+              'label' => 'Button font family',
+              'type' => 'input'
+            ),
+            'consentContainer__Button_fontSize' => array(
+              'label' => 'Button font size',
+              'type' => 'input'
+            ),
+            'consentContainer__Button_fontWeight' => array(
+              'label' => 'Button font weight',
+              'type' => 'input'
+            ),
+            'consentContainer__Button_lineHeight' => array(
+              'label' => 'Button line height',
+              'type' => 'input'
+            ),
+            'consentContainer__Button_textTransform' => array(
+              'label' => 'Button text transform',
+              'type' => 'input'
+            ),
+            'consentContainer__Button_letterSpacing' => array(
+              'label' => 'Button letter spacing',
+              'type' => 'input'
+            ),
+            'consentContainer__Button_padding' => array(
+              'label' => 'Button padding',
+              'type' => 'input'
+            ),
+            'consentContainer__Button_borderWidth' => array(
+              'label' => 'Button border width',
+              'type' => 'input'
+            ),
+            'consentContainer__Button_borderRadius' => array(
+              'label' => 'Button border radius',
+              'type' => 'input'
+            ),
+            'consentContainer__Button_fontSize_mobile' => array(
+              'label' => 'Button font size',
+              'type' => 'input'
+            ),
+            'consentContainer__Button_lineHeight_mobile' => array(
+              'label' => 'Button line height',
+              'type' => 'input'
+            ),
+            'consentContainer__Button_padding_mobile' => array(
+              'label' => 'Button padding',
               'type' => 'input'
             )
           )
@@ -2755,6 +2888,10 @@ class prefix_core_Customizer {
             ),
             'imagePins__pinColor_hover' => array(
               'label' => 'Pin color',
+              'type' => 'color'
+            ),
+            'imagePins__pinColor_loaded' => array(
+              'label' => 'Loaded pin color',
               'type' => 'color'
             ),
             'imagePins__pinSize' => array(

@@ -37,6 +37,9 @@
         removeSpacing,
         additionalSpacingOne,
         additionalSpacingTwo,
+        dsgvoImgId,
+        dsgvoImageURL,
+        dsgvoCookie
       } = attributes;
       return (
         <Fragment>
@@ -53,7 +56,7 @@
   /* add custom element class in save element
   /------------------------*/
   function applyExtraClass( extraProps, blockType, attributes ) {
-    const { hideOnDesktop, hideOnMobile, removeSpacing, additionalSpacingOne, additionalSpacingTwo } = attributes;
+    const { hideOnDesktop, hideOnMobile, removeSpacing, additionalSpacingOne, additionalSpacingTwo, dsgvoCookie } = attributes;
     if ( typeof hideOnDesktop !== 'undefined' && hideOnDesktop ) {
       extraProps.className = classnames( extraProps.className, 'mobile' );
     }
@@ -68,6 +71,9 @@
     }
     if ( typeof additionalSpacingTwo !== 'undefined' && additionalSpacingTwo ) {
       extraProps.className = classnames( extraProps.className, 'spacing-two' );
+    }
+    if ( typeof dsgvoCookie !== 'undefined' && dsgvoCookie ) {
+      extraProps.className = classnames( extraProps.className, dsgvoCookie );
     }
     return extraProps;
   }
