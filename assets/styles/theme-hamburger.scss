@@ -8,6 +8,7 @@
 
 
 body.frontend,
+body.page-template,
 .block-editor .editor-styles-wrapper {
 
   > header nav {
@@ -219,6 +220,7 @@ body.frontend,
                 transition: .3s;
                 width: var(--submenu__toggle_width, 25px);
                 padding: var(--submenu__toggle_padding, 0px);
+                line-height: 0;
                 svg {
                   width: 100%;
                   height: auto;

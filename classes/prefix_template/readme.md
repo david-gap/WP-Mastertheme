@@ -1,4 +1,4 @@
-**Version 2.31.17** (19.07.2022)
+**Version 2.32.17** (31.08.2022)
 
 Custom class "template" with template parts and header / footer builder
 
@@ -54,6 +54,8 @@ Custom class "template" with template parts and header / footer builder
 * $template_thumbnail_align: align all thumbnails
 * $template_404_align: align 404 page thumbnail
 * $template_search_align: align search results page thumbnail
+* $template_404_searchForm: Display search form on 404 page
+* $template_404_backToHome: Display back to home page button on 404 page
 
 ## CONFIGURATION FILE
 ```

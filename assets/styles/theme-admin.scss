@@ -9,6 +9,8 @@
 
 $light:         #fff;
 $coloring:      #bbd9e4;
+$coloring_row1: #e8f5fa;
+$coloring_row2: #e2eff4;
 $button:        #007cba;
 
 $color_error:   #a53737;
@@ -71,6 +73,15 @@ body.wp-admin {
           }
           tbody {
             > tr {
+              border-width: 0 0 1px;
+              border-style: solid;
+              border-color: $coloring;
+              &:nth-child(odd) {
+                background-color: $coloring_row1;
+              }
+              &:nth-child(even) {
+                background-color: $coloring_row2;
+              }
               > th {
                 text-align: left;
                 padding: 0 12px;

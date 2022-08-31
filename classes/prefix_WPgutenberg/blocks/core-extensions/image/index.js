@@ -39,6 +39,7 @@
       } = props;
       const {
         addPopUp,
+        addDownloadButton,
       } = attributes;
       return (
         <Fragment>

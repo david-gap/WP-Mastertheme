@@ -59,6 +59,24 @@ wp.blocks.registerBlockStyle( 'core/heading', [{
   isDefault: false,
 }] );
 
+wp.blocks.registerBlockStyle( 'core/post-title', [{
+  name: 'post-title',
+  label: 'Seiten Titel',
+  isDefault: false,
+},{
+  name: 'title-one',
+  label: 'Title 1',
+  isDefault: false,
+},{
+  name: 'title-two',
+  label: 'Title 2',
+  isDefault: false,
+},{
+  name: 'title-three',
+  label: 'Title 3',
+  isDefault: false,
+}] );
+
 wp.blocks.registerBlockStyle( 'core/columns', [{
   name: 'columns-has-background-gap',
   label: 'Abstand wie mit Hintergrundfarbe'

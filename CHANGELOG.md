@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## 1.61.28 | 31.08.2022 <📦 NEW: img download, Alpha 💎 IMPROVE: customizer>
+* Add search form to 404 page
+* Manage search form & back to home button on 404 page by the configurator
+* Add customizer breadcrumb colors for dark mode
+* Fix title background fallbacks
+* Customizer font style
+* Add alpha canal to customizer color picker
+* Add social media customizer settings
+* Add all php registered Gutenberg blocks to configuration
+* Additional configuration styles
+* Add download link to image block
+* Scroll to top button to customizer
+* Add header & footer padding to before & after container
+
 ## 1.60.28 | 28.07.2022 <💎 IMPROVE: blog & archive stylings>
 * Add blog and archive styles to customizer
 * Use blog styles as search results defaults

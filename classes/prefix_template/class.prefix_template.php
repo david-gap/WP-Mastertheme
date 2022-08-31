@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.31.17
+ * @version     2.32.17
  *
 */
 
@@ -126,6 +126,8 @@ class prefix_template {
     * @param static string $template_thumbnail_align: align all thumbnails
     * @param static string $template_404_align: align 404 page thumbnail
     * @param static string $template_search_align: align search results page thumbnail
+    * @param static int $template_404_searchForm: Display search form on 404 page
+    * @param static int $template_404_backToHome: Display back to home page button on 404 page
   */
   static $template_container_header                = 1;
   static $template_container_breadcrumbs           = 1;
@@ -308,6 +310,8 @@ class prefix_template {
   static $template_thumbnail_align                 = 'normal';
   static $template_404_align                       = 'normal';
   static $template_search_align                    = 'normal';
+  static $template_404_searchForm                  = 0;
+  static $template_404_backToHome                  = 1;
 
 
   /* 1.2 ON LOAD RUN
@@ -1312,6 +1316,20 @@ class prefix_template {
           "value" => array('normal','wide','full')
         )
       )
+    ),
+    'errorPage' => array(
+      "label" => "404 Page",
+      "type" => "multiple",
+      "value" => array(
+        "searchForm" => array(
+          "label" => "Display search form",
+          "type" => "switchbutton"
+        ),
+        "BackToHome" => array(
+          "label" => "Display back to home button",
+          "type" => "switchbutton"
+        )
+      )
     )
   );
 
@@ -1461,6 +1479,11 @@ class prefix_template {
           SELF::$template_thumbnail_align = array_key_exists('align', $thumbnail) ? $thumbnail['align'] : SELF::$template_thumbnail_align;
           SELF::$template_404_align = array_key_exists('404_align', $thumbnail) ? $thumbnail['404_align'] : SELF::$template_404_align;
           SELF::$template_search_align = array_key_exists('search_align', $thumbnail) ? $thumbnail['search_align'] : SELF::$template_search_align;
+        endif;
+        if($configuration && array_key_exists('errorPage', $myConfig)):
+          $errorPage = $myConfig['errorPage'];
+          SELF::$template_404_searchForm = array_key_exists('searchForm', $errorPage) ? $errorPage['searchForm'] : SELF::$template_404_searchForm;
+          SELF::$template_404_backToHome = array_key_exists('BackToHome', $errorPage) ? $errorPage['BackToHome'] : SELF::$template_404_backToHome;
         endif;
       endif;
     }

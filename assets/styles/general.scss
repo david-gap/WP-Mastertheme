@@ -39,7 +39,8 @@ html {
   }
 }
 
-body.frontend {
+body.frontend,
+body.page-template {
   // used as wrapper for sticky footer
   display: flex;
   flex-direction: column;

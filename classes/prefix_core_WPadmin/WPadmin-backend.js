@@ -387,4 +387,25 @@ jQuery(document).ready(function($){
 
 
 
+    /* toggle all check boxes
+    /------------------------*/
+    function toggleCheckboxes(){
+      var target = this.getAttribute("data-name");
+      var checkboxes = document.querySelectorAll('input[name="' + target + '[]"]');
+      for (var i = 0; i < checkboxes.length; i++) {
+          if (checkboxes[i] != this)
+              checkboxes[i].checked = this.checked;
+      }
+    }
+    var toggleAllCheckboxes = document.querySelectorAll('.select-all');
+    if(toggleAllCheckboxes.length !== 0){
+      // click to toggle
+      Array.from(toggleAllCheckboxes).forEach(function(box) {
+        box.addEventListener('click', toggleCheckboxes);
+        box.addEventListener('keypress', toggleCheckboxes);
+      });
+    }
+
+
+
 });

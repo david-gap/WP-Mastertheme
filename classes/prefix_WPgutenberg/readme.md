@@ -1,4 +1,4 @@
-**Version 2.21.14** (28.07.2022)
+**Version 2.22.14** (31.08.2022)
 
 Custom class "WPgutenberg" to select allowed guttenberg blocks and add style options
 
@@ -180,3 +180,7 @@ WPgutenberg_imagepins_pin
 to replace the given Pin close info window SVG.
 There are two parameters inside this query. First parameter is the pin himself and the second is the block attributes.
 WPgutenberg_imagepins_pinclose
+
+to replace the given image download button value
+There are two parameters inside this query. First parameter is the content  and the second is the block attributes.
+WPgutenberg_image_downloadButton

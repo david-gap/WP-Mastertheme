@@ -22,6 +22,7 @@ Table of Contents:
     2.8 TITLE SIZES
     2.9 CONSENT CONTAINER
     2.10 BLOG & ARCHIVE
+    2.11 SCROLL TO TOP
   3.0 FOOTER
   4.0 GENERAL
   5.0 BLOCKS
@@ -65,6 +66,7 @@ Table of Contents:
 
 
 body.frontend,
+body.page-template,
 .block-editor .editor-styles-wrapper {
 
   /*==================================================================================
@@ -87,6 +89,7 @@ body.frontend,
         line-height: var(--mnav__lineheight, 1.4);
         font-weight: var(--mnav__fontWeight, 700);
         text-transform: var(--mnav__textTransform, uppercase);
+        font-style: var(--mnav__fontStyle, initial);
         letter-spacing: var(--mnav__letterSpacing, 0);
         ul#menu_main {
           > li {
@@ -97,6 +100,7 @@ body.frontend,
                 line-height: var(--mnav__sub_lineheight, inherit);
                 font-weight: var(--mnav__sub_fontWeight, 500);
                 text-transform: var(--mnav__sub_textTransform, none);
+                font-style: var(--mnav__sub_fontStyle, initial);
                 letter-spacing: var(--mnav__sub_letterSpacing, 0);
                 > ul {
                   > li {
@@ -105,6 +109,7 @@ body.frontend,
                     line-height: var(--mnav__subSub_lineheight, var(--mnav__sub_lineheight, inherit));
                     font-weight: var(--mnav__subSub_fontWeight, var(--mnav__sub_fontWeight, 500));
                     text-transform: var(--mnav__subSub_textTransform, var(--mnav__sub_textTransform, none));
+                    font-style: var(--mnav__subSub_fontStyle, var(--mnav__sub_fontStyle, initial));
                     letter-spacing: var(--mnav__subSub_letterSpacing, var(--mnav__sub_letterSpacing, 0));
                     > ul {
                       > li {
@@ -113,6 +118,7 @@ body.frontend,
                         line-height: var(--mnav__subSubSub_lineheight, var(--mnav__subSub_lineheight, inherit));
                         font-weight: var(--mnav__subSubSub_fontWeight, var(--mnav__subSub_fontWeight, 500));
                         text-transform: var(--mnav__subSubSub_textTransform, var(--mnav__subSub_textTransform, none));
+                        font-style: var(--mnav__subSubSub_fontStyle, var(--mnav__subSub_fontStyle, initial));
                         letter-spacing: var(--mnav__subSubSub_letterSpacing, var(--mnav__subSub_letterSpacing, 0));
                       }
                     }
@@ -141,12 +147,13 @@ body.frontend,
 
   /* 2.1 BREADCRUMBS
   /––––––––––––––––––––––––*/
-  nav.breadcrumbs {
+  .breadcrumbs {
     font-family: var(--bc__fontfamily, inherit);
     font-size: var(--bc__fontsize, inherit);
     font-weight: var(--bc__fontWeight, inherit);
     line-height: var(--bc__lineheight, inherit);
     text-transform: var(--bc__textTransform, inherit);
+    font-style: var(--bc__fontStyle, initial);
   }
 
 
@@ -161,6 +168,7 @@ body.frontend,
           line-height: var(--search__article_title_lineHeight, var(--blog__article_title_lineHeight, inherit));
           font-weight: var(--search__article_title_fontWeight, var(--blog__article_title_fontWeight, inherit));
           text-transform: var(--search__article_title_textTransform, var(--blog__article_title_textTransform, inherit));
+          font-style: var(--search__article_title_fontStyle, var(--blog__article_title_fontStyle, initial));
         }
       }
     }
@@ -189,6 +197,7 @@ body.frontend,
     line-height: var(--postTitle__lineHeight, inherit);
     font-weight: var(--postTitle__fontWeight, inherit);
     text-transform: var(--postTitle__textTransform, inherit);
+    font-style: var(--postTitle__fontStyle, initial);
     letter-spacing: var(--postTitle__letterSpacing, inherit);
   }
 
@@ -202,6 +211,7 @@ body.frontend,
     line-height: var(--leadText__lineHeight, inherit);
     font-weight: var(--leadText__fontWeight, inherit);
     text-transform: var(--leadText__textTransform, inherit);
+    font-style: var(--leadText__fontStyle, initial);
     letter-spacing: var(--leadText__letterSpacing, inherit);
   }
 
@@ -210,12 +220,14 @@ body.frontend,
   /––––––––––––––––––––––––*/
   #error-page {
     article {
+      text-align: var(--error__textAlign, inherit);
       h1.post-title {
         font-family: var(--error__title_fontFamily, var(--postTitle__fontFamily, inherit));
         font-size: var(--error__title_fontSize, var(--postTitle__fontSize, inherit));
         line-height: var(--error__title_lineHeight, var(--postTitle__lineHeight, inherit));
         font-weight: var(--error__title_fontWeight, var(--postTitle__fontWeight, inherit));
         text-transform: var(--error__title_textTransform, var(--postTitle__textTransform, inherit));
+        font-style: var(--error__title_fontStyle, var(--postTitle__fontStyle, initial));
         letter-spacing: var(--error__title_letterSpacing, var(--postTitle__letterSpacing, inherit));
       }
     }
@@ -235,6 +247,7 @@ body.frontend,
         font-weight: var(--ls__link_fontWeight, inherit);
         line-height: var(--ls__link_lineheight, inherit);
         text-transform: var(--ls__link_textTransform, inherit);
+        font-style: var(--ls__link_fontStyle, initial);
         letter-spacing: var(--ls__link_letterSpacing, inherit);
       }
     }
@@ -249,6 +262,7 @@ body.frontend,
     line-height: var(--titleOne__lineHeight, inherit);
     font-weight: var(--titleOne__fontWeight, inherit);
     text-transform: var(--titleOne__textTransform, inherit);
+    font-style: var(--titleOne__fontStyle, initial);
     letter-spacing: var(--titleOne__letterSpacing, inherit);
   }
   .is-style-title-two {
@@ -257,6 +271,7 @@ body.frontend,
     line-height: var(--titleTwo__lineHeight, inherit);
     font-weight: var(--titleTwo__fontWeight, inherit);
     text-transform: var(--titleTwo__textTransform, inherit);
+    font-style: var(--titleTwo__fontStyle, initial);
     letter-spacing: var(--titleTwo__letterSpacing, inherit);
   }
   .is-style-title-three {
@@ -265,6 +280,7 @@ body.frontend,
     line-height: var(--titleThree__lineHeight, inherit);
     font-weight: var(--titleThree__fontWeight, inherit);
     text-transform: var(--titleThree__textTransform, inherit);
+    font-style: var(--titleThree__fontStyle, initial);
     letter-spacing: var(--titleThree__letterSpacing, inherit);
   }
 
@@ -284,6 +300,7 @@ body.frontend,
         font-weight: var(--consentContainer__Button_fontWeight, var(--block__buttons_fontWeight, inherit));
         line-height: var(--consentContainer__Button_lineHeight, var(--block__buttons_lineHeight, inherit));
         text-transform: var(--consentContainer__Button_textTransform, var(--block__buttons_textTransform, inherit));
+        font-style: var(--consentContainer__Button_fontStyle, var(--block__buttons_fontStyle, initial));
         letter-spacing: var(--consentContainer__Button_letterSpacing, var(--block__buttons_letterSpacing, inherit));
       }
     }
@@ -302,8 +319,24 @@ body.frontend,
           line-height: var(--blog__article_title_lineHeight, inherit);
           font-weight: var(--blog__article_title_fontWeight, inherit);
           text-transform: var(--blog__article_title_textTransform, inherit);
+          font-style: var(--blog__article_title_fontStyle, initial);
         }
       }
+    }
+  }
+
+
+  /* 2.11 SCROLL TO TOP
+  /––––––––––––––––––––––––*/
+  #scroll-to-top {
+    span {
+      font-family: var(--scrollToTop__Button_fontFamily, inherit);
+      font-size: var(--scrollToTop__Button_fontSize, inherit);
+      line-height: var(--scrollToTop__Button_lineHeight, inherit);
+      font-weight: var(--scrollToTop__Button_fontWeight, inherit);
+      text-transform: var(--scrollToTop__Button_textTransform, inherit);
+      font-style: var(--scrollToTop__Button_fontStyle, initial);
+      letter-spacing: var(--scrollToTop__Button_letterSpacing, initial);
     }
   }
 
@@ -474,6 +507,7 @@ body.frontend,
         font-weight: var(--block__buttons_fontWeight, inherit);
         line-height: var(--block__buttons_lineHeight, inherit);
         text-transform: var(--block__buttons_textTransform, inherit);
+        font-style: var(--block__buttons_fontStyle, initial);
         letter-spacing: var(--block__buttons_letterSpacing, inherit);
       }
     }
@@ -536,6 +570,11 @@ body.frontend,
     figcaption {
       font-size: var(--block__imageFigcaption_fontSize, inherit);
       line-height: var(--block__imageFigcaption_lineHeight, inherit);
+    }
+    a {
+      &.download-button {
+        line-height: 1;
+      }
     }
   }
 

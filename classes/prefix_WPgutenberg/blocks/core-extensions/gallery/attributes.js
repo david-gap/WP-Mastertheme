@@ -14,6 +14,10 @@ const attributes = {
   addPopUpPreview: {
     type: 'boolean',
     default: false,
+  },
+  addDownloadButton: {
+    type: 'boolean',
+    default: false,
   }
 }
 

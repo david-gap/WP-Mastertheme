@@ -39,6 +39,7 @@ Table of Contents:
 
 
 body.frontend,
+body.page-template,
 .block-editor .editor-styles-wrapper {
 
   /*==================================================================================
@@ -48,9 +49,8 @@ body.frontend,
     /* 1.1 SOCIAL MEDIA
     /––––––––––––––––––––––––*/
     .socialmedia {
-      --iconSize: 20px;
-      --spaceBetween: 10px;
       list-style: none;
+      margin: 0;
       padding: 0;
       display: flex;
       flex-direction: row;
@@ -60,11 +60,12 @@ body.frontend,
           display: block;
           line-height: 0;
           svg {
-            width: var(--iconSize);
+            width: var(--sm__icon_width, 20px);
+            height: auto;
           }
         }
         + li {
-          margin-left: var(--spaceBetween);
+          margin-left: var(--sm__icon_space, 10px);
         }
       }
     }
@@ -754,6 +755,15 @@ body.frontend,
     figcaption {
       margin: var(--block__imageFigcaption_margin, 10px 0 0);
       padding: var(--block__imageFigcaption_padding, 0);
+    }
+    > a {
+      display: block;
+      &.download-button {
+        margin-top: var(--block__imageDonloadButton_marginTop, 10px);
+        display: block!important;
+        height: auto!important;
+        flex: unset!important;
+      }
     }
   }
 

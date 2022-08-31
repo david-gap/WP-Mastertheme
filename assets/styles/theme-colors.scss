@@ -32,6 +32,7 @@ Table of Contents:
     3.4 LEAD
     3.5 CONSENT CONTAINER
     3.6 BLOG & ARCHIVE
+    3.7 SCROLL TO TOP
   4.0 BLOCKS
     4.1 ACCORDION
     4.2 BUTTONS
@@ -51,6 +52,7 @@ Table of Contents:
 
 
 body.frontend,
+body.page-template,
 .block-editor .editor-styles-wrapper {
 
   /*==================================================================================
@@ -172,9 +174,9 @@ body.frontend,
 
   /* 1.5 BREADCRUMBS
   /––––––––––––––––––––––––*/
-  nav.breadcrumbs {
+  .breadcrumbs {
     color: var(--bc__color, inherit);
-    background-color: var(--bc__background_color, inherit);
+    background-color: var(--bc__background_color, initial);
     a {
       color: var(--bc__link_color, inherit);
       &:hover {
@@ -377,7 +379,7 @@ body.frontend,
       color: var(--postTitle__color, inherit);
     }
     &:not(.has-background){
-      background-color: var(--postTitle__bg, inherit);
+      background-color: var(--postTitle__bg, initial);
     }
   }
 
@@ -389,7 +391,7 @@ body.frontend,
       color: var(--titleOne__color, inherit);
     }
     &:not(.has-background){
-      background-color: var(--titleOne__bg, inherit);
+      background-color: var(--titleOne__bg, initial);
     }
   }
   .is-style-title-two {
@@ -397,7 +399,7 @@ body.frontend,
       color: var(--titleTwo__color, inherit);
     }
     &:not(.has-background){
-      background-color: var(--titleTwo__bg, inherit);
+      background-color: var(--titleTwo__bg, initial);
     }
   }
   .is-style-title-three {
@@ -405,7 +407,7 @@ body.frontend,
       color: var(--titleThree__color, inherit);
     }
     &:not(.has-background){
-      background-color: var(--titleThree__bg, inherit);
+      background-color: var(--titleThree__bg, initial);
     }
   }
 
@@ -451,6 +453,26 @@ body.frontend,
     > div {
       article {
         border-color: var(--blog__article_borderColor, inherit);
+      }
+    }
+  }
+
+
+  /* 3.7 SCROLL TO TOP
+  /––––––––––––––––––––––––*/
+  #scroll-to-top {
+    background-color: var(--scrollToTop__background, transparent);
+    > div {
+      background-color: var(--scrollToTop__container_background, transparent);
+    }
+    span {
+      color: var(--scrollToTop__Button_color, inherit);
+      background-color: var(--scrollToTop__Button_bg, inherit);
+      border-color: var(--scrollToTop__Button_borderColor, inherit);
+      &:hover {
+        color: var(--scrollToTop__Button_color_hover, inherit);
+        background-color: var(--scrollToTop__Button_bg_hover, inherit);
+        border-color: var(--scrollToTop__Button_borderColor_hover, inherit);
       }
     }
   }
@@ -538,10 +560,10 @@ body.frontend,
   /* 4.6 SOCIAL MEDIA
   /––––––––––––––––––––––––*/
   .socialmedia li a svg {
-    fill: var(--color__main);
+    fill: var(--sm__icon_color, var(--color__main));
   }
   .socialmedia li a:hover svg {
-    fill: var(--color__secondary);
+    fill: var(--sm__icon_color_hover, var(--color__secondary));
   }
 
   /* 4.7 IMAGE PINS
@@ -612,14 +634,14 @@ body.frontend,
       color: var(--block__quote_color, inherit);
     }
     &:not(.has-background){
-      background-color: var(--block__quote_bg, inherit);
+      background-color: var(--block__quote_bg, initial);
     }
     cite {
       &:not(.has-text-color){
         color: var(--block__quote_cite_color, inherit);
       }
       &:not(.has-background){
-        background-color: var(--block__quote_cite_bg, inherit);
+        background-color: var(--block__quote_cite_bg, initial);
       }
     }
   }

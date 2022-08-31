@@ -38,20 +38,29 @@ export default class Inspector extends Component {
       attributes: {
         addSwiper,
         addPopUp,
-        addPopUpPreview
+        addPopUpPreview,
+        addDownloadButton
       },
       setAttributes
     } = this.props;
 
     return (
       <InspectorControls>
-          <PanelBody title={ __( 'Lightbox', 'WPgutenberg' ) } initialOpen={ false } >
+          <PanelBody title={ __( 'Lightbox', 'devTheme' ) } initialOpen={ false } >
               <PanelRow>
                 <ToggleControl
                     id="add-popup"
-                    label={ __( 'Activate Lightbox', 'WPgutenberg' ) }
+                    label={ __( 'Activate Lightbox', 'devTheme' ) }
                     checked={ addPopUp }
                     onChange={addPopUp => setAttributes({ addPopUp })}
+                />
+              </PanelRow>
+              <PanelRow>
+                <ToggleControl
+                    id="add-download-button"
+                    label={ __( 'Download button', 'devTheme' ) }
+                    checked={ addDownloadButton }
+                    onChange={addDownloadButton => setAttributes({ addDownloadButton })}
                 />
               </PanelRow>
           </PanelBody>

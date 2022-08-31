@@ -42,6 +42,7 @@
         addBulletNav,
         addPopUp,
         addPopUpPreview,
+        addDownloadButton,
       } = attributes;
       return (
         <Fragment>

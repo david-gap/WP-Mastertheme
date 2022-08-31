@@ -4,7 +4,7 @@
  *
  * Backend area to manage configuration file
  * Author:      David Voglgsnag
- * @version     1.4.7
+ * @version     1.5.7
  *
  */
 
@@ -223,6 +223,7 @@ class prefix_core_WPadmin {
 
       case "checkboxes":
         $attr .= $name !== '' ? ' name="' . $name . '[]"' : '';
+        $output .= $css && strpos($css, 'selectAll') !== false ? '<label><input type="checkbox" class="select-all" data-name="' . $name . '">' . __('Select all','devTheme') . '</label><br>' : '';
         foreach ($multiple as $multiple_key => $multiple_input) {
           $selected = $value !== false ? prefix_core_BaseFunctions::setChecked($multiple_input, $value) : '';
           $output .= '<label><input type="checkbox"' . $attr . ' value="' . $multiple_input . '" ' . $selected . '>' . $multiple_input . '</label><br>';
@@ -230,6 +231,15 @@ class prefix_core_WPadmin {
           //   $output .= $multiple_input;
           // $output .= '</option>';
         }
+        if($name == "gutenberg[AllowedBlocks]"):
+          $registered_blocks = WP_Block_Type_Registry::get_instance()->get_all_registered();
+          foreach ($registered_blocks as $blockkey => $block) {
+            if(!in_array($block->name, $multiple) && $block->name !== 'core/block'):
+              $selected = $value !== false ? prefix_core_BaseFunctions::setChecked($block->name, $value) : '';
+              $output .= '<label><input type="checkbox"' . $attr . ' value="' . $block->name . '" ' . $selected . '>' . $block->name . '</label><br>';
+            endif;
+          }
+        endif;
         break;
 
       case "switchbutton":

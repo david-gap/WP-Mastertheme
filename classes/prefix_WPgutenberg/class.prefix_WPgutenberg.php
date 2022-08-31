@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.21.14
+ * @version     2.22.14
  */
 
 /*=======================================================
@@ -73,7 +73,7 @@ class prefix_WPgutenberg {
       SELF::updateVars();
       // filter gutenberg blocks
       if(!empty($this->WPgutenberg_AllowedBlocks)):
-        add_filter( 'allowed_block_types', array($this, 'AllowGutenbergBlocks'), 100 );
+        add_filter( 'allowed_block_types', array($this, 'AllowGutenbergBlocks') );
       endif;
       // add gutenberg style options
       if(!empty($this->WPgutenberg_Stylesfile)):
@@ -93,15 +93,14 @@ class prefix_WPgutenberg {
       if($this->WPgutenberg_fontsizeScaler !== 0):
         add_filter('the_content',  array($this, 'InlineFontSize') );
       endif;
-      if(strpos(implode(",", $this->AllowGutenbergBlocks()), 'templates/') !== false):
-        // add custom blocks scripts
-        add_action( 'enqueue_block_editor_assets', array($this, 'WPgutenbergEnqueueCustomBlocksAssets'), 1 );
-        // register custom blocks
-        add_action( 'init', array($this, 'WPgutenbergRegisterCustomBlocks') );
-      endif;
+      // add custom blocks scripts
+      add_action( 'enqueue_block_editor_assets', array($this, 'WPgutenbergEnqueueCustomBlocksAssets'), 1 );
+      // register custom blocks
+      add_action( 'init', array($this, 'WPgutenbergRegisterCustomBlocks') );
       // Fix rest api sort
       add_action( 'init', array($this, 'WPgutenbergFixApiSort'), 99 );
       // filter blocks before dom
+      add_filter('render_block_data',  array($this, 'FilterBlocksData'), 10, 3 );
       add_filter('render_block',  array($this, 'FilterBlocks'), 10, 2 );
       // extension files
       add_action( 'enqueue_block_assets', array($this, 'embedExtentionFiles') );
@@ -157,7 +156,7 @@ class prefix_WPgutenberg {
       ),
       "AllowedBlocks" => array(
         "label" => "Allowed core blocks",
-        "css" => "multiple",
+        "css" => "multiple selectAll",
         "type" => "checkboxes",
         "value" => array(
           "core/paragraph",
@@ -195,6 +194,60 @@ class prefix_WPgutenberg {
           "core/rss",
           "core/search",
           "core/tag-cloud",
+          "core/query",
+          "core/navigation",
+          "core/site-logo",
+          "core/site-title",
+          "core/site-tagline",
+          "core/query",
+          "core/posts-list",
+          "core/avatar",
+          "core/post-title",
+          "core/post-excerpt",
+          "core/post-featured-image",
+          "core/post-content",
+          "core/post-author",
+          "core/post-date",
+          "core/post-terms",
+          "core/post-navigation-link",
+          "core/read-more",
+          "core/comments-query-loop",
+          "core/post-comments-form",
+          "core/loginout",
+          "core/term-description",
+          "core/query-title",
+          "core/post-author-biography",
+          "core/social-links",
+          "core/comment-author-name",
+          "core/comment-content",
+          "core/comment-date",
+          "core/comment-edit-link",
+          "core/comment-reply-link",
+          "core/comment-template",
+          "core/comments-pagination-next",
+          "core/comments-pagination-numbers",
+          "core/comments-pagination-previous",
+          "core/comments-pagination",
+          "core/comments-title",
+          "core/home-link",
+          "core/legacy-widget",
+          "core/navigation-link",
+          "core/navigation-submenu",
+          "core/page-list",
+          "core/pattern",
+          "core/post-comments",
+          "core/post-template",
+          "core/query-no-results",
+          "core/query-pagination-next",
+          "core/query-pagination-numbers",
+          "core/query-pagination-previous",
+          "core/query-pagination",
+          "core/social-link",
+          "core/template-part",
+          "core/widget-group",
+          "core/column",
+          "core/missing",
+          "core/text-columns",
           "core/embed",
           "core-embed/twitter",
           "core-embed/youtube",
@@ -242,7 +295,7 @@ class prefix_WPgutenberg {
         )
       ),
       "CustomAllowedBlocks" => array(
-        "label" => "Allowed costum blocks",
+        "label" => "Allowed custom blocks registered in React",
         "type" => "array_addable"
       ),
       "ColorPalette_CP" => array(
@@ -332,9 +385,10 @@ class prefix_WPgutenberg {
 
   /* 2.4 MANAGE BLOCKS
   /------------------------*/
-  function AllowGutenbergBlocks(){
-    $AllowedBlocks = array_merge($this->WPgutenberg_AllowedBlocks, $this->WPgutenberg_CustomAllowedBlocks);
-    return $AllowedBlocks;
+  function AllowGutenbergBlocks($allowed_blocks){
+    $customSelection = array_merge($this->WPgutenberg_AllowedBlocks, $this->WPgutenberg_CustomAllowedBlocks);
+    $customSelection = array_merge($customSelection, array("core/block"));
+    return $customSelection;
   }
 
 
@@ -502,6 +556,18 @@ class prefix_WPgutenberg {
 
   /* 3.3 FILTER BLOCKS BEFORE DOM
   /------------------------*/
+  function FilterBlocksData($parsed_block, $source_block, $parent_block){
+    // img block
+    if("core/image" == $parsed_block['blockName'] && $parent_block && "core/gallery" == $parent_block->parsed_block['blockName']):
+      // heritage download button
+      if(array_key_exists('attrs', $parent_block->parsed_block) && $parent_block->parsed_block['attrs']):
+        if($parent_block->parsed_block['attrs'] && array_key_exists('addDownloadButton', $parent_block->parsed_block['attrs']) && $parent_block->parsed_block['attrs']['addDownloadButton'] == 1):
+          $parsed_block['attrs']['addDownloadButton'] = 1;
+        endif;
+      endif;
+    endif;
+    return $parsed_block;
+  }
   function FilterBlocks($blockContent, $block){
     $currentUrl = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
     // make sure to run this only on frontend
@@ -530,6 +596,22 @@ class prefix_WPgutenberg {
           $timeStatement = prefix_core_BaseFunctions::DateCheck("", $block['attrs']['scaduleEnd'], "past");
           $blockContent = $timeStatement === true ? '' : $blockContent;
         endif;
+      endif;
+      // overrides
+      if($blockContent !== ''):
+        // img
+        if("core/image" == $block['blockName']):
+          if($block['attrs'] && array_key_exists('addDownloadButton', $block['attrs'])):
+            if($block['attrs']['addDownloadButton'] == 1):
+              $downloadLink = '<a class="download-button" href="' . wp_get_attachment_image_url($block['attrs']['id'], 'full', false) . '" download>';
+                $downloadLinkText = __( 'Download', 'devTheme' );
+                $downloadLink .= apply_filters( 'WPgutenberg_image_downloadButton', $downloadLinkText, $block['attrs'] );
+              $downloadLink .= '</a>';
+              $blockContent = str_replace(array('<a href="', '</figure>'), array('<a download href="', $downloadLink . '</figure>'), $blockContent);
+            endif;
+          endif;
+        endif;
+        //
       endif;
     endif;
 

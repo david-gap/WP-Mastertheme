@@ -4,7 +4,7 @@
  *
  * Customizer extension
  * Author:      David Voglgsnag
- * @version     1.4
+ * @version     1.5
  *
  */
 
@@ -155,7 +155,7 @@ class prefix_core_Customizer {
             ),
             'html__fontweight' => array(
               'label' => 'Main font weight',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'html__fontsize_small' => array(
               'label' => 'Small text size',
@@ -317,12 +317,12 @@ class prefix_core_Customizer {
               'default' => 'transparent'
             ),
             'mnav__color_hover' => array(
-              'label' => 'Color (hover)',
+              'label' => 'Color',
               'type' => 'color',
               'default' => '#000000'
             ),
             'mnav__background_color_hover' => array(
-              'label' => 'Background color (hover)',
+              'label' => 'Background color',
               'type' => 'color',
               'default' => 'transparent'
             ),
@@ -363,7 +363,7 @@ class prefix_core_Customizer {
             ),
             'mnav__fontWeight' => array(
               'label' => 'Font weight',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'mnav__lineheight' => array(
               'label' => 'Line height',
@@ -371,7 +371,11 @@ class prefix_core_Customizer {
             ),
             'mnav__textTransform' => array(
               'label' => 'Text transform',
-              'type' => 'input'
+              'type' => 'select'
+            ),
+            'mnav__fontStyle' => array(
+              'label' => 'Font style',
+              'type' => 'select',
             ),
             'mnav__letterSpacing' => array(
               'label' => 'Letter spacing',
@@ -408,12 +412,12 @@ class prefix_core_Customizer {
               'default' => 'transparent'
             ),
             'mnav__sub_color_hover' => array(
-              'label' => 'Level 2 - color (hover)',
+              'label' => 'Level 2 - color',
               'type' => 'color',
               'default' => '#000000'
             ),
             'mnav__sub_background_color_hover' => array(
-              'label' => 'Level 2 - background color (hover)',
+              'label' => 'Level 2 - background color',
               'type' => 'color',
               'default' => 'transparent'
             ),
@@ -458,11 +462,15 @@ class prefix_core_Customizer {
             ),
             'mnav__sub_fontWeight' => array(
               'label' => 'Level 2 - font weight',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'mnav__sub_textTransform' => array(
               'label' => 'Level 2 - text transform',
-              'type' => 'input'
+              'type' => 'select'
+            ),
+            'mnav__sub_fontStyle' => array(
+              'label' => 'Level 2 - font style',
+              'type' => 'select'
             ),
             'mnav__sub_letterSpacing' => array(
               'label' => 'Level 2 - Letter spacing',
@@ -499,12 +507,12 @@ class prefix_core_Customizer {
               'default' => 'transparent'
             ),
             'mnav__subSub_color_hover' => array(
-              'label' => 'Level 3 - color (hover)',
+              'label' => 'Level 3 - color',
               'type' => 'color',
               'default' => '#000000'
             ),
             'mnav__subSub_background_color_hover' => array(
-              'label' => 'Level 3 - background color (hover)',
+              'label' => 'Level 3 - background color',
               'type' => 'color',
               'default' => 'transparent'
             ),
@@ -545,7 +553,7 @@ class prefix_core_Customizer {
             ),
             'mnav__subSub_fontWeight' => array(
               'label' => 'Level 3 - font weight',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'mnav__subSub_lineheight' => array(
               'label' => 'Level 3 - line height',
@@ -553,7 +561,11 @@ class prefix_core_Customizer {
             ),
             'mnav__subSub_textTransform' => array(
               'label' => 'Level 3 - text transform',
-              'type' => 'input'
+              'type' => 'select'
+            ),
+            'mnav__subSub_fontStyle' => array(
+              'label' => 'Level 3 - font style',
+              'type' => 'select'
             ),
             'mnav__subSub_letterSpacing' => array(
               'label' => 'Level 3 - Letter spacing',
@@ -590,12 +602,12 @@ class prefix_core_Customizer {
               'default' => 'transparent'
             ),
             'mnav__subSubSub_color_hover' => array(
-              'label' => 'Level 4 - color (hover)',
+              'label' => 'Level 4 - color',
               'type' => 'color',
               'default' => '#000000'
             ),
             'mnav__subSubSub_background_color_hover' => array(
-              'label' => 'Level 4 - background color (hover)',
+              'label' => 'Level 4 - background color',
               'type' => 'color',
               'default' => 'transparent'
             ),
@@ -636,7 +648,7 @@ class prefix_core_Customizer {
             ),
             'mnav__subSubSub_fontWeight' => array(
               'label' => 'Level 4 - font weight',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'mnav__subSubSub_lineheight' => array(
               'label' => 'Level 4 - line height',
@@ -644,7 +656,11 @@ class prefix_core_Customizer {
             ),
             'mnav__subSubSub_textTransform' => array(
               'label' => 'Level 4 - text transform',
-              'type' => 'input'
+              'type' => 'select'
+            ),
+            'mnav__subSubSub_fontStyle' => array(
+              'label' => 'Level 4 - font style',
+              'type' => 'select'
             ),
             'mnav__subSubSub_letterSpacing' => array(
               'label' => 'Level 4 - Letsubter spacing',
@@ -733,7 +749,7 @@ class prefix_core_Customizer {
             ),
             'hamburger__title_fontWeight' => array(
               'label' => 'Title font weight',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'hamburger__container_width_mobile' => array(
               'label' => 'Width',
@@ -947,28 +963,27 @@ class prefix_core_Customizer {
           'inputs' => array(
             'bc__color' => array(
               'label' => 'Color',
-              'type' => 'color',
-              'default' => 'inherit'
+              'type' => 'color'
             ),
             'bc__background_color' => array(
               'label' => 'Background color',
-              'type' => 'color',
-              'default' => 'transparent'
+              'type' => 'color'
             ),
             'bc__link_color' => array(
               'label' => 'Link color',
-              'type' => 'color',
-              'default' => 'inherit'
+              'type' => 'color'
             ),
             'bc__link_color_hover' => array(
-              'label' => 'Link color (hover)',
-              'type' => 'color',
-              'default' => 'inherit'
+              'label' => 'Link color',
+              'type' => 'color'
             ),
             'bc__color_active' => array(
               'label' => 'Color (active)',
-              'type' => 'color',
-              'default' => 'transparent'
+              'type' => 'color'
+            ),
+            'bc__margin' => array(
+              'label' => 'Margin',
+              'type' => 'input'
             ),
             'bc__padding' => array(
               'label' => 'Padding',
@@ -984,7 +999,7 @@ class prefix_core_Customizer {
             ),
             'bc__fontWeight' => array(
               'label' => 'Font weight',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'bc__lineheight' => array(
               'label' => 'Line height',
@@ -992,7 +1007,11 @@ class prefix_core_Customizer {
             ),
             'bc__textTransform' => array(
               'label' => 'Text transform',
-              'type' => 'input'
+              'type' => 'select'
+            ),
+            'bc__fontStyle' => array(
+              'label' => 'font style',
+              'type' => 'select'
             ),
             'bc__fontsize_mobile' => array(
               'label' => 'Font size',
@@ -1002,9 +1021,33 @@ class prefix_core_Customizer {
               'label' => 'Line height',
               'type' => 'input'
             ),
+            'bc__margin_mobile' => array(
+              'label' => 'Margin',
+              'type' => 'input'
+            ),
             'bc__padding_mobile' => array(
               'label' => 'Padding',
               'type' => 'input'
+            ),
+            'dark__bc__color' => array(
+              'label' => 'Color',
+              'type' => 'color'
+            ),
+            'dark__bc__background_color' => array(
+              'label' => 'Background color',
+              'type' => 'color'
+            ),
+            'dark__bc__link_color' => array(
+              'label' => 'Link color',
+              'type' => 'color'
+            ),
+            'dark__bc__link_color_hover' => array(
+              'label' => 'Link color',
+              'type' => 'color'
+            ),
+            'dark__bc__color_active' => array(
+              'label' => 'Color (active)',
+              'type' => 'color'
             )
           )
         ),
@@ -1012,7 +1055,7 @@ class prefix_core_Customizer {
           'label' => 'Language switcher',
           'inputs' => array(
             'ls__background_color' => array(
-              'label' => 'Background Image',
+              'label' => 'Background color',
               'type' => 'color'
             ),
             'ls__color_active' => array(
@@ -1041,11 +1084,15 @@ class prefix_core_Customizer {
             ),
             'ls__link_fontWeight' => array(
               'label' => 'Link font weight',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'ls__link_textTransform' => array(
               'label' => 'Link text transform',
-              'type' => 'input'
+              'type' => 'select'
+            ),
+            'ls__link_fontStyle' => array(
+              'label' => 'Link font style',
+              'type' => 'select'
             ),
             'ls__link_letterSpacing' => array(
               'label' => 'Link letter spacing',
@@ -1128,7 +1175,7 @@ class prefix_core_Customizer {
             ),
             'input__fontWeight' => array(
               'label' => 'Input font weight',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'input__fontSize_mobile' => array(
               'label' => 'Input font size',
@@ -1165,7 +1212,7 @@ class prefix_core_Customizer {
             ),
             'input__checkbox_fontWeight' => array(
               'label' => 'Checkbox/Radio font weight',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'input__checkbox_fontSize_mobile' => array(
               'label' => 'Checkbox/Radio font size',
@@ -1235,7 +1282,7 @@ class prefix_core_Customizer {
             ),
             'input__select_fontWeight' => array(
               'label' => 'Select font weight',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'input__select_fontSize_mobile' => array(
               'label' => 'Select font size',
@@ -1284,11 +1331,11 @@ class prefix_core_Customizer {
             ),
             'input__placeholder_fontWeight' => array(
               'label' => 'Placeholder font weight',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'input__placeholder_textTransform' => array(
               'label' => 'Placeholder text transform',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'input__submit_fontFamily' => array(
               'label' => 'Submit font family',
@@ -1308,11 +1355,11 @@ class prefix_core_Customizer {
             ),
             'input__submit_fontWeight' => array(
               'label' => 'Submit/button font weight',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'input__submit_textTransform' => array(
               'label' => 'Submit/button text transform',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'input__submit_fontSize_mobile' => array(
               'label' => 'Submit/button font size',
@@ -1342,17 +1389,17 @@ class prefix_core_Customizer {
               'default' => '#0175bc'
             ),
             'input__submit_bg_color_hover' => array(
-              'label' => 'Submit/button background color (hover)',
+              'label' => 'Submit/button background color',
               'type' => 'color',
               'default' => '#0175bc'
             ),
             'input__submit_border_color_hover' => array(
-              'label' => 'Submit/button border color (hover)',
+              'label' => 'Submit/button border color',
               'type' => 'color',
               'default' => '#0175bc'
             ),
             'input__submit_color_hover' => array(
-              'label' => 'Submit/button text color (hover)',
+              'label' => 'Submit/button text color',
               'type' => 'color',
               'default' => '#ffffff'
             ),
@@ -1390,11 +1437,11 @@ class prefix_core_Customizer {
             ),
             'input__reset_fontWeight' => array(
               'label' => 'Reset/button font weight',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'input__reset_textTransform' => array(
               'label' => 'Reset/button text transform',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'input__reset_fontSize_mobile' => array(
               'label' => 'Reset/button font size',
@@ -1424,17 +1471,17 @@ class prefix_core_Customizer {
               'default' => '#0175bc'
             ),
             'input__reset_bg_color_hover' => array(
-              'label' => 'Reset/button background color (hover)',
+              'label' => 'Reset/button background color',
               'type' => 'color',
               'default' => '#0175bc'
             ),
             'input__reset_border_color_hover' => array(
-              'label' => 'Reset/button border color (hover)',
+              'label' => 'Reset/button border color',
               'type' => 'color',
               'default' => '#0175bc'
             ),
             'input__reset_color_hover' => array(
-              'label' => 'Reset/button text color (hover)',
+              'label' => 'Reset/button text color',
               'type' => 'color',
               'default' => '#ffffff'
             ),
@@ -1497,7 +1544,7 @@ class prefix_core_Customizer {
             ),
             'blog__article_flexDirection' => array(
               'label' => 'Article direction',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'blog__article_flexGap' => array(
               'label' => 'Article gap',
@@ -1513,7 +1560,7 @@ class prefix_core_Customizer {
             ),
             'blog__article_flexDirection_mobile' => array(
               'label' => 'Article direction',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'blog__article_flexGap_mobile' => array(
               'label' => 'Article gap',
@@ -1573,11 +1620,15 @@ class prefix_core_Customizer {
             ),
             'blog__article_title_fontWeight' => array(
               'label' => 'Article title font weight',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'blog__article_title_textTransform' => array(
               'label' => 'Article title text transform',
-              'type' => 'input'
+              'type' => 'select'
+            ),
+            'blog__article_title_fontStyle' => array(
+              'label' => 'Article title font style',
+              'type' => 'select'
             ),
             'blog__article_title_fontSize_mobile' => array(
               'label' => 'Article title font size',
@@ -1638,7 +1689,7 @@ class prefix_core_Customizer {
             ),
             'search__article_flexDirection' => array(
               'label' => 'Article direction',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'search__article_flexGap' => array(
               'label' => 'Article gap',
@@ -1654,7 +1705,7 @@ class prefix_core_Customizer {
             ),
             'search__article_flexDirection_mobile' => array(
               'label' => 'Article direction',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'search__article_flexGap_mobile' => array(
               'label' => 'Article gap',
@@ -1714,11 +1765,15 @@ class prefix_core_Customizer {
             ),
             'search__article_title_fontWeight' => array(
               'label' => 'Article title font weight',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'search__article_title_textTransform' => array(
               'label' => 'Article title text transform',
-              'type' => 'input'
+              'type' => 'select'
+            ),
+            'search__article_title_fontStyle' => array(
+              'label' => 'Article title font style',
+              'type' => 'select'
             ),
             'search__article_title_fontSize_mobile' => array(
               'label' => 'Article title font size',
@@ -1771,11 +1826,15 @@ class prefix_core_Customizer {
             ),
             'postTitle__fontWeight' => array(
               'label' => 'Font weight',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'postTitle__textTransform' => array(
               'label' => 'Text transform',
-              'type' => 'input'
+              'type' => 'select'
+            ),
+            'postTitle__fontStyle' => array(
+              'label' => 'Font style',
+              'type' => 'select'
             ),
             'postTitle__letterSpacing' => array(
               'label' => 'Letter spacing',
@@ -1836,11 +1895,15 @@ class prefix_core_Customizer {
             ),
             'titleOne__fontWeight' => array(
               'label' => 'Font weight',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'titleOne__textTransform' => array(
               'label' => 'Text transform',
-              'type' => 'input'
+              'type' => 'select'
+            ),
+            'titleOne__fontStyle' => array(
+              'label' => 'Font style',
+              'type' => 'select'
             ),
             'titleOne__letterSpacing' => array(
               'label' => 'Letter spacing',
@@ -1905,11 +1968,15 @@ class prefix_core_Customizer {
             ),
             'titleTwo__fontWeight' => array(
               'label' => 'Font weight',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'titleTwo__textTransform' => array(
               'label' => 'Text transform',
-              'type' => 'input'
+              'type' => 'select'
+            ),
+            'titleTwo__fontStyle' => array(
+              'label' => 'Font style',
+              'type' => 'select'
             ),
             'titleTwo__letterSpacing' => array(
               'label' => 'Letter spacing',
@@ -1974,11 +2041,15 @@ class prefix_core_Customizer {
             ),
             'titleThree__fontWeight' => array(
               'label' => 'Font weight',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'titleThree__textTransform' => array(
               'label' => 'Text transform',
-              'type' => 'input'
+              'type' => 'select'
+            ),
+            'titleThree__fontStyle' => array(
+              'label' => 'Font style',
+              'type' => 'select'
             ),
             'titleThree__letterSpacing' => array(
               'label' => 'Letter spacing',
@@ -2043,11 +2114,15 @@ class prefix_core_Customizer {
             ),
             'leadText__fontWeight' => array(
               'label' => 'Font weight',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'leadText__textTransform' => array(
               'label' => 'Text transform',
-              'type' => 'input'
+              'type' => 'select'
+            ),
+            'leadText__fontStyle' => array(
+              'label' => 'Font style',
+              'type' => 'select'
             ),
             'leadText__letterSpacing' => array(
               'label' => 'Letter spacing',
@@ -2067,6 +2142,27 @@ class prefix_core_Customizer {
             )
           )
         ),
+        'socialmedia' => array(
+          'label' => 'Social media icons',
+          'inputs' => array(
+            'sm__icon_width' => array(
+              'label' => 'Icon width',
+              'type' => 'input'
+            ),
+            'sm__icon_space' => array(
+              'label' => 'Space between icons',
+              'type' => 'input'
+            ),
+            'sm__icon_color' => array(
+              'label' => 'Icon color',
+              'type' => 'color'
+            ),
+            'sm__icon_color_hover' => array(
+              'label' => 'Icon color',
+              'type' => 'color'
+            )
+          )
+        ),
         'page404' => array(
           'label' => '404 Page',
           'inputs' => array(
@@ -2076,6 +2172,10 @@ class prefix_core_Customizer {
             ),
             'error__margin' => array(
               'label' => 'Article margin',
+              'type' => 'input'
+            ),
+            'error__textAlign' => array(
+              'label' => 'Text align',
               'type' => 'input'
             ),
             'error__title_fontFamily' => array(
@@ -2100,11 +2200,15 @@ class prefix_core_Customizer {
             ),
             'error__title_fontWeight' => array(
               'label' => 'Title font weight',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'error__title_textTransform' => array(
               'label' => 'Title text transform',
-              'type' => 'input'
+              'type' => 'select'
+            ),
+            'error__title_fontStyle' => array(
+              'label' => 'Title font style',
+              'type' => 'select'
             ),
             'error__title_letterSpacing' => array(
               'label' => 'Title letter spacing',
@@ -2157,7 +2261,7 @@ class prefix_core_Customizer {
             ),
             'consentContainer__fontWeight' => array(
               'label' => 'Font weight',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'consentContainer__textAlign' => array(
               'label' => 'Text align',
@@ -2221,7 +2325,7 @@ class prefix_core_Customizer {
             ),
             'consentContainer__Button_fontWeight' => array(
               'label' => 'Button font weight',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'consentContainer__Button_lineHeight' => array(
               'label' => 'Button line height',
@@ -2229,7 +2333,11 @@ class prefix_core_Customizer {
             ),
             'consentContainer__Button_textTransform' => array(
               'label' => 'Button text transform',
-              'type' => 'input'
+              'type' => 'select'
+            ),
+            'consentContainer__Button_fontStyle' => array(
+              'label' => 'Button font style',
+              'type' => 'select'
             ),
             'consentContainer__Button_letterSpacing' => array(
               'label' => 'Button letter spacing',
@@ -2257,6 +2365,91 @@ class prefix_core_Customizer {
             ),
             'consentContainer__Button_padding_mobile' => array(
               'label' => 'Button padding',
+              'type' => 'input'
+            )
+          )
+        ),
+        'scrollToTop' => array(
+          'label' => 'Scroll to top',
+          'inputs' => array(
+            'scrollToTop__background' => array(
+              'label' => 'Background color',
+              'type' => 'color'
+            ),
+            'scrollToTop__container_background' => array(
+              'label' => 'Container background color',
+              'type' => 'color'
+            ),
+            'scrollToTop__container_paddingTop' => array(
+              'label' => 'Container padding top',
+              'type' => 'input'
+            ),
+            'scrollToTop__container_paddingBottom' => array(
+              'label' => 'Container padding bottom',
+              'type' => 'input'
+            ),
+            'scrollToTop__Button_color' => array(
+              'label' => 'Button color',
+              'type' => 'color'
+            ),
+            'scrollToTop__Button_bg' => array(
+              'label' => 'Button background color',
+              'type' => 'color'
+            ),
+            'scrollToTop__Button_borderColor' => array(
+              'label' => 'Button border color',
+              'type' => 'color'
+            ),
+            'scrollToTop__Button_color_hover' => array(
+              'label' => 'Button color',
+              'type' => 'color'
+            ),
+            'scrollToTop__Button_bg_hover' => array(
+              'label' => 'Button background color',
+              'type' => 'color'
+            ),
+            'scrollToTop__Button_borderColor_hover' => array(
+              'label' => 'Button border color',
+              'type' => 'color'
+            ),
+            'scrollToTop__Button_fontFamily' => array(
+              'label' => 'Button font family',
+              'type' => 'input'
+            ),
+            'scrollToTop__Button_fontSize' => array(
+              'label' => 'Button font size',
+              'type' => 'input'
+            ),
+            'scrollToTop__Button_fontWeight' => array(
+              'label' => 'Button font weight',
+              'type' => 'select'
+            ),
+            'scrollToTop__Button_lineHeight' => array(
+              'label' => 'Button line height',
+              'type' => 'input'
+            ),
+            'scrollToTop__Button_textTransform' => array(
+              'label' => 'Button text transform',
+              'type' => 'select'
+            ),
+            'scrollToTop__Button_fontStyle' => array(
+              'label' => 'Button font style',
+              'type' => 'select'
+            ),
+            'scrollToTop__Button_letterSpacing' => array(
+              'label' => 'Button letter spacing',
+              'type' => 'input'
+            ),
+            'scrollToTop__Button_padding' => array(
+              'label' => 'Button padding',
+              'type' => 'input'
+            ),
+            'scrollToTop__Button_borderWidth' => array(
+              'label' => 'Button border width',
+              'type' => 'input'
+            ),
+            'scrollToTop__Button_borderRadius' => array(
+              'label' => 'Button border radius',
               'type' => 'input'
             )
           )
@@ -2552,6 +2745,14 @@ class prefix_core_Customizer {
             'block__imageFigcaption_padding_mobile' => array(
               'label' => 'Figcaption padding',
               'type' => 'input'
+            ),
+            'block__imageDonloadButton_marginTop' => array(
+              'label' => 'Download button margin top',
+              'type' => 'input'
+            ),
+            'block__imageDonloadButton_marginTop_mobile' => array(
+              'label' => 'Download button margin top',
+              'type' => 'input'
             )
           )
         ),
@@ -2572,7 +2773,7 @@ class prefix_core_Customizer {
             ),
             'block__buttons_fontWeight' => array(
               'label' => 'Font weight',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'block__buttons_lineHeight' => array(
               'label' => 'Line height',
@@ -2580,7 +2781,11 @@ class prefix_core_Customizer {
             ),
             'block__buttons_textTransform' => array(
               'label' => 'Text transform',
-              'type' => 'input'
+              'type' => 'select'
+            ),
+            'block__buttons_fontStyle' => array(
+              'label' => 'Font style',
+              'type' => 'select'
             ),
             'block__buttons_letterSpacing' => array(
               'label' => 'Text letter spacing',
@@ -2611,15 +2816,15 @@ class prefix_core_Customizer {
               'type' => 'color'
             ),
             'block__buttonsHover_color' => array(
-              'label' => 'Text color (hover)',
+              'label' => 'Text color',
               'type' => 'color'
             ),
             'block__buttonsHover_bgColor' => array(
-              'label' => 'Background color (hover)',
+              'label' => 'Background color',
               'type' => 'color'
             ),
             'block__buttonsHover_borderColor' => array(
-              'label' => 'Border color (hover)',
+              'label' => 'Border color',
               'type' => 'color'
             ),
             'block__buttons_fontSize_mobile' => array(
@@ -2659,15 +2864,15 @@ class prefix_core_Customizer {
               'type' => 'color'
             ),
             'dark__block__buttonsHover_color' => array(
-              'label' => 'Text color (hover)',
+              'label' => 'Text color',
               'type' => 'color'
             ),
             'dark__block__buttonsHover_bgColor' => array(
-              'label' => 'Background color (hover)',
+              'label' => 'Background color',
               'type' => 'color'
             ),
             'dark__block__buttonsHover_borderColor' => array(
-              'label' => 'Border color (hover)',
+              'label' => 'Border color',
               'type' => 'color'
             )
           )
@@ -2784,11 +2989,11 @@ class prefix_core_Customizer {
             ),
             'block__tableHead_fontWeight' => array(
               'label' => 'Head font weight',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'block__tableHead_textTransform' => array(
               'label' => 'Head text transform',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'block__tableHead_letterSpacing' => array(
               'label' => 'Head letter spacing',
@@ -2820,11 +3025,11 @@ class prefix_core_Customizer {
             ),
             'block__table_fontWeight' => array(
               'label' => 'font weight',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'block__table_textTransform' => array(
               'label' => 'text transform',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'block__table_letterSpacing' => array(
               'label' => 'letter spacing',
@@ -2881,11 +3086,11 @@ class prefix_core_Customizer {
             ),
             'block__quote_fontWeight' => array(
               'label' => 'Font weight',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'block__quote_textTransform' => array(
               'label' => 'Text transform',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'block__quote_letterSpacing' => array(
               'label' => 'Letter spacing',
@@ -2929,11 +3134,11 @@ class prefix_core_Customizer {
             ),
             'block__quote_cite_fontWeight' => array(
               'label' => 'Cite font weight',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'block__quote_cite_textTransform' => array(
               'label' => 'Cite text transform',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'block__quote_cite_letterSpacing' => array(
               'label' => 'Cite letter spacing',
@@ -2980,7 +3185,7 @@ class prefix_core_Customizer {
             ),
             'block__accordion_label_textTransform' => array(
               'label' => 'Label text transform',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'block__accordion_label_letterSpacing' => array(
               'label' => 'Label letter spacing',
@@ -2992,7 +3197,7 @@ class prefix_core_Customizer {
             ),
             'block__accordion_label_fontweight' => array(
               'label' => 'Label font weight',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'block__accordion_label_lineheight' => array(
               'label' => 'Label line-height',
@@ -3432,11 +3637,11 @@ class prefix_core_Customizer {
             ),
             'footer__menu_link_fontWeight' => array(
               'label' => 'Link font weight',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'footer__menu_link_textTransform' => array(
               'label' => 'Link text transform',
-              'type' => 'input'
+              'type' => 'select'
             ),
             'footer__menu_link_letterSpacing' => array(
               'label' => 'Link letter spacing',
@@ -3586,6 +3791,9 @@ class prefix_core_Customizer {
   /------------------------*/
   function extendCustomizer( $wp_customize ) {
 
+    // Inlcude the Alpha Color Picker control file.
+    require_once( dirname( __FILE__ ) . '/alpha-color-picker/alpha-color-picker.php' );
+
     foreach ($this->defaultValues as $panelKey => $panelValues) {
       SELF::buildPanel($wp_customize, $panelKey, $panelValues, '', 1);
     }
@@ -3669,7 +3877,7 @@ class prefix_core_Customizer {
     if (strpos($inputKey, '_mobile') !== false):
       $activeLabels[] = __( 'mobile', 'customizer' );
     endif;
-    if (strpos($inputKey, '_hover') !== false):
+    if (strpos($inputKey, '_hover') !== false || strpos($inputKey, 'Hover_') !== false):
       $activeLabels[] = __( 'hover', 'customizer' );
     endif;
     // build labels
@@ -3684,26 +3892,84 @@ class prefix_core_Customizer {
     if($inputValues["type"] == 'color'):
       $wp_customize->add_setting($inputKey, array(
         'transport'         => 'postMessage',
-        'default'           => array_key_exists('default', $inputValues) ? $inputValues["default"] : '',
-        'sanitize_callback' => 'sanitize_hex_color',
+        'default'           => array_key_exists('default', $inputValues) ? $inputValues["default"] : ''
       ));
-      $wp_customize->add_control(new WP_Customize_Color_Control( $wp_customize, $inputKey, array(
-       'label'    => __( $inputValues["label"], 'customizer' ) . $labelAdd,
-       'section'  => $sectionKey,
-       'priority' => 1
+      $wp_customize->add_control(new Customize_Alpha_Color_Control( $wp_customize, $inputKey, array(
+        'label'        => __( $inputValues["label"], 'customizer' ) . $labelAdd,
+        'section'      => $sectionKey,
+        'show_opacity' => true,
+        'priority'     => 1
      )));
+    elseif($inputValues["type"] == 'select'):
+      // default options
+      if(!array_key_exists('options', $inputValues) && strpos($inputKey, '_fontStyle') !== false):
+        $selectOptions = array(
+          '' => '-',
+          'italic' => 'italic',
+          'normal' => 'normal',
+          'oblique' => 'oblique'
+        );
+      elseif(!array_key_exists('options', $inputValues) && strpos($inputKey, '_textTransform') !== false):
+        $selectOptions = array(
+          '' => '-',
+          'capitalize' => 'capitalize',
+          'full-width' => 'full-width',
+          'lowercase' => 'lowercase',
+          'none' => 'none',
+          'uppercase' => 'uppercase',
+          'inherit' => 'inherit'
+        );
+      elseif(!array_key_exists('options', $inputValues) && strpos($inputKey, '_fontWeight') !== false || !array_key_exists('options', $inputValues) && strpos($inputKey, '_fontweight') !== false):
+        $selectOptions = array(
+          '' => '-',
+          '100' => '100',
+          '200' => '200',
+          '300' => '300',
+          '400' => '400',
+          '500' => '500',
+          '600' => '600',
+          '700' => '700',
+          '800' => '800',
+          '900' => '900'
+        );
+      elseif(!array_key_exists('options', $inputValues) && strpos($inputKey, '_flexDirection') !== false):
+        $selectOptions = array(
+          '' => '-',
+          'column' => 'column',
+          'column-reverse' => 'column reverse',
+          'row' => 'row',
+          'row-reverse' => 'row reverse'
+        );
+      elseif(array_key_exists('options', $inputValues)):
+        $selectOptions = $inputValues["options"];
+      else:
+        $selectOptions = array('' => '-');
+      endif;
+      //
+      $wp_customize->add_setting($inputKey, array(
+        'transport'         => 'postMessage',
+        'default'           => array_key_exists('default', $inputValues) ? $inputValues["default"] : '',
+        'sanitize_callback' => 'wp_filter_nohtml_kses',
+      ));
+      $wp_customize->add_control($inputKey, array(
+        'label'    => __( $inputValues["label"], 'customizer' ) . $labelAdd,
+        'section'  => $sectionKey,
+        'type'     => 'select',
+        'choices'  => $selectOptions,
+        'priority' => 1
+      ));
     else:
       $wp_customize->add_setting($inputKey, array(
         'transport'         => 'postMessage',
         'default'           => array_key_exists('default', $inputValues) ? $inputValues["default"] : '',
         'sanitize_callback' => 'wp_filter_nohtml_kses',
       ));
-     $wp_customize->add_control($inputKey, array(
-      'label'    => __( $inputValues["label"], 'customizer' ) . $labelAdd,
-      'section'  => $sectionKey,
-      'type'     => 'input',
-      'priority' => 1
-     ));
+      $wp_customize->add_control($inputKey, array(
+        'label'    => __( $inputValues["label"], 'customizer' ) . $labelAdd,
+        'section'  => $sectionKey,
+        'type'     => 'input',
+        'priority' => 1
+      ));
     endif;
   }
 
