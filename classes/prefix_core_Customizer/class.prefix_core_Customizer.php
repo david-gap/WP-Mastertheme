@@ -4451,7 +4451,7 @@ class prefix_core_Customizer {
         foreach ($gutenbergCofig['ColorPalette'] as $colorKey => $color) {
           $slug = prefix_core_BaseFunctions::Slugify($color["key"]);
           $output .= '.has-' . $slug . '-background-color {background-color: ' . $color["value"] . ';}';
-          $output .= '.has-' . $slug . '-color {color: ' . $color["value"] . ';}';
+          $output .= '.has-' . $slug . '-color, .has-' . $slug . '-color > * {color: ' . $color["value"] . ';}';
         }
       endif;
       // add custom font sizes
@@ -4459,11 +4459,13 @@ class prefix_core_Customizer {
         $fontSizeMobile = '';
         foreach ($gutenbergCofig['FontSizes'] as $fontsizeKey => $fontsize) {
           $slug = prefix_core_BaseFunctions::Slugify($fontsize["key"]);
-          $output .= 'body.frontend .has-' . $slug . '---font-size, .block-editor .editor-styles-wrapper .has-' . $slug . '---font-size, ';
-          $output .= 'body.page-template .has-' . $slug . '---font-size {font-size: ' . $fontsize["value"] . ';}';
+          $output .= 'body.frontend .has-' . $slug . '---font-size, .block-editor .editor-styles-wrapper .has-' . $slug . '---font-size, body.page-template .has-' . $slug . '---font-size, ';
+          $output .= 'body.frontend .has-' . $slug . '---font-size > *, .block-editor .editor-styles-wrapper .has-' . $slug . '---font-size > *, body.page-template .has-' . $slug . '---font-size > * ';
+          $output .= '{font-size: ' . $fontsize["value"] . ';}';
           if(array_key_exists('valueMobile', $fontsize)):
-            $fontSizeMobile .= 'body.frontend .has-' . $slug . '---font-size, .block-editor .editor-styles-wrapper .has-' . $slug . '---font-size, ';
-            $fontSizeMobile .= 'body.page-template .has-' . $slug . '---font-size {font-size: ' . $fontsize["valueMobile"] . ';}';
+            $fontSizeMobile .= 'body.frontend .has-' . $slug . '---font-size, .block-editor .editor-styles-wrapper .has-' . $slug . '---font-size, body.page-template .has-' . $slug . '---font-size, ';
+            $fontSizeMobile .= 'body.frontend .has-' . $slug . '---font-size > *, .block-editor .editor-styles-wrapper .has-' . $slug . '---font-size > *, body.page-template .has-' . $slug . '---font-size > * ';
+            $fontSizeMobile .= '{font-size: ' . $fontsize["valueMobile"] . ';}';
           endif;
         }
         if($fontSizeMobile !== ''):
