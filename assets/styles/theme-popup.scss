@@ -15,8 +15,7 @@
   position: fixed;
   left: 0;
   top: 0;
-  background-color: black;
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: var(--popup__backgoundColor, black);
   width: 100vw;
   height: 100vh;
   padding: 0;
@@ -62,11 +61,12 @@
     min-width: 304px;
     margin: var(--popup__space, 40px);
     max-height: 100%;
+    background-color: var(--popup__container_backgroundColor, white);
     &:not(.popup-preview) {
       position: relative;
       .close {
-        right: -40px;
-        top: -40px;
+        right: calc((var(--popup__close_size, 25px) + 15px) * -1);
+        top: calc((var(--popup__close_size, 25px) + 15px) * -1);
       }
     }
     &:hover {
@@ -81,15 +81,38 @@
         width: 100%;
         max-width: 100%;
         height: auto;
-        background-color: #fff;
         max-height: calc(100vh - 100px);
+      }
+      figure {
+        margin: 0;
+        figcaption {
+          display: var(--popup__figcaption_display, none);
+          background-color: var(--popup__figcaption_backgroundColor, transparent);
+          color: var(--popup__figcaption_color, inherit);
+          text-align: var(--popup__figcaption_textAlign, center);
+          font-size: var(--popup__figcaption_fontSize, 100%);
+          line-height: var(--popup__figcaption_lineHeight, 1);
+          padding: var(--popup__figcaption_padding, 0);
+          margin: 0;
+        }
+        .download-button {
+          display: var(--popup__downloadLink_display, none)!important;
+          color: var(--popup__downloadLink_color, initial);
+          font-size: var(--popup__downloadLink_fontSize, 100%);
+          line-height: var(--popup__downloadLink_lineHeight, 1);
+          padding: var(--popup__downloadLink_padding, 0);
+          margin: 0;
+          &:hover {
+            color: var(--popup__downloadLink_color_hover, initial);
+          }
+        }
       }
     }
     .close {
       color: transparent;
       display: flex;
-      width: 25px;
-      height: 25px;
+      width: var(--popup__close_size, 25px);
+      height: var(--popup__close_size, 25px);
       text-align: center;
       justify-content: center;
       align-content: center;
@@ -101,6 +124,8 @@
       svg {
         width: 100%;
         height: 100%;
+        fill: var(--popup__close_color, white);
+        opacity: var(--popup__close_opacity, 1);
       }
     }
   }
@@ -114,13 +139,15 @@
   display: block;
   position: absolute;
   z-index: 2;
-  top: calc(50% - 35px);
+  top: calc((100% - var(--popup__arrow_height, 70px)) / 2);
   border: solid transparent;
-  border-width: 5px 10px;
-  width: 40px;
-  height: 70px;
+  border-width: var(--popup__arrow_borderWidth, 5px 10px);
+  border-color: var(--popup__arrow_borderColor, transparent);
+  background-color: var(--popup__arrow_backgroundColor, transparent);
   transition: .3s;
   opacity: 0;
+  padding: var(--popup__arrow_padding, 0);
+  line-height: 0;
   &.back {
     left: 20px;
   }
@@ -134,6 +161,10 @@
   svg {
     max-width: 100%;
     max-height: 100%;
+    width: auto;
+    height: var(--popup__arrow_height, 70px);
+    fill: var(--popup__arrow_color, black);
+    opacity: var(--popup__arrow_opacity, .6);
   }
 }
 

@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.62.28 | 05.09.2022 <💎 IMPROVE: pop-up styling 🐛 FIX: img data-id>
+* Make sure image block data-id is always
+* Add popup style to customizer
+* Add figcaption and download button to img pop up content
+
 ## 1.61.28 | 31.08.2022 <📦 NEW: img download, Alpha 💎 IMPROVE: customizer>
 * Add search form to 404 page
 * Manage search form & back to home button on 404 page by the configurator

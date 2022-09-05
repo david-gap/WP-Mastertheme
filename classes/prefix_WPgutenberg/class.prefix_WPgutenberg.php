@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.22.14
+ * @version     2.22.15
  */
 
 /*=======================================================
@@ -610,6 +610,7 @@ class prefix_WPgutenberg {
               $blockContent = str_replace(array('<a href="', '</figure>'), array('<a download href="', $downloadLink . '</figure>'), $blockContent);
             endif;
           endif;
+          $blockContent = str_replace('<img', '<img data-id="' . $block['attrs']['id'] . '"', $blockContent);
         endif;
         //
       endif;

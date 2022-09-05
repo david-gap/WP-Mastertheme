@@ -4,7 +4,7 @@
  *
  * Customizer extension
  * Author:      David Voglgsnag
- * @version     1.5
+ * @version     1.6
  *
  */
 
@@ -200,6 +200,14 @@ class prefix_core_Customizer {
         'theme_popup' => array (
           'label' => 'Lightbox',
           'inputs' => array(
+            'popup__backgoundColor' => array(
+              'label' => 'Background color',
+              'type' => 'color'
+            ),
+            'popup__container_backgroundColor' => array(
+              'label' => 'Background container color',
+              'type' => 'color'
+            ),
             'popup__width' => array(
               'label' => 'Lightbox width',
               'type' => 'input',
@@ -214,6 +222,98 @@ class prefix_core_Customizer {
               'label' => 'Lightbox preview visibility',
               'type' => 'input',
               'default' => '30px'
+            ),
+            'popup__arrow_backgroundColor' => array(
+              'label' => 'Arrow background color',
+              'type' => 'color'
+            ),
+            'popup__arrow_color' => array(
+              'label' => 'Arrow color',
+              'type' => 'color'
+            ),
+            'popup__arrow_borderColor' => array(
+              'label' => 'Arrow border color',
+              'type' => 'color'
+            ),
+            'popup__arrow_borderWidth' => array(
+              'label' => 'Arrow border width',
+              'type' => 'input'
+            ),
+            'popup__arrow_opacity' => array(
+              'label' => 'Arrow opacity',
+              'type' => 'input'
+            ),
+            'popup__arrow_height' => array(
+              'label' => 'Arrow height',
+              'type' => 'input'
+            ),
+            'popup__arrow_padding' => array(
+              'label' => 'Arrow padding',
+              'type' => 'input'
+            ),
+            'popup__close_color' => array(
+              'label' => 'Close button color',
+              'type' => 'color'
+            ),
+            'popup__close_size' => array(
+              'label' => 'Close button size',
+              'type' => 'input'
+            ),
+            'popup__close_opacity' => array(
+              'label' => 'Close button opacity',
+              'type' => 'input'
+            ),
+            'popup__figcaption_backgroundColor' => array(
+              'label' => 'Figcaption background color',
+              'type' => 'color'
+            ),
+            'popup__figcaption_color' => array(
+              'label' => 'Figcaption color',
+              'type' => 'color'
+            ),
+            'popup__figcaption_display' => array(
+              'label' => 'Figcaption display',
+              'type' => 'select'
+            ),
+            'popup__figcaption_textAlign' => array(
+              'label' => 'Figcaption text align',
+              'type' => 'select'
+            ),
+            'popup__figcaption_fontSize' => array(
+              'label' => 'Figcaption font size',
+              'type' => 'input'
+            ),
+            'popup__figcaption_lineHeight' => array(
+              'label' => 'Figcaption line height',
+              'type' => 'input'
+            ),
+            'popup__figcaption_padding' => array(
+              'label' => 'Figcaption padding',
+              'type' => 'input'
+            ),
+            'popup__downloadLink_color' => array(
+              'label' => 'Download link color',
+              'type' => 'color'
+            ),
+            'popup__downloadLink_color_hover' => array(
+              'label' => 'Download link color',
+              'type' => 'color'
+            ),
+            'popup__downloadLink_display' => array(
+              'label' => 'Download link display',
+              'type' => 'select'
+            ),
+            'popup__downloadLink_fontSize' => array(
+              'label' => 'Download link font size',
+              'type' => 'input'
+            ),
+            'popup__downloadLink_lineHeight' => array(
+              'label' => 'Download link line height',
+              'type' => 'input'
+            ),
+            'popup__downloadLink_padding' => array(
+              'label' => 'Download link padding',
+              'type' => 'input'
             )
           )
         )
@@ -3908,6 +4008,43 @@ class prefix_core_Customizer {
           'italic' => 'italic',
           'normal' => 'normal',
           'oblique' => 'oblique'
+        );
+      elseif(!array_key_exists('options', $inputValues) && strpos($inputKey, '_display') !== false):
+        $selectOptions = array(
+          '' => '-',
+          'block' => 'block',
+          'contents' => 'contents',
+          'flex' => 'flex',
+          'flow-root' => 'flow-root',
+          'grid' => 'grid',
+          'inline' => 'inline',
+          'inline-block' => 'inline-block',
+          'inline-flex' => 'inline-flex',
+          'inline-grid' => 'inline-grid',
+          'inline-table' => 'inline-table',
+          'list-item' => 'list-item',
+          'none' => 'none',
+          'run-in' => 'run-in',
+          'subgrid' => 'subgrid',
+          'table' => 'table',
+          'table-caption' => 'table-caption',
+          'table-cell' => 'table-cell',
+          'table-column' => 'table-column',
+          'table-column-group' => 'table-column-group',
+          'table-footer-group' => 'table-footer-group',
+          'table-header-group' => 'table-header-group',
+          'table-row' => 'table-row',
+          'table-row-group' => 'table-row-group',
+          'inherit' => 'inherit'
+        );
+      elseif(!array_key_exists('options', $inputValues) && strpos($inputKey, '_textAlign') !== false):
+        $selectOptions = array(
+          '' => '-',
+          'inherit' => 'inherit',
+          'justify' => 'justify',
+          'left' => 'left',
+          'center' => 'center',
+          'right' => 'right'
         );
       elseif(!array_key_exists('options', $inputValues) && strpos($inputKey, '_textTransform') !== false):
         $selectOptions = array(

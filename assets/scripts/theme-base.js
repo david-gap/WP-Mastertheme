@@ -1121,7 +1121,7 @@ function closePopUp(){
 /* Create
 /------------------------*/
 function loadPopUp(){
-  const popup_close = '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24.9 24.9" style="enable-background:new 0 0 24.9 24.9;" xml:space="preserve"><rect x="-3.7" y="10.9" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1549 12.4451)" fill="#fff" width="32.2" height="3"/><rect x="10.9" y="-3.7" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1549 12.4451)" fill="#fff" width="3" height="32.2"/></svg>',
+  const popup_close = '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24.9 24.9" xml:space="preserve"><rect x="-3.7" y="10.9" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1549 12.4451)" width="32.2" height="3"/><rect x="10.9" y="-3.7" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1549 12.4451)" width="3" height="32.2"/></svg>',
         popup_content = '<div class="popup closed" data-content="img-popup"><div class="popup-container"><span class="close">' + popup_close + '</span><div class="popup-content"></div></div></div>';
   // inser pop up
   body.insertAdjacentHTML('beforeend', popup_content);
@@ -1150,12 +1150,13 @@ function loadImagePopUp(){
   // load content
   setTimeout(function(self) {
     // insert image and arrows
-    var popupContainer = document.querySelector('.popup > .popup-container > .popup-content');
+    var currentGallery = self.closest('.add-popup'),
+    clone = currentGallery.cloneNode(true),
+    popupContainer = document.querySelector('.popup > .popup-container > .popup-content');
     popupContainer.insertAdjacentHTML('beforebegin', galleryArrowBefore);
-    popupContainer.appendChild(self.cloneNode());
+    popupContainer.appendChild(clone);
     popupContainer.insertAdjacentHTML('afterend', galleryArrowAfter);
     // add id of current gallery
-    var currentGallery = self.closest('.add-popup');
     popupContainer.setAttribute('data-id', currentGallery.getAttribute('data-id'));
     // check for preview images
   }, 100, this);
