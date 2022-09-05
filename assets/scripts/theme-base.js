@@ -28,7 +28,7 @@
 /* Global values
 /------------------------*/
 const root = document.querySelector('html'),
-      configuration = ajaxCall({action: 'configuration'}),
+      configuration = configurations,
       language = root.getAttribute('lang'),
       isTouch = 'ontouchstart' in document.documentElement,
       body = root.querySelector('body'),
@@ -375,25 +375,6 @@ var getStyle = function(e, styleName) {
 /*==================================================================================
  3.0 THEME FUNCTIONS
 ==================================================================================*/
-
-/* Settings from configuration file
-/------------------------*/
-function themeConfiguration(data){
-  // check if file value exists and inline css are disabled
-  if(data.content !== false && data.content.wp.HeaderCss !== "1"){
-    // set color palette
-    if(data.content.gutenberg && Array.isArray(data.content.gutenberg.ColorPalette)){
-      // gutenberg is given and colors been added
-      var colorPalette = data.content.gutenberg.ColorPalette;
-      var keys = Object.keys(data.content.gutenberg.ColorPalette);
-      for(var i=0; i<keys.length; i++){
-        addCSSRule(document.styleSheets[0], 'body.frontend .has-' + slugify(colorPalette[i].key) + '-background-color', 'background-color: ' + colorPalette[i].value);
-        addCSSRule(document.styleSheets[0], 'body.frontend .has-' + slugify(colorPalette[i].key) + '-color', 'color: ' + colorPalette[i].value);
-      }
-    }
-  }
-}
-
 
 /* Sticky menu
 /------------------------*/

@@ -4,7 +4,7 @@
  *
  * Customizer extension
  * Author:      David Voglgsnag
- * @version     1.6
+ * @version     1.7
  *
  */
 
@@ -59,7 +59,7 @@ class prefix_core_Customizer {
     )
   );
 
-  private $defaultValues = array(
+  public $defaultValues = array(
     'settings' => array(
       'label' => 'Settings',
       'sections' => array(
@@ -3607,6 +3607,192 @@ class prefix_core_Customizer {
               'type' => 'input'
             )
           )
+        ),
+        'posts' => array(
+          'label' => 'Posts',
+          'inputs' => array(
+            'block__posts_backgroundColor' => array(
+              'label' => 'Background color',
+              'type' => 'color'
+            ),
+            'block__posts_color' => array(
+              'label' => 'Color',
+              'type' => 'color'
+            ),
+            'block__posts_borderColor' => array(
+              'label' => 'Border color',
+              'type' => 'color'
+            ),
+            'block__posts_borderRadius' => array(
+              'label' => 'Border radius',
+              'type' => 'input'
+            ),
+            'block__posts_border' => array(
+              'label' => 'Border width',
+              'type' => 'input'
+            ),
+            'block__posts_flexGap' => array(
+              'label' => 'Gap',
+              'type' => 'input'
+            ),
+            'block__posts_padding' => array(
+              'label' => 'Padding',
+              'type' => 'input'
+            ),
+            'block__posts_fontSize' => array(
+              'label' => 'Font size',
+              'type' => 'input'
+            ),
+            'block__posts_lineHeight' => array(
+              'label' => 'Line height',
+              'type' => 'input'
+            ),
+            'block__posts_fontWeight' => array(
+              'label' => 'Font weight',
+              'type' => 'select'
+            ),
+            'block__posts_thumb_margin' => array(
+              'label' => 'Thumbnail margin',
+              'type' => 'select'
+            ),
+            'block__posts_thumb_padding' => array(
+              'label' => 'Thumbnail padding',
+              'type' => 'select'
+            ),
+            'block__posts_title_color' => array(
+              'label' => 'Title color',
+              'type' => 'color'
+            ),
+            'block__posts_title_fontfamily' => array(
+              'label' => 'Title font family',
+              'type' => 'input'
+            ),
+            'block__posts_title_fontSize' => array(
+              'label' => 'Title font size',
+              'type' => 'input'
+            ),
+            'block__posts_title_lineHeight' => array(
+              'label' => 'Title line height',
+              'type' => 'input'
+            ),
+            'block__posts_title_padding' => array(
+              'label' => 'Title padding',
+              'type' => 'input'
+            ),
+            'block__posts_title_margin' => array(
+              'label' => 'Title margin',
+              'type' => 'input'
+            ),
+            'block__posts_title_fontWeight' => array(
+              'label' => 'Title font weight',
+              'type' => 'select'
+            ),
+            'block__posts_title_textTransform' => array(
+              'label' => 'Title text transform',
+              'type' => 'select'
+            ),
+            'block__posts_title_fontStyle' => array(
+              'label' => 'Title font style',
+              'type' => 'select'
+            ),
+            'block__posts_title_letterSpacing' => array(
+              'label' => 'Title letter spacing',
+              'type' => 'input'
+            )
+          )
+        ),
+        'postsfilter' => array(
+          'label' => 'Posts filter',
+          'inputs' => array(
+            'block__postsfilter_backgroundColor' => array(
+              'label' => 'Background color',
+              'type' => 'color'
+            ),
+            'block__postsfilter_color' => array(
+              'label' => 'Color',
+              'type' => 'color'
+            ),
+            'block__postsfilter_borderColor' => array(
+              'label' => 'Border color',
+              'type' => 'color'
+            ),
+            'block__postsfilter_borderRadius' => array(
+              'label' => 'Border radius',
+              'type' => 'input'
+            ),
+            'block__postsfilter_border' => array(
+              'label' => 'Border width',
+              'type' => 'input'
+            ),
+            'block__postsfilter_flexGap' => array(
+              'label' => 'Gap',
+              'type' => 'input'
+            ),
+            'block__postsfilter_padding' => array(
+              'label' => 'Padding',
+              'type' => 'input'
+            ),
+            'block__postsfilter_fontSize' => array(
+              'label' => 'Font size',
+              'type' => 'input'
+            ),
+            'block__postsfilter_lineHeight' => array(
+              'label' => 'Line height',
+              'type' => 'input'
+            ),
+            'block__postsfilter_fontWeight' => array(
+              'label' => 'Font weight',
+              'type' => 'select'
+            ),
+            'block__postsfilter_thumb_margin' => array(
+              'label' => 'Thumbnail margin',
+              'type' => 'select'
+            ),
+            'block__postsfilter_thumb_padding' => array(
+              'label' => 'Thumbnail padding',
+              'type' => 'select'
+            ),
+            'block__postsfilter_title_color' => array(
+              'label' => 'Title color',
+              'type' => 'color'
+            ),
+            'block__postsfilter_title_fontfamily' => array(
+              'label' => 'Title font family',
+              'type' => 'input'
+            ),
+            'block__postsfilter_title_fontSize' => array(
+              'label' => 'Title font size',
+              'type' => 'input'
+            ),
+            'block__postsfilter_title_lineHeight' => array(
+              'label' => 'Title line height',
+              'type' => 'input'
+            ),
+            'block__postsfilter_title_padding' => array(
+              'label' => 'Title padding',
+              'type' => 'input'
+            ),
+            'block__postsfilter_title_margin' => array(
+              'label' => 'Title margin',
+              'type' => 'input'
+            ),
+            'block__postsfilter_title_fontWeight' => array(
+              'label' => 'Title font weight',
+              'type' => 'select'
+            ),
+            'block__postsfilter_title_textTransform' => array(
+              'label' => 'Title text transform',
+              'type' => 'select'
+            ),
+            'block__postsfilter_title_fontStyle' => array(
+              'label' => 'Title font style',
+              'type' => 'select'
+            ),
+            'block__postsfilter_title_letterSpacing' => array(
+              'label' => 'Title letter spacing',
+              'type' => 'input'
+            )
+          )
         )
       )
     ),
@@ -4122,7 +4308,6 @@ class prefix_core_Customizer {
       if($getMods):
         $updateMods = array();
         foreach ($getMods as $key => $mod) {
-
           // 1. update (remove light__ from keys)
           if($getModsUpdate < 1):
             if(strpos($key, 'light__') !== false):
@@ -4132,18 +4317,15 @@ class prefix_core_Customizer {
               $updateMods[$key] = $mod;
             endif;
           endif;
-
         }
         update_option('theme_mods_childtheme', $updateMods, false);
         // update the update nr.
         update_option('theme_mods_childtheme_update', 1, false);
       endif;
+    elseif($getModsUpdate == "1"):
+      $customizerUpdate = SELF::generateCusomizerFile();
+      update_option('theme_mods_childtheme_update', 2, false);
     endif;
-
-
-
-    // check if value exists
-
   }
 
 
@@ -4161,21 +4343,21 @@ class prefix_core_Customizer {
 
   /* 2.2 GENERATE THE CUSTOMIZER FILE
   /------------------------*/
-  function generateCusomizerFile() {
+  public function generateCusomizerFile() {
     // ob_start();
     // require(get_template_directory() . "/dist/responsive_contentW.css");
     // $output .= ob_get_clean();
     // ob_end_flush();
 
     // do math for master theme responsive file
-    $get_mobile_breakpoint = preg_split('/(?<=[0-9])(?=[a-z]+)/i',get_theme_mod('mobile_breakpoint', $this->defaultValues['settings']['sections']['container']['inputs']['mobile_breakpoint']['default']));
+    $get_mobile_breakpoint = preg_split('/(?<=[0-9])(?=[a-z]+)/i',get_theme_mod('mobile_breakpoint', '768px'));
     $mobile_breakpoint = $get_mobile_breakpoint[0] - 1;
-    $container_width = preg_split('/(?<=[0-9])(?=[a-z]+)/i',get_theme_mod('container__width', $this->defaultValues['settings']['sections']['container']['inputs']['container__width']['default']));
-    $wide_left = preg_split('/(?<=[0-9])(?=[a-z]+)/i',get_theme_mod('wide__left', $this->defaultValues['settings']['sections']['container']['inputs']['wide__left']['default']));
-    $wide_right = preg_split('/(?<=[0-9])(?=[a-z]+)/i',get_theme_mod('wide__right', $this->defaultValues['settings']['sections']['container']['inputs']['wide__right']['default']));
+    $container_width = preg_split('/(?<=[0-9])(?=[a-z]+)/i',get_theme_mod('container__width', '1000px'));
+    $wide_left = preg_split('/(?<=[0-9])(?=[a-z]+)/i',get_theme_mod('wide__left', '200px'));
+    $wide_right = preg_split('/(?<=[0-9])(?=[a-z]+)/i',get_theme_mod('wide__right', '200px'));
     $wide_reset = $container_width[0] + $wide_left[0] + $wide_right[0];
-    $popup_width = preg_split('/(?<=[0-9])(?=[a-z]+)/i',get_theme_mod('popup__width', $this->defaultValues['settings']['sections']['theme_popup']['values']['popup__width']['default']));
-    $popup_space = preg_split('/(?<=[0-9])(?=[a-z]+)/i',get_theme_mod('popup__space', $this->defaultValues['settings']['sections']['theme_popup']['values']['popup__space']['default']));
+    $popup_width = preg_split('/(?<=[0-9])(?=[a-z]+)/i',get_theme_mod('popup__width', '800px'));
+    $popup_space = preg_split('/(?<=[0-9])(?=[a-z]+)/i',get_theme_mod('popup__space', '40px'));
     $popup_breakpoint = $popup_width[0] + $popup_space[0] + $popup_space[0];
     // build new file content
     $mobileDarkOutput = '';
@@ -4260,6 +4442,38 @@ class prefix_core_Customizer {
       endif;
     $output .= '}';
 
+    // get configurator settings
+    global $configuration;
+    if($configuration && array_key_exists('gutenberg', $configuration)):
+      $gutenbergCofig = $configuration['gutenberg'];
+      // add custom colors
+      if(array_key_exists('ColorPalette', $gutenbergCofig)):
+        foreach ($gutenbergCofig['ColorPalette'] as $colorKey => $color) {
+          $slug = prefix_core_BaseFunctions::Slugify($color["key"]);
+          $output .= '.has-' . $slug . '-background-color {background-color: ' . $color["value"] . ';}';
+          $output .= '.has-' . $slug . '-color {color: ' . $color["value"] . ';}';
+        }
+      endif;
+      // add custom font sizes
+      if(array_key_exists('FontSizes', $gutenbergCofig)):
+        $fontSizeMobile = '';
+        foreach ($gutenbergCofig['FontSizes'] as $fontsizeKey => $fontsize) {
+          $slug = prefix_core_BaseFunctions::Slugify($fontsize["key"]);
+          $output .= 'body.frontend .has-' . $slug . '---font-size, .block-editor .editor-styles-wrapper .has-' . $slug . '---font-size, ';
+          $output .= 'body.page-template .has-' . $slug . '---font-size {font-size: ' . $fontsize["value"] . ';}';
+          if(array_key_exists('valueMobile', $fontsize)):
+            $fontSizeMobile .= 'body.frontend .has-' . $slug . '---font-size, .block-editor .editor-styles-wrapper .has-' . $slug . '---font-size, ';
+            $fontSizeMobile .= 'body.page-template .has-' . $slug . '---font-size {font-size: ' . $fontsize["valueMobile"] . ';}';
+          endif;
+        }
+        if($fontSizeMobile !== ''):
+          $output .= '@media screen and (max-width: ' . $mobile_breakpoint . $get_mobile_breakpoint[1] . ') {';
+            $output .= $fontSizeMobile;
+          $output .= '}';
+        endif;
+      endif;
+    endif;
+
     // root directories
     $uploads = wp_upload_dir();
     $css_dir = get_stylesheet_directory() . '/';
@@ -4290,7 +4504,7 @@ class prefix_core_Customizer {
   /* 3.1 PREVIEW CUSTOMIZER CHANGES
   /------------------------*/
   function customizerPreview() {
-    wp_enqueue_script('theme/customizer', get_template_directory_uri() . '/classes/prefix_core_Customizer/assets/theme-customizer.js', ['jquery', 'customize-preview'], '0.1', true);
+    wp_enqueue_script('theme/customizer', get_template_directory_uri() . '/classes/prefix_core_Customizer/assets/theme-customizer.js', ['jquery', 'customize-preview'], '1.0', true);
   }
 
 }

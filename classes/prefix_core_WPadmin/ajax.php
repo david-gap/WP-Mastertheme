@@ -22,6 +22,7 @@ if($run_action) {
       include_once $path . '/wp-config.php';
       include_once $path . '/wp-includes/wp-db.php';
       include_once $path . '/wp-includes/pluggable.php';
+      include_once $path . '/wp-content/themes/mastertheme/classes/prefix_core_Customizer/class.prefix_core_Customizer.php';
   endif;
 
 
@@ -79,6 +80,8 @@ if($run_action) {
         'type' => 'error'
       );
     endif;
+    $customizer = new prefix_core_Customizer();
+    $customizer->generateCusomizerFile();
     // check for classes actions on publish
     // $registered_classes = get_declared_classes();
     // foreach ($registered_classes as $class_key => $classname) {

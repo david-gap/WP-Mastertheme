@@ -3,7 +3,7 @@
  * Blog template for video
  *
  * @author      David Voglgsang
- * @version     1.0.1
+ * @version     1.1.1
  *
 */
 if($args['id'] && $args['id'] !== 0):
@@ -13,16 +13,18 @@ endif;
 
 $video = '';
 // check for blocks
-if(has_blocks()):
+if(function_exists('has_post_video') && has_post_video()):
+  $video = get_the_post_video();
+elseif(has_blocks()):
   $supportedBlocks = array("core/embed", "templates/vimeo", "core/vimeo");
   $blocks = parse_blocks( $post->post_content );
   foreach ($blocks as $blockKey => $block) {
     if(in_array($block['blockName'], $supportedBlocks)):
-        $video .= '<div class="gb-block">' . render_block($block) . '</div>';
-        if("core/embed" === $block['blockName']):
-          $not_embedded = $block['attrs']['url'];
-          $video = str_replace( $not_embedded, wp_oembed_get($not_embedded), $video );
-        endif;
+      $video .= '<div class="gb-block">' . render_block($block) . '</div>';
+      if("core/embed" === $block['blockName']):
+        $not_embedded = $block['attrs']['url'];
+        $video = str_replace( $not_embedded, wp_oembed_get($not_embedded), $video );
+      endif;
       break;
     endif;
   }

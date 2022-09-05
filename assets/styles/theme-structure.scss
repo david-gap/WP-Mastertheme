@@ -326,6 +326,7 @@ body.page-template,
     & > .block-accordion .accordion-content img,
     & > .block-accordion .accordion-content figure,
     & > .block-posts,
+    & > .block-postsfilter,
     & > #search-form,
     & > .wp-block-gallery-container,
     & > .wpcf7 .wpcf7-form p {
@@ -370,6 +371,7 @@ body.page-template,
       & > .block-accordion,
       & > .block-vimeo,
       & > .block-posts,
+      & > .block-postsfilter,
       & > #search-form,
       & > .wp-block-gallery-container,
       & > .wpcf7 .wpcf7-form p {
@@ -457,6 +459,7 @@ body.page-template,
       .post-meta {}
       .list-category {
         display: flex;
+        flex-wrap: wrap;
         list-style: none;
         margin: 0;
         padding: 0;

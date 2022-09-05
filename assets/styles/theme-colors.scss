@@ -44,6 +44,8 @@ Table of Contents:
     4.8 QUOTE
     4.9 GALLERY
     4.10 VIDEO
+    4.11 POSTS
+    4.12 POSTS FILTER
   5.0 FOOTER
     5.1 BACKGROUND
     5.2 LINKS
@@ -736,12 +738,49 @@ body.page-template,
   }
 
 
+  /* 4.11 POSTS
+  /––––––––––––––––––––––––*/
+  div.block-posts {
+    > ul {
+      > li {
+        background-color: var(--block__posts_backgroundColor, transparent);
+        color: var(--block__posts_color, inherit);
+        border-color: var(--block__posts_borderColor, transparent);
+        .post-content {
+          > h4,
+          .template h2 {
+            color: var(--block__posts_title_color, inherit);
+          }
+        }
+      }
+    }
+  }
+
+
+  /* 4.12 POSTS FILTER
+  /––––––––––––––––––––––––*/
+  div.block-postsfilter {
+    > div.results {
+      > div {
+        background-color: var(--block__postsfilter_backgroundColor, transparent);
+        border-color: var(--block__postsfilter_borderColor, transparent);
+        color: var(--block__postsfilter_color, inherit);
+        .post-content {
+          > h4,
+          .template h2 {
+            color: var(--block__postsfilter_title_color, inherit);
+          }
+        }
+      }
+    }
+  }
+
 
   /*==================================================================================
     5.0 FOOTER
   ==================================================================================*/
 
-  footer {
+  > footer {
 
     /* 5.1 BACKGROUND
     /––––––––––––––––––––––––*/

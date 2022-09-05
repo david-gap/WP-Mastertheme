@@ -474,7 +474,7 @@ REGISTER BLOCK
             {getTaxonomyFiedset(attributes)}
             {getResetButton(attributes)}
           </form>
-          <div className={postListTemplate} style={{'--postColumns': columnSum, '--postColumnsSpace': columnSpacing + 'px'}} data-columnspace={columnSpacing} data-columns={columnSum}>
+          <div className={postListTemplate + ' results'} style={{'--postColumns': columnSum, '--postColumnsSpace': columnSpacing + 'px'}} data-columnspace={columnSpacing} data-columns={columnSum}>
             { posts.map(
               ( post ) => {
                 // console.log(post);

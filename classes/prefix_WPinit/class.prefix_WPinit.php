@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.16.11
+ * @version     2.16.12
  *
 */
 
@@ -207,7 +207,7 @@ class prefix_WPinit {
         "type" => "array_addable"
       ),
       "css" => array(
-        "label" => "Embed CSS file",
+        "label" => "Embed custom CSS file",
         "type" => "switchbutton"
       ),
       "cachebust" => array(

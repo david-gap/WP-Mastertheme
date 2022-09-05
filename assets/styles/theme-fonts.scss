@@ -37,6 +37,8 @@ Table of Contents:
     5.9 QUOTE
     5.10 VIDEO
     5.11 GALLERY
+    5.13 POSTS
+    5.14 POSTS FILTER
 =======================================================*/
 
 
@@ -746,6 +748,56 @@ body.page-template,
           font-size: var(--swiper__bulletNav_item_fontSize, inherit);
           line-height: 1;
           text-align: center;
+        }
+      }
+    }
+  }
+
+
+  /* 5.13 POSTS
+  /––––––––––––––––––––––––*/
+  div.block-posts {
+    > ul {
+      > li {
+        .post-content {
+          font-size: var(--block__posts_fontSize, transparent);
+          line-height: var(--block__posts_lineHeight, transparent);
+          font-weight: var(--block__posts_fontWeight, transparent);
+          > h4,
+          .template h2 {
+            font-size: var(--block__posts_title_fontSize, transparent);
+            line-height: var(--block__posts_title_lineHeight, transparent);
+            font-weight: var(--block__posts_title_fontWeight, transparent);
+            font-family: var(--block__posts_title_fontfamily, inherit);
+            text-transform: var(--block__posts_title_textTransform, none);
+            font-style: var(--block__posts_title_fontStyle, initial);
+            letter-spacing: var(--block__posts_title_letterSpacing, 0);
+          }
+        }
+      }
+    }
+  }
+
+
+  /* 5.14 POSTS FILTER
+  /––––––––––––––––––––––––*/
+  div.block-postsfilter {
+    > div.results {
+      > div {
+        .post-content {
+          font-size: var(--block__postsfilter_fontSize, transparent);
+          line-height: var(--block__postsfilter_lineHeight, transparent);
+          font-weight: var(--block__postsfilter_fontWeight, transparent);
+          > h4,
+          .template h2 {
+            font-size: var(--block__postsfilter_title_fontSize, transparent);
+            line-height: var(--block__postsfilter_title_lineHeight, transparent);
+            font-weight: var(--block__postsfilter_title_fontWeight, transparent);
+            font-family: var(--block__postsfilter_title_fontfamily, inherit);
+            text-transform: var(--block__postsfilter_title_textTransform, none);
+            font-style: var(--block__postsfilter_title_fontStyle, initial);
+            letter-spacing: var(--block__postsfilter_title_letterSpacing, 0);
+          }
         }
       }
     }

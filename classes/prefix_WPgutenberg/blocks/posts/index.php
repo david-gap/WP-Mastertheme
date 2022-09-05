@@ -184,49 +184,67 @@ function WPgutenberg_posts_PostBuilder(array $attr, $id, $currentId){
     endif;
       // add post thumbnail
       if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_img', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
-        $output .= $linkOpen;
+        if(function_exists('has_post_video') && has_post_video($id)):
+        else:
+          $output .= $linkOpen;
+        endif;
       endif;
         if(array_key_exists('postThumb', $attr) && $attr['postThumb'] !== false):
-        if($attr['postType'] == 'attachment'):
-          $mineType = get_post_mime_type($id);
-          $audioType = ['audio/mpeg3', 'audio/x-mpeg-3', 'video/mpeg', 'video/x-mpeg', 'audio/m4a', 'audio/ogg', 'audio/wav', 'audio/x-wav', 'audio/mpeg'];
-          $videoType = ['video/mp4', 'video/x-m4v', 'video/quicktime', 'video/x-ms-asf', 'video/x-ms-wmv', 'application/x-troff-msvideo', 'video/avi', 'video/msvideo', 'video/x-msvideo', 'video/ogg', 'video/3gpp', 'audio/3gpp', 'video/3gpp2', 'audio/3gpp2', 'video/mpeg'];
-          if(in_array($mineType, $audioType)):
-            $file = '<audio controls src="' . wp_get_attachment_url($id) . '" data-id="' . $id . '" />';
-          elseif (in_array($mineType, $videoType)):
-            $file = '<video controls src="' . wp_get_attachment_url($id) . '" data-id="' . $id . '" />';
+          if($attr['postType'] == 'attachment'):
+            $mineType = get_post_mime_type($id);
+            $audioType = ['audio/mpeg3', 'audio/x-mpeg-3', 'video/mpeg', 'video/x-mpeg', 'audio/m4a', 'audio/ogg', 'audio/wav', 'audio/x-wav', 'audio/mpeg'];
+            $videoType = ['video/mp4', 'video/x-m4v', 'video/quicktime', 'video/x-ms-asf', 'video/x-ms-wmv', 'application/x-troff-msvideo', 'video/avi', 'video/msvideo', 'video/x-msvideo', 'video/ogg', 'video/3gpp', 'audio/3gpp', 'video/3gpp2', 'audio/3gpp2', 'video/mpeg'];
+            if(in_array($mineType, $audioType)):
+              $file = '<audio controls src="' . wp_get_attachment_url($id) . '" data-id="' . $id . '" />';
+            elseif (in_array($mineType, $videoType)):
+              $file = '<video controls src="' . wp_get_attachment_url($id) . '" data-id="' . $id . '" />';
+            else:
+              $file = wp_get_attachment_image($id, 'full', true, array("data-id" => $id));
+            endif;
+            $output .= '<figure>' . $file . '</figure>';
           else:
-            $file = wp_get_attachment_image($id, 'full', true, array("data-id" => $id));
+            $output .= get_the_post_thumbnail($id) ? '<figure>' . get_the_post_thumbnail($id, 'full', array("data-id" => $id)) . '</figure>' : '';
           endif;
-          $output .= '<figure>' . $file . '</figure>';
-        else:
-          $output .= get_the_post_thumbnail($id) ? '<figure>' . get_the_post_thumbnail($id, 'full', array("data-id" => $id)) . '</figure>' : '';
-        endif;
         endif;
       if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_img', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
-        $output .= $linkClose;
+        if(function_exists('has_post_video') && has_post_video($id)):
+        else:
+          $output .= $linkClose;
+        endif;
       endif;
       // add content
       $output .= '<div class="post-content">';
         if(array_key_exists('postTextOne', $attr) && $attr['postTextOne'] !== ''):
           $output .= $attr['postTextOne'] == 'title' ? '<h4>' : '<div class="' . $attr['postTextOne'] . '">';
             if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_row1', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
-              $output .= $linkOpen;
+              if(function_exists('has_post_video') && has_post_video($id) && ($attr['postTextOne'] == 'templateMedia' || $attr['postTextOne'] == 'template')):
+              else:
+                $output .= $linkOpen;
+              endif;
             endif;
               $output .= WPgutenberg_posts_ContentRow($attr['postTextOne'], $id);
             if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_row1', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
-              $output .= $linkClose;
+              if(function_exists('has_post_video') && has_post_video($id) && ($attr['postTextOne'] == 'templateMedia' || $attr['postTextOne'] == 'template')):
+              else:
+                $output .= $linkClose;
+              endif;
             endif;
           $output .= $attr['postTextOne'] == 'title' ? '</h4>' : '</div>';
         endif;
         if(array_key_exists('postTextTwo', $attr) && $attr['postTextTwo'] !== ''):
           $output .= $attr['postTextTwo'] == 'title' ? '<h4>' : '<div class="' . $attr['postTextTwo'] . '">';
             if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_row2', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
-              $output .= $linkOpen;
+              if(function_exists('has_post_video') && has_post_video($id) && ($attr['postTextTwo'] == 'templateMedia' || $attr['postTextTwo'] == 'template')):
+              else:
+                $output .= $linkOpen;
+              endif;
             endif;
               $output .= WPgutenberg_posts_ContentRow($attr['postTextTwo'], $id);
             if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_row2', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
-              $output .= $linkClose;
+              if(function_exists('has_post_video') && has_post_video($id) && ($attr['postTextTwo'] == 'templateMedia' || $attr['postTextTwo'] == 'template')):
+              else:
+                $output .= $linkClose;
+              endif;
             endif;
           $output .= $attr['postTextTwo'] == 'title' ? '</h4>' : '</div>';
         endif;

@@ -3,7 +3,7 @@
  * Blog template for defaults
  *
  * @author      David Voglgsang
- * @version     1.0.1
+ * @version     1.1.1
  *
 */
 if($args['id'] && $args['id'] !== 0):
@@ -11,7 +11,12 @@ if($args['id'] && $args['id'] !== 0):
   $post = get_post($args['id']);
 endif;
 
-$thumb = get_the_post_thumbnail();
+
+if(function_exists('has_post_video') && has_post_video()):
+  $thumb = get_the_post_video();
+else:
+  $thumb = get_the_post_thumbnail();
+endif;
 
 $css = 'temp-' . get_post_type() . '-default';
 // disable content loading

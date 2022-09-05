@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.22.15
+ * @version     2.23.15
  */
 
 /*=======================================================
@@ -326,7 +326,11 @@ class prefix_WPgutenberg {
             "type" => "text"
           ),
           "value" => array(
-            "label" => "Size (without px)",
+            "label" => "Size",
+            "type" => "text"
+          ),
+          "valueMobile" => array(
+            "label" => "Mobile size",
             "type" => "text"
           )
         )

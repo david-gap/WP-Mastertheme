@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.63.28 | 05.09.2022 <💎 IMPROVE: thumb video support, posts styling>
+* Add post thumb video support
+* Add posts & postsfilter styling to customizer
+* Move custom colors to customizer file and remove it from JS file
+* Generate customizer file on configuration save
+
 ## 1.62.28 | 05.09.2022 <💎 IMPROVE: pop-up styling 🐛 FIX: img data-id>
 * Make sure image block data-id is always
 * Add popup style to customizer
