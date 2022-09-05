@@ -376,6 +376,13 @@ var getStyle = function(e, styleName) {
  3.0 THEME FUNCTIONS
 ==================================================================================*/
 
+/* Settings from configuration file
+/------------------------*/
+function themeConfiguration(data){
+  // check if file value exists and inline css are disabled
+}
+
+
 /* Sticky menu
 /------------------------*/
 function StickyHeader(action) {
