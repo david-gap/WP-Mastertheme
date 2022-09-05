@@ -1357,4 +1357,4 @@ function runEventListeners(){
   allGalleryEventListeners();
 
 }
-// runEventListeners();
+runEventListeners();
