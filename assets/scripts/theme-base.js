@@ -28,7 +28,7 @@
 /* Global values
 /------------------------*/
 const root = document.querySelector('html'),
-      configuration = configurations,
+      configuration = ajaxCall({action: 'configuration'}),
       language = root.getAttribute('lang'),
       isTouch = 'ontouchstart' in document.documentElement,
       body = root.querySelector('body'),
@@ -1357,4 +1357,4 @@ function runEventListeners(){
   allGalleryEventListeners();
 
 }
-runEventListeners();
+// runEventListeners();
