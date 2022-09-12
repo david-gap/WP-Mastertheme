@@ -12,8 +12,37 @@
   const { __ } = wp.i18n;
   const { addFilter } = wp.hooks;
   const { Fragment }	= wp.element;
-  const { createHigherOrderComponent } = wp.compose;
+  const { createHigherOrderComponent, withState } = wp.compose;
+  const { select, withSelect, setState, useSelect, useDispatch } = wp.data;
+  const {
+    ColorPalette,
+    PanelColorSettings,
+    ContrastChecker,
+    MediaUpload,
+    MediaUploadCheck
+  } = wp.editor;
 
+  const {
+    CheckboxControl,
+    PanelBody,
+    PanelRow,
+    RadioControl,
+    RangeControl,
+    TextControl,
+    TextareaControl,
+    ToggleControl,
+    SelectControl,
+    DateTimePicker,
+    ResponsiveWrapper,
+    Button,
+    Spinner
+  } = wp.components;
+
+
+
+/*==================================================================================
+  BLOCKS
+==================================================================================*/
 
   /* add attributes to each block
   /------------------------*/

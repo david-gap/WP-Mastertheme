@@ -377,6 +377,7 @@ body.page-template,
   /––––––––––––––––––––––––*/
   .post-title,
   .is-style-post-title {
+    border-color: var(--postTitle__borderColor, transparent);
     &:not(.has-text-color){
       color: var(--postTitle__color, inherit);
     }
@@ -389,6 +390,7 @@ body.page-template,
   /* 3.3 TITLE SIZES
   /––––––––––––––––––––––––*/
   .is-style-title-one {
+    border-color: var(--titleOne__borderColor, transparent);
     &:not(.has-text-color){
       color: var(--titleOne__color, inherit);
     }
@@ -397,6 +399,7 @@ body.page-template,
     }
   }
   .is-style-title-two {
+    border-color: var(--titleTwo__borderColor, transparent);
     &:not(.has-text-color){
       color: var(--titleTwo__color, inherit);
     }
@@ -405,11 +408,30 @@ body.page-template,
     }
   }
   .is-style-title-three {
+    border-color: var(--titleThree__borderColor, transparent);
     &:not(.has-text-color){
       color: var(--titleThree__color, inherit);
     }
     &:not(.has-background){
       background-color: var(--titleThree__bg, initial);
+    }
+  }
+  .is-style-title-four {
+    border-color: var(--titleFour__borderColor, transparent);
+    &:not(.has-text-color){
+      color: var(--titleFour__color, inherit);
+    }
+    &:not(.has-background){
+      background-color: var(--titleFour__bg, initial);
+    }
+  }
+  .is-style-title-five {
+    border-color: var(--titleFive__borderColor, transparent);
+    &:not(.has-text-color){
+      color: var(--titleFive__color, inherit);
+    }
+    &:not(.has-background){
+      background-color: var(--titleFive__bg, initial);
     }
   }
 

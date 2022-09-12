@@ -365,6 +365,7 @@ REGISTER BLOCK
         'order': props.attributes.postSortDirection,
         'tax_relation': props.attributes.postTaxonomyFilterRelation
       };
+      query['orderby'] = props.attributes.postSortBy;
       if(props.attributes.postSortBy && defalutSort.includes(props.attributes.postSortBy)){
         query['orderby'] = props.attributes.postSortBy;
       } else if (props.attributes.postSortBy && props.attributes.postSortBy.startsWith("tax__")) {

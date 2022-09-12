@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.23.15
+ * @version     2.24.15
  */
 
 /*=======================================================
@@ -109,6 +109,29 @@ class prefix_WPgutenberg {
       // remove_filter( 'render_block', 'gutenberg_render_layout_support_flag', 10, 2 );
       // remove_filter( 'render_block', 'wp_render_elements_support', 10, 2 );
       // remove_filter( 'render_block', 'gutenberg_render_elements_support', 10, 2 );
+      // extend thumbnail metabox
+      register_meta( 'post', 'template_page_videothumb_videoId', array(
+        'type' => 'integer',
+        'single' => true,
+        'show_in_rest' => true
+      ) );
+      register_meta( 'post', 'template_page_videothumb_videoUrl', array(
+        'type' => 'string',
+        'single' => true,
+        'show_in_rest' => true
+      ) );
+      register_meta( 'post', 'template_page_videothumb_options', array(
+        'type' => 'array',
+        'single' => true,
+        'show_in_rest' => array(
+          'schema' => array(
+            'type'  => 'array',
+            'items' => array(
+              'type' => 'string'
+            )
+          )
+        ),
+      ) );
       // register strings
       $backendStrings = array(
         __('Gutenberg', 'devTheme'),
@@ -470,7 +493,7 @@ class prefix_WPgutenberg {
       'gutenberg-block',
       $class_path . 'assets/js/gutenberg-blocks.js',
       ['wp-i18n', 'wp-element', 'wp-blocks', 'wp-components', 'wp-editor'],
-      '1.0'
+      '1.1'
     );
   }
 

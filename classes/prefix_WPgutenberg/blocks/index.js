@@ -1,6 +1,7 @@
 /**
  * Hook core blocks
  */
+import "./core-extensions/featuredImage";
 import "./core-extensions/all";
 import "./core-extensions/image";
 import "./core-extensions/gallery";

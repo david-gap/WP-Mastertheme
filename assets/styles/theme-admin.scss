@@ -301,24 +301,28 @@ body.wp-admin {
     IMAGE SELECTOR
   ==================================================================================*/
   #configuration,
+  #postimagediv,
   .metaboxes {
-    .img-selected {
+    .img-selected,
+    .video-selected {
       display: block;
       position: relative;
       border: 1px solid;
       line-height: 0;
-      max-width: 100px;
+      max-width: 100%;
       line-height: 0;
       margin: 15px 0 10px;
       &:empty {
         border: 0 solid;
         margin: 0;
       }
-      img {
+      img,
+      video {
         width: 100%;
         height: auto;
       }
-      .remove_image {
+      .remove_image,
+      .remove_video {
         display: flex;
         justify-content: center;
         align-items: center;

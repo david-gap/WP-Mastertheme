@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.32.17
+ * @version     2.33.17
  *
 */
 
@@ -27,6 +27,7 @@ Table of Contents:
   2.6 REBUILD SEARCH FORM
   2.7 ADD VALUES TO REST API
   2.8 REDIRECT DETAIL PAGE
+  2.9 EXTEND THUMBNAIL
 3.0 OUTPUT
   3.1 SORTABLE HEADER CONTENT
   3.2 SORTABLE FOOTER CONTENT
@@ -103,6 +104,7 @@ class prefix_template {
     * @param static array $template_page_metablock: activate metablock on detail page/posts
     * @param static array $template_page_metablockAdds: Add metabox to CPT by slugs
     * @param static array $template_page_options: show/hide template elements
+    * @param static int $template_thumbvideo: Activate video as thumbnail
     * @param static int $template_page_bgColor: Activate custom background color
     * @param static int $template_page_bgImg: Activate custom background image
     * @param static int $template_scrolltotop_active: activate scroll to top
@@ -253,6 +255,7 @@ class prefix_template {
     "beforeMain" => 1,
     "afterMain" => 1
   );
+  static $template_thumbvideo                     = 0;
   static $template_page_bgColor                    = 0;
   static $template_page_bgImg                      = 0;
   static $template_page_metablock                  = array(
@@ -326,6 +329,9 @@ class prefix_template {
       // update custom fields
       add_action('save_post', array( $this, 'WPtemplate_meta_Save' ),  10, 2 );
     endif;
+    // extend thumbnail metabox
+    add_filter( 'admin_post_thumbnail_html', array( $this, 'extendThumbnailMetabox' ), 10, 2 );
+    add_filter( 'post_thumbnail_html', array( $this, 'extendThumbnailOutput' ), 10, 5 );
     // register widgets
     SELF::registerCustomWidgets();
     // shortcodes
@@ -999,6 +1005,10 @@ class prefix_template {
             )
           )
         ),
+        "videoThumb" => array(
+          "label" => "Activate video thumb",
+          "type" => "switchbutton"
+        ),
         "active" => array(
           "label" => "Activate page options",
           "type" => "switchbutton"
@@ -1432,6 +1442,7 @@ class prefix_template {
           SELF::$template_page_metablock = array_key_exists('metablock', $page) ? $page['metablock'] : SELF::$template_page_metablock;
           SELF::$template_page_metablockAdds = array_key_exists('add_metablock', $page) ? $page['add_metablock'] : SELF::$template_page_metablockAdds;
           SELF::$template_page_options = array_key_exists('options', $page) ? array_merge(SELF::$template_page_options, $page['options']) : SELF::$template_page_options;
+          SELF::$template_thumbvideo = array_key_exists('videoThumb', $page) ? $page['videoThumb'] : SELF::$template_thumbvideo;
           SELF::$template_page_bgColor = array_key_exists('bgColor', $page) ? $page['bgColor'] : SELF::$template_page_bgColor;
           SELF::$template_page_bgImg = array_key_exists('bgImage', $page) ? $page['bgImage'] : SELF::$template_page_bgImg;
           SELF::$template_page_additional = array_key_exists('additional', $page) ? array_merge(SELF::$template_page_additional, $page['additional']) : SELF::$template_page_additional;
@@ -1547,9 +1558,23 @@ class prefix_template {
       if(isset($_POST['template_page_bgColor'])):
         update_post_meta($post_id, 'template_page_bgColor', $_POST['template_page_bgColor']);
       endif;
-      // sage page backgound img
+      // save page backgound img
       if(isset($_POST['template_page_bgImg'])):
         update_post_meta($post_id, 'template_page_bgImg', $_POST['template_page_bgImg']);
+      endif;
+      // save video thumb settings
+      if(get_post_types(array(), 'objects')[get_post_type($post_id)]->show_in_rest == 1):
+      else:
+        if(isset($_POST['template_page_videothumb_options'])):
+          update_post_meta($post_id, 'template_page_videothumb_options', $_POST['template_page_videothumb_options']);
+        else:
+          update_post_meta($post_id, 'template_page_videothumb_options', '');
+        endif;
+        if(isset($_POST['template_page_videothumb_videoUrl'])):
+          update_post_meta($post_id, 'template_page_videothumb_videoUrl', $_POST['template_page_videothumb_videoUrl']);
+        else:
+          update_post_meta($post_id, 'template_page_videothumb_videoUrl', '');
+        endif;
       endif;
     }
 
@@ -1719,6 +1744,55 @@ class prefix_template {
       endif;
     }
 
+
+    /* 2.9 EXTEND THUMBNAIL
+    /------------------------*/
+    function extendThumbnailMetabox( $content, $post_id ) {
+      $videoThumbActive = SELF::$template_thumbvideo;
+      if($videoThumbActive):
+        $videoUrl = get_post_meta($post_id, 'template_page_videothumb_videoUrl', true);
+        $videoOptions = get_post_meta($post_id, 'template_page_videothumb_options', true);
+        $content .= '<div data-id="template_page_videothumb_videoUrl">';
+        $content .= '<p><b>' . __( 'Video thumb', 'devTheme' ) . '</b></p>';
+        $content .= '<input type="hidden" class="video-saved" id="template_page_videothumb_videoUrl" name="template_page_videothumb_videoUrl" value="' . $videoUrl . '" style="margin-top:5px; width:100%;">';
+        $content .= '<button class="wp-single-video" data-action="WPadmin">' . __('Select video','devTheme') . '</button>';
+        $content .= '<span class="video-selected">';
+          if($videoUrl !== false && $videoUrl !== ''):
+            $content .= '<span class="remove_video"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24.9 24.9" xml:space="preserve"><rect x="-3.7" y="10.9" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1549 12.4451)" fill="#000" width="32.2" height="3"/><rect x="10.9" y="-3.7" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1549 12.4451)" fill="#000" width="3" height="32.2"/></svg></span>';
+            $content .= '<video src="' . wp_get_attachment_url($videoUrl) . '" autoplay muted playsinline></video>';
+          endif;
+        $content .= '</span></div>';
+        $content .= '<div data-id="template_page_videothumb_options"><ul>';
+          $content .= '<p><b>' . __( 'Replace thumb image with video on:', 'devTheme' ) . '</b></p>';
+          if(is_string($videoOptions)):
+            $videoOptions = unserialize($videoOptions);
+          endif;
+          $content .= '<li><label><input type="checkbox" name="template_page_videothumb_options[]" value="detailpage" ' . prefix_core_BaseFunctions::setChecked('detailpage', $videoOptions) . '>' . __( 'Detail page', 'devTheme' ) . '</label></li>';
+          $content .= '<li><label><input type="checkbox" name="template_page_videothumb_options[]" value="searchresults" ' . prefix_core_BaseFunctions::setChecked('searchresults', $videoOptions) . '>' . __( 'Search results', 'devTheme' ) . '</label></li>';
+          $content .= '<li><label><input type="checkbox" name="template_page_videothumb_options[]" value="archive" ' . prefix_core_BaseFunctions::setChecked('archive', $videoOptions) . '>' . __( 'Archive', 'devTheme' ) . '</label></li>';
+          $content .= '<li><label><input type="checkbox" name="template_page_videothumb_options[]" value="postsblock" ' . prefix_core_BaseFunctions::setChecked('postsblock', $videoOptions) . '>' . __( 'Posts block', 'devTheme' ) . '</label></li>';
+          $content .= '<li><label><input type="checkbox" name="template_page_videothumb_options[]" value="postsfilterblock" ' . prefix_core_BaseFunctions::setChecked('postsfilterblock', $videoOptions) . '>' . __( 'Posts filter block', 'devTheme' ) . '</label></li>';
+        $content .= '</ul></div>';
+      endif;
+      return $content;
+    }
+    function extendThumbnailOutput( $html, $post_id, $post_thumbnail_id, $size, $attr ) {
+      $videoThumbActive = SELF::$template_thumbvideo;
+      $videoUrl = get_post_meta($post_id, 'template_page_videothumb_videoUrl', true);
+      $videoOptions = get_post_meta($post_id, 'template_page_videothumb_options', true);
+      if(is_string($videoOptions)):
+        $videoOptions = unserialize($videoOptions);
+      endif;
+      if($videoThumbActive && $videoUrl && in_array($attr["callingFrom"], $videoOptions)):
+        $html = '';
+        $html .= $attr["callingFrom"] == 'detailpage' ? '<div class="' . $attr["class"] . '">' : '';
+        $html .= $attr["callingFrom"] == 'archive' || $attr["callingFrom"] == 'searchresults' ? '<figure>' : '';
+        $html .= '<video src="' . wp_get_attachment_url($videoUrl) . '" autoplay muted playsinline></video>';
+        $html .= $attr["callingFrom"] == 'archive' || $attr["callingFrom"] == 'searchresults' ? '</figure>' : '';
+        $html .= $attr["callingFrom"] == 'detailpage' ? '</div>' : '';
+      endif;
+      return $html;
+    }
 
 
 
@@ -2691,7 +2765,7 @@ class prefix_template {
        endif;
 
       if($id > 0):
-        $output .= SELF::$template_thumbnail_div == 0 ? get_the_post_thumbnail($id, 'full', ['class' => $thumbnailCss]) : '';
+        $output .= SELF::$template_thumbnail_div == 0 ? get_the_post_thumbnail($id, 'full', ['class' => $thumbnailCss, 'callingFrom' => 'detailpage']) : '';
         $output .= SELF::$template_thumbnail_div == 0 && is_404() || SELF::$template_thumbnail_div == 0 && is_search() ? wp_get_attachment_image($id, 'full', ['class' => $thumbnailCss]) : '';
         $img_url = is_404() || is_search() ? wp_get_attachment_image_url($id, 'full') : get_the_post_thumbnail_url($id, 'full');
         $output .= SELF::$template_thumbnail_div == 1 && $img_url ? '<div class="' . $thumbnailCss . '" style="background-image: url(' . $img_url . ')"></div>' : '';

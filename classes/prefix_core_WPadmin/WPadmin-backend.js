@@ -192,9 +192,9 @@ jQuery(document).ready(function($){
     });
 
 
-    /* select media
+    /* select img
     /––––––––––––––––––––––––*/
-    $(document).on('click', '#configuration .wp-single-media, .metaboxes .wp-single-media', function (e) {
+    $(document).on('click', '#configuration .wp-single-media, .metaboxes .wp-single-media, #postimagediv .wp-single-media', function (e) {
       // get action
       var action = $(this).attr('data-action');
       var input_id = $(this).siblings('.img-saved').attr('id');
@@ -251,6 +251,77 @@ jQuery(document).ready(function($){
         });
         // Finally, open the modal
         meta_gallery_frame.open();
+      }
+    });
+
+
+    /* select video
+    /––––––––––––––––––––––––*/
+    $(document).on('click', '#configuration .wp-single-video, .metaboxes .wp-single-video, #postimagediv .wp-single-video', function (e) {
+      // get action
+      var action = $(this).attr('data-action');
+      var input_id = $(this).siblings('.video-saved').attr('id');
+      var container = $(this).parents('div').data('id');
+      var meta_gallery_frame;
+      // check if right action is active for video selection
+      if(action == "WPadmin"){
+        // stop page reload
+        e.preventDefault();
+        // if the frame already exists, re-open it.
+        if ( meta_gallery_frame ) {
+          meta_gallery_frame.open();
+          return;
+        }
+        // Sets up the media library frame
+        meta_gallery_frame = wp.media.frames.meta_gallery_frame = wp.media({
+          title: input_id.title,
+          button: { text:  input_id.button },
+          library: { type: 'video' },
+          multiple: true
+        });
+        // get already selected images
+        meta_gallery_frame.on('open', function() {
+          var selection = meta_gallery_frame.state().get('selection');
+          var library = meta_gallery_frame.state('gallery-edit').get('library');
+          var ids = $('div[data-id="' + container + '"]').find('.video-saved').val();
+          if (ids) {
+            idsArray = ids.split(',');
+            idsArray.forEach(function(id) {
+                    attachment = wp.media.attachment(id);
+                    attachment.fetch();
+                    selection.add( attachment ? [ attachment ] : [] );
+            });
+          }
+        });
+        //When an image is selected, run a callback.
+        meta_gallery_frame.on('select', function() {
+                var imageIDArray = [];
+                var imageHTML = '';
+                var metadataString = '';
+                images = meta_gallery_frame.state().get('selection');
+                images.each(function(attachment) {
+                        imageIDArray.push(attachment.attributes.id);
+                        imageHTML += '<span class="remove_video"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24.9 24.9" xml:space="preserve"><rect x="-3.7" y="10.9" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1549 12.4451)" fill="#000" width="32.2" height="3"/><rect x="10.9" y="-3.7" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1549 12.4451)" fill="#000" width="3" height="32.2"/></svg></span><video src="' + attachment.attributes.url + '" autoplay muted playsinline></video>';
+                });
+                metadataString = imageIDArray.join(",");
+                if (metadataString) {
+                  $('div[data-id="' + container + '"]').find('.video-saved').val(metadataString);
+                  $('div[data-id="' + container + '"]').find('.video-selected').html(imageHTML);
+                }
+        });
+        // Finally, open the modal
+        meta_gallery_frame.open();
+      }
+    });
+
+
+    /* remove selected video
+    /------------------------*/
+    $(document).on('click', '#configuration .video-selected .remove_video, .metaboxes .video-selected .remove_video, #postimagediv .video-selected .remove_video', function (e) {
+      event.preventDefault();
+      if (confirm('Are you sure you want to remove this video?')) {
+        $(this).parents('.video-selected').siblings('.video-saved').val('');
+        $(this).parents('.video-selected').html('');
       }
     });
 

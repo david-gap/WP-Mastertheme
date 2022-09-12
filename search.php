@@ -3,7 +3,7 @@
  * Search results page
  *
  * @author      David Voglgsang
- * @version     1.3.1
+ * @version     1.4.1
  *
 */
 
@@ -24,15 +24,15 @@ get_header();
       <?php while ( have_posts() ) : the_post();
         if(get_post_type() == "post" || post_type_supports(get_post_type(), 'post-formats')):
           // blog output
-          $blog_type = get_post_format();
+          $blog_type = get_post_format() ? get_post_format() : 'default';
           if(locate_template('template_parts/' . get_post_type() . '_' . $blog_type)):
-            get_template_part('template_parts/' . get_post_type() . '_' . $blog_type);
+            get_template_part('template_parts/' . get_post_type() . '_' . $blog_type, '', array('callingFrom' => 'searchresults'));
           else:
-            get_template_part('template_parts/post_' . $blog_type);
+            get_template_part('template_parts/post_' . $blog_type, '', array('callingFrom' => 'searchresults'));
           endif;
         else:
           // default output
-          get_template_part('template_parts/post_default');
+          get_template_part('template_parts/post_default', '', array('callingFrom' => 'searchresults'));
         endif;
       endwhile;	?>
     </div>

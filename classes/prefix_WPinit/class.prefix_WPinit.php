@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.16.12
+ * @version     2.16.13
  *
 */
 
@@ -34,6 +34,7 @@ Table of Contents:
   2.14 EDITORS BACKEND
   2.15 ACF TO REST API
   2.16 LOAD THEME TRANSLATION FILES
+  2.17 ADD META SORT TO REST API
 3.0 OUTPUT
   3.1 MENU
   3.2 RETURN CUSTOM CSS
@@ -80,7 +81,7 @@ class prefix_WPinit {
     private $WPinit_css_path           = "/dist/style.min.css";
     private $WPinit_admin_css_path     = "/dist/style_backend.min.css";
     private $WPinit_theme_js_version   = 1.4;
-    private $WPinit_theme_css_version  = 1.5;
+    private $WPinit_theme_css_version  = 1.6;
     private $WPinit_js                 = 1;
     private $WPinit_js_version         = 1.0;
     private $WPinit_js_path            = "/dist/script.min.js";
@@ -148,6 +149,11 @@ class prefix_WPinit {
       // acf fields
       add_filter('rest_prepare_post', array( $this, 'ACFtoRestApi' ), 10, 3);
       add_filter('rest_prepare_page', array( $this, 'ACFtoRestApi' ), 10, 3);
+      // meta fields sort in rest
+      add_filter('rest_post_query', array( $this, 'restMetaQuery' ), 10, 2);
+      add_filter('rest_post_collection_params', array( $this, 'restCollectionparms' ), 10, 2);
+      add_filter('rest_page_query', array( $this, 'restMetaQuery' ), 10, 2);
+      add_filter('rest_page_collection_params', array( $this, 'restCollectionparms' ), 10, 2);
       // return css inside head
       if($this->WPinit_HeaderCss == 1):
         add_action( 'wp_head', array( $this, 'BuildCustomCSS' ), 10, 1 );
@@ -621,6 +627,20 @@ class prefix_WPinit {
     /------------------------*/
     function themeTranslations(){
       load_theme_textdomain('devTheme', get_template_directory() . '/languages');
+    }
+
+
+    /* 2.17 ADD META SORT TO REST API
+    /------------------------*/
+    public function restMetaQuery($args, $request) {
+      if ( isset( $request['meta_key']) && !empty($request['meta_key'] ) ) {
+        $args['meta_key'] = $request['meta_key'];
+      }
+      return $args;
+    }
+    public function restCollectionparms($query_params, $post_type){
+      array_push($query_params['orderby']['enum'],'meta_value' );
+      return $query_params;
     }
 
 

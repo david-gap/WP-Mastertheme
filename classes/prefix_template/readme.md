@@ -1,4 +1,4 @@
-**Version 2.32.17** (31.08.2022)
+**Version 2.33.17** (12.09.2022)
 
 Custom class "template" with template parts and header / footer builder
 
@@ -31,6 +31,7 @@ Custom class "template" with template parts and header / footer builder
 * $template_header_after: html code after header
 * $template_page_active: activate page options
 * $template_page_options: show/hide template elements
+* $template_thumbvideo: Activate video as thumbnail
 * $template_page_bgColor: Activate custom background color
 * $template_page_additional: additional custom fields template elements
 * $template_page_metablock: activate metablock on detail page

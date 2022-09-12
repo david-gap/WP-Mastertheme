@@ -3,7 +3,7 @@
  * Post Type File Overview
  *
  * @author      David Voglgsang
- * @version     1.3
+ * @version     1.4
  *
 */
 
@@ -16,13 +16,13 @@ get_header();
         $blog_type = get_post_format(get_the_ID()) ? get_post_format(get_the_ID()) : "default";
         // blog output
         if(locate_template('template_parts/' . get_post_type() . '_' . $blog_type . '.php')):
-          get_template_part('template_parts/' . get_post_type() . '_' . $blog_type);
+          get_template_part('template_parts/' . get_post_type() . '_' . $blog_type, '', array('callingFrom' => 'archive'));
         else:
-          get_template_part('template_parts/post_' . $blog_type);
+          get_template_part('template_parts/post_' . $blog_type, '', array('callingFrom' => 'archive'));
         endif;
       else:
         // default output
-        get_template_part('template_parts/post_default');
+        get_template_part('template_parts/post_default', '', array('callingFrom' => 'archive'));
       endif;
     endwhile;	?>
   </div>

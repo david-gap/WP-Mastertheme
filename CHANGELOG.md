@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 1.63.29 | 09.09.2022 <🐛 FIX: meta sort 📦 NEW: thumb video>
+* Fix sort by meta value in posts block
+* Force posts block & posts filter block img width on grid to 100%
+* Add post video & post audio fallback
+* Remove thumb video support
+* Add thumb video
+* Add title 4 & 5
+* Fix search results replace missing posts
+
 ## 1.63.28 | 05.09.2022 <💎 IMPROVE: thumb video support, posts styling>
 * Add post thumb video support
 * Add posts & postsfilter styling to customizer

@@ -3,15 +3,20 @@
  * Blog template for images
  *
  * @author      David Voglgsang
- * @version     1.0.1
+ * @version     1.2.1
  *
 */
+if($args['callingFrom'] && $args['callingFrom'] !== ''):
+  $callingFrom = $args['callingFrom'];
+else:
+  $callingFrom = '';
+endif;
 if($args['id'] && $args['id'] !== 0):
   global $post;
   $post = get_post($args['id']);
 endif;
 
-$thumb = get_the_post_thumbnail();
+$thumb = get_the_post_thumbnail(get_the_id(), 'full', array('callingFrom' => $callingFrom));
 $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', get_the_content(), $matches);
 $thumb = isset($matches[1][0]) ? '<img src="' . $matches[1][0] . '">' : $thumb;
 

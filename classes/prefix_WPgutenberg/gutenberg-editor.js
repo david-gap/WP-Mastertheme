@@ -57,6 +57,14 @@ wp.blocks.registerBlockStyle( 'core/heading', [{
   name: 'title-three',
   label: 'Title 3',
   isDefault: false,
+},{
+  name: 'title-four',
+  label: 'Title 4',
+  isDefault: false,
+},{
+  name: 'title-five',
+  label: 'Title 5',
+  isDefault: false,
 }] );
 
 wp.blocks.registerBlockStyle( 'core/post-title', [{

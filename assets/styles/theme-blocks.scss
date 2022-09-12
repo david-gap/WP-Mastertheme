@@ -86,6 +86,12 @@ body.page-template,
           // justify-content: space-between;
           align-content: flex-start;
           > li {
+            article {
+              > img {
+                width: 100%;
+                height: auto;
+              }
+            }
             .flex {
               flex-direction: column;
             }
@@ -200,6 +206,10 @@ body.page-template,
           width: 100%;
           figure {
             margin: 0;
+            video {
+              width: 100%;
+              height: auto;
+            }
           }
         }
         &.grid {
@@ -214,6 +224,12 @@ body.page-template,
           align-content: flex-start;
           > .wide {
             grid-column: span var(--postColumns);
+          }
+          article {
+            > img {
+              width: 100%;
+              height: auto;
+            }
           }
           article.flex {
             flex-direction: column;
@@ -842,6 +858,9 @@ body.page-template,
   .wp-block-columns {
     gap: var(--wp--style--block-gap, var(--content__space, 30px));
     row-gap: var(--wp--style--block-gap, var(--content__space, 30px));
+    &.has-background {
+      padding: var(--block__columns_hasBackground_padding, var(--content__space, 30px));
+    }
     &.is-style-columns-has-background-gap {
       gap: var(--block__columns_hasBackground_gap, var(--wp--style--block-gap,2em));
       row-gap: var(--block__columns_hasBackground_gap, var(--wp--style--block-gap,2em));
@@ -900,7 +919,7 @@ body.page-template,
     }
     .wp-block-column {
       &.has-background {
-        padding: var(--block__columns_hasBackground_padding, var(--content__space, 30px));
+        padding: var(--block__columns_column_hasBackground_padding, var(--content__space, 30px));
       }
     }
     // /* three items */

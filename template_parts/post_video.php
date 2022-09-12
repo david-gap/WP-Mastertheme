@@ -3,9 +3,15 @@
  * Blog template for video
  *
  * @author      David Voglgsang
- * @version     1.1.1
+ * @version     1.2.1
  *
 */
+if($args['callingFrom'] && $args['callingFrom'] !== ''):
+  $callingFrom = $args['callingFrom'];
+else:
+  $callingFrom = '';
+endif;
+
 if($args['id'] && $args['id'] !== 0):
   global $post;
   $post = get_post($args['id']);
@@ -13,9 +19,7 @@ endif;
 
 $video = '';
 // check for blocks
-if(function_exists('has_post_video') && has_post_video()):
-  $video = get_the_post_video();
-elseif(has_blocks()):
+if(has_blocks()):
   $supportedBlocks = array("core/embed", "templates/vimeo", "core/vimeo");
   $blocks = parse_blocks( $post->post_content );
   foreach ($blocks as $blockKey => $block) {
@@ -51,6 +55,10 @@ else:
       $video .= '<div class="gb-block"><div class="resp_video"' . $blockAdds . '>' . $embeds[0] . '</div></div>';
     endif;
   endif;
+endif;
+// fallback if video does not exist
+if($video == ''):
+  $video = get_the_post_thumbnail(get_the_id(), 'full', array('callingFrom' => $callingFrom));
 endif;
 
 $css = 'temp-' . get_post_type() . '-video';

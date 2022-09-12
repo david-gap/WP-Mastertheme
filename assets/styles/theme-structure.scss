@@ -119,6 +119,10 @@ body.page-template,
     height: var(--thumbnail__height, auto);
     margin-top: var(--thumbnail__marginTop, 0);
     margin-bottom: var(--thumbnail__marginBottom, 0);
+    video {
+      width: 100%;
+      height: auto;
+    }
   }
   div.post-thumb {
     min-width: 100%;
@@ -454,6 +458,10 @@ body.page-template,
             width: 100%;
             max-width: 100%;
           }
+          video {
+            width: 100%;
+            height: auto;
+          }
         }
       }
       .post-meta {}
@@ -589,6 +597,8 @@ body.page-template,
     margin-left: auto;
     margin-right: auto;
     padding: var(--postTitle__padding, 0);
+    border-style: var(--postTitle__borderStyle, solid);
+    border-width: var(--postTitle__borderWidth, 0);
   }
 
 
@@ -638,16 +648,36 @@ body.page-template,
     margin-top: var(--titleOne__marginTop, 0);
     margin-bottom: var(--titleOne__marginBottom, 0);
     padding: var(--titleOne__padding, 0);
+    border-style: var(--titleOne__borderStyle, solid);
+    border-width: var(--titleOne__borderWidth, 0);
   }
   .is-style-title-two {
     margin-top: var(--titleTwo__marginTop, 0);
     margin-bottom: var(--titleTwo__marginBottom, 0);
     padding: var(--titleTwo__padding, 0);
+    border-style: var(--titleTwo__borderStyle, solid);
+    border-width: var(--titleTwo__borderWidth, 0);
   }
   .is-style-title-three {
     margin-top: var(--titleThree__marginTop, 0);
     margin-bottom: var(--titleThree__marginBottom, 0);
     padding: var(--titleThree__padding, 0);
+    border-style: var(--titleThree__borderStyle, solid);
+    border-width: var(--titleThree__borderWidth, 0);
+  }
+  .is-style-title-four {
+    margin-top: var(--titleFour__marginTop, 0);
+    margin-bottom: var(--titleFour__marginBottom, 0);
+    padding: var(--titleFour__padding, 0);
+    border-style: var(--titleFour__borderStyle, solid);
+    border-width: var(--titleFour__borderWidth, 0);
+  }
+  .is-style-title-five {
+    margin-top: var(--titleFive__marginTop, 0);
+    margin-bottom: var(--titleFive__marginBottom, 0);
+    padding: var(--titleFive__padding, 0);
+    border-style: var(--titleFive__borderStyle, solid);
+    border-width: var(--titleFive__borderWidth, 0);
   }
 
 

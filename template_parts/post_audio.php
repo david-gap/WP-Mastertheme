@@ -3,9 +3,14 @@
  * Blog template for audios
  *
  * @author      David Voglgsang
- * @version     1.0.1
+ * @version     1.2.1
  *
 */
+if($args['callingFrom'] && $args['callingFrom'] !== ''):
+  $callingFrom = $args['callingFrom'];
+else:
+  $callingFrom = '';
+endif;
 if($args['id'] && $args['id'] !== 0):
   global $post;
   $post = get_post($args['id']);
@@ -25,6 +30,10 @@ if (!empty($embeds)):
       break;
     endif;
   }
+endif;
+// fallback if audio does not exist
+if($audio == ''):
+  $audio = get_the_post_thumbnail(get_the_id(), 'full', array('callingFrom' => $callingFrom));
 endif;
 
 $css = 'temp-' . get_post_type() . '-image';

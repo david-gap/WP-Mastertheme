@@ -1904,6 +1904,18 @@ class prefix_core_Customizer {
               'label' => 'Background color',
               'type' => 'color'
             ),
+            'postTitle__borderColor' => array(
+              'label' => 'Border color',
+              'type' => 'color'
+            ),
+            'postTitle__borderStyle' => array(
+              'label' => 'Border style',
+              'type' => 'select'
+            ),
+            'postTitle__borderWidth' => array(
+              'label' => 'Border width',
+              'type' => 'input'
+            ),
             'postTitle__fontFamily' => array(
               'label' => 'Title font family',
               'type' => 'input'
@@ -1968,6 +1980,18 @@ class prefix_core_Customizer {
             'titleOne__bg' => array(
               'label' => 'Background color',
               'type' => 'color'
+            ),
+            'titleOne__borderColor' => array(
+              'label' => 'Border color',
+              'type' => 'color'
+            ),
+            'titleOne__borderStyle' => array(
+              'label' => 'Border style',
+              'type' => 'select'
+            ),
+            'titleOne__borderWidth' => array(
+              'label' => 'Border width',
+              'type' => 'input'
             ),
             'titleOne__fontFamily' => array(
               'label' => 'Title font family',
@@ -2042,6 +2066,18 @@ class prefix_core_Customizer {
               'label' => 'Background color',
               'type' => 'color'
             ),
+            'titleTwo__borderColor' => array(
+              'label' => 'Border color',
+              'type' => 'color'
+            ),
+            'titleTwo__borderStyle' => array(
+              'label' => 'Border style',
+              'type' => 'select'
+            ),
+            'titleTwo__borderWidth' => array(
+              'label' => 'Border width',
+              'type' => 'input'
+            ),
             'titleTwo__fontFamily' => array(
               'label' => 'Title font family',
               'type' => 'input'
@@ -2115,6 +2151,18 @@ class prefix_core_Customizer {
               'label' => 'Background color',
               'type' => 'color'
             ),
+            'titleThree__borderColor' => array(
+              'label' => 'Border color',
+              'type' => 'color'
+            ),
+            'titleThree__borderStyle' => array(
+              'label' => 'Border style',
+              'type' => 'select'
+            ),
+            'titleThree__borderWidth' => array(
+              'label' => 'Border width',
+              'type' => 'input'
+            ),
             'titleThree__fontFamily' => array(
               'label' => 'Title font family',
               'type' => 'input'
@@ -2172,6 +2220,176 @@ class prefix_core_Customizer {
               'type' => 'input'
             ),
             'titleThree__marginBottom_mobile' => array(
+              'label' => 'Margin bottom',
+              'type' => 'input'
+            )
+          )
+        ),
+        'titleFour' => array(
+          'label' => 'Title 4',
+          'inputs' => array(
+            'titleFour__color' => array(
+              'label' => 'Color',
+              'type' => 'color'
+            ),
+            'titleFour__bg' => array(
+              'label' => 'Background color',
+              'type' => 'color'
+            ),
+            'titleFour__borderColor' => array(
+              'label' => 'Border color',
+              'type' => 'color'
+            ),
+            'titleFour__borderStyle' => array(
+              'label' => 'Border style',
+              'type' => 'select'
+            ),
+            'titleFour__borderWidth' => array(
+              'label' => 'Border width',
+              'type' => 'input'
+            ),
+            'titleFour__fontFamily' => array(
+              'label' => 'Title font family',
+              'type' => 'input'
+            ),
+            'titleFour__fontSize' => array(
+              'label' => 'Font size',
+              'type' => 'input'
+            ),
+            'titleFour__lineHeight' => array(
+              'label' => 'Line height',
+              'type' => 'input'
+            ),
+            'titleFour__padding' => array(
+              'label' => 'Padding',
+              'type' => 'input'
+            ),
+            'titleFour__marginTop' => array(
+              'label' => 'Margin top',
+              'type' => 'input'
+            ),
+            'titleFour__marginBottom' => array(
+              'label' => 'Margin bottom',
+              'type' => 'input'
+            ),
+            'titleFour__fontWeight' => array(
+              'label' => 'Font weight',
+              'type' => 'select'
+            ),
+            'titleFour__textTransform' => array(
+              'label' => 'Text transform',
+              'type' => 'select'
+            ),
+            'titleFour__fontStyle' => array(
+              'label' => 'Font style',
+              'type' => 'select'
+            ),
+            'titleFour__letterSpacing' => array(
+              'label' => 'Letter spacing',
+              'type' => 'input'
+            ),
+            'titleFour__fontSize_mobile' => array(
+              'label' => 'Font size',
+              'type' => 'input'
+            ),
+            'titleFour__lineHeight_mobile' => array(
+              'label' => 'Line height',
+              'type' => 'input'
+            ),
+            'titleFour__padding_mobile' => array(
+              'label' => 'Padding',
+              'type' => 'input'
+            ),
+            'titleFour__marginTop_mobile' => array(
+              'label' => 'Margin top',
+              'type' => 'input'
+            ),
+            'titleFour__marginBottom_mobile' => array(
+              'label' => 'Margin bottom',
+              'type' => 'input'
+            )
+          )
+        ),
+        'titleFive' => array(
+          'label' => 'Title 5',
+          'inputs' => array(
+            'titleFive__color' => array(
+              'label' => 'Color',
+              'type' => 'color'
+            ),
+            'titleFive__bg' => array(
+              'label' => 'Background color',
+              'type' => 'color'
+            ),
+            'titleFive__borderColor' => array(
+              'label' => 'Border color',
+              'type' => 'color'
+            ),
+            'titleFive__borderStyle' => array(
+              'label' => 'Border style',
+              'type' => 'select'
+            ),
+            'titleFive__borderWidth' => array(
+              'label' => 'Border width',
+              'type' => 'input'
+            ),
+            'titleFive__fontFamily' => array(
+              'label' => 'Title font family',
+              'type' => 'input'
+            ),
+            'titleFive__fontSize' => array(
+              'label' => 'Font size',
+              'type' => 'input'
+            ),
+            'titleFive__lineHeight' => array(
+              'label' => 'Line height',
+              'type' => 'input'
+            ),
+            'titleFive__padding' => array(
+              'label' => 'Padding',
+              'type' => 'input'
+            ),
+            'titleFive__marginTop' => array(
+              'label' => 'Margin top',
+              'type' => 'input'
+            ),
+            'titleFive__marginBottom' => array(
+              'label' => 'Margin bottom',
+              'type' => 'input'
+            ),
+            'titleFive__fontWeight' => array(
+              'label' => 'Font weight',
+              'type' => 'select'
+            ),
+            'titleFive__textTransform' => array(
+              'label' => 'Text transform',
+              'type' => 'select'
+            ),
+            'titleFive__fontStyle' => array(
+              'label' => 'Font style',
+              'type' => 'select'
+            ),
+            'titleFive__letterSpacing' => array(
+              'label' => 'Letter spacing',
+              'type' => 'input'
+            ),
+            'titleFive__fontSize_mobile' => array(
+              'label' => 'Font size',
+              'type' => 'input'
+            ),
+            'titleFive__lineHeight_mobile' => array(
+              'label' => 'Line height',
+              'type' => 'input'
+            ),
+            'titleFive__padding_mobile' => array(
+              'label' => 'Padding',
+              'type' => 'input'
+            ),
+            'titleFive__marginTop_mobile' => array(
+              'label' => 'Margin top',
+              'type' => 'input'
+            ),
+            'titleFive__marginBottom_mobile' => array(
               'label' => 'Margin bottom',
               'type' => 'input'
             )
@@ -2732,6 +2950,10 @@ class prefix_core_Customizer {
               'label' => 'Space between',
               'type' => 'input'
             ),
+            'block__columns_column_hasBackground_padding' => array(
+              'label' => 'Column padding',
+              'type' => 'input'
+            ),
             'wp--style--block-gap_mobile' => array(
               'label' => 'Space between',
               'type' => 'input'
@@ -2742,6 +2964,10 @@ class prefix_core_Customizer {
             ),
             'block__columns_hasBackground_gap_mobile' => array(
               'label' => 'Space between',
+              'type' => 'input'
+            ),
+            'block__columns_column_hasBackground_padding_mobile' => array(
+              'label' => 'Column padding',
               'type' => 'input'
             ),
             'block__columns_3columns_gap' => array(
@@ -4194,6 +4420,20 @@ class prefix_core_Customizer {
           'italic' => 'italic',
           'normal' => 'normal',
           'oblique' => 'oblique'
+        );
+      elseif(!array_key_exists('options', $inputValues) && strpos($inputKey, '_borderStyle') !== false):
+        $selectOptions = array(
+          '' => '-',
+          'dashed' => 'dashed',
+          'dotted' => 'dotted',
+          'double' => 'double',
+          'groove' => 'groove',
+          'hidden' => 'hidden',
+          'inset' => 'inset',
+          'outset' => 'outset',
+          'ridge' => 'ridge',
+          'solid' => 'solid',
+          'inherit' => 'inherit'
         );
       elseif(!array_key_exists('options', $inputValues) && strpos($inputKey, '_display') !== false):
         $selectOptions = array(

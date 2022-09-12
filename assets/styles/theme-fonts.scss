@@ -285,6 +285,24 @@ body.page-template,
     font-style: var(--titleThree__fontStyle, initial);
     letter-spacing: var(--titleThree__letterSpacing, inherit);
   }
+  .is-style-title-four {
+    font-family: var(--titleFour__fontFamily, inherit);
+    font-size: var(--titleFour__fontSize, inherit);
+    line-height: var(--titleFour__lineHeight, inherit);
+    font-weight: var(--titleFour__fontWeight, inherit);
+    text-transform: var(--titleFour__textTransform, inherit);
+    font-style: var(--titleFour__fontStyle, initial);
+    letter-spacing: var(--titleFour__letterSpacing, inherit);
+  }
+  .is-style-title-five {
+    font-family: var(--titleFive__fontFamily, inherit);
+    font-size: var(--titleFive__fontSize, inherit);
+    line-height: var(--titleFive__lineHeight, inherit);
+    font-weight: var(--titleFive__fontWeight, inherit);
+    text-transform: var(--titleFive__textTransform, inherit);
+    font-style: var(--titleFive__fontStyle, initial);
+    letter-spacing: var(--titleFive__letterSpacing, inherit);
+  }
 
 
   /* 2.9 CONSENT CONTAINER
