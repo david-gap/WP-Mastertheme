@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.33.17
+ * @version     2.33.18
  *
 */
 
@@ -1570,10 +1570,10 @@ class prefix_template {
         else:
           update_post_meta($post_id, 'template_page_videothumb_options', '');
         endif;
-        if(isset($_POST['template_page_videothumb_videoUrl'])):
-          update_post_meta($post_id, 'template_page_videothumb_videoUrl', $_POST['template_page_videothumb_videoUrl']);
+        if(isset($_POST['template_page_videothumb_videoId'])):
+          update_post_meta($post_id, 'template_page_videothumb_videoId', $_POST['template_page_videothumb_videoId']);
         else:
-          update_post_meta($post_id, 'template_page_videothumb_videoUrl', '');
+          update_post_meta($post_id, 'template_page_videothumb_videoId', '');
         endif;
       endif;
     }
@@ -1750,16 +1750,16 @@ class prefix_template {
     function extendThumbnailMetabox( $content, $post_id ) {
       $videoThumbActive = SELF::$template_thumbvideo;
       if($videoThumbActive):
-        $videoUrl = get_post_meta($post_id, 'template_page_videothumb_videoUrl', true);
+        $videoId = get_post_meta($post_id, 'template_page_videothumb_videoId', true);
         $videoOptions = get_post_meta($post_id, 'template_page_videothumb_options', true);
         $content .= '<div data-id="template_page_videothumb_videoUrl">';
         $content .= '<p><b>' . __( 'Video thumb', 'devTheme' ) . '</b></p>';
-        $content .= '<input type="hidden" class="video-saved" id="template_page_videothumb_videoUrl" name="template_page_videothumb_videoUrl" value="' . $videoUrl . '" style="margin-top:5px; width:100%;">';
+        $content .= '<input type="hidden" class="video-saved" id="template_page_videothumb_videoUrl" name="template_page_videothumb_videoUrl" value="' . $videoId . '" style="margin-top:5px; width:100%;">';
         $content .= '<button class="wp-single-video" data-action="WPadmin">' . __('Select video','devTheme') . '</button>';
         $content .= '<span class="video-selected">';
-          if($videoUrl !== false && $videoUrl !== ''):
+          if($videoId !== false && $videoId !== ''):
             $content .= '<span class="remove_video"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24.9 24.9" xml:space="preserve"><rect x="-3.7" y="10.9" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1549 12.4451)" fill="#000" width="32.2" height="3"/><rect x="10.9" y="-3.7" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1549 12.4451)" fill="#000" width="3" height="32.2"/></svg></span>';
-            $content .= '<video src="' . wp_get_attachment_url($videoUrl) . '" autoplay muted playsinline></video>';
+            $content .= '<video src="' . wp_get_attachment_url($videoId) . '" autoplay muted playsinline></video>';
           endif;
         $content .= '</span></div>';
         $content .= '<div data-id="template_page_videothumb_options"><ul>';
@@ -1778,16 +1778,16 @@ class prefix_template {
     }
     function extendThumbnailOutput( $html, $post_id, $post_thumbnail_id, $size, $attr ) {
       $videoThumbActive = SELF::$template_thumbvideo;
-      $videoUrl = get_post_meta($post_id, 'template_page_videothumb_videoUrl', true);
+      $videoId = get_post_meta($post_id, 'template_page_videothumb_videoId', true);
       $videoOptions = get_post_meta($post_id, 'template_page_videothumb_options', true);
       if(is_string($videoOptions)):
         $videoOptions = unserialize($videoOptions);
       endif;
-      if($videoThumbActive && $videoUrl && in_array($attr["callingFrom"], $videoOptions)):
+      if($videoThumbActive && $videoId && in_array($attr["callingFrom"], $videoOptions)):
         $html = '';
         $html .= $attr["callingFrom"] == 'detailpage' ? '<div class="' . $attr["class"] . '">' : '';
         $html .= $attr["callingFrom"] == 'archive' || $attr["callingFrom"] == 'searchresults' ? '<figure>' : '';
-        $html .= '<video src="' . wp_get_attachment_url($videoUrl) . '" autoplay muted playsinline></video>';
+        $html .= '<video src="' . wp_get_attachment_url($videoId) . '" autoplay muted playsinline></video>';
         $html .= $attr["callingFrom"] == 'archive' || $attr["callingFrom"] == 'searchresults' ? '</figure>' : '';
         $html .= $attr["callingFrom"] == 'detailpage' ? '</div>' : '';
       endif;
