@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 1.64.29 | 21.09.2022 <>
+## 1.64.29 | 21.09.2022 <💎 IMPROVE: customizer 📦 NEW: gallery download>
 * Add option to download full gallery
 * Add Zip JS library
 * Add nesting to customizer
