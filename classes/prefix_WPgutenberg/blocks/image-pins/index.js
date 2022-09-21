@@ -11,7 +11,8 @@
 
   const { __ } = wp.i18n;
   const { registerBlockType } = wp.blocks;
-  const { RichText, InnerBlocks } = wp.editor;
+  const { RichText } = wp.editor;
+  const { InnerBlocks } = wp.blockEditor;
   const { select, withSelect } = wp.data;
 
   const ALLOWED_BLOCKS = [ 'templates/image-pins-item', 'core/buttons' ];

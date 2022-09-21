@@ -1,4 +1,4 @@
-**Version 2.24.15** (12.09.2022)
+**Version 2.25.15** (21.09.2022)
 
 Custom class "WPgutenberg" to select allowed guttenberg blocks and add style options
 
@@ -182,5 +182,9 @@ There are two parameters inside this query. First parameter is the pin himself a
 WPgutenberg_imagepins_pinclose
 
 to replace the given image download button value
-There are two parameters inside this query. First parameter is the content  and the second is the block attributes.
+There are two parameters inside this query. First parameter is the content and the second is the block attributes.
 WPgutenberg_image_downloadButton
+
+to replace the given download all button value
+There are two parameters inside this query. First parameter is the content and the second is the block attributes.
+WPgutenberg_gallery_downloadAllButton

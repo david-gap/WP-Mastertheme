@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 1.64.29 | 21.09.2022 <>
+* Add option to download full gallery
+* Add Zip JS library
+* Add nesting to customizer
+* Rebuild customizer settings
+* Additional customizer settings
+* Set thumbnail as thumb video poster
+* Style customizer dark
+* Update react components variables
+
 ## 1.63.29 | 13.09.2022 <🐛 FIX: thumb video>
 * Fix the thumb video variable calls
 

@@ -18,6 +18,10 @@ const attributes = {
   addDownloadButton: {
     type: 'boolean',
     default: false,
+  },
+  addDownloadAllButton: {
+    type: 'boolean',
+    default: false,
   }
 }
 

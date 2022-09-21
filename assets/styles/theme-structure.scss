@@ -20,11 +20,9 @@ Table of Contents:
     3.3 MENU STYLING OPTIONS
     3.4 BREADCRUMBS
     3.5 POST TITLE
-    3.6 LEAD
-    3.7 404 PAGE
-    3.8 LANGUAGE SWITCHER
-    3.9 TITLE SIZES
-    3.10 QUOTE
+    3.6 404 PAGE
+    3.7 LANGUAGE SWITCHER
+    3.8 SEARCH FORM
   4.0 SCROLL TO TOP
   5.0 FOOTER
 =======================================================*/
@@ -302,6 +300,7 @@ body.page-template,
   > main .wp-block-container,
   > main .wp-block-group__inner-container,
   > main .wp-block-cover__inner-container,
+  > main .wp-block-media-text__content,
   > main .consent-request-container,
   > footer .widget {
     & > p,
@@ -323,6 +322,7 @@ body.page-template,
     & > .wp-block-media-text p,
     & > .post-password-form p,
     & > .block-vimeo,
+    & > .wp-block-media-text,
     & > .block-accordion,
     & > .block-accordion .accordion-content p,
     & > .block-accordion .accordion-content ol,
@@ -331,7 +331,7 @@ body.page-template,
     & > .block-accordion .accordion-content figure,
     & > .block-posts,
     & > .block-postsfilter,
-    & > #search-form,
+    & > .search-form,
     & > .wp-block-gallery-container,
     & > .wpcf7 .wpcf7-form p {
       margin-top: 0;
@@ -370,13 +370,14 @@ body.page-template,
       & > .wp-block-file,
       & > .wp-block-buttons,
       & > .wp-block-columns,
+      & > .wp-block-media-text,
       & > .wp-block-media-text p,
       & > .post-password-form p,
       & > .block-accordion,
       & > .block-vimeo,
       & > .block-posts,
       & > .block-postsfilter,
-      & > #search-form,
+      & > .search-form,
       & > .wp-block-gallery-container,
       & > .wpcf7 .wpcf7-form p {
         &:last-child {
@@ -602,15 +603,7 @@ body.page-template,
   }
 
 
-  /* 3.6 LEAD
-  /––––––––––––––––––––––––*/
-  .leadtext,
-  .is-style-lead {
-    padding: var(--leadText__padding, 0);
-  }
-
-
-  /* 3.7 404 PAGE
+  /* 3.6 404 PAGE
   /––––––––––––––––––––––––*/
   #error-page {
     article {
@@ -626,7 +619,7 @@ body.page-template,
   }
 
 
-  /* 3.8 LANGUAGE SWITCHER
+  /* 3.7 LANGUAGE SWITCHER
   /––––––––––––––––––––––––*/
   .language-switcher {
     list-style: none;
@@ -642,53 +635,25 @@ body.page-template,
   }
 
 
-  /* 3.9 TITLE SIZES
+  /* 3.8 SEARCH FORM
   /––––––––––––––––––––––––*/
-  .is-style-title-one {
-    margin-top: var(--titleOne__marginTop, 0);
-    margin-bottom: var(--titleOne__marginBottom, 0);
-    padding: var(--titleOne__padding, 0);
-    border-style: var(--titleOne__borderStyle, solid);
-    border-width: var(--titleOne__borderWidth, 0);
-  }
-  .is-style-title-two {
-    margin-top: var(--titleTwo__marginTop, 0);
-    margin-bottom: var(--titleTwo__marginBottom, 0);
-    padding: var(--titleTwo__padding, 0);
-    border-style: var(--titleTwo__borderStyle, solid);
-    border-width: var(--titleTwo__borderWidth, 0);
-  }
-  .is-style-title-three {
-    margin-top: var(--titleThree__marginTop, 0);
-    margin-bottom: var(--titleThree__marginBottom, 0);
-    padding: var(--titleThree__padding, 0);
-    border-style: var(--titleThree__borderStyle, solid);
-    border-width: var(--titleThree__borderWidth, 0);
-  }
-  .is-style-title-four {
-    margin-top: var(--titleFour__marginTop, 0);
-    margin-bottom: var(--titleFour__marginBottom, 0);
-    padding: var(--titleFour__padding, 0);
-    border-style: var(--titleFour__borderStyle, solid);
-    border-width: var(--titleFour__borderWidth, 0);
-  }
-  .is-style-title-five {
-    margin-top: var(--titleFive__marginTop, 0);
-    margin-bottom: var(--titleFive__marginBottom, 0);
-    padding: var(--titleFive__padding, 0);
-    border-style: var(--titleFive__borderStyle, solid);
-    border-width: var(--titleFive__borderWidth, 0);
-  }
-
-
-  /* 3.10 QUOTE
-  /––––––––––––––––––––––––*/
-  .wp-block-quote {
-    margin-left: 0;
-    margin-right: 0;
-    padding: var(--block__quote_padding, 0);
-    cite {
-      padding: var(--block__quote_cite_padding, 0);
+  .search-form {
+    input {
+      margin: var(--searchForm__margin, 0);
+      padding: var(--searchForm__padding, var(--input__padding, 7px 10px));
+      border-radius: var(--searchForm__borderRadius, var(--input__borderRadius, 0));
+      border-style: solid;
+      border-width: var(--searchForm__border_width, var(--input__border_width, 1px));
+    }
+    input[type="submit"],
+    button[type="submit"] {
+      margin: var(--searchForm__submit_margin, 0);
+      border-radius: var(--searchForm__submit_borderRadius, var(--input__submit_borderRadius, 0));
+      border-style: solid;
+      border-width: var(--searchForm__submit_borderWidth, var(--input__submit_borderWidth, var(--input__border_width, 1px)));
+      padding: var(--searchForm__submit_padding, var(--input__submit_padding, 10px 20px));
+      appearance: none;
+      cursor: pointer;
     }
   }
 

@@ -200,7 +200,9 @@ function WPgutenberg_posts_PostBuilder(array $attr, $id, $currentId){
             endif;
             $output .= '<figure>' . $file . '</figure>';
           else:
-            $output .= get_the_post_thumbnail($id) ? '<figure>' . get_the_post_thumbnail($id, 'full', array("data-id" => $id, 'callingFrom' => 'postsblock')) . '</figure>' : '';
+            $output .= get_the_post_thumbnail($id) ? '<figure>' : '';
+              $output .= get_the_post_thumbnail($id, 'full', ['data-id' => $id, 'callingFrom' => 'postsblock']);
+            $output .= get_the_post_thumbnail($id) ? '</figure>' : '';
           endif;
         endif;
       if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_img', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):

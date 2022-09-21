@@ -4,7 +4,7 @@
  *
  * Customizer extension
  * Author:      David Voglgsnag
- * @version     1.7
+ * @version     1.8
  *
  */
 
@@ -41,38 +41,62 @@ class prefix_core_Customizer {
     *)
   */
   private $tree = array(
-    'key' => array(
-      'label' => 'Label',
+    'panel_one' => array(
+      'label' => 'Panel 1',
       'panels' => array(
-        'label' => 'Label',
-      ),
-      'sections' => array(
-        'label' => 'Label',
-      ),
-      'inputs' => array(
-        'key' => array(
-          'label' => 'Label',
-          'type' => 'input',
-          'default' => '1'
+        'panel_two' => array(
+          'label' => 'Panel 2',
+          'sections' => array(
+            'sectionone' => array(
+              'label' => 'Section 1',
+              'inputs' => array(
+                'inputone' => array(
+                  'label' => 'Label',
+                  'type' => 'input'
+                )
+              )
+            ),
+            'sectiontwo' => array(
+              'label' => 'Section 2',
+              'inputs' => array(
+                'inputtwo' => array(
+                  'label' => 'Label',
+                  'type' => 'input'
+                )
+              )
+            )
+          )
         )
       )
     )
   );
 
-  public $defaultValues = array(
+
+  private $defaultValues = array(
     'settings' => array(
       'label' => 'Settings',
+      'panels' => array(),
       'sections' => array(
+        'breakpoints' => array(
+          'label' => 'Breakpoints',
+          'inputs' => array(
+            'mobile_breakpoint' => array(
+              'label' => 'Mobile',
+              'type' => 'input',
+              'default' => '768px'
+            )
+          )
+        ),
         'container' => array(
           'label' => 'Container',
           'inputs' => array(
             'container__width' => array(
-              'label' => 'Container width',
+              'label' => 'Width',
               'type' => 'input',
               'default' => '1000px'
             ),
             'container__side' => array(
-              'label' => 'Container side padding',
+              'label' => 'Side padding',
               'type' => 'input',
               'default' => '40px'
             ),
@@ -86,15 +110,14 @@ class prefix_core_Customizer {
               'type' => 'input',
               'default' => '200px'
             ),
-            'mobile_breakpoint' => array(
-              'label' => 'Breakpoint to mobile',
-              'type' => 'input',
-              'default' => '768px'
+            'container__side_mobile' => array(
+              'label' => 'Container side padding',
+              'type' => 'input'
             )
           )
         ),
         'coloring' => array(
-          'label' => 'Main colors',
+          'label' => 'Default colors',
           'inputs' => array(
             'color__main' => array(
               'label' => 'Main color',
@@ -106,15 +129,33 @@ class prefix_core_Customizer {
               'type' => 'color',
               'default' => '#89c0ff'
             ),
+            'main_background' => array(
+              'label' => 'Background color',
+              'type' => 'color',
+              'default' => '#f9f9f9'
+            ),
             'main_color' => array(
               'label' => 'Font color',
               'type' => 'color',
               'default' => '#343434'
             ),
-            'main_background' => array(
-              'label' => 'Background color',
+            'link__color' => array(
+              'label' => 'Link color',
+              'type' => 'color'
+            ),
+            'link__color_hover' => array(
+              'label' => 'Link color',
+              'type' => 'color'
+            ),
+            'text__marked' => array(
+              'label' => 'Marker text color',
               'type' => 'color',
-              'default' => '#f9f9f9'
+              'default' => '#ffffff'
+            ),
+            'text__marked_bg' => array(
+              'label' => 'Marker background color',
+              'type' => 'color',
+              'default' => '#0175bc'
             ),
             'dark__main_background' => array(
               'label' => 'Background color',
@@ -126,12 +167,20 @@ class prefix_core_Customizer {
               'type' => 'color',
               'default' => '#c7cacc'
             ),
-            'text__marked' => array(
+            'dark__link__color' => array(
+              'label' => 'Link color',
+              'type' => 'color'
+            ),
+            'dark__link__color_hover' => array(
+              'label' => 'Link color',
+              'type' => 'color'
+            ),
+            'dark__text__marked' => array(
               'label' => 'Marker text color',
               'type' => 'color',
               'default' => '#ffffff'
             ),
-            'text__marked_bg' => array(
+            'dark__text__marked_bg' => array(
               'label' => 'Marker background color',
               'type' => 'color',
               'default' => '#0175bc'
@@ -142,15 +191,15 @@ class prefix_core_Customizer {
           'label' => 'Typography',
           'inputs' => array(
             'html__fontfamily' => array(
-              'label' => 'Main font family',
+              'label' => 'Font family',
               'type' => 'input'
             ),
             'html__fontsize' => array(
-              'label' => 'Main font size',
+              'label' => 'Font size',
               'type' => 'input'
             ),
             'html__lineheight' => array(
-              'label' => 'Main line height',
+              'label' => 'Line height',
               'type' => 'input'
             ),
             'html__fontweight' => array(
@@ -168,18 +217,14 @@ class prefix_core_Customizer {
           )
         ),
         'mobile' => array(
-          'label' => 'Mobile',
+          'label' => 'Typography (Mobile)',
           'inputs' => array(
-            'container__side_mobile' => array(
-              'label' => 'Container side padding',
-              'type' => 'input'
-            ),
             'html__fontsize_mobile' => array(
-              'label' => 'Main font size',
+              'label' => 'Font size',
               'type' => 'input'
             ),
             'html__lineheight_mobile' => array(
-              'label' => 'Main line height',
+              'label' => 'Line height',
               'type' => 'input'
             ),
             'gutenberg__font_scale' => array(
@@ -196,3975 +241,5254 @@ class prefix_core_Customizer {
               'type' => 'input'
             )
           )
-        ),
-        'theme_popup' => array (
-          'label' => 'Lightbox',
-          'inputs' => array(
-            'popup__backgoundColor' => array(
-              'label' => 'Background color',
-              'type' => 'color'
-            ),
-            'popup__container_backgroundColor' => array(
-              'label' => 'Background container color',
-              'type' => 'color'
-            ),
-            'popup__width' => array(
-              'label' => 'Lightbox width',
-              'type' => 'input',
-              'default' => '800px'
-            ),
-            'popup__space' => array(
-              'label' => 'Lightbox container padding',
-              'type' => 'input',
-              'default' => '40px'
-            ),
-            'popup_prev_visible' => array(
-              'label' => 'Lightbox preview visibility',
-              'type' => 'input',
-              'default' => '30px'
-            ),
-            'popup__arrow_backgroundColor' => array(
-              'label' => 'Arrow background color',
-              'type' => 'color'
-            ),
-            'popup__arrow_color' => array(
-              'label' => 'Arrow color',
-              'type' => 'color'
-            ),
-            'popup__arrow_borderColor' => array(
-              'label' => 'Arrow border color',
-              'type' => 'color'
-            ),
-            'popup__arrow_borderWidth' => array(
-              'label' => 'Arrow border width',
-              'type' => 'input'
-            ),
-            'popup__arrow_opacity' => array(
-              'label' => 'Arrow opacity',
-              'type' => 'input'
-            ),
-            'popup__arrow_height' => array(
-              'label' => 'Arrow height',
-              'type' => 'input'
-            ),
-            'popup__arrow_padding' => array(
-              'label' => 'Arrow padding',
-              'type' => 'input'
-            ),
-            'popup__close_color' => array(
-              'label' => 'Close button color',
-              'type' => 'color'
-            ),
-            'popup__close_size' => array(
-              'label' => 'Close button size',
-              'type' => 'input'
-            ),
-            'popup__close_opacity' => array(
-              'label' => 'Close button opacity',
-              'type' => 'input'
-            ),
-            'popup__figcaption_backgroundColor' => array(
-              'label' => 'Figcaption background color',
-              'type' => 'color'
-            ),
-            'popup__figcaption_color' => array(
-              'label' => 'Figcaption color',
-              'type' => 'color'
-            ),
-            'popup__figcaption_display' => array(
-              'label' => 'Figcaption display',
-              'type' => 'select'
-            ),
-            'popup__figcaption_textAlign' => array(
-              'label' => 'Figcaption text align',
-              'type' => 'select'
-            ),
-            'popup__figcaption_fontSize' => array(
-              'label' => 'Figcaption font size',
-              'type' => 'input'
-            ),
-            'popup__figcaption_lineHeight' => array(
-              'label' => 'Figcaption line height',
-              'type' => 'input'
-            ),
-            'popup__figcaption_padding' => array(
-              'label' => 'Figcaption padding',
-              'type' => 'input'
-            ),
-            'popup__downloadLink_color' => array(
-              'label' => 'Download link color',
-              'type' => 'color'
-            ),
-            'popup__downloadLink_color_hover' => array(
-              'label' => 'Download link color',
-              'type' => 'color'
-            ),
-            'popup__downloadLink_display' => array(
-              'label' => 'Download link display',
-              'type' => 'select'
-            ),
-            'popup__downloadLink_fontSize' => array(
-              'label' => 'Download link font size',
-              'type' => 'input'
-            ),
-            'popup__downloadLink_lineHeight' => array(
-              'label' => 'Download link line height',
-              'type' => 'input'
-            ),
-            'popup__downloadLink_padding' => array(
-              'label' => 'Download link padding',
-              'type' => 'input'
-            )
-          )
         )
       )
     ),
     'header' => array(
       'label' => 'Header',
-      'sections' => array(
-        'header_coloring' => array(
-          'label' => 'Colors',
-          'inputs' => array(
-            'header_background' => array(
-              'label' => 'Header background color',
-              'type' => 'color',
-              'default' => '#f9f9f9'
+      'panels' => array(
+        'header_settings' => array(
+          'label' => 'Settings',
+          'sections' => array(
+            'header_colors' => array(
+              'label' => 'Colors',
+              'inputs' => array(
+                'header_background' => array(
+                  'label' => 'Background color',
+                  'type' => 'color',
+                  'default' => '#f9f9f9'
+                ),
+                'headercontainer_background' => array(
+                  'label' => 'Container background color',
+                  'type' => 'color',
+                  'default' => 'transparent'
+                ),
+                'dark__header_background' => array(
+                  'label' => 'Background',
+                  'type' => 'color',
+                  'default' => '#1d1e1f'
+                ),
+                'dark__headercontainer_background' => array(
+                  'label' => 'Container background color',
+                  'type' => 'color',
+                  'default' => 'transparent'
+                )
+              )
             ),
-            'headercontainer_background' => array(
-              'label' => 'Header container background color',
-              'type' => 'color',
-              'default' => 'transparent'
-            ),
-            'dark__header_background' => array(
-              'label' => 'Header background',
-              'type' => 'color',
-              'default' => '#1d1e1f'
-            ),
-            'dark__headercontainer_background' => array(
-              'label' => 'header container background',
-              'type' => 'color',
-              'default' => 'transparent'
+            'header_spacing' => array(
+              'label' => 'Spacing',
+              'inputs' => array(
+                'header__paddingTop' => array(
+                  'label' => 'Container padding top',
+                  'type' => 'input'
+                ),
+                'header__paddingBottom' => array(
+                  'label' => 'Container padding bottom',
+                  'type' => 'input'
+                ),
+                'header__negativTopPosition_sticky' => array(
+                  'label' => 'Top negativ position',
+                  'type' => 'input'
+                ),
+                'header__paddingTop_sticky' => array(
+                  'label' => 'Container padding top',
+                  'type' => 'input'
+                ),
+                'header__paddingBottom_sticky' => array(
+                  'label' => 'Container padding bottom',
+                  'type' => 'input'
+                ),
+                'header__itemSpacingHorizontal' => array(
+                  'label' => 'Vertical spacing between items',
+                  'type' => 'input'
+                ),
+                'header__paddingTop_mobile' => array(
+                  'label' => 'Container padding top',
+                  'type' => 'input'
+                ),
+                'header__paddingBottom_mobile' => array(
+                  'label' => 'Container padding bottom',
+                  'type' => 'input'
+                ),
+                'header__negativTopPosition_sticky_mobile' => array(
+                  'label' => 'Top negativ position',
+                  'type' => 'input'
+                ),
+                'header__paddingTop_sticky_mobile' => array(
+                  'label' => 'Container padding top',
+                  'type' => 'input'
+                ),
+                'header__paddingBottom_sticky_mobile' => array(
+                  'label' => 'Container padding bottom',
+                  'type' => 'input'
+                ),
+                'header__itemSpacingHorizontal_mobile' => array(
+                  'label' => 'Vertical spacing between items',
+                  'type' => 'input'
+                )
+              )
             )
           )
         ),
-        'header_menu' => array(
-          'label' => 'Menu',
-          'inputs' => array(
-            'mnav__ul_gap' => array(
-              'label' => 'First level gap',
-              'type' => 'input'
-            ),
-            'mnav__ul_paddingTop' => array(
-              'label' => 'Padding top',
-              'type' => 'input'
-            ),
-            'mnav__ul_paddingBottom' => array(
-              'label' => 'Padding bottom',
-              'type' => 'input'
-            ),
-            'mnav__ul_gap_mobile' => array(
-              'label' => 'First level gap',
-              'type' => 'input'
-            ),
-            'mnav__ul_paddingTop_mobile' => array(
-              'label' => 'Padding top',
-              'type' => 'input'
-            ),
-            'mnav__ul_paddingBottom_mobile' => array(
-              'label' => 'Padding bottom',
-              'type' => 'input'
-            ),
-            'mnav__ul_lastChild_marginBottom' => array(
-              'label' => 'Last child margin bottom',
-              'type' => 'input'
-            ),
-            'mnav__ul_lastChild_marginBottom_mobile' => array(
-              'label' => 'Last child margin bottom',
-              'type' => 'input'
-            ),
-            'submenu__toggle_width' => array(
-              'label' => 'Toggle arrow container width',
-              'type' => 'input'
-            ),
-            'submenu__toggle_strokeWidth' => array(
-              'label' => 'Toggle arrow stroke width',
-              'type' => 'input'
-            ),
-            'submenu__toggle_padding' => array(
-              'label' => 'Toggle arrow container padding',
-              'type' => 'input'
-            ),
-            'submenu__toggle_width_mobile' => array(
-              'label' => 'Toggle arrow container width',
-              'type' => 'input'
-            ),
-            'submenu__toggle_strokeWidth_mobile' => array(
-              'label' => 'Toggle arrow stroke width',
-              'type' => 'input'
-            ),
-            'submenu__toggle_padding_mobile' => array(
-              'label' => 'Toggle arrow container padding',
-              'type' => 'input'
-            ),
-            'mnav__color' => array(
-              'label' => 'Color',
-              'type' => 'color',
-              'default' => '#000000'
-            ),
-            'mnav__background_color' => array(
-              'label' => 'Background color',
-              'type' => 'color',
-              'default' => 'transparent'
-            ),
-            'mnav__color_hover' => array(
-              'label' => 'Color',
-              'type' => 'color',
-              'default' => '#000000'
-            ),
-            'mnav__background_color_hover' => array(
-              'label' => 'Background color',
-              'type' => 'color',
-              'default' => 'transparent'
-            ),
-            'mnav__color_active' => array(
-              'label' => 'Color (active)',
-              'type' => 'color',
-              'default' => 'transparent'
-            ),
-            'mnav__background_color_active' => array(
-              'label' => 'Background color (active)',
-              'type' => 'color',
-              'default' => 'transparent'
-            ),
-            'mnav__border_color' => array(
-              'label' => 'Border color',
-              'type' => 'color',
-              'default' => 'transparent'
-            ),
-            'mnav__border_width' => array(
-              'label' => 'Border width',
-              'type' => 'input'
-            ),
-            'mnav__padding' => array(
-              'label' => 'Padding',
-              'type' => 'input'
-            ),
-            'mnav__margin' => array(
-              'label' => 'Margin',
-              'type' => 'input'
-            ),
-            'mnav__fontfamily' => array(
-              'label' => 'Font family',
-              'type' => 'input'
-            ),
-            'mnav__fontsize' => array(
-              'label' => 'Font size',
-              'type' => 'input'
-            ),
-            'mnav__fontWeight' => array(
-              'label' => 'Font weight',
-              'type' => 'select'
-            ),
-            'mnav__lineheight' => array(
-              'label' => 'Line height',
-              'type' => 'input'
-            ),
-            'mnav__textTransform' => array(
-              'label' => 'Text transform',
-              'type' => 'select'
-            ),
-            'mnav__fontStyle' => array(
-              'label' => 'Font style',
-              'type' => 'select',
-            ),
-            'mnav__letterSpacing' => array(
-              'label' => 'Letter spacing',
-              'type' => 'input'
-            ),
-            'mnav__border_width_mobile' => array(
-              'label' => 'Border width',
-              'type' => 'input'
-            ),
-            'mnav__fontsize_mobile' => array(
-              'label' => 'Font size',
-              'type' => 'input'
-            ),
-            'mnav__lineheight_mobile' => array(
-              'label' => 'Line height',
-              'type' => 'input'
-            ),
-            'mnav__padding_mobile' => array(
-              'label' => 'Padding',
-              'type' => 'input'
-            ),
-            'mnav__margin_mobile' => array(
-              'label' => 'Margin',
-              'type' => 'input'
-            ),
-            'mnav__sub_color' => array(
-              'label' => 'Level 2 - color',
-              'type' => 'color',
-              'default' => '#000000'
-            ),
-            'mnav__sub_background_color' => array(
-              'label' => 'Level 2 - background color',
-              'type' => 'color',
-              'default' => 'transparent'
-            ),
-            'mnav__sub_color_hover' => array(
-              'label' => 'Level 2 - color',
-              'type' => 'color',
-              'default' => '#000000'
-            ),
-            'mnav__sub_background_color_hover' => array(
-              'label' => 'Level 2 - background color',
-              'type' => 'color',
-              'default' => 'transparent'
-            ),
-            'mnav__sub_color_active' => array(
-              'label' => 'Level 2 - color (active)',
-              'type' => 'color',
-              'default' => 'transparent'
-            ),
-            'mnav__sub_background_color_active' => array(
-              'label' => 'Level 2 - background color (active)',
-              'type' => 'color',
-              'default' => 'transparent'
-            ),
-            'mnav__sub_border_color' => array(
-              'label' => 'Level 2 - border color',
-              'type' => 'color',
-              'default' => 'transparent'
-            ),
-            'mnav__sub_border_width' => array(
-              'label' => 'Level 2 - border width',
-              'type' => 'input'
-            ),
-            'mnav__sub_padding' => array(
-              'label' => 'Level 2 - padding',
-              'type' => 'input'
-            ),
-            'mnav__sub_margin' => array(
-              'label' => 'Level 2 - margin',
-              'type' => 'input'
-            ),
-            'mnav__sub_fontfamily' => array(
-              'label' => 'Level 2 - font family',
-              'type' => 'input'
-            ),
-            'mnav__sub_fontsize' => array(
-              'label' => 'Level 2 - font size',
-              'type' => 'input'
-            ),
-            'mnav__sub_lineheight' => array(
-              'label' => 'Level 2 - line height',
-              'type' => 'input'
-            ),
-            'mnav__sub_fontWeight' => array(
-              'label' => 'Level 2 - font weight',
-              'type' => 'select'
-            ),
-            'mnav__sub_textTransform' => array(
-              'label' => 'Level 2 - text transform',
-              'type' => 'select'
-            ),
-            'mnav__sub_fontStyle' => array(
-              'label' => 'Level 2 - font style',
-              'type' => 'select'
-            ),
-            'mnav__sub_letterSpacing' => array(
-              'label' => 'Level 2 - Letter spacing',
-              'type' => 'input'
-            ),
-            'mnav__sub_border_width_mobile' => array(
-              'label' => 'Level 2 - border width',
-              'type' => 'input'
-            ),
-            'mnav__sub_fontsize_mobile' => array(
-              'label' => 'Level 2 - font size',
-              'type' => 'input'
-            ),
-            'mnav__sub_lineheight_mobile' => array(
-              'label' => 'Level 2 - line height',
-              'type' => 'input'
-            ),
-            'mnav__sub_padding_mobile' => array(
-              'label' => 'Level 2 - padding',
-              'type' => 'input'
-            ),
-            'mnav__sub_margin_mobile' => array(
-              'label' => 'Level 2 - margin',
-              'type' => 'input'
-            ),
-            'mnav__subSub_color' => array(
-              'label' => 'Level 3 - color',
-              'type' => 'color',
-              'default' => '#000000'
-            ),
-            'mnav__subSub_background_color' => array(
-              'label' => 'Level 3 - background color',
-              'type' => 'color',
-              'default' => 'transparent'
-            ),
-            'mnav__subSub_color_hover' => array(
-              'label' => 'Level 3 - color',
-              'type' => 'color',
-              'default' => '#000000'
-            ),
-            'mnav__subSub_background_color_hover' => array(
-              'label' => 'Level 3 - background color',
-              'type' => 'color',
-              'default' => 'transparent'
-            ),
-            'mnav__subSub_color_active' => array(
-              'label' => 'Level 3 - color (active)',
-              'type' => 'color',
-              'default' => 'transparent'
-            ),
-            'mnav__subSub_background_color_active' => array(
-              'label' => 'Level 3 - background color (active)',
-              'type' => 'color',
-              'default' => 'transparent'
-            ),
-            'mnav__subSub_border_color' => array(
-              'label' => 'Level 3 - border color',
-              'type' => 'color',
-              'default' => 'transparent'
-            ),
-            'mnav__subSub_border_width' => array(
-              'label' => 'Level 3 - border width',
-              'type' => 'input'
-            ),
-            'mnav__subSub_padding' => array(
-              'label' => 'Level 3 - padding',
-              'type' => 'input'
-            ),
-            'mnav__subSub_margin' => array(
-              'label' => 'Level 3 - margin',
-              'type' => 'input'
-            ),
-            'mnav__subSub_fontfamily' => array(
-              'label' => 'Level 3 - font family',
-              'type' => 'input'
-            ),
-            'mnav__subSub_fontsize' => array(
-              'label' => 'Level 3 - font size',
-              'type' => 'input'
-            ),
-            'mnav__subSub_fontWeight' => array(
-              'label' => 'Level 3 - font weight',
-              'type' => 'select'
-            ),
-            'mnav__subSub_lineheight' => array(
-              'label' => 'Level 3 - line height',
-              'type' => 'input'
-            ),
-            'mnav__subSub_textTransform' => array(
-              'label' => 'Level 3 - text transform',
-              'type' => 'select'
-            ),
-            'mnav__subSub_fontStyle' => array(
-              'label' => 'Level 3 - font style',
-              'type' => 'select'
-            ),
-            'mnav__subSub_letterSpacing' => array(
-              'label' => 'Level 3 - Letter spacing',
-              'type' => 'input'
-            ),
-            'mnav__subSub_border_width_mobile' => array(
-              'label' => 'Level 3 - border width',
-              'type' => 'input'
-            ),
-            'mnav__subSub_fontsize_mobile' => array(
-              'label' => 'Level 3 - font size',
-              'type' => 'input'
-            ),
-            'mnav__subSub_lineheight_mobile' => array(
-              'label' => 'Level 3 - line height',
-              'type' => 'input'
-            ),
-            'mnav__subSub_padding_mobile' => array(
-              'label' => 'Level 3 - padding',
-              'type' => 'input'
-            ),
-            'mnav__subSub_margin_mobile' => array(
-              'label' => 'Level 3 - margin',
-              'type' => 'input'
-            ),
-            'mnav__subSubSub_color' => array(
-              'label' => 'Level 4 - color',
-              'type' => 'color',
-              'default' => '#000000'
-            ),
-            'mnav__subSubSub_background_color' => array(
-              'label' => 'Level 4 - background color',
-              'type' => 'color',
-              'default' => 'transparent'
-            ),
-            'mnav__subSubSub_color_hover' => array(
-              'label' => 'Level 4 - color',
-              'type' => 'color',
-              'default' => '#000000'
-            ),
-            'mnav__subSubSub_background_color_hover' => array(
-              'label' => 'Level 4 - background color',
-              'type' => 'color',
-              'default' => 'transparent'
-            ),
-            'mnav__subSubSub_color_active' => array(
-              'label' => 'Level 4 - color (active)',
-              'type' => 'color',
-              'default' => 'transparent'
-            ),
-            'mnav__subSubSub_background_color_active' => array(
-              'label' => 'Level 4 - background color (active)',
-              'type' => 'color',
-              'default' => 'transparent'
-            ),
-            'mnav__subSubSub_border_color' => array(
-              'label' => 'Level 4 - border color',
-              'type' => 'color',
-              'default' => 'transparent'
-            ),
-            'mnav__subSubSub_border_width' => array(
-              'label' => 'Level 4 - border width',
-              'type' => 'input'
-            ),
-            'mnav__subSubSub_padding' => array(
-              'label' => 'Level 4 - padding',
-              'type' => 'input'
-            ),
-            'mnav__subSubSub_margin' => array(
-              'label' => 'Level 4 - margin',
-              'type' => 'input'
-            ),
-            'mnav__subSubSub_fontfamily' => array(
-              'label' => 'Level 4 - font family',
-              'type' => 'input'
-            ),
-            'mnav__subSubSub_fontsize' => array(
-              'label' => 'Level 4 - font size',
-              'type' => 'input'
-            ),
-            'mnav__subSubSub_fontWeight' => array(
-              'label' => 'Level 4 - font weight',
-              'type' => 'select'
-            ),
-            'mnav__subSubSub_lineheight' => array(
-              'label' => 'Level 4 - line height',
-              'type' => 'input'
-            ),
-            'mnav__subSubSub_textTransform' => array(
-              'label' => 'Level 4 - text transform',
-              'type' => 'select'
-            ),
-            'mnav__subSubSub_fontStyle' => array(
-              'label' => 'Level 4 - font style',
-              'type' => 'select'
-            ),
-            'mnav__subSubSub_letterSpacing' => array(
-              'label' => 'Level 4 - Letsubter spacing',
-              'type' => 'input'
-            ),
-            'mnav__subSubSub_border_width_mobile' => array(
-              'label' => 'Level 4 - border width',
-              'type' => 'input'
-            ),
-            'mnav__subSubSub_fontsize_mobile' => array(
-              'label' => 'Level 4 - font size',
-              'type' => 'input'
-            ),
-            'mnav__subSubSub_lineheight_mobile' => array(
-              'label' => 'Level 4 - line height',
-              'type' => 'input'
-            ),
-            'mnav__subSubSub_padding_mobile' => array(
-              'label' => 'Level 4 - padding',
-              'type' => 'input'
-            ),
-            'mnav__subSubSub_margin_mobile' => array(
-              'label' => 'Level 4 - margin',
-              'type' => 'input'
+        'mainmenu' => array(
+          'label' => 'Main Menu',
+          'sections' => array(
+            'mainmenu_settings' => array(
+              'label' => 'Settings',
+              'inputs' => array(
+                'mnav__ul_paddingTop' => array(
+                  'label' => 'Padding top',
+                  'type' => 'input'
+                ),
+                'mnav__ul_paddingBottom' => array(
+                  'label' => 'Padding bottom',
+                  'type' => 'input'
+                ),
+                'mnav__ul_lastChild_marginBottom' => array(
+                  'label' => 'Last child margin bottom',
+                  'type' => 'input'
+                ),
+                'mnav__ul_paddingTop_mobile' => array(
+                  'label' => 'Padding top',
+                  'type' => 'input'
+                ),
+                'mnav__ul_paddingBottom_mobile' => array(
+                  'label' => 'Padding bottom',
+                  'type' => 'input'
+                ),
+                'mnav__ul_lastChild_marginBottom_mobile' => array(
+                  'label' => 'Last child margin bottom',
+                  'type' => 'input'
+                )
+              )
+            ),
+            'mainmenu_toggle' => array(
+              'label' => 'Toggler',
+              'inputs' => array(
+                'submenu__toggle_width' => array(
+                  'label' => 'Container width',
+                  'type' => 'input'
+                ),
+                'submenu__toggle_padding' => array(
+                  'label' => 'Container padding',
+                  'type' => 'input'
+                ),
+                'submenu__toggle_strokeWidth' => array(
+                  'label' => 'Stroke width',
+                  'type' => 'input'
+                ),
+                'submenu__toggle_width_mobile' => array(
+                  'label' => 'Container width',
+                  'type' => 'input'
+                ),
+                'submenu__toggle_padding_mobile' => array(
+                  'label' => 'Container padding',
+                  'type' => 'input'
+                ),
+                'submenu__toggle_strokeWidth_mobile' => array(
+                  'label' => 'Stroke width',
+                  'type' => 'input'
+                )
+              )
+            ),
+            'mainmenu_level1' => array(
+              'label' => 'Level 1',
+              'inputs' => array(
+                'mnav__ul_gap' => array(
+                  'label' => 'Gap',
+                  'type' => 'input'
+                ),
+                'mnav__ul_gap_mobile' => array(
+                  'label' => 'Gap',
+                  'type' => 'input'
+                ),
+                'mnav__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color',
+                  'default' => '#000000'
+                ),
+                'mnav__background_color' => array(
+                  'label' => 'Background color',
+                  'type' => 'color',
+                  'default' => 'transparent'
+                ),
+                'mnav__color_hover' => array(
+                  'label' => 'Color',
+                  'type' => 'color',
+                  'default' => '#000000'
+                ),
+                'mnav__background_color_hover' => array(
+                  'label' => 'Background color',
+                  'type' => 'color',
+                  'default' => 'transparent'
+                ),
+                'mnav__color_active' => array(
+                  'label' => 'Color (active)',
+                  'type' => 'color',
+                  'default' => 'transparent'
+                ),
+                'mnav__background_color_active' => array(
+                  'label' => 'Background color (active)',
+                  'type' => 'color',
+                  'default' => 'transparent'
+                ),
+                'mnav__border_color' => array(
+                  'label' => 'Border color',
+                  'type' => 'color',
+                  'default' => 'transparent'
+                ),
+                'mnav__border_width' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'mnav__padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'mnav__margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'mnav__fontfamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'mnav__fontsize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'mnav__fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'mnav__lineheight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'mnav__textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'mnav__fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select',
+                ),
+                'mnav__letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'input'
+                ),
+                'mnav__border_width_mobile' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'mnav__fontsize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'mnav__lineheight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'mnav__padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'mnav__margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'dark__mnav__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__mnav__background_color' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__mnav__color_hover' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__mnav__background_color_hover' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__mnav__color_active' => array(
+                  'label' => 'Color (active)',
+                  'type' => 'color'
+                ),
+                'dark__mnav__background_color_active' => array(
+                  'label' => 'Background color (active)',
+                  'type' => 'color'
+                ),
+                'dark__mnav__border_color' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
+            ),
+            'mainmenu_level2' => array(
+              'label' => 'Level 2',
+              'inputs' => array(
+                'mnav__sub_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'mnav__sub_background_color' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'mnav__sub_color_hover' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'mnav__sub_background_color_hover' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'mnav__sub_color_active' => array(
+                  'label' => 'Color (active)',
+                  'type' => 'color'
+                ),
+                'mnav__sub_background_color_active' => array(
+                  'label' => 'Background color (active)',
+                  'type' => 'color'
+                ),
+                'mnav__sub_border_color' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'mnav__sub_border_width' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'mnav__sub_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'mnav__sub_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'mnav__sub_fontfamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'mnav__sub_fontsize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'mnav__sub_lineheight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'mnav__sub_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'mnav__sub_textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'mnav__sub_fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'mnav__sub_letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'input'
+                ),
+                'mnav__sub_border_width_mobile' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'mnav__sub_fontsize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'mnav__sub_lineheight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'mnav__sub_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'mnav__sub_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'dark__mnav__sub_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__mnav__sub_background_color' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__mnav__sub_color_hover' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__mnav__sub_background_color_hover' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__mnav__sub_color_active' => array(
+                  'label' => 'Color (active)',
+                  'type' => 'color'
+                ),
+                'dark__mnav__sub_background_color_active' => array(
+                  'label' => 'Background color (active)',
+                  'type' => 'color'
+                ),
+                'dark__mnav__sub_border_color' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
+            ),
+            'mainmenu_level3' => array(
+              'label' => 'Level 3',
+              'inputs' => array(
+                'mnav__subSub_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'mnav__subSub_background_color' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'mnav__subSub_color_hover' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'mnav__subSub_background_color_hover' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'mnav__subSub_color_active' => array(
+                  'label' => 'Color (active)',
+                  'type' => 'color'
+                ),
+                'mnav__subSub_background_color_active' => array(
+                  'label' => 'Background color (active)',
+                  'type' => 'color'
+                ),
+                'mnav__subSub_border_color' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'mnav__subSub_border_width' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'mnav__subSub_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'mnav__subSub_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'mnav__subSub_fontfamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'mnav__subSub_fontsize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'mnav__subSub_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'mnav__subSub_lineheight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'mnav__subSub_textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'mnav__subSub_fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'mnav__subSub_letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'input'
+                ),
+                'mnav__subSub_border_width_mobile' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'mnav__subSub_fontsize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'mnav__subSub_lineheight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'mnav__subSub_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'mnav__subSub_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'dark__mnav__subSub_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__mnav__subSub_background_color' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__mnav__subSub_color_hover' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__mnav__subSub_background_color_hover' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__mnav__subSub_color_active' => array(
+                  'label' => 'Color (active)',
+                  'type' => 'color'
+                ),
+                'dark__mnav__subSub_background_color_active' => array(
+                  'label' => 'Background color (active)',
+                  'type' => 'color'
+                ),
+                'dark__mnav__subSub_border_color' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
+            ),
+            'mainmenu_level4' => array(
+              'label' => 'Level 4',
+              'inputs' => array(
+                'mnav__subSubSub_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'mnav__subSubSub_background_color' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'mnav__subSubSub_color_hover' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'mnav__subSubSub_background_color_hover' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'mnav__subSubSub_color_active' => array(
+                  'label' => 'Color (active)',
+                  'type' => 'color'
+                ),
+                'mnav__subSubSub_background_color_active' => array(
+                  'label' => 'Background color (active)',
+                  'type' => 'color'
+                ),
+                'mnav__subSubSub_border_color' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'mnav__subSubSub_border_width' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'mnav__subSubSub_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'mnav__subSubSub_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'mnav__subSubSub_fontfamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'mnav__subSubSub_fontsize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'mnav__subSubSub_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'mnav__subSubSub_lineheight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'mnav__subSubSub_textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'mnav__subSubSub_fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'mnav__subSubSub_letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'input'
+                ),
+                'mnav__subSubSub_border_width_mobile' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'mnav__subSubSub_fontsize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'mnav__subSubSub_lineheight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'mnav__subSubSub_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'mnav__subSubSub_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'dark__mnav__subSubSub_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__mnav__subSubSub_background_color' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__mnav__subSubSub_color_hover' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__mnav__subSubSub_background_color_hover' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__mnav__subSubSub_color_active' => array(
+                  'label' => 'Color (active)',
+                  'type' => 'color'
+                ),
+                'dark__mnav__subSubSub_background_color_active' => array(
+                  'label' => 'Background color (active)',
+                  'type' => 'color'
+                ),
+                'dark__mnav__subSubSub_border_color' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
             )
           )
         ),
         'hamburger' => array(
-          'label' => 'Hamburger',
-          'inputs' => array(
-            'hamburger__container_width' => array(
-              'label' => 'Width',
-              'type' => 'input'
+          'label' => 'Menu Hamburger',
+          'sections' => array(
+            'hamburger_settings' => array(
+              'label' => 'Settings',
+              'inputs' => array(
+                'hamburger_color' => array(
+                  'label' => 'Hamburger color',
+                  'type' => 'color',
+                  'default' => '#000000'
+                ),
+                'mnav_background' => array(
+                  'label' => 'Menu background color',
+                  'type' => 'color',
+                  'default' => '#f9f9f9'
+                ),
+                'hamburger__container_width' => array(
+                  'label' => 'Width',
+                  'type' => 'input'
+                ),
+                'hamburger__container_height' => array(
+                  'label' => 'Height',
+                  'type' => 'input'
+                ),
+                'hamburger__size' => array(
+                  'label' => 'Size',
+                  'type' => 'input'
+                ),
+                'content__blur_activemenu' => array(
+                  'label' => 'Blur Content while hamburger navigation is open',
+                  'type' => 'input'
+                ),
+                'hamburger__container_width_mobile' => array(
+                  'label' => 'Width',
+                  'type' => 'input'
+                ),
+                'hamburger__container_height_mobile' => array(
+                  'label' => 'Height',
+                  'type' => 'input'
+                ),
+                'dark__hamburger_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color',
+                  'default' => '#ffffff'
+                ),
+                'dark__mnav_background' => array(
+                  'label' => 'Menu background color',
+                  'type' => 'color',
+                  'default' => '#1d1e1f'
+                )
+              )
             ),
-            'hamburger__container_height' => array(
-              'label' => 'Height',
-              'type' => 'input'
-            ),
-            'hamburger__size' => array(
-              'label' => 'Size',
-              'type' => 'input'
-            ),
-            'hamburger_color' => array(
-              'label' => 'Hamburger color',
-              'type' => 'color',
-              'default' => '#000000'
-            ),
-            'hamburger_text_color' => array(
-              'label' => 'Hamburger text color',
-              'type' => 'color'
-            ),
-            'mnav_background' => array(
-              'label' => 'Hamburger navigation background color',
-              'type' => 'color',
-              'default' => '#f9f9f9'
-            ),
-            'dark__hamburger_color' => array(
-              'label' => 'Hamburger color',
-              'type' => 'color',
-              'default' => '#ffffff'
-            ),
-            'dark__hamburger_text_color' => array(
-              'label' => 'Hamburger text color',
-              'type' => 'color'
-            ),
-            'dark__mnav_background' => array(
-              'label' => 'Hamburger navigation background color',
-              'type' => 'color',
-              'default' => '#1d1e1f'
-            ),
-            'content__blur_activemenu' => array(
-              'label' => 'Blur Content while hamburger navigation is open',
-              'type' => 'input'
-            ),
-            'hamburger__title_space' => array(
-              'label' => 'Title spacing',
-              'type' => 'input'
-            ),
-            'hamburger__title_fontSize' => array(
-              'label' => 'Title font size',
-              'type' => 'input'
-            ),
-            'hamburger__title_LineHeight' => array(
-              'label' => 'Title line height',
-              'type' => 'input'
-            ),
-            'hamburger__title_fontWeight' => array(
-              'label' => 'Title font weight',
-              'type' => 'select'
-            ),
-            'hamburger__container_width_mobile' => array(
-              'label' => 'Width',
-              'type' => 'input'
-            ),
-            'hamburger__container_height_mobile' => array(
-              'label' => 'Height',
-              'type' => 'input'
-            ),
-            'hamburger__title_space_mobile' => array(
-              'label' => 'Title spacing',
-              'type' => 'input'
-            ),
-            'hamburger__title_fontSize_mobile' => array(
-              'label' => 'Title font size',
-              'type' => 'input'
-            ),
-            'hamburger__title_LineHeight_mobile' => array(
-              'label' => 'Title line height',
-              'type' => 'input'
-            )
-          )
-        ),
-        'header_desktop' => array(
-          'label' => 'Desktop',
-          'inputs' => array(
-            'header__paddingTop' => array(
-              'label' => 'Container padding top',
-              'type' => 'input'
-            ),
-            'header__paddingBottom' => array(
-              'label' => 'Container padding bottom',
-              'type' => 'input'
-            ),
-            'header__negativTopPosition_sticky' => array(
-              'label' => 'Top negativ position',
-              'type' => 'input'
-            ),
-            'header__paddingTop_sticky' => array(
-              'label' => 'Container padding top',
-              'type' => 'input'
-            ),
-            'header__paddingBottom_sticky' => array(
-              'label' => 'Container padding bottom',
-              'type' => 'input'
-            ),
-            'header__itemSpacingHorizontal' => array(
-              'label' => 'Vertical spacing between items',
-              'type' => 'input'
-            )
-          )
-        ),
-        'header_mobile' => array(
-          'label' => 'Mobile',
-          'inputs' => array(
-            'header__paddingTop_mobile' => array(
-              'label' => 'Container padding top',
-              'type' => 'input'
-            ),
-            'header__paddingBottom_mobile' => array(
-              'label' => 'Container padding bottom',
-              'type' => 'input'
-            ),
-            'header__negativTopPosition_sticky_mobile' => array(
-              'label' => 'Top negativ position',
-              'type' => 'input'
-            ),
-            'header__paddingTop_sticky_mobile' => array(
-              'label' => 'Container padding top',
-              'type' => 'input'
-            ),
-            'header__paddingBottom_sticky_mobile' => array(
-              'label' => 'Container padding bottom',
-              'type' => 'input'
-            ),
-            'header__itemSpacingHorizontal_mobile' => array(
-              'label' => 'Vertical spacing between items',
-              'type' => 'input'
+            'hamburger_title' => array(
+              'label' => 'Title',
+              'inputs' => array(
+                'hamburger_text_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'hamburger__title_space' => array(
+                  'label' => 'Spacing',
+                  'type' => 'input'
+                ),
+                'hamburger__title_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'hamburger__title_LineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'hamburger__title_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'hamburger__title_space_mobile' => array(
+                  'label' => 'Spacing',
+                  'type' => 'input'
+                ),
+                'hamburger__title_fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'hamburger__title_LineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'dark__hamburger_text_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                )
+              )
             )
           )
         )
-      )
+      ),
+      'sections' => array()
     ),
-    'main' => array (
-      'label' => 'Content area',
-      'sections' => array(
-        'main_desktop' => array(
-          'label' => 'Desktop',
-          'inputs' => array(
-            'content__space' => array(
-              'label' => 'Content spacing',
-              'type' => 'input'
+    'tmp' => array(
+      'label' => 'Template parts',
+      'panels' => array(
+        'tmp_spacing' => array(
+          'label' => 'Content spacing',
+          'sections' => array(
+            'tmp_spacing_default' => array(
+              'label' => 'Default spacings',
+              'inputs' => array(
+                'content__space' => array(
+                  'label' => 'Space between elements',
+                  'type' => 'input'
+                ),
+                'content__space_last' => array(
+                  'label' => 'Last element spacing',
+                  'type' => 'input'
+                ),
+                'html__anchor' => array(
+                  'label' => 'Anchor position (IE fix)',
+                  'type' => 'input',
+                  'default' => '100px'
+                ),
+                'content__space_mobile' => array(
+                  'label' => 'Space between elements',
+                  'type' => 'input'
+                ),
+                'content__space_last_mobile' => array(
+                  'label' => 'Last element spacing',
+                  'type' => 'input'
+                ),
+                'html__anchor_mobile' => array(
+                  'label' => 'Anchor position (IE fix)',
+                  'type' => 'input',
+                  'default' => '120px'
+                )
+              )
             ),
-            'content__space_one' => array(
-              'label' => 'Override content spacing 1',
-              'type' => 'input'
-            ),
-            'content__space_two' => array(
-              'label' => 'Override content spacing 2',
-              'type' => 'input'
-            ),
-            'content__space_last' => array(
-              'label' => 'Content last spacing',
-              'type' => 'input'
-            ),
-            'html__anchor' => array(
-              'label' => 'Anchor position',
-              'type' => 'input',
-              'default' => '100px'
+            'tmp_spacing_rules' => array(
+              'label' => 'Override spacing rules',
+              'inputs' => array(
+                'content__space_one' => array(
+                  'label' => 'Rule 1',
+                  'type' => 'input'
+                ),
+                'content__space_two' => array(
+                  'label' => 'Rule 2',
+                  'type' => 'input'
+                ),
+                'content__space_one_mobile' => array(
+                  'label' => 'Rule 1',
+                  'type' => 'input'
+                ),
+                'content__space_two_mobile' => array(
+                  'label' => 'Rule 2',
+                  'type' => 'input'
+                )
+              )
             )
           )
         ),
-        'main_mobile' => array(
-          'label' => 'Mobile',
-          'inputs' => array(
-            'content__space_mobile' => array(
-              'label' => 'Content spacing',
-              'type' => 'input'
-            ),
-            'content__space_one_mobile' => array(
-              'label' => 'Override content spacing 1',
-              'type' => 'input'
-            ),
-            'content__space_two_mobile' => array(
-              'label' => 'Override content spacing 2',
-              'type' => 'input'
-            ),
-            'content__space_last_mobile' => array(
-              'label' => 'Content last spacing',
-              'type' => 'input'
-            ),
-            'html__anchor_mobile' => array(
-              'label' => 'Anchor position',
-              'type' => 'input',
-              'default' => '120px'
-            )
-          )
-        ),
-        'mainSection' => array(
-          'label' => 'Main section',
-          'inputs' => array(
-            'mainSection__bgColor' => array(
-              'label' => 'Background color',
-              'type' => 'color'
-            ),
-            'mainSection__marginTop' => array(
-              'label' => 'Margin top',
-              'type' => 'input'
-            ),
-            'mainSection__marginBottom' => array(
-              'label' => 'Margin bottom',
-              'type' => 'input'
-            ),
-            'mainSection__paddingTop' => array(
-              'label' => 'Padding top',
-              'type' => 'input'
-            ),
-            'mainSection__paddingBottom' => array(
-              'label' => 'Padding bottom',
-              'type' => 'input'
-            ),
-            'mainSection__marginTop_mobile' => array(
-              'label' => 'Margin top',
-              'type' => 'input'
-            ),
-            'mainSection__marginBottom_mobile' => array(
-              'label' => 'Margin bottom',
-              'type' => 'input'
-            ),
-            'mainSection__paddingTop_mobile' => array(
-              'label' => 'Padding top',
-              'type' => 'input'
-            ),
-            'mainSection__paddingBottom_mobile' => array(
-              'label' => 'Padding bottom',
-              'type' => 'input'
-            )
-          )
-        ),
-        'thumbnail' => array(
+        'thumbnails' => array(
           'label' => 'Thumbnail',
-          'inputs' => array(
-            'thumbnail__height' => array(
-              'label' => 'Height',
-              'type' => 'input'
+          'sections' => array(
+            'thumbnails_desktop' => array(
+              'label' => 'Desktop',
+              'inputs' => array(
+                'thumbnail__height' => array(
+                  'label' => 'Height',
+                  'type' => 'input'
+                ),
+                'thumbnail__marginTop' => array(
+                  'label' => 'Margin top',
+                  'type' => 'input'
+                ),
+                'thumbnail__marginBottom' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'input'
+                )
+              )
             ),
-            'thumbnail__marginTop' => array(
-              'label' => 'Margin top',
-              'type' => 'input'
-            ),
-            'thumbnail__marginBottom' => array(
-              'label' => 'Margin bottom',
-              'type' => 'input'
-            ),
-            'thumbnail__height_mobile' => array(
-              'label' => 'Height',
-              'type' => 'input'
-            ),
-            'thumbnail__marginTop_mobile' => array(
-              'label' => 'Margin top',
-              'type' => 'input'
-            ),
-            'thumbnail__marginBottom_mobile' => array(
-              'label' => 'Margin bottom',
-              'type' => 'input'
+            'thumbnails_mobile' => array(
+              'label' => 'Mobile',
+              'inputs' => array(
+                'thumbnail__height_mobile' => array(
+                  'label' => 'Height',
+                  'type' => 'input'
+                ),
+                'thumbnail__marginTop_mobile' => array(
+                  'label' => 'Margin top',
+                  'type' => 'input'
+                ),
+                'thumbnail__marginBottom_mobile' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'input'
+                )
+              )
             )
           )
         ),
         'breadcrumbs' => array(
           'label' => 'Breadcrumbs',
-          'inputs' => array(
-            'bc__color' => array(
-              'label' => 'Color',
-              'type' => 'color'
+          'sections' => array(
+            'breadcrumbs_desktop' => array(
+              'label' => 'Desktop',
+              'inputs' => array(
+                'bc__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'bc__background_color' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'bc__link_color' => array(
+                  'label' => 'Link color',
+                  'type' => 'color'
+                ),
+                'bc__link_color_hover' => array(
+                  'label' => 'Link color',
+                  'type' => 'color'
+                ),
+                'bc__color_active' => array(
+                  'label' => 'Color (active)',
+                  'type' => 'color'
+                ),
+                'bc__margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'bc__padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'bc__fontfamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'bc__fontsize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'bc__fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'bc__lineheight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'bc__textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'bc__fontStyle' => array(
+                  'label' => 'font style',
+                  'type' => 'select'
+                ),
+                'dark__bc__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__bc__background_color' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__bc__link_color' => array(
+                  'label' => 'Link color',
+                  'type' => 'color'
+                ),
+                'dark__bc__link_color_hover' => array(
+                  'label' => 'Link color',
+                  'type' => 'color'
+                ),
+                'dark__bc__color_active' => array(
+                  'label' => 'Color (active)',
+                  'type' => 'color'
+                )
+              )
             ),
-            'bc__background_color' => array(
-              'label' => 'Background color',
-              'type' => 'color'
-            ),
-            'bc__link_color' => array(
-              'label' => 'Link color',
-              'type' => 'color'
-            ),
-            'bc__link_color_hover' => array(
-              'label' => 'Link color',
-              'type' => 'color'
-            ),
-            'bc__color_active' => array(
-              'label' => 'Color (active)',
-              'type' => 'color'
-            ),
-            'bc__margin' => array(
-              'label' => 'Margin',
-              'type' => 'input'
-            ),
-            'bc__padding' => array(
-              'label' => 'Padding',
-              'type' => 'input'
-            ),
-            'bc__fontfamily' => array(
-              'label' => 'Font family',
-              'type' => 'input'
-            ),
-            'bc__fontsize' => array(
-              'label' => 'Font size',
-              'type' => 'input'
-            ),
-            'bc__fontWeight' => array(
-              'label' => 'Font weight',
-              'type' => 'select'
-            ),
-            'bc__lineheight' => array(
-              'label' => 'Line height',
-              'type' => 'input'
-            ),
-            'bc__textTransform' => array(
-              'label' => 'Text transform',
-              'type' => 'select'
-            ),
-            'bc__fontStyle' => array(
-              'label' => 'font style',
-              'type' => 'select'
-            ),
-            'bc__fontsize_mobile' => array(
-              'label' => 'Font size',
-              'type' => 'input'
-            ),
-            'bc__lineheight_mobile' => array(
-              'label' => 'Line height',
-              'type' => 'input'
-            ),
-            'bc__margin_mobile' => array(
-              'label' => 'Margin',
-              'type' => 'input'
-            ),
-            'bc__padding_mobile' => array(
-              'label' => 'Padding',
-              'type' => 'input'
-            ),
-            'dark__bc__color' => array(
-              'label' => 'Color',
-              'type' => 'color'
-            ),
-            'dark__bc__background_color' => array(
-              'label' => 'Background color',
-              'type' => 'color'
-            ),
-            'dark__bc__link_color' => array(
-              'label' => 'Link color',
-              'type' => 'color'
-            ),
-            'dark__bc__link_color_hover' => array(
-              'label' => 'Link color',
-              'type' => 'color'
-            ),
-            'dark__bc__color_active' => array(
-              'label' => 'Color (active)',
-              'type' => 'color'
+            'breadcrumbs_mobile' => array(
+              'label' => 'Mobile',
+              'inputs' => array(
+                'bc__fontsize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'bc__lineheight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'bc__margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'bc__padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                )
+              )
             )
           )
         ),
         'languageswitcher' => array(
           'label' => 'Language switcher',
-          'inputs' => array(
-            'ls__background_color' => array(
-              'label' => 'Background color',
-              'type' => 'color'
+          'sections' => array(
+            'languageswitcher_settings' => array(
+              'label' => 'Settings',
+              'inputs' => array(
+                'ls__background_color' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'ls__color_active' => array(
+                  'label' => 'Active language color',
+                  'type' => 'color'
+                ),
+                'dark__ls__background_color' => array(
+                  'label' => 'Background Image',
+                  'type' => 'color'
+                ),
+                'dark__ls__color_active' => array(
+                  'label' => 'Active language color',
+                  'type' => 'color'
+                )
+              )
             ),
-            'ls__color_active' => array(
-              'label' => 'Active language color',
-              'type' => 'color'
-            ),
-            'ls__link_color' => array(
-              'label' => 'Link color',
-              'type' => 'color'
-            ),
-            'ls__link_color_hover' => array(
-              'label' => 'Link hover color',
-              'type' => 'color'
-            ),
-            'ls__link_fontfamily' => array(
-              'label' => 'Link font family',
-              'type' => 'input'
-            ),
-            'ls__link_fontsize' => array(
-              'label' => 'Link font size',
-              'type' => 'input'
-            ),
-            'ls__link_lineheight' => array(
-              'label' => 'Link line height',
-              'type' => 'input'
-            ),
-            'ls__link_fontWeight' => array(
-              'label' => 'Link font weight',
-              'type' => 'select'
-            ),
-            'ls__link_textTransform' => array(
-              'label' => 'Link text transform',
-              'type' => 'select'
-            ),
-            'ls__link_fontStyle' => array(
-              'label' => 'Link font style',
-              'type' => 'select'
-            ),
-            'ls__link_letterSpacing' => array(
-              'label' => 'Link letter spacing',
-              'type' => 'input'
-            ),
-            'ls__link_margin' => array(
-              'label' => 'Link margin',
-              'type' => 'input'
-            ),
-            'ls__link_padding' => array(
-              'label' => 'Link padding',
-              'type' => 'input'
-            ),
-            'ls__link_fontsize_mobile' => array(
-              'label' => 'Link font size',
-              'type' => 'input'
-            ),
-            'ls__link_lineheight_mobile' => array(
-              'label' => 'Link line height',
-              'type' => 'input'
-            ),
-            'ls__link_margin_mobile' => array(
-              'label' => 'Link margin',
-              'type' => 'input'
-            ),
-            'ls__link_padding_mobile' => array(
-              'label' => 'Link padding',
-              'type' => 'input'
-            ),
-            'dark__ls__background_color' => array(
-              'label' => 'Background Image',
-              'type' => 'color'
-            ),
-            'dark__ls__color_active' => array(
-              'label' => 'Active language color',
-              'type' => 'color'
-            ),
-            'dark__ls__link_color' => array(
-              'label' => 'Link color',
-              'type' => 'color'
-            ),
-            'dark__ls__link_color_hover' => array(
-              'label' => 'Link hover color',
-              'type' => 'color'
+            'languageswitcher_links' => array(
+              'label' => 'Buttons',
+              'inputs' => array(
+                'ls__link_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'ls__link_color_hover' => array(
+                  'label' => 'Hover color',
+                  'type' => 'color'
+                ),
+                'ls__link_fontfamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'ls__link_fontsize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'ls__link_lineheight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'ls__link_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'ls__link_textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'ls__link_fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'ls__link_letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'input'
+                ),
+                'ls__link_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'ls__link_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'ls__link_fontsize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'ls__link_lineheight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'ls__link_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'ls__link_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'dark__ls__link_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__ls__link_color_hover' => array(
+                  'label' => 'Hover color',
+                  'type' => 'color'
+                )
+              )
             )
           )
         ),
-        'inputs' => array(
-          'label' => 'Input fields',
-          'inputs' => array(
-            'input__color' => array(
-              'label' => 'Input color',
-              'type' => 'color'
-            ),
-            'input__bg_color' => array(
-              'label' => 'Input background color',
-              'type' => 'color',
-              'default' => '#ffffff'
-            ),
-            'input__border_width' => array(
-              'label' => 'Input border width',
-              'type' => 'input'
-            ),
-            'input__border_color' => array(
-              'label' => 'Input border color',
-              'type' => 'color',
-              'default' => '#000000'
-            ),
-            'input__fontFamily' => array(
-              'label' => 'Input font family',
-              'type' => 'input'
-            ),
-            'input__fontSize' => array(
-              'label' => 'Input font size',
-              'type' => 'input'
-            ),
-            'input__lineHeight' => array(
-              'label' => 'Input line height',
-              'type' => 'input'
-            ),
-            'input__fontWeight' => array(
-              'label' => 'Input font weight',
-              'type' => 'select'
-            ),
-            'input__fontSize_mobile' => array(
-              'label' => 'Input font size',
-              'type' => 'input'
-            ),
-            'input__lineHeight_mobile' => array(
-              'label' => 'Input line height',
-              'type' => 'input'
-            ),
-            'input__borderRadius' => array(
-              'label' => 'Input border radius',
-              'type' => 'input'
-            ),
-            'input__padding' => array(
-              'label' => 'Input padding',
-              'type' => 'input'
-            ),
-            'input__padding_mobile' => array(
-              'label' => 'Input padding mobile',
-              'type' => 'input'
-            ),
-            'input__checkbox_bg' => array(
-              'label' => 'Checkbox/Radio background color',
-              'type' => 'color',
-              'default' => '#ffffff'
-            ),
-            'input__checkbox_fontSize' => array(
-              'label' => 'Checkbox/Radio font size',
-              'type' => 'input'
-            ),
-            'input__checkbox_lineHeight' => array(
-              'label' => 'Checkbox/Radio line height',
-              'type' => 'input'
-            ),
-            'input__checkbox_fontWeight' => array(
-              'label' => 'Checkbox/Radio font weight',
-              'type' => 'select'
-            ),
-            'input__checkbox_fontSize_mobile' => array(
-              'label' => 'Checkbox/Radio font size',
-              'type' => 'input'
-            ),
-            'input__checkbox_lineHeight_mobile' => array(
-              'label' => 'Checkbox/Radio line height',
-              'type' => 'input'
-            ),
-            'input__checkbox_width' => array(
-              'label' => 'Checkbox/Radio width/height',
-              'type' => 'input'
-            ),
-            'input__checkbox_border_width' => array(
-              'label' => 'Checkbox/Radio border',
-              'type' => 'input'
-            ),
-            'input__checkbox_space' => array(
-              'label' => 'Checkbox/Radio space to text',
-              'type' => 'input'
-            ),
-            'input__checkbox_border_color' => array(
-              'label' => 'Checkbox/Radio border color',
-              'type' => 'color',
-              'default' => '#0175bc'
-            ),
-            'input__checkbox_bg_checked' => array(
-              'label' => 'Checkbox/Radio background color (checked)',
-              'type' => 'color',
-              'default' => '#0175bc'
-            ),
-            'input__select_bg_color' => array(
-              'label' => 'Select background color',
-              'type' => 'color'
-            ),
-            'input__select_color' => array(
-              'label' => 'Select text color',
-              'type' => 'color'
-            ),
-            'input__select_border_color' => array(
-              'label' => 'Select border color',
-              'type' => 'color'
-            ),
-            'input__select_padding' => array(
-              'label' => 'Select padding',
-              'type' => 'input'
-            ),
-            'input__select_border_width' => array(
-              'label' => 'Select border width',
-              'type' => 'input'
-            ),
-            'input__select_padding_mobile' => array(
-              'label' => 'Select padding',
-              'type' => 'input'
-            ),
-            'input__select_fontFamily' => array(
-              'label' => 'Input font family',
-              'type' => 'input'
-            ),
-            'input__select_fontSize' => array(
-              'label' => 'Select font size',
-              'type' => 'input'
-            ),
-            'input__select_lineHeight' => array(
-              'label' => 'Select line height',
-              'type' => 'input'
-            ),
-            'input__select_fontWeight' => array(
-              'label' => 'Select font weight',
-              'type' => 'select'
-            ),
-            'input__select_fontSize_mobile' => array(
-              'label' => 'Select font size',
-              'type' => 'input'
-            ),
-            'input__select_lineHeight_mobile' => array(
-              'label' => 'Select line height',
-              'type' => 'input'
-            ),
-            'input__selectContainer_color' => array(
-              'label' => 'Select container text color',
-              'type' => 'color'
-            ),
-            'input__selectContainer_bg_color' => array(
-              'label' => 'Select container background color',
-              'type' => 'color'
-            ),
-            'input__selectContainer_width' => array(
-              'label' => 'Select container size',
-              'type' => 'input'
-            ),
-            'input__selectContainer_width_mobile' => array(
-              'label' => 'Select container size',
-              'type' => 'input'
-            ),
-            'input__required' => array(
-              'label' => 'Required color',
-              'type' => 'color',
-              'default' => '#a53737'
-            ),
-            'input__placeholder_color' => array(
-              'label' => 'Placeholder color',
-              'type' => 'color'
-            ),
-            'input__placeholder_fontFamily' => array(
-              'label' => 'Placeholder font family',
-              'type' => 'input'
-            ),
-            'input__placeholder_fontSize' => array(
-              'label' => 'Placeholder font size',
-              'type' => 'input'
-            ),
-            'input__placeholder_lineHeight' => array(
-              'label' => 'Placeholder line height',
-              'type' => 'input'
-            ),
-            'input__placeholder_fontWeight' => array(
-              'label' => 'Placeholder font weight',
-              'type' => 'select'
-            ),
-            'input__placeholder_textTransform' => array(
-              'label' => 'Placeholder text transform',
-              'type' => 'select'
-            ),
-            'input__submit_fontFamily' => array(
-              'label' => 'Submit font family',
-              'type' => 'input'
-            ),
-            'input__submit_fontSize' => array(
-              'label' => 'Submit/button font size',
-              'type' => 'input'
-            ),
-            'input__submit_letterSpacing' => array(
-              'label' => 'Submit/button letter spacing',
-              'type' => 'input'
-            ),
-            'input__submit_lineHeight' => array(
-              'label' => 'Submit/button line height',
-              'type' => 'input'
-            ),
-            'input__submit_fontWeight' => array(
-              'label' => 'Submit/button font weight',
-              'type' => 'select'
-            ),
-            'input__submit_textTransform' => array(
-              'label' => 'Submit/button text transform',
-              'type' => 'select'
-            ),
-            'input__submit_fontSize_mobile' => array(
-              'label' => 'Submit/button font size',
-              'type' => 'input'
-            ),
-            'input__submit_lineHeight_mobile' => array(
-              'label' => 'Submit/button line height',
-              'type' => 'input'
-            ),
-            'input__submit_letterSpacing_mobile' => array(
-              'label' => 'Submit/button letter spacing',
-              'type' => 'input'
-            ),
-            'input__submit_bg_color' => array(
-              'label' => 'Submit/button background color',
-              'type' => 'color',
-              'default' => '#0175bc'
-            ),
-            'input__submit_color' => array(
-              'label' => 'Submit/button text color',
-              'type' => 'color',
-              'default' => '#ffffff'
-            ),
-            'input__submit_border_color' => array(
-              'label' => 'Submit/button border color',
-              'type' => 'color',
-              'default' => '#0175bc'
-            ),
-            'input__submit_bg_color_hover' => array(
-              'label' => 'Submit/button background color',
-              'type' => 'color',
-              'default' => '#0175bc'
-            ),
-            'input__submit_border_color_hover' => array(
-              'label' => 'Submit/button border color',
-              'type' => 'color',
-              'default' => '#0175bc'
-            ),
-            'input__submit_color_hover' => array(
-              'label' => 'Submit/button text color',
-              'type' => 'color',
-              'default' => '#ffffff'
-            ),
-            'input__submit_borderRadius' => array(
-              'label' => 'Submit/button border radius',
-              'type' => 'input'
-            ),
-            'input__submit_borderWidth' => array(
-              'label' => 'Submit/button border width',
-              'type' => 'input'
-            ),
-            'input__submit_padding' => array(
-              'label' => 'Submit/button padding',
-              'type' => 'input'
-            ),
-            'input__submit_padding_mobile' => array(
-              'label' => 'Submit/button padding',
-              'type' => 'input'
-            ),
-            'input__reset_fontFamily' => array(
-              'label' => 'Reset font family',
-              'type' => 'input'
-            ),
-            'input__reset_fontSize' => array(
-              'label' => 'Reset/button font size',
-              'type' => 'input'
-            ),
-            'input__reset_letterSpacing' => array(
-              'label' => 'Reset/button letter spacing',
-              'type' => 'input'
-            ),
-            'input__reset_lineHeight' => array(
-              'label' => 'Reset/button line height',
-              'type' => 'input'
-            ),
-            'input__reset_fontWeight' => array(
-              'label' => 'Reset/button font weight',
-              'type' => 'select'
-            ),
-            'input__reset_textTransform' => array(
-              'label' => 'Reset/button text transform',
-              'type' => 'select'
-            ),
-            'input__reset_fontSize_mobile' => array(
-              'label' => 'Reset/button font size',
-              'type' => 'input'
-            ),
-            'input__reset_lineHeight_mobile' => array(
-              'label' => 'Reset/button line height',
-              'type' => 'input'
-            ),
-            'input__reset_letterSpacing_mobile' => array(
-              'label' => 'Reset/button letter spacing',
-              'type' => 'input'
-            ),
-            'input__reset_bg_color' => array(
-              'label' => 'Reset/button background color',
-              'type' => 'color',
-              'default' => '#0175bc'
-            ),
-            'input__reset_color' => array(
-              'label' => 'Reset/button text color',
-              'type' => 'color',
-              'default' => '#ffffff'
-            ),
-            'input__reset_border_color' => array(
-              'label' => 'Reset/button border color',
-              'type' => 'color',
-              'default' => '#0175bc'
-            ),
-            'input__reset_bg_color_hover' => array(
-              'label' => 'Reset/button background color',
-              'type' => 'color',
-              'default' => '#0175bc'
-            ),
-            'input__reset_border_color_hover' => array(
-              'label' => 'Reset/button border color',
-              'type' => 'color',
-              'default' => '#0175bc'
-            ),
-            'input__reset_color_hover' => array(
-              'label' => 'Reset/button text color',
-              'type' => 'color',
-              'default' => '#ffffff'
-            ),
-            'input__reset_borderRadius' => array(
-              'label' => 'Reset/button border radius',
-              'type' => 'input'
-            ),
-            'input__reset_borderWidth' => array(
-              'label' => 'Reset/button border width',
-              'type' => 'input'
-            ),
-            'input__reset_padding' => array(
-              'label' => 'Reset/button padding',
-              'type' => 'input'
-            ),
-            'input__reset_padding_mobile' => array(
-              'label' => 'Reset/button padding',
-              'type' => 'input'
+        'tagStyles' => array(
+          'label' => 'Tag styles',
+          'sections' => array(
+            'tagStyles_section' => array(
+              'label' => 'Main section',
+              'inputs' => array(
+                'mainSection__bgColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'mainSection__marginTop' => array(
+                  'label' => 'Margin top',
+                  'type' => 'input'
+                ),
+                'mainSection__marginBottom' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'input'
+                ),
+                'mainSection__paddingTop' => array(
+                  'label' => 'Padding top',
+                  'type' => 'input'
+                ),
+                'mainSection__paddingBottom' => array(
+                  'label' => 'Padding bottom',
+                  'type' => 'input'
+                ),
+                'mainSection__marginTop_mobile' => array(
+                  'label' => 'Margin top',
+                  'type' => 'input'
+                ),
+                'mainSection__marginBottom_mobile' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'input'
+                ),
+                'mainSection__paddingTop_mobile' => array(
+                  'label' => 'Padding top',
+                  'type' => 'input'
+                ),
+                'mainSection__paddingBottom_mobile' => array(
+                  'label' => 'Padding bottom',
+                  'type' => 'input'
+                )
+              )
+            )
+          )
+        ),
+        'forms' => array(
+          'label' => 'Formular',
+          'sections' => array(
+            'forms_messages' => array(
+              'label' => 'Massages',
+              'inputs' => array(
+                'input__required' => array(
+                  'label' => 'Color (required)',
+                  'type' => 'color',
+                  'default' => '#a53737'
+                ),
+                'dark__input__required' => array(
+                  'label' => 'Color (required)',
+                  'type' => 'color'
+                )
+              )
+            ),
+            'forms_input' => array(
+              'label' => 'Input field',
+              'inputs' => array(
+                'input__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'input__bg_color' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'input__border_color' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'input__border_width' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'input__borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'input'
+                ),
+                'input__padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'input__fontFamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'input__fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'input__lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'input__fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'input__padding_mobile' => array(
+                  'label' => 'Padding mobile',
+                  'type' => 'input'
+                ),
+                'input__fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'input__lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'dark__input__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__input__bg_color' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__input__border_color' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
+            ),
+            'forms_checkboxRadio' => array(
+              'label' => 'Radio & Checkbox',
+              'inputs' => array(
+                'input__checkbox_bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'input__checkbox_bg_checked' => array(
+                  'label' => 'Background color (checked)',
+                  'type' => 'color'
+                ),
+                'input__checkbox_border_color' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'input__checkbox_width' => array(
+                  'label' => 'Width/height',
+                  'type' => 'input'
+                ),
+                'input__checkbox_border_width' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'input__checkbox_space' => array(
+                  'label' => 'Space to text',
+                  'type' => 'input'
+                ),
+                'input__checkbox_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'input__checkbox_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'input__checkbox_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'input__checkbox_fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'input__checkbox_lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'dark__input__checkbox_bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__input__checkbox_border_color' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'dark__input__checkbox_bg_checked' => array(
+                  'label' => 'Background color (checked)',
+                  'type' => 'color'
+                )
+              )
+            ),
+            'forms_select' => array(
+              'label' => 'Select',
+              'inputs' => array(
+                'input__select_bg_color' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'input__select_color' => array(
+                  'label' => 'Text color',
+                  'type' => 'color'
+                ),
+                'input__select_border_color' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'input__select_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'input__select_border_width' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'input__select_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'input__select_fontFamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'input__select_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'input__select_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'input__select_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'input__select_fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'input__select_lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'input__selectContainer_color' => array(
+                  'label' => 'Container text color',
+                  'type' => 'color'
+                ),
+                'input__selectContainer_bg_color' => array(
+                  'label' => 'Container background color',
+                  'type' => 'color'
+                ),
+                'input__selectContainer_width' => array(
+                  'label' => 'Container size',
+                  'type' => 'input'
+                ),
+                'input__selectContainer_width_mobile' => array(
+                  'label' => 'Container size',
+                  'type' => 'input'
+                ),
+                'dark__input__select_bg_color' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__input__select_color' => array(
+                  'label' => 'Text color',
+                  'type' => 'color'
+                ),
+                'dark__input__select_border_color' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'dark__input__selectContainer_color' => array(
+                  'label' => 'Container text color',
+                  'type' => 'color'
+                ),
+                'dark__input__selectContainer_bg_color' => array(
+                  'label' => 'Container background color',
+                  'type' => 'color'
+                )
+              )
+            ),
+            'forms_placeholder' => array(
+              'label' => 'Placeholder',
+              'inputs' => array(
+                'input__placeholder_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'input__placeholder_fontFamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'input__placeholder_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'input__placeholder_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'input__placeholder_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'input__placeholder_textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'dark__input__placeholder_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                )
+              )
+            ),
+            'forms_submit' => array(
+              'label' => 'Submit button',
+              'inputs' => array(
+                'input__submit_bg_color' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'input__submit_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'input__submit_border_color' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'input__submit_bg_color_hover' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'input__submit_color_hover' => array(
+                  'label' => 'Text color',
+                  'type' => 'color'
+                ),
+                'input__submit_border_color_hover' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'input__submit_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'input__submit_borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'input'
+                ),
+                'input__submit_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'input__submit_fontFamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'input__submit_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'input__submit_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'input__submit_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'input__submit_letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'input'
+                ),
+                'input__submit_textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'input__submit_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'input__submit_fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'input__submit_lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'input__submit_letterSpacing_mobile' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'input'
+                ),
+                'dark__input__submit_bg_color' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__input__submit_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__input__submit_border_color' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'dark__input__submit_bg_color_hover' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__input__submit_color_hover' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__input__submit_border_color_hover' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
+            ),
+            'forms_reset' => array(
+              'label' => 'Reset button',
+              'inputs' => array(
+                'input__reset_bg_color' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'input__reset_color' => array(
+                  'label' => 'Text color',
+                  'type' => 'color'
+                ),
+                'input__reset_border_color' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'input__reset_bg_color_hover' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'input__reset_color_hover' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'input__reset_border_color_hover' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'input__reset_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'input__reset_borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'input'
+                ),
+                'input__reset_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'input__reset_fontFamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'input__reset_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'input__reset_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'input__reset_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'input__reset_letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'input'
+                ),
+                'input__reset_textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'input__reset_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'input__reset_fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'input__reset_lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'input__reset_letterSpacing_mobile' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'input'
+                ),
+                'dark__input__reset_bg_color' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__input__reset_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__input__reset_border_color' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'dark__input__reset_bg_color_hover' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__input__reset_color_hover' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__input__reset_border_color_hover' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
+            )
+          )
+        ),
+        'search_form' => array(
+          'label' => 'Search form',
+          'sections' => array(
+            'search_form_settings' => array(
+              'label' => 'Settings',
+              'inputs' => array()
+            ),
+            'search_form_input' => array(
+              'label' => 'Input',
+              'inputs' => array(
+                'searchForm__bg_color' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'searchForm__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'searchForm__border_color' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'searchForm__border_width' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'searchForm__borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'input'
+                ),
+                'searchForm__margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'searchForm__padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'searchForm__fontFamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'searchForm__fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'searchForm__lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'searchForm__fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'searchForm__margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'searchForm__padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'searchForm__fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'searchForm__lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'dark__searchForm__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__searchForm__bg_color' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__searchForm__border_color' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
+            ),
+            'search_form_placeholder' => array(
+              'label' => 'Placeholder',
+              'inputs' => array(
+                'searchForm__placeholder_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'searchForm__placeholder_fontFamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'searchForm__placeholder_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'searchForm__placeholder_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'searchForm__placeholder_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'searchForm__placeholder_textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'dark__searchForm__placeholder_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                )
+              )
+            ),
+            'search_form_button' => array(
+              'label' => 'Button',
+              'inputs' => array(
+                'searchForm__submit_bg_color' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'searchForm__submit_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'searchForm__submit_border_color' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'searchForm__submit_bg_color_hover' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'searchForm__submit_color_hover' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'searchForm__submit_border_color_hover' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'searchForm__submit_borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'input'
+                ),
+                'searchForm__submit_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'searchForm__submit_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'searchForm__submit_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'searchForm__submit_fontFamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'searchForm__submit_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'searchForm__submit_letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'input'
+                ),
+                'searchForm__submit_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'searchForm__submit_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'searchForm__submit_textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'searchForm__submit_fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'searchForm__submit_lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'searchForm__submit_letterSpacing_mobile' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'input'
+                ),
+                'searchForm__submit_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'searchForm__submit_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'dark__searchForm__submit_bg_color' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__searchForm__submit_color' => array(
+                  'label' => 'Text color',
+                  'type' => 'color'
+                ),
+                'dark__searchForm__submit_border_color' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'dark__searchForm__submit_bg_color_hover' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__searchForm__submit_border_color_hover' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'dark__searchForm__submit_color_hover' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                )
+              )
+            )
+          )
+        ),
+        'search_results' => array(
+          'label' => 'Search results',
+          'sections' => array(
+            'search_results_settings' => array(
+              'label' => 'Settings',
+              'inputs' => array(
+                'search__marginTop' => array(
+                  'label' => 'Margin top',
+                  'type' => 'input'
+                ),
+                'search__marginBottom' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'input'
+                ),
+                'search__paddingTop' => array(
+                  'label' => 'Padding top',
+                  'type' => 'input'
+                ),
+                'search__paddingBottom' => array(
+                  'label' => 'Padding bottom',
+                  'type' => 'input'
+                ),
+                'search__marginTop_mobile' => array(
+                  'label' => 'Margin top',
+                  'type' => 'input'
+                ),
+                'search__marginBottom_mobile' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'input'
+                ),
+                'search__paddingTop_mobile' => array(
+                  'label' => 'Padding top',
+                  'type' => 'input'
+                ),
+                'search__paddingBottom_mobile' => array(
+                  'label' => 'Padding bottom',
+                  'type' => 'input'
+                )
+              )
+            ),
+            'search_results_item' => array(
+              'label' => 'Item',
+              'inputs' => array(
+                'search__article_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'search__article_border' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'search__article_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'search__article_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'search__article_flexDirection' => array(
+                  'label' => 'Direction',
+                  'type' => 'select'
+                ),
+                'search__article_flexGap' => array(
+                  'label' => 'Gap',
+                  'type' => 'input'
+                ),
+                'search__article_flexDivWidth' => array(
+                  'label' => 'Excerpt width',
+                  'type' => 'input'
+                ),
+                'search__article_flexMediaWidth' => array(
+                  'label' => 'Media width',
+                  'type' => 'input'
+                ),
+                'search__article_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'search__article_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'search__article_flexDirection_mobile' => array(
+                  'label' => 'Direction',
+                  'type' => 'select'
+                ),
+                'search__article_flexGap_mobile' => array(
+                  'label' => 'Gap',
+                  'type' => 'input'
+                ),
+                'search__article_flexDivWidth_mobile' => array(
+                  'label' => 'Excerpt width',
+                  'type' => 'input'
+                ),
+                'search__article_flexMediaWidth_mobile' => array(
+                  'label' => 'Media width',
+                  'type' => 'input'
+                )
+              )
+            ),
+            'search_results_item_title' => array(
+              'label' => 'Item title',
+              'inputs' => array(
+                'search__article_title_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'search__article_title_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'search__article_title_fontFamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'search__article_title_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'search__article_title_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'search__article_title_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'search__article_title_textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'search__article_title_fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'search__article_title_fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'search__article_title_lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'search__article_title_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'search__article_title_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                )
+              )
+            ),
+            'search_results_pagination' => array(
+              'label' => 'Pagination',
+              'inputs' => array(
+                'search__pagination_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                )
+              )
             )
           )
         ),
         'blog' => array(
           'label' => 'Blog & Archive',
-          'inputs' => array(
-            'blog__marginTop' => array(
-              'label' => 'Margin top',
-              'type' => 'input'
-            ),
-            'blog__marginBottom' => array(
-              'label' => 'Margin bottom',
-              'type' => 'input'
-            ),
-            'blog__paddingTop' => array(
-              'label' => 'Padding top',
-              'type' => 'input'
-            ),
-            'blog__paddingBottom' => array(
-              'label' => 'Padding bottom',
-              'type' => 'input'
-            ),
-            'blog__marginTop_mobile' => array(
-              'label' => 'Margin top',
-              'type' => 'input'
-            ),
-            'blog__marginBottom_mobile' => array(
-              'label' => 'Margin bottom',
-              'type' => 'input'
-            ),
-            'blog__paddingTop_mobile' => array(
-              'label' => 'Padding top',
-              'type' => 'input'
-            ),
-            'blog__paddingBottom_mobile' => array(
-              'label' => 'Padding bottom',
-              'type' => 'input'
-            ),
-            'blog__pagination_margin' => array(
-              'label' => 'Space around pagination',
-              'type' => 'input'
-            ),
-            'blog__article_flexDirection' => array(
-              'label' => 'Article direction',
-              'type' => 'select'
-            ),
-            'blog__article_flexGap' => array(
-              'label' => 'Article gap',
-              'type' => 'input'
-            ),
-            'blog__article_flexDivWidth' => array(
-              'label' => 'Article excerpt width',
-              'type' => 'input'
-            ),
-            'blog__article_flexMediaWidth' => array(
-              'label' => 'Article media width',
-              'type' => 'input'
-            ),
-            'blog__article_flexDirection_mobile' => array(
-              'label' => 'Article direction',
-              'type' => 'select'
-            ),
-            'blog__article_flexGap_mobile' => array(
-              'label' => 'Article gap',
-              'type' => 'input'
-            ),
-            'blog__article_flexDivWidth_mobile' => array(
-              'label' => 'Article excerpt width',
-              'type' => 'input'
-            ),
-            'blog__article_flexMediaWidth_mobile' => array(
-              'label' => 'Article media width',
-              'type' => 'input'
-            ),
-            'blog__article_margin' => array(
-              'label' => 'Article margin',
-              'type' => 'input'
-            ),
-            'blog__article_padding' => array(
-              'label' => 'Article padding',
-              'type' => 'input'
-            ),
-            'blog__article_border' => array(
-              'label' => 'Article border width',
-              'type' => 'input'
-            ),
-            'blog__article_borderColor' => array(
-              'label' => 'Article border color',
-              'type' => 'color'
-            ),
-            'blog__article_margin_mobile' => array(
-              'label' => 'Article margin',
-              'type' => 'input'
-            ),
-            'blog__article_padding_mobile' => array(
-              'label' => 'Article padding',
-              'type' => 'input'
-            ),
-            'blog__article_title_margin' => array(
-              'label' => 'Article title margin',
-              'type' => 'input'
-            ),
-            'blog__article_title_padding' => array(
-              'label' => 'Article title padding',
-              'type' => 'input'
-            ),
-            'blog__article_title_fontFamily' => array(
-              'label' => 'Article title font family',
-              'type' => 'input'
-            ),
-            'blog__article_title_fontSize' => array(
-              'label' => 'Article title font size',
-              'type' => 'input'
-            ),
-            'blog__article_title_lineHeight' => array(
-              'label' => 'Article title line height',
-              'type' => 'input'
-            ),
-            'blog__article_title_fontWeight' => array(
-              'label' => 'Article title font weight',
-              'type' => 'select'
-            ),
-            'blog__article_title_textTransform' => array(
-              'label' => 'Article title text transform',
-              'type' => 'select'
-            ),
-            'blog__article_title_fontStyle' => array(
-              'label' => 'Article title font style',
-              'type' => 'select'
-            ),
-            'blog__article_title_fontSize_mobile' => array(
-              'label' => 'Article title font size',
-              'type' => 'input'
-            ),
-            'blog__article_title_lineHeight_mobile' => array(
-              'label' => 'Article title line height',
-              'type' => 'input'
-            ),
-            'blog__article_title_margin_mobile' => array(
-              'label' => 'Article title margin',
-              'type' => 'input'
-            ),
-            'blog__article_title_padding_mobile' => array(
-              'label' => 'Article title padding',
-              'type' => 'input'
-            )
-          )
-        ),
-        'searchResults' => array(
-          'label' => 'Search results',
-          'inputs' => array(
-            'search__marginTop' => array(
-              'label' => 'Margin top',
-              'type' => 'input'
-            ),
-            'search__marginBottom' => array(
-              'label' => 'Margin bottom',
-              'type' => 'input'
-            ),
-            'search__paddingTop' => array(
-              'label' => 'Padding top',
-              'type' => 'input'
-            ),
-            'search__paddingBottom' => array(
-              'label' => 'Padding bottom',
-              'type' => 'input'
-            ),
-            'search__marginTop_mobile' => array(
-              'label' => 'Margin top',
-              'type' => 'input'
-            ),
-            'search__marginBottom_mobile' => array(
-              'label' => 'Margin bottom',
-              'type' => 'input'
-            ),
-            'search__paddingTop_mobile' => array(
-              'label' => 'Padding top',
-              'type' => 'input'
-            ),
-            'search__paddingBottom_mobile' => array(
-              'label' => 'Padding bottom',
-              'type' => 'input'
-            ),
-            'search__pagination_margin' => array(
-              'label' => 'Space around pagination',
-              'type' => 'input'
-            ),
-            'search__article_flexDirection' => array(
-              'label' => 'Article direction',
-              'type' => 'select'
-            ),
-            'search__article_flexGap' => array(
-              'label' => 'Article gap',
-              'type' => 'input'
-            ),
-            'search__article_flexDivWidth' => array(
-              'label' => 'Article excerpt width',
-              'type' => 'input'
-            ),
-            'search__article_flexMediaWidth' => array(
-              'label' => 'Article media width',
-              'type' => 'input'
-            ),
-            'search__article_flexDirection_mobile' => array(
-              'label' => 'Article direction',
-              'type' => 'select'
-            ),
-            'search__article_flexGap_mobile' => array(
-              'label' => 'Article gap',
-              'type' => 'input'
-            ),
-            'search__article_flexDivWidth_mobile' => array(
-              'label' => 'Article excerpt width',
-              'type' => 'input'
-            ),
-            'search__article_flexMediaWidth_mobile' => array(
-              'label' => 'Article media width',
-              'type' => 'input'
-            ),
-            'search__article_margin' => array(
-              'label' => 'Article margin',
-              'type' => 'input'
-            ),
-            'search__article_padding' => array(
-              'label' => 'Article padding',
-              'type' => 'input'
-            ),
-            'search__article_border' => array(
-              'label' => 'Article border width',
-              'type' => 'input'
-            ),
-            'search__article_borderColor' => array(
-              'label' => 'Article border color',
-              'type' => 'color'
-            ),
-            'search__article_margin_mobile' => array(
-              'label' => 'Article margin',
-              'type' => 'input'
-            ),
-            'search__article_padding_mobile' => array(
-              'label' => 'Article padding',
-              'type' => 'input'
-            ),
-            'search__article_title_margin' => array(
-              'label' => 'Article title margin',
-              'type' => 'input'
-            ),
-            'search__article_title_padding' => array(
-              'label' => 'Article title padding',
-              'type' => 'input'
-            ),
-            'search__article_title_fontFamily' => array(
-              'label' => 'Article title font family',
-              'type' => 'input'
-            ),
-            'search__article_title_fontSize' => array(
-              'label' => 'Article title font size',
-              'type' => 'input'
-            ),
-            'search__article_title_lineHeight' => array(
-              'label' => 'Article title line height',
-              'type' => 'input'
-            ),
-            'search__article_title_fontWeight' => array(
-              'label' => 'Article title font weight',
-              'type' => 'select'
-            ),
-            'search__article_title_textTransform' => array(
-              'label' => 'Article title text transform',
-              'type' => 'select'
-            ),
-            'search__article_title_fontStyle' => array(
-              'label' => 'Article title font style',
-              'type' => 'select'
-            ),
-            'search__article_title_fontSize_mobile' => array(
-              'label' => 'Article title font size',
-              'type' => 'input'
-            ),
-            'search__article_title_lineHeight_mobile' => array(
-              'label' => 'Article title line height',
-              'type' => 'input'
-            ),
-            'search__article_title_margin_mobile' => array(
-              'label' => 'Article title margin',
-              'type' => 'input'
-            ),
-            'search__article_title_padding_mobile' => array(
-              'label' => 'Article title padding',
-              'type' => 'input'
-            )
-          )
-        ),
-        'postTitle' => array(
-          'label' => 'Post title',
-          'inputs' => array(
-            'postTitle__color' => array(
-              'label' => 'Color',
-              'type' => 'color'
-            ),
-            'postTitle__bg' => array(
-              'label' => 'Background color',
-              'type' => 'color'
-            ),
-            'postTitle__borderColor' => array(
-              'label' => 'Border color',
-              'type' => 'color'
-            ),
-            'postTitle__borderStyle' => array(
-              'label' => 'Border style',
-              'type' => 'select'
-            ),
-            'postTitle__borderWidth' => array(
-              'label' => 'Border width',
-              'type' => 'input'
-            ),
-            'postTitle__fontFamily' => array(
-              'label' => 'Title font family',
-              'type' => 'input'
-            ),
-            'postTitle__fontSize' => array(
-              'label' => 'Font size',
-              'type' => 'input'
-            ),
-            'postTitle__lineHeight' => array(
-              'label' => 'Line height',
-              'type' => 'input'
-            ),
-            'postTitle__padding' => array(
-              'label' => 'Padding',
-              'type' => 'input'
-            ),
-            'postTitle__margin' => array(
-              'label' => 'Margin',
-              'type' => 'input'
-            ),
-            'postTitle__fontWeight' => array(
-              'label' => 'Font weight',
-              'type' => 'select'
-            ),
-            'postTitle__textTransform' => array(
-              'label' => 'Text transform',
-              'type' => 'select'
-            ),
-            'postTitle__fontStyle' => array(
-              'label' => 'Font style',
-              'type' => 'select'
-            ),
-            'postTitle__letterSpacing' => array(
-              'label' => 'Letter spacing',
-              'type' => 'input'
-            ),
-            'postTitle__fontSize_mobile' => array(
-              'label' => 'Font size',
-              'type' => 'input'
-            ),
-            'postTitle__lineHeight_mobile' => array(
-              'label' => 'Line height',
-              'type' => 'input'
-            ),
-            'postTitle__padding_mobile' => array(
-              'label' => 'Padding',
-              'type' => 'input'
-            ),
-            'postTitle__margin_mobile' => array(
-              'label' => 'Margin',
-              'type' => 'input'
-            )
-          )
-        ),
-        'titleOne' => array(
-          'label' => 'Title 1',
-          'inputs' => array(
-            'titleOne__color' => array(
-              'label' => 'Color',
-              'type' => 'color'
-            ),
-            'titleOne__bg' => array(
-              'label' => 'Background color',
-              'type' => 'color'
-            ),
-            'titleOne__borderColor' => array(
-              'label' => 'Border color',
-              'type' => 'color'
-            ),
-            'titleOne__borderStyle' => array(
-              'label' => 'Border style',
-              'type' => 'select'
-            ),
-            'titleOne__borderWidth' => array(
-              'label' => 'Border width',
-              'type' => 'input'
-            ),
-            'titleOne__fontFamily' => array(
-              'label' => 'Title font family',
-              'type' => 'input'
-            ),
-            'titleOne__fontSize' => array(
-              'label' => 'Font size',
-              'type' => 'input'
-            ),
-            'titleOne__lineHeight' => array(
-              'label' => 'Line height',
-              'type' => 'input'
-            ),
-            'titleOne__padding' => array(
-              'label' => 'Padding',
-              'type' => 'input'
-            ),
-            'titleOne__marginTop' => array(
-              'label' => 'Margin top',
-              'type' => 'input'
-            ),
-            'titleOne__marginBottom' => array(
-              'label' => 'Margin bottom',
-              'type' => 'input'
-            ),
-            'titleOne__fontWeight' => array(
-              'label' => 'Font weight',
-              'type' => 'select'
-            ),
-            'titleOne__textTransform' => array(
-              'label' => 'Text transform',
-              'type' => 'select'
-            ),
-            'titleOne__fontStyle' => array(
-              'label' => 'Font style',
-              'type' => 'select'
-            ),
-            'titleOne__letterSpacing' => array(
-              'label' => 'Letter spacing',
-              'type' => 'input'
-            ),
-            'titleOne__fontSize_mobile' => array(
-              'label' => 'Font size',
-              'type' => 'input'
-            ),
-            'titleOne__lineHeight_mobile' => array(
-              'label' => 'Line height',
-              'type' => 'input'
-            ),
-            'titleOne__padding_mobile' => array(
-              'label' => 'Padding',
-              'type' => 'input'
-            ),
-            'titleOne__marginTop_mobile' => array(
-              'label' => 'Margin top',
-              'type' => 'input'
-            ),
-            'titleOne__marginBottom_mobile' => array(
-              'label' => 'Margin bottom',
-              'type' => 'input'
-            )
-          )
-        ),
-        'titleTwo' => array(
-          'label' => 'Title 2',
-          'inputs' => array(
-            'titleTwo__color' => array(
-              'label' => 'Color',
-              'type' => 'color'
-            ),
-            'titleTwo__bg' => array(
-              'label' => 'Background color',
-              'type' => 'color'
-            ),
-            'titleTwo__borderColor' => array(
-              'label' => 'Border color',
-              'type' => 'color'
-            ),
-            'titleTwo__borderStyle' => array(
-              'label' => 'Border style',
-              'type' => 'select'
-            ),
-            'titleTwo__borderWidth' => array(
-              'label' => 'Border width',
-              'type' => 'input'
-            ),
-            'titleTwo__fontFamily' => array(
-              'label' => 'Title font family',
-              'type' => 'input'
-            ),
-            'titleTwo__fontSize' => array(
-              'label' => 'Font size',
-              'type' => 'input'
-            ),
-            'titleTwo__lineHeight' => array(
-              'label' => 'Line height',
-              'type' => 'input'
-            ),
-            'titleTwo__padding' => array(
-              'label' => 'Padding',
-              'type' => 'input'
-            ),
-            'titleTwo__marginTop' => array(
-              'label' => 'Margin top',
-              'type' => 'input'
-            ),
-            'titleTwo__marginBottom' => array(
-              'label' => 'Margin bottom',
-              'type' => 'input'
-            ),
-            'titleTwo__fontWeight' => array(
-              'label' => 'Font weight',
-              'type' => 'select'
-            ),
-            'titleTwo__textTransform' => array(
-              'label' => 'Text transform',
-              'type' => 'select'
-            ),
-            'titleTwo__fontStyle' => array(
-              'label' => 'Font style',
-              'type' => 'select'
-            ),
-            'titleTwo__letterSpacing' => array(
-              'label' => 'Letter spacing',
-              'type' => 'input'
-            ),
-            'titleTwo__fontSize_mobile' => array(
-              'label' => 'Font size',
-              'type' => 'input'
-            ),
-            'titleTwo__lineHeight_mobile' => array(
-              'label' => 'Line height',
-              'type' => 'input'
-            ),
-            'titleTwo__padding_mobile' => array(
-              'label' => 'Padding',
-              'type' => 'input'
-            ),
-            'titleTwo__marginTop_mobile' => array(
-              'label' => 'Margin top',
-              'type' => 'input'
-            ),
-            'titleTwo__marginBottom_mobile' => array(
-              'label' => 'Margin bottom',
-              'type' => 'input'
-            )
-          )
-        ),
-        'titleThree' => array(
-          'label' => 'Title 3',
-          'inputs' => array(
-            'titleThree__color' => array(
-              'label' => 'Color',
-              'type' => 'color'
-            ),
-            'titleThree__bg' => array(
-              'label' => 'Background color',
-              'type' => 'color'
-            ),
-            'titleThree__borderColor' => array(
-              'label' => 'Border color',
-              'type' => 'color'
-            ),
-            'titleThree__borderStyle' => array(
-              'label' => 'Border style',
-              'type' => 'select'
-            ),
-            'titleThree__borderWidth' => array(
-              'label' => 'Border width',
-              'type' => 'input'
-            ),
-            'titleThree__fontFamily' => array(
-              'label' => 'Title font family',
-              'type' => 'input'
-            ),
-            'titleThree__fontSize' => array(
-              'label' => 'Font size',
-              'type' => 'input'
-            ),
-            'titleThree__lineHeight' => array(
-              'label' => 'Line height',
-              'type' => 'input'
-            ),
-            'titleThree__padding' => array(
-              'label' => 'Padding',
-              'type' => 'input'
-            ),
-            'titleThree__marginTop' => array(
-              'label' => 'Margin top',
-              'type' => 'input'
-            ),
-            'titleThree__marginBottom' => array(
-              'label' => 'Margin bottom',
-              'type' => 'input'
-            ),
-            'titleThree__fontWeight' => array(
-              'label' => 'Font weight',
-              'type' => 'select'
-            ),
-            'titleThree__textTransform' => array(
-              'label' => 'Text transform',
-              'type' => 'select'
-            ),
-            'titleThree__fontStyle' => array(
-              'label' => 'Font style',
-              'type' => 'select'
-            ),
-            'titleThree__letterSpacing' => array(
-              'label' => 'Letter spacing',
-              'type' => 'input'
-            ),
-            'titleThree__fontSize_mobile' => array(
-              'label' => 'Font size',
-              'type' => 'input'
-            ),
-            'titleThree__lineHeight_mobile' => array(
-              'label' => 'Line height',
-              'type' => 'input'
-            ),
-            'titleThree__padding_mobile' => array(
-              'label' => 'Padding',
-              'type' => 'input'
-            ),
-            'titleThree__marginTop_mobile' => array(
-              'label' => 'Margin top',
-              'type' => 'input'
-            ),
-            'titleThree__marginBottom_mobile' => array(
-              'label' => 'Margin bottom',
-              'type' => 'input'
-            )
-          )
-        ),
-        'titleFour' => array(
-          'label' => 'Title 4',
-          'inputs' => array(
-            'titleFour__color' => array(
-              'label' => 'Color',
-              'type' => 'color'
-            ),
-            'titleFour__bg' => array(
-              'label' => 'Background color',
-              'type' => 'color'
-            ),
-            'titleFour__borderColor' => array(
-              'label' => 'Border color',
-              'type' => 'color'
-            ),
-            'titleFour__borderStyle' => array(
-              'label' => 'Border style',
-              'type' => 'select'
-            ),
-            'titleFour__borderWidth' => array(
-              'label' => 'Border width',
-              'type' => 'input'
-            ),
-            'titleFour__fontFamily' => array(
-              'label' => 'Title font family',
-              'type' => 'input'
-            ),
-            'titleFour__fontSize' => array(
-              'label' => 'Font size',
-              'type' => 'input'
-            ),
-            'titleFour__lineHeight' => array(
-              'label' => 'Line height',
-              'type' => 'input'
-            ),
-            'titleFour__padding' => array(
-              'label' => 'Padding',
-              'type' => 'input'
-            ),
-            'titleFour__marginTop' => array(
-              'label' => 'Margin top',
-              'type' => 'input'
-            ),
-            'titleFour__marginBottom' => array(
-              'label' => 'Margin bottom',
-              'type' => 'input'
-            ),
-            'titleFour__fontWeight' => array(
-              'label' => 'Font weight',
-              'type' => 'select'
-            ),
-            'titleFour__textTransform' => array(
-              'label' => 'Text transform',
-              'type' => 'select'
-            ),
-            'titleFour__fontStyle' => array(
-              'label' => 'Font style',
-              'type' => 'select'
-            ),
-            'titleFour__letterSpacing' => array(
-              'label' => 'Letter spacing',
-              'type' => 'input'
-            ),
-            'titleFour__fontSize_mobile' => array(
-              'label' => 'Font size',
-              'type' => 'input'
-            ),
-            'titleFour__lineHeight_mobile' => array(
-              'label' => 'Line height',
-              'type' => 'input'
-            ),
-            'titleFour__padding_mobile' => array(
-              'label' => 'Padding',
-              'type' => 'input'
-            ),
-            'titleFour__marginTop_mobile' => array(
-              'label' => 'Margin top',
-              'type' => 'input'
-            ),
-            'titleFour__marginBottom_mobile' => array(
-              'label' => 'Margin bottom',
-              'type' => 'input'
-            )
-          )
-        ),
-        'titleFive' => array(
-          'label' => 'Title 5',
-          'inputs' => array(
-            'titleFive__color' => array(
-              'label' => 'Color',
-              'type' => 'color'
-            ),
-            'titleFive__bg' => array(
-              'label' => 'Background color',
-              'type' => 'color'
-            ),
-            'titleFive__borderColor' => array(
-              'label' => 'Border color',
-              'type' => 'color'
-            ),
-            'titleFive__borderStyle' => array(
-              'label' => 'Border style',
-              'type' => 'select'
-            ),
-            'titleFive__borderWidth' => array(
-              'label' => 'Border width',
-              'type' => 'input'
-            ),
-            'titleFive__fontFamily' => array(
-              'label' => 'Title font family',
-              'type' => 'input'
-            ),
-            'titleFive__fontSize' => array(
-              'label' => 'Font size',
-              'type' => 'input'
-            ),
-            'titleFive__lineHeight' => array(
-              'label' => 'Line height',
-              'type' => 'input'
-            ),
-            'titleFive__padding' => array(
-              'label' => 'Padding',
-              'type' => 'input'
-            ),
-            'titleFive__marginTop' => array(
-              'label' => 'Margin top',
-              'type' => 'input'
-            ),
-            'titleFive__marginBottom' => array(
-              'label' => 'Margin bottom',
-              'type' => 'input'
-            ),
-            'titleFive__fontWeight' => array(
-              'label' => 'Font weight',
-              'type' => 'select'
-            ),
-            'titleFive__textTransform' => array(
-              'label' => 'Text transform',
-              'type' => 'select'
-            ),
-            'titleFive__fontStyle' => array(
-              'label' => 'Font style',
-              'type' => 'select'
-            ),
-            'titleFive__letterSpacing' => array(
-              'label' => 'Letter spacing',
-              'type' => 'input'
-            ),
-            'titleFive__fontSize_mobile' => array(
-              'label' => 'Font size',
-              'type' => 'input'
-            ),
-            'titleFive__lineHeight_mobile' => array(
-              'label' => 'Line height',
-              'type' => 'input'
-            ),
-            'titleFive__padding_mobile' => array(
-              'label' => 'Padding',
-              'type' => 'input'
-            ),
-            'titleFive__marginTop_mobile' => array(
-              'label' => 'Margin top',
-              'type' => 'input'
-            ),
-            'titleFive__marginBottom_mobile' => array(
-              'label' => 'Margin bottom',
-              'type' => 'input'
-            )
-          )
-        ),
-        'leadText' => array(
-          'label' => 'Lead Text',
-          'inputs' => array(
-            'leadText__color' => array(
-              'label' => 'Color',
-              'type' => 'color'
-            ),
-            'leadText__bg' => array(
-              'label' => 'Background color',
-              'type' => 'color'
-            ),
-            'dark__leadText__color' => array(
-              'label' => 'Color',
-              'type' => 'color'
-            ),
-            'dark__leadText__bg' => array(
-              'label' => 'Background color',
-              'type' => 'color'
-            ),
-            'leadText__fontFamily' => array(
-              'label' => 'Lead font family',
-              'type' => 'input'
-            ),
-            'leadText__fontSize' => array(
-              'label' => 'Lead font size',
-              'type' => 'input'
-            ),
-            'leadText__lineHeight' => array(
-              'label' => 'Line height',
-              'type' => 'input'
-            ),
-            'leadText__padding' => array(
-              'label' => 'Padding',
-              'type' => 'input'
-            ),
-            'leadText__fontWeight' => array(
-              'label' => 'Font weight',
-              'type' => 'select'
-            ),
-            'leadText__textTransform' => array(
-              'label' => 'Text transform',
-              'type' => 'select'
-            ),
-            'leadText__fontStyle' => array(
-              'label' => 'Font style',
-              'type' => 'select'
-            ),
-            'leadText__letterSpacing' => array(
-              'label' => 'Letter spacing',
-              'type' => 'input'
-            ),
-            'leadText__fontSize_mobile' => array(
-              'label' => 'Font size',
-              'type' => 'input'
-            ),
-            'leadText__lineHeight_mobile' => array(
-              'label' => 'Line height',
-              'type' => 'input'
-            ),
-            'leadText__padding_mobile' => array(
-              'label' => 'Padding',
-              'type' => 'input'
-            )
-          )
-        ),
-        'socialmedia' => array(
-          'label' => 'Social media icons',
-          'inputs' => array(
-            'sm__icon_width' => array(
-              'label' => 'Icon width',
-              'type' => 'input'
-            ),
-            'sm__icon_space' => array(
-              'label' => 'Space between icons',
-              'type' => 'input'
-            ),
-            'sm__icon_color' => array(
-              'label' => 'Icon color',
-              'type' => 'color'
-            ),
-            'sm__icon_color_hover' => array(
-              'label' => 'Icon color',
-              'type' => 'color'
+          'sections' => array(
+            'blog_settings' => array(
+              'label' => 'Settings',
+              'inputs' => array(
+                'blog__marginTop' => array(
+                  'label' => 'Margin top',
+                  'type' => 'input'
+                ),
+                'blog__marginBottom' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'input'
+                ),
+                'blog__paddingTop' => array(
+                  'label' => 'Padding top',
+                  'type' => 'input'
+                ),
+                'blog__paddingBottom' => array(
+                  'label' => 'Padding bottom',
+                  'type' => 'input'
+                ),
+                'blog__marginTop_mobile' => array(
+                  'label' => 'Margin top',
+                  'type' => 'input'
+                ),
+                'blog__marginBottom_mobile' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'input'
+                ),
+                'blog__paddingTop_mobile' => array(
+                  'label' => 'Padding top',
+                  'type' => 'input'
+                ),
+                'blog__paddingBottom_mobile' => array(
+                  'label' => 'Padding bottom',
+                  'type' => 'input'
+                )
+              )
+            ),
+            'blog_item' => array(
+              'label' => 'Item',
+              'inputs' => array(
+                'blog__article_borderColor' => array(
+                  'label' => 'Article border color',
+                  'type' => 'color'
+                ),
+                'blog__article_border' => array(
+                  'label' => 'Article border width',
+                  'type' => 'input'
+                ),
+                'blog__article_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'blog__article_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'blog__article_flexDirection' => array(
+                  'label' => 'Direction',
+                  'type' => 'select'
+                ),
+                'blog__article_flexGap' => array(
+                  'label' => 'Gap',
+                  'type' => 'input'
+                ),
+                'blog__article_flexDivWidth' => array(
+                  'label' => 'Excerpt width',
+                  'type' => 'input'
+                ),
+                'blog__article_flexMediaWidth' => array(
+                  'label' => 'Media width',
+                  'type' => 'input'
+                ),
+                'blog__article_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'blog__article_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'blog__article_flexDirection_mobile' => array(
+                  'label' => 'Direction',
+                  'type' => 'select'
+                ),
+                'blog__article_flexGap_mobile' => array(
+                  'label' => 'Gap',
+                  'type' => 'input'
+                ),
+                'blog__article_flexDivWidth_mobile' => array(
+                  'label' => 'Excerpt width',
+                  'type' => 'input'
+                ),
+                'blog__article_flexMediaWidth_mobile' => array(
+                  'label' => 'Article media width',
+                  'type' => 'input'
+                )
+              )
+            ),
+            'blog_item_title' => array(
+              'label' => 'Item title',
+              'inputs' => array(
+                'blog__article_title_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'blog__article_title_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'blog__article_title_fontFamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'blog__article_title_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'blog__article_title_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'blog__article_title_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'blog__article_title_textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'blog__article_title_fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'blog__article_title_fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'blog__article_title_lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'blog__article_title_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'blog__article_title_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                )
+              )
+            ),
+            'blog_pagination' => array(
+              'label' => 'Pagination',
+              'inputs' => array(
+                'blog__pagination_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                )
+              )
             )
           )
         ),
         'page404' => array(
           'label' => '404 Page',
-          'inputs' => array(
-            'error__padding' => array(
-              'label' => 'Article padding',
-              'type' => 'input'
+          'sections' => array(
+            'page404_settings' => array(
+              'label' => 'Settings',
+              'inputs' => array(
+                'error__margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'error__padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'error__textAlign' => array(
+                  'label' => 'Text align',
+                  'type' => 'input'
+                )
+              )
             ),
-            'error__margin' => array(
-              'label' => 'Article margin',
-              'type' => 'input'
+            'page404_title' => array(
+              'label' => 'Title',
+              'inputs' => array(
+                'error__title_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'error__title_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'error__title_fontFamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'error__title_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'error__title_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'error__title_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'error__title_textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'error__title_fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'error__title_letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'input'
+                ),
+                'error__title_fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'error__title_lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'error__title_margin_mobile' => array(
+                  'label' => 'Title margin',
+                  'type' => 'input'
+                ),
+                'error__title_padding_mobile' => array(
+                  'label' => 'Title padding',
+                  'type' => 'input'
+                )
+              )
+            )
+          )
+        ),
+        'tmp_lightbox' => array(
+          'label' => 'Lightbox',
+          'sections' => array(
+            'theme_popup_box' => array(
+              'label' => 'Box',
+              'inputs' => array(
+                'popup__backgoundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'popup__container_backgroundColor' => array(
+                  'label' => 'Container background color',
+                  'type' => 'color'
+                ),
+                'popup__width' => array(
+                  'label' => 'Lightbox width',
+                  'type' => 'input',
+                  'default' => '800px'
+                ),
+                'popup__space' => array(
+                  'label' => 'Container padding',
+                  'type' => 'input',
+                  'default' => '40px'
+                ),
+                'popup_prev_visible' => array(
+                  'label' => 'Preview visibility',
+                  'type' => 'input',
+                  'default' => '30px'
+                )
+              )
             ),
-            'error__textAlign' => array(
-              'label' => 'Text align',
-              'type' => 'input'
+            'theme_popup_arrow' => array(
+              'label' => 'Arrow navigation',
+              'inputs' => array(
+                'popup__arrow_backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'popup__arrow_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'popup__arrow_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'popup__arrow_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'popup__arrow_opacity' => array(
+                  'label' => 'Opacity',
+                  'type' => 'input'
+                ),
+                'popup__arrow_height' => array(
+                  'label' => 'Height',
+                  'type' => 'input'
+                ),
+                'popup__arrow_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                )
+              )
             ),
-            'error__title_fontFamily' => array(
-              'label' => 'Title font family',
-              'type' => 'input'
+            'theme_popup_close' => array(
+              'label' => 'Close button',
+              'inputs' => array(
+                'popup__close_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'popup__close_size' => array(
+                  'label' => 'Size',
+                  'type' => 'input'
+                ),
+                'popup__close_opacity' => array(
+                  'label' => 'Opacity',
+                  'type' => 'input'
+                )
+              )
             ),
-            'error__title_fontSize' => array(
-              'label' => 'Title font size',
-              'type' => 'input'
+            'figcaption' => array(
+              'label' => 'Figcaption',
+              'inputs' => array(
+                'popup__figcaption_backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'popup__figcaption_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'popup__figcaption_display' => array(
+                  'label' => 'Display',
+                  'type' => 'select'
+                ),
+                'popup__figcaption_textAlign' => array(
+                  'label' => 'Text align',
+                  'type' => 'select'
+                ),
+                'popup__figcaption_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'popup__figcaption_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'popup__figcaption_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                )
+              )
             ),
-            'error__title_lineHeight' => array(
-              'label' => 'Title line height',
-              'type' => 'input'
-            ),
-            'error__title_padding' => array(
-              'label' => 'Title padding',
-              'type' => 'input'
-            ),
-            'error__title_margin' => array(
-              'label' => 'Title margin',
-              'type' => 'input'
-            ),
-            'error__title_fontWeight' => array(
-              'label' => 'Title font weight',
-              'type' => 'select'
-            ),
-            'error__title_textTransform' => array(
-              'label' => 'Title text transform',
-              'type' => 'select'
-            ),
-            'error__title_fontStyle' => array(
-              'label' => 'Title font style',
-              'type' => 'select'
-            ),
-            'error__title_letterSpacing' => array(
-              'label' => 'Title letter spacing',
-              'type' => 'input'
-            ),
-            'error__title_fontSize_mobile' => array(
-              'label' => 'Title font size',
-              'type' => 'input'
-            ),
-            'error__title_lineHeight_mobile' => array(
-              'label' => 'Title line height',
-              'type' => 'input'
-            ),
-            'error__title_padding_mobile' => array(
-              'label' => 'Title padding',
-              'type' => 'input'
-            ),
-            'error__title_margin_mobile' => array(
-              'label' => 'Title margin',
-              'type' => 'input'
+            'downloadLink' => array(
+              'label' => 'Download link',
+              'inputs' => array(
+                'popup__downloadLink_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'popup__downloadLink_color_hover' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'popup__downloadLink_display' => array(
+                  'label' => 'Display',
+                  'type' => 'select'
+                ),
+                'popup__downloadLink_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'popup__downloadLink_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'popup__downloadLink_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                )
+              )
             )
           )
         ),
         'consentContainer' => array(
           'label' => 'DSGVO consent container',
-          'inputs' => array(
-            'consentContainer__bg' => array(
-              'label' => 'Background color',
-              'type' => 'color'
+          'sections' => array(
+            'consentContainer_' => array(
+              'label' => 'Container',
+              'inputs' => array(
+                'consentContainer__bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'consentContainer__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'consentContainer__borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'consentContainer__borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'consentContainer__borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'input'
+                ),
+                'consentContainer__padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'consentContainer__fontFamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'consentContainer__fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'consentContainer__lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'consentContainer__fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'consentContainer__textAlign' => array(
+                  'label' => 'Text align',
+                  'type' => 'input'
+                ),
+                'consentContainer__padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'consentContainer__fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'consentContainer__lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                )
+              )
             ),
-            'consentContainer__color' => array(
-              'label' => 'Text color',
-              'type' => 'color'
+            'consentContainer_button' => array(
+              'label' => 'Button',
+              'inputs' => array(
+                'consentContainer__Button_bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'consentContainer__Button_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'consentContainer__Button_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'consentContainer__Button_bg_hover' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'consentContainer__Button_color_hover' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'consentContainer__Button_borderColor_hover' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'consentContainer__Button_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'consentContainer__Button_borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'input'
+                ),
+                'consentContainer__Button_padding' => array(
+                  'label' => 'Button padding',
+                  'type' => 'input'
+                ),
+                'consentContainer__Button_fontFamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'consentContainer__Button_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'consentContainer__Button_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'consentContainer__Button_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'consentContainer__Button_textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'consentContainer__Button_fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'consentContainer__Button_letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'input'
+                ),
+                'consentContainer__Button_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'consentContainer__Button_fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'consentContainer__Button_lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                )
+              )
+            )
+          )
+        ),
+        'tmp_socialmedia' => array(
+          'label' => 'Social media',
+          'sections' => array(
+            'tmp_socialmedia_settings' => array(
+              'label' => 'Settings',
+              'inputs' => array(
+                'sm__icon_space' => array(
+                  'label' => 'Gap',
+                  'type' => 'input'
+                ),
+              )
             ),
-            'consentContainer__borderColor' => array(
-              'label' => 'Border color',
-              'type' => 'color'
-            ),
-            'consentContainer__fontFamily' => array(
-              'label' => 'Font family',
-              'type' => 'input'
-            ),
-            'consentContainer__fontSize' => array(
-              'label' => 'Font size',
-              'type' => 'input'
-            ),
-            'consentContainer__lineHeight' => array(
-              'label' => 'Line height',
-              'type' => 'input'
-            ),
-            'consentContainer__fontWeight' => array(
-              'label' => 'Font weight',
-              'type' => 'select'
-            ),
-            'consentContainer__textAlign' => array(
-              'label' => 'Text align',
-              'type' => 'input'
-            ),
-            'consentContainer__padding' => array(
-              'label' => 'Padding',
-              'type' => 'input'
-            ),
-            'consentContainer__borderWidth' => array(
-              'label' => 'Border width',
-              'type' => 'input'
-            ),
-            'consentContainer__borderRadius' => array(
-              'label' => 'Border radius',
-              'type' => 'input'
-            ),
-            'consentContainer__fontSize_mobile' => array(
-              'label' => 'Font size',
-              'type' => 'input'
-            ),
-            'consentContainer__lineHeight_mobile' => array(
-              'label' => 'Line height',
-              'type' => 'input'
-            ),
-            'consentContainer__padding_mobile' => array(
-              'label' => 'Padding',
-              'type' => 'input'
-            ),
-            'consentContainer__Button_bg' => array(
-              'label' => 'Button background color',
-              'type' => 'color'
-            ),
-            'consentContainer__Button_color' => array(
-              'label' => 'Button text color',
-              'type' => 'color'
-            ),
-            'consentContainer__Button_borderColor' => array(
-              'label' => 'Button border color',
-              'type' => 'color'
-            ),
-            'consentContainer__Button_bg_hover' => array(
-              'label' => 'Button background color',
-              'type' => 'color'
-            ),
-            'consentContainer__Button_color_hover' => array(
-              'label' => 'Button text color',
-              'type' => 'color'
-            ),
-            'consentContainer__Button_borderColor_hover' => array(
-              'label' => 'Button border color',
-              'type' => 'color'
-            ),
-            'consentContainer__Button_fontFamily' => array(
-              'label' => 'Button font family',
-              'type' => 'input'
-            ),
-            'consentContainer__Button_fontSize' => array(
-              'label' => 'Button font size',
-              'type' => 'input'
-            ),
-            'consentContainer__Button_fontWeight' => array(
-              'label' => 'Button font weight',
-              'type' => 'select'
-            ),
-            'consentContainer__Button_lineHeight' => array(
-              'label' => 'Button line height',
-              'type' => 'input'
-            ),
-            'consentContainer__Button_textTransform' => array(
-              'label' => 'Button text transform',
-              'type' => 'select'
-            ),
-            'consentContainer__Button_fontStyle' => array(
-              'label' => 'Button font style',
-              'type' => 'select'
-            ),
-            'consentContainer__Button_letterSpacing' => array(
-              'label' => 'Button letter spacing',
-              'type' => 'input'
-            ),
-            'consentContainer__Button_padding' => array(
-              'label' => 'Button padding',
-              'type' => 'input'
-            ),
-            'consentContainer__Button_borderWidth' => array(
-              'label' => 'Button border width',
-              'type' => 'input'
-            ),
-            'consentContainer__Button_borderRadius' => array(
-              'label' => 'Button border radius',
-              'type' => 'input'
-            ),
-            'consentContainer__Button_fontSize_mobile' => array(
-              'label' => 'Button font size',
-              'type' => 'input'
-            ),
-            'consentContainer__Button_lineHeight_mobile' => array(
-              'label' => 'Button line height',
-              'type' => 'input'
-            ),
-            'consentContainer__Button_padding_mobile' => array(
-              'label' => 'Button padding',
-              'type' => 'input'
+            'tmp_socialmedia_item' => array(
+              'label' => 'Item',
+              'inputs' => array(
+                'sm__icon_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'sm__icon_color_hover' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'sm__icon_width' => array(
+                  'label' => 'Width',
+                  'type' => 'input'
+                ),
+                'dark__sm__icon_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__sm__icon_color_hover' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                )
+              )
             )
           )
         ),
         'scrollToTop' => array(
           'label' => 'Scroll to top',
-          'inputs' => array(
-            'scrollToTop__background' => array(
-              'label' => 'Background color',
-              'type' => 'color'
+          'sections' => array(
+            'scrollToTop_settings' => array(
+              'label' => 'Settings',
+              'inputs' => array(
+                'scrollToTop__background' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'scrollToTop__container_background' => array(
+                  'label' => 'Container background color',
+                  'type' => 'color'
+                ),
+                'scrollToTop__container_paddingTop' => array(
+                  'label' => 'Container padding top',
+                  'type' => 'input'
+                ),
+                'scrollToTop__container_paddingBottom' => array(
+                  'label' => 'Container padding bottom',
+                  'type' => 'input'
+                )
+              )
             ),
-            'scrollToTop__container_background' => array(
-              'label' => 'Container background color',
-              'type' => 'color'
-            ),
-            'scrollToTop__container_paddingTop' => array(
-              'label' => 'Container padding top',
-              'type' => 'input'
-            ),
-            'scrollToTop__container_paddingBottom' => array(
-              'label' => 'Container padding bottom',
-              'type' => 'input'
-            ),
-            'scrollToTop__Button_color' => array(
-              'label' => 'Button color',
-              'type' => 'color'
-            ),
-            'scrollToTop__Button_bg' => array(
-              'label' => 'Button background color',
-              'type' => 'color'
-            ),
-            'scrollToTop__Button_borderColor' => array(
-              'label' => 'Button border color',
-              'type' => 'color'
-            ),
-            'scrollToTop__Button_color_hover' => array(
-              'label' => 'Button color',
-              'type' => 'color'
-            ),
-            'scrollToTop__Button_bg_hover' => array(
-              'label' => 'Button background color',
-              'type' => 'color'
-            ),
-            'scrollToTop__Button_borderColor_hover' => array(
-              'label' => 'Button border color',
-              'type' => 'color'
-            ),
-            'scrollToTop__Button_fontFamily' => array(
-              'label' => 'Button font family',
-              'type' => 'input'
-            ),
-            'scrollToTop__Button_fontSize' => array(
-              'label' => 'Button font size',
-              'type' => 'input'
-            ),
-            'scrollToTop__Button_fontWeight' => array(
-              'label' => 'Button font weight',
-              'type' => 'select'
-            ),
-            'scrollToTop__Button_lineHeight' => array(
-              'label' => 'Button line height',
-              'type' => 'input'
-            ),
-            'scrollToTop__Button_textTransform' => array(
-              'label' => 'Button text transform',
-              'type' => 'select'
-            ),
-            'scrollToTop__Button_fontStyle' => array(
-              'label' => 'Button font style',
-              'type' => 'select'
-            ),
-            'scrollToTop__Button_letterSpacing' => array(
-              'label' => 'Button letter spacing',
-              'type' => 'input'
-            ),
-            'scrollToTop__Button_padding' => array(
-              'label' => 'Button padding',
-              'type' => 'input'
-            ),
-            'scrollToTop__Button_borderWidth' => array(
-              'label' => 'Button border width',
-              'type' => 'input'
-            ),
-            'scrollToTop__Button_borderRadius' => array(
-              'label' => 'Button border radius',
-              'type' => 'input'
+            'scrollToTop_button' => array(
+              'label' => 'Button',
+              'inputs' => array(
+                'scrollToTop__Button_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'scrollToTop__Button_bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'scrollToTop__Button_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'scrollToTop__Button_bg_hover' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'scrollToTop__Button_color_hover' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'scrollToTop__Button_borderColor_hover' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'scrollToTop__Button_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'scrollToTop__Button_borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'input'
+                ),
+                'scrollToTop__Button_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'scrollToTop__Button_fontFamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'scrollToTop__Button_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'scrollToTop__Button_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'scrollToTop__Button_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'scrollToTop__Button_textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'scrollToTop__Button_fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'scrollToTop__Button_letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'input'
+                )
+              )
             )
           )
         )
-      )
+      ),
+      'sections' => array()
     ),
     'gutenberg' => array(
       'label' => 'Gutenberg Blocks',
-      'sections' => array(
-        'gutenberg_group' => array(
-          'label' => 'Group',
-          'inputs' => array(
-            'block__group_hasBackground_paddingTop' => array(
-              'label' => 'Padding top',
-              'type' => 'input'
+      'panels' => array(
+        'gutenberg_title' => array(
+          'label' => 'Title',
+          'sections' => array(
+            'gutenberg_title_postTitle' => array(
+              'label' => 'Post title',
+              'inputs' => array(
+                'postTitle__bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'postTitle__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'postTitle__borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'postTitle__borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'postTitle__borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'postTitle__margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'postTitle__padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'postTitle__fontFamily' => array(
+                  'label' => 'Title font family',
+                  'type' => 'input'
+                ),
+                'postTitle__fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'postTitle__lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'postTitle__fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'postTitle__textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'postTitle__fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'postTitle__letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'input'
+                ),
+                'postTitle__margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'postTitle__padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'postTitle__fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'postTitle__lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'dark__postTitle__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__postTitle__bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__postTitle__borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
             ),
-            'block__group_hasBackground_paddingBottom' => array(
-              'label' => 'Padding bottom',
-              'type' => 'input'
+            'gutenberg_title_title1' => array(
+              'label' => 'Title 1',
+              'inputs' => array(
+                'titleOne__bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'titleOne__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'titleOne__borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'titleOne__borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'titleOne__borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'titleOne__marginTop' => array(
+                  'label' => 'Margin top',
+                  'type' => 'input'
+                ),
+                'titleOne__marginBottom' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'input'
+                ),
+                'titleOne__padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'titleOne__fontFamily' => array(
+                  'label' => 'Title font family',
+                  'type' => 'input'
+                ),
+                'titleOne__fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'titleOne__lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'titleOne__fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'titleOne__textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'titleOne__fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'titleOne__letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'input'
+                ),
+                'titleOne__marginTop_mobile' => array(
+                  'label' => 'Margin top',
+                  'type' => 'input'
+                ),
+                'titleOne__marginBottom_mobile' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'input'
+                ),
+                'titleOne__padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'titleOne__fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'titleOne__lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'dark__titleOne__bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__titleOne__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__titleOne__borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
             ),
-            'block__group_hasBackground_paddingTop_mobile' => array(
-              'label' => 'Padding top',
-              'type' => 'input'
+            'gutenberg_title_title2' => array(
+              'label' => 'Title 2',
+              'inputs' => array(
+                'titleTwo__bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'titleTwo__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'titleTwo__borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'titleTwo__borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'titleTwo__borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'titleTwo__marginTop' => array(
+                  'label' => 'Margin top',
+                  'type' => 'input'
+                ),
+                'titleTwo__marginBottom' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'input'
+                ),
+                'titleTwo__padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'titleTwo__fontFamily' => array(
+                  'label' => 'Title font family',
+                  'type' => 'input'
+                ),
+                'titleTwo__fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'titleTwo__lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'titleTwo__fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'titleTwo__textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'titleTwo__fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'titleTwo__letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'input'
+                ),
+                'titleTwo__marginTop_mobile' => array(
+                  'label' => 'Margin top',
+                  'type' => 'input'
+                ),
+                'titleTwo__marginBottom_mobile' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'input'
+                ),
+                'titleTwo__padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'titleTwo__fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'titleTwo__lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'dark__titleTwo__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__titleTwo__bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__titleTwo__borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
             ),
-            'block__group_hasBackground_paddingBottom_mobile' => array(
-              'label' => 'Padding bottom',
-              'type' => 'input'
+            'gutenberg_title_title3' => array(
+              'label' => 'Title 3',
+              'inputs' => array(
+                'titleThree__bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'titleThree__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'titleThree__borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'titleThree__borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'titleThree__borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'titleThree__marginTop' => array(
+                  'label' => 'Margin top',
+                  'type' => 'input'
+                ),
+                'titleThree__marginBottom' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'input'
+                ),
+                'titleThree__padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'titleThree__fontFamily' => array(
+                  'label' => 'Title font family',
+                  'type' => 'input'
+                ),
+                'titleThree__fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'titleThree__lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'titleThree__fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'titleThree__textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'titleThree__fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'titleThree__letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'input'
+                ),
+                'titleThree__marginTop_mobile' => array(
+                  'label' => 'Margin top',
+                  'type' => 'input'
+                ),
+                'titleThree__marginBottom_mobile' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'input'
+                ),
+                'titleThree__padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'titleThree__fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'titleThree__lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'dark__titleThree__bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__titleThree__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__titleThree__borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
+            ),
+            'gutenberg_title_title4' => array(
+              'label' => 'Title 4',
+              'inputs' => array(
+                'titleFour__bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'titleFour__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'titleFour__borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'titleFour__borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'titleFour__borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'titleFour__marginTop' => array(
+                  'label' => 'Margin top',
+                  'type' => 'input'
+                ),
+                'titleFour__marginBottom' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'input'
+                ),
+                'titleFour__padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'titleFour__fontFamily' => array(
+                  'label' => 'Title font family',
+                  'type' => 'input'
+                ),
+                'titleFour__fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'titleFour__lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'titleFour__fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'titleFour__textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'titleFour__fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'titleFour__letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'input'
+                ),
+                'titleFour__marginTop_mobile' => array(
+                  'label' => 'Margin top',
+                  'type' => 'input'
+                ),
+                'titleFour__marginBottom_mobile' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'input'
+                ),
+                'titleFour__padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'titleFour__fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'titleFour__lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'dark__titleFour__bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__titleFour__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__titleFour__borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
+            ),
+            'gutenberg_title_title5' => array(
+              'label' => 'Title 5',
+              'inputs' => array(
+                'titleFive__bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'titleFive__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'titleFive__borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'titleFive__borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'titleFive__borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'titleFive__marginTop' => array(
+                  'label' => 'Margin top',
+                  'type' => 'input'
+                ),
+                'titleFive__marginBottom' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'input'
+                ),
+                'titleFive__padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'titleFive__fontFamily' => array(
+                  'label' => 'Title font family',
+                  'type' => 'input'
+                ),
+                'titleFive__fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'titleFive__lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'titleFive__fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'titleFive__textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'titleFive__fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'titleFive__letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'input'
+                ),
+                'titleFive__marginTop_mobile' => array(
+                  'label' => 'Margin top',
+                  'type' => 'input'
+                ),
+                'titleFive__marginBottom_mobile' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'input'
+                ),
+                'titleFive__padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'titleFive__fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'titleFive__lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'dark__titleFive__bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__titleFive__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__titleFive__borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
             )
           )
         ),
-        'gutenberg_imageGallery' => array(
-          'label' => 'Image gallery',
-          'inputs' => array(
-            'gallery-block--gutter-size' => array(
-              'label' => 'Space between',
-              'type' => 'input'
-            ),
-            'block__imagegallery_arrow_position' => array(
-              'label' => 'Swiper arrow position from sides',
-              'type' => 'input'
-            ),
-            'block__imagegallery_arrow_position_mobile' => array(
-              'label' => 'Swiper arrow position from sides',
-              'type' => 'input'
-            ),
-            'block__imagegallery_arrow_color' => array(
-              'label' => 'Swiper arrow color',
-              'type' => 'color'
-            ),
-            'block__imagegallery_arrow_opacity' => array(
-              'label' => 'Swiper arrow opacity',
-              'type' => 'input'
-            ),
-            'swiper__bulletNav_position' => array(
-              'label' => 'Bullet navigation position from bottom',
-              'type' => 'input'
-            ),
-            'swiper__bulletNav_position_mobile' => array(
-              'label' => 'Bullet navigation position from bottom',
-              'type' => 'input'
-            ),
-            'swiper__bulletNav_gap' => array(
-              'label' => 'Bullet navigation gap',
-              'type' => 'input'
-            ),
-            'swiper__bulletNav_item_bg' => array(
-              'label' => 'Bullet navigation item backgorund color',
-              'type' => 'color'
-            ),
-            'swiper__bulletNav_item_color' => array(
-              'label' => 'Bullet navigation item color',
-              'type' => 'color'
-            ),
-            'swiper__bulletNav_item_borderColor' => array(
-              'label' => 'Bullet navigation active item border color',
-              'type' => 'color'
-            ),
-            'swiper__bulletNav_item_borderRadius' => array(
-              'label' => 'Bullet navigation item border radius',
-              'type' => 'input'
-            ),
-            'swiper__bulletNav_item_borderWidth' => array(
-              'label' => 'Bullet navigation item border width',
-              'type' => 'input'
-            ),
-            'swiper__bulletNav_item_fontSize' => array(
-              'label' => 'Bullet navigation item font size',
-              'type' => 'input'
-            ),
-            'swiper__bulletNav_item_width' => array(
-              'label' => 'Bullet navigation item width',
-              'type' => 'input'
-            ),
-            'swiper__bulletNav_item_height' => array(
-              'label' => 'Bullet navigation item height',
-              'type' => 'input'
-            ),
-            'swiper__bulletNav_item_width_mobile' => array(
-              'label' => 'Bullet navigation item width',
-              'type' => 'input'
-            ),
-            'swiper__bulletNav_item_height_mobile' => array(
-              'label' => 'Bullet navigation item height',
-              'type' => 'input'
-            ),
-            'swiper__bulletNav_itemActive_bg' => array(
-              'label' => 'Bullet navigation active item backgorund color',
-              'type' => 'color'
-            ),
-            'swiper__bulletNav_itemActive_color' => array(
-              'label' => 'Bullet navigation active item color',
-              'type' => 'color'
-            ),
-            'swiper__bulletNav_itemActive_borderColor' => array(
-              'label' => 'Bullet navigation active item border color',
-              'type' => 'color'
-            )
-          )
-        ),
-        'gutenberg_seperator' => array(
-          'label' => 'Seperator',
-          'inputs' => array(
-            'block__separator_width' => array(
-              'label' => 'Height',
-              'type' => 'input'
-            ),
-            'block__separator_marginTop' => array(
-              'label' => 'Margin top',
-              'type' => 'input'
-            ),
-            'block__separator_marginBottom' => array(
-              'label' => 'Margin bottom',
-              'type' => 'input'
-            ),
-            'gbSeperator_color' => array(
-              'label' => 'Default color',
-              'type' => 'color',
-              'default' => '#dddddd'
-            ),
-            'dark__gbSeperator_color' => array(
-              'label' => 'Default color',
-              'type' => 'color',
-              'default' => '#343434'
-            ),
-            'block__separator_width_mobile' => array(
-              'label' => 'Height',
-              'type' => 'input'
-            ),
-            'block__separator_marginTop_mobile' => array(
-              'label' => 'Margin top',
-              'type' => 'input'
-            ),
-            'block__separator_marginBottom_mobile' => array(
-              'label' => 'Margin bottom',
-              'type' => 'input'
-            ),
-            'block__separatorDots_fontSize' => array(
-              'label' => 'Dots font size',
-              'type' => 'input'
-            ),
-            'block__separatorDots_fontSize_mobile' => array(
-              'label' => 'Dots font size',
-              'type' => 'input'
-            )
-          )
-        ),
-        'gutenberg_columns' => array(
-          'label' => 'Columns',
-          'inputs' => array(
-            'wp--style--block-gap' => array(
-              'label' => 'Space between',
-              'type' => 'input',
-              'default' => '20px'
-            ),
-            'block__columns_hasBackground_padding' => array(
-              'label' => 'Padding',
-              'type' => 'input'
-            ),
-            'block__columns_hasBackground_gap' => array(
-              'label' => 'Space between',
-              'type' => 'input'
-            ),
-            'block__columns_column_hasBackground_padding' => array(
-              'label' => 'Column padding',
-              'type' => 'input'
-            ),
-            'wp--style--block-gap_mobile' => array(
-              'label' => 'Space between',
-              'type' => 'input'
-            ),
-            'block__columns_hasBackground_padding_mobile' => array(
-              'label' => 'Padding',
-              'type' => 'input'
-            ),
-            'block__columns_hasBackground_gap_mobile' => array(
-              'label' => 'Space between',
-              'type' => 'input'
-            ),
-            'block__columns_column_hasBackground_padding_mobile' => array(
-              'label' => 'Column padding',
-              'type' => 'input'
-            ),
-            'block__columns_3columns_gap' => array(
-              'label' => '3 columns space between',
-              'type' => 'input'
-            ),
-            'block__columns_3columns_hasBackground_gap' => array(
-              'label' => '3 columns space between',
-              'type' => 'input'
-            ),
-            'block__columns_3columns_gap_mobile' => array(
-              'label' => '3 columns space between',
-              'type' => 'input'
-            ),
-            'block__columns_3columns_hasBackground_gap_mobile' => array(
-              'label' => '3 columns space between',
-              'type' => 'input'
-            ),
-            'block__columns_4columns_gap' => array(
-              'label' => '4 columns space between',
-              'type' => 'input'
-            ),
-            'block__columns_4columns_hasBackground_gap' => array(
-              'label' => '4 columns space between',
-              'type' => 'input'
-            ),
-            'block__columns_4columns_gap_mobile' => array(
-              'label' => '4 columns space between',
-              'type' => 'input'
-            ),
-            'block__columns_4columns_hasBackground_gap_mobile' => array(
-              'label' => '4 columns space between',
-              'type' => 'input'
-            ),
-            'block__columns_5columns_gap' => array(
-              'label' => '5 columns space between',
-              'type' => 'input'
-            ),
-            'block__columns_5columns_hasBackground_gap' => array(
-              'label' => '5 columns space between',
-              'type' => 'input'
-            ),
-            'block__columns_5columns_gap_mobile' => array(
-              'label' => '5 columns space between',
-              'type' => 'input'
-            ),
-            'block__columns_5columns_hasBackground_gap_mobile' => array(
-              'label' => '5 columns space between',
-              'type' => 'input'
-            ),
-            'block__columns_6columns_gap' => array(
-              'label' => '6 columns space between',
-              'type' => 'input'
-            ),
-            'block__columns_6columns_hasBackground_gap' => array(
-              'label' => '6 columns space between',
-              'type' => 'input'
-            ),
-            'block__columns_6columns_gap_mobile' => array(
-              'label' => '6 columns space between',
-              'type' => 'input',
-              'default' => '20px'
-            ),
-            'block__columns_6columns_hasBackground_gap_mobile' => array(
-              'label' => '6 columns space between',
-              'type' => 'input'
-            )
-          )
-        ),
-        'gutenberg_image' => array(
-          'label' => 'Image',
-          'inputs' => array(
-            'block__imageFigcaption_fontSize' => array(
-              'label' => 'Figcaption font size',
-              'type' => 'input'
-            ),
-            'block__imageFigcaption_lineHeight' => array(
-              'label' => 'Figcaption line height',
-              'type' => 'input'
-            ),
-            'block__imageFigcaption_margin' => array(
-              'label' => 'Figcaption margin',
-              'type' => 'input'
-            ),
-            'block__imageFigcaption_padding' => array(
-              'label' => 'Figcaption padding',
-              'type' => 'input'
-            ),
-            'block__imageFigcaption_fontSize_mobile' => array(
-              'label' => 'Figcaption font size',
-              'type' => 'input'
-            ),
-            'block__imageFigcaption_lineHeight_mobile' => array(
-              'label' => 'Figcaption line height',
-              'type' => 'input'
-            ),
-            'block__imageFigcaption_margin_mobile' => array(
-              'label' => 'Figcaption margin',
-              'type' => 'input'
-            ),
-            'block__imageFigcaption_padding_mobile' => array(
-              'label' => 'Figcaption padding',
-              'type' => 'input'
-            ),
-            'block__imageDonloadButton_marginTop' => array(
-              'label' => 'Download button margin top',
-              'type' => 'input'
-            ),
-            'block__imageDonloadButton_marginTop_mobile' => array(
-              'label' => 'Download button margin top',
-              'type' => 'input'
+        'gutenberg_paragraph' => array(
+          'label' => 'Paragraph',
+          'sections' => array(
+            'gutenberg_paragraph_lead' => array(
+              'label' => 'Lead text',
+              'inputs' => array(
+                'leadText__bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'leadText__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'leadText__borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'leadText__borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'leadText__borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'leadText__padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'leadText__fontFamily' => array(
+                  'label' => 'Lead font family',
+                  'type' => 'input'
+                ),
+                'leadText__fontSize' => array(
+                  'label' => 'Lead font size',
+                  'type' => 'input'
+                ),
+                'leadText__lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'leadText__fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'leadText__textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'leadText__fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'leadText__letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'input'
+                ),
+                'leadText__padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'leadText__fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'leadText__lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'dark__leadText__bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__leadText__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__leadText__borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
             )
           )
         ),
         'gutenberg_buttons' => array(
           'label' => 'Buttons',
-          'inputs' => array(
-            'block__buttons_spacing' => array(
-              'label' => 'Space between buttons',
-              'type' => 'input'
+          'sections' => array(
+            'gutenberg_buttons_settings' => array(
+              'label' => 'Settings',
+              'inputs' => array(
+                'block__buttons_spacing' => array(
+                  'label' => 'Space between',
+                  'type' => 'input'
+                )
+              )
             ),
-            'block__buttons_fontFamily' => array(
-              'label' => 'Font',
-              'type' => 'input'
-            ),
-            'block__buttons_fontSize' => array(
-              'label' => 'Font size',
-              'type' => 'input'
-            ),
-            'block__buttons_fontWeight' => array(
-              'label' => 'Font weight',
-              'type' => 'select'
-            ),
-            'block__buttons_lineHeight' => array(
-              'label' => 'Line height',
-              'type' => 'input'
-            ),
-            'block__buttons_textTransform' => array(
-              'label' => 'Text transform',
-              'type' => 'select'
-            ),
-            'block__buttons_fontStyle' => array(
-              'label' => 'Font style',
-              'type' => 'select'
-            ),
-            'block__buttons_letterSpacing' => array(
-              'label' => 'Text letter spacing',
-              'type' => 'input'
-            ),
-            'block__buttons_padding' => array(
-              'label' => 'Padding',
-              'type' => 'input'
-            ),
-            'block__buttons_borderWidth' => array(
-              'label' => 'Border width',
-              'type' => 'input'
-            ),
-            'block__buttons_borderRadius' => array(
-              'label' => 'Border radius',
-              'type' => 'input'
-            ),
-            'block__buttons_color' => array(
-              'label' => 'Text color',
-              'type' => 'color'
-            ),
-            'block__buttons_bgColor' => array(
-              'label' => 'Background color',
-              'type' => 'color'
-            ),
-            'block__buttons_borderColor' => array(
-              'label' => 'Border color',
-              'type' => 'color'
-            ),
-            'block__buttonsHover_color' => array(
-              'label' => 'Text color',
-              'type' => 'color'
-            ),
-            'block__buttonsHover_bgColor' => array(
-              'label' => 'Background color',
-              'type' => 'color'
-            ),
-            'block__buttonsHover_borderColor' => array(
-              'label' => 'Border color',
-              'type' => 'color'
-            ),
-            'block__buttons_fontSize_mobile' => array(
-              'label' => 'Font size',
-              'type' => 'input'
-            ),
-            'block__buttons_lineHeight_mobile' => array(
-              'label' => 'Line height',
-              'type' => 'input'
-            ),
-            'block__buttons_textTransform_mobile' => array(
-              'label' => 'Text transform',
-              'type' => 'input'
-            ),
-            'block__buttons_padding_mobile' => array(
-              'label' => 'Padding',
-              'type' => 'input'
-            ),
-            'block__buttons_borderWidth_mobile' => array(
-              'label' => 'Border width',
-              'type' => 'input'
-            ),
-            'block__buttons_borderRadius_mobile' => array(
-              'label' => 'Border radius',
-              'type' => 'input'
-            ),
-            'dark__block__buttons_color' => array(
-              'label' => 'Text color',
-              'type' => 'color'
-            ),
-            'dark__block__buttons_bgColor' => array(
-              'label' => 'Background color',
-              'type' => 'color'
-            ),
-            'dark__block__buttons_borderColor' => array(
-              'label' => 'Border color',
-              'type' => 'color'
-            ),
-            'dark__block__buttonsHover_color' => array(
-              'label' => 'Text color',
-              'type' => 'color'
-            ),
-            'dark__block__buttonsHover_bgColor' => array(
-              'label' => 'Background color',
-              'type' => 'color'
-            ),
-            'dark__block__buttonsHover_borderColor' => array(
-              'label' => 'Border color',
-              'type' => 'color'
+            'gutenberg_buttons_item' => array(
+              'label' => 'Item',
+              'inputs' => array(
+                'block__buttons_bgColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'block__buttons_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'block__buttons_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'block__buttonsHover_bgColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'block__buttonsHover_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'block__buttonsHover_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'block__buttons_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'block__buttons_borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'input'
+                ),
+                'block__buttons_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'block__buttons_fontFamily' => array(
+                  'label' => 'Font',
+                  'type' => 'input'
+                ),
+                'block__buttons_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'block__buttons_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'block__buttons_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'block__buttons_textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'block__buttons_fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'block__buttons_letterSpacing' => array(
+                  'label' => 'Text letter spacing',
+                  'type' => 'input'
+                ),
+                'block__buttons_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'block__buttons_borderWidth_mobile' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'block__buttons_borderRadius_mobile' => array(
+                  'label' => 'Border radius',
+                  'type' => 'input'
+                ),
+                'block__buttons_fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'block__buttons_lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'block__buttons_textTransform_mobile' => array(
+                  'label' => 'Text transform',
+                  'type' => 'input'
+                ),
+                'dark__block__buttons_bgColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__block__buttons_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__block__buttons_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'dark__block__buttonsHover_bgColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__block__buttonsHover_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__block__buttonsHover_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
             )
           )
         ),
         'gutenberg_list' => array(
           'label' => 'List',
-          'inputs' => array(
-            'block__list_marker_value' => array(
-              'label' => 'Marker value',
-              'type' => 'input',
-              'default' => '•',
-              'quotemark' => '1'
+          'sections' => array(
+            'gutenberg_list_bullet_settings' => array(
+              'label' => 'Bullet Settings',
+              'inputs' => array(
+                'block__list_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'block__list_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'block__list_borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'block__list_gap' => array(
+                  'label' => 'Gap',
+                  'type' => 'input'
+                )
+              )
             ),
-            'block__list_marker_size' => array(
-              'label' => 'Marker size',
-              'type' => 'input',
-              'default' => '150%'
-            ),
-            'block__list_lineHeight' => array(
-              'label' => 'Marker line height',
-              'type' => 'input'
-            ),
-            'block__list_marker_space' => array(
-              'label' => 'Marker spacing',
-              'type' => 'input'
-            ),
-            'gbList_marker_color' => array(
-              'label' => 'Marker color',
-              'type' => 'color',
-              'default' => 'inherit'
-            ),
-            'dark__gbList_marker_color' => array(
-              'label' => 'Marker color',
-              'type' => 'color',
-              'default' => 'inherit'
-            ),
-            'block__list_marker_size_mobile' => array(
-              'label' => 'Marker size',
-              'type' => 'input'
-            ),
-            'block__list_lineHeight_mobile' => array(
-              'label' => 'Marker line height',
-              'type' => 'input'
-            ),
-            'block__list_marker_space_mobile' => array(
-              'label' => 'Marker spacing',
-              'type' => 'input'
+            'gutenberg_list_bullet_marker' => array(
+              'label' => 'Bullet marker',
+              'inputs' => array(
+                'gbList_marker_color' => array(
+                  'label' => 'Marker color',
+                  'type' => 'color',
+                  'default' => 'inherit'
+                ),
+                'block__list_item_borderColor' => array(
+                  'label' => 'Item border color',
+                  'type' => 'color'
+                ),
+                'block__list_item_borderWidth' => array(
+                  'label' => 'Item border width',
+                  'type' => 'input'
+                ),
+                'block__list_item_borderStyle' => array(
+                  'label' => 'Item border style',
+                  'type' => 'select'
+                ),
+                'block__list_marker_value' => array(
+                  'label' => 'Marker value',
+                  'type' => 'input',
+                  'default' => '•',
+                  'quotemark' => '1'
+                ),
+                'block__list_marker_size' => array(
+                  'label' => 'Marker size',
+                  'type' => 'input',
+                  'default' => '150%'
+                ),
+                'block__list_lineHeight' => array(
+                  'label' => 'Marker line height',
+                  'type' => 'input'
+                ),
+                'block__list_marker_space' => array(
+                  'label' => 'Marker spacing',
+                  'type' => 'input'
+                ),
+                'block__list_marker_size_mobile' => array(
+                  'label' => 'Marker size',
+                  'type' => 'input'
+                ),
+                'block__list_lineHeight_mobile' => array(
+                  'label' => 'Marker line height',
+                  'type' => 'input'
+                ),
+                'block__list_marker_space_mobile' => array(
+                  'label' => 'Marker spacing',
+                  'type' => 'input'
+                ),
+                'dark__gbList_marker_color' => array(
+                  'label' => 'Marker color',
+                  'type' => 'color',
+                  'default' => 'inherit'
+                )
+              )
             )
           )
         ),
-        'gutenberg_cover' => array(
-          'label' => 'Cover',
-          'inputs' => array(
-            'block__cover_minHeight' => array(
-              'label' => 'Minimum height',
-              'type' => 'input'
+        'gutenberg_image' => array(
+          'label' => 'Image',
+          'sections' => array(
+            'gutenberg_image_figcaption' => array(
+              'label' => 'Figcaption',
+              'inputs' => array(
+                'block__imageFigcaption_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'block__imageFigcaption_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'block__imageFigcaption_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'block__imageFigcaption_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'block__imageFigcaption_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'block__imageFigcaption_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'block__imageFigcaption_fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'block__imageFigcaption_lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                )
+              )
             ),
-            'block__cover_alignfull_minHeight' => array(
-              'label' => 'Minimum height',
-              'type' => 'input'
-            ),
-            'block__cover_alignwide_minHeight' => array(
-              'label' => 'Minimum height',
-              'type' => 'input'
-            ),
-            'block__cover_container_paddingTop' => array(
-              'label' => 'Container padding top',
-              'type' => 'input'
-            ),
-            'block__cover_container_paddingBottom' => array(
-              'label' => 'Container padding bottom',
-              'type' => 'input'
-            ),
-            'block__cover_zoomer_scale' => array(
-              'label' => 'Background image zoom animation',
-              'type' => 'input'
-            ),
-            'block__cover_minHeight_mobile' => array(
-              'label' => 'Minimum height',
-              'type' => 'input'
-            ),
-            'block__cover_alignfull_minHeight_mobile' => array(
-              'label' => 'Minimum height',
-              'type' => 'input'
-            ),
-            'block__cover_alignwide_minHeight_mobile' => array(
-              'label' => 'Minimum height',
-              'type' => 'input'
-            ),
-            'block__cover_container_paddingTop_mobile' => array(
-              'label' => 'Container padding top',
-              'type' => 'input'
-            ),
-            'block__cover_container_paddingBottom_mobile' => array(
-              'label' => 'Container padding bottom',
-              'type' => 'input'
+            'gutenberg_image_donloadbutton' => array(
+              'label' => 'Download button',
+              'inputs' => array(
+                'block__imageDonloadButton_marginTop' => array(
+                  'label' => 'Margin top',
+                  'type' => 'input'
+                ),
+                'block__imageDonloadButton_marginTop_mobile' => array(
+                  'label' => 'Margin top',
+                  'type' => 'input'
+                )
+              )
             )
           )
         ),
-        'gutenberg_table' => array(
-          'label' => 'Table',
-          'inputs' => array(
-            'block__tableHead_fontFamily' => array(
-              'label' => 'Head font family',
-              'type' => 'input'
+        'gutenberg_gallery' => array(
+          'label' => 'Image gallery',
+          'sections' => array(
+            'gutenberg_gallery_' => array(
+              'label' => 'Settings',
+              'inputs' => array(
+                'gallery-block--gutter-size' => array(
+                  'label' => 'Space between',
+                  'type' => 'input'
+                )
+              )
             ),
-            'block__tableHead_fontSize' => array(
-              'label' => 'Head font size',
-              'type' => 'input'
+            'gutenberg_gallery_arrows' => array(
+              'label' => 'Swiper arrows',
+              'inputs' => array(
+                'block__imagegallery_arrow_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'block__imagegallery_arrow_opacity' => array(
+                  'label' => 'Opacity',
+                  'type' => 'input'
+                ),
+                'block__imagegallery_arrow_position' => array(
+                  'label' => 'Position from sides',
+                  'type' => 'input'
+                ),
+                'block__imagegallery_arrow_position_mobile' => array(
+                  'label' => 'Position from sides',
+                  'type' => 'input'
+                )
+              )
             ),
-            'block__tableHead_lineHeight' => array(
-              'label' => 'Head line height',
-              'type' => 'input'
+            'gutenberg_gallery_bulletNav' => array(
+              'label' => 'Bullet navigation',
+              'inputs' => array(
+                'swiper__bulletNav_gap' => array(
+                  'label' => 'Gap',
+                  'type' => 'input'
+                ),
+                'swiper__bulletNav_position' => array(
+                  'label' => 'Position from bottom',
+                  'type' => 'input'
+                ),
+                'swiper__bulletNav_position_mobile' => array(
+                  'label' => 'Position from bottom',
+                  'type' => 'input'
+                )
+              )
             ),
-            'block__tableHead_fontWeight' => array(
-              'label' => 'Head font weight',
-              'type' => 'select'
+            'gutenberg_gallery_bulletNav_items' => array(
+              'label' => 'Bullet navigation items',
+              'inputs' => array(
+                'swiper__bulletNav_item_bg' => array(
+                  'label' => 'Backgorund color',
+                  'type' => 'color'
+                ),
+                'swiper__bulletNav_item_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'swiper__bulletNav_item_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'swiper__bulletNav_itemActive_bg' => array(
+                  'label' => 'Backgorund color (active)',
+                  'type' => 'color'
+                ),
+                'swiper__bulletNav_itemActive_color' => array(
+                  'label' => 'Color (active)',
+                  'type' => 'color'
+                ),
+                'swiper__bulletNav_itemActive_borderColor' => array(
+                  'label' => 'Border color (active)',
+                  'type' => 'color'
+                ),
+                'swiper__bulletNav_item_borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'input'
+                ),
+                'swiper__bulletNav_item_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'swiper__bulletNav_item_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'swiper__bulletNav_item_width' => array(
+                  'label' => 'Width',
+                  'type' => 'input'
+                ),
+                'swiper__bulletNav_item_height' => array(
+                  'label' => 'Height',
+                  'type' => 'input'
+                ),
+                'swiper__bulletNav_item_width_mobile' => array(
+                  'label' => 'Width',
+                  'type' => 'input'
+                ),
+                'swiper__bulletNav_item_height_mobile' => array(
+                  'label' => 'Height',
+                  'type' => 'input'
+                )
+              )
             ),
-            'block__tableHead_textTransform' => array(
-              'label' => 'Head text transform',
-              'type' => 'select'
+            'gutenberg_gallery_downloadAll' => array(
+              'label' => 'Download all button',
+              'inputs' => array(
+                'downloadAll__backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'downloadAll__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'downloadAll__borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'downloadAll__backgroundColor_hover' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'downloadAll__color_hover' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'downloadAll__borderColor_hover' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'downloadAll__borderRadius' => array(
+                  'label' => 'Border raduis',
+                  'type' => 'input'
+                ),
+                'downloadAll__borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'downloadAll__borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'downloadAll__padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'downloadAll__fontFamily' => array(
+                  'label' => 'Font',
+                  'type' => 'input'
+                ),
+                'downloadAll__fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'downloadAll__lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'downloadAll__fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'downloadAll__textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'downloadAll__fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'downloadAll__letterSpacing' => array(
+                  'label' => 'Text letter spacing',
+                  'type' => 'input'
+                ),
+                'downloadAll__padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'downloadAll__fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'downloadAll__lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'downloadAll__letterSpacing_mobile' => array(
+                  'label' => 'Text letter spacing',
+                  'type' => 'input'
+                ),
+                'dark__downloadAll__backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__downloadAll__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__downloadAll__borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'dark__downloadAll__backgroundColor_hover' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__downloadAll__color_hover' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__downloadAll__borderColor_hover' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'downloadAll__progressbar_backgroundColor' => array(
+                  'label' => 'Prozessbar Background color',
+                  'type' => 'color'
+                ),
+                'downloadAll__progressbar_prozess_backgroundColor' => array(
+                  'label' => 'Prozessbar color',
+                  'type' => 'color'
+                ),
+                'downloadAll__progressbar_prozess_height' => array(
+                  'label' => 'Prozessbar height',
+                  'type' => 'input'
+                ),
+                'dark__downloadAll__progressbar_backgroundColor' => array(
+                  'label' => 'Prozessbar Background color',
+                  'type' => 'color'
+                ),
+                'dark__downloadAll__progressbar_prozess_backgroundColor' => array(
+                  'label' => 'Prozessbar color',
+                  'type' => 'color'
+                )
+              )
+            )
+          )
+        ),
+        'gutenberg_mediatext' => array(
+          'label' => 'Media & Text',
+          'sections' => array(
+            'gutenberg_mediatext_settings' => array(
+              'label' => 'Settings',
+              'inputs' => array(
+                'block__mediatext_gap' => array(
+                  'label' => 'Gap',
+                  'type' => 'input'
+                ),
+                'block__mediatext_backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'block__mediatext_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'block__mediatext_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'block__mediatext_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'block__mediatext_borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'block__mediatext_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'block__mediatext_gap_mobile' => array(
+                  'label' => 'Gap',
+                  'type' => 'input'
+                ),
+                'block__mediatext_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'dark__block__mediatext_backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__block__mediatext_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__block__mediatext_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
             ),
-            'block__tableHead_letterSpacing' => array(
-              'label' => 'Head letter spacing',
-              'type' => 'input'
+            'gutenberg_mediatext_media' => array(
+              'label' => 'Media',
+              'inputs' => array(
+                'block__mediatext_media_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'block__mediatext_media_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'block__mediatext_media_borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'block__mediatext_media_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'block__mediatext_media_minHeight' => array(
+                  'label' => 'Minimum height',
+                  'type' => 'input'
+                ),
+                'block__mediatext_media_maxHeight' => array(
+                  'label' => 'Maximum height',
+                  'type' => 'input'
+                ),
+                'block__mediatext_media_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'block__mediatext_media_minHeight_mobile' => array(
+                  'label' => 'Minimum height',
+                  'type' => 'input'
+                ),
+                'block__mediatext_media_maxHeight_mobile' => array(
+                  'label' => 'Maximum height',
+                  'type' => 'input'
+                ),
+                'dark__block__mediatext_media_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
             ),
-            'block__tableHead_fontSize_mobile' => array(
-              'label' => 'Head font size',
-              'type' => 'input'
-            ),
-            'block__tableHead_lineHeight_mobile' => array(
-              'label' => 'Head line height',
-              'type' => 'input'
-            ),
-            'block__tableHead_letterSpacing_mobile' => array(
-              'label' => 'Head letter spacing',
-              'type' => 'input'
-            ),
-            'block__table_fontFamily' => array(
-              'label' => 'font family',
-              'type' => 'input'
-            ),
-            'block__table_fontSize' => array(
-              'label' => 'font size',
-              'type' => 'input'
-            ),
-            'block__table_lineHeight' => array(
-              'label' => 'line height',
-              'type' => 'input'
-            ),
-            'block__table_fontWeight' => array(
-              'label' => 'font weight',
-              'type' => 'select'
-            ),
-            'block__table_textTransform' => array(
-              'label' => 'text transform',
-              'type' => 'select'
-            ),
-            'block__table_letterSpacing' => array(
-              'label' => 'letter spacing',
-              'type' => 'input'
-            ),
-            'block__table_fontSize_mobile' => array(
-              'label' => 'font size',
-              'type' => 'input'
-            ),
-            'block__table_lineHeight_mobile' => array(
-              'label' => 'line height',
-              'type' => 'input'
-            ),
-            'block__table_letterSpacing_mobile' => array(
-              'label' => 'letter spacing',
-              'type' => 'input'
+            'gutenberg_mediatext_text' => array(
+              'label' => 'Text',
+              'inputs' => array(
+                'block__mediatext_text_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'block__mediatext_hasBackground_text_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'block__mediatext_text_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'block__mediatext_text_borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'block__mediatext_text_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'block__mediatext_hasBackground_text_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'block__mediatext_hasBackground_text_borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'block__mediatext_hasBackground_text_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'dark__block__mediatext_text_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'dark__block__mediatext_hasBackground_text_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
             )
           )
         ),
         'gutenberg_quote' => array(
           'label' => 'Quote',
-          'inputs' => array(
-            'block__quote_color' => array(
-              'label' => 'Color',
-              'type' => 'color'
+          'sections' => array(
+            'gutenberg_quote_' => array(
+              'label' => 'Settings',
+              'inputs' => array(
+                'block__quote_bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'block__quote_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'block__quote_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'block__quote_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'block__quote_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'block__quote_fontFamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'block__quote_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'block__quote_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'block__quote_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'block__quote_textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'block__quote_letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'input'
+                ),
+                'block__quote_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'block__quote_fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'block__quote_lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'dark__block__quote_bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__block__quote_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__block__quote_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
             ),
-            'block__quote_bg' => array(
-              'label' => 'Background color',
-              'type' => 'color'
+            'gutenberg_quote_cite' => array(
+              'label' => 'Cite',
+              'inputs' => array(
+                'block__quote_cite_bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'block__quote_cite_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'block__quote_cite_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'block__quote_cite_fontFamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'block__quote_cite_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'block__quote_cite_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'block__quote_cite_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'block__quote_cite_textTransform' => array(
+                  'label' => 'Cite text transform',
+                  'type' => 'select'
+                ),
+                'block__quote_cite_letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'input'
+                ),
+                'block__quote_cite_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'block__quote_cite_fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'block__quote_cite_lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'dark__block__quote_cite_bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__block__quote_cite_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                )
+              )
+            )
+          )
+        ),
+        'gutenberg_table' => array(
+          'label' => 'Table',
+          'sections' => array(
+            'gutenberg_table_head' => array(
+              'label' => 'Head',
+              'inputs' => array(
+                'block__tableHead_fontFamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'block__tableHead_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'block__tableHead_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'block__tableHead_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'block__tableHead_textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'block__tableHead_letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'input'
+                ),
+                'block__tableHead_fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'block__tableHead_lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'block__tableHead_letterSpacing_mobile' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'input'
+                )
+              )
             ),
-            'block__quote_borderColor' => array(
-              'label' => 'Border color',
-              'type' => 'color'
+            'gutenberg_table_columns' => array(
+              'label' => 'Columns',
+              'inputs' => array(
+                'block__table_fontFamily' => array(
+                  'label' => 'font family',
+                  'type' => 'input'
+                ),
+                'block__table_fontSize' => array(
+                  'label' => 'font size',
+                  'type' => 'input'
+                ),
+                'block__table_lineHeight' => array(
+                  'label' => 'line height',
+                  'type' => 'input'
+                ),
+                'block__table_fontWeight' => array(
+                  'label' => 'font weight',
+                  'type' => 'select'
+                ),
+                'block__table_textTransform' => array(
+                  'label' => 'text transform',
+                  'type' => 'select'
+                ),
+                'block__table_letterSpacing' => array(
+                  'label' => 'letter spacing',
+                  'type' => 'input'
+                ),
+                'block__table_fontSize_mobile' => array(
+                  'label' => 'font size',
+                  'type' => 'input'
+                ),
+                'block__table_lineHeight_mobile' => array(
+                  'label' => 'line height',
+                  'type' => 'input'
+                ),
+                'block__table_letterSpacing_mobile' => array(
+                  'label' => 'letter spacing',
+                  'type' => 'input'
+                )
+              )
+            )
+          )
+        ),
+        'gutenberg_columns' => array(
+          'label' => 'Columns',
+          'sections' => array(
+            'gutenberg_columns_settings' => array(
+              'label' => 'Settings',
+              'inputs' => array(
+                'wp--style--block-gap' => array(
+                  'label' => 'Space between',
+                  'type' => 'input',
+                  'default' => '20px'
+                ),
+                'block__columns_hasBackground_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'block__columns_hasBackground_gap' => array(
+                  'label' => 'Space between',
+                  'type' => 'input'
+                ),
+                'block__columns_column_hasBackground_padding' => array(
+                  'label' => 'Column padding',
+                  'type' => 'input'
+                ),
+                'wp--style--block-gap_mobile' => array(
+                  'label' => 'Space between',
+                  'type' => 'input'
+                ),
+                'block__columns_hasBackground_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'block__columns_hasBackground_gap_mobile' => array(
+                  'label' => 'Space between',
+                  'type' => 'input'
+                ),
+                'block__columns_column_hasBackground_padding_mobile' => array(
+                  'label' => 'Column padding',
+                  'type' => 'input'
+                )
+              )
             ),
-            'block__quote_borderWidth' => array(
-              'label' => 'Border width',
-              'type' => 'input'
+            'gutenberg_columns_three' => array(
+              'label' => '3 Columns',
+              'inputs' => array(
+                'block__columns_3columns_gap' => array(
+                  'label' => 'Space between',
+                  'type' => 'input'
+                ),
+                'block__columns_3columns_hasBackground_gap' => array(
+                  'label' => 'Space between',
+                  'type' => 'input'
+                ),
+                'block__columns_3columns_gap_mobile' => array(
+                  'label' => 'Space between',
+                  'type' => 'input'
+                ),
+                'block__columns_3columns_hasBackground_gap_mobile' => array(
+                  'label' => 'Space between',
+                  'type' => 'input'
+                )
+              )
             ),
-            'block__quote_padding' => array(
-              'label' => 'Padding',
-              'type' => 'input'
+            'gutenberg_columns_four' => array(
+              'label' => '4 Columns',
+              'inputs' => array(
+                'block__columns_4columns_gap' => array(
+                  'label' => 'Space between',
+                  'type' => 'input'
+                ),
+                'block__columns_4columns_hasBackground_gap' => array(
+                  'label' => 'Space between',
+                  'type' => 'input'
+                ),
+                'block__columns_4columns_gap_mobile' => array(
+                  'label' => 'Space between',
+                  'type' => 'input'
+                ),
+                'block__columns_4columns_hasBackground_gap_mobile' => array(
+                  'label' => 'Space between',
+                  'type' => 'input'
+                )
+              )
             ),
-            'block__quote_fontFamily' => array(
-              'label' => 'Font family',
-              'type' => 'input'
+            'gutenberg_columns_five' => array(
+              'label' => '5 Columns',
+              'inputs' => array(
+                'block__columns_5columns_gap' => array(
+                  'label' => 'Space between',
+                  'type' => 'input'
+                ),
+                'block__columns_5columns_hasBackground_gap' => array(
+                  'label' => 'Space between',
+                  'type' => 'input'
+                ),
+                'block__columns_5columns_gap_mobile' => array(
+                  'label' => 'Space between',
+                  'type' => 'input'
+                ),
+                'block__columns_5columns_hasBackground_gap_mobile' => array(
+                  'label' => 'Space between',
+                  'type' => 'input'
+                )
+              )
             ),
-            'block__quote_fontSize' => array(
-              'label' => 'Font size',
-              'type' => 'input'
-            ),
-            'block__quote_lineHeight' => array(
-              'label' => 'Line height',
-              'type' => 'input'
-            ),
-            'block__quote_fontWeight' => array(
-              'label' => 'Font weight',
-              'type' => 'select'
-            ),
-            'block__quote_textTransform' => array(
-              'label' => 'Text transform',
-              'type' => 'select'
-            ),
-            'block__quote_letterSpacing' => array(
-              'label' => 'Letter spacing',
-              'type' => 'input'
-            ),
-            'block__quote_padding_mobile' => array(
-              'label' => 'Padding',
-              'type' => 'input'
-            ),
-            'block__quote_fontSize_mobile' => array(
-              'label' => 'Font size',
-              'type' => 'input'
-            ),
-            'block__quote_lineHeight_mobile' => array(
-              'label' => 'Line height',
-              'type' => 'input'
-            ),
-            'block__quote_cite_color' => array(
-              'label' => 'Cite color',
-              'type' => 'color'
-            ),
-            'block__quote_cite_bg' => array(
-              'label' => 'Cite background color',
-              'type' => 'color'
-            ),
-            'block__quote_cite_padding' => array(
-              'label' => 'Cite padding',
-              'type' => 'input'
-            ),
-            'block__quote_cite_fontFamily' => array(
-              'label' => 'Cite font family',
-              'type' => 'input'
-            ),
-            'block__quote_cite_fontSize' => array(
-              'label' => 'Cite font size',
-              'type' => 'input'
-            ),
-            'block__quote_cite_lineHeight' => array(
-              'label' => 'Cite line height',
-              'type' => 'input'
-            ),
-            'block__quote_cite_fontWeight' => array(
-              'label' => 'Cite font weight',
-              'type' => 'select'
-            ),
-            'block__quote_cite_textTransform' => array(
-              'label' => 'Cite text transform',
-              'type' => 'select'
-            ),
-            'block__quote_cite_letterSpacing' => array(
-              'label' => 'Cite letter spacing',
-              'type' => 'input'
-            ),
-            'block__quote_cite_padding_mobile' => array(
-              'label' => 'Cite padding',
-              'type' => 'input'
-            ),
-            'block__quote_cite_fontSize_mobile' => array(
-              'label' => 'Cite font size',
-              'type' => 'input'
-            ),
-            'block__quote_cite_lineHeight_mobile' => array(
-              'label' => 'Cite line height',
-              'type' => 'input'
+            'gutenberg_columns_six' => array(
+              'label' => '6 Columns',
+              'inputs' => array(
+                'block__columns_6columns_gap' => array(
+                  'label' => 'Space between',
+                  'type' => 'input'
+                ),
+                'block__columns_6columns_hasBackground_gap' => array(
+                  'label' => 'Space between',
+                  'type' => 'input'
+                ),
+                'block__columns_6columns_gap_mobile' => array(
+                  'label' => 'Space between',
+                  'type' => 'input',
+                  'default' => '20px'
+                ),
+                'block__columns_6columns_hasBackground_gap_mobile' => array(
+                  'label' => 'Space between',
+                  'type' => 'input'
+                )
+              )
             )
           )
         ),
         'gutenberg_accordion' => array(
           'label' => 'Accordion',
-          'inputs' => array(
-            'block__accordion_separator' => array(
-              'label' => 'Space between accordions',
-              'type' => 'input'
+          'sections' => array(
+            'gutenberg_accordion_settings' => array(
+              'label' => 'Settings',
+              'inputs' => array(
+                'block__accordion_separator' => array(
+                  'label' => 'Gap between accordions',
+                  'type' => 'input'
+                )
+              )
             ),
-            'block__accordion_label_bg' => array(
-              'label' => 'Label background color',
-              'type' => 'color',
-              'default' => '#0175bc'
+            'gutenberg_accordion_label' => array(
+              'label' => 'Label',
+              'inputs' => array(
+                'block__accordion_label_bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'block__accordion_label' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'block__accordion_label_spacing' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'block__accordion_label_fontfamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'block__accordion_label_fontsize' => array(
+                  'label' => 'Font-size',
+                  'type' => 'input'
+                ),
+                'block__accordion_label_fontweight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'block__accordion_label_lineheight' => array(
+                  'label' => 'Line-height',
+                  'type' => 'input'
+                ),
+                'block__accordion_label_textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'block__accordion_label_letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'input'
+                ),
+                'block__accordion_label_spacing_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'block__accordion_label_fontsize_mobile' => array(
+                  'label' => 'Font-size',
+                  'type' => 'input'
+                ),
+                'block__accordion_label_lineheight_mobile' => array(
+                  'label' => 'Line-height',
+                  'type' => 'input'
+                )
+              )
             ),
-            'block__accordion_label' => array(
-              'label' => 'Label text color',
-              'type' => 'color',
-              'default' => '#ffffff'
+            'gutenberg_accordion_icon' => array(
+              'label' => 'Icon',
+              'inputs' => array(
+                'block__accordion_iconbox_bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'block__accordion_icon_borderRadius' => array(
+                  'label' => 'Radius',
+                  'type' => 'input'
+                ),
+                'block__accordion_icon_width' => array(
+                  'label' => 'Width',
+                  'type' => 'input'
+                ),
+                'block__accordion_icon_height' => array(
+                  'label' => 'Height',
+                  'type' => 'input'
+                ),
+                'block__accordion_icon_seperator' => array(
+                  'label' => 'Placeholder between text and icon',
+                  'type' => 'input'
+                ),
+                'block__accordion_icon_width_mobile' => array(
+                  'label' => 'Width',
+                  'type' => 'input'
+                ),
+                'block__accordion_icon_height_mobile' => array(
+                  'label' => 'Height',
+                  'type' => 'input'
+                ),
+                'block__accordion_label_arrow' => array(
+                  'label' => 'Plus sign color',
+                  'type' => 'color'
+                ),
+                'block__accordion_icon_plusRadius' => array(
+                  'label' => 'Plus sign radius',
+                  'type' => 'input'
+                ),
+                'block__accordion_icon_plusSize' => array(
+                  'label' => 'Plus sign size',
+                  'type' => 'input'
+                ),
+                'block__accordion_icon_plusWeight' => array(
+                  'label' => 'Plus sign weight',
+                  'type' => 'input'
+                )
+              )
             ),
-            'block__accordion_label_spacing' => array(
-              'label' => 'Space inside label',
-              'type' => 'input'
-            ),
-            'block__accordion_label_fontfamily' => array(
-              'label' => 'Label font family',
-              'type' => 'input'
-            ),
-            'block__accordion_label_textTransform' => array(
-              'label' => 'Label text transform',
-              'type' => 'select'
-            ),
-            'block__accordion_label_letterSpacing' => array(
-              'label' => 'Label letter spacing',
-              'type' => 'input'
-            ),
-            'block__accordion_label_fontsize' => array(
-              'label' => 'Label font-size',
-              'type' => 'input'
-            ),
-            'block__accordion_label_fontweight' => array(
-              'label' => 'Label font weight',
-              'type' => 'select'
-            ),
-            'block__accordion_label_lineheight' => array(
-              'label' => 'Label line-height',
-              'type' => 'input'
-            ),
-            'block__accordion_label_spacing_mobile' => array(
-              'label' => 'Space inside label',
-              'type' => 'input'
-            ),
-            'block__accordion_label_fontsize_mobile' => array(
-              'label' => 'Label font-size',
-              'type' => 'input'
-            ),
-            'block__accordion_label_lineheight_mobile' => array(
-              'label' => 'Label line-height',
-              'type' => 'input'
-            ),
-            'block__accordion_iconbox_bg' => array(
-              'label' => 'Iconbox background color',
-              'type' => 'color',
-              'default' => '#000000'
-            ),
-            'block__accordion_icon_borderRadius' => array(
-              'label' => 'Iconbox radius',
-              'type' => 'input'
-            ),
-            'block__accordion_icon_width' => array(
-              'label' => 'Iconbox width',
-              'type' => 'input'
-            ),
-            'block__accordion_icon_height' => array(
-              'label' => 'Iconbox height',
-              'type' => 'input'
-            ),
-            'block__accordion_icon_seperator' => array(
-              'label' => 'Placeholder between text and icon',
-              'type' => 'input'
-            ),
-            'block__accordion_icon_width_mobile' => array(
-              'label' => 'Iconbox width',
-              'type' => 'input'
-            ),
-            'block__accordion_icon_height_mobile' => array(
-              'label' => 'Iconbox height',
-              'type' => 'input'
-            ),
-            'block__accordion_label_arrow' => array(
-              'label' => 'Plus sign color',
-              'type' => 'color',
-              'default' => '#89c0ff'
-            ),
-            'block__accordion_icon_plusSize' => array(
-              'label' => 'Plus sign size',
-              'type' => 'input'
-            ),
-            'block__accordion_icon_plusRadius' => array(
-              'label' => 'Plus sign radius',
-              'type' => 'input'
-            ),
-            'block__accordion_icon_plusWeight' => array(
-              'label' => 'Plus sign weight',
-              'type' => 'input'
-            ),
-            'block__accordion_content_bg' => array(
-              'label' => 'toggled content background color',
-              'type' => 'color',
-              'default' => '#ffffff'
-            ),
-            'block__accordion_content' => array(
-              'label' => 'toggled content text color',
-              'type' => 'color',
-              'default' => '#000000'
-            ),
-            'block__accordion_content_spacing' => array(
-              'label' => 'Space inside toggled content',
-              'type' => 'input'
-            ),
-            'block__accordion_content_fontsize' => array(
-              'label' => 'Content font size',
-              'type' => 'input'
-            ),
-            'block__accordion_content_lineheight' => array(
-              'label' => 'Content line height',
-              'type' => 'input'
-            ),
-            'block__accordion_content_spacing_mobile' => array(
-              'label' => 'Space inside toggled content',
-              'type' => 'input'
-            ),
-            'block__accordion_content_fontsize_mobile' => array(
-              'label' => 'Content font size',
-              'type' => 'input'
-            ),
-            'block__accordion_content_lineheight_mobile' => array(
-              'label' => 'Content line height',
-              'type' => 'input'
+            'gutenberg_accordion_content' => array(
+              'label' => 'Content',
+              'inputs' => array(
+                'block__accordion_content_bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'block__accordion_content' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'block__accordion_content_spacing' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'block__accordion_content_fontsize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'block__accordion_content_lineheight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'block__accordion_content_spacing_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'block__accordion_content_fontsize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'block__accordion_content_lineheight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                )
+              )
             )
           )
         ),
-        'gutenberg_imagePins' => array(
-          'label' => 'Image with pins',
-          'inputs' => array(
-            'imagePins__pinColor' => array(
-              'label' => 'Pin color',
-              'type' => 'color'
+        'gutenberg_postsblock' => array(
+          'label' => 'Posts',
+          'sections' => array(
+            'gutenberg_postsblock_item' => array(
+              'label' => 'Item',
+              'inputs' => array(
+                'block__posts_backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'block__posts_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'block__posts_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'block__posts_borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'input'
+                ),
+                'block__posts_border' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'block__posts_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'block__posts_flexGap' => array(
+                  'label' => 'Gap',
+                  'type' => 'input'
+                ),
+                'block__posts_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'block__posts_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'block__posts_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                )
+              )
             ),
-            'imagePins__pinColor_hover' => array(
-              'label' => 'Pin color',
-              'type' => 'color'
+            'gutenberg_postsblock_itemthumb' => array(
+              'label' => 'Item thumbnail',
+              'inputs' => array(
+                'block__posts_thumb_margin' => array(
+                  'label' => 'Thumbnail margin',
+                  'type' => 'input'
+                ),
+                'block__posts_thumb_padding' => array(
+                  'label' => 'Thumbnail padding',
+                  'type' => 'input'
+                )
+              )
             ),
-            'imagePins__pinColor_loaded' => array(
-              'label' => 'Loaded pin color',
-              'type' => 'color'
+            'gutenberg_postsblock_itemtitle' => array(
+              'label' => 'Item title',
+              'inputs' => array(
+                'block__posts_title_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'block__posts_title_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'block__posts_title_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'block__posts_title_fontfamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'block__posts_title_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'block__posts_title_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'block__posts_title_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'block__posts_title_textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'block__posts_title_fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'block__posts_title_letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'input'
+                )
+              )
+            )
+          )
+        ),
+        'gutenberg_postsfilter' => array(
+          'label' => 'Posts filter',
+          'sections' => array(
+            'gutenberg_postsfilter_item' => array(
+              'label' => 'Item',
+              'inputs' => array(
+                'block__postsfilter_backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'block__postsfilter_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'block__postsfilter_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'block__postsfilter_borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'input'
+                ),
+                'block__postsfilter_border' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'block__postsfilter_flexGap' => array(
+                  'label' => 'Gap',
+                  'type' => 'input'
+                ),
+                'block__postsfilter_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'block__postsfilter_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'block__postsfilter_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'block__postsfilter_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                )
+              )
             ),
-            'imagePins__pinSize' => array(
-              'label' => 'Pin width',
-              'type' => 'input'
+            'gutenberg_postsfilter_itemthumb' => array(
+              'label' => 'Item thumbnail',
+              'inputs' => array(
+                'block__postsfilter_thumb_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'block__postsfilter_thumb_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                )
+              )
             ),
-            'imagePins__pinInfo_bc' => array(
-              'label' => 'Info window background color',
-              'type' => 'color'
-            ),
-            'imagePins__pinInfo_borderColor' => array(
-              'label' => 'Info window border color',
-              'type' => 'color'
-            ),
-            'imagePins__pinInfo_width' => array(
-              'label' => 'Info window max width',
-              'type' => 'input'
-            ),
-            'imagePins__pinInfo_padding' => array(
-              'label' => 'Info window padding',
-              'type' => 'input'
-            ),
-            'imagePins__pinInfo_borderWidth' => array(
-              'label' => 'Info window border width',
-              'type' => 'input'
-            ),
-            'imagePins__pinInfo_borderRadius' => array(
-              'label' => 'Info window border radius',
-              'type' => 'input'
-            ),
-            'imagePins__pinInfo_closeColor' => array(
-              'label' => 'Pin color',
-              'type' => 'color'
-            ),
-            'imagePins__pinInfo_closeColor_hover' => array(
-              'label' => 'Pin color',
-              'type' => 'color'
-            ),
-            'imagePins__pinInfo_closeSize' => array(
-              'label' => 'Pin width',
-              'type' => 'input'
+            'gutenberg_postsfilter_itemtitle' => array(
+              'label' => 'Item title',
+              'inputs' => array(
+                'block__postsfilter_title_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'block__postsfilter_title_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'block__postsfilter_title_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'block__postsfilter_title_fontfamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'block__postsfilter_title_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'block__postsfilter_title_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'block__postsfilter_title_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'block__postsfilter_title_textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'block__postsfilter_title_fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'block__postsfilter_title_letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'input'
+                )
+              )
             )
           )
         ),
         'gutenberg_video' => array(
           'label' => 'Video',
-          'inputs' => array(
-            'block__videojs_iconFont' => array(
-              'label' => 'VideoJS Icons font family',
-              'type' => 'input',
-              'default' => 'VideoJS'
+          'sections' => array(
+            'gutenberg_video_settings' => array(
+              'label' => 'Settings (Video JS)',
+              'inputs' => array(
+                'block__videojs_iconFont' => array(
+                  'label' => 'Icons font family',
+                  'type' => 'input',
+                  'default' => 'VideoJS'
+                )
+              )
             ),
-            'block__videojs_coverStart_bgColor' => array(
-              'label' => 'VideoJS cover background color on start',
-              'type' => 'color'
+            'gutenberg_video_coverstart' => array(
+              'label' => 'Start cover (Video JS)',
+              'inputs' => array(
+                'block__videojs_coverStart_bgColor' => array(
+                  'label' => 'Background color (on start)',
+                  'type' => 'color'
+                ),
+                'block__videojs_coverStart_opacity (on start)' => array(
+                  'label' => 'Opacity',
+                  'type' => 'input'
+                ),
+                'block__videojs_coverPause_bgColor' => array(
+                  'label' => 'Background color (on pause)',
+                  'type' => 'color'
+                ),
+                'block__videojs_coverPause_opacity' => array(
+                  'label' => 'Opacity (on pause)',
+                  'type' => 'input'
+                )
+              )
             ),
-            'block__videojs_coverStart_opacity' => array(
-              'label' => 'VideoJS cover opacity on start',
-              'type' => 'input'
+            'gutenberg_video_playbutton' => array(
+              'label' => 'Play button (Video JS)',
+              'inputs' => array(
+                'block__videojs_firstPlay_bgColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'block__videojs_firstPlay_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'block__videojs_firstPlay_color' => array(
+                  'label' => 'Icon color',
+                  'type' => 'color'
+                ),
+                'block__videojs_firstPlay_bgColor_hover' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'block__videojs_firstPlay_borderColor_hover' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'block__videojs_firstPlay_color_hover' => array(
+                  'label' => 'Icon color',
+                  'type' => 'color'
+                ),
+                'block__videojs_firstPlay_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'block__videojs_firstPlay_borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'input'
+                ),
+                'block__videojs_firstPlay_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'block__videojs_firstPlay_size' => array(
+                  'label' => 'Icon size',
+                  'type' => 'input'
+                ),
+                'block__videojs_firstPlay_borderWidth_mobile' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'block__videojs_firstPlay_size_mobile' => array(
+                  'label' => 'Icon size',
+                  'type' => 'input'
+                )
+              )
             ),
-            'block__videojs_coverPause_bgColor' => array(
-              'label' => 'VideoJS cover background color on pause',
-              'type' => 'color'
+            'gutenberg_video_controlbar' => array(
+              'label' => 'Control bar (Video JS)',
+              'inputs' => array(
+                'block__videojs_controlBar_bgColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'block__videojs_controlBarButton_color' => array(
+                  'label' => 'Icon color',
+                  'type' => 'color'
+                ),
+                'block__videojs_controlBarButton_color_hover' => array(
+                  'label' => 'Icon color',
+                  'type' => 'color'
+                ),
+                'block__videojs_controlBar_borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'input'
+                ),
+                'block__videojs_controlBar_spacing' => array(
+                  'label' => 'Spacing',
+                  'type' => 'input'
+                ),
+                'block__videojs_controlBar_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'block__videojs_controlBar_gap' => array(
+                  'label' => 'Gap',
+                  'type' => 'input'
+                ),
+                'block__videojs_controlBarButton_fontSize' => array(
+                  'label' => 'Icon size',
+                  'type' => 'input'
+                )
+              )
             ),
-            'block__videojs_coverPause_opacity' => array(
-              'label' => 'VideoJS cover opacity on pause',
-              'type' => 'input'
+            'gutenberg_video_progressbar' => array(
+              'label' => 'Progress bar (Video JS)',
+              'inputs' => array(
+                'block__videojs_progress_bgColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'block__videojs_progress_height' => array(
+                  'label' => 'Height',
+                  'type' => 'input'
+                ),
+                'block__videojs_progress_button_color' => array(
+                  'label' => 'Button color',
+                  'type' => 'color'
+                ),
+                'block__videojs_progress_button_fontSize' => array(
+                  'label' => 'Button size',
+                  'type' => 'input'
+                ),
+                'block__videojs_progress_passed_bgColor' => array(
+                  'label' => 'Passed progress bar',
+                  'type' => 'color'
+                ),
+                'block__videojs_progress_remainingTime_color' => array(
+                  'label' => 'Remaining time color',
+                  'type' => 'color'
+                ),
+                'block__videojs_progress_remainingTime_fontSize' => array(
+                  'label' => 'Remaining time font size',
+                  'type' => 'input'
+                )
+              )
             ),
-            'block__videojs_firstPlay_bgColor' => array(
-              'label' => 'VideoJS big play button background color',
-              'type' => 'color'
-            ),
-            'block__videojs_firstPlay_borderColor' => array(
-              'label' => 'VideoJS big play button border color',
-              'type' => 'color'
-            ),
-            'block__videojs_firstPlay_color' => array(
-              'label' => 'VideoJS big play button icon color',
-              'type' => 'color'
-            ),
-            'block__videojs_firstPlay_bgColor_hover' => array(
-              'label' => 'VideoJS big play button background color',
-              'type' => 'color'
-            ),
-            'block__videojs_firstPlay_borderColor_hover' => array(
-              'label' => 'VideoJS big play button border color',
-              'type' => 'color'
-            ),
-            'block__videojs_firstPlay_color_hover' => array(
-              'label' => 'VideoJS big play button icon color',
-              'type' => 'color'
-            ),
-            'block__videojs_firstPlay_size' => array(
-              'label' => 'VideoJS big play button icon size',
-              'type' => 'input'
-            ),
-            'block__videojs_firstPlay_size_mobile' => array(
-              'label' => 'VideoJS big play button icon size',
-              'type' => 'input'
-            ),
-            'block__videojs_firstPlay_padding' => array(
-              'label' => 'VideoJS big play button padding',
-              'type' => 'input'
-            ),
-            'block__videojs_firstPlay_borderWidth' => array(
-              'label' => 'VideoJS big play button border width',
-              'type' => 'input'
-            ),
-            'block__videojs_firstPlay_borderWidth_mobile' => array(
-              'label' => 'VideoJS big play button border width',
-              'type' => 'input'
-            ),
-            'block__videojs_firstPlay_borderRadius' => array(
-              'label' => 'VideoJS big play button border radius',
-              'type' => 'input'
-            ),
-            'block__videojs_controlBar_bgColor' => array(
-              'label' => 'VideoJS control bar background color',
-              'type' => 'color'
-            ),
-            'block__videojs_controlBar_spacing' => array(
-              'label' => 'VideoJS control bar spacing',
-              'type' => 'input'
-            ),
-            'block__videojs_controlBar_borderRadius' => array(
-              'label' => 'VideoJS control bar border radius',
-              'type' => 'input'
-            ),
-            'block__videojs_controlBar_padding' => array(
-              'label' => 'VideoJS control bar padding',
-              'type' => 'input'
-            ),
-            'block__videojs_controlBar_gap' => array(
-              'label' => 'VideoJS control bar gap',
-              'type' => 'input'
-            ),
-            'block__videojs_controlBarButton_color' => array(
-              'label' => 'VideoJS control bar icon color',
-              'type' => 'color'
-            ),
-            'block__videojs_controlBarButton_color_hover' => array(
-              'label' => 'VideoJS control bar icon color',
-              'type' => 'color'
-            ),
-            'block__videojs_controlBarButton_fontSize' => array(
-              'label' => 'VideoJS Icons icon size',
-              'type' => 'input'
-            ),
-            'block__videojs_progress_bgColor' => array(
-              'label' => 'VideoJS progress bar background color',
-              'type' => 'color'
-            ),
-            'block__videojs_progress_height' => array(
-              'label' => 'VideoJS progress bar height',
-              'type' => 'input'
-            ),
-            'block__videojs_progress_button_color' => array(
-              'label' => 'VideoJS progress bar button',
-              'type' => 'color'
-            ),
-            'block__videojs_progress_button_fontSize' => array(
-              'label' => 'VideoJS progress bar button size',
-              'type' => 'input'
-            ),
-            'block__videojs_progress_passed_bgColor' => array(
-              'label' => 'VideoJS passed progress bar',
-              'type' => 'color'
-            ),
-            'block__videojs_progress_remainingTime_color' => array(
-              'label' => 'VideoJS remaining time color',
-              'type' => 'color'
-            ),
-            'block__videojs_progress_remainingTime_fontSize' => array(
-              'label' => 'VideoJS remaining time font size',
-              'type' => 'input'
-            ),
-            'block__videojs_tooltip_bgColor' => array(
-              'label' => 'VideoJS tooltip background color',
-              'type' => 'color'
-            ),
-            'block__videojs_tooltip_Color' => array(
-              'label' => 'VideoJS tooltip color',
-              'type' => 'color'
-            ),
-            'bblock__videojs_tooltip_fontSize' => array(
-              'label' => 'VideoJS tooltip font size',
-              'type' => 'input'
-            ),
-            'bblock__videojs_tooltip_lineHeight' => array(
-              'label' => 'VideoJS tooltip line height',
-              'type' => 'input'
-            ),
-            'block__videojs_tooltip_decoSize' => array(
-              'label' => 'VideoJS tooltip decoration size',
-              'type' => 'input'
+            'gutenberg_video_tooltip' => array(
+              'label' => 'Tooltip (Video JS)',
+              'inputs' => array(
+                'block__videojs_tooltip_bgColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'block__videojs_tooltip_Color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'bblock__videojs_tooltip_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'bblock__videojs_tooltip_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'block__videojs_tooltip_decoSize' => array(
+                  'label' => 'Decoration size',
+                  'type' => 'input'
+                )
+              )
             )
           )
         ),
-        'posts' => array(
-          'label' => 'Posts',
-          'inputs' => array(
-            'block__posts_backgroundColor' => array(
-              'label' => 'Background color',
-              'type' => 'color'
+        'gutenberg_imagePins' => array(
+          'label' => 'Image with pins',
+          'sections' => array(
+            'gutenberg_imagePins_pins' => array(
+              'label' => 'Pins',
+              'inputs' => array(
+                'imagePins__pinColor' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'imagePins__pinColor_hover' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'imagePins__pinColor_loaded' => array(
+                  'label' => 'Color (loaded)',
+                  'type' => 'color'
+                ),
+                'imagePins__pinSize' => array(
+                  'label' => 'Width',
+                  'type' => 'input'
+                )
+              )
             ),
-            'block__posts_color' => array(
-              'label' => 'Color',
-              'type' => 'color'
+            'gutenberg_imagePins_info' => array(
+              'label' => 'Info window',
+              'inputs' => array(
+                'imagePins__pinInfo_bc' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'imagePins__pinInfo_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'imagePins__pinInfo_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'imagePins__pinInfo_borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'input'
+                ),
+                'imagePins__pinInfo_width' => array(
+                  'label' => 'Max width',
+                  'type' => 'input'
+                ),
+                'imagePins__pinInfo_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                )
+              )
             ),
-            'block__posts_borderColor' => array(
-              'label' => 'Border color',
-              'type' => 'color'
-            ),
-            'block__posts_borderRadius' => array(
-              'label' => 'Border radius',
-              'type' => 'input'
-            ),
-            'block__posts_border' => array(
-              'label' => 'Border width',
-              'type' => 'input'
-            ),
-            'block__posts_flexGap' => array(
-              'label' => 'Gap',
-              'type' => 'input'
-            ),
-            'block__posts_padding' => array(
-              'label' => 'Padding',
-              'type' => 'input'
-            ),
-            'block__posts_fontSize' => array(
-              'label' => 'Font size',
-              'type' => 'input'
-            ),
-            'block__posts_lineHeight' => array(
-              'label' => 'Line height',
-              'type' => 'input'
-            ),
-            'block__posts_fontWeight' => array(
-              'label' => 'Font weight',
-              'type' => 'select'
-            ),
-            'block__posts_thumb_margin' => array(
-              'label' => 'Thumbnail margin',
-              'type' => 'select'
-            ),
-            'block__posts_thumb_padding' => array(
-              'label' => 'Thumbnail padding',
-              'type' => 'select'
-            ),
-            'block__posts_title_color' => array(
-              'label' => 'Title color',
-              'type' => 'color'
-            ),
-            'block__posts_title_fontfamily' => array(
-              'label' => 'Title font family',
-              'type' => 'input'
-            ),
-            'block__posts_title_fontSize' => array(
-              'label' => 'Title font size',
-              'type' => 'input'
-            ),
-            'block__posts_title_lineHeight' => array(
-              'label' => 'Title line height',
-              'type' => 'input'
-            ),
-            'block__posts_title_padding' => array(
-              'label' => 'Title padding',
-              'type' => 'input'
-            ),
-            'block__posts_title_margin' => array(
-              'label' => 'Title margin',
-              'type' => 'input'
-            ),
-            'block__posts_title_fontWeight' => array(
-              'label' => 'Title font weight',
-              'type' => 'select'
-            ),
-            'block__posts_title_textTransform' => array(
-              'label' => 'Title text transform',
-              'type' => 'select'
-            ),
-            'block__posts_title_fontStyle' => array(
-              'label' => 'Title font style',
-              'type' => 'select'
-            ),
-            'block__posts_title_letterSpacing' => array(
-              'label' => 'Title letter spacing',
-              'type' => 'input'
+            'gutenberg_imagePins_infoClose' => array(
+              'label' => 'Close info window',
+              'inputs' => array(
+                'imagePins__pinInfo_closeColor' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'imagePins__pinInfo_closeColor_hover' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'imagePins__pinInfo_closeSize' => array(
+                  'label' => 'Width',
+                  'type' => 'input'
+                )
+              )
             )
           )
         ),
-        'postsfilter' => array(
-          'label' => 'Posts filter',
-          'inputs' => array(
-            'block__postsfilter_backgroundColor' => array(
-              'label' => 'Background color',
-              'type' => 'color'
+        'gutenberg_seperator' => array(
+          'label' => 'Seperator',
+          'sections' => array(
+            'gutenberg_seperator_settings' => array(
+              'label' => 'Settings',
+              'inputs' => array(
+                'gbSeperator_color' => array(
+                  'label' => 'Default color',
+                  'type' => 'color'
+                ),
+                'block__separator_marginTop' => array(
+                  'label' => 'Margin top',
+                  'type' => 'input'
+                ),
+                'block__separator_marginBottom' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'input'
+                ),
+                'block__separator_width' => array(
+                  'label' => 'Height',
+                  'type' => 'input'
+                ),
+                'block__separator_marginTop_mobile' => array(
+                  'label' => 'Margin top',
+                  'type' => 'input'
+                ),
+                'block__separator_marginBottom_mobile' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'input'
+                ),
+                'block__separator_width_mobile' => array(
+                  'label' => 'Height',
+                  'type' => 'input'
+                ),
+                'dark__gbSeperator_color' => array(
+                  'label' => 'Default color',
+                  'type' => 'color'
+                )
+              )
             ),
-            'block__postsfilter_color' => array(
-              'label' => 'Color',
-              'type' => 'color'
+            'gutenberg_seperator_dots' => array(
+              'label' => 'Dotted',
+              'inputs' => array(
+                'block__separatorDots_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'block__separatorDots_fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                )
+              )
+            )
+          )
+        ),
+        'gutenberg_cover' => array(
+          'label' => 'Cover',
+          'sections' => array(
+            'gutenberg_cover_settings' => array(
+              'label' => 'Settings',
+              'inputs' => array(
+                'block__cover_minHeight' => array(
+                  'label' => 'Minimum height',
+                  'type' => 'input'
+                ),
+                'block__cover_container_paddingTop' => array(
+                  'label' => 'Container padding top',
+                  'type' => 'input'
+                ),
+                'block__cover_container_paddingBottom' => array(
+                  'label' => 'Container padding bottom',
+                  'type' => 'input'
+                ),
+                'block__cover_zoomer_scale' => array(
+                  'label' => 'Background image zoom animation',
+                  'type' => 'input'
+                ),
+                'block__cover_minHeight_mobile' => array(
+                  'label' => 'Minimum height',
+                  'type' => 'input'
+                ),
+                'block__cover_container_paddingTop_mobile' => array(
+                  'label' => 'Container padding top',
+                  'type' => 'input'
+                ),
+                'block__cover_container_paddingBottom_mobile' => array(
+                  'label' => 'Container padding bottom',
+                  'type' => 'input'
+                )
+              )
             ),
-            'block__postsfilter_borderColor' => array(
-              'label' => 'Border color',
-              'type' => 'color'
+            'gutenberg_cover_alignwide' => array(
+              'label' => 'Align wide',
+              'inputs' => array(
+                'block__cover_alignwide_minHeight' => array(
+                  'label' => 'Minimum height',
+                  'type' => 'input'
+                ),
+                'block__cover_alignwide_minHeight_mobile' => array(
+                  'label' => 'Minimum height',
+                  'type' => 'input'
+                )
+              )
             ),
-            'block__postsfilter_borderRadius' => array(
-              'label' => 'Border radius',
-              'type' => 'input'
-            ),
-            'block__postsfilter_border' => array(
-              'label' => 'Border width',
-              'type' => 'input'
-            ),
-            'block__postsfilter_flexGap' => array(
-              'label' => 'Gap',
-              'type' => 'input'
-            ),
-            'block__postsfilter_padding' => array(
-              'label' => 'Padding',
-              'type' => 'input'
-            ),
-            'block__postsfilter_fontSize' => array(
-              'label' => 'Font size',
-              'type' => 'input'
-            ),
-            'block__postsfilter_lineHeight' => array(
-              'label' => 'Line height',
-              'type' => 'input'
-            ),
-            'block__postsfilter_fontWeight' => array(
-              'label' => 'Font weight',
-              'type' => 'select'
-            ),
-            'block__postsfilter_thumb_margin' => array(
-              'label' => 'Thumbnail margin',
-              'type' => 'select'
-            ),
-            'block__postsfilter_thumb_padding' => array(
-              'label' => 'Thumbnail padding',
-              'type' => 'select'
-            ),
-            'block__postsfilter_title_color' => array(
-              'label' => 'Title color',
-              'type' => 'color'
-            ),
-            'block__postsfilter_title_fontfamily' => array(
-              'label' => 'Title font family',
-              'type' => 'input'
-            ),
-            'block__postsfilter_title_fontSize' => array(
-              'label' => 'Title font size',
-              'type' => 'input'
-            ),
-            'block__postsfilter_title_lineHeight' => array(
-              'label' => 'Title line height',
-              'type' => 'input'
-            ),
-            'block__postsfilter_title_padding' => array(
-              'label' => 'Title padding',
-              'type' => 'input'
-            ),
-            'block__postsfilter_title_margin' => array(
-              'label' => 'Title margin',
-              'type' => 'input'
-            ),
-            'block__postsfilter_title_fontWeight' => array(
-              'label' => 'Title font weight',
-              'type' => 'select'
-            ),
-            'block__postsfilter_title_textTransform' => array(
-              'label' => 'Title text transform',
-              'type' => 'select'
-            ),
-            'block__postsfilter_title_fontStyle' => array(
-              'label' => 'Title font style',
-              'type' => 'select'
-            ),
-            'block__postsfilter_title_letterSpacing' => array(
-              'label' => 'Title letter spacing',
-              'type' => 'input'
+            'gutenberg_cover_alignfull' => array(
+              'label' => 'Align full',
+              'inputs' => array(
+                'block__cover_alignfull_minHeight' => array(
+                  'label' => 'Minimum height',
+                  'type' => 'input'
+                ),
+                'block__cover_alignfull_minHeight_mobile' => array(
+                  'label' => 'Minimum height',
+                  'type' => 'input'
+                )
+              )
+            )
+          )
+        ),
+        'gutenberg_group' => array(
+          'label' => 'Group',
+          'sections' => array(
+            'gutenberg_group_' => array(
+              'label' => 'Has background',
+              'inputs' => array(
+                'block__group_hasBackground_paddingTop' => array(
+                  'label' => 'Padding top',
+                  'type' => 'input'
+                ),
+                'block__group_hasBackground_paddingBottom' => array(
+                  'label' => 'Padding bottom',
+                  'type' => 'input'
+                ),
+                'block__group_hasBackground_paddingTop_mobile' => array(
+                  'label' => 'Padding top',
+                  'type' => 'input'
+                ),
+                'block__group_hasBackground_paddingBottom_mobile' => array(
+                  'label' => 'Padding bottom',
+                  'type' => 'input'
+                )
+              )
             )
           )
         )
-      )
+      ),
+      'sections' => array()
     ),
     'footer' => array(
       'label' => 'Footer',
+      'panels' => array(
+        'footer_settings' => array(
+          'label' => 'Settings',
+          'sections' => array(
+            'footer_settings_colors' => array(
+              'label' => 'Colors',
+              'inputs' => array(
+                'footer_background' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'footercontainer_background' => array(
+                  'label' => 'Container background color',
+                  'type' => 'color'
+                ),
+                'footer_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'footer_link_color' => array(
+                  'label' => 'Link color',
+                  'type' => 'color'
+                ),
+                'footer_linkHover_color' => array(
+                  'label' => 'Link hover color',
+                  'type' => 'color'
+                ),
+                'dark__footer_background' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__footercontainer_background' => array(
+                  'label' => 'Container background color',
+                  'type' => 'color'
+                ),
+                'dark__footer_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__footer_link_color' => array(
+                  'label' => 'Link color',
+                  'type' => 'color'
+                ),
+                'dark__footer_linkHover_color' => array(
+                  'label' => 'Link hover color',
+                  'type' => 'color'
+                )
+              )
+            ),
+            'footer_settings_spacing' => array(
+              'label' => 'Spacing',
+              'inputs' => array(
+                'footer__paddingTop' => array(
+                  'label' => 'Container padding top',
+                  'type' => 'input',
+                ),
+                'footer__paddingBottom' => array(
+                  'label' => 'Container padding bottom',
+                  'type' => 'input'
+                ),
+                'footer_itemSpacing' => array(
+                  'label' => 'Item Spacing (vertical)',
+                  'type' => 'input'
+                ),
+                'footer__paddingTop_mobile' => array(
+                  'label' => 'Container padding top',
+                  'type' => 'input'
+                ),
+                'footer__paddingBottom_mobile' => array(
+                  'label' => 'Container padding bottom',
+                  'type' => 'input'
+                ),
+                'footer_itemSpacing_mobile' => array(
+                  'label' => 'Item Spacing (vertical)',
+                  'type' => 'input'
+                )
+              )
+            ),
+            'footer_settings_typography' => array(
+              'label' => 'Typography',
+              'inputs' => array(
+                'footer__fontsize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'footer__lineheight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'footer__fontsize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'footer__lineheight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                )
+              )
+            )
+          )
+        )
+      ),
       'sections' => array(
-        'footer_colors' => array(
-          'label' => 'Colors',
-          'inputs' => array(
-            'footer_background' => array(
-              'label' => 'Footer background color',
-              'type' => 'color',
-              'default' => '#f9f9f9'
-            ),
-            'footercontainer_background' => array(
-              'label' => 'Footer container background color',
-              'type' => 'color',
-              'default' => 'transparent'
-            ),
-            'footer_color' => array(
-              'label' => 'Text color',
-              'type' => 'color'
-            ),
-            'footer_link_color' => array(
-              'label' => 'Link color',
-              'type' => 'color'
-            ),
-            'footer_linkHover_color' => array(
-              'label' => 'Link hover color',
-              'type' => 'color'
-            ),
-            'dark__footer_background' => array(
-              'label' => 'Footer background',
-              'type' => 'color',
-              'default' => '#1d1e1f'
-            ),
-            'dark__footercontainer_background' => array(
-              'label' => 'Footer container background',
-              'type' => 'color',
-              'default' => 'transparent'
-            ),
-            'dark__footer_color' => array(
-              'label' => 'Text color',
-              'type' => 'color'
-            ),
-            'dark__footer_link_color' => array(
-              'label' => 'Link color',
-              'type' => 'color'
-            ),
-            'dark__footer_linkHover_color' => array(
-              'label' => 'Link hover color',
-              'type' => 'color'
-            )
-          )
-        ),
-        'footer_desktop' => array(
-          'label' => 'Desktop',
-          'inputs' => array(
-            'footer__fontsize' => array(
-              'label' => 'Footer font size',
-              'type' => 'input'
-            ),
-            'footer__lineheight' => array(
-              'label' => 'Footer line height',
-              'type' => 'input'
-            ),
-            'footer__paddingTop' => array(
-              'label' => 'Container padding top',
-              'type' => 'input',
-            ),
-            'footer__paddingBottom' => array(
-              'label' => 'Container padding bottom',
-              'type' => 'input'
-            ),
-            'footer_itemSpacing' => array(
-              'label' => 'Item Spacing (vertical)',
-              'type' => 'input'
-            )
-          )
-        ),
-        'footer_mobile' => array(
-          'label' => 'Mobile',
-          'inputs' => array(
-            'footer__fontsize_mobile' => array(
-              'label' => 'Footer font size',
-              'type' => 'input'
-            ),
-            'footer__lineheight_mobile' => array(
-              'label' => 'Footer line height',
-              'type' => 'input'
-            ),
-            'footer__paddingTop_mobile' => array(
-              'label' => 'Container padding top',
-              'type' => 'input'
-            ),
-            'footer__paddingBottom_mobile' => array(
-              'label' => 'Container padding bottom',
-              'type' => 'input'
-            ),
-            'footer_itemSpacing_mobile' => array(
-              'label' => 'Item Spacing (vertical)',
-              'type' => 'input'
-            )
-          )
-        ),
-        'footerMenu' => array(
+        'gutenberg_menu' => array(
           'label' => 'Menu',
           'inputs' => array(
             'footer__menu_link_color' => array(
-              'label' => 'Link color',
+              'label' => 'Color',
               'type' => 'color'
             ),
             'footer__menu_linkHover_color' => array(
-              'label' => 'Link hover color',
+              'label' => 'Hover color',
               'type' => 'color'
             ),
             'footer__menu_link_fontfamily' => array(
-              'label' => 'Link font family',
+              'label' => 'Font family',
               'type' => 'input'
             ),
             'footer__menu_link_fontsize' => array(
-              'label' => 'Link font size',
+              'label' => 'Font size',
               'type' => 'input'
             ),
             'footer__menu_link_lineheight' => array(
-              'label' => 'Link line height',
+              'label' => 'Line height',
               'type' => 'input'
             ),
             'footer__menu_link_fontWeight' => array(
-              'label' => 'Link font weight',
+              'label' => 'Font weight',
               'type' => 'select'
             ),
             'footer__menu_link_textTransform' => array(
-              'label' => 'Link text transform',
+              'label' => 'Text transform',
               'type' => 'select'
             ),
             'footer__menu_link_letterSpacing' => array(
-              'label' => 'Link letter spacing',
+              'label' => 'Letter spacing',
               'type' => 'input'
             ),
             'footer__menu_link_fontsize_mobile' => array(
-              'label' => 'Link font size',
+              'label' => 'Font size',
               'type' => 'input'
             ),
             'footer__menu_link_lineheight_mobile' => array(
-              'label' => 'Link line height',
+              'label' => 'Line height',
               'type' => 'input'
             )
           )
@@ -4305,6 +5629,8 @@ class prefix_core_Customizer {
 
     // Inlcude the Alpha Color Picker control file.
     require_once( dirname( __FILE__ ) . '/alpha-color-picker/alpha-color-picker.php' );
+    require_once( dirname( __FILE__ ) . '/nesting/nesting.php' );
+    $wp_customize->register_panel_type( 'PE_WP_Customize_Panel' );
 
     foreach ($this->defaultValues as $panelKey => $panelValues) {
       SELF::buildPanel($wp_customize, $panelKey, $panelValues, '', 1);
@@ -4315,21 +5641,31 @@ class prefix_core_Customizer {
   function buildPanel($wp_customize, $panelKey, $panelValues, $panalParent, $priority){
     // build panal
     if($panalParent !== ''):
-      $wp_customize->add_panel($panelKey,
-        array(
-          'title' => $panelValues["label"],
-          'priority' => $priority,
-          'panel' => $panalParent
-        )
-      );
+      // $wp_customize->add_panel($panelKey,
+      //   array(
+      //     'title' => $panelValues["label"],
+      //     'priority' => $priority,
+      //     'panel' => $panalParent
+      //   )
+      // );
+      $panelBuilder = new PE_WP_Customize_Panel( $wp_customize, $panelKey, array(
+        'title' => $panelValues["label"],
+        'priority' => $priority,
+        'panel' => $panalParent
+      ));
     else:
-      $wp_customize->add_panel($panelKey,
-        array(
-          'title' => $panelValues["label"],
-          'priority' => $priority
-        )
-      );
+      // $wp_customize->add_panel($panelKey,
+      //   array(
+      //     'title' => $panelValues["label"],
+      //     'priority' => $priority
+      //   )
+      // );
+      $panelBuilder = new PE_WP_Customize_Panel( $wp_customize, $panelKey, array(
+        'title' => $panelValues["label"],
+        'priority' => $priority
+      ));
     endif;
+    $wp_customize->add_panel( $panelBuilder );
     // add sub panals
     if(array_key_exists("panels",$panelValues)):
       $priority = $priority + 1;
@@ -4371,9 +5707,9 @@ class prefix_core_Customizer {
     $activeLabels = array();
     $labelAdd = '';
     // add labels
-    if (strpos($inputKey, 'dark__') !== false):
-      $activeLabels[] = __( 'dark mode', 'customizer' );
-    endif;
+    // if (strpos($inputKey, 'dark__') !== false):
+    //   $activeLabels[] = __( 'dark mode', 'customizer' );
+    // endif;
     if (strpos($inputKey, '_sticky') !== false):
       $activeLabels[] = __( 'sticky', 'customizer' );
     endif;
@@ -4590,6 +5926,7 @@ class prefix_core_Customizer {
     // ob_end_flush();
 
     // do math for master theme responsive file
+    $inputsToBuild = array();
     $get_mobile_breakpoint = preg_split('/(?<=[0-9])(?=[a-z]+)/i',get_theme_mod('mobile_breakpoint', '768px'));
     $mobile_breakpoint = $get_mobile_breakpoint[0] - 1;
     $container_width = preg_split('/(?<=[0-9])(?=[a-z]+)/i',get_theme_mod('container__width', '1000px'));
@@ -4607,31 +5944,51 @@ class prefix_core_Customizer {
     $output .= ':root {';
       $output .= '--wideWidth: ' . $wide_reset . 'px;';
       foreach ($this->defaultValues as $panelKey => $panelValues) {
+        // first level sections
         foreach ($panelValues["sections"] as $sectionKey => $sectionValues) {
           foreach ($sectionValues["inputs"] as $valueKey => $ValueSettings) {
-            $quotemark = array_key_exists("quotemark",$ValueSettings) && $ValueSettings["quotemark"]  == '1' ? '"' : '';
-            $insert = htmlspecialchars(get_theme_mod($valueKey, $ValueSettings["default"]));
-            if($insert !== ''):
-              if(strpos($valueKey, 'dark__') !== false && strpos($valueKey, '_mobile') !== false):
-                // move to mobile dark mode
-                $mobileDarkOutput .= '--' . str_replace(arrray('dark__', '_mobile'), array('', ''), $valueKey) . ': ' . $quotemark . $insert . $quotemark . ';';
-              elseif(strpos($valueKey, 'dark__') !== false):
-                // move to dark mode
-                $darkOutput .= '--' . str_replace('dark__', '', $valueKey) . ': ' . $quotemark . $insert . $quotemark . ';';
-              elseif (strpos($valueKey, '_mobile') !== false):
-                // move to mobile
-                $mobileOutput .= '--' . str_replace('_mobile', '', $valueKey) . ': ' . $quotemark . $insert . $quotemark . ';';
-              else:
-                if($valueKey == 'gutenberg__font_scale'):
-                  $output .= '--' . $valueKey . ': ' . $quotemark . '1' . $quotemark . ';';
-                  $mobileOutput .= '--' . $valueKey . ': ' . $quotemark . $insert . $quotemark . ';';
-                else:
-                  $output .= '--' . $valueKey . ': ' . $quotemark . $insert . $quotemark . ';';
-                endif;
-              endif;
-            endif;
+            $inputsToBuild[$valueKey] = $ValueSettings;
           }
         }
+        // second level sections
+        foreach ($panelValues["panels"] as $subPanelKey => $subPanelValues) {
+          foreach ($subPanelValues["sections"] as $sectionKey => $sectionValues) {
+            foreach ($sectionValues["inputs"] as $valueKey => $ValueSettings) {
+              $inputsToBuild[$valueKey] = $ValueSettings;
+            }
+          }
+          // third level sections
+          foreach ($subPanelValues["panels"] as $subsubPanelKey => $subsubPanelValues) {
+            foreach ($subsubPanelValues["sections"] as $sectionKey => $sectionValues) {
+              foreach ($sectionValues["inputs"] as $valueKey => $ValueSettings) {
+                $inputsToBuild[$valueKey] = $ValueSettings;
+              }
+            }
+          }
+        }
+      }
+      foreach ($inputsToBuild as $valueKey => $ValueSettings) {
+        $quotemark = array_key_exists("quotemark",$ValueSettings) && $ValueSettings["quotemark"]  == '1' ? '"' : '';
+        $insert = htmlspecialchars(get_theme_mod($valueKey, $ValueSettings["default"]));
+        if($insert !== ''):
+          if(strpos($valueKey, 'dark__') !== false && strpos($valueKey, '_mobile') !== false):
+            // move to mobile dark mode
+            $mobileDarkOutput .= '--' . str_replace(arrray('dark__', '_mobile'), array('', ''), $valueKey) . ': ' . $quotemark . $insert . $quotemark . ';';
+          elseif(strpos($valueKey, 'dark__') !== false):
+            // move to dark mode
+            $darkOutput .= '--' . str_replace('dark__', '', $valueKey) . ': ' . $quotemark . $insert . $quotemark . ';';
+          elseif (strpos($valueKey, '_mobile') !== false):
+            // move to mobile
+            $mobileOutput .= '--' . str_replace('_mobile', '', $valueKey) . ': ' . $quotemark . $insert . $quotemark . ';';
+          else:
+            if($valueKey == 'gutenberg__font_scale'):
+              $output .= '--' . $valueKey . ': ' . $quotemark . '1' . $quotemark . ';';
+              $mobileOutput .= '--' . $valueKey . ': ' . $quotemark . $insert . $quotemark . ';';
+            else:
+              $output .= '--' . $valueKey . ': ' . $quotemark . $insert . $quotemark . ';';
+            endif;
+          endif;
+        endif;
       }
     $output .= '}';
     // dark mode
@@ -4691,6 +6048,7 @@ class prefix_core_Customizer {
         foreach ($gutenbergCofig['ColorPalette'] as $colorKey => $color) {
           $slug = prefix_core_BaseFunctions::Slugify($color["key"]);
           $output .= '.has-' . $slug . '-background-color {background-color: ' . $color["value"] . ';}';
+          $output .= '.has-' . $slug . '-border-color {border-color: ' . $color["value"] . ';}';
           $output .= '.has-' . $slug . '-color, .has-' . $slug . '-color > * {color: ' . $color["value"] . ';}';
         }
       endif;

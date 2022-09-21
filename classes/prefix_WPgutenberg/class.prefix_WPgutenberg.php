@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.24.15
+ * @version     2.25.15
  */
 
 /*=======================================================
@@ -639,7 +639,33 @@ class prefix_WPgutenberg {
           endif;
           $blockContent = str_replace('<img', '<img data-id="' . $block['attrs']['id'] . '"', $blockContent);
         endif;
-        //
+        // gallery
+        if("core/gallery" == $block['blockName']):
+          if(array_key_exists('attrs', $block) && $block['attrs']):
+            if($block['attrs'] && array_key_exists('addDownloadAllButton', $block['attrs']) && $block['attrs']['addDownloadAllButton'] == 1):
+              $allItems = array();
+              if(array_key_exists('innerBlocks', $block) && $block['innerBlocks']):
+                foreach ($block['innerBlocks'] as $innerBlocksKey => $innerBlocks) {
+                  if(array_key_exists('attrs', $innerBlocks) && $innerBlocks['attrs'] && array_key_exists('id', $innerBlocks['attrs'])):
+                    $allItems[] = basename (get_attached_file($innerBlocks['attrs']['id'])) . "__" . base64_encode(file_get_contents(wp_get_attachment_url($innerBlocks['attrs']['id'])));
+                  endif;
+                }
+                if(!empty($allItems)):
+                  $downloadLink = '<div class="download-container">';
+                    $downloadLink .= '<a class="download-all-button" data-items="' . implode($allItems, '|') . '">';
+                      $downloadLinkText = __( 'Download all', 'devTheme' );
+                      $downloadLink .= apply_filters( 'WPgutenberg_gallery_downloadAllButton', $downloadLinkText, $block['attrs'] );
+                    $downloadLink .= '</a>';
+                    $downloadLink .= '<div class="progress-bar">';
+                      $downloadLink .= '<div class="progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>';
+                    $downloadLink .= '</div>';
+                  $downloadLink .= '</div>';
+                  $blockContent .= $downloadLink;
+                endif;
+              endif;
+            endif;
+          endif;
+        endif;
       endif;
     endif;
 
@@ -658,6 +684,14 @@ class prefix_WPgutenberg {
           'https://vjs.zencdn.net/7.19.2/video.min.js',
           [],
           '7.19.2'
+        );
+      }
+      if (has_block('core/gallery', $id)) {
+        wp_enqueue_script(
+          'zip-js',
+          get_template_directory_uri() . '/assets/jszip.min.js',
+          [],
+          '3.10.1'
         );
       }
       if (has_block('templates/vimeo', $id)) {

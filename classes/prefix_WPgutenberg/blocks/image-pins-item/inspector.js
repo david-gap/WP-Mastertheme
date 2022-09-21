@@ -9,13 +9,13 @@ const {withState} = wp.compose;
 const {
   ColorPalette,
   PanelColorSettings,
-  ContrastChecker,
-  MediaUpload,
-  MediaUploadCheck
+  ContrastChecker
 } = wp.editor;
 
 const {
-  InspectorControls
+  InspectorControls,
+  MediaUploadCheck,
+  MediaUpload
 } = wp.blockEditor;
 
 const {

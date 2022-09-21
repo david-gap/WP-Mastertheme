@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.33.18
+ * @version     2.34.18
  *
 */
 
@@ -1682,7 +1682,7 @@ class prefix_template {
     public function buildSearchForm(string $type = 'default'){
       $output = '';
       if($type == 'menu'):
-        $containerStart = '<li class="menu-item menu-search-form">';
+        $containerStart = '<li class="menu-item menu-search-form search-form">';
         $containerEnd = '</li>';
       else:
         $containerStart = '<div class="search-form">';
@@ -1759,7 +1759,7 @@ class prefix_template {
         $content .= '<span class="video-selected">';
           if($videoId !== false && $videoId !== ''):
             $content .= '<span class="remove_video"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24.9 24.9" xml:space="preserve"><rect x="-3.7" y="10.9" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1549 12.4451)" fill="#000" width="32.2" height="3"/><rect x="10.9" y="-3.7" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -5.1549 12.4451)" fill="#000" width="3" height="32.2"/></svg></span>';
-            $content .= '<video src="' . wp_get_attachment_url($videoId) . '" autoplay muted playsinline></video>';
+            $content .= '<video src="' . wp_get_attachment_url($videoId) . '" autoplay muted playsinline loop></video>';
           endif;
         $content .= '</span></div>';
         $content .= '<div data-id="template_page_videothumb_options"><ul>';
@@ -1783,12 +1783,13 @@ class prefix_template {
       if(is_string($videoOptions)):
         $videoOptions = unserialize($videoOptions);
       endif;
-      if($videoThumbActive && $videoId && in_array($attr["callingFrom"], $videoOptions)):
+      if($videoThumbActive && $videoId && $attr && array_key_exists('callingFrom', $attr) && in_array($attr["callingFrom"], $videoOptions)):
         $html = '';
+        $placeholder = $post_thumbnail_id > 0 ? '  poster="' . wp_get_attachment_image_url($post_thumbnail_id, 'full') . '"' : '';
         $html .= $attr["callingFrom"] == 'detailpage' ? '<div class="' . $attr["class"] . '">' : '';
-        $html .= $attr["callingFrom"] == 'archive' || $attr["callingFrom"] == 'searchresults' ? '<figure>' : '';
-        $html .= '<video src="' . wp_get_attachment_url($videoId) . '" autoplay muted playsinline></video>';
-        $html .= $attr["callingFrom"] == 'archive' || $attr["callingFrom"] == 'searchresults' ? '</figure>' : '';
+        $html .= $attr["callingFrom"] !== 'detailpage' ? '<figure class="' . $attr["class"] . '">' : '';
+        $html .= '<video src="' . wp_get_attachment_url($videoId) . '" autoplay muted playsinline loop' . $placeholder . '></video>';
+        $html .= $attr["callingFrom"] !== 'detailpage' ? '</figure>' : '';
         $html .= $attr["callingFrom"] == 'detailpage' ? '</div>' : '';
       endif;
       return $html;

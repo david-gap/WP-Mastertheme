@@ -43,6 +43,7 @@
         addPopUp,
         addPopUpPreview,
         addDownloadButton,
+        addDownloadAllButton,
       } = attributes;
       return (
         <Fragment>

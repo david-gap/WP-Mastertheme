@@ -29,11 +29,16 @@ Table of Contents:
     2.8 QUOTE
     2.9 GALLERY
     2.10 VIDEO - VIDEO JS
+    2.11 MEDIA & TEXT
+    2.12 PARAGRAPH
+    2.13 TITLE
   3.0 ADDITIONAL STYLINGS
     3.1 BACKEND HIGHLIGHTS
     3.2 COLUMNS
     3.3 BLOCK ARROWS
     3.4 CONSENT BLOCK
+    3.5 COVER ZOOM ANIMATION
+    3.6 DOWNLOAD ALL BUTTON
 =======================================================*/
 
 
@@ -125,7 +130,6 @@ body.page-template,
           border-width: var(--block__posts_border, 0);
           border-style: solid;
           border-radius: var(--block__posts_borderRadius, 0);
-          overflow: hidden;
           &.wide {
             grid-column: span var(--postColumns);
           }
@@ -138,6 +142,7 @@ body.page-template,
           [data-load="content"] {
             cursor: pointer;
           }
+          > a > figure,
           > figure {
             margin: var(--block__posts_thumb_margin, 0);
             padding: var(--block__posts_thumb_padding, 0);
@@ -735,14 +740,24 @@ body.page-template,
 
   /* 2.1 LIST
   /––––––––––––––––––––––––*/
+  ul.is-style-default {
+    border-width: var(--block__list_borderWidth, 0);
+    border-style: var(--block__list_borderStyle, solid);
+  }
   ul.is-style-default,
   ul.is-style-default ul {
+    display: flex;
+    flex-direction: column;
     list-style: none;
     margin-top: 0;
     padding: 0;
-    li {
+    gap: var(--block__list_gap, 0);
+    row-gap: var(--block__list_gap, 0);
+    > li {
       position: relative;
       padding-left: var(--block__list_marker_space, 20px);
+      border-width: var(--block__list_item_borderWidth, 0);
+      border-style: var(--block__list_item_borderStyle, solid);
       &:before {
         display: block;
         content: var(--block__list_marker_value, "•");
@@ -1106,6 +1121,90 @@ body.page-template,
   }
 
 
+  /* 2.11 MEDIA & TEXT
+  /––––––––––––––––––––––––*/
+  .wp-block-media-text {
+    gap: var(--block__mediatext_gap, var(--wp--style--block-gap, var(--content__space, 30px)));
+    row-gap: var(--block__mediatext_gap, var(--wp--style--block-gap, var(--content__space, 30px)));
+    &.has-background {
+      > .wp-block-media-text__content {
+        border-width: var(--block__mediatext_hasBackground_text_borderWidth, var(--block__mediatext_text_borderWidth, 0));
+        border-style: var(--block__mediatext_hasBackground_text_borderStyle, var(--block__mediatext_text_borderStyle, solid));
+        padding: var(--block__mediatext_hasBackground_text_padding, var(--block__mediatext_text_padding, 0));
+      }
+    }
+    border-width: var(--block__mediatext_borderWidth, 0);
+    border-style: var(--block__mediatext_borderStyle, solid);
+    padding: var(--block__mediatext_padding, 0);
+    > .wp-block-media-text__media {
+      border-width: var(--block__mediatext_media_borderWidth, 0);
+      border-style: var(--block__mediatext_media_borderStyle, solid);
+      padding: var(--block__mediatext_media_padding, 0);
+      img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        min-height: var(--block__mediatext_media_minHeight, auto);
+        max-height: var(--block__mediatext_media_maxHeight, auto);
+      }
+    }
+    > .wp-block-media-text__content {
+      border-width: var(--block__mediatext_text_borderWidth, 0);
+      border-style: var(--block__mediatext_text_borderStyle, solid);
+      padding: var(--block__mediatext_text_padding, 0);
+    }
+  }
+
+
+  /* 2.12 PARAGRAPH
+  /––––––––––––––––––––––––*/
+  .leadtext,
+  .is-style-lead {
+    padding: var(--leadText__padding, 0);
+    border-style: var(--leadText__borderStyle, solid);
+    border-width: var(--leadText__borderWidth, 0);
+  }
+
+
+  /* 2.13 TITLE
+  /––––––––––––––––––––––––*/
+  .is-style-title-one {
+    margin-top: var(--titleOne__marginTop, 0);
+    margin-bottom: var(--titleOne__marginBottom, 0);
+    padding: var(--titleOne__padding, 0);
+    border-style: var(--titleOne__borderStyle, solid);
+    border-width: var(--titleOne__borderWidth, 0);
+  }
+  .is-style-title-two {
+    margin-top: var(--titleTwo__marginTop, 0);
+    margin-bottom: var(--titleTwo__marginBottom, 0);
+    padding: var(--titleTwo__padding, 0);
+    border-style: var(--titleTwo__borderStyle, solid);
+    border-width: var(--titleTwo__borderWidth, 0);
+  }
+  .is-style-title-three {
+    margin-top: var(--titleThree__marginTop, 0);
+    margin-bottom: var(--titleThree__marginBottom, 0);
+    padding: var(--titleThree__padding, 0);
+    border-style: var(--titleThree__borderStyle, solid);
+    border-width: var(--titleThree__borderWidth, 0);
+  }
+  .is-style-title-four {
+    margin-top: var(--titleFour__marginTop, 0);
+    margin-bottom: var(--titleFour__marginBottom, 0);
+    padding: var(--titleFour__padding, 0);
+    border-style: var(--titleFour__borderStyle, solid);
+    border-width: var(--titleFour__borderWidth, 0);
+  }
+  .is-style-title-five {
+    margin-top: var(--titleFive__marginTop, 0);
+    margin-bottom: var(--titleFive__marginBottom, 0);
+    padding: var(--titleFive__padding, 0);
+    border-style: var(--titleFive__borderStyle, solid);
+    border-width: var(--titleFive__borderWidth, 0);
+  }
+
+
 
   /*==================================================================================
     2.0 ADDITIONAL STYLINGS
@@ -1196,6 +1295,7 @@ body.page-template,
         height: 0;
       }
     }
+
 
     /* 3.3 BLOCK ARROWS
     /––––––––––––––––––––––––*/
@@ -1309,6 +1409,7 @@ body.page-template,
       }
     }
 
+
     /* 3.4 CONSENT BLOCK
     /––––––––––––––––––––––––*/
     .consent-request {
@@ -1357,6 +1458,7 @@ body.page-template,
       }
     }
 
+
     /* 3.5 COVER ZOOM ANIMATION
     /––––––––––––––––––––––––*/
   .wp-block-cover {
@@ -1376,6 +1478,51 @@ body.page-template,
     &.is-style-no-spacing {
       .wp-block-cover__inner-container {
         padding: 0;
+      }
+    }
+  }
+
+
+  /* 3.6 DOWNLOAD ALL BUTTON
+  /––––––––––––––––––––––––*/
+  .download-container {
+    position: relative;
+    width: fit-content;
+    .download-all-button {
+      display: inline-block;
+      border-radius: var(--downloadAll__borderRadius, 0);
+      border-width: var(--downloadAll__borderWidth, 0);
+      border-style: var(--downloadAll__borderStyle, solid);
+      padding: var(--downloadAll__padding, 0);
+      cursor: pointer;
+      &.button-loading + .progress-bar {
+        opacity: 1;
+        pointer-events: auto;
+        transition: .3s;
+      }
+    }
+    .progress-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      opacity: 0;
+      border-radius: var(--downloadAll__borderRadius, 0);
+      border-width: var(--downloadAll__borderWidth, 0);
+      border-style: var(--downloadAll__borderStyle, solid);
+      transition: .3s;
+      .progress {
+        min-width: 0%;
+        max-width: 100%;
+        height: var(--downloadAll__progressbar_prozess_height, 5px);
+        margin: var(--downloadAll__padding, 0);
+        transition: .3s;
       }
     }
   }

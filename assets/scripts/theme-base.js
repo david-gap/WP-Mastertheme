@@ -2,7 +2,7 @@
  * All template base javascript functions
  *
  * @author      David Voglgsang
- * @version     1.4
+ * @version     1.5
  *
  */
 
@@ -159,6 +159,38 @@ function slugify(Text){
   .replace(/Ü/g,'ue')
   .replace(/ß/g,'ss')
   .replace(/[^\w-]+/g,'');
+}
+
+
+/* Download gallery
+/------------------------*/
+function downloadGroupedFiles(){
+  this.classList.add("button-loading");
+  // Check if file URL's are given as data
+  if(this.hasAttribute('data-items')){
+    var downloadItems = this.getAttribute('data-items').split("|");
+    // create zip file
+    var zip = new JSZip();
+    // add files
+    downloadItems.forEach(function (item, i) {
+      let itemArray = item.split("__");
+      zip.file(itemArray[0], itemArray[1], {base64: true});
+    });
+    zip.generateAsync({type:"base64",streamFiles:true}, function updateCallback(metadata) {
+      var button = document.querySelector('.download-container .download-all-button');
+      var progressbar = document.querySelector('.download-container .progress-bar .progress');
+      progressbar.style.width = metadata.percent + '%';
+      if(metadata.percent == 100){
+        button.classList.remove("button-loading");
+      }
+    }).then(function(content) {
+      let downloadButton = document.createElement('a');
+      downloadButton.href = "data:application/zip;base64,"+content;
+      downloadButton.target = '_blank';
+      downloadButton.download = "gallery.zip";
+      downloadButton.click();
+    });
+  }
 }
 
 
@@ -1355,6 +1387,18 @@ function runEventListeners(){
     // click to toggle
     Array.from(selectVideoBlocks).forEach(function(videoblock) {
       runVideoJS(videoblock);
+    });
+  }
+
+
+  /* Download full gallery
+  /------------------------*/
+  var downloadGroupedFilesButtons = document.querySelectorAll('.download-all-button');
+  if(downloadGroupedFilesButtons.length !== 0){
+    // click to toggle
+    Array.from(downloadGroupedFilesButtons).forEach(function(downloadButton) {
+      downloadButton.addEventListener('click', downloadGroupedFiles);
+      downloadButton.addEventListener('keypress', downloadGroupedFiles);
     });
   }
 

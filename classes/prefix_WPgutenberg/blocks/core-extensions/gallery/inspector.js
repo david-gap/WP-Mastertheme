@@ -40,7 +40,8 @@ export default class Inspector extends Component {
         addBulletNav,
         addPopUp,
         addPopUpPreview,
-        addDownloadButton
+        addDownloadButton,
+        addDownloadAllButton
       },
       setAttributes
     } = this.props;
@@ -86,6 +87,14 @@ export default class Inspector extends Component {
                     label={ __( 'Download button', 'devTheme' ) }
                     checked={ addDownloadButton }
                     onChange={addDownloadButton => setAttributes({ addDownloadButton })}
+                />
+              </PanelRow>
+              <PanelRow>
+                <ToggleControl
+                    id="add-download-all-button"
+                    label={ __( 'Download all button', 'devTheme' ) }
+                    checked={ addDownloadAllButton }
+                    onChange={addDownloadAllButton => setAttributes({ addDownloadAllButton })}
                 />
               </PanelRow>
           </PanelBody>

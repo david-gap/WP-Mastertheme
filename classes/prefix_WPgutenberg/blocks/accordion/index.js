@@ -11,7 +11,8 @@
 
   const { __ } = wp.i18n;
   const { registerBlockType } = wp.blocks;
-  const { RichText, InnerBlocks } = wp.editor;
+  const { RichText } = wp.editor;
+  const { InnerBlocks } = wp.blockEditor;
 
   const ALLOWED_BLOCKS = [ 'templates/accordion-item' ];
   // const getCount = memoize( ( count ) => {

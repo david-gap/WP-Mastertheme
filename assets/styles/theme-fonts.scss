@@ -23,6 +23,7 @@ Table of Contents:
     2.9 CONSENT CONTAINER
     2.10 BLOG & ARCHIVE
     2.11 SCROLL TO TOP
+    2.12 DOWNLOAD ALL BUTTON
   3.0 FOOTER
   4.0 GENERAL
   5.0 BLOCKS
@@ -361,6 +362,21 @@ body.page-template,
   }
 
 
+  /* 2.12 DOWNLOAD ALL BUTTON
+  /––––––––––––––––––––––––*/
+  .download-container {
+    .download-all-button {
+      font-family: var(--downloadAll__fontFamily, inherit);
+      font-size: var(--downloadAll__fontSize, inherit);
+      line-height: var(--downloadAll__lineHeight, inherit);
+      font-weight: var(--downloadAll__fontWeight, inherit);
+      text-transform: var(--downloadAll__textTransform, inherit);
+      font-style: var(--downloadAll__fontStyle, initial);
+      letter-spacing: var(--downloadAll__letterSpacing, inherit);
+    }
+  }
+
+
 
   /*==================================================================================
     3.0 FOOTER
@@ -462,6 +478,10 @@ body.page-template,
   }
   // placeholder
   input, select, textarea {
+    font-family: var(--searchForm__fontFamily, var(--input__fontFamily, inherit));
+    font-size: var(--searchForm__fontSize, var(--input__fontSize, inherit));
+    line-height: var(--searchForm__lineHeight, var(--input__lineHeight, inherit));
+    font-weight: var(--searchForm__fontWeight, var(--input__fontWeight, inherit));
     &::-webkit-input-placeholder {
       font-family: var(--input__placeholder_fontFamily, inherit);
       font-size: var(--input__placeholder_fontSize, inherit);
@@ -489,6 +509,50 @@ body.page-template,
       line-height: var(--input__placeholder_lineHeight, inherit);
       font-weight: var(--input__placeholder_fontWeight, inherit);
       text-transform: var(--input__placeholder_textTransform, inherit);
+    }
+  }
+
+
+  // search form
+  .search-form {
+    button[type="submit"],
+    input[type="submit"] {
+      font-family: var(--searchForm__submit_fontFamily, var(--input__submit_fontFamily, var(--input__fontFamily, inherit)));
+      font-size: var(--searchForm__submit_fontSize, var(--input__submit_fontSize, var(--input__fontSize, inherit)));
+      line-height: var(--searchForm__submit_lineHeight, var(--input__submit_lineHeight, var(--input__lineHeight, inherit)));
+      font-weight: var(--searchForm__submit_fontWeight, var(--input__submit_fontWeight, var(--input__fontWeight, inherit)));
+      text-transform: var(--searchForm__submit_textTransform, var(--input__submit_textTransform, uppercase));
+      letter-spacing: var(--searchForm__submit_letterSpacing, var(--input__submit_letterSpacing, 0px));
+    }
+    input {
+      &::-webkit-input-placeholder {
+        font-family: var(--searchForm__placeholder_fontFamily, var(--input__placeholder_fontFamily, inherit));
+        font-size: var(--searchForm__placeholder_fontSize, var(--input__placeholder_fontSize, inherit));
+        line-height: var(--searchForm__placeholder_lineHeight, var(--input__placeholder_lineHeight, inherit));
+        font-weight: var(--searchForm__placeholder_fontWeight, var(--input__placeholder_fontWeight, inherit));
+        text-transform: var(--searchForm__placeholder_textTransform, var(--input__placeholder_textTransform, inherit));
+      }
+      &::-moz-placeholder {
+        font-family: var(--searchForm__placeholder_fontFamily, var(--input__placeholder_fontFamily, inherit));
+        font-size: var(--searchForm__placeholder_fontSize, var(--input__placeholder_fontSize, inherit));
+        line-height: var(--searchForm__placeholder_lineHeight, var(--input__placeholder_lineHeight, inherit));
+        font-weight: var(--searchForm__placeholder_fontWeight, var(--input__placeholder_fontWeight, inherit));
+        text-transform: var(--searchForm__placeholder_textTransform, var(--input__placeholder_textTransform, inherit));
+      }
+      &:-ms-input-placeholder {
+        font-family: var(--searchForm__placeholder_fontFamily, var(--input__placeholder_fontFamily, inherit));
+        font-size: var(--searchForm__placeholder_fontSize, var(--input__placeholder_fontSize, inherit));
+        line-height: var(--searchForm__placeholder_lineHeight, var(--input__placeholder_lineHeight, inherit));
+        font-weight: var(--searchForm__placeholder_fontWeight, var(--input__placeholder_fontWeight, inherit));
+        text-transform: var(--searchForm__placeholder_textTransform, var(--input__placeholder_textTransform, inherit));
+      }
+      &:-moz-placeholder {
+        font-family: var(--searchForm__placeholder_fontFamily, var(--input__placeholder_fontFamily, inherit));
+        font-size: var(--searchForm__placeholder_fontSize, var(--input__placeholder_fontSize, inherit));
+        line-height: var(--searchForm__placeholder_lineHeight, var(--input__placeholder_lineHeight, inherit));
+        font-weight: var(--searchForm__placeholder_fontWeight, var(--input__placeholder_fontWeight, inherit));
+        text-transform: var(--searchForm__placeholder_textTransform, var(--input__placeholder_textTransform, inherit));
+      }
     }
   }
 

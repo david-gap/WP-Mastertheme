@@ -17,10 +17,13 @@
   const {
     ColorPalette,
     PanelColorSettings,
-    ContrastChecker,
-    MediaUpload,
-    MediaUploadCheck
+    ContrastChecker
   } = wp.editor;
+
+  const {
+    MediaUploadCheck,
+    MediaUpload
+  } = wp.blockEditor;
 
   const {
     CheckboxControl,
