@@ -769,6 +769,29 @@ body.page-template,
   }
 
 
+  ol.is-style-default {
+    border-width: var(--block__list_ol_borderWidth, 0);
+    border-style: var(--block__list_ol_borderStyle, solid);
+  }
+  ol.is-style-default,
+  ol.is-style-default ol {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0;
+    padding: var(--block__list_ol_padding, 0 20px 0 0);
+    gap: var(--block__list_ol_gap, 0);
+    row-gap: var(--block__list_ol_gap, 0);
+    list-style-position: var(--block__list_ol_marker_listStylePosition, outside);
+    > li {
+      position: relative;
+      margin: var(--block__list_ol_item_margin, 0);
+      padding: var(--block__list_ol_item_padding, 0);
+      border-width: var(--block__list_ol_item_borderWidth, 0);
+      border-style: var(--block__list_ol_item_borderStyle, solid);
+    }
+  }
+
+
   /* 2.2 HR
   /––––––––––––––––––––––––*/
   hr.wp-block-separator {
@@ -1158,6 +1181,9 @@ body.page-template,
 
   /* 2.12 PARAGRAPH
   /––––––––––––––––––––––––*/
+  p.has-background {
+    padding: var(--block__paragraph_hasBackground_padding, var(--content__space, 30px));
+  }
   .leadtext,
   .is-style-lead {
     padding: var(--leadText__padding, 0);

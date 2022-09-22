@@ -15,15 +15,13 @@ Table of Contents:
     2.1 BREADCRUMBS
     2.2 SEARCH RESULTS
     2.3 RESET LINE-HEIGHT
-    2.4 POST TITLE
-    2.5 LEAD
-    2.6 404 PAGE
-    2.7 LANGUAGE SWITCHER
-    2.8 TITLE SIZES
-    2.9 CONSENT CONTAINER
-    2.10 BLOG & ARCHIVE
-    2.11 SCROLL TO TOP
-    2.12 DOWNLOAD ALL BUTTON
+    2.4 TITLE
+    2.5 404 PAGE
+    2.6 LANGUAGE SWITCHER
+    2.7 CONSENT CONTAINER
+    2.8 BLOG & ARCHIVE
+    2.9 SCROLL TO TOP
+    2.10 DOWNLOAD ALL BUTTON
   3.0 FOOTER
   4.0 GENERAL
   5.0 BLOCKS
@@ -40,6 +38,8 @@ Table of Contents:
     5.11 GALLERY
     5.13 POSTS
     5.14 POSTS FILTER
+    5.15 TITLE
+    5.16 PARAGRAPH
 =======================================================*/
 
 
@@ -191,9 +191,82 @@ body.page-template,
   }
 
 
-  /* 2.4 POST TITLE
+  /* 2.4 TITLE
   /––––––––––––––––––––––––*/
+  h1 {
+    &:not(.post-title):not(.wp-block-post-title):not([class^='is-style-']):not([class*=' is-style-']),
+    &.is-style-default {
+      font-family: var(--h1__fontFamily, inherit);
+      font-size: var(--h1__fontSize, inherit);
+      line-height: var(--h1__lineHeight, inherit);
+      font-weight: var(--h1__fontWeight, inherit);
+      text-transform: var(--h1__textTransform, inherit);
+      font-style: var(--h1__fontStyle, initial);
+      letter-spacing: var(--h1__letterSpacing, inherit);
+    }
+  }
+  h2 {
+    &:not(.post-title):not([class^='is-style-']):not([class*=' is-style-']),
+    &.is-style-default {
+      font-family: var(--h2__fontFamily, inherit);
+      font-size: var(--h2__fontSize, inherit);
+      line-height: var(--h2__lineHeight, inherit);
+      font-weight: var(--h2__fontWeight, inherit);
+      text-transform: var(--h2__textTransform, inherit);
+      font-style: var(--h2__fontStyle, initial);
+      letter-spacing: var(--h2__letterSpacing, inherit);
+    }
+  }
+  h3 {
+    &:not(.post-title):not([class^='is-style-']):not([class*=' is-style-']),
+    &.is-style-default {
+      font-family: var(--h3__fontFamily, inherit);
+      font-size: var(--h3__fontSize, inherit);
+      line-height: var(--h3__lineHeight, inherit);
+      font-weight: var(--h3__fontWeight, inherit);
+      text-transform: var(--h3__textTransform, inherit);
+      font-style: var(--h3__fontStyle, initial);
+      letter-spacing: var(--h3__letterSpacing, inherit);
+    }
+  }
+  h4 {
+    &:not(.post-title):not([class^='is-style-']):not([class*=' is-style-']),
+    &.is-style-default {
+      font-family: var(--h4__fontFamily, inherit);
+      font-size: var(--h4__fontSize, inherit);
+      line-height: var(--h4__lineHeight, inherit);
+      font-weight: var(--h4__fontWeight, inherit);
+      text-transform: var(--h4__textTransform, inherit);
+      font-style: var(--h4__fontStyle, initial);
+      letter-spacing: var(--h4__letterSpacing, inherit);
+    }
+  }
+  h5 {
+    &:not(.post-title):not([class^='is-style-']):not([class*=' is-style-']),
+    &.is-style-default {
+      font-family: var(--h5__fontFamily, inherit);
+      font-size: var(--h5__fontSize, inherit);
+      line-height: var(--h5__lineHeight, inherit);
+      font-weight: var(--h5__fontWeight, inherit);
+      text-transform: var(--h5__textTransform, inherit);
+      font-style: var(--h5__fontStyle, initial);
+      letter-spacing: var(--h5__letterSpacing, inherit);
+    }
+  }
+  h6 {
+    &:not(.post-title):not([class^='is-style-']):not([class*=' is-style-']),
+    &.is-style-default {
+      font-family: var(--h6__fontFamily, inherit);
+      font-size: var(--h6__fontSize, inherit);
+      line-height: var(--h6__lineHeight, inherit);
+      font-weight: var(--h6__fontWeight, inherit);
+      text-transform: var(--h6__textTransform, inherit);
+      font-style: var(--h6__fontStyle, initial);
+      letter-spacing: var(--h6__letterSpacing, inherit);
+    }
+  }
   .post-title,
+  .wp-block-post-title,
   .is-style-post-title {
     font-family: var(--postTitle__fontFamily, inherit);
     font-size: var(--postTitle__fontSize, inherit);
@@ -205,21 +278,7 @@ body.page-template,
   }
 
 
-  /* 2.5 LEAD
-  /––––––––––––––––––––––––*/
-  .leadtext,
-  .is-style-lead {
-    font-family: var(--leadText__fontFamily, inherit);
-    font-size: var(--leadText__fontSize, inherit);
-    line-height: var(--leadText__lineHeight, inherit);
-    font-weight: var(--leadText__fontWeight, inherit);
-    text-transform: var(--leadText__textTransform, inherit);
-    font-style: var(--leadText__fontStyle, initial);
-    letter-spacing: var(--leadText__letterSpacing, inherit);
-  }
-
-
-  /* 2.6 404 PAGE
+  /* 2.5 404 PAGE
   /––––––––––––––––––––––––*/
   #error-page {
     article {
@@ -237,7 +296,7 @@ body.page-template,
   }
 
 
-  /* 2.7 LANGUAGE SWITCHER
+  /* 2.6 LANGUAGE SWITCHER
   /––––––––––––––––––––––––*/
   .language-switcher {
     font-size: var(--ls__link_fontsize, inherit);
@@ -257,56 +316,7 @@ body.page-template,
   }
 
 
-  /* 2.8 TITLE SIZES
-  /––––––––––––––––––––––––*/
-  .is-style-title-one {
-    font-family: var(--titleOne__fontFamily, inherit);
-    font-size: var(--titleOne__fontSize, inherit);
-    line-height: var(--titleOne__lineHeight, inherit);
-    font-weight: var(--titleOne__fontWeight, inherit);
-    text-transform: var(--titleOne__textTransform, inherit);
-    font-style: var(--titleOne__fontStyle, initial);
-    letter-spacing: var(--titleOne__letterSpacing, inherit);
-  }
-  .is-style-title-two {
-    font-family: var(--titleTwo__fontFamily, inherit);
-    font-size: var(--titleTwo__fontSize, inherit);
-    line-height: var(--titleTwo__lineHeight, inherit);
-    font-weight: var(--titleTwo__fontWeight, inherit);
-    text-transform: var(--titleTwo__textTransform, inherit);
-    font-style: var(--titleTwo__fontStyle, initial);
-    letter-spacing: var(--titleTwo__letterSpacing, inherit);
-  }
-  .is-style-title-three {
-    font-family: var(--titleThree__fontFamily, inherit);
-    font-size: var(--titleThree__fontSize, inherit);
-    line-height: var(--titleThree__lineHeight, inherit);
-    font-weight: var(--titleThree__fontWeight, inherit);
-    text-transform: var(--titleThree__textTransform, inherit);
-    font-style: var(--titleThree__fontStyle, initial);
-    letter-spacing: var(--titleThree__letterSpacing, inherit);
-  }
-  .is-style-title-four {
-    font-family: var(--titleFour__fontFamily, inherit);
-    font-size: var(--titleFour__fontSize, inherit);
-    line-height: var(--titleFour__lineHeight, inherit);
-    font-weight: var(--titleFour__fontWeight, inherit);
-    text-transform: var(--titleFour__textTransform, inherit);
-    font-style: var(--titleFour__fontStyle, initial);
-    letter-spacing: var(--titleFour__letterSpacing, inherit);
-  }
-  .is-style-title-five {
-    font-family: var(--titleFive__fontFamily, inherit);
-    font-size: var(--titleFive__fontSize, inherit);
-    line-height: var(--titleFive__lineHeight, inherit);
-    font-weight: var(--titleFive__fontWeight, inherit);
-    text-transform: var(--titleFive__textTransform, inherit);
-    font-style: var(--titleFive__fontStyle, initial);
-    letter-spacing: var(--titleFive__letterSpacing, inherit);
-  }
-
-
-  /* 2.9 CONSENT CONTAINER
+  /* 2.7 CONSENT CONTAINER
   /––––––––––––––––––––––––*/
   .consent-request {
     .consent-request-container {
@@ -328,7 +338,7 @@ body.page-template,
   }
 
 
-  /* 2.10 BLOG & ARCHIVE
+  /* 2.8 BLOG & ARCHIVE
   /––––––––––––––––––––––––*/
   #home,
   #archive {
@@ -347,7 +357,7 @@ body.page-template,
   }
 
 
-  /* 2.11 SCROLL TO TOP
+  /* 2.9 SCROLL TO TOP
   /––––––––––––––––––––––––*/
   #scroll-to-top {
     span {
@@ -362,7 +372,7 @@ body.page-template,
   }
 
 
-  /* 2.12 DOWNLOAD ALL BUTTON
+  /* 2.10 DOWNLOAD ALL BUTTON
   /––––––––––––––––––––––––*/
   .download-container {
     .download-all-button {
@@ -478,10 +488,6 @@ body.page-template,
   }
   // placeholder
   input, select, textarea {
-    font-family: var(--searchForm__fontFamily, var(--input__fontFamily, inherit));
-    font-size: var(--searchForm__fontSize, var(--input__fontSize, inherit));
-    line-height: var(--searchForm__lineHeight, var(--input__lineHeight, inherit));
-    font-weight: var(--searchForm__fontWeight, var(--input__fontWeight, inherit));
     &::-webkit-input-placeholder {
       font-family: var(--input__placeholder_fontFamily, inherit);
       font-size: var(--input__placeholder_fontSize, inherit);
@@ -554,6 +560,17 @@ body.page-template,
         text-transform: var(--searchForm__placeholder_textTransform, var(--input__placeholder_textTransform, inherit));
       }
     }
+  }
+
+
+  // label
+  label {
+    font-family: var(--label_fontFamily, inherit);
+    font-size: var(--label_fontSize, inherit);
+    line-height: var(--label_lineHeight, inherit);
+    font-weight: var(--label_fontWeight, inherit);
+    text-transform: var(--label_textTransform, inherit);
+    letter-spacing: var(--label_letterSpacing, 0px);
   }
 
 
@@ -668,6 +685,14 @@ body.page-template,
     li {
       &:before {
         line-height: var(--block__list_lineHeight, 1);
+      }
+    }
+  }
+  ol.is-style-default {
+    > li {
+      &::marker {
+        font-size: var(--block__list_ol_marker_fontSize, inherit);
+        line-height: var(--block__list_ol_marker_lineHeight, inherit);
       }
     }
   }
@@ -883,6 +908,69 @@ body.page-template,
         }
       }
     }
+  }
+
+
+  /* 5.15 TITLE
+  /––––––––––––––––––––––––*/
+  .is-style-title-one {
+    font-family: var(--titleOne__fontFamily, inherit);
+    font-size: var(--titleOne__fontSize, inherit);
+    line-height: var(--titleOne__lineHeight, inherit);
+    font-weight: var(--titleOne__fontWeight, inherit);
+    text-transform: var(--titleOne__textTransform, inherit);
+    font-style: var(--titleOne__fontStyle, initial);
+    letter-spacing: var(--titleOne__letterSpacing, inherit);
+  }
+  .is-style-title-two {
+    font-family: var(--titleTwo__fontFamily, inherit);
+    font-size: var(--titleTwo__fontSize, inherit);
+    line-height: var(--titleTwo__lineHeight, inherit);
+    font-weight: var(--titleTwo__fontWeight, inherit);
+    text-transform: var(--titleTwo__textTransform, inherit);
+    font-style: var(--titleTwo__fontStyle, initial);
+    letter-spacing: var(--titleTwo__letterSpacing, inherit);
+  }
+  .is-style-title-three {
+    font-family: var(--titleThree__fontFamily, inherit);
+    font-size: var(--titleThree__fontSize, inherit);
+    line-height: var(--titleThree__lineHeight, inherit);
+    font-weight: var(--titleThree__fontWeight, inherit);
+    text-transform: var(--titleThree__textTransform, inherit);
+    font-style: var(--titleThree__fontStyle, initial);
+    letter-spacing: var(--titleThree__letterSpacing, inherit);
+  }
+  .is-style-title-four {
+    font-family: var(--titleFour__fontFamily, inherit);
+    font-size: var(--titleFour__fontSize, inherit);
+    line-height: var(--titleFour__lineHeight, inherit);
+    font-weight: var(--titleFour__fontWeight, inherit);
+    text-transform: var(--titleFour__textTransform, inherit);
+    font-style: var(--titleFour__fontStyle, initial);
+    letter-spacing: var(--titleFour__letterSpacing, inherit);
+  }
+  .is-style-title-five {
+    font-family: var(--titleFive__fontFamily, inherit);
+    font-size: var(--titleFive__fontSize, inherit);
+    line-height: var(--titleFive__lineHeight, inherit);
+    font-weight: var(--titleFive__fontWeight, inherit);
+    text-transform: var(--titleFive__textTransform, inherit);
+    font-style: var(--titleFive__fontStyle, initial);
+    letter-spacing: var(--titleFive__letterSpacing, inherit);
+  }
+
+
+  /* 5.16 PARAGRAPH
+  /––––––––––––––––––––––––*/
+  .leadtext,
+  .is-style-lead {
+    font-family: var(--leadText__fontFamily, inherit);
+    font-size: var(--leadText__fontSize, inherit);
+    line-height: var(--leadText__lineHeight, inherit);
+    font-weight: var(--leadText__fontWeight, inherit);
+    text-transform: var(--leadText__textTransform, inherit);
+    font-style: var(--leadText__fontStyle, initial);
+    letter-spacing: var(--leadText__letterSpacing, inherit);
   }
 
 
