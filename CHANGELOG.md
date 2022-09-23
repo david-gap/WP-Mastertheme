@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.65.31 | 23.09.2022 <🐛 FIX: styles set by the customizer>
+* Fix title margin rules
+
 ## 1.65.29 | 22.09.2022 <💎 IMPROVE & 📦 NEW: customizer>
 * h1 - h6 title to customizer tag styling
 * Label to customizer form styling
