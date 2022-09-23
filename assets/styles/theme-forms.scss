@@ -54,7 +54,10 @@ body.page-template,
   }
 
   .select-container {
+    display: inline-block;
     position: relative;
+    width: var(--input_width, auto);
+    max-width: 100%;
     &:after {
       display: flex;
       justify-content: center;
@@ -70,6 +73,7 @@ body.page-template,
     }
     select {
       appearance: none;
+      width: 100%;
     }
   }
   select {

@@ -736,6 +736,7 @@ body.page-template,
   /––––––––––––––––––––––––*/
   .search-form {
     input {
+      width: 100%;
       margin: var(--searchForm__margin, 0);
       padding: var(--searchForm__padding, var(--input__padding, 7px 10px));
       border-radius: var(--searchForm__borderRadius, var(--input__borderRadius, 0));
