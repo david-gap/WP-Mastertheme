@@ -146,6 +146,7 @@ function addCSSRule(sheet, selector, rules, index) {
   }
 }
 
+
 /* Slugify string
 /------------------------*/
 function slugify(Text){
@@ -162,24 +163,40 @@ function slugify(Text){
 }
 
 
+/* Convert to base64
+/------------------------*/
+function getBase64Image(img) {
+  var canvas = document.createElement("canvas");
+  canvas.width = img.naturalWidth;
+  canvas.height = img.naturalHeight;
+  var ctx = canvas.getContext("2d");
+  ctx.drawImage(img, 0, 0);
+  var dataURL = canvas.toDataURL("image/png");
+  return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+}
+
+
 /* Download gallery
 /------------------------*/
 function downloadGroupedFiles(){
   this.classList.add("button-loading");
   // Check if file URL's are given as data
-  if(this.hasAttribute('data-items')){
-    var downloadItems = this.getAttribute('data-items').split("|");
+  let itemsContainer = this.querySelector('.download-base');
+  if(itemsContainer){
+    var downloadItems = itemsContainer.textContent.split("|");
     // create zip file
     var zip = new JSZip();
     // add files
     downloadItems.forEach(function (item, i) {
       let itemArray = item.split("__");
-      zip.file(itemArray[0], itemArray[1], {base64: true});
+      let image = document.querySelector('img[src="' + itemArray[1] + '"]');
+      zip.file(itemArray[0], getBase64Image(image), {base64: true});
     });
     zip.generateAsync({type:"base64",streamFiles:true}, function updateCallback(metadata) {
       var button = document.querySelector('.download-container .download-all-button');
       var progressbar = document.querySelector('.download-container .progress-bar .progress');
       progressbar.style.width = metadata.percent + '%';
+      // console.log(metadata);
       if(metadata.percent == 100){
         button.classList.remove("button-loading");
       }

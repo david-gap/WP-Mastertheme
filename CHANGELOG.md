@@ -2,6 +2,8 @@
 
 ## 1.65.31 | 23.09.2022 <🐛 FIX: styles set by the customizer>
 * Fix title margin rules
+* Add JS function to convert image to base64 code
+* Fix download all button action
 
 ## 1.65.29 | 22.09.2022 <💎 IMPROVE & 📦 NEW: customizer>
 * h1 - h6 title to customizer tag styling

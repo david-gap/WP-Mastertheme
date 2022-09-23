@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.25.15
+ * @version     2.25.16
  */
 
 /*=======================================================
@@ -647,12 +647,14 @@ class prefix_WPgutenberg {
               if(array_key_exists('innerBlocks', $block) && $block['innerBlocks']):
                 foreach ($block['innerBlocks'] as $innerBlocksKey => $innerBlocks) {
                   if(array_key_exists('attrs', $innerBlocks) && $innerBlocks['attrs'] && array_key_exists('id', $innerBlocks['attrs'])):
-                    $allItems[] = basename (get_attached_file($innerBlocks['attrs']['id'])) . "__" . base64_encode(file_get_contents(wp_get_attachment_url($innerBlocks['attrs']['id'])));
+                    $allItems[] = basename (get_attached_file($innerBlocks['attrs']['id'])) . "__" . wp_get_attachment_url($innerBlocks['attrs']['id']);
                   endif;
                 }
                 if(!empty($allItems)):
+                  $base64 = implode($allItems, '|');
                   $downloadLink = '<div class="download-container">';
-                    $downloadLink .= '<a class="download-all-button" data-items="' . implode($allItems, '|') . '">';
+                    $downloadLink .= '<a class="download-all-button">';
+                      $downloadLink .= '<span class="download-base">' . $base64 . '</span>';
                       $downloadLinkText = __( 'Download all', 'devTheme' );
                       $downloadLink .= apply_filters( 'WPgutenberg_gallery_downloadAllButton', $downloadLinkText, $block['attrs'] );
                     $downloadLink .= '</a>';
