@@ -1975,6 +1975,10 @@ class prefix_core_Customizer {
                   'label' => 'Border color',
                   'type' => 'color'
                 ),
+                'label_width' => array(
+                  'label' => 'Width',
+                  'type' => 'input'
+                ),
                 'label_borderRadius' => array(
                   'label' => 'Border radius',
                   'type' => 'input'
@@ -2017,6 +2021,10 @@ class prefix_core_Customizer {
                 ),
                 'label_letterSpacing' => array(
                   'label' => 'Letter spacing',
+                  'type' => 'input'
+                ),
+                'label_width_mobile' => array(
+                  'label' => 'Minimum width',
                   'type' => 'input'
                 ),
                 'label_margin_mobile' => array(
@@ -2068,6 +2076,10 @@ class prefix_core_Customizer {
                   'label' => 'Border color',
                   'type' => 'color'
                 ),
+                'input_width' => array(
+                  'label' => 'Width',
+                  'type' => 'input'
+                ),
                 'input__border_width' => array(
                   'label' => 'Border width',
                   'type' => 'input'
@@ -2075,6 +2087,10 @@ class prefix_core_Customizer {
                 'input__borderRadius' => array(
                   'label' => 'Border radius',
                   'type' => 'input'
+                ),
+                'input_borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
                 ),
                 'input__padding' => array(
                   'label' => 'Padding',
@@ -2095,6 +2111,10 @@ class prefix_core_Customizer {
                 'input__fontWeight' => array(
                   'label' => 'Font weight',
                   'type' => 'select'
+                ),
+                'input_width_mobile' => array(
+                  'label' => 'Width',
+                  'type' => 'input'
                 ),
                 'input__padding_mobile' => array(
                   'label' => 'Padding mobile',
@@ -2209,6 +2229,10 @@ class prefix_core_Customizer {
                 'input__select_border_width' => array(
                   'label' => 'Border width',
                   'type' => 'input'
+                ),
+                'input_select_borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
                 ),
                 'input__select_padding_mobile' => array(
                   'label' => 'Padding',
