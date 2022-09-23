@@ -325,6 +325,7 @@ body.page-template,
           margin-top: var(--block__accordion_separator, 20px);
         }
         .accordion-label {
+          width: 100%;
           display: flex;
           flex-wrap: nowrap;
           justify-content: space-between;
