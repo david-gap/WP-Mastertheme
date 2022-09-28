@@ -299,6 +299,10 @@ class prefix_core_Customizer {
                   'type' => 'input'
                 ),
                 'header__itemSpacingHorizontal' => array(
+                  'label' => 'Horizontal spacing between items',
+                  'type' => 'input'
+                ),
+                'header__itemSpacingVertical' => array(
                   'label' => 'Vertical spacing between items',
                   'type' => 'input'
                 ),
@@ -323,6 +327,10 @@ class prefix_core_Customizer {
                   'type' => 'input'
                 ),
                 'header__itemSpacingHorizontal_mobile' => array(
+                  'label' => 'Horizontal spacing between items',
+                  'type' => 'input'
+                ),
+                'header__itemSpacingVertical_mobile' => array(
                   'label' => 'Vertical spacing between items',
                   'type' => 'input'
                 )

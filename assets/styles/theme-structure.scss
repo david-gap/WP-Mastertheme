@@ -177,16 +177,10 @@ body.page-template,
         display: flex;
         justify-content: space-between;
         align-items: center;
+        gap: var(--header__itemSpacingHorizontal, 40px);
+        row-gap: var(--header__itemSpacingVertical, 0);
         &.wrap {
           flex-wrap: wrap;
-        }
-        > * {
-          &:not(.post-thumb){
-            margin-right: var(--header__itemSpacingHorizontal, 40px);
-            &:last-child {
-              margin-right: 0;
-            }
-          }
         }
         > *:last-child:not(:first-child) {
           text-align: right;
