@@ -8,6 +8,7 @@
 * Add gap definition for menu level 2-4
 * Add menu direction
 * Add dashoffset animation
+* Fix search form input styles
 
 ## 1.65.31 | 23.09.2022 <🐛 FIX: styles set by the customizer>
 * Fix title margin rules

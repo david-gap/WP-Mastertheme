@@ -554,7 +554,8 @@ body.page-template,
       text-transform: var(--searchForm__submit_textTransform, var(--input__submit_textTransform, uppercase));
       letter-spacing: var(--searchForm__submit_letterSpacing, var(--input__submit_letterSpacing, 0px));
     }
-    input {
+    input[type="text"],
+    input[type="search"] {
       &::-webkit-input-placeholder {
         font-family: var(--searchForm__placeholder_fontFamily, var(--input__placeholder_fontFamily, inherit));
         font-size: var(--searchForm__placeholder_fontSize, var(--input__placeholder_fontSize, inherit));

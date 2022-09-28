@@ -753,7 +753,8 @@ body.page-template,
   /* 3.8 SEARCH FORM
   /––––––––––––––––––––––––*/
   .search-form {
-    input[type="text"] {
+    input[type="text"],
+    input[type="search"] {
       width: 100%;
       margin: var(--searchForm__margin, 0);
       padding: var(--searchForm__padding, var(--input__padding, 7px 10px));

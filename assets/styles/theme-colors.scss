@@ -365,7 +365,8 @@ body.page-template,
         color: var(--searchForm__submit_color_hover, var(--input__submit_color_hover));
       }
     }
-    input {
+    input[type="text"],
+    input[type="search"] {
       color:  var(--searchForm__color, var(--input__color));
       background-color:var(--searchForm__bg_color,  var(--input__bg_color));
       border-color: var(--searchForm__border_color, var(--input__border_color, unset));
