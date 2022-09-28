@@ -2,7 +2,7 @@
  * All template base javascript functions
  *
  * @author      David Voglgsang
- * @version     1.5
+ * @version     1.6
  *
  */
 
@@ -1236,6 +1236,16 @@ function runEventListeners(){
         columnsContainer.classList.add("is-style-columns-has-background-gap");
       }
     });
+  }
+
+
+  /* Browser support - input range styling
+  /------------------------*/
+  for (let e of document.querySelectorAll('input[type="range"]')) {
+    e.style.setProperty('--value', e.value);
+    e.style.setProperty('--min', e.min == '' ? '0' : e.min);
+    e.style.setProperty('--max', e.max == '' ? '100' : e.max);
+    e.addEventListener('input', () => e.style.setProperty('--value', e.value));
   }
 
 

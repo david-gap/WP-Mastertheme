@@ -4,7 +4,7 @@
  *
  * Customizer extension
  * Author:      David Voglgsnag
- * @version     1.9
+ * @version     1.10
  *
  */
 
@@ -1050,6 +1050,235 @@ class prefix_core_Customizer {
             )
           )
         ),
+        'tmp_menuItem' => array(
+          'label' => 'Menu items',
+          'sections' => array(
+            'tmp_menuItem_svg' => array(
+              'label' => 'SVG',
+              'inputs' => array(
+                'menuItem__svg_fillColor' => array(
+                  'label' => 'Filling color',
+                  'type' => 'color'
+                ),
+                'menuItem__svg_strokeColor' => array(
+                  'label' => 'stroking color',
+                  'type' => 'color'
+                ),
+                'menuItem__svg_fillColor_hover' => array(
+                  'label' => 'Filling color',
+                  'type' => 'color'
+                ),
+                'menuItem__svg_strokeColor_hover' => array(
+                  'label' => 'stroking color',
+                  'type' => 'color'
+                ),
+                'dark__menuItem__svg_fillColor' => array(
+                  'label' => 'Filling color',
+                  'type' => 'color'
+                ),
+                'dark__menuItem__svg_strokeColor' => array(
+                  'label' => 'stroking color',
+                  'type' => 'color'
+                ),
+                'dark__menuItem__svg_fillColor_hover' => array(
+                  'label' => 'Filling color',
+                  'type' => 'color'
+                ),
+                'dark__menuItem__svg_strokeColor_hover' => array(
+                  'label' => 'stroking color',
+                  'type' => 'color'
+                )
+              )
+            ),
+            'tmp_menuItem_svgBehind' => array(
+              'label' => 'SVG behind link',
+              'inputs' => array(
+                'menuItem__svg_positionBehind_opacity' => array(
+                  'label' => 'Opacity',
+                  'type' => 'input'
+                ),
+                'menuItem__svg_positionBehind_opacity_hover' => array(
+                  'label' => 'Opacity',
+                  'type' => 'input'
+                )
+              )
+            ),
+            'tmp_menuItem_svgContainer' => array(
+              'label' => 'SVG left container',
+              'inputs' => array(
+                'menuItem__svg_positionLeft_backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'menuItem__svg_positionLeft_borderColor' => array(
+                  'label' => 'border color',
+                  'type' => 'color'
+                ),
+                'menuItem__svg_positionLeft_backgroundColor_hover' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'menuItem__svg_positionLeft_borderColor_hover' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'menuItem__svg_positionLeft_width' => array(
+                  'label' => 'Width',
+                  'type' => 'input'
+                ),
+                'menuItem__svg_positionLeft_borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'input'
+                ),
+                'menuItem__svg_positionLeft_borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'menuItem__svg_positionLeft_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'menuItem__svg_positionLeft_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'menuItem__svg_positionLeft_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'menuItem__svg_positionLeft_width_mobile' => array(
+                  'label' => 'Width',
+                  'type' => 'input'
+                ),
+                'menuItem__svg_positionLeft_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'menuItem__svg_positionLeft_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'dark__menuItem__svg_positionLeft_backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__menuItem__svg_positionLeft_borderColor' => array(
+                  'label' => 'border color',
+                  'type' => 'color'
+                ),
+                'dark__menuItem__svg_positionLeft_backgroundColor_hover' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__menuItem__svg_positionLeft_borderColor_hover' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
+            ),
+            'tmp_menuItem_description' => array(
+              'label' => 'Description',
+              'inputs' => array(
+                'menuItem__description_backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'menuItem__description_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'menuItem__description_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'dark__menuItem__description_backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__menuItem__description_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__menuItem__description_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'menuItem__description_borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'input'
+                ),
+                'menuItem__description_borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'menuItem__description_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'menuItem__description_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'menuItem__description_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'menuItem__description_fontFamiliy' => array(
+                  'label' => 'Title font family',
+                  'type' => 'input'
+                ),
+                'menuItem__description_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'menuItem__description_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'menuItem__description_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'menuItem__description_textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'menuItem__description_fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'menuItem__description_letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'input'
+                ),
+                'menuItem__description_fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'menuItem__description_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'menuItem__description_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'dark__menuItem__description_backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__menuItem__description_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__menuItem__description_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
+            )
+          )
+        ),
         'thumbnails' => array(
           'label' => 'Thumbnail',
           'sections' => array(
@@ -1940,6 +2169,24 @@ class prefix_core_Customizer {
                   'type' => 'color'
                 )
               )
+            ),
+            'tagStyles_b' => array(
+              'label' => 'B',
+              'inputs' => array(
+                'b_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                )
+              )
+            ),
+            'tagStyles_strong' => array(
+              'label' => 'Strong',
+              'inputs' => array(
+                'strong_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                )
+              )
             )
           )
         ),
@@ -2329,6 +2576,167 @@ class prefix_core_Customizer {
                 ),
                 'dark__input__placeholder_color' => array(
                   'label' => 'Color',
+                  'type' => 'color'
+                )
+              )
+            ),
+            'forms_range' => array(
+              'label' => 'Range',
+              'inputs' => array(
+                'input__range_progressbar_backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'input__range_progressbar_backgroundColor_hover' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'input__range_progressbar_backgroundColor_active' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'input__range_progressbar_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'input__range_progressbar_borderColor_hover' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'input__range_progressbar_borderColor_active' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'input__range_progressbar_height' => array(
+                  'label' => 'Height',
+                  'type' => 'input'
+                ),
+                'input__range_progressbar_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'input__range_progressbar_borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'input__range_progressbar_borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'input'
+                ),
+                'input__range_handler_backgroundColor' => array(
+                  'label' => 'Handler color',
+                  'type' => 'color'
+                ),
+                'input__range_handler_backgroundColor_hover' => array(
+                  'label' => 'Handler color',
+                  'type' => 'color'
+                ),
+                'input__range_handler_backgroundColor_active' => array(
+                  'label' => 'Handler color',
+                  'type' => 'color'
+                ),
+                'input__range_handler_borderColor' => array(
+                  'label' => 'Handler border color',
+                  'type' => 'color'
+                ),
+                'input__range_handler_borderColor_hover' => array(
+                  'label' => 'Handler border color',
+                  'type' => 'color'
+                ),
+                'input__range_handler_borderColor_active' => array(
+                  'label' => 'Handler border color',
+                  'type' => 'color'
+                ),
+                'input__range_handle_width' => array(
+                  'label' => 'Handler width',
+                  'type' => 'input'
+                ),
+                'input__range_handle_height' => array(
+                  'label' => 'Handler height',
+                  'type' => 'input'
+                ),
+                'input__range_handle_borderWidth' => array(
+                  'label' => 'Handler border width',
+                  'type' => 'input'
+                ),
+                'input__range_handle_borderStyle' => array(
+                  'label' => 'Handler border style',
+                  'type' => 'select'
+                ),
+                'input__range_handle_borderRadius' => array(
+                  'label' => 'Handler border radius',
+                  'type' => 'input'
+                ),
+                'input__range_progressed_backgroundColor' => array(
+                  'label' => 'Prozessed color',
+                  'type' => 'color'
+                ),
+                'input__range_progressed_backgroundColor_hover' => array(
+                  'label' => 'Prozessed color',
+                  'type' => 'color'
+                ),
+                'input__range_progressed_backgroundColor_active' => array(
+                  'label' => 'Prozessed color',
+                  'type' => 'color'
+                ),
+                'dark__input__range_progressbar_backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__input__range_progressbar_backgroundColor_hover' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__input__range_progressbar_backgroundColor_active' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__input__range_progressbar_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'dark__input__range_progressbar_borderColor_hover' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'dark__input__range_progressbar_borderColor_active' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'dark__input__range_handler_backgroundColor' => array(
+                  'label' => 'Handler color',
+                  'type' => 'color'
+                ),
+                'dark__input__range_handler_backgroundColor_hover' => array(
+                  'label' => 'Handler color',
+                  'type' => 'color'
+                ),
+                'dark__input__range_handler_backgroundColor_active' => array(
+                  'label' => 'Handler color',
+                  'type' => 'color'
+                ),
+                'dark__input__range_handler_borderColor' => array(
+                  'label' => 'Handler border color',
+                  'type' => 'color'
+                ),
+                'dark__input__range_handler_borderColor_hover' => array(
+                  'label' => 'Handler border color',
+                  'type' => 'color'
+                ),
+                'dark__input__range_handler_borderColor_active' => array(
+                  'label' => 'Handler border color',
+                  'type' => 'color'
+                ),
+                'dark__input__range_progressed_backgroundColor' => array(
+                  'label' => 'Prozessed color',
+                  'type' => 'color'
+                ),
+                'dark__input__range_progressed_backgroundColor_hover' => array(
+                  'label' => 'Prozessed color',
+                  'type' => 'color'
+                ),
+                'dark__input__range_progressed_backgroundColor_active' => array(
+                  'label' => 'Prozessed color',
                   'type' => 'color'
                 )
               )

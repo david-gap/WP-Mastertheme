@@ -1,4 +1,4 @@
-**Version 2.34.18** (21.09.2022)
+**Version 2.35.18** (28.09.2022)
 
 Custom class "template" with template parts and header / footer builder
 
@@ -42,6 +42,7 @@ Custom class "template" with template parts and header / footer builder
 * $template_footer_custom: custom html
 * $template_footer_sort: Sort and activate blocks inside footer builder
 * $template_footer_before: html code before footer
+* $template_footer_end: html code before footer end
 * $template_searchform_autocomplete: configure the autocomplete in the search form
 * $template_breadcrumbs_active: activate breadcrumbs
 * $template_breadcrumbs_active: activate breadcrumbs
@@ -51,6 +52,10 @@ Custom class "template" with template parts and header / footer builder
 * $template_languageSwitcher_separat: Separat languages
 * $template_languageSwitcher_direction: Select direction
 * $template_languageSwitcher_nameDisplay: Select what should be displayed in the language switcher
+* $template_menu_svgIcon: Add menu custom meta field for a svg icon
+* $template_menu_svgIcon_position: Set menu item svg position
+* $template_menu_description: Add menu custom meta field for a description
+* $template_menu_description_position: Set menu item description position
 * $template_thumbnail_div: return thumbnail in a div to repeat it
 * $template_thumbnail_align: align all thumbnails
 * $template_404_align: align 404 page thumbnail

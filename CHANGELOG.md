@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.66.31 | 23.09.2022 <📦 NEW: menu item fields 💎 IMPROVE: customizer>
+* Add option for custom scripts inside the footer tag
+* Add option to insert SVG code to menu
+* Add input range to customizer
+* Add b and strong tag to customizer
+
 ## 1.65.31 | 23.09.2022 <🐛 FIX: styles set by the customizer>
 * Fix title margin rules
 * Add JS function to convert image to base64 code

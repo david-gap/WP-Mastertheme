@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.34.18
+ * @version     2.35.18
  *
 */
 
@@ -28,6 +28,7 @@ Table of Contents:
   2.7 ADD VALUES TO REST API
   2.8 REDIRECT DETAIL PAGE
   2.9 EXTEND THUMBNAIL
+  2.10 MENU CUSTOM FIELDS
 3.0 OUTPUT
   3.1 SORTABLE HEADER CONTENT
   3.2 SORTABLE FOOTER CONTENT
@@ -115,6 +116,7 @@ class prefix_template {
     * @param static string $template_footer_menu: footer menu settings
     * @param static array $template_footer_sort: Sort and activate blocks inside footer builder
     * @param static string $template_footer_before: html code before footer
+    * @param static string $template_footer_end: html code before footer end
     * @param static string $template_searchform_autocomplete: configure the autocomplete in the search form
     * @param static int $template_breadcrumbs_active: activate breadcrumbs
     * @param static int $template_breadcrumbs_inside: Place breadcrumbs inside page content and if first element is image than after image
@@ -124,6 +126,10 @@ class prefix_template {
     * @param static int $template_languageSwitcher_separat: Separat languages
     * @param static string $template_languageSwitcher_direction: Select direction
     * @param static string $template_languageSwitcher_nameDisplay: Select what should be displayed in the language switcher
+    * @param static int $template_menu_svgIcon: Add menu custom meta field for a svg icon
+    * @param static string $template_menu_svgIcon_position: Set menu item svg position
+    * @param static int $template_menu_description: Add menu custom meta field for a description
+    * @param static string $template_menu_description_position: Set menu item description position
     * @param static int $template_thumbnail_div: return thumbnail in a div to repeat it
     * @param static string $template_thumbnail_align: align all thumbnails
     * @param static string $template_404_align: align 404 page thumbnail
@@ -297,6 +303,7 @@ class prefix_template {
     "widget_three" => 0
   );
   static $template_footer_before                   = "";
+  static $template_footer_end                      = "";
   static $template_footer_after                    = "";
   static $template_searchform_autocomplete         = 0;
   static $template_breadcrumbs_active              = 0;
@@ -307,6 +314,10 @@ class prefix_template {
   static $template_languageSwitcher_separat        = 0;
   static $template_languageSwitcher_direction      = 'horizontal';
   static $template_languageSwitcher_nameDisplay    = 'slug';
+  static $template_menu_svgIcon                    = 0;
+  static $template_menu_svgIcon_position           = 'left';
+  static $template_menu_description                = 0;
+  static $template_menu_description_position       = 'under';
   static $template_thumbnail_div                   = 0;
   static $template_thumbnail_404                   = 0;
   static $template_thumbnail_search                = 0;
@@ -332,6 +343,11 @@ class prefix_template {
     // extend thumbnail metabox
     add_filter( 'admin_post_thumbnail_html', array( $this, 'extendThumbnailMetabox' ), 10, 2 );
     add_filter( 'post_thumbnail_html', array( $this, 'extendThumbnailOutput' ), 10, 5 );
+    // menu custom fields
+    add_action( 'wp_nav_menu_item_custom_fields', array( $this, 'menuCustomFields_backendForm' ), 10, 2 );
+    add_action( 'wp_update_nav_menu_item', array( $this, 'menuCustomFields_saveValue' ), 10, 2 );
+    add_filter( 'nav_menu_item_title', array( $this, 'menuCustomFields_frontendIcon' ), 10, 2 );
+    add_filter( 'walker_nav_menu_start_el', array( $this, 'menuCustomFields_frontendDescription' ), 10, 4 );
     // register widgets
     SELF::registerCustomWidgets();
     // shortcodes
@@ -1258,6 +1274,10 @@ class prefix_template {
           "label" => "Custom content before footer",
           "type" => "textarea"
         ),
+        "footer_end" => array(
+          "label" => "Custom script footer end",
+          "type" => "textarea"
+        ),
         "after_footer" => array(
           "label" => "Custom content after footer",
           "type" => "textarea"
@@ -1271,6 +1291,30 @@ class prefix_template {
         "autocomplete" => array(
           "label" => "Autocomplete",
           "type" => "switchbutton"
+        )
+      )
+    ),
+    "menu" => array(
+      "label" => "Menu",
+      "type" => "multiple",
+      "value" => array(
+        "svgIcon" => array(
+          "label" => "SVG",
+          "type" => "switchbutton"
+        ),
+        "svgIcon_position" => array(
+          "label" => "SVG position",
+          "type" => "select",
+          "value" => array('left','behind')
+        ),
+        "description" => array(
+          "label" => "Description",
+          "type" => "switchbutton"
+        ),
+        "description_position" => array(
+          "label" => "SVG position",
+          "type" => "select",
+          "value" => array('under','hover')
         )
       )
     ),
@@ -1462,6 +1506,7 @@ class prefix_template {
           SELF::$template_footer_menu = array_key_exists('menu', $footer) ? $footer['menu'] : SELF::$template_footer_menu;
           SELF::$template_footer_sort = array_key_exists('sort', $footer) ? $footer['sort'] : SELF::$template_footer_sort;
           SELF::$template_footer_before = array_key_exists('before_footer', $footer) ? $footer['before_footer'] : SELF::$template_footer_before;
+          SELF::$template_footer_end = array_key_exists('footer_end', $footer) ? $footer['footer_end'] : SELF::$template_footer_end;
           SELF::$template_footer_after = array_key_exists('after_footer', $footer) ? $footer['after_footer'] : SELF::$template_footer_after;
         endif;
         if($configuration && array_key_exists('breadcrumbs', $myConfig)):
@@ -1495,6 +1540,14 @@ class prefix_template {
           $errorPage = $myConfig['errorPage'];
           SELF::$template_404_searchForm = array_key_exists('searchForm', $errorPage) ? $errorPage['searchForm'] : SELF::$template_404_searchForm;
           SELF::$template_404_backToHome = array_key_exists('BackToHome', $errorPage) ? $errorPage['BackToHome'] : SELF::$template_404_backToHome;
+        endif;
+        if($configuration && array_key_exists('menu', $myConfig)):
+          $menu = $myConfig['menu'];
+          SELF::$template_menu_svgIcon = array_key_exists('svgIcon', $menu) ? $menu['svgIcon'] : SELF::$template_menu_svgIcon;
+          SELF::$template_menu_svgIcon_position = array_key_exists('svgIcon_position', $menu) ? $menu['svgIcon_position'] : SELF::$template_menu_svgIcon_position;
+          SELF::$template_menu_description = array_key_exists('description', $menu) ? $menu['description'] : SELF::$template_menu_description;
+          SELF::$template_menu_description_position = array_key_exists('description_position', $menu) ? $menu['description_position'] : SELF::$template_menu_description_position;
+
         endif;
       endif;
     }
@@ -1794,6 +1847,83 @@ class prefix_template {
       endif;
       return $html;
     }
+
+
+    /* 2.10 MENU CUSTOM FIELDS
+    /------------------------*/
+    // add input to menu backend
+    function menuCustomFields_backendForm($item_id, $item){
+      $output = '';
+      $cf_svgIcon = prefix_template::$template_menu_svgIcon;
+      $cf_description = prefix_template::$template_menu_description;
+      $menu_cf_svgIcon = get_post_meta( $item_id, '_menu_svgIcon', true );
+      $menu_cf_description = get_post_meta( $item_id, '_menu_description', true );
+      // add textarea for the svg icon code
+      if($cf_svgIcon):
+        $output .= '<div style="clear: both;">';
+          $output .= '<p class="field-desc-attribute field-attr-desc description description-wide">';
+            $output .= '<label for="menu-svgIcon-' . $item_id . '">';
+              $output .= __('Menu item SVG','devTheme');
+              $output .= '<br><small>' . __('If you wish to use the icon coloring from the customizer set the class "stroked" or "filled" in the right position of the svg and remove the color definition','devTheme') . '</small>';
+              $output .= '<br><textarea class="widefat edit-menu-svgIcon" name="menu_svgIcon[' . $item_id . ']" id="menu-svgIcon-' . $item_id . '">' . stripslashes($menu_cf_svgIcon) . '</textarea>';
+            $output .= '</label>';
+          $output .= '</p>';
+        $output .= '</div>';
+      endif;
+      // add textarea for the description
+      if($cf_description):
+        $output .= '<div style="clear: both;">';
+          $output .= '<p class="field-desc-attribute field-attr-desc description description-wide">';
+            $output .= '<label for="menu-description-' . $item_id . '">';
+              $output .= __('Menu item description','devTheme');
+              $output .= '<br><textarea class="widefat edit-menu-description" name="menu_description[' . $item_id . ']" id="menu-description-' . $item_id . '">' . stripslashes($menu_cf_description) . '</textarea>';
+            $output .= '</label>';
+          $output .= '</p>';
+        $output .= '</div>';
+      endif;
+      //
+      echo $output;
+    }
+    // save menu input
+  function menuCustomFields_saveValue( $menu_id, $menu_item_db_id ) {
+    // svg
+    if ( isset( $_POST['menu_svgIcon'][$menu_item_db_id]  ) ):
+      $sanitized_svgIcon = stripslashes( $_POST['menu_svgIcon'][$menu_item_db_id] );
+      update_post_meta( $menu_item_db_id, '_menu_svgIcon', $sanitized_svgIcon );
+    else:
+      delete_post_meta( $menu_item_db_id, '_menu_svgIcon' );
+    endif;
+    // description
+    if ( isset( $_POST['menu_description'][$menu_item_db_id]  ) ):
+      $sanitized_description = stripslashes( $_POST['menu_description'][$menu_item_db_id] );
+      update_post_meta( $menu_item_db_id, '_menu_description', $sanitized_description );
+    else:
+      delete_post_meta( $menu_item_db_id, '_menu_description' );
+    endif;
+  }
+  // return on frontend
+  function menuCustomFields_frontendIcon( $title, $item ) {
+    $cf_svgIcon = prefix_template::$template_menu_svgIcon;
+    $cf_svgIconPosition = prefix_template::$template_menu_svgIcon_position;
+    if($cf_svgIcon):
+      if(is_object( $item ) && isset( $item->ID)):
+        $menu_item_svgIcon = get_post_meta($item->ID, '_menu_svgIcon', true);
+        if(! empty( $menu_item_svgIcon)):
+          $title = $menu_item_svgIcon ? '<span class="icon position-' . $cf_svgIconPosition . '">' . $menu_item_svgIcon . '</span>' . $title : $title;
+        endif;
+      endif;
+    endif;
+    return $title;
+  }
+  function menuCustomFields_frontendDescription( $item_output, $item, $depth, $args ) {
+    $cf_description = prefix_template::$template_menu_description;
+    $cf_descriptionPosition = prefix_template::$template_menu_description_position;
+    //
+    if ($cf_description && !empty( $item->description ) ) {
+      $item_output .= '<span class="description position-' . $cf_descriptionPosition . '">' . $item->description . '</span>';
+    }
+    return $item_output;
+}
 
 
 

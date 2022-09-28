@@ -33,6 +33,7 @@ Table of Contents:
     3.3 CONSENT CONTAINER
     3.4 BLOG & ARCHIVE
     3.5 SCROLL TO TOP
+    3.6 MENU ITEMS
   4.0 BLOCKS
     4.1 ACCORDION
     4.2 BUTTONS
@@ -141,7 +142,7 @@ body.page-template,
   input,
   textarea,
   select {
-    color:  var(--input__color);
+    color: var(--input__color);
     background-color: var(--input__bg_color);
     border-color: var(--input__border_color, unset);
     // placeholder
@@ -186,6 +187,122 @@ body.page-template,
     select {
       border-color: var(--input__required, unset);
     }
+  }
+  input[type="range"]{
+    /*webkit*/
+    &::-webkit-slider-thumb {
+      background: var(--input__range_handler_backgroundColor, var(--color__main));
+      border-color: var(--input__range_handler_borderColor, unset);
+    }
+    &::-webkit-slider-runnable-track {
+      border-color: var(--input__range_progressbar_borderColor, unset);
+      background: var(--input__range_progressbar_backgroundColor, var(--input__bg_color));
+    }
+    &::-webkit-slider-thumb:hover {
+      background: var(--input__range_handler_backgroundColor_hover, var(--input__range_handler_backgroundColor, var(--color__main)));
+      border-color: var(--input__range_handler_borderColor_hover, var(--input__range_handler_borderColor, unset));
+    }
+    &:hover::-webkit-slider-runnable-track {
+      background: var(--input__range_progressbar_backgroundColor_hover, var(--input__bg_color));
+      border-color: var(--input__range_progressbar_borderColor_hover, var(--input__range_progressbar_borderColor, unset));
+    }
+    &::-webkit-slider-thumb:active {
+      background: var(--input__range_handler_backgroundColor_active, var(--input__range_handler_backgroundColor, var(--color__main)));
+      border-color: var(--input__range_handler_borderColor_active, var(--input__range_handler_borderColor, unset));
+    }
+    &:active::-webkit-slider-runnable-track {
+      background: var(--input__range_progressbar_backgroundColor_active, var(--input__bg_color));
+      border-color: var(--input__range_progressbar_borderColor_active, var(--input__range_progressbar_borderColor, unset));
+    }
+    &::-webkit-slider-runnable-track {
+      background: linear-gradient(var(--input__range_progressed_backgroundColor, var(--color__main)),var(--input__range_progressed_backgroundColor, var(--color__main))) 0/var(--sx) 100% no-repeat, var(--input__range_progressbar_backgroundColor, var(--input__bg_color));
+    }
+    &:hover::-webkit-slider-runnable-track {
+      background: linear-gradient(var(--input__range_progressed_backgroundColor_hover, var(--input__range_progressed_backgroundColor, var(--color__main))),var(--input__range_progressed_backgroundColor_hover, var(--input__range_progressed_backgroundColor, var(--color__main)))) 0/var(--sx) 100% no-repeat, var(--input__range_progressbar_backgroundColor_hover, var(--input__bg_color));
+    }
+    &:active::-webkit-slider-runnable-track {
+      background: linear-gradient(var(--input__range_progressed_backgroundColor_active, var(--input__range_progressed_backgroundColor, var(--color__main))),var(--input__range_progressed_backgroundColor_active, var(--input__range_progressed_backgroundColor, var(--color__main)))) 0/var(--sx) 100% no-repeat, var(--input__range_progressbar_backgroundColor_active, var(--input__bg_color));
+    }
+    /*mozilla*/
+    &::-moz-range-thumb {
+      background: var(--input__range_handler_backgroundColor, var(--color__main));
+      border-color: var(--input__range_handler_borderColor, unset);
+    }
+    &::-moz-range-track {
+      border-color: var(--input__range_progressbar_borderColor, unset);
+      background: var(--input__range_progressbar_backgroundColor, var(--input__bg_color));
+    }
+    &::-moz-range-thumb:hover {
+      background: var(--input__range_handler_backgroundColor_hover, var(--input__range_handler_backgroundColor, var(--color__main)));
+      border-color: var(--input__range_handler_borderColor_hover, var(--input__range_handler_borderColor, unset));
+    }
+    &:hover::-moz-range-track {
+      background: var(--input__range_progressbar_backgroundColor_hover, var(--input__bg_color));
+      border-color: var(--input__range_progressbar_borderColor_hover, var(--input__range_progressbar_borderColor, unset));
+    }
+    &::-moz-range-thumb:active {
+      background: var(--input__range_handler_backgroundColor_active, var(--input__range_handler_backgroundColor, var(--color__main)));
+      border-color: var(--input__range_handler_borderColor_active, var(--input__range_handler_borderColor, unset));
+    }
+    &:active::-moz-range-track {
+      background: var(--input__range_progressbar_backgroundColor_active, var(--input__bg_color));
+      border-color: var(--input__range_progressbar_borderColor_active, var(--input__range_progressbar_borderColor, unset));
+    }
+    &::-moz-range-track {
+      background: linear-gradient(var(--input__range_progressed_backgroundColor, var(--color__main)),var(--input__range_progressed_backgroundColor, var(--color__main))) 0/var(--sx) 100% no-repeat, var(--input__range_progressbar_backgroundColor, var(--input__bg_color));
+    }
+    &:hover::-moz-range-track {
+      background: linear-gradient(var(--input__range_progressed_backgroundColor_hover, var(--input__range_progressed_backgroundColor, var(--color__main))),var(--input__range_progressed_backgroundColor_hover, var(--input__range_progressed_backgroundColor, var(--color__main)))) 0/var(--sx) 100% no-repeat, var(--input__range_progressbar_backgroundColor_hover, var(--input__bg_color));
+    }
+    &:active::-moz-range-track {
+      background: linear-gradient(var(--input__range_progressed_backgroundColor_active, var(--input__range_progressed_backgroundColor, var(--color__main))),var(--input__range_progressed_backgroundColor_active, var(--input__range_progressed_backgroundColor, var(--color__main)))) 0/var(--sx) 100% no-repeat, var(--input__range_progressbar_backgroundColor_active, var(--input__bg_color));
+    }
+    /*ms*/
+    &::-ms-fill-upper,
+    &::-ms-fill-lower {
+      background: transparent;
+      border-color: transparent;
+    }
+    &::-ms-thumb {
+      background: var(--input__range_handler_backgroundColor, var(--color__main));
+      border-color: var(--input__range_handler_borderColor, unset);
+    }
+    &::-ms-track {
+      background: var(--input__range_progressbar_backgroundColor, var(--input__bg_color));
+      border-color: var(--input__range_progressbar_borderColor, unset);
+    }
+    &::-ms-thumb:hover {
+      background: var(--input__range_handler_backgroundColor_hover, var(--input__range_handler_backgroundColor, var(--color__main)));
+      border-color: var(--input__range_handler_borderColor_hover, var(--input__range_handler_borderColor, unset));
+    }
+    &:hover::-ms-track {
+      background: var(--input__range_progressbar_backgroundColor_hover, var(--input__bg_color));
+      border-color: var(--input__range_progressbar_borderColor_hover, var(--input__range_progressbar_borderColor, unset));
+    }
+    &::-ms-thumb:active {
+      background: var(--input__range_handler_backgroundColor_active, var(--input__range_handler_backgroundColor, var(--color__main)));
+      border-color: var(--input__range_handler_borderColor_active, var(--input__range_handler_borderColor, unset));
+    }
+    &:active::-ms-track {
+      background: var(--input__range_progressbar_backgroundColor_active, var(--input__bg_color));
+      border-color: var(--input__range_progressbar_borderColor_active, var(--input__range_progressbar_borderColor, unset));
+    }
+    &::-ms-fill-lower {
+      background: var(--input__range_progressed_backgroundColor, var(--color__main));
+      border-color: var(--input__range_progressbar_borderColor, unset);
+    }
+    &:hover::-ms-fill-lower {
+      background: var(--input__range_progressed_backgroundColor_hover, var(--input__range_progressed_backgroundColor, var(--color__main)));
+      border-color: var(--input__range_progressbar_borderColor_hover, var(--input__range_progressbar_borderColor, unset));
+    }
+    &:active::-ms-fill-lower {
+      background: var(--input__range_progressed_backgroundColor_active, var(--input__range_progressed_backgroundColor, var(--color__main)));
+      border-color: var(--input__range_progressbar_borderColor_active, var(--input__range_progressbar_borderColor, unset));
+    }
+
+
+
+
   }
 
 
@@ -587,6 +704,50 @@ body.page-template,
         background-color: var(--scrollToTop__Button_bg_hover, inherit);
         border-color: var(--scrollToTop__Button_borderColor_hover, unset);
       }
+    }
+  }
+
+
+  /* 3.6 MENU ITEMS
+  /––––––––––––––––––––––––*/
+  .menu-item {
+    a {
+      position: relative;
+      &:hover {
+        .icon {
+          &.position-left {
+            background-color: var(--menuItem__svg_positionLeft_backgroundColor_hover, var(--menuItem__svg_positionLeft_backgroundColor, transparent));
+            border-color: var(--menuItem__svg_positionLeft_borderColor_hover, var(--menuItem__svg_positionLeft_borderColor, transparent));
+          }
+          svg {
+            .filled {
+              fill: var(--menuItem__svg_fillColor_hover, transparent);
+            }
+            .stroked {
+              stroke: var(--menuItem__svg_strokeColor_hover, inherit);
+            }
+          }
+        }
+      }
+      .icon {
+        &.position-left {
+          background-color: var(--menuItem__svg_positionLeft_backgroundColor, transparent);
+          border-color: var(--menuItem__svg_positionLeft_borderColor, transparent);
+        }
+        svg {
+          .filled {
+            fill: var(--menuItem__svg_fillColor, transparent);
+          }
+          .stroked {
+            stroke: var(--menuItem__svg_strokeColor, inherit);
+          }
+        }
+      }
+    }
+    .description {
+      background-color: var(--menuItem__description_backgroundColor, transparent);
+      color: var(--menuItem__description_color, inherit);
+      border-color: var(--menuItem__description_borderColor, unset);
     }
   }
 

@@ -22,6 +22,7 @@ Table of Contents:
     2.8 BLOG & ARCHIVE
     2.9 SCROLL TO TOP
     2.10 DOWNLOAD ALL BUTTON
+    2.11 MENU ITEMS
   3.0 FOOTER
   4.0 GENERAL
   5.0 BLOCKS
@@ -387,6 +388,21 @@ body.page-template,
   }
 
 
+  /* 2.11 MENU ITEMS
+  /––––––––––––––––––––––––*/
+  .menu-item {
+    .description {
+      font-family: var(--menuItem__description_fontFamiliy, inherit);
+      font-size: var(--menuItem__description_fontSize, 80%);
+      line-height: var(--menuItem__description_lineHeight, inherit);
+      font-weight: var(--menuItem__description_fontWeight, inherit);
+      letter-spacing: var(--menuItem__description_letterSpacing, 0);
+      text-transform: var(--menuItem__description_textTransform, none);
+      font-style: var(--menuItem__description_fontStyle, normal);
+    }
+  }
+
+
 
   /*==================================================================================
     3.0 FOOTER
@@ -425,6 +441,14 @@ body.page-template,
   sub, sup {
     font-size: var(--html__fontsize_subsup, 80%);
   }
+
+  b {
+    font-weight: var(--b_fontWeight, bold);
+  }
+  strong {
+    font-weight: var(--strong_fontWeight, bold);
+  }
+
 
   // inputs
   input[type="text"],

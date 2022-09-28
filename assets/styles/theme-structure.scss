@@ -23,6 +23,7 @@ Table of Contents:
     3.6 404 PAGE
     3.7 LANGUAGE SWITCHER
     3.8 SEARCH FORM
+    3.9 MENU ITEMS
   4.0 SCROLL TO TOP
   5.0 FOOTER
 =======================================================*/
@@ -752,6 +753,69 @@ body.page-template,
       padding: var(--searchForm__submit_padding, var(--input__submit_padding, 10px 20px));
       appearance: none;
       cursor: pointer;
+    }
+  }
+
+
+  /* 3.9 MENU ITEMS
+  /––––––––––––––––––––––––*/
+  .menu-item {
+    a {
+      position: relative;
+      &:hover {
+        + .description.position-hover {
+          opacity: 1;
+          transition: .3s;
+          pointer-events: auto;
+        }
+        .icon {
+          &.position-behind {
+            opacity: var(--menuItem__svg_positionBehind_opacity_hover, 1);
+          }
+        }
+      }
+      .icon {
+        &.position-left {
+          display: inline-block;
+          width: var(--menuItem__svg_positionLeft_width, auto);
+          border-radius: var(--menuItem__svg_positionLeft_borderRadius, 0);
+          border-width: var(--menuItem__svg_positionLeft_borderWidth, 0);
+          border-style: var(--menuItem__svg_positionLeft_borderStyle, solid);
+          margin: var(--menuItem__svg_positionLeft_margin, 0 10px 0 0);
+          padding: var(--menuItem__svg_positionLeft_padding, 0);
+        }
+        &.position-behind {
+          position: absolute;
+          z-index: -1;
+          display: block;
+          width: 100%;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          opacity: var(--menuItem__svg_positionBehind_opacity, 0);
+        }
+        svg {
+          width: 100%;
+          height: auto;
+        }
+      }
+    }
+    .description {
+      display: block;
+      border-radius: var(--menuItem__description_borderRadius, 0);
+      border-width: var(--menuItem__description_borderWidth, 0);
+      border-style: var(--menuItem__description_borderStyle);
+      margin: var(--menuItem__description_margin, 0);
+      padding: var(--menuItem__description_padding, 0);
+      pointer-events: none;
+      &.position-hover {
+        position: absolute;
+        opacity: 0;
+        transition: .3s;
+        &:hover {
+          opacity: 1;
+        }
+      }
     }
   }
 
