@@ -762,6 +762,7 @@ body.page-template,
   .menu-item {
     a {
       position: relative;
+      z-index: 1;
       &:hover {
         + .description.position-hover {
           opacity: 1;
