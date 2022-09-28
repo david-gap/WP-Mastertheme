@@ -236,6 +236,8 @@ body.page-template,
             > ul {
               display: flex;
               flex-wrap: wrap;
+              justify-content: stretch;
+              align-items: stretch;
               flex-direction: var(--mnav__sub_flexDirection, column);
               gap: var(--mnav__sub_gap, var(--mnav__ul_gap, 0px));
               row-gap: var(--mnav__sub_gap, var(--mnav__ul_gap, 0px));
@@ -248,6 +250,8 @@ body.page-template,
                 > ul {
                   display: flex;
                   flex-wrap: wrap;
+                  justify-content: stretch;
+                  align-items: stretch;
                   flex-direction: var(--mnav__subSub_flexDirection, column);
                   gap: var(--mnav__subSub_gap, var(--mnav__ul_gap, 0px));
                   row-gap: var(--mnav__subSub_gap, var(--mnav__ul_gap, 0px));
@@ -260,6 +264,8 @@ body.page-template,
                     > ul {
                       display: flex;
                       flex-wrap: wrap;
+                      justify-content: stretch;
+                      align-items: stretch;
                       flex-direction: var(--mnav__subSubSub_flexDirection, column);
                       gap: var(--mnav__subSubSub_gap, var(--mnav__ul_gap, 0px));
                       row-gap: var(--mnav__subSubSub_gap, var(--mnav__ul_gap, 0px));

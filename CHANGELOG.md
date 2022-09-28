@@ -7,6 +7,7 @@
 * Add b and strong tag to customizer
 * Add gap definition for menu level 2-4
 * Add menu direction
+* Add dashoffset animation
 
 ## 1.65.31 | 23.09.2022 <🐛 FIX: styles set by the customizer>
 * Fix title margin rules

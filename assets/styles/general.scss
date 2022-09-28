@@ -123,6 +123,22 @@ body.page-template {
   }
 
 
+  /* SVG ANIMATIONS
+  /––––––––––––––––––––––––*/
+  .svg-animate-dashoffset {
+    &:hover {
+      svg {
+        stroke-dasharray: var(--dasharray, 100);
+        stroke-dashoffset: var(--dashoffset, 100);
+        transition: var(--transition, .5s ease-in);
+      }
+    }
+    svg {
+      stroke-dashoffset: 0;
+    }
+  }
+
+
   /* FULL AND WIDE ALIGN
   /––––––––––––––––––––––––*/
   .alignwide {

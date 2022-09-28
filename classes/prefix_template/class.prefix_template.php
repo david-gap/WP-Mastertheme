@@ -1312,7 +1312,7 @@ class prefix_template {
           "type" => "switchbutton"
         ),
         "description_position" => array(
-          "label" => "SVG position",
+          "label" => "Description position",
           "type" => "select",
           "value" => array('under','hover')
         )
