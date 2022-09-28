@@ -5,6 +5,7 @@
 * Add option to insert SVG code to menu
 * Add input range to customizer
 * Add b and strong tag to customizer
+* Add gap definition for menu level 2-4
 
 ## 1.65.31 | 23.09.2022 <🐛 FIX: styles set by the customizer>
 * Fix title margin rules

@@ -530,6 +530,14 @@ class prefix_core_Customizer {
             'mainmenu_level2' => array(
               'label' => 'Level 2',
               'inputs' => array(
+                'mnav__sub_gap' => array(
+                  'label' => 'Gap',
+                  'type' => 'input'
+                ),
+                'mnav__sub_gap_mobile' => array(
+                  'label' => 'Gap',
+                  'type' => 'input'
+                ),
                 'mnav__sub_color' => array(
                   'label' => 'Color',
                   'type' => 'color'
@@ -651,6 +659,14 @@ class prefix_core_Customizer {
             'mainmenu_level3' => array(
               'label' => 'Level 3',
               'inputs' => array(
+                'mnav__subSub_gap' => array(
+                  'label' => 'Gap',
+                  'type' => 'input'
+                ),
+                'mnav__subSub_gap_mobile' => array(
+                  'label' => 'Gap',
+                  'type' => 'input'
+                ),
                 'mnav__subSub_color' => array(
                   'label' => 'Color',
                   'type' => 'color'
@@ -772,6 +788,14 @@ class prefix_core_Customizer {
             'mainmenu_level4' => array(
               'label' => 'Level 4',
               'inputs' => array(
+                'mnav__subSubSub_gap' => array(
+                  'label' => 'Gap',
+                  'type' => 'input'
+                ),
+                'mnav__subSubSub_gap_mobile' => array(
+                  'label' => 'Gap',
+                  'type' => 'input'
+                ),
                 'mnav__subSubSub_color' => array(
                   'label' => 'Color',
                   'type' => 'color'
