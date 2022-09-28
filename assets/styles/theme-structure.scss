@@ -219,6 +219,8 @@ body.page-template,
         }
         > ul#menu_main {
           display: flex;
+          flex-wrap: wrap;
+          // flex-direction: var(--mnav__ul_flexDirection, row);
           list-style: none;
           margin: 0;
           padding: 0;
@@ -232,6 +234,9 @@ body.page-template,
               border-width: var(--mnav__border_width, 0);
             }
             > ul {
+              display: flex;
+              flex-wrap: wrap;
+              flex-direction: var(--mnav__sub_flexDirection, column);
               gap: var(--mnav__sub_gap, var(--mnav__ul_gap, 0px));
               row-gap: var(--mnav__sub_gap, var(--mnav__ul_gap, 0px));
               > li {
@@ -241,6 +246,9 @@ body.page-template,
                   border-width: var(--mnav__sub_border_width, 0);
                 }
                 > ul {
+                  display: flex;
+                  flex-wrap: wrap;
+                  flex-direction: var(--mnav__subSub_flexDirection, column);
                   gap: var(--mnav__subSub_gap, var(--mnav__ul_gap, 0px));
                   row-gap: var(--mnav__subSub_gap, var(--mnav__ul_gap, 0px));
                   > li {
@@ -250,6 +258,9 @@ body.page-template,
                       border-width: var(--mnav__subSub_border_width, 0);
                     }
                     > ul {
+                      display: flex;
+                      flex-wrap: wrap;
+                      flex-direction: var(--mnav__subSubSub_flexDirection, column);
                       gap: var(--mnav__subSubSub_gap, var(--mnav__ul_gap, 0px));
                       row-gap: var(--mnav__subSubSub_gap, var(--mnav__ul_gap, 0px));
                       > li {

@@ -398,10 +398,18 @@ class prefix_core_Customizer {
                   'label' => 'Gap',
                   'type' => 'input'
                 ),
+                // 'mnav__ul_flexDirection' => array(
+                //   'label' => 'Direction',
+                //   'type' => 'select'
+                // ),
                 'mnav__ul_gap_mobile' => array(
                   'label' => 'Gap',
                   'type' => 'input'
                 ),
+                // 'mnav__ul_flexDirection_mobile' => array(
+                //   'label' => 'Direction',
+                //   'type' => 'select'
+                // ),
                 'mnav__color' => array(
                   'label' => 'Color',
                   'type' => 'color',
@@ -534,9 +542,17 @@ class prefix_core_Customizer {
                   'label' => 'Gap',
                   'type' => 'input'
                 ),
+                'mnav__sub_flexDirection' => array(
+                  'label' => 'Direction',
+                  'type' => 'select'
+                ),
                 'mnav__sub_gap_mobile' => array(
                   'label' => 'Gap',
                   'type' => 'input'
+                ),
+                'mnav__sub_flexDirection_mobile' => array(
+                  'label' => 'Direction',
+                  'type' => 'select'
                 ),
                 'mnav__sub_color' => array(
                   'label' => 'Color',
@@ -663,9 +679,17 @@ class prefix_core_Customizer {
                   'label' => 'Gap',
                   'type' => 'input'
                 ),
+                'mnav__subSub_flexDirection' => array(
+                  'label' => 'Direction',
+                  'type' => 'select'
+                ),
                 'mnav__subSub_gap_mobile' => array(
                   'label' => 'Gap',
                   'type' => 'input'
+                ),
+                'mnav__subSub_flexDirection_mobile' => array(
+                  'label' => 'Direction',
+                  'type' => 'select'
                 ),
                 'mnav__subSub_color' => array(
                   'label' => 'Color',
@@ -792,9 +816,17 @@ class prefix_core_Customizer {
                   'label' => 'Gap',
                   'type' => 'input'
                 ),
+                'mnav__subSubSub_flexDirection' => array(
+                  'label' => 'Direction',
+                  'type' => 'select'
+                ),
                 'mnav__subSubSub_gap_mobile' => array(
                   'label' => 'Gap',
                   'type' => 'input'
+                ),
+                'mnav__subSubSub_flexDirection_mobile' => array(
+                  'label' => 'Direction',
+                  'type' => 'select'
                 ),
                 'mnav__subSubSub_color' => array(
                   'label' => 'Color',
