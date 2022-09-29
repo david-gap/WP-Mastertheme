@@ -34,6 +34,7 @@ Table of Contents:
     3.4 BLOG & ARCHIVE
     3.5 SCROLL TO TOP
     3.6 MENU ITEMS
+    3.7 COMMENTS
   4.0 BLOCKS
     4.1 ACCORDION
     4.2 BUTTONS
@@ -550,6 +551,14 @@ body.page-template,
     .results {
       article {
         border-color: var(--search__article_borderColor, var(--blog__article_borderColor, unset));
+        h2:not(.post-title):not([class^=is-style-]):not([class*=' is-style-']) {
+          background-color: var(--search__article_title_backgroundColor, var(--blog__article_title_backgroundColor, transparent));
+          color: var(--search__article_title_color, var(--blog__article_title_color, inherit));
+          border-color: var(--search__article_title_borderColor, var(--blog__article_title_borderColor, unset));
+          a {
+            color: var(--search__article_title_color, var(--blog__article_title_color, inherit));
+          }
+        }
       }
     }
   }
@@ -684,6 +693,14 @@ body.page-template,
     > div {
       article {
         border-color: var(--blog__article_borderColor, unset);
+        h2:not(.post-title):not([class^=is-style-]):not([class*=' is-style-']) {
+          background-color: var(--blog__article_title_backgroundColor, transparent);
+          color: var(--blog__article_title_color, inherit);
+          border-color: var(--blog__article_title_borderColor, unset);
+          a {
+            color: var(--blog__article_title_color, inherit);
+          }
+        }
       }
     }
   }
@@ -749,6 +766,29 @@ body.page-template,
       background-color: var(--menuItem__description_backgroundColor, transparent);
       color: var(--menuItem__description_color, inherit);
       border-color: var(--menuItem__description_borderColor, unset);
+    }
+  }
+
+
+  /* 3.7 COMMENTS
+  /––––––––––––––––––––––––*/
+  #comments {
+    background-color: var(--comments__bg, initial);
+    border-color: var(--comments__borderColor, unset);
+    h3.comments-title {
+      background-color: var(--comments__title_bg, initial);
+      color: var(--comments__title_color, inherit);
+      border-color: var(--comments__title_borderColor, unset);
+    }
+    ol.commentlist {
+      li {
+        border-color: var(--comments__commentlist_item_borderColor, unset);
+      }
+      ol.children {
+        li {
+          border-color: var(--comments__commentlist_respond_item_borderColor, var(--comments__commentlist_item_borderColor, unset));
+        }
+      }
     }
   }
 
@@ -1043,9 +1083,14 @@ body.page-template,
         color: var(--block__posts_color, inherit);
         border-color: var(--block__posts_borderColor, unset);
         .post-content {
-          > h4,
-          .template h2 {
+          > h4:not(.post-title):not([class^='is-style-']):not([class*=' is-style-']),
+          .template h2:not(.post-title):not([class^='is-style-']):not([class*=' is-style-']) {
+            background-color: var(--block__posts_title_backgroundColor, transparent);
+            border-color: var(--block__posts_title_borderColor, unset);
             color: var(--block__posts_title_color, inherit);
+            a {
+              color: var(--block__posts_title_color, inherit);
+            }
           }
         }
       }
@@ -1062,9 +1107,14 @@ body.page-template,
         border-color: var(--block__postsfilter_borderColor, unset);
         color: var(--block__postsfilter_color, inherit);
         .post-content {
-          > h4,
-          .template h2 {
+          > h4:not(.post-title):not([class^='is-style-']):not([class*=' is-style-']),
+          .template h2:not(.post-title):not([class^='is-style-']):not([class*=' is-style-']) {
+            background-color: var(--block__postsfilter_title_backgroundColor, transparent);
+            border-color: var(--block__postsfilter_title_borderColor, unset);
             color: var(--block__postsfilter_title_color, inherit);
+            a {
+              color: var(--block__postsfilter_title_color, inherit);
+            }
           }
         }
       }

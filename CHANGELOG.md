@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.67.31 | 29.09.2022 <🐛 FIX: title styles 📦 NEW: comment styles>
+* Add comments styles to customizer
+* Fix posts and postsfilter block title style
+* Add posts and postsfilter block title color and border styles
+* Add blog and search results title color and border styles
+
 ## 1.66.31 | 23.09.2022 <📦 NEW: menu item fields 💎 IMPROVE: customizer>
 * Add option for custom scripts inside the footer tag
 * Add option to insert SVG code to menu

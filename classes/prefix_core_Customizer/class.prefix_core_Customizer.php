@@ -4,7 +4,7 @@
  *
  * Customizer extension
  * Author:      David Voglgsnag
- * @version     1.10
+ * @version     1.11
  *
  */
 
@@ -3353,6 +3353,26 @@ class prefix_core_Customizer {
             'search_results_item_title' => array(
               'label' => 'Item title',
               'inputs' => array(
+                'search__article_title_backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'search__article_title_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'search__article_title_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'search__article_title_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'search__article_title_borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
                 'search__article_title_margin' => array(
                   'label' => 'Margin',
                   'type' => 'input'
@@ -3518,6 +3538,26 @@ class prefix_core_Customizer {
             'blog_item_title' => array(
               'label' => 'Item title',
               'inputs' => array(
+                'blog__article_title_backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'blog__article_title_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'blog__article_title_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'blog__article_title_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'blog__article_title_borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
                 'blog__article_title_margin' => array(
                   'label' => 'Margin',
                   'type' => 'input'
@@ -3572,6 +3612,291 @@ class prefix_core_Customizer {
               'label' => 'Pagination',
               'inputs' => array(
                 'blog__pagination_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                )
+              )
+            )
+          )
+        ),
+        'tmp_comments' => array(
+          'label' => 'Comments',
+          'sections' => array(
+            'tmp_comments_settings' => array(
+              'label' => 'Settings',
+              'inputs' => array(
+                'comments__bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'comments__borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'comments__borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'input'
+                ),
+                'comments__borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'comments__borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'comments__margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'comments__padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                )
+              )
+            ),
+            'tmp_comments_title' => array(
+              'label' => 'Title',
+              'inputs' => array(
+                'comments__title_bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'comments__title_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'comments__title_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'comments__title_borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'input'
+                ),
+                'comments__title_borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'comments__title_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'comments__title_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'comments__title_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'comments__title_fontFamiliy' => array(
+                  'label' => 'Title font family',
+                  'type' => 'input'
+                ),
+                'comments__title_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'comments__title_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'comments__title_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'comments__title_textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'comments__title_fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'comments__title_letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'input'
+                ),
+                'comments__title_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'comments__title_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'comments__title_fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'input'
+                ),
+                'comments__title_lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'input'
+                ),
+                'dark__comments__title_bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__comments__title_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__comments__title_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
+            ),
+            'tmp_comments_list' => array(
+              'label' => 'Commentlist',
+              'inputs' => array(
+                'comments__commentlist_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'comments__commentlist_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'comments__commentlist_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'comments__commentlist_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                )
+              )
+            ),
+            'tmp_comments_list_item' => array(
+              'label' => 'Comment item',
+              'inputs' => array(
+                'comments__commentlist_item_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'comments__commentlist_item_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'comments__commentlist_item_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'comments__commentlist_item_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'comments__commentlist_item_borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'comments__commentlist_item_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'comments__commentlist_item_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                )
+              )
+            ),
+            'tmp_comments_list_respond' => array(
+              'label' => 'Commentlist respond',
+              'inputs' => array(
+                'comments__commentlist_respond_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'comments__commentlist_respond_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'comments__commentlist_respond_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'comments__commentlist_respond_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                )
+              )
+            ),
+            'tmp_comments_list_respond_item' => array(
+              'label' => 'Comment item',
+              'inputs' => array(
+                'comments__commentlist_respond_item_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'comments__commentlist_respond_item_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'comments__commentlist_respond_item_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                ),
+                'comments__commentlist_respond_item_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'comments__commentlist_respond_item_borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'comments__commentlist_respond_item_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'comments__commentlist_respond_item_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'input'
+                )
+              )
+            ),
+            'tmp_comments_form' => array(
+              'label' => 'Form',
+              'inputs' => array(
+                'comments__form_flexDirection' => array(
+                  'label' => 'Direction',
+                  'type' => 'select'
+                ),
+                'comments__form_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'comments__form_flexDirection_mobile' => array(
+                  'label' => 'Direction',
+                  'type' => 'select'
+                ),
+                'comments__form_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                )
+              )
+            ),
+            'tmp_comments_avatar' => array(
+              'label' => 'Avatar',
+              'inputs' => array(
+                'comments__avatar_display' => array(
+                  'label' => 'Display',
+                  'type' => 'select'
+                ),
+                'comments__avatar_width' => array(
+                  'label' => 'Width',
+                  'type' => 'input'
+                ),
+                'comments__avatar_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'input'
+                ),
+                'comments__avatar_width_mobile' => array(
+                  'label' => 'Width',
+                  'type' => 'input'
+                ),
+                'comments__avatar_margin_mobile' => array(
                   'label' => 'Margin',
                   'type' => 'input'
                 )
@@ -5456,9 +5781,25 @@ class prefix_core_Customizer {
             'gutenberg_postsblock_itemtitle' => array(
               'label' => 'Item title',
               'inputs' => array(
+                'block__posts_title_backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
                 'block__posts_title_color' => array(
                   'label' => 'Color',
                   'type' => 'color'
+                ),
+                'block__posts_title_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'block__posts_title_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'block__posts_title_borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
                 ),
                 'block__posts_title_margin' => array(
                   'label' => 'Margin',
@@ -5564,9 +5905,25 @@ class prefix_core_Customizer {
             'gutenberg_postsfilter_itemtitle' => array(
               'label' => 'Item title',
               'inputs' => array(
+                'block__postsfilter_title_backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
                 'block__postsfilter_title_color' => array(
                   'label' => 'Color',
                   'type' => 'color'
+                ),
+                'block__postsfilter_title_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'block__postsfilter_title_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'input'
+                ),
+                'block__postsfilter_title_borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
                 ),
                 'block__postsfilter_title_margin' => array(
                   'label' => 'Margin',

@@ -166,7 +166,7 @@ body.page-template,
   #search-results {
     .results {
       article {
-        h2 {
+        h2:not(.post-title):not([class^='is-style-']):not([class*=' is-style-']) {
           font-family: var(--search__article_title_fontFamily, var(--blog__article_title_fontFamily, inherit));
           font-size: var(--search__article_title_fontSize, var(--blog__article_title_fontSize, inherit));
           line-height: var(--search__article_title_lineHeight, var(--blog__article_title_lineHeight, inherit));
@@ -345,7 +345,7 @@ body.page-template,
   #archive {
     > div {
       article {
-        h2 {
+        h2:not(.post-title):not([class^='is-style-']):not([class*=' is-style-']) {
           font-family: var(--blog__article_title_fontFamily, inherit);
           font-size: var(--blog__article_title_fontSize, inherit);
           line-height: var(--blog__article_title_lineHeight, inherit);
@@ -399,6 +399,21 @@ body.page-template,
       letter-spacing: var(--menuItem__description_letterSpacing, 0);
       text-transform: var(--menuItem__description_textTransform, none);
       font-style: var(--menuItem__description_fontStyle, normal);
+    }
+  }
+
+
+  /* 2.12 COMMENTS
+  /––––––––––––––––––––––––*/
+  #comments {
+    h3.comments-title {
+      font-family: var(--comments__title_fontFamiliy, inherit);
+      font-size: var(--comments__title_fontSize, 100%);
+      line-height: var(--comments__title_lineHeight, inherit);
+      font-weight: var(--comments__title_fontWeight, inherit);
+      letter-spacing: var(--comments__title_letterSpacing, 0);
+      text-transform: var(--comments__title_textTransform, none);
+      font-style: var(--comments__title_fontStyle, normal);
     }
   }
 
@@ -556,6 +571,10 @@ body.page-template,
     }
     input[type="text"],
     input[type="search"] {
+      font-family: var(--searchForm__fontFamily, var(--input__placeholder_fontFamily, inherit));
+      font-size: var(--searchForm__fontSize, var(--input__placeholder_fontSize, inherit));
+      line-height: var(--searchForm__lineHeight, var(--input__placeholder_lineHeight, inherit));
+      font-weight: var(--searchForm__fontWeight, var(--input__placeholder_fontWeight, inherit));
       &::-webkit-input-placeholder {
         font-family: var(--searchForm__placeholder_fontFamily, var(--input__placeholder_fontFamily, inherit));
         font-size: var(--searchForm__placeholder_fontSize, var(--input__placeholder_fontSize, inherit));
@@ -892,14 +911,14 @@ body.page-template,
     > ul {
       > li {
         .post-content {
-          font-size: var(--block__posts_fontSize, transparent);
-          line-height: var(--block__posts_lineHeight, transparent);
-          font-weight: var(--block__posts_fontWeight, transparent);
-          > h4,
-          .template h2 {
-            font-size: var(--block__posts_title_fontSize, transparent);
-            line-height: var(--block__posts_title_lineHeight, transparent);
-            font-weight: var(--block__posts_title_fontWeight, transparent);
+          font-size: var(--block__posts_fontSize, inherit);
+          line-height: var(--block__posts_lineHeight, inherit);
+          font-weight: var(--block__posts_fontWeight, inherit);
+          > h4:not(.post-title):not([class^='is-style-']):not([class*=' is-style-']),
+          .template h2:not(.post-title):not([class^='is-style-']):not([class*=' is-style-']) {
+            font-size: var(--block__posts_title_fontSize, initial);
+            line-height: var(--block__posts_title_lineHeight, initial);
+            font-weight: var(--block__posts_title_fontWeight, initial);
             font-family: var(--block__posts_title_fontfamily, inherit);
             text-transform: var(--block__posts_title_textTransform, none);
             font-style: var(--block__posts_title_fontStyle, initial);
@@ -920,8 +939,8 @@ body.page-template,
           font-size: var(--block__postsfilter_fontSize, transparent);
           line-height: var(--block__postsfilter_lineHeight, transparent);
           font-weight: var(--block__postsfilter_fontWeight, transparent);
-          > h4,
-          .template h2 {
+          > h4:not(.post-title):not([class^='is-style-']):not([class*=' is-style-']),
+          .template h2:not(.post-title):not([class^='is-style-']):not([class*=' is-style-']) {
             font-size: var(--block__postsfilter_title_fontSize, transparent);
             line-height: var(--block__postsfilter_title_lineHeight, transparent);
             font-weight: var(--block__postsfilter_title_fontWeight, transparent);

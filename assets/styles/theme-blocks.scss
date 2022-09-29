@@ -153,10 +153,12 @@ body.page-template,
           }
           .post-content {
             padding: var(--block__posts_padding, 0);
-            > h4,
-            .template h2 {
+            > h4:not(.post-title):not([class^='is-style-']):not([class*=' is-style-']),
+            .template h2:not(.post-title):not([class^='is-style-']):not([class*=' is-style-']) {
               margin: var(--block__posts_title_margin, 0);
               padding: var(--block__posts_title_padding, 0);
+              border-style: var(--block__posts_title_borderStyle, solid);
+              border-width: var(--block__posts_title_borderWidth, 0);
             }
             article.flex {
               margin: 0;
@@ -257,10 +259,12 @@ body.page-template,
           }
           .post-content {
             padding: var(--block__postsfilter_padding, 0);
-            > h4,
-            .template h2 {
+            > h4:not(.post-title):not([class^='is-style-']):not([class*=' is-style-']),
+            .template h2:not(.post-title):not([class^='is-style-']):not([class*=' is-style-']) {
               margin: var(--block__postsfilter_title_margin, 0);
               padding: var(--block__postsfilter_title_padding, 0);
+              border-style: var(--block__postsfilter_title_borderStyle, solid);
+              border-width: var(--block__postsfilter_title_borderWidth, 0);
             }
             .flex {
               gap: var(--block__postsfilter_flexGap, var(--blog__article_flexGap, var(--wp--style--block-gap, var(--content__space, 30px))));
