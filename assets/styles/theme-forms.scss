@@ -221,6 +221,9 @@ body.page-template,
       display: flex;
       align-items: flex-start;
       flex-wrap: wrap;
+      margin-top: var(--mautic__row_marginBottom, 20px);
+      gap: var(--mautic__row_gap, 20px);
+      row-gap: var(--mautic__row_rowgap, 0);
       .mauticform-errormsg {
         width: 100%;
       }

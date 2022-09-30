@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.67.32 | 29.09.2022 <🐛 FIX: spacing, youtube 💎 IMPROVE: search>
+* Fix youtube embed iframe position
+* Add mautic form row styles
+* Apply search form styles to search block
+* Fix no margin rule
+
 ## 1.67.31 | 29.09.2022 <🐛 FIX: title styles 📦 NEW: comment styles>
 * Add comments styles to customizer
 * Fix posts and postsfilter block title style

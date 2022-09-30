@@ -957,7 +957,7 @@ class prefix_core_Customizer {
           )
         ),
         'hamburger' => array(
-          'label' => 'Menu Hamburger',
+          'label' => 'Hamburger',
           'sections' => array(
             'hamburger_settings' => array(
               'label' => 'Settings',
@@ -966,11 +966,6 @@ class prefix_core_Customizer {
                   'label' => 'Hamburger color',
                   'type' => 'color',
                   'default' => '#000000'
-                ),
-                'mnav_background' => array(
-                  'label' => 'Menu background color',
-                  'type' => 'color',
-                  'default' => '#f9f9f9'
                 ),
                 'hamburger__container_width' => array(
                   'label' => 'Width',
@@ -1000,11 +995,6 @@ class prefix_core_Customizer {
                   'label' => 'Color',
                   'type' => 'color',
                   'default' => '#ffffff'
-                ),
-                'dark__mnav_background' => array(
-                  'label' => 'Menu background color',
-                  'type' => 'color',
-                  'default' => '#1d1e1f'
                 )
               )
             ),
@@ -1046,6 +1036,21 @@ class prefix_core_Customizer {
                 'dark__hamburger_text_color' => array(
                   'label' => 'Color',
                   'type' => 'color'
+                )
+              )
+            ),
+            'hamburger_menu' => array(
+              'label' => 'Menu',
+              'inputs' => array(
+                'mnav_background' => array(
+                  'label' => 'Menu background color',
+                  'type' => 'color',
+                  'default' => '#f9f9f9'
+                ),
+                'dark__mnav_background' => array(
+                  'label' => 'Menu background color',
+                  'type' => 'color',
+                  'default' => '#1d1e1f'
                 )
               )
             )
@@ -3012,6 +3017,35 @@ class prefix_core_Customizer {
                 'dark__input__reset_border_color_hover' => array(
                   'label' => 'Border color',
                   'type' => 'color'
+                )
+              )
+            ),
+            'forms_mautic' => array(
+              'label' => 'Mautic',
+              'inputs' => array(
+                'mautic__row_marginBottom' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'input'
+                ),
+                'mautic__row_gap' => array(
+                  'label' => 'Gap',
+                  'type' => 'input'
+                ),
+                'mautic__row_rowgap' => array(
+                  'label' => 'Row gap',
+                  'type' => 'input'
+                ),
+                'mautic__row_marginBottom_mobile' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'input'
+                ),
+                'mautic__row_gap_mobile' => array(
+                  'label' => 'Gap',
+                  'type' => 'input'
+                ),
+                'mautic__row_rowgap_mobile' => array(
+                  'label' => 'Row gap',
+                  'type' => 'input'
                 )
               )
             )

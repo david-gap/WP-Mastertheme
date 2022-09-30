@@ -322,62 +322,57 @@ body.page-template,
   > main .wp-block-media-text__content,
   > main .consent-request-container,
   > footer .widget {
-    & > h1,
-    & > h2,
-    & > h3,
-    & > h4,
-    & > h5,
-    & > h6,
-    & > p,
-    & > ol,
-    & > ul,
-    & > figure,
-    & > blockquote,
-    & > .wp-block-button,
-    & > .wp-block-cover,
-    & > .wp-block-file,
-    & > .wp-block-buttons,
-    & > .wp-block-columns,
-    & > .wp-block-columns .wp-block-column p,
-    & > .wp-block-columns .wp-block-column ol,
-    & > .wp-block-columns .wp-block-column ul,
-    & > .wp-block-columns .wp-block-column img,
-    & > .wp-block-columns .wp-block-column figure,
-    & > .wp-block-columns .wp-block-column .wp-block-cover,
-    & > .wp-block-media-text p,
-    & > .post-password-form p,
-    & > .block-vimeo,
-    & > .wp-block-media-text,
-    & > .block-accordion,
-    & > .block-accordion .accordion-content p,
-    & > .block-accordion .accordion-content ol,
-    & > .block-accordion .accordion-content ul,
-    & > .block-accordion .accordion-content img,
-    & > .block-accordion .accordion-content figure,
-    & > .block-posts,
-    & > .block-postsfilter,
-    & > .search-form,
-    & > .wp-block-gallery-container,
-    & > .wpcf7 .wpcf7-form p {
+    > h1,
+    > h2,
+    > h3,
+    > h4,
+    > h5,
+    > h6,
+    > p,
+    > ol,
+    > ul,
+    > figure,
+    > blockquote,
+    > .wp-block-button,
+    > .wp-block-cover,
+    > .wp-block-file,
+    > .wp-block-buttons,
+    > .wp-block-columns,
+    > .wp-block-columns .wp-block-column p,
+    > .wp-block-columns .wp-block-column ol,
+    > .wp-block-columns .wp-block-column ul,
+    > .wp-block-columns .wp-block-column img,
+    > .wp-block-columns .wp-block-column figure,
+    > .wp-block-columns .wp-block-column .wp-block-cover,
+    > .wp-block-media-text p,
+    > .post-password-form p,
+    > .block-vimeo,
+    > .wp-block-media-text,
+    > .block-accordion,
+    > .block-accordion .accordion-content p,
+    > .block-accordion .accordion-content ol,
+    > .block-accordion .accordion-content ul,
+    > .block-accordion .accordion-content img,
+    > .block-accordion .accordion-content figure,
+    > .block-posts,
+    > .block-postsfilter,
+    > .search-form,
+    > .wp-block-search,
+    > .wp-block-gallery-container,
+    > .wpcf7 .wpcf7-form p {
       margin-top: 0;
       margin-bottom: var(--content__space, 30px);
-      &.spacing-one {
-        margin-bottom: var(--content__space_one, var(--content__space, 30px));
-        &.no-spacing,
-        &:last-child {
-          margin-bottom: 0;
-        }
-      }
-      &.spacing-two {
-        margin-bottom: var(--content__space_two, var(--content__space, 30px));
-        &.no-spacing,
-        &:last-child {
-          margin-bottom: 0;
-        }
-      }
-      &.no-spacing,
       &:last-child {
         margin-bottom: 0;
+      }
+      &.no-spacing {
+        margin-bottom: 0;
+      }
+      &.spacing-one:not(.no-spacing):not(:last-child) {
+        margin-bottom: var(--content__space_one, var(--content__space, 30px));
+      }
+      &.spacing-two:not(.no-spacing):not(:last-child) {
+        margin-bottom: var(--content__space_two, var(--content__space, 30px));
       }
     }
   }
@@ -403,6 +398,7 @@ body.page-template,
       & > .block-posts,
       & > .block-postsfilter,
       & > .search-form,
+      & > .wp-block-search,
       & > .wp-block-gallery-container,
       & > .wpcf7 .wpcf7-form p {
         &:last-child {
@@ -757,6 +753,7 @@ body.page-template,
 
   /* 3.8 SEARCH FORM
   /––––––––––––––––––––––––*/
+  .wp-block-search,
   .search-form {
     input[type="text"],
     input[type="search"] {
@@ -854,7 +851,7 @@ body.page-template,
     padding: var(--comments__padding, 0);
     h3.comments-title {
       border-radius: var(--comments__title_borderRadius, 0);
-      border-width: var(--comments__title_borderWidth, 0);
+      border-width: var(--comments__title_borderWidth, 32px);
       border-style: var(--comments__title_borderStyle, solid);
       margin: var(--comments__title_margin, 0);
       padding: var(--comments__title_padding, 0);
