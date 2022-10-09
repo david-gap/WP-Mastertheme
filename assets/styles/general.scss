@@ -126,16 +126,19 @@ body.page-template {
   /* SVG ANIMATIONS
   /––––––––––––––––––––––––*/
   .svg-animate-dashoffset {
-    &:hover {
+    > a,
+    > .svg-container {
+      &:hover {
+        svg {
+          stroke-dashoffset: 0;
+          transition: var(--transition, .5s ease-in);
+        }
+      }
       svg {
-        stroke-dashoffset: 0;
+        stroke-dasharray: var(--dasharray, 100);
+        stroke-dashoffset: var(--dashoffset, 100);
         transition: var(--transition, .5s ease-in);
       }
-    }
-    svg {
-      stroke-dasharray: var(--dasharray, 100);
-      stroke-dashoffset: var(--dashoffset, 100);
-      transition: var(--transition, .5s ease-in);
     }
   }
 

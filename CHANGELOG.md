@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 1.68.32 | 09.10.2022 <📦 NEW: customizer field type 🐛 FIX: post meta>
+* Improve customizer coloring with dark mode live preview
+* Add CSS file for touch divices
+* Add option to allow comments on pages and posts
+* Fix meta output
+* Fix svg animation on menu
+* Customizer range + number input extension
+* Group all customizer extensions in one folder
+* Set range-value and range-four-value in customizer class
+* Coming soon: customizer input type range-four-value for styles like margin and padding
+* Make Configuration messages always visible
+
 ## 1.67.32 | 29.09.2022 <🐛 FIX: spacing, youtube 💎 IMPROVE: search>
 * Fix youtube embed iframe position
 * Add mautic form row styles

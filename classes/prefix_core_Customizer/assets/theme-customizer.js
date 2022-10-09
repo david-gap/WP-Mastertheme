@@ -1,3 +1,7 @@
+/**
+ * Script run inside a Customizer control sidebar
+*/
+
 ( function( $ ) {
   var allSettings = [
     'container__width',
@@ -1540,7 +1544,14 @@
         value.bind(
           function ( to ) {
             if(setting.includes('dark__')){
-              // $( 'body.dark' ).get(0).style.setProperty( '--' + setting.replace('dark__',''), to );
+              if(to){
+                $( 'body.dark' ).get(0).style.setProperty( '--' + setting.replace('dark__',''), to );
+              } else {
+                // fallback to default
+                let value = document.querySelector('input[data-customize-setting-link="header_background"]');
+                console.log(value);
+                $( 'body.dark' ).get(0).style.setProperty( '--' + setting.replace('dark__',''), 'unset' );
+              }
             } else {
               $( ':root' ).get(0).style.setProperty( '--' + setting, to );
             }

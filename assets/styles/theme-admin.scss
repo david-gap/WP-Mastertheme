@@ -126,6 +126,7 @@ body.wp-admin {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
             padding: 1em 12px;
             margin-bottom: 10px;
             border-style: solid;
@@ -201,8 +202,8 @@ body.wp-admin {
     /––––––––––––––––––––––––*/
     #config-message {
       display: block;
-      max-width: 300px;
       font-weight: bold;
+      flex-basis: 100%;
       &.success,
       &.error {
         margin-top: 20px;

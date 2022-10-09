@@ -3,7 +3,7 @@
  * Blog template footer for all
  *
  * @author      David Voglgsang
- * @version     1.0
+ * @version     1.1
  *
 */
 if($args['id'] && $args['id'] !== 0):
@@ -13,7 +13,7 @@ endif;
 ?>
 
 <footer>
-  <?php if(prefix_template::$template_blog_type_parts["categories"] == 1):
+  <?php if(prefix_template::$template_meta_overview["categories"] == 1):
     echo prefix_core_BaseFunctions::ListTaxonomies('category', get_the_ID(), false, ',&nbsp;');
   endif; ?>
 </footer>

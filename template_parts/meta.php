@@ -3,7 +3,7 @@
  * Blog template meta for all
  *
  * @author      David Voglgsang
- * @version     1.0
+ * @version     1.1
  *
 */
 if($args['id'] && $args['id'] !== 0):
@@ -13,29 +13,7 @@ endif;
 ?>
 
 <?php
-// entry meta
-$meta = '';
-// meta date and time
-if(prefix_template::$template_blog_type_parts["date"] == 1 || prefix_template::$template_blog_type_parts["time"] == 1):
-  $meta .= '<time class="entry-date" datetime="' . get_the_time( 'c' ) . '">';
-  // if date active
-  if(prefix_template::$template_blog_type_parts["date"] == 1):
-    $meta .= '<span class="date">' . get_the_date(prefix_template::$template_blog_dateformat) . '</span>';
-  endif;
-  // if time active
-  if(prefix_template::$template_blog_type_parts["time"] == 1):
-    $meta .= '<span class="time">' . get_the_date('G:i') . '</span>';
-  endif;
-  $meta .= '</time>';
-endif;
-// meta author
-if(prefix_template::$template_blog_type_parts["author"] == 1):
-  $meta .= '<span class="entry-author">' . get_the_author() . '</span>';
-endif;
-// return values
-if($meta !== ''):
-  echo '<div class="post-meta">';
-    echo $meta;
-  echo '</div>';
-endif;
+// page options
+$options = prefix_template::PageOptions(get_the_id());
+echo prefix_template::postMeta(get_post_type(), $options, 1);
 ?>

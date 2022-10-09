@@ -1,4 +1,4 @@
-**Version 2.35.18** (28.09.2022)
+**Version 2.36.18** (09.10.2022)
 
 Custom class "template" with template parts and header / footer builder
 
@@ -6,6 +6,7 @@ Custom class "template" with template parts and header / footer builder
 * $template_container_header: activate container for the header
 * $template_container_breadcrumbs: activate container for the breadcrumbs
 * $template_container: activate container for the content
+* $template_container_totop: activate container for the scroll to top button
 * $template_container_footer: activate container for the footer
 * $template_coloring: template coloring (dark/light)
 * $template_ph_active: activate placeholder
@@ -18,34 +19,40 @@ Custom class "template" with template parts and header / footer builder
 * $template_header_sticky: activate sticky header
 * $template_header_stickyload: activate sticky header on load
 * $template_header_dmenu: Activate header hamburger for desktop
+* $template_header_menusearchform: Activate searchform inside the main menu
 * $template_header_menu_style: Select menu direction (options: horizontal/vertical)
-* $template_header_hmenu_style: Select hamburger menu style fullscreen (options: fullscreen, left, left_contained, right, right_contained)
+* $template_header_hmenu_style: Select hamburger menu style (options: fullscreen, top, top_contained, left, left_contained, right, right_contained)
 * $template_header_hmenu_text: Show text on hamburger menu button
+* $template_header_hmenu_streched: Strech main menu verticaly
+* $template_header_hmenu_visible_head: Define if header is visible on active hamburger menu
+* $template_header_hmenu_scroll: Define if hamburger menu close by scrolling (Desktop only)
 * $template_header_hmenu_toggle: Hamburger Menü toggle able submenus
-* $template_header_custom: Custom header html
+* $template_header_custom:  Custom header html
 * $template_header_sort: Sort and activate blocks inside header builder
 * $template_header_logo_link: Logo link with wordpress fallback
 * $template_header_logo_d: desktop logo configuration
 * $template_header_logo_m: mobile logo configuration
+* $template_header_logo_scrolled: scrolled logo configuration
 * $template_header_logo_svg: Insert SVG code as logo
 * $template_header_after: html code after header
 * $template_page_active: activate page options
+* $template_page_additional: additional custom fields template elements
 * $template_page_options: show/hide template elements
 * $template_thumbvideo: Activate video as thumbnail
 * $template_page_bgColor: Activate custom background color
-* $template_page_additional: additional custom fields template elements
-* $template_page_metablock: activate metablock on detail page
-* $template_page_metablockAdds: Add metabox to CPT by slugs
+* $template_page_bgImg: Activate custom background image
+* $template_scrolltotop_active: activate scroll to top
 * $template_footer_active: activate footer
 * $template_footer_wrap: Allow the footer content to wrap
 * $template_footer_cr: copyright text
 * $template_footer_custom: custom html
+* $template_footer_menu: footer menu settings
 * $template_footer_sort: Sort and activate blocks inside footer builder
 * $template_footer_before: html code before footer
 * $template_footer_end: html code before footer end
 * $template_searchform_autocomplete: configure the autocomplete in the search form
 * $template_breadcrumbs_active: activate breadcrumbs
-* $template_breadcrumbs_active: activate breadcrumbs
+* $template_breadcrumbs_inside: Place breadcrumbs inside page content and if first element is image than after image
 * $template_breadcrumbs_intro: Show introduction text
 * $template_breadcrumbs_home: Show home link
 * $template_breadcrumbs_separator: Separate crumbs by string
@@ -62,6 +69,10 @@ Custom class "template" with template parts and header / footer builder
 * $template_search_align: align search results page thumbnail
 * $template_404_searchForm: Display search form on 404 page
 * $template_404_backToHome: Display back to home page button on 404 page
+* $template_comments_activeBlog: Activate comments on blog
+* $template_comments_activePages: Activate comments on pages
+* $template_meta_metablock: activate metablock on detail page/posts
+* $template_meta_metablockAdds: Add metabox to CPT by slugs
 
 ## CONFIGURATION FILE
 ```

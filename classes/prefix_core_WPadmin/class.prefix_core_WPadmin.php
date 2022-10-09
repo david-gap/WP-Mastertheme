@@ -4,7 +4,7 @@
  *
  * Backend area to manage configuration file
  * Author:      David Voglgsnag
- * @version     1.5.7
+ * @version     1.5.8
  *
  */
 
@@ -114,7 +114,6 @@ class prefix_core_WPadmin {
       // output
       $output .= '<div class="wrap" id="configuration">';
         $output .= '<h1 class="wp-heading-inline">' . __('Page Configurator','devTheme') . '</h1>';
-        $output .= '<span id="config-message"></span>';
         $output .= '<div id="settings-group">';
           $output .= '<ul id="configuration-navigation">';
             foreach ($registered_classes as $class_key => $classname) {
@@ -131,6 +130,7 @@ class prefix_core_WPadmin {
             $output .= '<div class="configSubmit">';
               $output .= '<button class="page-title-action ajax-action" data-action="GenerateConfigFile">' . __('Generate configuration file','devTheme') . '</button>';
               $output .= '<input type="submit" class="button button-primary" data-action="SaveFormInput" value="' . __( 'Save', 'devTheme' ) . '">';
+              $output .= '<span id="config-message"></span>';
             $output .= '</div>';
             foreach ($registered_classes as $class_key => $classname) {
               if(strpos($classname, 'prefix_') === 0 && strpos($classname, '_core_') == false):

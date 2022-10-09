@@ -4,7 +4,7 @@
  *
  * Customizer extension
  * Author:      David Voglgsnag
- * @version     1.11
+ * @version     1.12
  *
  */
 
@@ -82,8 +82,12 @@ class prefix_core_Customizer {
           'inputs' => array(
             'mobile_breakpoint' => array(
               'label' => 'Mobile',
-              'type' => 'input',
-              'default' => '768px'
+              'type' => 'range-value',
+              'default' => '768px',
+              'rangeMin' => 280,
+              'rangeMax' => 1200,
+              'rangeSuffix' => 'px',
+              'rangeStep' => 1
             )
           )
         ),
@@ -92,27 +96,47 @@ class prefix_core_Customizer {
           'inputs' => array(
             'container__width' => array(
               'label' => 'Width',
-              'type' => 'input',
-              'default' => '1000px'
+              'type' => 'range-value',
+              'default' => '1000px',
+              'rangeMin' => 200,
+              'rangeMax' => 5000,
+              'rangeSuffix' => 'px',
+              'rangeStep' => 1
             ),
             'container__side' => array(
               'label' => 'Side padding',
-              'type' => 'input',
-              'default' => '40px'
+              'type' => 'range-value',
+              'default' => '40px',
+              'rangeMin' => 0,
+              'rangeMax' => 100,
+              'rangeSuffix' => 'px',
+              'rangeStep' => 1
             ),
             'wide__left' => array(
               'label' => 'Align wide left',
-              'type' => 'input',
-              'default' => '200px'
+              'type' => 'range-value',
+              'default' => '200px',
+              'rangeMin' => 0,
+              'rangeMax' => 2000,
+              'rangeSuffix' => 'px',
+              'rangeStep' => 1
             ),
             'wide__right' => array(
               'label' => 'Align wide right',
-              'type' => 'input',
-              'default' => '200px'
+              'type' => 'range-value',
+              'default' => '200px',
+              'rangeMin' => 0,
+              'rangeMax' => 2000,
+              'rangeSuffix' => 'px',
+              'rangeStep' => 1
             ),
             'container__side_mobile' => array(
-              'label' => 'Container side padding',
-              'type' => 'input'
+              'label' => 'Side padding',
+              'type' => 'range-value',
+              'rangeMin' => 0,
+              'rangeMax' => 100,
+              'rangeSuffix' => 'px',
+              'rangeStep' => 1
             )
           )
         ),
@@ -196,11 +220,11 @@ class prefix_core_Customizer {
             ),
             'html__fontsize' => array(
               'label' => 'Font size',
-              'type' => 'input'
+              'type' => 'range-value'
             ),
             'html__lineheight' => array(
               'label' => 'Line height',
-              'type' => 'input'
+              'type' => 'range-value'
             ),
             'html__fontweight' => array(
               'label' => 'Main font weight',
@@ -208,11 +232,17 @@ class prefix_core_Customizer {
             ),
             'html__fontsize_small' => array(
               'label' => 'Small text size',
-              'type' => 'input'
+              'type' => 'range-value',
+              'rangeSuffix' => '%',
+              'rangeMax' => 100,
+              'rangeStep' => 1
             ),
             'html__fontsize_subsup' => array(
               'label' => 'sub/sup text size',
-              'type' => 'input'
+              'type' => 'range-value',
+              'rangeSuffix' => '%',
+              'rangeMax' => 100,
+              'rangeStep' => 1
             )
           )
         ),
@@ -221,24 +251,34 @@ class prefix_core_Customizer {
           'inputs' => array(
             'html__fontsize_mobile' => array(
               'label' => 'Font size',
-              'type' => 'input'
+              'type' => 'range-value'
             ),
             'html__lineheight_mobile' => array(
               'label' => 'Line height',
-              'type' => 'input'
+              'type' => 'range-value'
             ),
             'gutenberg__font_scale' => array(
               'label' => 'Gutenberg font scaling',
-              'type' => 'input',
-              'default' => '.55'
+              'type' => 'range-value',
+              'default' => '.55',
+              'rangeSuffix' => '%',
+              'rangeMin' => 1,
+              'rangeMax' => 100,
+              'rangeStep' => 1
             ),
             'html__fontsize_small_mobile' => array(
               'label' => 'Small text size',
-              'type' => 'input'
+              'type' => 'range-value',
+              'rangeSuffix' => '%',
+              'rangeMax' => 100,
+              'rangeStep' => 1
             ),
             'html__fontsize_subsup_mobile' => array(
               'label' => 'sub/sup text size',
-              'type' => 'input'
+              'type' => 'range-value',
+              'rangeSuffix' => '%',
+              'rangeMax' => 100,
+              'rangeStep' => 1
             )
           )
         )
@@ -280,59 +320,59 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'header__paddingTop' => array(
                   'label' => 'Container padding top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'header__paddingBottom' => array(
                   'label' => 'Container padding bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'header__negativTopPosition_sticky' => array(
                   'label' => 'Top negativ position',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'header__paddingTop_sticky' => array(
                   'label' => 'Container padding top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'header__paddingBottom_sticky' => array(
                   'label' => 'Container padding bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'header__itemSpacingHorizontal' => array(
                   'label' => 'Horizontal spacing between items',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'header__itemSpacingVertical' => array(
                   'label' => 'Vertical spacing between items',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'header__paddingTop_mobile' => array(
                   'label' => 'Container padding top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'header__paddingBottom_mobile' => array(
                   'label' => 'Container padding bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'header__negativTopPosition_sticky_mobile' => array(
                   'label' => 'Top negativ position',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'header__paddingTop_sticky_mobile' => array(
                   'label' => 'Container padding top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'header__paddingBottom_sticky_mobile' => array(
                   'label' => 'Container padding bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'header__itemSpacingHorizontal_mobile' => array(
                   'label' => 'Horizontal spacing between items',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'header__itemSpacingVertical_mobile' => array(
                   'label' => 'Vertical spacing between items',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             )
@@ -346,27 +386,27 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'mnav__ul_paddingTop' => array(
                   'label' => 'Padding top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'mnav__ul_paddingBottom' => array(
                   'label' => 'Padding bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'mnav__ul_lastChild_marginBottom' => array(
                   'label' => 'Last child margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'mnav__ul_paddingTop_mobile' => array(
                   'label' => 'Padding top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'mnav__ul_paddingBottom_mobile' => array(
                   'label' => 'Padding bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'mnav__ul_lastChild_marginBottom_mobile' => array(
                   'label' => 'Last child margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             ),
@@ -375,27 +415,27 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'submenu__toggle_width' => array(
                   'label' => 'Container width',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'submenu__toggle_padding' => array(
                   'label' => 'Container padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'submenu__toggle_strokeWidth' => array(
                   'label' => 'Stroke width',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'submenu__toggle_width_mobile' => array(
                   'label' => 'Container width',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'submenu__toggle_padding_mobile' => array(
                   'label' => 'Container padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'submenu__toggle_strokeWidth_mobile' => array(
                   'label' => 'Stroke width',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             ),
@@ -404,7 +444,7 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'mnav__ul_gap' => array(
                   'label' => 'Gap',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 // 'mnav__ul_flexDirection' => array(
                 //   'label' => 'Direction',
@@ -412,7 +452,7 @@ class prefix_core_Customizer {
                 // ),
                 'mnav__ul_gap_mobile' => array(
                   'label' => 'Gap',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 // 'mnav__ul_flexDirection_mobile' => array(
                 //   'label' => 'Direction',
@@ -455,15 +495,15 @@ class prefix_core_Customizer {
                 ),
                 'mnav__border_width' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'mnav__padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'mnav__margin' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'mnav__fontfamily' => array(
                   'label' => 'Font family',
@@ -471,7 +511,7 @@ class prefix_core_Customizer {
                 ),
                 'mnav__fontsize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'mnav__fontWeight' => array(
                   'label' => 'Font weight',
@@ -479,7 +519,7 @@ class prefix_core_Customizer {
                 ),
                 'mnav__lineheight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'mnav__textTransform' => array(
                   'label' => 'Text transform',
@@ -491,27 +531,27 @@ class prefix_core_Customizer {
                 ),
                 'mnav__letterSpacing' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'mnav__border_width_mobile' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
-                ),
-                'mnav__fontsize_mobile' => array(
-                  'label' => 'Font size',
-                  'type' => 'input'
-                ),
-                'mnav__lineheight_mobile' => array(
-                  'label' => 'Line height',
-                  'type' => 'input'
-                ),
-                'mnav__padding_mobile' => array(
-                  'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'mnav__margin_mobile' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
+                ),
+                'mnav__padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'mnav__fontsize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'mnav__lineheight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
                 ),
                 'dark__mnav__color' => array(
                   'label' => 'Color',
@@ -548,7 +588,7 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'mnav__sub_gap' => array(
                   'label' => 'Gap',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'mnav__sub_flexDirection' => array(
                   'label' => 'Direction',
@@ -556,7 +596,7 @@ class prefix_core_Customizer {
                 ),
                 'mnav__sub_gap_mobile' => array(
                   'label' => 'Gap',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'mnav__sub_flexDirection_mobile' => array(
                   'label' => 'Direction',
@@ -592,15 +632,15 @@ class prefix_core_Customizer {
                 ),
                 'mnav__sub_border_width' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'mnav__sub_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'mnav__sub_margin' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'mnav__sub_fontfamily' => array(
                   'label' => 'Font family',
@@ -608,11 +648,11 @@ class prefix_core_Customizer {
                 ),
                 'mnav__sub_fontsize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'mnav__sub_lineheight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'mnav__sub_fontWeight' => array(
                   'label' => 'Font weight',
@@ -628,27 +668,27 @@ class prefix_core_Customizer {
                 ),
                 'mnav__sub_letterSpacing' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'mnav__sub_border_width_mobile' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
-                ),
-                'mnav__sub_fontsize_mobile' => array(
-                  'label' => 'Font size',
-                  'type' => 'input'
-                ),
-                'mnav__sub_lineheight_mobile' => array(
-                  'label' => 'Line height',
-                  'type' => 'input'
-                ),
-                'mnav__sub_padding_mobile' => array(
-                  'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'mnav__sub_margin_mobile' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
+                ),
+                'mnav__sub_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'mnav__sub_fontsize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'mnav__sub_lineheight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
                 ),
                 'dark__mnav__sub_color' => array(
                   'label' => 'Color',
@@ -685,7 +725,7 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'mnav__subSub_gap' => array(
                   'label' => 'Gap',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'mnav__subSub_flexDirection' => array(
                   'label' => 'Direction',
@@ -693,7 +733,7 @@ class prefix_core_Customizer {
                 ),
                 'mnav__subSub_gap_mobile' => array(
                   'label' => 'Gap',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'mnav__subSub_flexDirection_mobile' => array(
                   'label' => 'Direction',
@@ -729,15 +769,15 @@ class prefix_core_Customizer {
                 ),
                 'mnav__subSub_border_width' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
-                ),
-                'mnav__subSub_padding' => array(
-                  'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'mnav__subSub_margin' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
+                ),
+                'mnav__subSub_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
                 ),
                 'mnav__subSub_fontfamily' => array(
                   'label' => 'Font family',
@@ -745,15 +785,15 @@ class prefix_core_Customizer {
                 ),
                 'mnav__subSub_fontsize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
+                ),
+                'mnav__subSub_lineheight' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
                 ),
                 'mnav__subSub_fontWeight' => array(
                   'label' => 'Font weight',
                   'type' => 'select'
-                ),
-                'mnav__subSub_lineheight' => array(
-                  'label' => 'Line height',
-                  'type' => 'input'
                 ),
                 'mnav__subSub_textTransform' => array(
                   'label' => 'Text transform',
@@ -765,27 +805,27 @@ class prefix_core_Customizer {
                 ),
                 'mnav__subSub_letterSpacing' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'mnav__subSub_border_width_mobile' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
-                ),
-                'mnav__subSub_fontsize_mobile' => array(
-                  'label' => 'Font size',
-                  'type' => 'input'
-                ),
-                'mnav__subSub_lineheight_mobile' => array(
-                  'label' => 'Line height',
-                  'type' => 'input'
-                ),
-                'mnav__subSub_padding_mobile' => array(
-                  'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'mnav__subSub_margin_mobile' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
+                ),
+                'mnav__subSub_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'mnav__subSub_fontsize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'mnav__subSub_lineheight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
                 ),
                 'dark__mnav__subSub_color' => array(
                   'label' => 'Color',
@@ -822,7 +862,7 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'mnav__subSubSub_gap' => array(
                   'label' => 'Gap',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'mnav__subSubSub_flexDirection' => array(
                   'label' => 'Direction',
@@ -830,7 +870,7 @@ class prefix_core_Customizer {
                 ),
                 'mnav__subSubSub_gap_mobile' => array(
                   'label' => 'Gap',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'mnav__subSubSub_flexDirection_mobile' => array(
                   'label' => 'Direction',
@@ -866,15 +906,15 @@ class prefix_core_Customizer {
                 ),
                 'mnav__subSubSub_border_width' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
-                ),
-                'mnav__subSubSub_padding' => array(
-                  'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'mnav__subSubSub_margin' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
+                ),
+                'mnav__subSubSub_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
                 ),
                 'mnav__subSubSub_fontfamily' => array(
                   'label' => 'Font family',
@@ -882,15 +922,15 @@ class prefix_core_Customizer {
                 ),
                 'mnav__subSubSub_fontsize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
+                ),
+                'mnav__subSubSub_lineheight' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
                 ),
                 'mnav__subSubSub_fontWeight' => array(
                   'label' => 'Font weight',
                   'type' => 'select'
-                ),
-                'mnav__subSubSub_lineheight' => array(
-                  'label' => 'Line height',
-                  'type' => 'input'
                 ),
                 'mnav__subSubSub_textTransform' => array(
                   'label' => 'Text transform',
@@ -902,27 +942,27 @@ class prefix_core_Customizer {
                 ),
                 'mnav__subSubSub_letterSpacing' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'mnav__subSubSub_border_width_mobile' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
-                ),
-                'mnav__subSubSub_fontsize_mobile' => array(
-                  'label' => 'Font size',
-                  'type' => 'input'
-                ),
-                'mnav__subSubSub_lineheight_mobile' => array(
-                  'label' => 'Line height',
-                  'type' => 'input'
-                ),
-                'mnav__subSubSub_padding_mobile' => array(
-                  'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'mnav__subSubSub_margin_mobile' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
+                ),
+                'mnav__subSubSub_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'mnav__subSubSub_fontsize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'mnav__subSubSub_lineheight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
                 ),
                 'dark__mnav__subSubSub_color' => array(
                   'label' => 'Color',
@@ -969,27 +1009,31 @@ class prefix_core_Customizer {
                 ),
                 'hamburger__container_width' => array(
                   'label' => 'Width',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeSuffixFixed' => 'px'
                 ),
                 'hamburger__container_height' => array(
                   'label' => 'Height',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeSuffixFixed' => 'px'
                 ),
                 'hamburger__size' => array(
                   'label' => 'Size',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeSuffixFixed' => 'px',
+                  'rangeMax' => 30
                 ),
                 'content__blur_activemenu' => array(
                   'label' => 'Blur Content while hamburger navigation is open',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'hamburger__container_width_mobile' => array(
                   'label' => 'Width',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'hamburger__container_height_mobile' => array(
                   'label' => 'Height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'dark__hamburger_color' => array(
                   'label' => 'Color',
@@ -1007,15 +1051,15 @@ class prefix_core_Customizer {
                 ),
                 'hamburger__title_space' => array(
                   'label' => 'Spacing',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'hamburger__title_fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'hamburger__title_LineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'hamburger__title_fontWeight' => array(
                   'label' => 'Font weight',
@@ -1023,15 +1067,15 @@ class prefix_core_Customizer {
                 ),
                 'hamburger__title_space_mobile' => array(
                   'label' => 'Spacing',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'hamburger__title_fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'hamburger__title_LineHeight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'dark__hamburger_text_color' => array(
                   'label' => 'Color',
@@ -1070,29 +1114,33 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'content__space' => array(
                   'label' => 'Space between elements',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'content__space_last' => array(
                   'label' => 'Last element spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'html__anchor' => array(
                   'label' => 'Anchor position (IE fix)',
-                  'type' => 'input',
-                  'default' => '100px'
+                  'type' => 'range-value',
+                  'default' => '100px',
+                  'rangeMax' => 300,
+                  'rangeSuffixFixed' => 'px'
                 ),
                 'content__space_mobile' => array(
                   'label' => 'Space between elements',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'content__space_last_mobile' => array(
                   'label' => 'Last element spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'html__anchor_mobile' => array(
                   'label' => 'Anchor position (IE fix)',
-                  'type' => 'input',
-                  'default' => '120px'
+                  'type' => 'range-value',
+                  'default' => '120px',
+                  'rangeMax' => 300,
+                  'rangeSuffixFixed' => 'px'
                 )
               )
             ),
@@ -1101,19 +1149,19 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'content__space_one' => array(
                   'label' => 'Rule 1',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'content__space_two' => array(
                   'label' => 'Rule 2',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'content__space_one_mobile' => array(
                   'label' => 'Rule 1',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'content__space_two_mobile' => array(
                   'label' => 'Rule 2',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             )
@@ -1164,11 +1212,17 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'menuItem__svg_positionBehind_opacity' => array(
                   'label' => 'Opacity',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMin' => 0,
+                  'rangeMax' => 1,
+                  'rangeSuffixFixed' => ''
                 ),
                 'menuItem__svg_positionBehind_opacity_hover' => array(
                   'label' => 'Opacity',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMin' => 0,
+                  'rangeMax' => 1,
+                  'rangeSuffixFixed' => ''
                 )
               )
             ),
@@ -1193,11 +1247,11 @@ class prefix_core_Customizer {
                 ),
                 'menuItem__svg_positionLeft_width' => array(
                   'label' => 'Width',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'menuItem__svg_positionLeft_borderRadius' => array(
                   'label' => 'Border radius',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'menuItem__svg_positionLeft_borderStyle' => array(
                   'label' => 'Border style',
@@ -1205,27 +1259,27 @@ class prefix_core_Customizer {
                 ),
                 'menuItem__svg_positionLeft_borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'menuItem__svg_positionLeft_margin' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'menuItem__svg_positionLeft_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'menuItem__svg_positionLeft_width_mobile' => array(
                   'label' => 'Width',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'menuItem__svg_positionLeft_margin_mobile' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'menuItem__svg_positionLeft_padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'dark__menuItem__svg_positionLeft_backgroundColor' => array(
                   'label' => 'Background color',
@@ -1274,7 +1328,7 @@ class prefix_core_Customizer {
                 ),
                 'menuItem__description_borderRadius' => array(
                   'label' => 'Border radius',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'menuItem__description_borderStyle' => array(
                   'label' => 'Border style',
@@ -1282,15 +1336,15 @@ class prefix_core_Customizer {
                 ),
                 'menuItem__description_borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'menuItem__description_margin' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'menuItem__description_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'menuItem__description_fontFamiliy' => array(
                   'label' => 'Title font family',
@@ -1298,11 +1352,11 @@ class prefix_core_Customizer {
                 ),
                 'menuItem__description_fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'menuItem__description_lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'menuItem__description_fontWeight' => array(
                   'label' => 'Font weight',
@@ -1318,19 +1372,19 @@ class prefix_core_Customizer {
                 ),
                 'menuItem__description_letterSpacing' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'menuItem__description_fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'menuItem__description_margin_mobile' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'menuItem__description_padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'dark__menuItem__description_backgroundColor' => array(
                   'label' => 'Background color',
@@ -1356,15 +1410,15 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'thumbnail__height' => array(
                   'label' => 'Height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'thumbnail__marginTop' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'thumbnail__marginBottom' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             ),
@@ -1373,15 +1427,15 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'thumbnail__height_mobile' => array(
                   'label' => 'Height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'thumbnail__marginTop_mobile' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'thumbnail__marginBottom_mobile' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             )
@@ -1415,11 +1469,11 @@ class prefix_core_Customizer {
                 ),
                 'bc__margin' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'bc__padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'bc__fontfamily' => array(
                   'label' => 'Font family',
@@ -1427,15 +1481,15 @@ class prefix_core_Customizer {
                 ),
                 'bc__fontsize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
+                ),
+                'bc__lineheight' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
                 ),
                 'bc__fontWeight' => array(
                   'label' => 'Font weight',
                   'type' => 'select'
-                ),
-                'bc__lineheight' => array(
-                  'label' => 'Line height',
-                  'type' => 'input'
                 ),
                 'bc__textTransform' => array(
                   'label' => 'Text transform',
@@ -1472,19 +1526,19 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'bc__fontsize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'bc__lineheight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'bc__margin_mobile' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'bc__padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 )
               )
             )
@@ -1525,17 +1579,25 @@ class prefix_core_Customizer {
                   'label' => 'Hover color',
                   'type' => 'color'
                 ),
+                'ls__link_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'ls__link_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
                 'ls__link_fontfamily' => array(
                   'label' => 'Font family',
                   'type' => 'input'
                 ),
                 'ls__link_fontsize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'ls__link_lineheight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'ls__link_fontWeight' => array(
                   'label' => 'Font weight',
@@ -1551,31 +1613,23 @@ class prefix_core_Customizer {
                 ),
                 'ls__link_letterSpacing' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
-                ),
-                'ls__link_margin' => array(
-                  'label' => 'Margin',
-                  'type' => 'input'
-                ),
-                'ls__link_padding' => array(
-                  'label' => 'Padding',
-                  'type' => 'input'
-                ),
-                'ls__link_fontsize_mobile' => array(
-                  'label' => 'Font size',
-                  'type' => 'input'
-                ),
-                'ls__link_lineheight_mobile' => array(
-                  'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'ls__link_margin_mobile' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'ls__link_padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
+                ),
+                'ls__link_fontsize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'ls__link_lineheight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
                 ),
                 'dark__ls__link_color' => array(
                   'label' => 'Color',
@@ -1601,35 +1655,35 @@ class prefix_core_Customizer {
                 ),
                 'mainSection__marginTop' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'mainSection__marginBottom' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'mainSection__paddingTop' => array(
                   'label' => 'Padding top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'mainSection__paddingBottom' => array(
                   'label' => 'Padding bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'mainSection__marginTop_mobile' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'mainSection__marginBottom_mobile' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'mainSection__paddingTop_mobile' => array(
                   'label' => 'Padding top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'mainSection__paddingBottom_mobile' => array(
                   'label' => 'Padding bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             ),
@@ -1650,7 +1704,7 @@ class prefix_core_Customizer {
                 ),
                 'h1__borderRadius' => array(
                   'label' => 'Border radius',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'h1__borderStyle' => array(
                   'label' => 'Border style',
@@ -1658,19 +1712,19 @@ class prefix_core_Customizer {
                 ),
                 'h1__borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'h1__marginTop' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h1__marginBottom' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h1__padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'h1__fontFamily' => array(
                   'label' => 'Title font family',
@@ -1678,11 +1732,11 @@ class prefix_core_Customizer {
                 ),
                 'h1__fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h1__lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h1__fontWeight' => array(
                   'label' => 'Font weight',
@@ -1698,27 +1752,27 @@ class prefix_core_Customizer {
                 ),
                 'h1__letterSpacing' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h1__marginTop_mobile' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h1__marginBottom_mobile' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h1__padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'h1__fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h1__lineHeight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'dark__h1__bg' => array(
                   'label' => 'Background color',
@@ -1751,7 +1805,7 @@ class prefix_core_Customizer {
                 ),
                 'h2__borderRadius' => array(
                   'label' => 'Border radius',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'h2__borderStyle' => array(
                   'label' => 'Border style',
@@ -1759,19 +1813,19 @@ class prefix_core_Customizer {
                 ),
                 'h2__borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'h2__marginTop' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h2__marginBottom' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h2__padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'h2__fontFamily' => array(
                   'label' => 'Title font family',
@@ -1779,11 +1833,11 @@ class prefix_core_Customizer {
                 ),
                 'h2__fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h2__lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h2__fontWeight' => array(
                   'label' => 'Font weight',
@@ -1799,27 +1853,27 @@ class prefix_core_Customizer {
                 ),
                 'h2__letterSpacing' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h2__marginTop_mobile' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h2__marginBottom_mobile' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h2__padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'h2__fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h2__lineHeight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'dark__h2__bg' => array(
                   'label' => 'Background color',
@@ -1852,7 +1906,7 @@ class prefix_core_Customizer {
                 ),
                 'h3__borderRadius' => array(
                   'label' => 'Border radius',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'h3__borderStyle' => array(
                   'label' => 'Border style',
@@ -1860,19 +1914,19 @@ class prefix_core_Customizer {
                 ),
                 'h3__borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'h3__marginTop' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h3__marginBottom' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h3__padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'h3__fontFamily' => array(
                   'label' => 'Title font family',
@@ -1880,11 +1934,11 @@ class prefix_core_Customizer {
                 ),
                 'h3__fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h3__lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h3__fontWeight' => array(
                   'label' => 'Font weight',
@@ -1900,27 +1954,27 @@ class prefix_core_Customizer {
                 ),
                 'h3__letterSpacing' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h3__marginTop_mobile' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h3__marginBottom_mobile' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h3__padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'h3__fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h3__lineHeight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'dark__h3__bg' => array(
                   'label' => 'Background color',
@@ -1953,7 +2007,7 @@ class prefix_core_Customizer {
                 ),
                 'h4__borderRadius' => array(
                   'label' => 'Border radius',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'h4__borderStyle' => array(
                   'label' => 'Border style',
@@ -1961,19 +2015,19 @@ class prefix_core_Customizer {
                 ),
                 'h4__borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'h4__marginTop' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h4__marginBottom' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h4__padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'h4__fontFamily' => array(
                   'label' => 'Title font family',
@@ -1981,11 +2035,11 @@ class prefix_core_Customizer {
                 ),
                 'h4__fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h4__lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h4__fontWeight' => array(
                   'label' => 'Font weight',
@@ -2001,27 +2055,27 @@ class prefix_core_Customizer {
                 ),
                 'h4__letterSpacing' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h4__marginTop_mobile' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h4__marginBottom_mobile' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h4__padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'h4__fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h4__lineHeight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'dark__h4__bg' => array(
                   'label' => 'Background color',
@@ -2054,7 +2108,7 @@ class prefix_core_Customizer {
                 ),
                 'h5__borderRadius' => array(
                   'label' => 'Border radius',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'h5__borderStyle' => array(
                   'label' => 'Border style',
@@ -2062,19 +2116,19 @@ class prefix_core_Customizer {
                 ),
                 'h5__borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'h5__marginTop' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h5__marginBottom' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h5__padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'h5__fontFamily' => array(
                   'label' => 'Title font family',
@@ -2082,11 +2136,11 @@ class prefix_core_Customizer {
                 ),
                 'h5__fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h5__lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h5__fontWeight' => array(
                   'label' => 'Font weight',
@@ -2102,27 +2156,27 @@ class prefix_core_Customizer {
                 ),
                 'h5__letterSpacing' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h5__marginTop_mobile' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h5__marginBottom_mobile' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h5__padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'h5__fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h5__lineHeight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'dark__h5__bg' => array(
                   'label' => 'Background color',
@@ -2155,7 +2209,7 @@ class prefix_core_Customizer {
                 ),
                 'h6__borderRadius' => array(
                   'label' => 'Border radius',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'h6__borderStyle' => array(
                   'label' => 'Border style',
@@ -2163,19 +2217,19 @@ class prefix_core_Customizer {
                 ),
                 'h6__borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'h6__marginTop' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h6__marginBottom' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h6__padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'h6__fontFamily' => array(
                   'label' => 'Title font family',
@@ -2183,11 +2237,11 @@ class prefix_core_Customizer {
                 ),
                 'h6__fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h6__lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h6__fontWeight' => array(
                   'label' => 'Font weight',
@@ -2203,27 +2257,27 @@ class prefix_core_Customizer {
                 ),
                 'h6__letterSpacing' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h6__marginTop_mobile' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h6__marginBottom_mobile' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h6__padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'h6__fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'h6__lineHeight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'dark__h6__bg' => array(
                   'label' => 'Background color',
@@ -2293,15 +2347,16 @@ class prefix_core_Customizer {
                 ),
                 'label_width' => array(
                   'label' => 'Width',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMax' => 600
                 ),
                 'label_borderRadius' => array(
                   'label' => 'Border radius',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'label_borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'label_borderStyle' => array(
                   'label' => 'Border style',
@@ -2309,11 +2364,11 @@ class prefix_core_Customizer {
                 ),
                 'label_margin' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'label_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'label_fontFamily' => array(
                   'label' => 'Font family',
@@ -2321,11 +2376,11 @@ class prefix_core_Customizer {
                 ),
                 'label_fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'label_lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'label_fontWeight' => array(
                   'label' => 'Font weight',
@@ -2337,31 +2392,32 @@ class prefix_core_Customizer {
                 ),
                 'label_letterSpacing' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'label_width_mobile' => array(
                   'label' => 'Minimum width',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMax' => 300
                 ),
                 'label_margin_mobile' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'label_padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'label_fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'label_lineHeight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'label_letterSpacing_mobile' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'dark__label_backgroundColor' => array(
                   'label' => 'Background color',
@@ -2394,15 +2450,16 @@ class prefix_core_Customizer {
                 ),
                 'input_width' => array(
                   'label' => 'Width',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMax' => 600
                 ),
                 'input__border_width' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'input__borderRadius' => array(
                   'label' => 'Border radius',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'input_borderStyle' => array(
                   'label' => 'Border style',
@@ -2410,7 +2467,7 @@ class prefix_core_Customizer {
                 ),
                 'input__padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'input__fontFamily' => array(
                   'label' => 'Font family',
@@ -2418,11 +2475,11 @@ class prefix_core_Customizer {
                 ),
                 'input__fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'input__lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'input__fontWeight' => array(
                   'label' => 'Font weight',
@@ -2430,19 +2487,20 @@ class prefix_core_Customizer {
                 ),
                 'input_width_mobile' => array(
                   'label' => 'Width',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMax' => 300
                 ),
                 'input__padding_mobile' => array(
                   'label' => 'Padding mobile',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'input__fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'input__lineHeight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'dark__input__color' => array(
                   'label' => 'Color',
@@ -2475,27 +2533,27 @@ class prefix_core_Customizer {
                 ),
                 'input__checkbox_width' => array(
                   'label' => 'Width/height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'input__checkbox_border_width' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'input__checkbox_marginTop' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'input__checkbox_space' => array(
                   'label' => 'Space to text',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'input__checkbox_fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'input__checkbox_lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'input__checkbox_fontWeight' => array(
                   'label' => 'Font weight',
@@ -2503,11 +2561,11 @@ class prefix_core_Customizer {
                 ),
                 'input__checkbox_fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'input__checkbox_lineHeight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'dark__input__checkbox_bg' => array(
                   'label' => 'Background color',
@@ -2540,11 +2598,11 @@ class prefix_core_Customizer {
                 ),
                 'input__select_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'input__select_border_width' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'input_select_borderStyle' => array(
                   'label' => 'Border style',
@@ -2552,7 +2610,7 @@ class prefix_core_Customizer {
                 ),
                 'input__select_padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'input__select_fontFamily' => array(
                   'label' => 'Font family',
@@ -2560,11 +2618,11 @@ class prefix_core_Customizer {
                 ),
                 'input__select_fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'input__select_lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'input__select_fontWeight' => array(
                   'label' => 'Font weight',
@@ -2572,11 +2630,11 @@ class prefix_core_Customizer {
                 ),
                 'input__select_fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'input__select_lineHeight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'input__selectContainer_color' => array(
                   'label' => 'Container text color',
@@ -2588,11 +2646,13 @@ class prefix_core_Customizer {
                 ),
                 'input__selectContainer_width' => array(
                   'label' => 'Container size',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMax' => 600
                 ),
                 'input__selectContainer_width_mobile' => array(
                   'label' => 'Container size',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMax' => 300
                 ),
                 'dark__input__select_bg_color' => array(
                   'label' => 'Background color',
@@ -2629,11 +2689,11 @@ class prefix_core_Customizer {
                 ),
                 'input__placeholder_fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'input__placeholder_lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'input__placeholder_fontWeight' => array(
                   'label' => 'Font weight',
@@ -2678,11 +2738,12 @@ class prefix_core_Customizer {
                 ),
                 'input__range_progressbar_height' => array(
                   'label' => 'Height',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMax' => 50
                 ),
                 'input__range_progressbar_borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'input__range_progressbar_borderStyle' => array(
                   'label' => 'Border style',
@@ -2690,7 +2751,7 @@ class prefix_core_Customizer {
                 ),
                 'input__range_progressbar_borderRadius' => array(
                   'label' => 'Border radius',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'input__range_handler_backgroundColor' => array(
                   'label' => 'Handler color',
@@ -2718,15 +2779,17 @@ class prefix_core_Customizer {
                 ),
                 'input__range_handle_width' => array(
                   'label' => 'Handler width',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMax' => 600
                 ),
                 'input__range_handle_height' => array(
                   'label' => 'Handler height',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMax' => 50
                 ),
                 'input__range_handle_borderWidth' => array(
                   'label' => 'Handler border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'input__range_handle_borderStyle' => array(
                   'label' => 'Handler border style',
@@ -2734,7 +2797,7 @@ class prefix_core_Customizer {
                 ),
                 'input__range_handle_borderRadius' => array(
                   'label' => 'Handler border radius',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'input__range_progressed_backgroundColor' => array(
                   'label' => 'Prozessed color',
@@ -2839,15 +2902,15 @@ class prefix_core_Customizer {
                 ),
                 'input__submit_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'input__submit_borderRadius' => array(
                   'label' => 'Border radius',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'input__submit_borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'input__submit_fontFamily' => array(
                   'label' => 'Font family',
@@ -2855,11 +2918,11 @@ class prefix_core_Customizer {
                 ),
                 'input__submit_fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'input__submit_lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'input__submit_fontWeight' => array(
                   'label' => 'Font weight',
@@ -2867,7 +2930,7 @@ class prefix_core_Customizer {
                 ),
                 'input__submit_letterSpacing' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'input__submit_textTransform' => array(
                   'label' => 'Text transform',
@@ -2875,19 +2938,19 @@ class prefix_core_Customizer {
                 ),
                 'input__submit_padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'input__submit_fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'input__submit_lineHeight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'input__submit_letterSpacing_mobile' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'dark__input__submit_bg_color' => array(
                   'label' => 'Background color',
@@ -2944,15 +3007,15 @@ class prefix_core_Customizer {
                 ),
                 'input__reset_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'input__reset_borderRadius' => array(
                   'label' => 'Border radius',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'input__reset_borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'input__reset_fontFamily' => array(
                   'label' => 'Font family',
@@ -2960,11 +3023,11 @@ class prefix_core_Customizer {
                 ),
                 'input__reset_fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'input__reset_lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'input__reset_fontWeight' => array(
                   'label' => 'Font weight',
@@ -2972,7 +3035,7 @@ class prefix_core_Customizer {
                 ),
                 'input__reset_letterSpacing' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'input__reset_textTransform' => array(
                   'label' => 'Text transform',
@@ -2980,19 +3043,19 @@ class prefix_core_Customizer {
                 ),
                 'input__reset_padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'input__reset_fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'input__reset_lineHeight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'input__reset_letterSpacing_mobile' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'dark__input__reset_bg_color' => array(
                   'label' => 'Background color',
@@ -3025,27 +3088,27 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'mautic__row_marginBottom' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'mautic__row_gap' => array(
                   'label' => 'Gap',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'mautic__row_rowgap' => array(
                   'label' => 'Row gap',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'mautic__row_marginBottom_mobile' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'mautic__row_gap_mobile' => array(
                   'label' => 'Gap',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'mautic__row_rowgap_mobile' => array(
                   'label' => 'Row gap',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             )
@@ -3075,19 +3138,19 @@ class prefix_core_Customizer {
                 ),
                 'searchForm__border_width' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'searchForm__borderRadius' => array(
                   'label' => 'Border radius',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'searchForm__margin' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'searchForm__padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'searchForm__fontFamily' => array(
                   'label' => 'Font family',
@@ -3095,11 +3158,11 @@ class prefix_core_Customizer {
                 ),
                 'searchForm__fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'searchForm__lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'searchForm__fontWeight' => array(
                   'label' => 'Font weight',
@@ -3107,19 +3170,19 @@ class prefix_core_Customizer {
                 ),
                 'searchForm__margin_mobile' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'searchForm__padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'searchForm__fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'searchForm__lineHeight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'dark__searchForm__color' => array(
                   'label' => 'Color',
@@ -3148,11 +3211,11 @@ class prefix_core_Customizer {
                 ),
                 'searchForm__placeholder_fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'searchForm__placeholder_lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'searchForm__placeholder_fontWeight' => array(
                   'label' => 'Font weight',
@@ -3197,19 +3260,19 @@ class prefix_core_Customizer {
                 ),
                 'searchForm__submit_borderRadius' => array(
                   'label' => 'Border radius',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'searchForm__submit_borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'searchForm__submit_margin' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'searchForm__submit_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'searchForm__submit_fontFamily' => array(
                   'label' => 'Font family',
@@ -3217,15 +3280,15 @@ class prefix_core_Customizer {
                 ),
                 'searchForm__submit_fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'searchForm__submit_letterSpacing' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'searchForm__submit_lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'searchForm__submit_fontWeight' => array(
                   'label' => 'Font weight',
@@ -3237,23 +3300,23 @@ class prefix_core_Customizer {
                 ),
                 'searchForm__submit_fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'searchForm__submit_lineHeight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'searchForm__submit_letterSpacing_mobile' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'searchForm__submit_margin_mobile' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'searchForm__submit_padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'dark__searchForm__submit_bg_color' => array(
                   'label' => 'Background color',
@@ -3291,35 +3354,35 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'search__marginTop' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'search__marginBottom' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'search__paddingTop' => array(
                   'label' => 'Padding top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'search__paddingBottom' => array(
                   'label' => 'Padding bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'search__marginTop_mobile' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'search__marginBottom_mobile' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'search__paddingTop_mobile' => array(
                   'label' => 'Padding top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'search__paddingBottom_mobile' => array(
                   'label' => 'Padding bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             ),
@@ -3332,15 +3395,15 @@ class prefix_core_Customizer {
                 ),
                 'search__article_border' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'search__article_margin' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'search__article_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'search__article_flexDirection' => array(
                   'label' => 'Direction',
@@ -3348,23 +3411,25 @@ class prefix_core_Customizer {
                 ),
                 'search__article_flexGap' => array(
                   'label' => 'Gap',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'search__article_flexDivWidth' => array(
                   'label' => 'Excerpt width',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMax' => 600
                 ),
                 'search__article_flexMediaWidth' => array(
                   'label' => 'Media width',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMax' => 600
                 ),
                 'search__article_margin_mobile' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'search__article_padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'search__article_flexDirection_mobile' => array(
                   'label' => 'Direction',
@@ -3372,15 +3437,17 @@ class prefix_core_Customizer {
                 ),
                 'search__article_flexGap_mobile' => array(
                   'label' => 'Gap',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'search__article_flexDivWidth_mobile' => array(
                   'label' => 'Excerpt width',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMax' => 300
                 ),
                 'search__article_flexMediaWidth_mobile' => array(
                   'label' => 'Media width',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMax' => 300
                 )
               )
             ),
@@ -3401,7 +3468,7 @@ class prefix_core_Customizer {
                 ),
                 'search__article_title_borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'search__article_title_borderStyle' => array(
                   'label' => 'Border style',
@@ -3409,11 +3476,11 @@ class prefix_core_Customizer {
                 ),
                 'search__article_title_margin' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'search__article_title_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'search__article_title_fontFamily' => array(
                   'label' => 'Font family',
@@ -3421,11 +3488,11 @@ class prefix_core_Customizer {
                 ),
                 'search__article_title_fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'search__article_title_lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'search__article_title_fontWeight' => array(
                   'label' => 'Font weight',
@@ -3441,19 +3508,19 @@ class prefix_core_Customizer {
                 ),
                 'search__article_title_fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'search__article_title_lineHeight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'search__article_title_margin_mobile' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'search__article_title_padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 )
               )
             ),
@@ -3462,7 +3529,7 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'search__pagination_margin' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 )
               )
             )
@@ -3476,35 +3543,35 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'blog__marginTop' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'blog__marginBottom' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'blog__paddingTop' => array(
                   'label' => 'Padding top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'blog__paddingBottom' => array(
                   'label' => 'Padding bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'blog__marginTop_mobile' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'blog__marginBottom_mobile' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'blog__paddingTop_mobile' => array(
                   'label' => 'Padding top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'blog__paddingBottom_mobile' => array(
                   'label' => 'Padding bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             ),
@@ -3517,15 +3584,15 @@ class prefix_core_Customizer {
                 ),
                 'blog__article_border' => array(
                   'label' => 'Article border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'blog__article_margin' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'blog__article_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'blog__article_flexDirection' => array(
                   'label' => 'Direction',
@@ -3533,23 +3600,25 @@ class prefix_core_Customizer {
                 ),
                 'blog__article_flexGap' => array(
                   'label' => 'Gap',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'blog__article_flexDivWidth' => array(
                   'label' => 'Excerpt width',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMax' => 600
                 ),
                 'blog__article_flexMediaWidth' => array(
                   'label' => 'Media width',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMax' => 600
                 ),
                 'blog__article_margin_mobile' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'blog__article_padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'blog__article_flexDirection_mobile' => array(
                   'label' => 'Direction',
@@ -3557,15 +3626,17 @@ class prefix_core_Customizer {
                 ),
                 'blog__article_flexGap_mobile' => array(
                   'label' => 'Gap',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'blog__article_flexDivWidth_mobile' => array(
                   'label' => 'Excerpt width',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMax' => 300
                 ),
                 'blog__article_flexMediaWidth_mobile' => array(
                   'label' => 'Article media width',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMax' => 300
                 )
               )
             ),
@@ -3586,7 +3657,7 @@ class prefix_core_Customizer {
                 ),
                 'blog__article_title_borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'blog__article_title_borderStyle' => array(
                   'label' => 'Border style',
@@ -3594,11 +3665,11 @@ class prefix_core_Customizer {
                 ),
                 'blog__article_title_margin' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'blog__article_title_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'blog__article_title_fontFamily' => array(
                   'label' => 'Font family',
@@ -3606,11 +3677,11 @@ class prefix_core_Customizer {
                 ),
                 'blog__article_title_fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'blog__article_title_lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'blog__article_title_fontWeight' => array(
                   'label' => 'Font weight',
@@ -3624,21 +3695,21 @@ class prefix_core_Customizer {
                   'label' => 'Font style',
                   'type' => 'select'
                 ),
-                'blog__article_title_fontSize_mobile' => array(
-                  'label' => 'Font size',
-                  'type' => 'input'
-                ),
-                'blog__article_title_lineHeight_mobile' => array(
-                  'label' => 'Line height',
-                  'type' => 'input'
-                ),
                 'blog__article_title_margin_mobile' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'blog__article_title_padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
+                ),
+                'blog__article_title_fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'blog__article_title_lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
                 )
               )
             ),
@@ -3647,7 +3718,7 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'blog__pagination_margin' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 )
               )
             )
@@ -3669,7 +3740,7 @@ class prefix_core_Customizer {
                 ),
                 'comments__borderRadius' => array(
                   'label' => 'Border radius',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'comments__borderStyle' => array(
                   'label' => 'Border style',
@@ -3677,15 +3748,15 @@ class prefix_core_Customizer {
                 ),
                 'comments__borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'comments__margin' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'comments__padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 )
               )
             ),
@@ -3706,7 +3777,7 @@ class prefix_core_Customizer {
                 ),
                 'comments__title_borderRadius' => array(
                   'label' => 'Border radius',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'comments__title_borderStyle' => array(
                   'label' => 'Border style',
@@ -3714,15 +3785,15 @@ class prefix_core_Customizer {
                 ),
                 'comments__title_borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'comments__title_margin' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'comments__title_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'comments__title_fontFamiliy' => array(
                   'label' => 'Title font family',
@@ -3730,11 +3801,11 @@ class prefix_core_Customizer {
                 ),
                 'comments__title_fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'comments__title_lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'comments__title_fontWeight' => array(
                   'label' => 'Font weight',
@@ -3750,23 +3821,23 @@ class prefix_core_Customizer {
                 ),
                 'comments__title_letterSpacing' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'comments__title_margin_mobile' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'comments__title_padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'comments__title_fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'comments__title_lineHeight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'dark__comments__title_bg' => array(
                   'label' => 'Background color',
@@ -3787,19 +3858,19 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'comments__commentlist_margin' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'comments__commentlist_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'comments__commentlist_margin_mobile' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'comments__commentlist_padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 )
               )
             ),
@@ -3812,15 +3883,15 @@ class prefix_core_Customizer {
                 ),
                 'comments__commentlist_item_margin' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'comments__commentlist_item_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'comments__commentlist_item_borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'comments__commentlist_item_borderStyle' => array(
                   'label' => 'Border style',
@@ -3828,11 +3899,11 @@ class prefix_core_Customizer {
                 ),
                 'comments__commentlist_item_margin_mobile' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'comments__commentlist_item_padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 )
               )
             ),
@@ -3841,19 +3912,19 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'comments__commentlist_respond_margin' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'comments__commentlist_respond_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'comments__commentlist_respond_margin_mobile' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'comments__commentlist_respond_padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 )
               )
             ),
@@ -3866,15 +3937,15 @@ class prefix_core_Customizer {
                 ),
                 'comments__commentlist_respond_item_margin' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'comments__commentlist_respond_item_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'comments__commentlist_respond_item_borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'comments__commentlist_respond_item_borderStyle' => array(
                   'label' => 'Border style',
@@ -3882,11 +3953,11 @@ class prefix_core_Customizer {
                 ),
                 'comments__commentlist_respond_item_margin_mobile' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'comments__commentlist_respond_item_padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 )
               )
             ),
@@ -3899,7 +3970,7 @@ class prefix_core_Customizer {
                 ),
                 'comments__form_margin' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'comments__form_flexDirection_mobile' => array(
                   'label' => 'Direction',
@@ -3907,7 +3978,7 @@ class prefix_core_Customizer {
                 ),
                 'comments__form_margin_mobile' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 )
               )
             ),
@@ -3920,19 +3991,19 @@ class prefix_core_Customizer {
                 ),
                 'comments__avatar_width' => array(
                   'label' => 'Width',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'comments__avatar_margin' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'comments__avatar_width_mobile' => array(
                   'label' => 'Width',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'comments__avatar_margin_mobile' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 )
               )
             )
@@ -3946,15 +4017,15 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'error__margin' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'error__padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'error__textAlign' => array(
                   'label' => 'Text align',
-                  'type' => 'input'
+                  'type' => 'select'
                 )
               )
             ),
@@ -3963,11 +4034,11 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'error__title_margin' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'error__title_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'error__title_fontFamily' => array(
                   'label' => 'Font family',
@@ -3975,11 +4046,11 @@ class prefix_core_Customizer {
                 ),
                 'error__title_fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'error__title_lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'error__title_fontWeight' => array(
                   'label' => 'Font weight',
@@ -3995,23 +4066,23 @@ class prefix_core_Customizer {
                 ),
                 'error__title_letterSpacing' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
-                ),
-                'error__title_fontSize_mobile' => array(
-                  'label' => 'Font size',
-                  'type' => 'input'
-                ),
-                'error__title_lineHeight_mobile' => array(
-                  'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'error__title_margin_mobile' => array(
                   'label' => 'Title margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'error__title_padding_mobile' => array(
                   'label' => 'Title padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
+                ),
+                'error__title_fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'error__title_lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
                 )
               )
             )
@@ -4033,18 +4104,20 @@ class prefix_core_Customizer {
                 ),
                 'popup__width' => array(
                   'label' => 'Lightbox width',
-                  'type' => 'input',
-                  'default' => '800px'
+                  'type' => 'range-value',
+                  'default' => '800px',
+                  'rangeMax' => 3000
                 ),
                 'popup__space' => array(
                   'label' => 'Container padding',
-                  'type' => 'input',
+                  'type' => 'range-four-value',
                   'default' => '40px'
                 ),
                 'popup_prev_visible' => array(
                   'label' => 'Preview visibility',
-                  'type' => 'input',
-                  'default' => '30px'
+                  'type' => 'range-value',
+                  'default' => '30px',
+                  'rangeMax' => 1000
                 )
               )
             ),
@@ -4065,19 +4138,22 @@ class prefix_core_Customizer {
                 ),
                 'popup__arrow_borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'popup__arrow_opacity' => array(
                   'label' => 'Opacity',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMin' => 0,
+                  'rangeMax' => 1,
+                  'rangeSuffixFixed' => ''
                 ),
                 'popup__arrow_height' => array(
                   'label' => 'Height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'popup__arrow_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 )
               )
             ),
@@ -4090,11 +4166,14 @@ class prefix_core_Customizer {
                 ),
                 'popup__close_size' => array(
                   'label' => 'Size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'popup__close_opacity' => array(
                   'label' => 'Opacity',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMin' => 0,
+                  'rangeMax' => 1,
+                  'rangeSuffixFixed' => ''
                 )
               )
             ),
@@ -4119,15 +4198,15 @@ class prefix_core_Customizer {
                 ),
                 'popup__figcaption_fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'popup__figcaption_lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'popup__figcaption_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 )
               )
             ),
@@ -4148,15 +4227,15 @@ class prefix_core_Customizer {
                 ),
                 'popup__downloadLink_fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'popup__downloadLink_lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'popup__downloadLink_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 )
               )
             )
@@ -4182,15 +4261,15 @@ class prefix_core_Customizer {
                 ),
                 'consentContainer__borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'consentContainer__borderRadius' => array(
                   'label' => 'Border radius',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'consentContainer__padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'consentContainer__fontFamily' => array(
                   'label' => 'Font family',
@@ -4198,11 +4277,11 @@ class prefix_core_Customizer {
                 ),
                 'consentContainer__fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'consentContainer__lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'consentContainer__fontWeight' => array(
                   'label' => 'Font weight',
@@ -4210,19 +4289,19 @@ class prefix_core_Customizer {
                 ),
                 'consentContainer__textAlign' => array(
                   'label' => 'Text align',
-                  'type' => 'input'
+                  'type' => 'select'
                 ),
                 'consentContainer__padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'consentContainer__fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'consentContainer__lineHeight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             ),
@@ -4255,15 +4334,15 @@ class prefix_core_Customizer {
                 ),
                 'consentContainer__Button_borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'consentContainer__Button_borderRadius' => array(
                   'label' => 'Border radius',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'consentContainer__Button_padding' => array(
                   'label' => 'Button padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'consentContainer__Button_fontFamily' => array(
                   'label' => 'Font family',
@@ -4271,7 +4350,7 @@ class prefix_core_Customizer {
                 ),
                 'consentContainer__Button_fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'consentContainer__Button_fontWeight' => array(
                   'label' => 'Font weight',
@@ -4279,7 +4358,7 @@ class prefix_core_Customizer {
                 ),
                 'consentContainer__Button_lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'consentContainer__Button_textTransform' => array(
                   'label' => 'Text transform',
@@ -4291,19 +4370,19 @@ class prefix_core_Customizer {
                 ),
                 'consentContainer__Button_letterSpacing' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'consentContainer__Button_padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'consentContainer__Button_fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'consentContainer__Button_lineHeight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             )
@@ -4317,7 +4396,7 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'sm__icon_space' => array(
                   'label' => 'Gap',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
               )
             ),
@@ -4334,7 +4413,7 @@ class prefix_core_Customizer {
                 ),
                 'sm__icon_width' => array(
                   'label' => 'Width',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'dark__sm__icon_color' => array(
                   'label' => 'Color',
@@ -4364,11 +4443,11 @@ class prefix_core_Customizer {
                 ),
                 'scrollToTop__container_paddingTop' => array(
                   'label' => 'Container padding top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'scrollToTop__container_paddingBottom' => array(
                   'label' => 'Container padding bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             ),
@@ -4401,15 +4480,15 @@ class prefix_core_Customizer {
                 ),
                 'scrollToTop__Button_borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'scrollToTop__Button_borderRadius' => array(
                   'label' => 'Border radius',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'scrollToTop__Button_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'scrollToTop__Button_fontFamily' => array(
                   'label' => 'Font family',
@@ -4417,7 +4496,7 @@ class prefix_core_Customizer {
                 ),
                 'scrollToTop__Button_fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'scrollToTop__Button_fontWeight' => array(
                   'label' => 'Font weight',
@@ -4425,7 +4504,7 @@ class prefix_core_Customizer {
                 ),
                 'scrollToTop__Button_lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'scrollToTop__Button_textTransform' => array(
                   'label' => 'Text transform',
@@ -4437,7 +4516,7 @@ class prefix_core_Customizer {
                 ),
                 'scrollToTop__Button_letterSpacing' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             )
@@ -4457,7 +4536,7 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'block__accordion_separator' => array(
                   'label' => 'Gap between accordions',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             ),
@@ -4474,7 +4553,7 @@ class prefix_core_Customizer {
                 ),
                 'block__accordion_label_spacing' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__accordion_label_fontfamily' => array(
                   'label' => 'Font family',
@@ -4482,7 +4561,7 @@ class prefix_core_Customizer {
                 ),
                 'block__accordion_label_fontsize' => array(
                   'label' => 'Font-size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__accordion_label_fontweight' => array(
                   'label' => 'Font weight',
@@ -4490,7 +4569,7 @@ class prefix_core_Customizer {
                 ),
                 'block__accordion_label_lineheight' => array(
                   'label' => 'Line-height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__accordion_label_textTransform' => array(
                   'label' => 'Text transform',
@@ -4498,19 +4577,19 @@ class prefix_core_Customizer {
                 ),
                 'block__accordion_label_letterSpacing' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__accordion_label_spacing_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__accordion_label_fontsize_mobile' => array(
                   'label' => 'Font-size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__accordion_label_lineheight_mobile' => array(
                   'label' => 'Line-height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             ),
@@ -4522,28 +4601,28 @@ class prefix_core_Customizer {
                   'type' => 'color'
                 ),
                 'block__accordion_icon_borderRadius' => array(
-                  'label' => 'Radius',
-                  'type' => 'input'
+                  'label' => 'Border radius',
+                  'type' => 'range-four-value'
                 ),
                 'block__accordion_icon_width' => array(
                   'label' => 'Width',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__accordion_icon_height' => array(
                   'label' => 'Height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__accordion_icon_seperator' => array(
                   'label' => 'Placeholder between text and icon',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__accordion_icon_width_mobile' => array(
                   'label' => 'Width',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__accordion_icon_height_mobile' => array(
                   'label' => 'Height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__accordion_label_arrow' => array(
                   'label' => 'Plus sign color',
@@ -4551,15 +4630,15 @@ class prefix_core_Customizer {
                 ),
                 'block__accordion_icon_plusRadius' => array(
                   'label' => 'Plus sign radius',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__accordion_icon_plusSize' => array(
                   'label' => 'Plus sign size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__accordion_icon_plusWeight' => array(
                   'label' => 'Plus sign weight',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             ),
@@ -4576,27 +4655,27 @@ class prefix_core_Customizer {
                 ),
                 'block__accordion_content_spacing' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__accordion_content_fontsize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__accordion_content_lineheight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__accordion_content_spacing_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__accordion_content_fontsize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__accordion_content_lineheight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             )
@@ -4610,7 +4689,7 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'block__buttons_spacing' => array(
                   'label' => 'Space between',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             ),
@@ -4643,23 +4722,23 @@ class prefix_core_Customizer {
                 ),
                 'block__buttons_borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__buttons_borderRadius' => array(
                   'label' => 'Border radius',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__buttons_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__buttons_fontFamily' => array(
-                  'label' => 'Font',
+                  'label' => 'Font family',
                   'type' => 'input'
                 ),
                 'block__buttons_fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__buttons_fontWeight' => array(
                   'label' => 'Font weight',
@@ -4667,7 +4746,7 @@ class prefix_core_Customizer {
                 ),
                 'block__buttons_lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__buttons_textTransform' => array(
                   'label' => 'Text transform',
@@ -4679,31 +4758,31 @@ class prefix_core_Customizer {
                 ),
                 'block__buttons_letterSpacing' => array(
                   'label' => 'Text letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__buttons_padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__buttons_borderWidth_mobile' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__buttons_borderRadius_mobile' => array(
                   'label' => 'Border radius',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__buttons_fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__buttons_lineHeight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__buttons_textTransform_mobile' => array(
                   'label' => 'Text transform',
-                  'type' => 'input'
+                  'type' => 'select'
                 ),
                 'dark__block__buttons_bgColor' => array(
                   'label' => 'Background color',
@@ -4741,36 +4820,36 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'wp--style--block-gap' => array(
                   'label' => 'Space between',
-                  'type' => 'input',
+                  'type' => 'range-value',
                   'default' => '20px'
                 ),
                 'block__columns_hasBackground_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__columns_hasBackground_gap' => array(
                   'label' => 'Space between',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__columns_column_hasBackground_padding' => array(
                   'label' => 'Column padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'wp--style--block-gap_mobile' => array(
                   'label' => 'Space between',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__columns_hasBackground_padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__columns_hasBackground_gap_mobile' => array(
                   'label' => 'Space between',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__columns_column_hasBackground_padding_mobile' => array(
                   'label' => 'Column padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 )
               )
             ),
@@ -4779,19 +4858,19 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'block__columns_3columns_gap' => array(
                   'label' => 'Space between',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__columns_3columns_hasBackground_gap' => array(
                   'label' => 'Space between',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__columns_3columns_gap_mobile' => array(
                   'label' => 'Space between',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__columns_3columns_hasBackground_gap_mobile' => array(
                   'label' => 'Space between',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             ),
@@ -4800,19 +4879,19 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'block__columns_4columns_gap' => array(
                   'label' => 'Space between',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__columns_4columns_hasBackground_gap' => array(
                   'label' => 'Space between',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__columns_4columns_gap_mobile' => array(
                   'label' => 'Space between',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__columns_4columns_hasBackground_gap_mobile' => array(
                   'label' => 'Space between',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             ),
@@ -4821,19 +4900,19 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'block__columns_5columns_gap' => array(
                   'label' => 'Space between',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__columns_5columns_hasBackground_gap' => array(
                   'label' => 'Space between',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__columns_5columns_gap_mobile' => array(
                   'label' => 'Space between',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__columns_5columns_hasBackground_gap_mobile' => array(
                   'label' => 'Space between',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             ),
@@ -4842,20 +4921,20 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'block__columns_6columns_gap' => array(
                   'label' => 'Space between',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__columns_6columns_hasBackground_gap' => array(
                   'label' => 'Space between',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__columns_6columns_gap_mobile' => array(
                   'label' => 'Space between',
-                  'type' => 'input',
+                  'type' => 'range-value',
                   'default' => '20px'
                 ),
                 'block__columns_6columns_hasBackground_gap_mobile' => array(
                   'label' => 'Space between',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             )
@@ -4869,31 +4948,33 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'block__cover_minHeight' => array(
                   'label' => 'Minimum height',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMax' => 1000
                 ),
                 'block__cover_container_paddingTop' => array(
                   'label' => 'Container padding top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__cover_container_paddingBottom' => array(
                   'label' => 'Container padding bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__cover_zoomer_scale' => array(
                   'label' => 'Background image zoom animation',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMax' => 1000
                 ),
                 'block__cover_minHeight_mobile' => array(
                   'label' => 'Minimum height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__cover_container_paddingTop_mobile' => array(
                   'label' => 'Container padding top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__cover_container_paddingBottom_mobile' => array(
                   'label' => 'Container padding bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             ),
@@ -4902,11 +4983,13 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'block__cover_alignwide_minHeight' => array(
                   'label' => 'Minimum height',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMax' => 1000
                 ),
                 'block__cover_alignwide_minHeight_mobile' => array(
                   'label' => 'Minimum height',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMax' => 1000
                 )
               )
             ),
@@ -4915,11 +4998,13 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'block__cover_alignfull_minHeight' => array(
                   'label' => 'Minimum height',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMax' => 1000
                 ),
                 'block__cover_alignfull_minHeight_mobile' => array(
                   'label' => 'Minimum height',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMax' => 1000
                 )
               )
             )
@@ -4933,19 +5018,19 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'block__group_hasBackground_paddingTop' => array(
                   'label' => 'Padding top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__group_hasBackground_paddingBottom' => array(
                   'label' => 'Padding bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__group_hasBackground_paddingTop_mobile' => array(
                   'label' => 'Padding top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__group_hasBackground_paddingBottom_mobile' => array(
                   'label' => 'Padding bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             )
@@ -4959,35 +5044,35 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'block__imageFigcaption_margin' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__imageFigcaption_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__imageFigcaption_fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__imageFigcaption_lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__imageFigcaption_margin_mobile' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__imageFigcaption_padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__imageFigcaption_fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__imageFigcaption_lineHeight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             ),
@@ -4996,11 +5081,11 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'block__imageDonloadButton_marginTop' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__imageDonloadButton_marginTop_mobile' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             )
@@ -5014,7 +5099,7 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'gallery-block--gutter-size' => array(
                   'label' => 'Space between',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             ),
@@ -5027,15 +5112,18 @@ class prefix_core_Customizer {
                 ),
                 'block__imagegallery_arrow_opacity' => array(
                   'label' => 'Opacity',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMin' => 0,
+                  'rangeMax' => 1,
+                  'rangeSuffixFixed' => ''
                 ),
                 'block__imagegallery_arrow_position' => array(
                   'label' => 'Position from sides',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__imagegallery_arrow_position_mobile' => array(
                   'label' => 'Position from sides',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             ),
@@ -5044,15 +5132,15 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'swiper__bulletNav_gap' => array(
                   'label' => 'Gap',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'swiper__bulletNav_position' => array(
                   'label' => 'Position from bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'swiper__bulletNav_position_mobile' => array(
                   'label' => 'Position from bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             ),
@@ -5085,31 +5173,31 @@ class prefix_core_Customizer {
                 ),
                 'swiper__bulletNav_item_borderRadius' => array(
                   'label' => 'Border radius',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'swiper__bulletNav_item_borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'swiper__bulletNav_item_fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'swiper__bulletNav_item_width' => array(
                   'label' => 'Width',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'swiper__bulletNav_item_height' => array(
                   'label' => 'Height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'swiper__bulletNav_item_width_mobile' => array(
                   'label' => 'Width',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'swiper__bulletNav_item_height_mobile' => array(
                   'label' => 'Height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             ),
@@ -5142,11 +5230,11 @@ class prefix_core_Customizer {
                 ),
                 'downloadAll__borderRadius' => array(
                   'label' => 'Border raduis',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'downloadAll__borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'downloadAll__borderStyle' => array(
                   'label' => 'Border style',
@@ -5154,7 +5242,7 @@ class prefix_core_Customizer {
                 ),
                 'downloadAll__padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'downloadAll__fontFamily' => array(
                   'label' => 'Font',
@@ -5162,11 +5250,11 @@ class prefix_core_Customizer {
                 ),
                 'downloadAll__fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'downloadAll__lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'downloadAll__fontWeight' => array(
                   'label' => 'Font weight',
@@ -5182,23 +5270,23 @@ class prefix_core_Customizer {
                 ),
                 'downloadAll__letterSpacing' => array(
                   'label' => 'Text letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'downloadAll__padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'downloadAll__fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'downloadAll__lineHeight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'downloadAll__letterSpacing_mobile' => array(
                   'label' => 'Text letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'dark__downloadAll__backgroundColor' => array(
                   'label' => 'Background color',
@@ -5234,7 +5322,7 @@ class prefix_core_Customizer {
                 ),
                 'downloadAll__progressbar_prozess_height' => array(
                   'label' => 'Prozessbar height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'dark__downloadAll__progressbar_backgroundColor' => array(
                   'label' => 'Prozessbar Background color',
@@ -5268,7 +5356,7 @@ class prefix_core_Customizer {
                 ),
                 'imagePins__pinSize' => array(
                   'label' => 'Width',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             ),
@@ -5285,19 +5373,20 @@ class prefix_core_Customizer {
                 ),
                 'imagePins__pinInfo_borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'imagePins__pinInfo_borderRadius' => array(
                   'label' => 'Border radius',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'imagePins__pinInfo_width' => array(
                   'label' => 'Max width',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMax' => 400
                 ),
                 'imagePins__pinInfo_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 )
               )
             ),
@@ -5314,7 +5403,7 @@ class prefix_core_Customizer {
                 ),
                 'imagePins__pinInfo_closeSize' => array(
                   'label' => 'Width',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             )
@@ -5332,7 +5421,7 @@ class prefix_core_Customizer {
                 ),
                 'block__list_ol_borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__list_ol_borderStyle' => array(
                   'label' => 'Border style',
@@ -5340,19 +5429,19 @@ class prefix_core_Customizer {
                 ),
                 'block__list_ol_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__list_ol_gap' => array(
                   'label' => 'Gap',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__list_ol_padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__list_ol_gap_mobile' => array(
                   'label' => 'Gap',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'dark__block__list_ol_borderColor' => array(
                   'label' => 'Border color',
@@ -5374,7 +5463,7 @@ class prefix_core_Customizer {
                 ),
                 'block__list_ol_item_borderWidth' => array(
                   'label' => 'Item border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__list_ol_item_borderStyle' => array(
                   'label' => 'Item border style',
@@ -5382,11 +5471,11 @@ class prefix_core_Customizer {
                 ),
                 'block__list_ol_item_margin' => array(
                   'label' => 'Item Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__list_ol_item_padding' => array(
                   'label' => 'Item Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__list_ol_marker_listStylePosition' => array(
                   'label' => 'List style position',
@@ -5394,27 +5483,27 @@ class prefix_core_Customizer {
                 ),
                 'block__list_ol_marker_fontSize' => array(
                   'label' => 'Marker font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__list_ol_marker_lineHeight' => array(
                   'label' => 'Marker line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__list_ol_item_margin_mobile' => array(
                   'label' => 'Item Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__list_ol_item_padding_mobile' => array(
                   'label' => 'Item Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__list_ol_marker_fontSize_mobile' => array(
                   'label' => 'Marker font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__list_ol_marker_lineHeight_mobile' => array(
                   'label' => 'Marker line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'dark__block__list_ol_item_marker_color' => array(
                   'label' => 'Marker color',
@@ -5436,7 +5525,7 @@ class prefix_core_Customizer {
                 ),
                 'block__list_borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__list_borderStyle' => array(
                   'label' => 'Border style',
@@ -5444,7 +5533,7 @@ class prefix_core_Customizer {
                 ),
                 'block__list_gap' => array(
                   'label' => 'Gap',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             ),
@@ -5462,7 +5551,7 @@ class prefix_core_Customizer {
                 ),
                 'block__list_item_borderWidth' => array(
                   'label' => 'Item border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__list_item_borderStyle' => array(
                   'label' => 'Item border style',
@@ -5476,28 +5565,30 @@ class prefix_core_Customizer {
                 ),
                 'block__list_marker_size' => array(
                   'label' => 'Marker size',
-                  'type' => 'input',
-                  'default' => '150%'
+                  'type' => 'range-value',
+                  'default' => '150%',
+                  'rangeMax' => 200
                 ),
                 'block__list_lineHeight' => array(
                   'label' => 'Marker line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__list_marker_space' => array(
                   'label' => 'Marker spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__list_marker_size_mobile' => array(
                   'label' => 'Marker size',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMax' => 200
                 ),
                 'block__list_lineHeight_mobile' => array(
                   'label' => 'Marker line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__list_marker_space_mobile' => array(
                   'label' => 'Marker spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'dark__gbList_marker_color' => array(
                   'label' => 'Marker color',
@@ -5516,7 +5607,11 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'block__mediatext_gap' => array(
                   'label' => 'Gap',
-                  'type' => 'input'
+                  'type' => 'range-value'
+                ),
+                'block__mediatext_gap_mobile' => array(
+                  'label' => 'Gap',
+                  'type' => 'range-value'
                 ),
                 'block__mediatext_backgroundColor' => array(
                   'label' => 'Background color',
@@ -5532,7 +5627,7 @@ class prefix_core_Customizer {
                 ),
                 'block__mediatext_borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__mediatext_borderStyle' => array(
                   'label' => 'Border style',
@@ -5540,15 +5635,11 @@ class prefix_core_Customizer {
                 ),
                 'block__mediatext_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
-                ),
-                'block__mediatext_gap_mobile' => array(
-                  'label' => 'Gap',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__mediatext_padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'dark__block__mediatext_backgroundColor' => array(
                   'label' => 'Background color',
@@ -5573,7 +5664,7 @@ class prefix_core_Customizer {
                 ),
                 'block__mediatext_media_borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__mediatext_media_borderStyle' => array(
                   'label' => 'Border style',
@@ -5581,27 +5672,31 @@ class prefix_core_Customizer {
                 ),
                 'block__mediatext_media_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__mediatext_media_minHeight' => array(
                   'label' => 'Minimum height',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMax' => 1000
                 ),
                 'block__mediatext_media_maxHeight' => array(
                   'label' => 'Maximum height',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMax' => 1000
                 ),
                 'block__mediatext_media_padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__mediatext_media_minHeight_mobile' => array(
                   'label' => 'Minimum height',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMax' => 1000
                 ),
                 'block__mediatext_media_maxHeight_mobile' => array(
                   'label' => 'Maximum height',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMax' => 1000
                 ),
                 'dark__block__mediatext_media_borderColor' => array(
                   'label' => 'Border color',
@@ -5622,7 +5717,7 @@ class prefix_core_Customizer {
                 ),
                 'block__mediatext_text_borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__mediatext_text_borderStyle' => array(
                   'label' => 'Border style',
@@ -5630,11 +5725,11 @@ class prefix_core_Customizer {
                 ),
                 'block__mediatext_text_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__mediatext_hasBackground_text_borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__mediatext_hasBackground_text_borderStyle' => array(
                   'label' => 'Border style',
@@ -5642,7 +5737,7 @@ class prefix_core_Customizer {
                 ),
                 'block__mediatext_hasBackground_text_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'dark__block__mediatext_text_borderColor' => array(
                   'label' => 'Border color',
@@ -5660,11 +5755,11 @@ class prefix_core_Customizer {
           'label' => 'Paragraph',
           'sections' => array(
             'gutenberg_paragraph_hasBackgound' => array(
-              'label' => 'Lead text',
+              'label' => 'Settings',
               'inputs' => array(
                 'block__paragraph_hasBackground_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 )
               )
             ),
@@ -5685,7 +5780,7 @@ class prefix_core_Customizer {
                 ),
                 'leadText__borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'leadText__borderStyle' => array(
                   'label' => 'Border style',
@@ -5693,7 +5788,7 @@ class prefix_core_Customizer {
                 ),
                 'leadText__padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'leadText__fontFamily' => array(
                   'label' => 'Lead font family',
@@ -5701,11 +5796,11 @@ class prefix_core_Customizer {
                 ),
                 'leadText__fontSize' => array(
                   'label' => 'Lead font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'leadText__lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'leadText__fontWeight' => array(
                   'label' => 'Font weight',
@@ -5721,19 +5816,19 @@ class prefix_core_Customizer {
                 ),
                 'leadText__letterSpacing' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'leadText__padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'leadText__fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'leadText__lineHeight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'dark__leadText__bg' => array(
                   'label' => 'Background color',
@@ -5771,27 +5866,27 @@ class prefix_core_Customizer {
                 ),
                 'block__posts_borderRadius' => array(
                   'label' => 'Border radius',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__posts_border' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__posts_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__posts_flexGap' => array(
                   'label' => 'Gap',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__posts_fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__posts_lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__posts_fontWeight' => array(
                   'label' => 'Font weight',
@@ -5804,11 +5899,11 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'block__posts_thumb_margin' => array(
                   'label' => 'Thumbnail margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__posts_thumb_padding' => array(
                   'label' => 'Thumbnail padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 )
               )
             ),
@@ -5829,7 +5924,7 @@ class prefix_core_Customizer {
                 ),
                 'block__posts_title_borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__posts_title_borderStyle' => array(
                   'label' => 'Border style',
@@ -5837,11 +5932,11 @@ class prefix_core_Customizer {
                 ),
                 'block__posts_title_margin' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__posts_title_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__posts_title_fontfamily' => array(
                   'label' => 'Font family',
@@ -5849,11 +5944,11 @@ class prefix_core_Customizer {
                 ),
                 'block__posts_title_fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__posts_title_lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__posts_title_fontWeight' => array(
                   'label' => 'Font weight',
@@ -5869,7 +5964,7 @@ class prefix_core_Customizer {
                 ),
                 'block__posts_title_letterSpacing' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             )
@@ -5895,27 +5990,27 @@ class prefix_core_Customizer {
                 ),
                 'block__postsfilter_borderRadius' => array(
                   'label' => 'Border radius',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__postsfilter_border' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__postsfilter_flexGap' => array(
                   'label' => 'Gap',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__postsfilter_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__postsfilter_fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__postsfilter_lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__postsfilter_fontWeight' => array(
                   'label' => 'Font weight',
@@ -5928,11 +6023,11 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'block__postsfilter_thumb_margin' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__postsfilter_thumb_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 )
               )
             ),
@@ -5953,7 +6048,7 @@ class prefix_core_Customizer {
                 ),
                 'block__postsfilter_title_borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__postsfilter_title_borderStyle' => array(
                   'label' => 'Border style',
@@ -5961,11 +6056,11 @@ class prefix_core_Customizer {
                 ),
                 'block__postsfilter_title_margin' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__postsfilter_title_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__postsfilter_title_fontfamily' => array(
                   'label' => 'Font family',
@@ -5973,11 +6068,11 @@ class prefix_core_Customizer {
                 ),
                 'block__postsfilter_title_fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__postsfilter_title_lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__postsfilter_title_fontWeight' => array(
                   'label' => 'Font weight',
@@ -5993,7 +6088,7 @@ class prefix_core_Customizer {
                 ),
                 'block__postsfilter_title_letterSpacing' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             )
@@ -6019,11 +6114,11 @@ class prefix_core_Customizer {
                 ),
                 'block__quote_borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__quote_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__quote_fontFamily' => array(
                   'label' => 'Font family',
@@ -6031,11 +6126,11 @@ class prefix_core_Customizer {
                 ),
                 'block__quote_fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__quote_lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__quote_fontWeight' => array(
                   'label' => 'Font weight',
@@ -6047,19 +6142,19 @@ class prefix_core_Customizer {
                 ),
                 'block__quote_letterSpacing' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__quote_padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__quote_fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__quote_lineHeight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'dark__block__quote_bg' => array(
                   'label' => 'Background color',
@@ -6088,7 +6183,7 @@ class prefix_core_Customizer {
                 ),
                 'block__quote_cite_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__quote_cite_fontFamily' => array(
                   'label' => 'Font family',
@@ -6096,11 +6191,11 @@ class prefix_core_Customizer {
                 ),
                 'block__quote_cite_fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__quote_cite_lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__quote_cite_fontWeight' => array(
                   'label' => 'Font weight',
@@ -6112,19 +6207,19 @@ class prefix_core_Customizer {
                 ),
                 'block__quote_cite_letterSpacing' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__quote_cite_padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__quote_cite_fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__quote_cite_lineHeight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'dark__block__quote_cite_bg' => array(
                   'label' => 'Background color',
@@ -6150,27 +6245,29 @@ class prefix_core_Customizer {
                 ),
                 'block__separator_marginTop' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__separator_marginBottom' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__separator_width' => array(
-                  'label' => 'Height',
-                  'type' => 'input'
+                  'label' => 'Width',
+                  'type' => 'range-value',
+                  'rangeMax' => 3000
                 ),
                 'block__separator_marginTop_mobile' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__separator_marginBottom_mobile' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__separator_width_mobile' => array(
-                  'label' => 'Height',
-                  'type' => 'input'
+                  'label' => 'Width',
+                  'type' => 'range-value',
+                  'rangeMax' => 3000
                 ),
                 'dark__gbSeperator_color' => array(
                   'label' => 'Default color',
@@ -6183,11 +6280,11 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'block__separatorDots_fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__separatorDots_fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             )
@@ -6205,11 +6302,11 @@ class prefix_core_Customizer {
                 ),
                 'block__tableHead_fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__tableHead_lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__tableHead_fontWeight' => array(
                   'label' => 'Font weight',
@@ -6221,19 +6318,19 @@ class prefix_core_Customizer {
                 ),
                 'block__tableHead_letterSpacing' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__tableHead_fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__tableHead_lineHeight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__tableHead_letterSpacing_mobile' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             ),
@@ -6246,11 +6343,11 @@ class prefix_core_Customizer {
                 ),
                 'block__table_fontSize' => array(
                   'label' => 'font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__table_lineHeight' => array(
                   'label' => 'line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__table_fontWeight' => array(
                   'label' => 'font weight',
@@ -6262,19 +6359,19 @@ class prefix_core_Customizer {
                 ),
                 'block__table_letterSpacing' => array(
                   'label' => 'letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__table_fontSize_mobile' => array(
                   'label' => 'font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__table_lineHeight_mobile' => array(
                   'label' => 'line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__table_letterSpacing_mobile' => array(
                   'label' => 'letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             )
@@ -6304,15 +6401,15 @@ class prefix_core_Customizer {
                 ),
                 'postTitle__borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'postTitle__margin' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'postTitle__padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'postTitle__fontFamily' => array(
                   'label' => 'Title font family',
@@ -6320,11 +6417,11 @@ class prefix_core_Customizer {
                 ),
                 'postTitle__fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'postTitle__lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'postTitle__fontWeight' => array(
                   'label' => 'Font weight',
@@ -6340,23 +6437,23 @@ class prefix_core_Customizer {
                 ),
                 'postTitle__letterSpacing' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'postTitle__margin_mobile' => array(
                   'label' => 'Margin',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'postTitle__padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'postTitle__fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'postTitle__lineHeight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'dark__postTitle__color' => array(
                   'label' => 'Color',
@@ -6393,19 +6490,19 @@ class prefix_core_Customizer {
                 ),
                 'titleOne__borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'titleOne__marginTop' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleOne__marginBottom' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleOne__padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'titleOne__fontFamily' => array(
                   'label' => 'Title font family',
@@ -6413,11 +6510,11 @@ class prefix_core_Customizer {
                 ),
                 'titleOne__fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleOne__lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleOne__fontWeight' => array(
                   'label' => 'Font weight',
@@ -6433,27 +6530,27 @@ class prefix_core_Customizer {
                 ),
                 'titleOne__letterSpacing' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleOne__marginTop_mobile' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleOne__marginBottom_mobile' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleOne__padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'titleOne__fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleOne__lineHeight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'dark__titleOne__bg' => array(
                   'label' => 'Background color',
@@ -6490,19 +6587,19 @@ class prefix_core_Customizer {
                 ),
                 'titleTwo__borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'titleTwo__marginTop' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleTwo__marginBottom' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleTwo__padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'titleTwo__fontFamily' => array(
                   'label' => 'Title font family',
@@ -6510,11 +6607,11 @@ class prefix_core_Customizer {
                 ),
                 'titleTwo__fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleTwo__lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleTwo__fontWeight' => array(
                   'label' => 'Font weight',
@@ -6530,27 +6627,27 @@ class prefix_core_Customizer {
                 ),
                 'titleTwo__letterSpacing' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleTwo__marginTop_mobile' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleTwo__marginBottom_mobile' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleTwo__padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'titleTwo__fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleTwo__lineHeight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'dark__titleTwo__color' => array(
                   'label' => 'Color',
@@ -6587,19 +6684,19 @@ class prefix_core_Customizer {
                 ),
                 'titleThree__borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'titleThree__marginTop' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleThree__marginBottom' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleThree__padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'titleThree__fontFamily' => array(
                   'label' => 'Title font family',
@@ -6607,11 +6704,11 @@ class prefix_core_Customizer {
                 ),
                 'titleThree__fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleThree__lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleThree__fontWeight' => array(
                   'label' => 'Font weight',
@@ -6627,27 +6724,27 @@ class prefix_core_Customizer {
                 ),
                 'titleThree__letterSpacing' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleThree__marginTop_mobile' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleThree__marginBottom_mobile' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleThree__padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'titleThree__fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleThree__lineHeight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'dark__titleThree__bg' => array(
                   'label' => 'Background color',
@@ -6684,19 +6781,19 @@ class prefix_core_Customizer {
                 ),
                 'titleFour__borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'titleFour__marginTop' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleFour__marginBottom' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleFour__padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'titleFour__fontFamily' => array(
                   'label' => 'Title font family',
@@ -6704,11 +6801,11 @@ class prefix_core_Customizer {
                 ),
                 'titleFour__fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleFour__lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleFour__fontWeight' => array(
                   'label' => 'Font weight',
@@ -6724,27 +6821,27 @@ class prefix_core_Customizer {
                 ),
                 'titleFour__letterSpacing' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleFour__marginTop_mobile' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleFour__marginBottom_mobile' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleFour__padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'titleFour__fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleFour__lineHeight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'dark__titleFour__bg' => array(
                   'label' => 'Background color',
@@ -6781,19 +6878,19 @@ class prefix_core_Customizer {
                 ),
                 'titleFive__borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'titleFive__marginTop' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleFive__marginBottom' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleFive__padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'titleFive__fontFamily' => array(
                   'label' => 'Title font family',
@@ -6801,11 +6898,11 @@ class prefix_core_Customizer {
                 ),
                 'titleFive__fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleFive__lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleFive__fontWeight' => array(
                   'label' => 'Font weight',
@@ -6821,27 +6918,27 @@ class prefix_core_Customizer {
                 ),
                 'titleFive__letterSpacing' => array(
                   'label' => 'Letter spacing',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleFive__marginTop_mobile' => array(
                   'label' => 'Margin top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleFive__marginBottom_mobile' => array(
                   'label' => 'Margin bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleFive__padding_mobile' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'titleFive__fontSize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'titleFive__lineHeight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'dark__titleFive__bg' => array(
                   'label' => 'Background color',
@@ -6881,7 +6978,10 @@ class prefix_core_Customizer {
                 ),
                 'block__videojs_coverStart_opacity (on start)' => array(
                   'label' => 'Opacity',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMin' => 0,
+                  'rangeMax' => 1,
+                  'rangeSuffixFixed' => ''
                 ),
                 'block__videojs_coverPause_bgColor' => array(
                   'label' => 'Background color (on pause)',
@@ -6889,7 +6989,10 @@ class prefix_core_Customizer {
                 ),
                 'block__videojs_coverPause_opacity' => array(
                   'label' => 'Opacity (on pause)',
-                  'type' => 'input'
+                  'type' => 'range-value',
+                  'rangeMin' => 0,
+                  'rangeMax' => 1,
+                  'rangeSuffixFixed' => ''
                 )
               )
             ),
@@ -6922,27 +7025,27 @@ class prefix_core_Customizer {
                 ),
                 'block__videojs_firstPlay_borderWidth' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__videojs_firstPlay_borderRadius' => array(
                   'label' => 'Border radius',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__videojs_firstPlay_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__videojs_firstPlay_size' => array(
                   'label' => 'Icon size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__videojs_firstPlay_borderWidth_mobile' => array(
                   'label' => 'Border width',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__videojs_firstPlay_size_mobile' => array(
                   'label' => 'Icon size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             ),
@@ -6963,23 +7066,23 @@ class prefix_core_Customizer {
                 ),
                 'block__videojs_controlBar_borderRadius' => array(
                   'label' => 'Border radius',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__videojs_controlBar_spacing' => array(
                   'label' => 'Spacing',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__videojs_controlBar_padding' => array(
                   'label' => 'Padding',
-                  'type' => 'input'
+                  'type' => 'range-four-value'
                 ),
                 'block__videojs_controlBar_gap' => array(
                   'label' => 'Gap',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__videojs_controlBarButton_fontSize' => array(
                   'label' => 'Icon size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             ),
@@ -6992,7 +7095,7 @@ class prefix_core_Customizer {
                 ),
                 'block__videojs_progress_height' => array(
                   'label' => 'Height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__videojs_progress_button_color' => array(
                   'label' => 'Button color',
@@ -7000,7 +7103,7 @@ class prefix_core_Customizer {
                 ),
                 'block__videojs_progress_button_fontSize' => array(
                   'label' => 'Button size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__videojs_progress_passed_bgColor' => array(
                   'label' => 'Passed progress bar',
@@ -7012,7 +7115,7 @@ class prefix_core_Customizer {
                 ),
                 'block__videojs_progress_remainingTime_fontSize' => array(
                   'label' => 'Remaining time font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             ),
@@ -7029,15 +7132,15 @@ class prefix_core_Customizer {
                 ),
                 'bblock__videojs_tooltip_fontSize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'bblock__videojs_tooltip_lineHeight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'block__videojs_tooltip_decoSize' => array(
                   'label' => 'Decoration size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             )
@@ -7102,27 +7205,27 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'footer__paddingTop' => array(
                   'label' => 'Container padding top',
-                  'type' => 'input',
+                  'type' => 'range-value'
                 ),
                 'footer__paddingBottom' => array(
                   'label' => 'Container padding bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'footer_itemSpacing' => array(
                   'label' => 'Item Spacing (vertical)',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'footer__paddingTop_mobile' => array(
                   'label' => 'Container padding top',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'footer__paddingBottom_mobile' => array(
                   'label' => 'Container padding bottom',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'footer_itemSpacing_mobile' => array(
                   'label' => 'Item Spacing (vertical)',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             ),
@@ -7131,19 +7234,19 @@ class prefix_core_Customizer {
               'inputs' => array(
                 'footer__fontsize' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'footer__lineheight' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'footer__fontsize_mobile' => array(
                   'label' => 'Font size',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 ),
                 'footer__lineheight_mobile' => array(
                   'label' => 'Line height',
-                  'type' => 'input'
+                  'type' => 'range-value'
                 )
               )
             )
@@ -7151,7 +7254,7 @@ class prefix_core_Customizer {
         )
       ),
       'sections' => array(
-        'gutenberg_menu' => array(
+        'footer__menu' => array(
           'label' => 'Menu',
           'inputs' => array(
             'footer__menu_link_color' => array(
@@ -7168,11 +7271,11 @@ class prefix_core_Customizer {
             ),
             'footer__menu_link_fontsize' => array(
               'label' => 'Font size',
-              'type' => 'input'
+              'type' => 'range-value'
             ),
             'footer__menu_link_lineheight' => array(
               'label' => 'Line height',
-              'type' => 'input'
+              'type' => 'range-value'
             ),
             'footer__menu_link_fontWeight' => array(
               'label' => 'Font weight',
@@ -7184,15 +7287,15 @@ class prefix_core_Customizer {
             ),
             'footer__menu_link_letterSpacing' => array(
               'label' => 'Letter spacing',
-              'type' => 'input'
+              'type' => 'range-value'
             ),
             'footer__menu_link_fontsize_mobile' => array(
               'label' => 'Font size',
-              'type' => 'input'
+              'type' => 'range-value'
             ),
             'footer__menu_link_lineheight_mobile' => array(
               'label' => 'Line height',
-              'type' => 'input'
+              'type' => 'range-value'
             )
           )
         )
@@ -7331,8 +7434,9 @@ class prefix_core_Customizer {
   function extendCustomizer( $wp_customize ) {
 
     // Inlcude the Alpha Color Picker control file.
-    require_once( dirname( __FILE__ ) . '/alpha-color-picker/alpha-color-picker.php' );
-    require_once( dirname( __FILE__ ) . '/nesting/nesting.php' );
+    require_once( dirname( __FILE__ ) . '/controls/nesting/nesting.php' );
+    require_once( dirname( __FILE__ ) . '/controls/alpha-color-picker/alpha-color-picker.php' );
+    require_once( dirname( __FILE__ ) . '/controls/range/class-customizer-range-value-control.php' );
     $wp_customize->register_panel_type( 'PE_WP_Customize_Panel' );
 
     foreach ($this->defaultValues as $panelKey => $panelValues) {
@@ -7451,6 +7555,60 @@ class prefix_core_Customizer {
         'show_opacity' => true,
         'priority'     => 1
      )));
+    // elseif($inputValues["type"] == 'range-four-value'):
+      // COMING SOON
+      // For padding, margin, borderWidth, borderRadius...
+    elseif($inputValues["type"] == 'range-value'):
+      // max range
+      if(array_key_exists('rangeMax', $inputValues)):
+        $maxRange = $inputValues["rangeMax"];
+      elseif(
+        strpos($inputKey, '_marginTop') !== false ||
+        strpos($inputKey, '_marginBottom') !== false ||
+        strpos($inputKey, '_paddingTop') !== false ||
+        strpos($inputKey, '_paddingBottom') !== false ||
+        strpos($inputKey, '_negativTopPosition') !== false
+      ):
+        $maxRange = 500;
+      elseif(
+        strpos($inputKey, '_lineHeight') !== false ||
+        strpos($inputKey, '_fontSize') !== false ||
+        strpos($inputKey, '_lineheight') !== false ||
+        strpos($inputKey, '_fontsize') !== false
+      ):
+        $maxRange = 200;
+      elseif(
+        strpos($inputKey, '_gap') !== false ||
+        strpos($inputKey, '_itemSpacing') !== false
+      ):
+        $maxRange = 100;
+      elseif(
+        strpos($inputKey, '_letterSpacing') !== false ||
+        strpos($inputKey, '_strokeWidth') !== false
+      ):
+        $maxRange = 30;
+      else:
+        $maxRange = 100;
+      endif;
+      //
+      $wp_customize->add_setting($inputKey, array(
+        'transport'         => 'postMessage',
+        'default'           => array_key_exists('default', $inputValues) ? $inputValues["default"] : '',
+        'sanitize_callback' => 'wp_filter_nohtml_kses',
+      ));
+      $wp_customize->add_control(new Customizer_Range_Value_Control($wp_customize, $inputKey, array(
+        'label'    => __( $inputValues["label"], 'customizer' ) . $labelAdd,
+        'section'  => $sectionKey,
+        'type'     => 'range-value',
+        'priority' => 1,
+        'input_attrs' => array(
+          'min'  => array_key_exists('rangeMin', $inputValues) ? $inputValues["rangeMin"] : 0,
+          'max'  => $maxRange,
+          'step' => array_key_exists('rangeStep', $inputValues) ? $inputValues["rangeStep"] : 0.01,
+          'suffix' => array_key_exists('rangeSuffix', $inputValues) ? $inputValues["rangeSuffix"] : 'none',
+          'id' => '_customize-input-' . $inputKey
+        )
+      )));
     elseif($inputValues["type"] == 'select'):
       // default options
       if(!array_key_exists('options', $inputValues) && strpos($inputKey, '_fontStyle') !== false):

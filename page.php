@@ -3,7 +3,7 @@
  * Pages File
  *
  * @author      David Voglgsang
- * @version     1.1.4
+ * @version     1.1.5
  *
 */
 
@@ -27,7 +27,7 @@ $options = $obj && property_exists($obj, 'ID') ? prefix_template::PageOptions($o
         <h1 class="post-title<?php if(in_array('titleWide', $options)): ?> alignwide<?php endif; ?>"><?php the_title(); ?></h1>
       <?php endif; ?>
       <?php the_content(); ?>
-      <?php comments_template();?>
+      <?php comments_template(); ?>
     </article>
   <?php endwhile; endif; ?>
   <?php get_sidebar(); ?>

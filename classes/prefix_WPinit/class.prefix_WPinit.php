@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.16.13
+ * @version     2.16.14
  *
 */
 
@@ -74,7 +74,7 @@ class prefix_WPinit {
       * @param private int $WPinit_imgScaling: Disable default image scaling
     */
     private $WPinit_support            = array("title-tag", "menus", "html5", "post-thumbnails", "custom-line-height");
-    private $WPinit_css                = 1;
+    private $WPinit_css                = 0;
     private $WPinit_cachebust          = 1;
     private $WPinit_cachebust_file     = '/dist/rev-manifest.json';
     private $WPinit_css_version        = 1.0;
@@ -82,7 +82,7 @@ class prefix_WPinit {
     private $WPinit_admin_css_path     = "/dist/style_backend.min.css";
     private $WPinit_theme_js_version   = 1.4;
     private $WPinit_theme_css_version  = 1.6;
-    private $WPinit_js                 = 1;
+    private $WPinit_js                 = 0;
     private $WPinit_js_version         = 1.0;
     private $WPinit_js_path            = "/dist/script.min.js";
     private $WPinit_admin_js_path      = "/dist/script_backend.min.js";

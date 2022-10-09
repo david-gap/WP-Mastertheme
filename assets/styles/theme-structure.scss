@@ -780,6 +780,24 @@ body.page-template,
   /* 3.9 MENU ITEMS
   /––––––––––––––––––––––––*/
   .menu-item {
+    &:not([class^='svg-animate-']):not([class*=' svg-animate-']) {
+      a {
+        &:hover {
+          .icon {
+            &.position-behind:not([class^='svg-animate-']):not([class*=' svg-animate-']) {
+              opacity: var(--menuItem__svg_positionBehind_opacity_hover, 1);
+              transition: .3s;
+            }
+          }
+        }
+        .icon {
+          &.position-behind {
+            opacity: var(--menuItem__svg_positionBehind_opacity, 0);
+            transition: .3s;
+          }
+        }
+      }
+    }
     a {
       position: relative;
       z-index: 1;
@@ -788,11 +806,6 @@ body.page-template,
           opacity: 1;
           transition: .3s;
           pointer-events: auto;
-        }
-        .icon {
-          &.position-behind {
-            opacity: var(--menuItem__svg_positionBehind_opacity_hover, 1);
-          }
         }
       }
       .icon {
@@ -813,7 +826,6 @@ body.page-template,
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
-          opacity: var(--menuItem__svg_positionBehind_opacity, 0);
         }
         svg {
           width: 100%;

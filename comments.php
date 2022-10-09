@@ -14,6 +14,8 @@ $options = $obj && property_exists($obj, 'ID') ? prefix_template::PageOptions($o
 if (comments_open() && !in_array('comments', $options)):
   if ( post_password_required() )
    return;
+   if($obj->post_type == 'page' && prefix_template::$template_comments_activePages == 0 || $obj->post_type == 'post' && prefix_template::$template_comments_activeBlog == 0)
+   return;
 ?>
 <div id="comments" class="comments-area <?php echo prefix_template::AddContainer(prefix_template::$template_container, false); ?>">
   <?php if (0 != get_comments_number()): ?>

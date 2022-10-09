@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.35.18
+ * @version     2.36.18
  *
 */
 
@@ -102,8 +102,6 @@ class prefix_template {
     * @param static string $template_header_after: html code after header
     * @param static int $template_page_active: activate page options
     * @param static array $template_page_additional: additional custom fields template elements
-    * @param static array $template_page_metablock: activate metablock on detail page/posts
-    * @param static array $template_page_metablockAdds: Add metabox to CPT by slugs
     * @param static array $template_page_options: show/hide template elements
     * @param static int $template_thumbvideo: Activate video as thumbnail
     * @param static int $template_page_bgColor: Activate custom background color
@@ -136,6 +134,10 @@ class prefix_template {
     * @param static string $template_search_align: align search results page thumbnail
     * @param static int $template_404_searchForm: Display search form on 404 page
     * @param static int $template_404_backToHome: Display back to home page button on 404 page
+    * @param static int $template_comments_activeBlog: Activate comments on blog
+    * @param static int $template_comments_activePages: Activate comments on pages
+    * @param static array $template_meta_metablock: activate metablock on detail page/posts
+    * @param static array $template_meta_metablockAdds: Add metabox to CPT by slugs
   */
   static $template_container_header                = 1;
   static $template_container_breadcrumbs           = 1;
@@ -253,7 +255,6 @@ class prefix_template {
     "thumbnail" => 1,
     "thumbnailWide" => 0,
     "thumbnailFull" => 0,
-    "comments" => 1,
     "sidebar" => 1,
     "scrolltotop" => 0,
     "footer" => 1,
@@ -261,22 +262,33 @@ class prefix_template {
     "beforeMain" => 1,
     "afterMain" => 1
   );
-  static $template_thumbvideo                     = 0;
+  static $template_thumbvideo                      = 0;
   static $template_page_bgColor                    = 0;
   static $template_page_bgImg                      = 0;
-  static $template_page_metablock                  = array(
+  static $template_blog_type                       = 0;
+  static $template_meta_metablock                  = array(
     "page" => 0,
-    "post" => 0
+    "post" => 0,
+    "overview" => 0
   );
-  static $template_page_metablockAdds              = array();
-  static $template_blog_type                       = 1;
-  static $template_blog_type_parts                 = array(
+  static $template_meta_metablockAdds              = array();
+  static $template_meta_page                       = array(
+    "author" => 0,
+    "date" => 0,
+    "time" => 0
+  );
+  static $template_meta_post                       = array(
+    "author" => 0,
+    "date" => 0,
+    "time" => 0
+  );
+  static $template_meta_overview                   = array(
     "author" => 0,
     "date" => 0,
     "time" => 0,
     "categories" => 0
   );
-  static $template_blog_dateformat                 = 'd.m.Y';
+  static $template_meta_dateformat                 = 'd.m.Y';
   static $template_page_additional                 = array();
   static $template_scrolltotop_active              = 0;
   static $template_footer_active                   = 1;
@@ -326,6 +338,8 @@ class prefix_template {
   static $template_search_align                    = 'normal';
   static $template_404_searchForm                  = 0;
   static $template_404_backToHome                  = 1;
+  static $template_comments_activeBlog             = 0;
+  static $template_comments_activePages            = 0;
 
 
   /* 1.2 ON LOAD RUN
@@ -1007,26 +1021,8 @@ class prefix_template {
       "label" => "Page",
       "type" => "multiple",
       "value" => array(
-        "metablock" => array(
-          "label" => "Activate metablock",
-          "type" => "multiple",
-          "value" => array(
-            "page" => array(
-              "label" => "Pages",
-              "type" => "switchbutton"
-            ),
-            "post" => array(
-              "label" => "Posts",
-              "type" => "switchbutton"
-            )
-          )
-        ),
         "videoThumb" => array(
           "label" => "Activate video thumb",
-          "type" => "switchbutton"
-        ),
-        "active" => array(
-          "label" => "Activate page options",
           "type" => "switchbutton"
         ),
         "bgColor" => array(
@@ -1037,12 +1033,12 @@ class prefix_template {
           "label" => "Activate custom background image",
           "type" => "switchbutton"
         ),
-        "add_metablock" => array(
-          "label" => "Metablock for CPT",
-          "type" => "array_addable"
+        "active" => array(
+          "label" => "Activate display options",
+          "type" => "switchbutton"
         ),
         "options" => array(
-          "label" => "Page options",
+          "label" => "Display options",
           "type" => "multiple",
           "value" => array(
             "disableDetailpage" => array(
@@ -1058,15 +1054,15 @@ class prefix_template {
               "type" => "switchbutton"
             ),
             "date" => array(
-              "label" => "Hide date",
+              "label" => "Show/Hide date",
               "type" => "switchbutton"
             ),
             "time" => array(
-              "label" => "Hide time",
+              "label" => "Show/Hide time",
               "type" => "switchbutton"
             ),
             "author" => array(
-              "label" => "Hide author",
+              "label" => "Show/Hide author",
               "type" => "switchbutton"
             ),
             "thumbnail" => array(
@@ -1087,10 +1083,6 @@ class prefix_template {
             ),
             "titleWide" => array(
               "label" => "Title wide",
-              "type" => "switchbutton"
-            ),
-            "comments" => array(
-              "label" => "Hide comments",
               "type" => "switchbutton"
             ),
             "sidebar" => array(
@@ -1140,10 +1132,66 @@ class prefix_template {
       "type" => "multiple",
       "value" => array(
         "type" => array(
-          "label" => "Activate blog template options",
+          "label" => "Activate blog type option",
           "type" => "switchbutton"
+        )
+      )
+    ),
+    "meta" => array(
+      "label" => "Metablock",
+      "type" => "multiple",
+      "value" => array(
+        "metablock" => array(
+          "label" => "Activate on",
+          "type" => "multiple",
+          "value" => array(
+            "page" => array(
+              "label" => "Pages",
+              "type" => "switchbutton"
+            ),
+            "post" => array(
+              "label" => "Posts",
+              "type" => "switchbutton"
+            )
+          )
         ),
-        "show" => array(
+        "showPageDetail" => array(
+          "label" => "Pages",
+          "type" => "multiple",
+          "value" => array(
+            "author" => array(
+              "label" => "Activate author",
+              "type" => "switchbutton"
+            ),
+            "date" => array(
+              "label" => "Activate date",
+              "type" => "switchbutton"
+            ),
+            "time" => array(
+              "label" => "Activate time",
+              "type" => "switchbutton"
+            )
+          )
+        ),
+        "showPostDetail" => array(
+          "label" => "Posts",
+          "type" => "multiple",
+          "value" => array(
+            "author" => array(
+              "label" => "Activate author",
+              "type" => "switchbutton"
+            ),
+            "date" => array(
+              "label" => "Activate date",
+              "type" => "switchbutton"
+            ),
+            "time" => array(
+              "label" => "Activate time",
+              "type" => "switchbutton"
+            )
+          )
+        ),
+        "showOverview" => array(
           "label" => "Show on overview pages",
           "type" => "multiple",
           "value" => array(
@@ -1161,6 +1209,28 @@ class prefix_template {
             ),
             "categories" => array(
               "label" => "Activate categories",
+              "type" => "switchbutton"
+            )
+          )
+        ),
+        "add_metablock" => array(
+          "label" => "Metablock for CPT",
+          "type" => "array_addable",
+          "value" => array(
+            "slug" => array(
+              "label" => "Slug",
+              "type" => "text"
+            ),
+            "author" => array(
+              "label" => "Activate author",
+              "type" => "switchbutton"
+            ),
+            "date" => array(
+              "label" => "Activate date",
+              "type" => "switchbutton"
+            ),
+            "time" => array(
+              "label" => "Activate time",
               "type" => "switchbutton"
             )
           )
@@ -1371,6 +1441,20 @@ class prefix_template {
         )
       )
     ),
+    'comments' => array(
+      "label" => "Comments",
+      "type" => "multiple",
+        "value" => array(
+          "activeBlog" => array(
+            "label" => "Allow comments for blocks",
+            "type" => "switchbutton"
+          ),
+          "activePages" => array(
+            "label" => "Allow comments for pages",
+            "type" => "switchbutton"
+          )
+        )
+    ),
     'errorPage' => array(
       "label" => "404 Page",
       "type" => "multiple",
@@ -1483,19 +1567,24 @@ class prefix_template {
         if($configuration && array_key_exists('page', $myConfig)):
           $page = $myConfig['page'];
           SELF::$template_page_active = array_key_exists('active', $page) ? $page['active'] : SELF::$template_page_active;
-          SELF::$template_page_metablock = array_key_exists('metablock', $page) ? $page['metablock'] : SELF::$template_page_metablock;
-          SELF::$template_page_metablockAdds = array_key_exists('add_metablock', $page) ? $page['add_metablock'] : SELF::$template_page_metablockAdds;
           SELF::$template_page_options = array_key_exists('options', $page) ? array_merge(SELF::$template_page_options, $page['options']) : SELF::$template_page_options;
           SELF::$template_thumbvideo = array_key_exists('videoThumb', $page) ? $page['videoThumb'] : SELF::$template_thumbvideo;
           SELF::$template_page_bgColor = array_key_exists('bgColor', $page) ? $page['bgColor'] : SELF::$template_page_bgColor;
           SELF::$template_page_bgImg = array_key_exists('bgImage', $page) ? $page['bgImage'] : SELF::$template_page_bgImg;
           SELF::$template_page_additional = array_key_exists('additional', $page) ? array_merge(SELF::$template_page_additional, $page['additional']) : SELF::$template_page_additional;
         endif;
+        if($configuration && array_key_exists('meta', $myConfig)):
+          $metablock = $myConfig['meta'];
+          SELF::$template_meta_metablock = array_key_exists('metablock', $metablock) ? $metablock['metablock'] : SELF::$template_meta_metablock;
+          SELF::$template_meta_metablockAdds = array_key_exists('add_metablock', $metablock) ? $metablock['add_metablock'] : SELF::$template_meta_metablockAdds;
+          SELF::$template_meta_page = array_key_exists('showPageDetail', $metablock) ? $metablock['showPageDetail'] : SELF::$template_meta_page;
+          SELF::$template_meta_post = array_key_exists('showPostDetail', $metablock) ? $metablock['showPostDetail'] : SELF::$template_meta_post;
+          SELF::$template_meta_overview = array_key_exists('showOverview', $metablock) ? $metablock['showOverview'] : SELF::$template_meta_overview;
+          SELF::$template_meta_dateformat = array_key_exists('dateformat', $metablock) ? $metablock['dateformat'] : SELF::$template_meta_dateformat;
+        endif;
         if($configuration && array_key_exists('blog', $myConfig)):
           $blog = $myConfig['blog'];
           SELF::$template_blog_type = array_key_exists('type', $blog) ? $blog['type'] : SELF::$template_blog_type;
-          SELF::$template_blog_type_parts = array_key_exists('show', $blog) ? $blog['show'] : SELF::$template_blog_type_parts;
-          SELF::$template_blog_dateformat = array_key_exists('dateformat', $blog) ? $blog['dateformat'] : SELF::$template_blog_dateformat;
         endif;
         if($configuration && array_key_exists('footer', $myConfig)):
           $footer = $myConfig['footer'];
@@ -1547,7 +1636,11 @@ class prefix_template {
           SELF::$template_menu_svgIcon_position = array_key_exists('svgIcon_position', $menu) ? $menu['svgIcon_position'] : SELF::$template_menu_svgIcon_position;
           SELF::$template_menu_description = array_key_exists('description', $menu) ? $menu['description'] : SELF::$template_menu_description;
           SELF::$template_menu_description_position = array_key_exists('description_position', $menu) ? $menu['description_position'] : SELF::$template_menu_description_position;
-
+        endif;
+        if($configuration && array_key_exists('comments', $myConfig)):
+          $comments = $myConfig['comments'];
+          SELF::$template_comments_activeBlog = array_key_exists('activeBlog', $comments) ? $comments['activeBlog'] : SELF::$template_comments_activeBlog;
+          SELF::$template_comments_activePages = array_key_exists('activePages', $comments) ? $comments['activePages'] : SELF::$template_comments_activePages;
         endif;
       endif;
     }
@@ -2163,7 +2256,7 @@ class prefix_template {
                   $active = prefix_core_BaseFunctions::setChecked($key, $options);
                   // rule for metabox before output
                   if(in_array($key, array('date', 'time', 'author'))):
-                    if(in_array($post->post_type, array('page', 'post')) && SELF::$template_page_metablock[$post->post_type] == 1 || !empty(SELF::$template_page_metablockAdds) && in_array($post->post_type, SELF::$template_page_metablockAdds)):
+                    if(in_array($post->post_type, array('page', 'post')) && SELF::$template_meta_metablock[$post->post_type] == 1 || !empty(SELF::$template_meta_metablockAdds) && prefix_core_BaseFunctions::MultidArraySearch($post->post_type, SELF::$template_meta_metablockAdds, 'value')):
                       $show = true;
                     else:
                       $show = false;
@@ -2173,7 +2266,20 @@ class prefix_template {
                   endif;
                   // output
                   if($show == true):
-                    echo '<li><label><input type="checkbox" name="template_page_options[]" value="' . $key . '" ' . $active . '>' . SELF::$backend['page']['value']['options']['value'][$key]["label"] . '</label></li>';
+                    $customCptMeta = array();
+                    foreach (SELF::$template_meta_metablockAdds as $metablockAdds_key => $metablockAdds) {
+                      if($metablockAdds['slug'] == $post->post_type):
+                        $customCptMeta = $metablockAdds;
+                        break;
+                      endif;
+                    }
+                    if(in_array($key, array('date', 'time', 'author')) && ($post->post_type == 'page' && SELF::$template_meta_page[$key] || $post->post_type == 'post' && SELF::$template_meta_post[$key] || !empty($customCptMeta) && $customCptMeta[$key])):
+                      echo '<li><label><input type="checkbox" name="template_page_options[]" value="' . $key . '" ' . $active . '>' . str_replace("Show/Hide", "Hide", SELF::$backend['page']['value']['options']['value'][$key]["label"]) . '</label></li>';
+                    elseif(in_array($key, array('date', 'time', 'author')) && ($post->post_type == 'page' || $post->post_type == 'post' || !empty($customCptMeta))):
+                      echo '<li><label><input type="checkbox" name="template_page_options[]" value="show-' . $key . '" ' . $active . '>' . str_replace("Show/Hide", "Show", SELF::$backend['page']['value']['options']['value'][$key]["label"]) . '</label></li>';
+                    else:
+                      echo '<li><label><input type="checkbox" name="template_page_options[]" value="' . $key . '" ' . $active . '>' . SELF::$backend['page']['value']['options']['value'][$key]["label"] . '</label></li>';
+                    endif;
                   endif;
                 endif;
               }
@@ -2784,32 +2890,114 @@ class prefix_template {
 
     /* 3.18 POST META
     /------------------------*/
-    public static function postMeta($pt, $options){
+    public static function postMeta(string $postType = '', array $options = array(), int $overview = 0){
       $output = '';
-      // if metablock is active for post type
-      if(in_array($pt, array('page', 'post')) && SELF::$template_page_metablock[$pt] == 1 || !empty(SELF::$template_page_metablockAdds) && in_array($pt, SELF::$template_page_metablockAdds)):
-        // post meta blog
-        if(!in_array('date', $options) || !in_array('time', $options) || !in_array('author', $options)):
-          $output .= '<div class="post-meta">';
-          // meta date and time
-          if(!in_array('date', $options) || !in_array('time', $options)):
-            $output .= '<time class="entry-date" datetime="' . get_the_time( 'c' ) . '">';
-            // if date active
-            if(!in_array('date', $options)):
-              $output .= '<span class="date">' . get_the_date(prefix_template::$template_blog_dateformat) . '</span>';
-            endif;
-            // if time active
-            if(!in_array('time', $options)):
-              $output .= '<span class="time">' . get_the_date('G:i') . '</span>';
-            endif;
-            $output .= '</time>';
-          endif;
-          // meta author
-          if(!in_array('author', $options)):
-            $output .= '<span class="entry-author">' . get_the_author() . '</span>';
-          endif;
-          $output .= '</div>';
+      // get settings
+      if($overview == 1):
+        // if its a overview output
+        $settingsAuthor = SELF::$template_meta_overview["author"];
+        $settingsDate = SELF::$template_meta_overview["date"];
+        $settingsTime = SELF::$template_meta_overview["time"];
+      elseif($postType == 'page' && SELF::$template_meta_metablock[$postType] == 1):
+        // page settings
+        if(SELF::$template_meta_page["author"] == 0 && in_array('show-author', $options)):
+          $settingsAuthor = 1;
+        elseif(SELF::$template_meta_page["author"] == 1 && in_array('author', $options)):
+          $settingsAuthor = 0;
+        else:
+          $settingsAuthor = SELF::$template_meta_page["author"];
         endif;
+        if(SELF::$template_meta_page["date"] == 0 && in_array('show-date', $options)):
+          $settingsDate = 1;
+        elseif(SELF::$template_meta_page["date"] == 1 && in_array('date', $options)):
+          $settingsDate = 0;
+        else:
+          $settingsDate = SELF::$template_meta_page["date"];
+        endif;
+        if(SELF::$template_meta_page["time"] == 0 && in_array('show-time', $options)):
+          $settingsTime = 1;
+        elseif(SELF::$template_meta_page["time"] == 1 && in_array('time', $options)):
+          $settingsTime = 0;
+        else:
+          $settingsTime = SELF::$template_meta_page["time"];
+        endif;
+      elseif($postType == 'post' && SELF::$template_meta_metablock[$postType] == 1):
+        // page settings
+        if(SELF::$template_meta_post["author"] == 0 && in_array('show-author', $options)):
+          $settingsAuthor = 1;
+        elseif(SELF::$template_meta_post["author"] == 1 && in_array('author', $options)):
+          $settingsAuthor = 0;
+        else:
+          $settingsAuthor = SELF::$template_meta_post["author"];
+        endif;
+        if(SELF::$template_meta_post["date"] == 0 && in_array('show-date', $options)):
+          $settingsDate = 1;
+        elseif(SELF::$template_meta_post["date"] == 1 && in_array('date', $options)):
+          $settingsDate = 0;
+        else:
+          $settingsDate = SELF::$template_meta_post["date"];
+        endif;
+        if(SELF::$template_meta_post["time"] == 0 && in_array('show-time', $options)):
+          $settingsTime = 1;
+        elseif(SELF::$template_meta_post["time"] == 1 && in_array('time', $options)):
+          $settingsTime = 0;
+        else:
+          $settingsTime = SELF::$template_meta_post["time"];
+        endif;
+      elseif(!empty(SELF::$template_meta_metablockAdds) && prefix_core_BaseFunctions::MultidArraySearch($postType, SELF::$template_meta_metablockAdds, 'value')):
+        // CPT settings
+        foreach (SELF::$template_meta_metablockAdds as $metablockAdds_key => $metablockAdds) {
+          if($metablockAdds['slug'] == $postType):
+            if($metablockAdds["author"] == 0 && in_array('show-author', $options)):
+              $settingsAuthor = 1;
+            elseif($metablockAdds["author"] == 1 && in_array('author', $options)):
+              $settingsAuthor = 0;
+            else:
+              $settingsAuthor = $metablockAdds["author"];
+            endif;
+            if($metablockAdds["date"] == 0 && in_array('show-date', $options)):
+              $settingsDate = 1;
+            elseif($metablockAdds["date"] == 1 && in_array('date', $options)):
+              $settingsDate = 0;
+            else:
+              $settingsDate = $metablockAdds["date"];
+            endif;
+            if($metablockAdds["time"] == 0 && in_array('show-time', $options)):
+              $settingsTime = 1;
+            elseif($metablockAdds["time"] == 1 && in_array('time', $options)):
+              $settingsTime = 0;
+            else:
+              $settingsTime = $metablockAdds["time"];
+            endif;
+            break;
+          endif;
+        }
+      else:
+        $settingsAuthor = 0;
+        $settingsDate = 0;
+        $settingsTime = 0;
+      endif;
+      // if any item is active
+      if($settingsAuthor || $settingsDate || $settingsTime):
+        $output .= '<div class="post-meta">';
+            // meta date and time
+            if($settingsDate || $settingsTime):
+              $output .= '<time class="entry-date" datetime="' . get_the_time( 'c' ) . '">';
+              // if date active
+              if($settingsDate):
+                $output .= '<span class="date">' . get_the_date(prefix_template::$template_meta_dateformat) . '</span>';
+              endif;
+              // if time active
+              if($settingsTime):
+                $output .= '<span class="time">' . get_the_date('G:i') . '</span>';
+              endif;
+              $output .= '</time>';
+            endif;
+            // meta author
+            if($settingsAuthor):
+              $output .= '<span class="entry-author">' . get_the_author() . '</span>';
+            endif;
+        $output .= '</div>';
       endif;
       return $output;
     }
