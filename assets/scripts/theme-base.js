@@ -2,7 +2,7 @@
  * All template base javascript functions
  *
  * @author      David Voglgsang
- * @version     1.7
+ * @version     1.7.1
  *
  */
 
@@ -1433,6 +1433,5 @@ function runEventListeners(){
   /* Run theme-grid-swiper event listeners
   /------------------------*/
   allGalleryEventListeners();
-
 }
 runEventListeners();

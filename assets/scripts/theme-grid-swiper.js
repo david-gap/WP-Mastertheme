@@ -17,8 +17,6 @@ const galleryArrow = '<svg xmlns="http://www.w3.org/2000/svg" width="60.043" hei
       galleryArrowBefore = '<span class="arrow back hidden">' + galleryArrow + '</span>',
       galleryArrowAfter = '<span class="arrow next hidden">' + galleryArrow + '</span>';
 
-
-
 /*==================================================================================
   SWIPER
 ==================================================================================*/
@@ -371,66 +369,72 @@ function allGalleryEventListeners(){
   /* SWIPER - Check for active swipers
   /------------------------*/
   var activeSwipers = document.querySelectorAll('.gallery-swiper');
-  if(activeSwipers.length > 0){
-    Array.from(activeSwipers).forEach(function(swiper) {
-      // add arrows to dom
-      addNavArrows(swiper);
-      if(swiper.classList.contains('wp-block-gallery-container')){
-        swiper.querySelector('.wp-block-gallery').addEventListener("scroll", function(){
-          var parentID = swiper.getAttribute('data-id');
-          bulletNavCheckItemActive(parentID, 1);
-        }, false);
-      };
-    });
-  }
+  document.addEventListener("DOMContentLoaded", function(event) {
+    if(activeSwipers.length > 0){
+      Array.from(activeSwipers).forEach(function(swiper) {
+        // add arrows to dom
+        addNavArrows(swiper);
+        if(swiper.classList.contains('wp-block-gallery-container')){
+          swiper.querySelector('.wp-block-gallery').addEventListener("scroll", function(){
+            var parentID = swiper.getAttribute('data-id');
+            bulletNavCheckItemActive(parentID, 1);
+          }, false);
+        };
+      });
+    }
+  });
 
 
   /* BULLET NAVIGATION - Check for active swipers with bullet navigation
   /------------------------*/
   var activeBulletGalleries = document.querySelectorAll('.gallery-swiper.bullet-nav');
-  if(activeBulletGalleries.length > 0){
-    Array.from(activeBulletGalleries).forEach(function(gallery) {
-      // all children
-      var items = '';
-      let itemsCounter = 0;
-      var galleryItems = gallery.querySelectorAll('.wp-block-gallery .wp-block-image');
-      if(galleryItems.length > 0){
-        Array.from(galleryItems).forEach(function(item) {
-          itemsCounter++;
-          if(checkChildPosition(gallery, item, 'inside')){
-            var activeStatement = ' class="active"';
-          } else {
-            var activeStatement = '';
-          }
-          items += '<li' + activeStatement + '>' + itemsCounter + '</li>';
-        });
-      }
-      // build output
-      var bulletNav = '<div class="bullet-navigation"><ul>';
-      bulletNav += items;
-      bulletNav += '</ul></div>';
-      gallery.insertAdjacentHTML('beforeend', bulletNav);
-      // add events to each arrow
-      var arrows = document.querySelectorAll('.bullet-navigation ul li');
-      if(arrows.length > 0){
-        Array.from(arrows).forEach(function(arrow) {
-          arrow.addEventListener('click', clickBulletNavItem);
-          arrow.addEventListener('keypress', clickBulletNavItem);
-        });
-      }
-    });
-  }
+  document.addEventListener("DOMContentLoaded", function(event) {
+    if(activeBulletGalleries.length > 0){
+      Array.from(activeBulletGalleries).forEach(function(gallery) {
+        // all children
+        var items = '';
+        let itemsCounter = 0;
+        var galleryItems = gallery.querySelectorAll('.wp-block-gallery .wp-block-image');
+        if(galleryItems.length > 0){
+          Array.from(galleryItems).forEach(function(item) {
+            itemsCounter++;
+            if(checkChildPosition(gallery, item, 'inside')){
+              var activeStatement = ' class="active"';
+            } else {
+              var activeStatement = '';
+            }
+            items += '<li' + activeStatement + '>' + itemsCounter + '</li>';
+          });
+        }
+        // build output
+        var bulletNav = '<div class="bullet-navigation"><ul>';
+        bulletNav += items;
+        bulletNav += '</ul></div>';
+        gallery.insertAdjacentHTML('beforeend', bulletNav);
+        // add events to each arrow
+        var arrows = document.querySelectorAll('.bullet-navigation ul li');
+        if(arrows.length > 0){
+          Array.from(arrows).forEach(function(arrow) {
+            arrow.addEventListener('click', clickBulletNavItem);
+            arrow.addEventListener('keypress', clickBulletNavItem);
+          });
+        }
+      });
+    }
+  });
 
 
   /* POPUP - Check for active swipers/grid without url
   /------------------------*/
   var activeGalleryPopUps = document.querySelectorAll('.add-popup figure > img');
-  if(activeGalleryPopUps.length > 0){
-    Array.from(activeGalleryPopUps).forEach(function(popup) {
-      // open pop-up
-      popup.addEventListener('click', loadGalleryPopUp);
-      popup.addEventListener('keypress', loadGalleryPopUp);
-    });
-  }
+  document.addEventListener("DOMContentLoaded", function(event) {
+    if(activeGalleryPopUps.length > 0){
+      Array.from(activeGalleryPopUps).forEach(function(popup) {
+        // open pop-up
+        popup.addEventListener('click', loadGalleryPopUp);
+        popup.addEventListener('keypress', loadGalleryPopUp);
+      });
+    }
+  });
 
 }
