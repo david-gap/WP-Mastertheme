@@ -80,7 +80,7 @@ class prefix_WPinit {
     private $WPinit_css_version        = 1.0;
     private $WPinit_css_path           = "/dist/style.min.css";
     private $WPinit_admin_css_path     = "/dist/style_backend.min.css";
-    private $WPinit_theme_js_version   = 1.7.1;
+    private $WPinit_theme_js_version   = 1.8;
     private $WPinit_theme_css_version  = 1.7;
     private $WPinit_js                 = 0;
     private $WPinit_js_version         = 1.0;

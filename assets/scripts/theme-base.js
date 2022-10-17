@@ -2,7 +2,7 @@
  * All template base javascript functions
  *
  * @author      David Voglgsang
- * @version     1.7.1
+ * @version     1.8
  *
  */
 
