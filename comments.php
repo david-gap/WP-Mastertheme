@@ -3,7 +3,7 @@
  * Comments File
  *
  * @author      David Voglgsang
- * @version     1.0.2
+ * @version     1.1.2
  *
 */
 
@@ -17,7 +17,7 @@ if (comments_open() && !in_array('comments', $options)):
    if($obj->post_type == 'page' && prefix_template::$template_comments_activePages == 0 || $obj->post_type == 'post' && prefix_template::$template_comments_activeBlog == 0)
    return;
 ?>
-<div id="comments" class="comments-area <?php echo prefix_template::AddContainer(prefix_template::$template_container, false); ?>">
+<div id="comments" class="comments-area <?php echo prefix_template::AddContainer(prefix_template::$template_container, prefix_template::$template_container_comments_wide, false); ?>">
   <?php if (0 != get_comments_number()): ?>
     <h3 class="comments-title">
       <?php

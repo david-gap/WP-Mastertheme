@@ -27,7 +27,8 @@ const {
   TextareaControl,
   ToggleControl,
   SelectControl,
-  MyFormTokenField
+  MyFormTokenField,
+  Button
 } = wp.components;
 
 /**
@@ -60,20 +61,15 @@ export default class Inspector extends Component {
         postTaxonomyFilter,
         postTaxonomyFilterRelation,
         postTaxonomyFilterOptions,
-        postIdFilter
+        postIdFilter,
+        postsBreakpoints
       },
       setAttributes
     } = this.props;
 
-    // update text selection options
-    let fieldSelection = [
-      { value: "", label: "-" },
-      { value: "title", label: __( 'Title', 'devTheme' ) },
-      { value: "date", label: __( 'Date', 'devTheme' ) },
-      { value: "excerpt", label: __( 'Excerpt', 'devTheme' ) },
-      { value: "template", label: __( 'Post template', 'devTheme' ) },
-      { value: "templateMedia", label: __( 'Post template (media only)', 'devTheme' ) }
-    ];
+
+    /* query
+    /------------------------*/
     const query = {
       'status': 'publish',
       'per_page': 100,
@@ -83,6 +79,18 @@ export default class Inspector extends Component {
       query['status'] = 'inherit';
     }
     const posts = select( 'core' ).getEntityRecords( 'postType', postType, query );
+
+
+    /* set value options
+    /------------------------*/
+    let fieldSelection = [
+      { value: "", label: "-" },
+      { value: "title", label: __( 'Title', 'devTheme' ) },
+      { value: "date", label: __( 'Date', 'devTheme' ) },
+      { value: "excerpt", label: __( 'Excerpt', 'devTheme' ) },
+      { value: "template", label: __( 'Post template', 'devTheme' ) },
+      { value: "templateMedia", label: __( 'Post template (media only)', 'devTheme' ) }
+    ];
     if(posts && posts.length > 0){
       if(posts[0].meta !== undefined){
         Object.entries(posts[0].meta).forEach(([key, value]) => {
@@ -100,7 +108,10 @@ export default class Inspector extends Component {
         });
       }
     }
-    // sort options
+
+
+    /* set sort options
+    /------------------------*/
     let postSortOptions = [
       { value: "menu_order", label: __( 'Menu order', 'devTheme' ) },
       { value: "date", label: __( 'Date', 'devTheme' ) },
@@ -123,7 +134,10 @@ export default class Inspector extends Component {
         });
       }
     }
-    // update post type selection options
+
+
+    /* set post type options
+    /------------------------*/
     let postTypes = [];
     const getposttypes = select('core').getPostTypes({ per_page: -1 });
     if(getposttypes){
@@ -133,7 +147,10 @@ export default class Inspector extends Component {
         }
       });
     }
-    // post id selection
+
+
+    /* set post id selection
+    /------------------------*/
     let postNames = [];
     let postsFieldValue = [];
     if ( posts !== null ) {
@@ -150,7 +167,10 @@ export default class Inspector extends Component {
         } );
       }
     }
-    // update taxonomy filter
+
+
+    /* set taxonomy filter
+    /------------------------*/
     let postTaxonomies = [];
     let currentTaxVal;
     if(posts && posts.length > 0){
@@ -202,7 +222,10 @@ export default class Inspector extends Component {
         });
       }
     }
-    // sort nav options
+
+
+    /* set sort nav options
+    /------------------------*/
     let sortnavoptions = [
       { value: "title", label: __( 'Title', 'devTheme' ) },
       { value: "date", label: __( 'Date', 'devTheme' ) }
@@ -240,7 +263,10 @@ export default class Inspector extends Component {
         } );
       }
     }
-    // options
+
+
+    /* set post options
+    /------------------------*/
     const postOptions = [
       { value: "link_img", label: __( 'Link image', 'devTheme' ) },
       { value: "link_row1", label: __( 'Link row 1', 'devTheme' ) },
@@ -270,7 +296,10 @@ export default class Inspector extends Component {
       }
       setAttributes({ postTaxonomyFilterOptions: newSelection });
     };
-    // taxonomy check
+
+
+    /* taxonomy value updates
+    /------------------------*/
     function checkFilter(id){
       if (postTaxonomyFilter && postTaxonomyFilter.length >= 1 && postTaxonomyFilter.includes(id)) {
         return true;
@@ -295,6 +324,52 @@ export default class Inspector extends Component {
       setAttributes({ postTaxonomyFilter: newSelection });
     };
 
+
+    /* breakpoint value updates
+    /------------------------*/
+    const handleChangeBreakpointWidth = ( width, index, postsBreakpoints ) => {
+      let updateBreakpoints = [];
+      postsBreakpoints.map( ( breakpoint, subindex ) => {
+        if(index == subindex){
+          var currentBreakpointValues = breakpoint;
+          currentBreakpointValues.width = width;
+          updateBreakpoints.push( currentBreakpointValues );
+        } else {
+          updateBreakpoints.push( breakpoint );
+        }
+      })
+      setAttributes({ postsBreakpoints: updateBreakpoints });
+    };
+    const handleChangeBreakpointColumns = ( columns, index, postsBreakpoints ) => {
+      let updateBreakpoints = [];
+      postsBreakpoints.map( ( breakpoint, subindex ) => {
+        if(index == subindex){
+          var currentBreakpointValues = breakpoint;
+          currentBreakpointValues.columns = columns;
+          updateBreakpoints.push( currentBreakpointValues );
+        } else {
+          updateBreakpoints.push( breakpoint );
+        }
+      })
+      setAttributes({ postsBreakpoints: updateBreakpoints });
+    };
+    const handleChangeBreakpointSpacing = ( spacing, index, postsBreakpoints ) => {
+      let updateBreakpoints = [];
+      postsBreakpoints.map( ( breakpoint, subindex ) => {
+        if(index == subindex){
+          var currentBreakpointValues = breakpoint;
+          currentBreakpointValues.spacing = spacing;
+          updateBreakpoints.push( currentBreakpointValues );
+        } else {
+          updateBreakpoints.push( breakpoint );
+        }
+      })
+      setAttributes({ postsBreakpoints: updateBreakpoints });
+    };
+
+
+    /* build inspector controls
+    /------------------------*/
     return (
       <InspectorControls>
           <PanelBody title={ __( 'Posts query', 'devTheme' ) } >
@@ -352,15 +427,96 @@ export default class Inspector extends Component {
                 max={101}
               />
             </PanelRow>
+            <PanelRow>
+              <ToggleControl
+                  id="posts-repeater"
+                  label={ __( 'Repeat output until maximum item sum is achieded', 'devTheme' ) }
+                  checked={ postRepeater }
+                  onChange={postRepeater => setAttributes({ postRepeater })}
+              />
+            </PanelRow>
           </PanelBody>
-          <PanelRow>
-            <ToggleControl
-                id="posts-repeater"
-                label={ __( 'Repeat output until maximum item sum is achieded', 'devTheme' ) }
-                checked={ postRepeater }
-                onChange={postRepeater => setAttributes({ postRepeater })}
-            />
-          </PanelRow>
+          <PanelBody title={ __( 'Posts Filter', 'devTheme' ) } >
+            <PanelRow>
+              <FormTokenField
+                label={__("Select posts", "devTheme")}
+                value={ postsFieldValue }
+                suggestions={ postNames }
+                maxSuggestions={ 20 }
+                onChange={ ( postIdFilter ) => {
+                  // Build array of selected posts.
+                  let postIdFilterArray = [];
+                  postIdFilter.map(
+                    ( postName ) => {
+                      const matchingPost = posts.find( ( post ) => {
+                        return post.title.raw === postName;
+                      } );
+                      if ( matchingPost !== undefined ) {
+                        postIdFilterArray.push( matchingPost.id );
+                      }
+                    }
+                  )
+                  setAttributes( { postIdFilter: postIdFilterArray } );
+                } }
+              />
+            </PanelRow>
+            <PanelRow>
+              <SelectControl
+                label={__("Relation", "devTheme")}
+                value={postTaxonomyFilterRelation}
+                options={[
+                  { value: "AND", label: __( 'AND', 'devTheme' ) },
+                  { value: "OR", label: __( 'OR', 'devTheme' ) }
+                ]}
+                onChange={postTaxonomyFilterRelation => setAttributes({ postTaxonomyFilterRelation })}
+              />
+            </PanelRow>
+            <PanelRow>
+              <div>
+                { postTaxonomies.map(
+                  (taxonomy, setState) => {
+                  return(
+                    <PanelRow>
+                      <FormTokenField
+                        label={taxonomy.name}
+                        value={ taxonomy.values }
+                        suggestions={ taxonomy.options }
+                        maxSuggestions={ 20 }
+                        onFocus= { ( index ) => {
+                          currentTaxVal = postTaxonomyFilter;
+                        } }
+                        onChange={ ( postTaxonomyFilter ) => {
+                          // build array of selected posts from other taxonomies
+                          let postTaxFilterArray = [];
+                          if(currentTaxVal && currentTaxVal.length >= 1){
+                            // query.concat(props.attributes.postTaxonomyFilter);
+                            currentTaxVal.forEach(function(allTaxSelections) {
+                              var stringToArray = allTaxSelections.split("-");
+                              if( stringToArray[0] !== taxonomy.name ) {
+                                postTaxFilterArray.push( allTaxSelections );
+                              }
+                            });
+                          }
+                          // add to selection from current taxonomy
+                          postTaxonomyFilter.map(
+                            ( taxSelection ) => {
+                              const matchingTax = taxonomy.query.find( ( tax ) => {
+                                return tax.name === taxSelection;
+                              } );
+                              if ( matchingTax !== undefined ) {
+                                postTaxFilterArray.push( taxonomy.name + "-" + matchingTax.id );
+                              }
+                            }
+                          )
+                          setAttributes( { postTaxonomyFilter: postTaxFilterArray } );
+                        } }
+                      />
+                    </PanelRow>
+                  );
+                }) }
+              </div>
+            </PanelRow>
+          </PanelBody>
           <PanelBody title={ __( 'Layout', 'devTheme' ) } >
             <PanelRow>
               <RangeControl
@@ -486,85 +642,75 @@ export default class Inspector extends Component {
               />
             </PanelRow>
           </PanelBody>
-          <PanelBody title={ __( 'Posts Filter', 'devTheme' ) } >
-            <PanelRow>
-              <FormTokenField
-                label={__("Select posts", "devTheme")}
-                value={ postsFieldValue }
-                suggestions={ postNames }
-                maxSuggestions={ 20 }
-                onChange={ ( postIdFilter ) => {
-                  // Build array of selected posts.
-                  let postIdFilterArray = [];
-                  postIdFilter.map(
-                    ( postName ) => {
-                      const matchingPost = posts.find( ( post ) => {
-                        return post.title.raw === postName;
-                      } );
-                      if ( matchingPost !== undefined ) {
-                        postIdFilterArray.push( matchingPost.id );
-                      }
-                    }
-                  )
-                  setAttributes( { postIdFilter: postIdFilterArray } );
-                } }
-              />
-            </PanelRow>
-            <PanelRow>
-              <SelectControl
-                label={__("Relation", "devTheme")}
-                value={postTaxonomyFilterRelation}
-                options={[
-                  { value: "AND", label: __( 'AND', 'devTheme' ) },
-                  { value: "OR", label: __( 'OR', 'devTheme' ) }
-                ]}
-                onChange={postTaxonomyFilterRelation => setAttributes({ postTaxonomyFilterRelation })}
-              />
-            </PanelRow>
-            <PanelRow>
-              <div>
-                { postTaxonomies.map(
-                  (taxonomy, setState) => {
-                  return(
-                    <PanelRow>
-                      <FormTokenField
-                        label={taxonomy.name}
-                        value={ taxonomy.values }
-                        suggestions={ taxonomy.options }
-                        maxSuggestions={ 20 }
-                        onFocus= { ( index ) => {
-                          currentTaxVal = postTaxonomyFilter;
-                        } }
-                        onChange={ ( postTaxonomyFilter ) => {
-                          // build array of selected posts from other taxonomies
-                          let postTaxFilterArray = [];
-                          if(currentTaxVal && currentTaxVal.length >= 1){
-                            // query.concat(props.attributes.postTaxonomyFilter);
-                            currentTaxVal.forEach(function(allTaxSelections) {
-                              var stringToArray = allTaxSelections.split("-");
-                              if( stringToArray[0] !== taxonomy.name ) {
-                                postTaxFilterArray.push( allTaxSelections );
-                              }
-                            });
-                          }
-                          // add to selection from current taxonomy
-                          postTaxonomyFilter.map(
-                            ( taxSelection ) => {
-                              const matchingTax = taxonomy.query.find( ( tax ) => {
-                                return tax.name === taxSelection;
-                              } );
-                              if ( matchingTax !== undefined ) {
-                                postTaxFilterArray.push( taxonomy.name + "-" + matchingTax.id );
-                              }
+          <PanelBody title={ __( 'Breakpoints', 'devTheme' ) } >
+            <div class="repeater">
+              { postsBreakpoints && postsBreakpoints.length >= 1 &&
+                  postsBreakpoints.map( ( breakpoint, index ) => {
+                    return <div class="repeater-row" data-key={ index } key={ index }>
+                      <PanelRow>
+                        <RangeControl
+                          label={__("Max-Width in PX", "devTheme")}
+                          value={ postsBreakpoints[ index ].width }
+                          onChange={ ( width ) => handleChangeBreakpointWidth( width, index, postsBreakpoints ) }
+                          min={1}
+                          max={5000}
+                        />
+                      </PanelRow>
+                      <PanelRow>
+                        <RangeControl
+                          label={__("Column sum", "devTheme")}
+                          value={ postsBreakpoints[ index ].columns }
+                          onChange={ ( columns ) => handleChangeBreakpointColumns( columns, index, postsBreakpoints ) }
+                          min={1}
+                          max={50}
+                        />
+                      </PanelRow>
+                      <PanelRow>
+                        <RangeControl
+                          label={__("Column spacing", "devTheme")}
+                          value={ postsBreakpoints[ index ].spacing }
+                          onChange={ ( spacing ) => handleChangeBreakpointSpacing( spacing, index, postsBreakpoints ) }
+                          min={1}
+                          max={100}
+                        />
+                      </PanelRow>
+                      <Button
+                        className="remove-breakpoint"
+                        icon="no-alt"
+                        label={__("remove", "devTheme")}
+                        onClick={ () => {
+                          let updateBreakpoints = [];
+                          postsBreakpoints.map( ( breakpoint, subindex ) => {
+                            if(index !== subindex){
+                              updateBreakpoints.push( breakpoint );
                             }
-                          )
-                          setAttributes( { postTaxonomyFilter: postTaxFilterArray } );
+                          })
+                          setAttributes({ postsBreakpoints: updateBreakpoints });
                         } }
                       />
-                    </PanelRow>
-                  );
-                }) }
-              </div>
+                    </div>;
+                  })
+              }
+            </div>
+            <PanelRow>
+              <Button
+                variant="secondary"
+                onClick={ () => {
+                  let updateBreakpoints = [];
+                  var newEntry = {
+                    width: 1000,
+                    columns: 1,
+                    spacing: 20
+                  };
+                  postsBreakpoints.map(( breakpoint ) => {
+                    updateBreakpoints.push( breakpoint );
+                  })
+                  updateBreakpoints.push(newEntry);
+                  setAttributes({ postsBreakpoints: updateBreakpoints });
+                } }
+              >
+                { __( 'Add breakpoint', 'devTheme' ) }
+              </Button>
             </PanelRow>
           </PanelBody>
       </InspectorControls>

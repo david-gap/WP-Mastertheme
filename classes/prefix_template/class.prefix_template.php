@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.36.18
+ * @version     2.37.18
  *
 */
 
@@ -73,6 +73,14 @@ class prefix_template {
     * @param static int $template_container: activate container for the content
     * @param static int $template_container_totop: activate container for the scroll to top button
     * @param static int $template_container_footer: activate container for the footer
+    * @param static int $template_container_header_wide: Set header container to wide width
+    * @param static int $template_container_blog_wide: Set blog container to wide width
+    * @param static int $template_container_comments_wide: Set comments container to wide width
+    * @param static int $template_container_archive_wide: Set archive container to wide width
+    * @param static int $template_container_searchresults_wide: Set search results container to wide width
+    * @param static int $template_container_errorpage_wide: Set 404 container to wide width
+    * @param static int $template_container_totop_wide: Set to top container to wide width
+    * @param static int $template_container_footer_wide: Set footer container to wide width
     * @param static string $template_coloring: template coloring (dark/light)
     * @param static bool $template_ph_active: activate placeholder
     * @param static bool $template_ph_address: placeholder show address block
@@ -145,6 +153,12 @@ class prefix_template {
   static $template_container_totop                 = 1;
   static $template_container_footer                = 1;
   static $template_container_header_wide           = 0;
+  static $template_container_blog_wide             = 0;
+  static $template_container_comments_wide         = 0;
+  static $template_container_archive_wide          = 0;
+  static $template_container_searchresults_wide    = 0;
+  static $template_container_errorpage_wide        = 0;
+  static $template_container_totop_wide            = 0;
   static $template_container_footer_wide           = 0;
   static $template_coloring                        = "light";
   static $template_ph_active                       = true;
@@ -546,41 +560,74 @@ class prefix_template {
   static $classtitle = 'Template';
   static $classkey = 'template';
   static $backend = array(
+    "coloring" => array(
+      "label" => "Custom css class",
+      "type" => "text"
+    ),
+    "title_container" => array(
+      "label" => "Activate container",
+      "type" => "title"
+    ),
     "container_header" => array(
-      "label" => "Activate header container",
+      "label" => "Header",
       "type" => "switchbutton"
     ),
     "container_breadcrumbs" => array(
-      "label" => "Activate breadcrumbs container",
+      "label" => "Breadcrumbs",
       "type" => "switchbutton"
     ),
     "container" => array(
-      "label" => "Activate main container",
+      "label" => "Main (Pages, Posts, Blog, Archive, Search results, 404)",
       "type" => "switchbutton"
     ),
     "container_scrolltotop" => array(
-      "label" => "Activate scroll to top container",
+      "label" => "Scroll to top",
       "type" => "switchbutton"
     ),
     "container_footer" => array(
-      "label" => "Activate footer container",
+      "label" => "Footer",
       "type" => "switchbutton"
     ),
+    "title_wide" => array(
+      "label" => "Activate wide container",
+      "type" => "title"
+    ),
     "container_header_wide" => array(
-      "label" => "Activate header wide container",
+      "label" => "Header",
+      "type" => "switchbutton"
+    ),
+    "container_blog_wide" => array(
+      "label" => "Blog",
+      "type" => "switchbutton"
+    ),
+    "container_comments_wide" => array(
+      "label" => "Comments",
+      "type" => "switchbutton"
+    ),
+    "container_archive_wide" => array(
+      "label" => "Archive",
+      "type" => "switchbutton"
+    ),
+    "container_searchresults_wide" => array(
+      "label" => "Search results",
+      "type" => "switchbutton"
+    ),
+    "container_errorpage_wide" => array(
+      "label" => "404",
+      "type" => "switchbutton"
+    ),
+    "container_totop_wide" => array(
+      "label" => "To top",
       "type" => "switchbutton"
     ),
     "container_footer_wide" => array(
-      "label" => "Activate footer wide container",
+      "label" => "Footer",
       "type" => "switchbutton"
-    ),
-    "coloring" => array(
-      "label" => "Body css (light/dark)",
-      "type" => "text"
     ),
     "address" => array(
       "label" => "Addressblock information",
       "type" => "multiple",
+      "labelTitled" => 1,
       "value" => array(
         "logo" => array(
           "label" => "Logo",
@@ -727,6 +774,7 @@ class prefix_template {
     "socialmedia" => array(
       "label" => "Social Media block (Icons)",
       "type" => "multiple",
+      "labelTitled" => 1,
       "value" => array(
         "facebook" => array(
           "label" => "Facebook",
@@ -749,6 +797,7 @@ class prefix_template {
     "contactblock" => array(
       "label" => "Contact block (Icons)",
       "type" => "multiple",
+      "labelTitled" => 1,
       "value" => array(
         "phone" => array(
           "label" => "Phone",
@@ -785,6 +834,7 @@ class prefix_template {
     "header" => array(
       "label" => "Header",
       "type" => "multiple",
+      "labelTitled" => 1,
       "value" => array(
         "divider" => array(
           "label" => "Activate divider",
@@ -993,6 +1043,7 @@ class prefix_template {
     "breadcrumbs" => array(
       "label" => "Breadcrumbs",
       "type" => "multiple",
+      "labelTitled" => 1,
       "value" => array(
         "active" => array(
           "label" => "Activate breadcrumbs",
@@ -1020,6 +1071,7 @@ class prefix_template {
     "page" => array(
       "label" => "Page",
       "type" => "multiple",
+      "labelTitled" => 1,
       "value" => array(
         "videoThumb" => array(
           "label" => "Activate video thumb",
@@ -1130,6 +1182,7 @@ class prefix_template {
     "blog" => array(
       "label" => "Blog",
       "type" => "multiple",
+      "labelTitled" => 1,
       "value" => array(
         "type" => array(
           "label" => "Activate blog type option",
@@ -1140,6 +1193,7 @@ class prefix_template {
     "meta" => array(
       "label" => "Metablock",
       "type" => "multiple",
+      "labelTitled" => 1,
       "value" => array(
         "metablock" => array(
           "label" => "Activate on",
@@ -1242,6 +1296,10 @@ class prefix_template {
         )
       )
     ),
+    "title_totop" => array(
+      "label" => "Scroll to top",
+      "type" => "title"
+    ),
     "scrolltotop" => array(
       "label" => "Activate scroll to top",
       "type" => "switchbutton"
@@ -1249,6 +1307,7 @@ class prefix_template {
     "footer" => array(
       "label" => "Footer",
       "type" => "multiple",
+      "labelTitled" => 1,
       "value" => array(
         "active" => array(
           "label" => "Activate footer",
@@ -1356,6 +1415,7 @@ class prefix_template {
     ),
     "searchform" => array(
       "label" => "Search form",
+      "labelTitled" => 1,
       "type" => "multiple",
       "value" => array(
         "autocomplete" => array(
@@ -1367,6 +1427,7 @@ class prefix_template {
     "menu" => array(
       "label" => "Menu",
       "type" => "multiple",
+      "labelTitled" => 1,
       "value" => array(
         "svgIcon" => array(
           "label" => "SVG",
@@ -1391,6 +1452,7 @@ class prefix_template {
     "languageSwitcher" => array(
       "label" => "Language Switcher",
       "type" => "multiple",
+      "labelTitled" => 1,
       "value" => array(
         "direction" => array(
           "label" => "Menu direction",
@@ -1411,6 +1473,7 @@ class prefix_template {
     'thumbnail' => array(
       "label" => "Thumbnail settings",
       "type" => "multiple",
+      "labelTitled" => 1,
       "value" => array(
         "div" => array(
           "label" => "Insert IMG into DIV",
@@ -1444,6 +1507,7 @@ class prefix_template {
     'comments' => array(
       "label" => "Comments",
       "type" => "multiple",
+      "labelTitled" => 1,
         "value" => array(
           "activeBlog" => array(
             "label" => "Allow comments for blocks",
@@ -1458,6 +1522,7 @@ class prefix_template {
     'errorPage' => array(
       "label" => "404 Page",
       "type" => "multiple",
+      "labelTitled" => 1,
       "value" => array(
         "searchForm" => array(
           "label" => "Display search form",
@@ -1526,7 +1591,13 @@ class prefix_template {
         SELF::$template_container_totop = array_key_exists('container_scrolltotop', $myConfig) ? $myConfig['container_scrolltotop'] : SELF::$template_container_totop;
         SELF::$template_container_footer = array_key_exists('container_footer', $myConfig) ? $myConfig['container_footer'] : SELF::$template_container_footer;
         SELF::$template_container_header_wide = array_key_exists('container_header_wide', $myConfig) ? $myConfig['container_header_wide'] : SELF::$template_container_header_wide;
+        SELF::$template_container_totop_wide = array_key_exists('container_totop_wide', $myConfig) ? $myConfig['container_totop_wide'] : SELF::$template_container_totop_wide;
         SELF::$template_container_footer_wide = array_key_exists('container_footer_wide', $myConfig) ? $myConfig['container_footer_wide'] : SELF::$template_container_footer_wide;
+        SELF::$template_container_blog_wide = array_key_exists('container_blog_wide', $myConfig) ? $myConfig['container_blog_wide'] : SELF::$template_container_blog_wide;
+        SELF::$template_container_comments_wide = array_key_exists('container_comments_wide', $myConfig) ? $myConfig['container_comments_wide'] : SELF::$template_container_comments_wide;
+        SELF::$template_container_archive_wide = array_key_exists('container_archive_wide', $myConfig) ? $myConfig['container_archive_wide'] : SELF::$template_container_archive_wide;
+        SELF::$template_container_searchresults_wide = array_key_exists('container_searchresults_wide', $myConfig) ? $myConfig['container_searchresults_wide'] : SELF::$template_container_searchresults_wide;
+        SELF::$template_container_errorpage_wide = array_key_exists('container_errorpage_wide', $myConfig) ? $myConfig['container_errorpage_wide'] : SELF::$template_container_errorpage_wide;
         SELF::$template_coloring = array_key_exists('coloring', $myConfig) ? $myConfig['coloring'] : SELF::$template_coloring;
         SELF::$template_address = array_key_exists('address', $myConfig) ? $myConfig['address'] : SELF::$template_address;
         SELF::$template_socialmedia = array_key_exists('socialmedia', $myConfig) ? $myConfig['socialmedia'] : SELF::$template_socialmedia;
@@ -1649,14 +1720,23 @@ class prefix_template {
     /* 2.2 ACTIVATE CONTAINER CSS CLASS FOR HEADER/FOOTER
     /------------------------*/
     // $container to activate, $wrap to add the class attribute
-    public static function AddContainer(int $container = 0, bool $wrap = true){
+    public static function AddContainer(int $container = 0, int $wide = 0, bool $wrap = true){
       // fallback if config file is missing
       $active = $container ? $container : SELF::$template_container;
+      $css = array();
       // check if container is active
-      if($active === 1 && $wrap === true):
-        return 'class="container"';
+      if($active === 1):
+        $css[] = 'container';
+      endif;
+      // check if wide is active
+      if($wide === 1):
+        $css[] = 'wide-container';
+      endif;
+      // output
+      if($wrap === true):
+        return 'class="' . implode(" ", $css) . '"';
       elseif($active === 1):
-        return 'container';
+        return implode(" ", $css);
       endif;
     }
 
@@ -2034,7 +2114,7 @@ class prefix_template {
       $css = '';
       $css .= SELF::$template_header_wrap == 1 ? ' wrap' : '';
       $counter = 0;
-      $container = '<div class="header-container ' . prefix_template::AddContainer(prefix_template::$template_container_header, false) . $css . '">';
+      $container = '<div class="header-container ' . prefix_template::AddContainer(prefix_template::$template_container_header, prefix_template::$template_container_header_wide, false) . $css . '">';
       $container_open = false;
       $container_closed = false;
 
@@ -2139,7 +2219,7 @@ class prefix_template {
       $css = '';
       $css .= SELF::$template_footer_wrap == 1 ? ' wrap' : '';
       $counter = 0;
-      $container = '<div class="footer-container ' . prefix_template::AddContainer(prefix_template::$template_container_footer, false) . $css . '">';
+      $container = '<div class="footer-container ' . prefix_template::AddContainer(prefix_template::$template_container_footer, prefix_template::$template_container_footer_wide, false) . $css . '">';
       $container_open = false;
       $container_closed = false;
 
@@ -3008,7 +3088,7 @@ class prefix_template {
     static public function scrollToTop(){
       $output = '';
       $output .= '<div id="scroll-to-top">';
-        $output .= '<div ' . prefix_template::AddContainer(prefix_template::$template_container_totop, true) . '>';
+        $output .= '<div ' . prefix_template::AddContainer(prefix_template::$template_container_totop, prefix_template::$template_container_totop_wide, true) . '>';
           $output .= '<span>' . __( 'To top', 'devTheme' ) . '</span>';
         $output .= '</div>';
       $output .= '</div>';
@@ -3111,7 +3191,7 @@ class prefix_template {
           $after = '</span>';
 
           $bc_output .= '<nav class="breadcrumbs">';
-            $bc_output .= prefix_template::AddContainer(prefix_template::$template_container_breadcrumbs, false) == 'container' ? '<div ' . prefix_template::AddContainer(prefix_template::$template_container_breadcrumbs, true) . '>' : '';
+            $bc_output .= prefix_template::AddContainer(prefix_template::$template_container_breadcrumbs, 0, false) == 'container' ? '<div ' . prefix_template::AddContainer(prefix_template::$template_container_breadcrumbs, 0, true) . '>' : '';
                 // introduction
                 $bc_output .= prefix_template::$template_breadcrumbs_intro ? '<span class="introduction">' . __('You are here:', 'devTheme') . ' </span>' : '';
                 // home page
@@ -3198,7 +3278,7 @@ class prefix_template {
                     $bc_output .= ' (' . __('site') . ' ' . get_query_var('paged') . ')';
                   endif;
                 endif;
-            $bc_output .= prefix_template::AddContainer(prefix_template::$template_container_breadcrumbs, false) == 'container' ? '</div>' : '';
+            $bc_output .= prefix_template::AddContainer(prefix_template::$template_container_breadcrumbs, 0, false) == 'container' ? '</div>' : '';
           $bc_output .= '</nav>';
         endif;
         // define output

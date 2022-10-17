@@ -4,7 +4,7 @@
  *
  * Customizer extension
  * Author:      David Voglgsnag
- * @version     1.12
+ * @version     1.13
  *
  */
 
@@ -384,6 +384,12 @@ class prefix_core_Customizer {
             'mainmenu_settings' => array(
               'label' => 'Settings',
               'inputs' => array(
+                'mnav__ul_width' => array(
+                  'label' => 'Width',
+                  'type' => 'range-value',
+                  'rangeMin' => 200,
+                  'rangeMax' => 5000
+                ),
                 'mnav__ul_paddingTop' => array(
                   'label' => 'Padding top',
                   'type' => 'range-value'
@@ -395,6 +401,12 @@ class prefix_core_Customizer {
                 'mnav__ul_lastChild_marginBottom' => array(
                   'label' => 'Last child margin bottom',
                   'type' => 'range-value'
+                ),
+                'mnav__ul_width_mobile' => array(
+                  'label' => 'Width',
+                  'type' => 'range-value',
+                  'rangeMin' => 200,
+                  'rangeMax' => 1000
                 ),
                 'mnav__ul_paddingTop_mobile' => array(
                   'label' => 'Padding top',
@@ -3120,6 +3132,117 @@ class prefix_core_Customizer {
             'search_form_settings' => array(
               'label' => 'Settings',
               'inputs' => array()
+            ),
+            'search_form_label' => array(
+              'label' => 'Label',
+              'inputs' => array(
+                'searchForm__label_backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'searchForm__label_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'searchForm__label_border_color' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'searchForm__label_display' => array(
+                  'label' => 'Display',
+                  'type' => 'select'
+                ),
+                'searchForm__label_width' => array(
+                  'label' => 'Width',
+                  'type' => 'range-value',
+                  'rangeMax' => 600
+                ),
+                'searchForm__label_borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'range-four-value'
+                ),
+                'searchForm__label_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'range-four-value'
+                ),
+                'searchForm__label_borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'searchForm__label_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'searchForm__label_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'searchForm__label_fontFamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'searchForm__label_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'searchForm__label_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
+                ),
+                'searchForm__label_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'searchForm__label_textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'searchForm__label_letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'range-value'
+                ),
+                'searchForm__label_display_mobile' => array(
+                  'label' => 'Display',
+                  'type' => 'select'
+                ),
+                'searchForm__label_width_mobile' => array(
+                  'label' => 'Minimum width',
+                  'type' => 'range-value',
+                  'rangeMax' => 300
+                ),
+                'searchForm__label_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'searchForm__label_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'searchForm__label_fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'searchForm__label_lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
+                ),
+                'searchForm__label_letterSpacing_mobile' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'range-value'
+                ),
+                'dark__searchForm__label_backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__searchForm__label_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__searchForm__label_border_color' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
             ),
             'search_form_input' => array(
               'label' => 'Input',
@@ -7437,6 +7560,7 @@ class prefix_core_Customizer {
     require_once( dirname( __FILE__ ) . '/controls/nesting/nesting.php' );
     require_once( dirname( __FILE__ ) . '/controls/alpha-color-picker/alpha-color-picker.php' );
     require_once( dirname( __FILE__ ) . '/controls/range/class-customizer-range-value-control.php' );
+    require_once( dirname( __FILE__ ) . '/controls/range-four/class-customizer-range-four-value-control.php' );
     $wp_customize->register_panel_type( 'PE_WP_Customize_Panel' );
 
     foreach ($this->defaultValues as $panelKey => $panelValues) {
@@ -7555,8 +7679,36 @@ class prefix_core_Customizer {
         'show_opacity' => true,
         'priority'     => 1
      )));
-    // elseif($inputValues["type"] == 'range-four-value'):
+    elseif($inputValues["type"] == 'range-four-value'):
       // COMING SOON
+      if(array_key_exists('rangeMax', $inputValues)):
+        $maxRange = $inputValues["rangeMax"];
+      elseif(
+        strpos($inputKey, '_margin') !== false ||
+        strpos($inputKey, '_padding') !== false
+      ):
+        $maxRange = 1000;
+      else:
+        $maxRange = 100;
+      endif;
+      $wp_customize->add_setting($inputKey, array(
+        'transport'         => 'postMessage',
+        'default'           => array_key_exists('default', $inputValues) ? $inputValues["default"] : '',
+        'sanitize_callback' => 'wp_filter_nohtml_kses',
+      ));
+      $wp_customize->add_control(new Customizer_Range_Four_Value_Control($wp_customize, $inputKey, array(
+        'label'    => __( $inputValues["label"], 'customizer' ) . $labelAdd,
+        'section'  => $sectionKey,
+        'type'     => 'range-four-value',
+        'priority' => 1,
+        'input_attrs' => array(
+          'min'  => array_key_exists('rangeMin', $inputValues) ? $inputValues["rangeMin"] : 0,
+          'max'  => $maxRange,
+          'step' => array_key_exists('rangeStep', $inputValues) ? $inputValues["rangeStep"] : 0.01,
+          'suffix' => array_key_exists('rangeSuffix', $inputValues) ? $inputValues["rangeSuffix"] : 'none',
+          'id' => '_customize-input-' . $inputKey
+        )
+      )));
       // For padding, margin, borderWidth, borderRadius...
     elseif($inputValues["type"] == 'range-value'):
       // max range

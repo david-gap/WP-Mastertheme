@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.16.14
+ * @version     2.17.14
  *
 */
 
@@ -80,8 +80,8 @@ class prefix_WPinit {
     private $WPinit_css_version        = 1.0;
     private $WPinit_css_path           = "/dist/style.min.css";
     private $WPinit_admin_css_path     = "/dist/style_backend.min.css";
-    private $WPinit_theme_js_version   = 1.4;
-    private $WPinit_theme_css_version  = 1.6;
+    private $WPinit_theme_js_version   = 1.7;
+    private $WPinit_theme_css_version  = 1.7;
     private $WPinit_js                 = 0;
     private $WPinit_js_version         = 1.0;
     private $WPinit_js_path            = "/dist/script.min.js";
@@ -212,68 +212,8 @@ class prefix_WPinit {
         "label" => "Wordpress Support",
         "type" => "array_addable"
       ),
-      "css" => array(
-        "label" => "Embed custom CSS file",
-        "type" => "switchbutton"
-      ),
-      "cachebust" => array(
-        "label" => "Activate Cache Busting",
-        "type" => "switchbutton"
-      ),
-      "jquery" => array(
-        "label" => "Embed Jquery file",
-        "type" => "switchbutton"
-      ),
-      "js" => array(
-        "label" => "Embed custom JS file",
-        "type" => "switchbutton"
-      ),
-      "HeaderCss" => array(
-        "label" => "Load custom css inside header",
-        "type" => "switchbutton"
-      ),
-      // "upload_svg" => array(
-      //   "label" => "Enable SVG upload",
-      //   "type" => "switchbutton"
-      // ),
-      "css_version" => array(
-        "label" => "CSS Version",
-        "type" => "text"
-      ),
-      "js_version" => array(
-        "label" => "JS Version",
-        "type" => "text"
-      ),
       "imgSacaling" => array(
         "label" => "IMG scaling",
-        "type" => "switchbutton"
-      ),
-      // "css_path" => array(
-      //   "label" => "CSS file path",
-      //   "type" => "text"
-      // ),
-      // "cachebust_file" => array(
-      //   "label" => "Cache Busting file path",
-      //   "type" => "text"
-      // ),
-      // "js_path" => array(
-      //   "label" => "JS file path",
-      //   "type" => "text"
-      // ),
-      "admin_menu" => array(
-        "label" => "Hide backend menu to not admins",
-        "type" => "array_addable"
-      ),
-      "EditorMenu" => array(
-        "label" => "Show menu to editors",
-        "type" => "switchbutton"
-      ),
-      "EditorWidget" => array(
-        "label" => "Show widgets to editors",
-        "type" => "switchbutton"
-      ),
-      "EditorCustomizer" => array(
-        "label" => "Show customizer to editors",
         "type" => "switchbutton"
       ),
       "menus" => array(
@@ -303,6 +243,78 @@ class prefix_WPinit {
             "type" => "text"
           )
         )
+      ),
+      "title_assets" => array(
+        "label" => "Assets",
+        "type" => "title"
+      ),
+      "css" => array(
+        "label" => "Embed custom CSS file",
+        "type" => "switchbutton"
+      ),
+      "cachebust" => array(
+        "label" => "Activate Cache Busting",
+        "type" => "switchbutton"
+      ),
+      "jquery" => array(
+        "label" => "Embed Jquery file",
+        "type" => "switchbutton"
+      ),
+      "js" => array(
+        "label" => "Embed custom JS file",
+        "type" => "switchbutton"
+      ),
+      "HeaderCss" => array(
+        "label" => "Load custom css inside header",
+        "type" => "switchbutton"
+      ),
+      "css_version" => array(
+        "label" => "CSS Version",
+        "type" => "text"
+      ),
+      "js_version" => array(
+        "label" => "JS Version",
+        "type" => "text"
+      ),
+      // "upload_svg" => array(
+      //   "label" => "Enable SVG upload",
+      //   "type" => "switchbutton"
+      // ),
+      // "css_path" => array(
+      //   "label" => "CSS file path",
+      //   "type" => "text"
+      // ),
+      // "cachebust_file" => array(
+      //   "label" => "Cache Busting file path",
+      //   "type" => "text"
+      // ),
+      // "js_path" => array(
+      //   "label" => "JS file path",
+      //   "type" => "text"
+      // ),
+      "title_access" => array(
+        "label" => "Backend access",
+        "type" => "title"
+      ),
+      "admin_menu" => array(
+        "label" => "Hide backend menu to not admins",
+        "type" => "array_addable"
+      ),
+      "EditorMenu" => array(
+        "label" => "Show menu to editors",
+        "type" => "switchbutton"
+      ),
+      "EditorWidget" => array(
+        "label" => "Show widgets to editors",
+        "type" => "switchbutton"
+      ),
+      "EditorCustomizer" => array(
+        "label" => "Show customizer to editors",
+        "type" => "switchbutton"
+      ),
+      "title_fonts" => array(
+        "label" => "Fonts embed",
+        "type" => "title"
       ),
       "typekit_id" => array(
         "label" => "Typekit ID",
@@ -414,6 +426,11 @@ class prefix_WPinit {
           $configuration = get_option('WPadmin_configuration') ? get_option('WPadmin_configuration') : false;
         endif;
         wp_localize_script( 'theme/scripts', 'configurations', $configuration);
+        // add block ajax path to main js file
+        $postsBlock = '../mastertheme/classes/prefix_WPgutenberg/blocks/posts/ajax.php';
+        $postsFilterBlock = '../mastertheme/classes/prefix_WPgutenberg/blocks/postsfilter/ajax.php';
+        wp_localize_script( 'theme/scripts', 'postsBlock', $postsBlock);
+        wp_localize_script( 'theme/scripts', 'postsFilterBlock', $postsFilterBlock);
       // template css
         wp_enqueue_style('theme/styles', get_template_directory_uri() . '' . $this->WPinit_css_path, false, $this->WPinit_theme_css_version);
       // jQuery (from wp core)

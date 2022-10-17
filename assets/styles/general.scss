@@ -15,7 +15,8 @@
 :root {
   --container_content: calc(var(--container__width, 1000px) - var(--container__side, 20px) - var(--container__side, 20px));
   --container_spacing: calc(50% - var(--container__side, 20px) - (var(--container__width, 1000px) / 2));
-  --img_wide_reset:    calc(var(--container__width, 1000px) + var(--img_wide_left, 200px) + var(--img_wide_right, 200px));
+  --img_wide_reset: calc(var(--container__width, 1000px) + var(--img_wide_left, 200px) + var(--img_wide_right, 200px));
+  --scrollbar_width: calc(100vw - 100%);
 }
 
 html {
@@ -152,8 +153,8 @@ body.page-template {
     width: unset;
   }
   .alignfull {
-    margin-left: calc(-100vw / 2 + 100% / 2);
-    margin-right: calc(-100vw / 2 + 100% / 2);
+    margin-left: calc(-100vw / 2 + 100% / 2)!important;
+    margin-right: calc(-100vw / 2 + 100% / 2)!important;
     max-width: 100vw;
     width: 100vw;
     > img {

@@ -3,7 +3,7 @@
  * Post Type File Single
  *
  * @author      David Voglgsang
- * @version     1.2.4
+ * @version     1.3.4
  *
 */
 
@@ -13,7 +13,7 @@ $obj = get_queried_object();
 // page options
 $options = $obj && property_exists($obj, 'ID') ? prefix_template::PageOptions($obj->ID) : array();
 ?>
-<section id="detail-page" <?php echo prefix_template::AddContainer(prefix_template::$template_container, true); ?>>
+<section id="detail-page" <?php echo prefix_template::AddContainer(prefix_template::$template_container, 0, true); ?>>
   <?php if(!in_array('thumbnail', $options)):
      if(array_key_exists('thumbnail', prefix_template::$template_header_sort) && prefix_template::$template_header_sort['thumbnail'] == 1):
      else:

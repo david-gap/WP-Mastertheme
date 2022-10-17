@@ -213,6 +213,7 @@ body.page-template,
           }
         }
         > ul#menu_main {
+          width: var(--mnav__ul_width, auto);
           display: flex;
           flex-wrap: wrap;
           // flex-direction: var(--mnav__ul_flexDirection, row);
@@ -755,6 +756,16 @@ body.page-template,
   /––––––––––––––––––––––––*/
   .wp-block-search,
   .search-form {
+    label {
+      display: var(--searchForm__label_display, inline-block);
+      width: var(--searchForm__label_width, var(--label_width, auto));
+      max-width: 100%;
+      border-width: var(--searchForm__label_borderWidth, var(--label_borderWidth, 0));
+      border-style: var(--searchForm__label_borderStyle, var(--label_borderStyle, solid));
+      border-radius: var(--searchForm__label_borderRadius, var(--label_borderRadius, 0));
+      margin: var(--searchForm__label_margin, var(--label_margin, 0));
+      padding: var(--searchForm__label_padding, var(--label_padding, 0));
+    }
     input[type="text"],
     input[type="search"] {
       width: 100%;

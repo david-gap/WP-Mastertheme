@@ -62,6 +62,10 @@ register_block_type(
       ),
       'postTaxonomyPreFilter' => array(
         'type' => 'array'
+      ),
+      'postsBreakpoints' => array(
+        'type' => 'array',
+        'default' => array()
       )
     ),
     'render_callback' => 'WPgutenberg_postsfilter_blockRender'
@@ -369,7 +373,7 @@ function WPgutenberg_postsfilter_blockRender($attr){
   $css = '';
   $inlinecss = '';
   // add edvanced options (ID/CSS)
-  $id = array_key_exists('anchor', $attr) ? ' id="' . $attr['anchor'] . '"' : '';
+  $id = array_key_exists('anchor', $attr) ? $attr['anchor'] : prefix_core_BaseFunctions::ShortID(10, 'letters');
   $css .= array_key_exists('className', $attr) ? ' ' . $attr['className'] : '';
   $css .= array_key_exists('align', $attr) ? ' align' . $attr['align'] : '';
   $css .= array_key_exists('postFilterPosition', $attr) ? ' filter-' . $attr['postFilterPosition']  : '';
@@ -379,8 +383,18 @@ function WPgutenberg_postsfilter_blockRender($attr){
   $columns = array_key_exists('postColumns', $attr) ? $attr['postColumns'] : 1;
   $inlinecss .= '--postColumns: ' . $columns . ';';
   $inlinecss .= ' --postColumnsSpace: ' . $spacing . 'px;';
+  // breakpoints
+  if(array_key_exists('postsBreakpoints', $attr) && !empty($attr['postsBreakpoints'])):
+    $output .= '<style>';
+      foreach ($attr['postsBreakpoints'] as $key => $breakpoint) {
+        $output .= '@media (max-width: ' . $breakpoint['width'] . 'px) {';
+          $output .= '#' . $id . ' .results {--postColumns: ' . $breakpoint['columns'] . '!important; --postColumnsSpace: ' . $breakpoint['spacing'] . 'px!important;}';
+        $output .= '}';
+      }
+    $output .= '</style>';
+  endif;
   // build content
-  $output .= '<div' . $id . ' class="block-postsfilter' . $css . '" data-id="' . prefix_core_BaseFunctions::ShortID() . '">';
+  $output .= '<div id="' . $id . '" class="block-postsfilter' . $css . '" data-id="' . prefix_core_BaseFunctions::ShortID() . '">';
     $output .= '<form class="thefilter">';
       if($attr['postTextSearch']):
         $output .= '<div class="textsearch">';

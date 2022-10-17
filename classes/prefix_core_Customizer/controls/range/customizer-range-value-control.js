@@ -45,7 +45,6 @@
           } else {
             var value = '';
           }
-          console.log("touch it the tralala");
           $(this).siblings('.range-slider__value').val(value);
           wp.customize( key, function( obj ) {
             obj.set( value );

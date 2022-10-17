@@ -26,7 +26,8 @@ const {
   TextControl,
   TextareaControl,
   ToggleControl,
-  SelectControl
+  SelectControl,
+  Button
 } = wp.components;
 
 /**
@@ -54,22 +55,25 @@ export default class Inspector extends Component {
         postTextSearch,
         postTaxonomyFilter,
         postTaxonomyFilterOptions,
-        postTaxonomyPreFilter
+        postTaxonomyPreFilter,
+        postsBreakpoints
       },
       setAttributes
     } = this.props;
 
-    // update post type selection options
-    let postTypes = [];
-    const getposttypes = select('core').getPostTypes({ per_page: -1 });
-    if(getposttypes){
-      getposttypes.forEach( type => {
-        if(type.slug !== "attachment" && type.slug !== "wp_block"){
-          postTypes.push( { value: type.slug, label: type.labels.name } );
-        }
-      });
-    }
-    // update text selection options
+
+    /* query
+    /------------------------*/
+    const query = {
+      'status': 'publish',
+      'per_page': 1,
+      'order': postSortDirection
+    };
+    const posts = select( 'core' ).getEntityRecords( 'postType', postType, query );
+
+
+    /* set value options
+    /------------------------*/
     let fieldSelection = [
       { value: "", label: "-" },
       { value: "title", label: __( 'Title', 'devTheme' ) },
@@ -78,12 +82,6 @@ export default class Inspector extends Component {
       { value: "template", label: __( 'Post template', 'devTheme' ) },
       { value: "templateMedia", label: __( 'Post template (media only)', 'devTheme' ) }
     ];
-    const query = {
-      'status': 'publish',
-      'per_page': 1,
-      'order': postSortDirection
-    };
-    const posts = select( 'core' ).getEntityRecords( 'postType', postType, query );
     if(posts && posts.length > 0){
       if(posts[0].meta !== undefined){
         Object.entries(posts[0].meta).forEach(([key, value]) => {
@@ -101,7 +99,10 @@ export default class Inspector extends Component {
         });
       }
     }
-    // sort options
+
+
+    /* set sort options
+    /------------------------*/
     let postSortOptions = [
       { value: "menu_order", label: __( 'Menu order', 'devTheme' ) },
       { value: "date", label: __( 'Date', 'devTheme' ) },
@@ -124,7 +125,23 @@ export default class Inspector extends Component {
         });
       }
     }
-    // update taxonomy filter
+
+
+    /* set post type options
+    /------------------------*/
+    let postTypes = [];
+    const getposttypes = select('core').getPostTypes({ per_page: -1 });
+    if(getposttypes){
+      getposttypes.forEach( type => {
+        if(type.slug !== "attachment" && type.slug !== "wp_block"){
+          postTypes.push( { value: type.slug, label: type.labels.name } );
+        }
+      });
+    }
+
+
+    /* set taxonomy filter
+    /------------------------*/
     let postTaxonomies = [];
     let currentTaxVal;
     if(posts && posts.length > 0){
@@ -172,7 +189,6 @@ export default class Inspector extends Component {
         });
       }
     }
-    // taxonomies checking functions
     function checkFilter(name){
       if (postTaxonomyFilter && postTaxonomyFilter.length >= 1 && postTaxonomyFilter.includes(name)) {
         return true;
@@ -196,6 +212,10 @@ export default class Inspector extends Component {
       }
       setAttributes({ postTaxonomyFilter: newSelection });
     };
+
+
+    /* set post options
+    /------------------------*/
     // options
     const postOptions = [
       { value: "legend", label: __( 'Show taxonomy legend', 'devTheme' ) },
@@ -231,6 +251,52 @@ export default class Inspector extends Component {
       setAttributes({ postTaxonomyFilterOptions: newSelection });
     };
 
+
+    /* breakpoint value updates
+    /------------------------*/
+    const handleChangeBreakpointWidth = ( width, index, postsBreakpoints ) => {
+      let updateBreakpoints = [];
+      postsBreakpoints.map( ( breakpoint, subindex ) => {
+        if(index == subindex){
+          var currentBreakpointValues = breakpoint;
+          currentBreakpointValues.width = width;
+          updateBreakpoints.push( currentBreakpointValues );
+        } else {
+          updateBreakpoints.push( breakpoint );
+        }
+      })
+      setAttributes({ postsBreakpoints: updateBreakpoints });
+    };
+    const handleChangeBreakpointColumns = ( columns, index, postsBreakpoints ) => {
+      let updateBreakpoints = [];
+      postsBreakpoints.map( ( breakpoint, subindex ) => {
+        if(index == subindex){
+          var currentBreakpointValues = breakpoint;
+          currentBreakpointValues.columns = columns;
+          updateBreakpoints.push( currentBreakpointValues );
+        } else {
+          updateBreakpoints.push( breakpoint );
+        }
+      })
+      setAttributes({ postsBreakpoints: updateBreakpoints });
+    };
+    const handleChangeBreakpointSpacing = ( spacing, index, postsBreakpoints ) => {
+      let updateBreakpoints = [];
+      postsBreakpoints.map( ( breakpoint, subindex ) => {
+        if(index == subindex){
+          var currentBreakpointValues = breakpoint;
+          currentBreakpointValues.spacing = spacing;
+          updateBreakpoints.push( currentBreakpointValues );
+        } else {
+          updateBreakpoints.push( breakpoint );
+        }
+      })
+      setAttributes({ postsBreakpoints: updateBreakpoints });
+    };
+
+
+    /* build inspector controls
+    /------------------------*/
     return (
       <InspectorControls>
           <PanelBody title={ __( 'Posts query', 'devTheme' ) } >
@@ -287,6 +353,53 @@ export default class Inspector extends Component {
                 options={fieldSelection}
                 onChange={postTextTwo => setAttributes({ postTextTwo })}
               />
+            </PanelRow>
+          </PanelBody>
+          <PanelBody title={ __( 'Pre filter', 'devTheme' ) } >
+            <PanelRow>
+              <div>
+                { postTaxonomies.map(
+                  (taxonomy, setState) => {
+                  return(
+                    <PanelRow>
+                      <FormTokenField
+                        label={taxonomy.name}
+                        value={ taxonomy.values }
+                        suggestions={ taxonomy.options }
+                        maxSuggestions={ 20 }
+                        onFocus= { ( index ) => {
+                          currentTaxVal = postTaxonomyPreFilter;
+                        } }
+                        onChange={ ( postTaxonomyPreFilter ) => {
+                          // build array of selected posts from other taxonomies
+                          let postTaxFilterArray = [];
+                          if(currentTaxVal && currentTaxVal.length >= 1){
+                            // query.concat(props.attributes.postTaxonomyPreFilter);
+                            currentTaxVal.forEach(function(allTaxSelections) {
+                              var stringToArray = allTaxSelections.split("-");
+                              if( stringToArray[0] !== taxonomy.name ) {
+                                postTaxFilterArray.push( allTaxSelections );
+                              }
+                            });
+                          }
+                          // add to selection from current taxonomy
+                          postTaxonomyPreFilter.map(
+                            ( taxSelection ) => {
+                              const matchingTax = taxonomy.query.find( ( tax ) => {
+                                return tax.name === taxSelection;
+                              } );
+                              if ( matchingTax !== undefined ) {
+                                postTaxFilterArray.push( taxonomy.name + "-" + matchingTax.id );
+                              }
+                            }
+                          )
+                          setAttributes( { postTaxonomyPreFilter: postTaxFilterArray } );
+                        } }
+                      />
+                    </PanelRow>
+                  );
+                }) }
+              </div>
             </PanelRow>
           </PanelBody>
           <PanelBody title={ __( 'Layout', 'devTheme' ) } >
@@ -392,51 +505,75 @@ export default class Inspector extends Component {
               </div>
             </PanelRow>
           </PanelBody>
-          <PanelBody title={ __( 'Pre filter', 'devTheme' ) } >
-            <PanelRow>
-              <div>
-                { postTaxonomies.map(
-                  (taxonomy, setState) => {
-                  return(
-                    <PanelRow>
-                      <FormTokenField
-                        label={taxonomy.name}
-                        value={ taxonomy.values }
-                        suggestions={ taxonomy.options }
-                        maxSuggestions={ 20 }
-                        onFocus= { ( index ) => {
-                          currentTaxVal = postTaxonomyPreFilter;
-                        } }
-                        onChange={ ( postTaxonomyPreFilter ) => {
-                          // build array of selected posts from other taxonomies
-                          let postTaxFilterArray = [];
-                          if(currentTaxVal && currentTaxVal.length >= 1){
-                            // query.concat(props.attributes.postTaxonomyPreFilter);
-                            currentTaxVal.forEach(function(allTaxSelections) {
-                              var stringToArray = allTaxSelections.split("-");
-                              if( stringToArray[0] !== taxonomy.name ) {
-                                postTaxFilterArray.push( allTaxSelections );
-                              }
-                            });
-                          }
-                          // add to selection from current taxonomy
-                          postTaxonomyPreFilter.map(
-                            ( taxSelection ) => {
-                              const matchingTax = taxonomy.query.find( ( tax ) => {
-                                return tax.name === taxSelection;
-                              } );
-                              if ( matchingTax !== undefined ) {
-                                postTaxFilterArray.push( taxonomy.name + "-" + matchingTax.id );
-                              }
+          <PanelBody title={ __( 'Breakpoints', 'devTheme' ) } >
+            <div class="repeater">
+              { postsBreakpoints && postsBreakpoints.length >= 1 &&
+                  postsBreakpoints.map( ( breakpoint, index ) => {
+                    return <div class="repeater-row" data-key={ index } key={ index }>
+                      <PanelRow>
+                        <RangeControl
+                          label={__("Max-Width in PX", "devTheme")}
+                          value={ postsBreakpoints[ index ].width }
+                          onChange={ ( width ) => handleChangeBreakpointWidth( width, index, postsBreakpoints ) }
+                          min={1}
+                          max={5000}
+                        />
+                      </PanelRow>
+                      <PanelRow>
+                        <RangeControl
+                          label={__("Column sum", "devTheme")}
+                          value={ postsBreakpoints[ index ].columns }
+                          onChange={ ( columns ) => handleChangeBreakpointColumns( columns, index, postsBreakpoints ) }
+                          min={1}
+                          max={50}
+                        />
+                      </PanelRow>
+                      <PanelRow>
+                        <RangeControl
+                          label={__("Column spacing", "devTheme")}
+                          value={ postsBreakpoints[ index ].spacing }
+                          onChange={ ( spacing ) => handleChangeBreakpointSpacing( spacing, index, postsBreakpoints ) }
+                          min={1}
+                          max={100}
+                        />
+                      </PanelRow>
+                      <Button
+                        className="remove-breakpoint"
+                        icon="no-alt"
+                        label={__("remove", "devTheme")}
+                        onClick={ () => {
+                          let updateBreakpoints = [];
+                          postsBreakpoints.map( ( breakpoint, subindex ) => {
+                            if(index !== subindex){
+                              updateBreakpoints.push( breakpoint );
                             }
-                          )
-                          setAttributes( { postTaxonomyPreFilter: postTaxFilterArray } );
+                          })
+                          setAttributes({ postsBreakpoints: updateBreakpoints });
                         } }
                       />
-                    </PanelRow>
-                  );
-                }) }
-              </div>
+                    </div>;
+                  })
+              }
+            </div>
+            <PanelRow>
+              <Button
+                variant="secondary"
+                onClick={ () => {
+                  let updateBreakpoints = [];
+                  var newEntry = {
+                    width: 1000,
+                    columns: 1,
+                    spacing: 20
+                  };
+                  postsBreakpoints.map(( breakpoint ) => {
+                    updateBreakpoints.push( breakpoint );
+                  })
+                  updateBreakpoints.push(newEntry);
+                  setAttributes({ postsBreakpoints: updateBreakpoints });
+                } }
+              >
+                { __( 'Add breakpoint', 'devTheme' ) }
+              </Button>
             </PanelRow>
           </PanelBody>
       </InspectorControls>

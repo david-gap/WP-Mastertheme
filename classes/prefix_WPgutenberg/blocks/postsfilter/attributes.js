@@ -26,7 +26,6 @@ const attributes = {
     type: 'string',
     default: 'date'
   },
-
   postFilterPosition: {
     type: 'string',
     default: 'left'
@@ -59,6 +58,10 @@ const attributes = {
   },
   postTaxonomyPreFilter: {
     type: 'array'
+  },
+  postsBreakpoints: {
+    type: 'array',
+    default: []
   }
 }
 

@@ -561,6 +561,14 @@ body.page-template,
   // search form
   .wp-block-search,
   .search-form {
+    label {
+      font-family: var(--searchForm__label_fontFamily, var(--label_fontFamily, inherit));
+      font-size: var(--searchForm__label_fontSize, var(--label_fontSize, inherit));
+      line-height: var(--searchForm__label_lineHeight, var(--label_lineHeight, inherit));
+      font-weight: var(--searchForm__label_fontWeight, var(--label_fontWeight, inherit));
+      text-transform: var(--searchForm__label_textTransform, var(--label_textTransform, inherit));
+      letter-spacing: var(--searchForm__label_letterSpacing, var(--label_letterSpacing, 0px));
+    }
     button[type="submit"],
     input[type="submit"] {
       font-family: var(--searchForm__submit_fontFamily, var(--input__submit_fontFamily, var(--input__fontFamily, inherit)));
@@ -726,14 +734,16 @@ body.page-template,
 
   /* 5.7 LISTS
   /––––––––––––––––––––––––*/
-  ul.is-style-default {
+  ul.is-style-default,
+  ul.is-style-list-customizer {
     li {
       &:before {
         line-height: var(--block__list_lineHeight, 1);
       }
     }
   }
-  ol.is-style-default {
+  ol.is-style-default,
+  ol.is-style-list-customizer {
     > li {
       &::marker {
         font-size: var(--block__list_ol_marker_fontSize, inherit);

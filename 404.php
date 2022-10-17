@@ -3,12 +3,12 @@
  * The template for displaying 404 pages (not found)
  *
  * @author      David Voglgsang
- * @version     1.2.2
+ * @version     1.3.2
 */
 
 get_header();
 ?>
-<section id="error-page" <?php echo prefix_template::AddContainer(prefix_template::$template_container, true); ?>>
+<section id="error-page" <?php echo prefix_template::AddContainer(prefix_template::$template_container, prefix_template::$template_container_errorpage_wide, true); ?>>
   <?php
     if(array_key_exists('thumbnail', prefix_template::$template_header_sort) && prefix_template::$template_header_sort['thumbnail'] == 1):
     else:

@@ -82,6 +82,10 @@ register_block_type(
         'type' => 'boolean',
         'default' => false
       ),
+      'postsBreakpoints' => array(
+        'type' => 'array',
+        'default' => array()
+      )
     ),
     'render_callback' => 'WPgutenberg_posts_blockRender'
   )
@@ -179,11 +183,11 @@ function WPgutenberg_posts_PostBuilder(array $attr, $id, $currentId){
       $linkOpen = $get_url && $get_url !== '' ? '<a href="' . $get_url . '">' : '';
       $linkClose = $get_url && $get_url !== '' ? '</a>' : '';
     endif;
-    if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_box', $attr['postTaxonomyFilterOptions'])):
+    if(array_key_exists('postTaxonomyFilterOptions', $attr) && is_array($attr['postTaxonomyFilterOptions']) && in_array('link_box', $attr['postTaxonomyFilterOptions'])):
       $output .= $linkOpen;
     endif;
       // add post thumbnail
-      if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_img', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
+      if(array_key_exists('postTaxonomyFilterOptions', $attr) && is_array($attr['postTaxonomyFilterOptions']) && in_array('link_img', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
         $output .= $linkOpen;
       endif;
         if(array_key_exists('postThumb', $attr) && $attr['postThumb'] !== false):
@@ -205,36 +209,36 @@ function WPgutenberg_posts_PostBuilder(array $attr, $id, $currentId){
             $output .= get_the_post_thumbnail($id) ? '</figure>' : '';
           endif;
         endif;
-      if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_img', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
+      if(array_key_exists('postTaxonomyFilterOptions', $attr) && is_array($attr['postTaxonomyFilterOptions']) && in_array('link_img', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
         $output .= $linkClose;
       endif;
       // add content
       $output .= '<div class="post-content">';
         if(array_key_exists('postTextOne', $attr) && $attr['postTextOne'] !== ''):
           $output .= $attr['postTextOne'] == 'title' ? '<h4>' : '<div class="' . $attr['postTextOne'] . '">';
-            if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_row1', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
+            if(array_key_exists('postTaxonomyFilterOptions', $attr) && is_array($attr['postTaxonomyFilterOptions']) && in_array('link_row1', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
 
               $output .= $linkOpen;
             endif;
               $output .= WPgutenberg_posts_ContentRow($attr['postTextOne'], $id);
-            if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_row1', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
+            if(array_key_exists('postTaxonomyFilterOptions', $attr) && is_array($attr['postTaxonomyFilterOptions']) && in_array('link_row1', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
               $output .= $linkClose;
             endif;
           $output .= $attr['postTextOne'] == 'title' ? '</h4>' : '</div>';
         endif;
         if(array_key_exists('postTextTwo', $attr) && $attr['postTextTwo'] !== ''):
           $output .= $attr['postTextTwo'] == 'title' ? '<h4>' : '<div class="' . $attr['postTextTwo'] . '">';
-            if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_row2', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
+            if(array_key_exists('postTaxonomyFilterOptions', $attr) && is_array($attr['postTaxonomyFilterOptions']) && in_array('link_row2', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
               $output .= $linkOpen;
             endif;
               $output .= WPgutenberg_posts_ContentRow($attr['postTextTwo'], $id);
-            if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_row2', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
+            if(array_key_exists('postTaxonomyFilterOptions', $attr) && is_array($attr['postTaxonomyFilterOptions']) && in_array('link_row2', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
               $output .= $linkClose;
             endif;
           $output .= $attr['postTextTwo'] == 'title' ? '</h4>' : '</div>';
         endif;
       $output .= '</div>';
-      if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_box', $attr['postTaxonomyFilterOptions'])):
+      if(array_key_exists('postTaxonomyFilterOptions', $attr) && is_array($attr['postTaxonomyFilterOptions']) && in_array('link_box', $attr['postTaxonomyFilterOptions'])):
         $output .= $linkClose;
       endif;
   $output .= '</li>';
@@ -438,7 +442,7 @@ function WPgutenberg_posts_blockRender($attr){
   $css = '';
   $inlinecss = '';
   // add edvanced options (ID/CSS)
-  $id = array_key_exists('anchor', $attr) ? ' id="' . $attr['anchor'] . '"' : '';
+  $id = array_key_exists('anchor', $attr) ? $attr['anchor'] : prefix_core_BaseFunctions::ShortID(10, 'letters');
   $css .= array_key_exists('className', $attr) ? ' ' . $attr['className'] : '';
   $css .= array_key_exists('align', $attr) ? ' align' . $attr['align'] : '';
   // add swiper
@@ -452,8 +456,18 @@ function WPgutenberg_posts_blockRender($attr){
   $columns = array_key_exists('postColumns', $attr) ? $attr['postColumns'] : 1;
   $inlinecss .= '--postColumns: ' . $columns . ';';
   $inlinecss .= ' --postColumnsSpace: ' . $spacing . 'px;';
+  // breakpoints
+  if(array_key_exists('postsBreakpoints', $attr) && !empty($attr['postsBreakpoints'])):
+    $output .= '<style>';
+      foreach ($attr['postsBreakpoints'] as $key => $breakpoint) {
+        $output .= '@media (max-width: ' . $breakpoint['width'] . 'px) {';
+          $output .= '#' . $id . ' {--postColumns: ' . $breakpoint['columns'] . '!important; --postColumnsSpace: ' . $breakpoint['spacing'] . 'px!important;}';
+        $output .= '}';
+      }
+    $output .= '</style>';
+  endif;
   // build content
-  $output .= '<div' . $id . ' class="block-posts' . $css . '" data-columnspace="' . $spacing . '" data-columns="' . $columns . '" style="' . $inlinecss . '">';
+  $output .= '<div id="' . $id . '" class="block-posts' . $css . '" data-columnspace="' . $spacing . '" data-columns="' . $columns . '" style="' . $inlinecss . '">';
     // sort options
     if(array_key_exists('postSortNav', $attr) && $attr['postSortNav'] !== false):
       $output .= '<div class="sort-options">';

@@ -4,7 +4,7 @@
  *
  * Backend area to manage configuration file
  * Author:      David Voglgsnag
- * @version     1.5.8
+ * @version     1.6.8
  *
  */
 
@@ -153,35 +153,65 @@ class prefix_core_WPadmin {
                     // return inputs
                     foreach ($builder as $input_key => $input) {
                       $output .= '<tr>';
-                        $output .= '<td><label for="WPadmin_' . $builder_slug . '_' . $input_key . '">';
-                        if(array_key_exists('label', $input)):
-                          $output .= esc_html( stripslashes( $input["label"] ) );
+                        if($input["type"] == 'title'):
+                          $output .= '<td class="title" colspan="2">' . $input["label"] . '</td>';
+                        elseif(array_key_exists('labelTitled', $input) && $input["labelTitled"] == 1):
+                            $output .= '<td class="title" colspan="2">' . $input["label"] . '</td>';
+                          $output .= '</tr>';
+                          $output .= '<tr>';
+                            $output .= '<td colspan="2" class="' . $input["type"] . '">';
+                              if(array_key_exists('type', $input)):
+                                $css = '';
+                                $css .= array_key_exists('css', $input) ? ' ' . $input["css"] : '';
+                                $value = array_key_exists('value', $input) ? $input["value"] : false;
+                                $db_value = array_key_exists($input_key, $db_settings) ? $db_settings[$input_key] : false;
+                                $placeholder = array_key_exists('placeholder', $input) ? ' ' . $input["placeholder"] : '';
+                                $translate = array_key_exists('translation', $input) ? $input["translation"] : '';
+                                $output .= SELF::BuildInput(
+                                  $input["type"],
+                                  $value,
+                                  $builder_slug . '[' . $input_key. ']',
+                                  'WPadmin_' . $builder_slug . '_' . $input_key,
+                                  $css,
+                                  $db_value,
+                                  $placeholder,
+                                  $translate
+                                );
+                              else:
+                                $output .= '<span class="error">' . __('Input type is missing','devTheme') . '</span>';
+                              endif;
+                            $output .= '</td>';
                         else:
-                          $output .= '<span class="error">' . __('Label is missing','devTheme') . '</span>';
-                        endif;
-                        $output .= '</label></td>';
-                        $output .= '<td>';
-                          if(array_key_exists('type', $input)):
-                            $css = '';
-                            $css .= array_key_exists('css', $input) ? ' ' . $input["css"] : '';
-                            $value = array_key_exists('value', $input) ? $input["value"] : false;
-                            $db_value = array_key_exists($input_key, $db_settings) ? $db_settings[$input_key] : false;
-                            $placeholder = array_key_exists('placeholder', $input) ? ' ' . $input["placeholder"] : '';
-                            $translate = array_key_exists('translation', $input) ? $input["translation"] : '';
-                            $output .= SELF::BuildInput(
-                              $input["type"],
-                              $value,
-                              $builder_slug . '[' . $input_key. ']',
-                              'WPadmin_' . $builder_slug . '_' . $input_key,
-                              $css,
-                              $db_value,
-                              $placeholder,
-                              $translate
-                            );
+                          $output .= '<td><label for="WPadmin_' . $builder_slug . '_' . $input_key . '">';
+                          if(array_key_exists('label', $input)):
+                            $output .= esc_html( stripslashes( $input["label"] ) );
                           else:
-                            $output .= '<span class="error">' . __('Input type is missing','devTheme') . '</span>';
+                            $output .= '<span class="error">' . __('Label is missing','devTheme') . '</span>';
                           endif;
-                        $output .= '</td>';
+                          $output .= '</label></td>';
+                          $output .= '<td class="' . $input["type"] . '">';
+                            if(array_key_exists('type', $input)):
+                              $css = '';
+                              $css .= array_key_exists('css', $input) ? ' ' . $input["css"] : '';
+                              $value = array_key_exists('value', $input) ? $input["value"] : false;
+                              $db_value = array_key_exists($input_key, $db_settings) ? $db_settings[$input_key] : false;
+                              $placeholder = array_key_exists('placeholder', $input) ? ' ' . $input["placeholder"] : '';
+                              $translate = array_key_exists('translation', $input) ? $input["translation"] : '';
+                              $output .= SELF::BuildInput(
+                                $input["type"],
+                                $value,
+                                $builder_slug . '[' . $input_key. ']',
+                                'WPadmin_' . $builder_slug . '_' . $input_key,
+                                $css,
+                                $db_value,
+                                $placeholder,
+                                $translate
+                              );
+                            else:
+                              $output .= '<span class="error">' . __('Input type is missing','devTheme') . '</span>';
+                            endif;
+                          $output .= '</td>';
+                        endif;
                       $output .= '</tr>';
                     }
                   $output .= '</table>';
@@ -467,7 +497,7 @@ class prefix_core_WPadmin {
           $value = array_key_exists($translationName, $langTranslations) ? $langTranslations[$translationName] : '';
           //
           $output .= '<li>';
-            $output .= $languageCode . ': ' . str_replace(array('langid', 'value=""'), array($languageCode, 'value="' . htmlspecialchars($value) . '"'), $translationValue);
+            $output .= '<label> ' . $languageCode . ':</label> ' . str_replace(array('langid', 'value=""'), array($languageCode, 'value="' . htmlspecialchars($value) . '"'), $translationValue);
           $output .= '</li>';
         }
       $output .= '</ul></span>';

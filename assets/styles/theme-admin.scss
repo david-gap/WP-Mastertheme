@@ -9,6 +9,7 @@
 
 $light:         #fff;
 $coloring:      #bbd9e4;
+$titleBg:       #5a7b86;
 $coloring_row1: #e8f5fa;
 $coloring_row2: #e2eff4;
 $button:        #007cba;
@@ -17,6 +18,37 @@ $color_error:   #a53737;
 $color_success: #74b95b;
 
 body.wp-admin {
+
+  /*==================================================================================
+    GUTENBERG
+  ==================================================================================*/
+  .edit-post-visual-editor__post-title-wrapper {
+    max-width: var(--container_content);
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .repeater {
+    .repeater-row {
+      position: relative;
+      + .repeater-row {
+        margin-top: 10px;
+        border-top: 1px solid;
+        padding-top: 10px;
+      }
+      .components-panel__row {
+        display: block;
+        margin-right: 40px;
+      }
+      .remove-breakpoint {
+        position: absolute;
+        right: 0;
+        bottom: 2px;
+        .dashicon {
+          color: $color_error;
+        }
+      }
+    }
+  }
 
   /*==================================================================================
     CONFIGURATOR
@@ -89,6 +121,13 @@ body.wp-admin {
               }
               > td {
                 padding: 5px 12px;
+                &.title {
+                  background-color: $titleBg;
+                  color: $light;
+                }
+                + td:not(.checkboxes) {
+                  text-align: right;
+                }
               }
               td:first-child {
                 font-weight: bold;
@@ -97,6 +136,7 @@ body.wp-admin {
               }
               td:first-child label {
                 font-weight: bold;
+                flex-grow: 1;
               }
             }
           }
@@ -286,11 +326,39 @@ body.wp-admin {
     /––––––––––––––––––––––––*/
     .config-group {
       .multiple {
+        li {
+          + li {
+            border-top: 1px solid $coloring;
+            padding-top: 6px;
+          }
+        }
+        .multiple {
+          li {
+            + li {
+              border-top: 0 solid;
+              padding-top: 0;
+            }
+          }
+        }
+      }
+      .multiple {
         margin: 0;
         li {
           display: flex;
           justify-content: space-between;
-          align-items: center;
+          align-items: flex-start;
+          gap: 10px;
+          label {
+            order: 0;
+            margin-top: 5px;
+          }
+          .config-translations {
+            order: 1;
+            align-self: center;
+          }
+          input {
+            order: 2;
+          }
         }
       }
     }
@@ -388,7 +456,7 @@ body.wp-admin {
     ul {
       position: absolute;
       z-index: 1;
-      right: 0;
+      left: 0;
       padding: 3px 0;
       border-top: 1px solid $coloring;
       background-color: $light;
@@ -399,10 +467,12 @@ body.wp-admin {
         pointer-events: inherit;
       }
       li {
-        padding: 3px 5px;
+        padding: 3px 10px;
+        label {
+          text-transform: uppercase;
+        }
         input {
-          min-width: 100px;
-          margin-left: 10px;
+          min-width: 166px;
         }
       }
     }
@@ -414,7 +484,7 @@ body.wp-admin {
     SWITCH BUTTON
   ==================================================================================*/
   .switchbutton {
-    display: flex;
+    display: inline-flex;
     overflow: hidden;
     input {
       position: absolute !important;
@@ -471,6 +541,11 @@ body.wp-customizer {
       padding: 6px 12px;
       margin-bottom: 0;
       margin-left: -12px;
+    }
+
+    + .customize-control {
+      border-top: 2px solid;
+      padding-top: 6px;
     }
 
 

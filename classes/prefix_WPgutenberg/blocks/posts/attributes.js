@@ -82,6 +82,10 @@ const attributes = {
     type: 'boolean',
     default: false,
   },
+  postsBreakpoints: {
+    type: 'array',
+    default: []
+  }
 }
 
 export default attributes;

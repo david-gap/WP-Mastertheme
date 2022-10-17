@@ -2,7 +2,7 @@
  * All template base javascript functions
  *
  * @author      David Voglgsang
- * @version     1.6
+ * @version     1.7
  *
  */
 
@@ -28,7 +28,7 @@
 /* Global values
 /------------------------*/
 const root = document.querySelector('html'),
-      configuration = ajaxCall({action: 'configuration'}),
+      configuration = configurations,
       language = root.getAttribute('lang'),
       isTouch = 'ontouchstart' in document.documentElement,
       body = root.querySelector('body'),
@@ -714,7 +714,7 @@ function runPostSorting(){
   document.querySelector('.block-posts[data-id="' + id + '"] .sort-options input[name="postSortDirection"]').value = newDirection;
   // run query
   var config = formValuesToAjax(this.closest('.block-posts[data-id="' + id + '"]').querySelector('form'));
-  config['path'] = '../mastertheme/classes/prefix_WPgutenberg/blocks/posts/ajax.php';
+  config['path'] = postsBlock;
   config['action'] = 'loadPosts';
   config['id'] = id;
   // run ajax function
@@ -771,7 +771,7 @@ function runPostFilter(input){
   // vars
   const id = input.closest(".block-postsfilter").getAttribute('data-id');
   var config = formValuesToAjax(input.closest('.block-postsfilter[data-id="' + id + '"]').querySelector('form'));
-  config['path'] = '../mastertheme/classes/prefix_WPgutenberg/blocks/postsfilter/ajax.php';
+  config['path'] = postsFilterBlock;
   config['action'] = 'loadPosts';
   config['id'] = id;
   if(input.closest(".block-postsfilter").querySelectorAll('input[type="checkbox"]:checked').length >= 1 || input.closest(".block-postsfilter").querySelector('#textsearch') && input.closest(".block-postsfilter").querySelector('#textsearch').value !== ""){
@@ -1435,4 +1435,4 @@ function runEventListeners(){
   allGalleryEventListeners();
 
 }
-// runEventListeners();
+runEventListeners();

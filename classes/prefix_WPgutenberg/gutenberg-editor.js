@@ -5,21 +5,21 @@ wp.blocks.registerBlockStyle( 'core/group', [{
 },
 {
   name: 'content-container',
-  label: 'Content centered',
+  label: 'Content container',
   isDefault: false,
 },{
   name: 'content-wide-container',
-  label: 'Content centered wide',
+  label: 'Content wide container',
   isDefault: false,
 }] );
 
 wp.blocks.registerBlockStyle( 'core/cover', [{
   name: 'content-container',
-  label: 'Content centered',
+  label: 'Content container',
   isDefault: false,
 },{
   name: 'content-wide-container',
-  label: 'Content centered wide',
+  label: 'Content wide container',
   isDefault: false,
 },{
   name: 'no-spacing',
@@ -32,7 +32,7 @@ wp.blocks.registerBlockStyle( 'core/cover', [{
 }] );
 
 wp.blocks.registerBlockStyle( 'core/list', [{
-  name: 'default',
+  name: 'list-customizer',
   label: 'Customizer'
 }] );
 

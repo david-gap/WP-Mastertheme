@@ -85,7 +85,7 @@
 
   /* return post thumbnail
   /------------------------*/
-  function PostImg(postThumb, postTaxonomyFilterOptions, id, media){
+  function PostImg(postThumb, postTaxonomyFilterOptions, post, media){
     if(postThumb === true && media){
 
       var imgType = ['image/jpeg', 'image/pjpeg', 'image/png', 'image/gif', 'image/x-icon'];
@@ -98,14 +98,14 @@
           return (
             <a href="#">
               <figure>
-                <img src={themedia} data-id={ id } width="100%" />
+                <img src={themedia} data-id={ post.id } width="100%" />
               </figure>
             </a>
           );
         } else {
           return (
             <figure>
-              <img src={themedia} data-id={ id } width="100%" />
+              <img src={themedia} data-id={ post.id } width="100%" />
             </figure>
           );
         }
@@ -114,14 +114,14 @@
           return (
             <a href="#">
               <figure class="wp-block-audio">
-                <audio controls src={themedia} data-id={ id } width="100%" />
+                <audio controls src={themedia} data-id={ post.id } width="100%" />
               </figure>
             </a>
           );
         } else {
           return (
             <figure class="wp-block-audio">
-              <audio controls src={themedia} data-id={ id } width="100%" />
+              <audio controls src={themedia} data-id={ post.id } width="100%" />
             </figure>
           );
         }
@@ -130,18 +130,33 @@
           return (
             <a href="#">
               <figure class="is-block-video">
-                <video controls src={themedia} data-id={ id } width="100%" />
+                <video controls src={themedia} data-id={ post.id } width="100%" />
               </figure>
             </a>
           );
         } else {
           return (
             <figure class="is-block-video">
-              <video controls src={themedia} data-id={ id } width="100%" />
+              <video controls src={themedia} data-id={ post.id } width="100%" />
             </figure>
           );
         }
       } else {
+        if(postTaxonomyFilterOptions && postTaxonomyFilterOptions.includes('link_img') && postTaxonomyFilterOptions.indexOf('link_box') < 1){
+          return (
+            <a href="#">
+              <figure>
+                <img src={themedia} data-id={ post.id } width="100%" />
+              </figure>
+            </a>
+          );
+        } else {
+          return (
+            <figure>
+              <img src={themedia} data-id={ post.id } width="100%" />
+            </figure>
+          );
+        }
       }
 
     }
@@ -431,7 +446,7 @@ REGISTER BLOCK
     } )( props => {
       // set values
       const {
-        attributes: { postType, postTaxonomyFilter, postIdFilter, postTaxonomyFilterRelation, postSum, postRepeater, postSortDirection, postSortBy, postTextOne, postTextTwo, postColumns, anchor, postThumb, postSwiper, postPopUp, postPopUpNav, postSortNav, postSortNavOptions, postColumnsSpace, postTaxonomyFilterOptions, postsInsideLoad, postsInsideLoadFirst },
+        attributes: { postType, postTaxonomyFilter, postIdFilter, postTaxonomyFilterRelation, postSum, postRepeater, postSortDirection, postSortBy, postTextOne, postTextTwo, postColumns, anchor, postThumb, postSwiper, postPopUp, postPopUpNav, postSortNav, postSortNavOptions, postColumnsSpace, postTaxonomyFilterOptions, postsInsideLoad, postsInsideLoadFirst, postsBreakpoints },
         attributes,
         className,
         setAttributes,
@@ -480,7 +495,7 @@ REGISTER BLOCK
                 return (
                   <li data-id={post.id}>
                     <a href="#">
-                        {PostImg(postThumb, postTaxonomyFilterOptions, post.id, media[ post.id ])}
+                        {PostImg(postThumb, postTaxonomyFilterOptions, post, media[ post.id ])}
                         <div class="post-content">
                           {PostValues(postTextOne, post, postTaxonomyFilterOptions, "link_row1", taxOne)}
                           {PostValues(postTextTwo, post, postTaxonomyFilterOptions, "link_row2", taxTwo)}
@@ -491,7 +506,7 @@ REGISTER BLOCK
               } else {
                 return (
                   <li data-id={post.id}>
-                      {PostImg(postThumb, postTaxonomyFilterOptions, post.id, media[ post.id ])}
+                      {PostImg(postThumb, postTaxonomyFilterOptions, post, media[ post.id ])}
                       <div class="post-content">
                         {PostValues(postTextOne, post, postTaxonomyFilterOptions, "link_row1", taxOne)}
                         {PostValues(postTextTwo, post, postTaxonomyFilterOptions, "link_row2", taxTwo)}
@@ -507,7 +522,7 @@ REGISTER BLOCK
     } ),
     save: props => {
       const {
-        attributes: { postType, postTaxonomyFilter, postIdFilter, postTaxonomyFilterRelation, postSum, postRepeater, postSortDirection, postSortBy, postTextOne, postTextTwo, postColumns, anchor, postThumb, postSwiper, postPopUp, postPopUpNav, postSortNav, postSortNavOptions, postColumnsSpace, postTaxonomyFilterOptions, postsInsideLoad, postsInsideLoadFirst },
+        attributes: { postType, postTaxonomyFilter, postIdFilter, postTaxonomyFilterRelation, postSum, postRepeater, postSortDirection, postSortBy, postTextOne, postTextTwo, postColumns, anchor, postThumb, postSwiper, postPopUp, postPopUpNav, postSortNav, postSortNavOptions, postColumnsSpace, postTaxonomyFilterOptions, postsInsideLoad, postsInsideLoadFirst, postsBreakpoints },
         attributes
       } = props;
 

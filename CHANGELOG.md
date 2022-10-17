@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## 1.69.32 | 16.10.2022 <💎 IMPROVE: posts & -filter breakpoints, 🐛 FIX>
+* Add search form label styles to customizer
+* Add subtitling in the configurator
+* Customizer range + number x4 input extension
+* Fix Hamburger close max width
+* Rename the list block css name for the customizer styles (old settings are still working till next release)
+* Wide width setting for 404, Blog, Archive and Searchresults page
+* Backend fallback for the posts block thumbnail type
+* Add breakpoint settings to posts and postsfilter block
+* Remove on load ajax request for the configuration file
+
 ## 1.68.32 | 09.10.2022 <📦 NEW: customizer field type 🐛 FIX: post meta>
 * Improve customizer coloring with dark mode live preview
 * Add CSS file for touch divices

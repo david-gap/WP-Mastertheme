@@ -38,6 +38,7 @@
   width: 100px;
   padding: 0 5px;
   border: 0px solid;
+  min-width: 50px;
 }
 .range-slider .range-slider__unit:disabled {
   -webkit-appearance: none;

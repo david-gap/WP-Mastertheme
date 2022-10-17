@@ -3,13 +3,13 @@
  * Search results page
  *
  * @author      David Voglgsang
- * @version     1.4.1
+ * @version     1.5.1
  *
 */
 
 get_header();
 ?>
-<section id="search-results" <?php echo prefix_template::AddContainer(prefix_template::$template_container, true); ?>>
+<section id="search-results" <?php echo prefix_template::AddContainer(prefix_template::$template_container, prefix_template::$template_container_searchresults_wide, true); ?>>
   <?php
     if(array_key_exists('thumbnail', prefix_template::$template_header_sort) && prefix_template::$template_header_sort['thumbnail'] == 1):
     else:

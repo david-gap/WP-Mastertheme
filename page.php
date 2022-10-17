@@ -3,7 +3,7 @@
  * Pages File
  *
  * @author      David Voglgsang
- * @version     1.1.5
+ * @version     1.2.5
  *
 */
 
@@ -13,7 +13,7 @@ $obj = get_queried_object();
 // page options
 $options = $obj && property_exists($obj, 'ID') ? prefix_template::PageOptions($obj->ID) : array();
 ?>
-<section id="page" <?php echo prefix_template::AddContainer(prefix_template::$template_container, true); ?>>
+<section id="page" <?php echo prefix_template::AddContainer(prefix_template::$template_container, 0, true); ?>>
   <?php if (have_posts() ) : while (have_posts()) : the_post() ?>
     <?php if(!in_array('thumbnail', $options)):
       if(array_key_exists('thumbnail', prefix_template::$template_header_sort) && prefix_template::$template_header_sort['thumbnail'] == 1):

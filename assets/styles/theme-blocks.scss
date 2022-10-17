@@ -146,9 +146,12 @@ body.page-template,
           > figure {
             margin: var(--block__posts_thumb_margin, 0);
             padding: var(--block__posts_thumb_padding, 0);
+            img,
             audio,
             video {
               max-width: 100%;
+              width: 100%;
+              height: auto;
             }
           }
           .post-content {
@@ -520,7 +523,7 @@ body.page-template,
       overflow: hidden;
       display: flex;
       flex-wrap: wrap;
-      min-width: 100%;
+      width: 100%;
       > a {
         display: block;
         position: absolute;
@@ -745,12 +748,15 @@ body.page-template,
 
   /* 2.1 LIST
   /––––––––––––––––––––––––*/
-  ul.is-style-default {
+  ul.is-style-default,
+  ul.is-style-list-customizer {
     border-width: var(--block__list_borderWidth, 0);
     border-style: var(--block__list_borderStyle, solid);
   }
   ul.is-style-default,
-  ul.is-style-default ul {
+  ul.is-style-default ul,
+  ul.is-style-list-customizer,
+  ul.is-style-list-customizer ul {
     display: flex;
     flex-direction: column;
     list-style: none;
@@ -774,12 +780,15 @@ body.page-template,
   }
 
 
-  ol.is-style-default {
+  ol.is-style-default,
+  ol.is-style-list-customizer {
     border-width: var(--block__list_ol_borderWidth, 0);
     border-style: var(--block__list_ol_borderStyle, solid);
   }
   ol.is-style-default,
-  ol.is-style-default ol {
+  ol.is-style-default ol,
+  ol.is-style-list-customizer,
+  ol.is-style-list-customizer ol {
     display: flex;
     flex-direction: column;
     margin-top: 0;

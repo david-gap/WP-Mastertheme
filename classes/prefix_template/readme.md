@@ -1,4 +1,4 @@
-**Version 2.36.18** (09.10.2022)
+**Version 2.37.18** (16.10.2022)
 
 Custom class "template" with template parts and header / footer builder
 
@@ -8,6 +8,12 @@ Custom class "template" with template parts and header / footer builder
 * $template_container: activate container for the content
 * $template_container_totop: activate container for the scroll to top button
 * $template_container_footer: activate container for the footer
+* $template_container_header_wide: Set header container to wide width
+* $template_container_blog_wide: Set blog container to wide width
+* $template_container_archive_wide: Set archive container to wide width
+* $template_container_searchresults_wide: Set search results container to wide width
+* $template_container_errorpage_wide: Set 404 container to wide width
+* $template_container_footer_wide: Set footer container to wide width
 * $template_coloring: template coloring (dark/light)
 * $template_ph_active: activate placeholder
 * $template_ph_address: placeholder show address block
@@ -228,9 +234,10 @@ echo prefix_template::CheckSticky(prefix_template::$template_header_sticky, pref
 
 ### CONTAINER
 First variable to set container true or false
-Set second variable to true if you would like to add class attribute to the output
+Set the second variable to 1 if you would like to use the wide width container
+Set last variable to true if you would like to add class attribute to the output
 ```php
-echo prefix_template::AddContainer(prefix_template::$template_container, true);
+echo prefix_template::AddContainer(prefix_template::$template_container, 1, true);
 ```
 
 ### PAGE OPTIONS

@@ -356,6 +356,11 @@ body.page-template,
   /––––––––––––––––––––––––*/
   .wp-block-search,
   .search-form {
+    label {
+      background-color: var(--searchForm__label_backgroundColor, var(--label_backgroundColor, inherit));
+      border-color: var(--searchForm__label_border_color, var(--label_border_color, unset));
+      color: var(--searchForm__label_color, var(--label_color, inherit));
+    }
     input[type="submit"],
     button[type="submit"] {
       background-color: var(--searchForm__submit_bg_color, var(--input__submit_bg_color));
@@ -867,13 +872,16 @@ body.page-template,
 
   /* 4.5 LIST
   /––––––––––––––––––––––––*/
-  ul.is-style-default {
+  ul.is-style-default,
+  ul.is-style-list-customizer {
     &:not(.has-border-color){
       border-color: var(--block__list_borderColor, unset);
     }
   }
   ul.is-style-default,
-  ul.is-style-default ul {
+  ul.is-style-default ul,
+  ul.is-style-list-customizer,
+  ul.is-style-list-customizer ul {
     > li {
       border-color: var(--block__list_item_borderColor, unset);
       &:before {
@@ -881,13 +889,16 @@ body.page-template,
       }
     }
   }
-  ol.is-style-default {
+  ol.is-style-default,
+  ol.is-style-list-customizer {
     &:not(.has-border-color){
       border-color: var(--block__list_ol_borderColor, unset);
     }
   }
   ol.is-style-default,
-  ol.is-style-default ul {
+  ol.is-style-default ol,
+  ol.is-style-list-customizer,
+  ol.is-style-list-customizer ul {
     > li {
       border-color: var(--block__list_ol_item_borderColor, unset);
       &::marker {

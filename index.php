@@ -3,13 +3,13 @@
  * Home File
  *
  * @author      David Voglgsang
- * @version     1.3
+ * @version     1.4
  *
 */
 
 get_header();
 ?>
-<section id="home" <?php echo prefix_template::AddContainer(prefix_template::$template_container, true); ?>>
+<section id="home" <?php echo prefix_template::AddContainer(prefix_template::$template_container, prefix_template::$template_container_blog_wide, true); ?>>
   <div>
     <?php if (have_posts() ) : while (have_posts()) : the_post();
       if(get_post_type() == "post" || post_type_supports(get_post_type(), 'post-formats')):

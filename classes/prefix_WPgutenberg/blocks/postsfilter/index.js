@@ -431,7 +431,7 @@ REGISTER BLOCK
     } )( props => {
       // set values
       const {
-        attributes: { anchor, postType, postSortBy, postTextOne, postTextTwo, postTaxonomyFilter, postTaxonomyPreFilter, postTaxonomyFilterOptions, postColumns, postFilterPosition, postListTemplate, postColumnsSpace, postTextSearch, postThumb, postTaxonomyFilterRelation, postSortDirection },
+        attributes: { anchor, postType, postSortBy, postTextOne, postTextTwo, postTaxonomyFilter, postTaxonomyPreFilter, postTaxonomyFilterOptions, postColumns, postFilterPosition, postListTemplate, postColumnsSpace, postTextSearch, postThumb, postTaxonomyFilterRelation, postSortDirection, postsBreakpoints },
         attributes,
         className,
         setAttributes,
@@ -509,7 +509,7 @@ REGISTER BLOCK
     } ),
     save: props => {
       const {
-        attributes: { anchor, postType, postSortBy, postTextOne, postTextTwo, postTaxonomyFilter, postTaxonomyPreFilter, postTaxonomyFilterOptions, postColumns, postFilterPosition, postListTemplate, postColumnsSpace, postTextSearch, postThumb, postTaxonomyFilterRelation, postSortDirection },
+        attributes: { anchor, postType, postSortBy, postTextOne, postTextTwo, postTaxonomyFilter, postTaxonomyPreFilter, postTaxonomyFilterOptions, postColumns, postFilterPosition, postListTemplate, postColumnsSpace, postTextSearch, postThumb, postTaxonomyFilterRelation, postSortDirection, postsBreakpoints },
         attributes
       } = props;
 

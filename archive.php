@@ -3,13 +3,13 @@
  * Post Type File Overview
  *
  * @author      David Voglgsang
- * @version     1.4
+ * @version     1.5
  *
 */
 
 get_header();
 ?>
-<section id="archive" <?php echo prefix_template::AddContainer(prefix_template::$template_container, true); ?>>
+<section id="archive" <?php echo prefix_template::AddContainer(prefix_template::$template_container, prefix_template::$template_container_archive_wide, true); ?>>
   <div>
     <?php while ( have_posts() ) : the_post();
       if(get_post_type() == "post" || post_type_supports(get_post_type(), 'post-formats')):

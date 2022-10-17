@@ -132,6 +132,8 @@ body.page-template,
         z-index: 101;
         span {
           transform: rotate(-45deg);
+          max-width: var(--hamburger__container_height,40px);
+          max-height: var(--hamburger__container_width,40px);
           &:before,
           &:after {
             width: 50%;
