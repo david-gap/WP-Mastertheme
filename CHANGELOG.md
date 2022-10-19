@@ -6,6 +6,7 @@
 * Add filter for core ajax functions
 * Add lightbox entry info styles
 * Fix extended vimeo align settings
+* Hide header, main and footer overflow x
 
 ## 1.69.32 | 16.10.2022 <💎 IMPROVE: posts & -filter breakpoints, 🐛 FIX>
 * Add search form label styles to customizer
