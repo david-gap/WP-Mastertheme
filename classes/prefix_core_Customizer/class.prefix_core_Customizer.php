@@ -1022,17 +1022,17 @@ class prefix_core_Customizer {
                 'hamburger__container_width' => array(
                   'label' => 'Width',
                   'type' => 'range-value',
-                  'rangeSuffixFixed' => 'px'
+                  'rangeSuffix' => 'px'
                 ),
                 'hamburger__container_height' => array(
                   'label' => 'Height',
                   'type' => 'range-value',
-                  'rangeSuffixFixed' => 'px'
+                  'rangeSuffix' => 'px'
                 ),
                 'hamburger__size' => array(
                   'label' => 'Size',
                   'type' => 'range-value',
-                  'rangeSuffixFixed' => 'px',
+                  'rangeSuffix' => 'px',
                   'rangeMax' => 30
                 ),
                 'content__blur_activemenu' => array(
@@ -1137,7 +1137,7 @@ class prefix_core_Customizer {
                   'type' => 'range-value',
                   'default' => '100px',
                   'rangeMax' => 300,
-                  'rangeSuffixFixed' => 'px'
+                  'rangeSuffix' => 'px'
                 ),
                 'content__space_mobile' => array(
                   'label' => 'Space between elements',
@@ -1152,7 +1152,7 @@ class prefix_core_Customizer {
                   'type' => 'range-value',
                   'default' => '120px',
                   'rangeMax' => 300,
-                  'rangeSuffixFixed' => 'px'
+                  'rangeSuffix' => 'px'
                 )
               )
             ),
@@ -1227,14 +1227,14 @@ class prefix_core_Customizer {
                   'type' => 'range-value',
                   'rangeMin' => 0,
                   'rangeMax' => 1,
-                  'rangeSuffixFixed' => ''
+                  'rangeSuffix' => ''
                 ),
                 'menuItem__svg_positionBehind_opacity_hover' => array(
                   'label' => 'Opacity',
                   'type' => 'range-value',
                   'rangeMin' => 0,
                   'rangeMax' => 1,
-                  'rangeSuffixFixed' => ''
+                  'rangeSuffix' => ''
                 )
               )
             ),
@@ -4281,7 +4281,7 @@ class prefix_core_Customizer {
                   'type' => 'range-value',
                   'rangeMin' => 0,
                   'rangeMax' => 1,
-                  'rangeSuffixFixed' => ''
+                  'rangeSuffix' => ''
                 ),
                 'popup__arrow_height' => array(
                   'label' => 'Height',
@@ -4309,7 +4309,7 @@ class prefix_core_Customizer {
                   'type' => 'range-value',
                   'rangeMin' => 0,
                   'rangeMax' => 1,
-                  'rangeSuffixFixed' => ''
+                  'rangeSuffix' => ''
                 )
               )
             ),
@@ -5522,7 +5522,7 @@ class prefix_core_Customizer {
                   'type' => 'range-value',
                   'rangeMin' => 0,
                   'rangeMax' => 1,
-                  'rangeSuffixFixed' => ''
+                  'rangeSuffix' => ''
                 ),
                 'block__imagegallery_arrow_position' => array(
                   'label' => 'Position from sides',
@@ -7388,7 +7388,7 @@ class prefix_core_Customizer {
                   'type' => 'range-value',
                   'rangeMin' => 0,
                   'rangeMax' => 1,
-                  'rangeSuffixFixed' => ''
+                  'rangeSuffix' => ''
                 ),
                 'block__videojs_coverPause_bgColor' => array(
                   'label' => 'Background color (on pause)',
@@ -7399,7 +7399,7 @@ class prefix_core_Customizer {
                   'type' => 'range-value',
                   'rangeMin' => 0,
                   'rangeMax' => 1,
-                  'rangeSuffixFixed' => ''
+                  'rangeSuffix' => ''
                 )
               )
             ),
