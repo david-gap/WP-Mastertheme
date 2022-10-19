@@ -157,9 +157,12 @@ function WPgutenberg_postsfilter_PostBuilder(array $attr, $id){
         if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_img', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
           $output .= $linkOpen;
         endif;
-        $output .= get_the_post_thumbnail($id) ? '<figure>' : '';
-          $output .= get_the_post_thumbnail($id, 'full', ['data-id' => $id, 'callingFrom' => 'postsfilterblock', 'figure' => 0]);
-        $output .= get_the_post_thumbnail($id) ? '</figure>' : '';
+        $thumb = get_the_post_thumbnail($id, 'full', ['data-id' => $id, 'callingFrom' => 'postsfilterblock', 'figure' => 0]);
+        if($thumb):
+          $output .= '<figure>';
+            $output .= $thumb;
+          $output .= '</figure>';
+        endif;
         if(array_key_exists('postTaxonomyFilterOptions', $attr) && in_array('link_img', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
           $output .= $linkClose;
         endif;
