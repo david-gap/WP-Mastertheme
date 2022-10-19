@@ -2010,14 +2010,15 @@ class prefix_template {
         $videoOptions = unserialize($videoOptions);
       endif;
       if($videoThumbActive && $videoId && $attr && array_key_exists('callingFrom', $attr) && in_array($attr["callingFrom"], $videoOptions)):
+        $figure = array_key_exists('figure', $attr) ? $attr["figure"] : 1;
         $html = '';
         $atts = '';
         $atts .= in_array($attr["callingFrom"], array('postsblock')) ? ' data-id="' . $post_id . '"' : '';
         $placeholder = $post_thumbnail_id > 0 ? '  poster="' . wp_get_attachment_image_url($post_thumbnail_id, 'full') . '"' : '';
         $html .= $attr["callingFrom"] == 'detailpage' ? '<div class="' . $attr["class"] . '">' : '';
-        $html .= $attr["callingFrom"] !== 'detailpage' && $attr["callingFrom"] !== 'postsblock' ? '<figure class="' . $attr["class"] . '">' : '';
+        $html .= $attr["callingFrom"] !== 'detailpage' && $figure == 1 ? '<figure class="' . $attr["class"] . '">' : '';
         $html .= '<video src="' . wp_get_attachment_url($videoId) . '" autoplay muted playsinline loop' . $placeholder . $atts . '></video>';
-        $html .= $attr["callingFrom"] !== 'detailpage' && $attr["callingFrom"] !== 'postsblock' ? '</figure>' : '';
+        $html .= $attr["callingFrom"] !== 'detailpage' && $figure == 1 ? '</figure>' : '';
         $html .= $attr["callingFrom"] == 'detailpage' ? '</div>' : '';
       endif;
       return $html;

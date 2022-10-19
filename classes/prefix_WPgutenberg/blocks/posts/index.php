@@ -209,7 +209,7 @@ function WPgutenberg_posts_PostBuilder(array $attr, $id, $currentId){
             $output .= '<figure>' . $file . '</figure>';
           else:
             $output .= get_the_post_thumbnail($id) ? '<figure>' : '';
-              $output .= get_the_post_thumbnail($id, 'full', ['data-id' => $id, 'callingFrom' => 'postsblock']);
+              $output .= get_the_post_thumbnail($id, 'full', ['data-id' => $id, 'callingFrom' => 'postsblock', 'figure' => 0]);
             $output .= get_the_post_thumbnail($id) ? '</figure>' : '';
           endif;
         endif;
