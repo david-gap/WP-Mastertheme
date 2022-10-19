@@ -39,6 +39,7 @@
     'popup__width',
     'popup__space',
     'popup_prev_visible',
+    'popup__space_mobile',
     'popup__arrow_color',
     'popup__arrow_opacity',
     'popup__arrow_backgroundColor',

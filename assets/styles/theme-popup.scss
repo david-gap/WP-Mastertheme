@@ -63,7 +63,7 @@
   .popup-container {
     width: 100%;
     width: fit-content;
-    max-width: var(--popup__width, 800px);
+    max-width: calc(100vw - var(--popup__space, 40px) - var(--popup__space, 40px));
     min-width: 304px;
     margin: var(--popup__space, 40px);
     max-height: 100%;
@@ -91,7 +91,7 @@
       overflow-y: auto;
       &.with-info {
         width: var(--popup__width, 800px);
-        max-width: 100vw;
+        max-width: 100%;
         figure {
           width: var(--popup__figure_width, 70%);
           flex-basis: var(--popup__figure_width, 70%);

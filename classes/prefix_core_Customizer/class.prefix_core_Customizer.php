@@ -4233,18 +4233,27 @@ class prefix_core_Customizer {
                   'label' => 'Lightbox width',
                   'type' => 'range-value',
                   'default' => '800px',
+                  'rangeSuffix' => 'px',
                   'rangeMax' => 3000
                 ),
                 'popup__space' => array(
                   'label' => 'Container padding',
-                  'type' => 'range-four-value',
-                  'default' => '40px'
+                  'type' => 'range-value',
+                  'default' => '40px',
+                  'rangeSuffix' => 'px'
                 ),
                 'popup_prev_visible' => array(
                   'label' => 'Preview visibility',
                   'type' => 'range-value',
                   'default' => '30px',
+                  'rangeSuffix' => 'px',
                   'rangeMax' => 1000
+                ),
+                'popup__space_mobile' => array(
+                  'label' => 'Container padding',
+                  'type' => 'range-value',
+                  'default' => '0px',
+                  'rangeSuffix' => 'px'
                 )
               )
             ),
@@ -8303,7 +8312,7 @@ class prefix_core_Customizer {
       endif;
     $output .= '}';
     // popup/lightbox
-    $output .= '@media screen and (max-width: ' . $popup_breakpoint . $popup_breakpoint[1] . ') {';
+    $output .= '@media screen and (max-width: ' . $popup_breakpoint . 'px) {';
       if(file_exists(get_template_directory() . "/dist/responsive_popup.css")):
         $output .= file_get_contents(get_template_directory() . "/dist/responsive_popup.css");
       endif;
