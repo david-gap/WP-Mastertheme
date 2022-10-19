@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.17.15
+ * @version     2.18.15
  *
 */
 
@@ -80,8 +80,8 @@ class prefix_WPinit {
     private $WPinit_css_version        = 1.0;
     private $WPinit_css_path           = "/dist/style.min.css";
     private $WPinit_admin_css_path     = "/dist/style_backend.min.css";
-    private $WPinit_theme_js_version   = 1.8;
-    private $WPinit_theme_css_version  = 1.7;
+    private $WPinit_theme_js_version   = 1.9;
+    private $WPinit_theme_css_version  = 1.8;
     private $WPinit_js                 = 0;
     private $WPinit_js_version         = 1.0;
     private $WPinit_js_path            = "/dist/script.min.js";
@@ -431,6 +431,9 @@ class prefix_WPinit {
         $postsFilterBlock = '../mastertheme/classes/prefix_WPgutenberg/blocks/postsfilter/ajax.php';
         wp_localize_script( 'theme/scripts', 'postsBlock', $postsBlock);
         wp_localize_script( 'theme/scripts', 'postsFilterBlock', $postsFilterBlock);
+        // add core ajax path
+        $mainAjax = '../mastertheme/main-ajax.php';
+        wp_localize_script( 'theme/scripts', 'mainPath', $mainAjax);
       // template css
         wp_enqueue_style('theme/styles', get_template_directory_uri() . '' . $this->WPinit_css_path, false, $this->WPinit_theme_css_version);
       // jQuery (from wp core)

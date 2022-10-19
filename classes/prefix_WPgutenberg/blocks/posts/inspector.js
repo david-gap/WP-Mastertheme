@@ -52,6 +52,7 @@ export default class Inspector extends Component {
         postThumb,
         postSwiper,
         postPopUp,
+        postPopUpInfo,
         postPopUpNav,
         postSortNav,
         postsInsideLoad,
@@ -566,7 +567,15 @@ export default class Inspector extends Component {
             </PanelRow>
             <PanelRow>
               <ToggleControl
-                  id="posts-popup"
+                  id="posts-popup-info"
+                  label={ __( 'Load post info inside Lightbox', 'devTheme' ) }
+                  checked={ postPopUpInfo }
+                  onChange={postPopUpInfo => setAttributes({ postPopUpInfo })}
+              />
+            </PanelRow>
+            <PanelRow>
+              <ToggleControl
+                  id="posts-popup-preview"
                   label={ __( 'Image preview inside Lightbox', 'devTheme' ) }
                   checked={ postPopUpNav }
                   onChange={postPopUpNav => setAttributes({ postPopUpNav })}

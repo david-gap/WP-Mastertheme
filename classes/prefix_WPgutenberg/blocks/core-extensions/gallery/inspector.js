@@ -39,6 +39,7 @@ export default class Inspector extends Component {
         addSwiper,
         addBulletNav,
         addPopUp,
+        addPopUpInfo,
         addPopUpPreview,
         addDownloadButton,
         addDownloadAllButton
@@ -71,6 +72,14 @@ export default class Inspector extends Component {
                     label={ __( 'Activate Lightbox', 'devTheme' ) }
                     checked={ addPopUp }
                     onChange={addPopUp => setAttributes({ addPopUp })}
+                />
+              </PanelRow>
+              <PanelRow>
+                <ToggleControl
+                    id="posts-popup-info"
+                    label={ __( 'Load post info inside Lightbox', 'devTheme' ) }
+                    checked={ addPopUpInfo }
+                    onChange={addPopUpInfo => setAttributes({ addPopUpInfo })}
                 />
               </PanelRow>
               <PanelRow>

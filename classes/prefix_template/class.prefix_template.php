@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.37.18
+ * @version     2.37.19
  *
 */
 
@@ -2011,11 +2011,13 @@ class prefix_template {
       endif;
       if($videoThumbActive && $videoId && $attr && array_key_exists('callingFrom', $attr) && in_array($attr["callingFrom"], $videoOptions)):
         $html = '';
+        $atts = '';
+        $atts .= in_array($attr["callingFrom"], array('postsblock')) ? ' data-id="' . $post_id . '"' : '';
         $placeholder = $post_thumbnail_id > 0 ? '  poster="' . wp_get_attachment_image_url($post_thumbnail_id, 'full') . '"' : '';
         $html .= $attr["callingFrom"] == 'detailpage' ? '<div class="' . $attr["class"] . '">' : '';
-        $html .= $attr["callingFrom"] !== 'detailpage' ? '<figure class="' . $attr["class"] . '">' : '';
-        $html .= '<video src="' . wp_get_attachment_url($videoId) . '" autoplay muted playsinline loop' . $placeholder . '></video>';
-        $html .= $attr["callingFrom"] !== 'detailpage' ? '</figure>' : '';
+        $html .= $attr["callingFrom"] !== 'detailpage' && $attr["callingFrom"] !== 'postsblock' ? '<figure class="' . $attr["class"] . '">' : '';
+        $html .= '<video src="' . wp_get_attachment_url($videoId) . '" autoplay muted playsinline loop' . $placeholder . $atts . '></video>';
+        $html .= $attr["callingFrom"] !== 'detailpage' && $attr["callingFrom"] !== 'postsblock' ? '</figure>' : '';
         $html .= $attr["callingFrom"] == 'detailpage' ? '</div>' : '';
       endif;
       return $html;
@@ -2970,8 +2972,9 @@ class prefix_template {
 
     /* 3.18 POST META
     /------------------------*/
-    public static function postMeta(string $postType = '', array $options = array(), int $overview = 0){
+    public static function postMeta(string $postType = '', array $options = array(), int $overview = 0, int $postID = 0){
       $output = '';
+      $postID = $postID > 0 ? $postID : get_the_id();
       // get settings
       if($overview == 1):
         // if its a overview output
@@ -3062,20 +3065,20 @@ class prefix_template {
         $output .= '<div class="post-meta">';
             // meta date and time
             if($settingsDate || $settingsTime):
-              $output .= '<time class="entry-date" datetime="' . get_the_time( 'c' ) . '">';
+              $output .= '<time class="entry-date" datetime="' . get_the_time('c', $postID) . '">';
               // if date active
               if($settingsDate):
-                $output .= '<span class="date">' . get_the_date(prefix_template::$template_meta_dateformat) . '</span>';
+                $output .= '<span class="date">' . get_the_date(prefix_template::$template_meta_dateformat, $postID) . '</span>';
               endif;
               // if time active
               if($settingsTime):
-                $output .= '<span class="time">' . get_the_date('G:i') . '</span>';
+                $output .= '<span class="time">' . get_the_date('G:i', $postID) . '</span>';
               endif;
               $output .= '</time>';
             endif;
             // meta author
             if($settingsAuthor):
-              $output .= '<span class="entry-author">' . get_the_author() . '</span>';
+              $output .= '<span class="entry-author">' . get_the_author($postID) . '</span>';
             endif;
         $output .= '</div>';
       endif;

@@ -39,6 +39,7 @@
       } = props;
       const {
         addPopUp,
+        addPopUpInfo,
         addDownloadButton,
       } = attributes;
       return (
@@ -56,9 +57,12 @@
   /* add custom element class in save element
   /------------------------*/
   function applyExtraClass( extraProps, blockType, attributes ) {
-    const { addPopUp } = attributes;
+    const { addPopUp, addPopUpInfo } = attributes;
     if ( typeof addPopUp !== 'undefined' && addPopUp && allowedBlocks.includes( blockType.name ) ) {
       extraProps.className = classnames( extraProps.className, 'add-popup' );
+    }
+    if ( typeof addPopUpInfo !== 'undefined' && addPopUpInfo && allowedBlocks.includes( blockType.name ) ) {
+      extraProps.className = classnames( extraProps.className, 'popup-info' );
     }
     return extraProps;
   }

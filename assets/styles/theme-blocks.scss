@@ -523,7 +523,9 @@ body.page-template,
       overflow: hidden;
       display: flex;
       flex-wrap: wrap;
-      width: 100%;
+      &:not(.alignwide):not(.alignfull) {
+        width: 100%;
+      }
       > a {
         display: block;
         position: absolute;

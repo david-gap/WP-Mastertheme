@@ -2,7 +2,7 @@
  * Swiper & Grid gallery with popup
  *
  * @author      David Voglgsang
- * @version     1.3
+ * @version     1.4
  *
  */
 
@@ -228,10 +228,9 @@ function getNextImg(){
   // get current img
   var currentPopUp = document.querySelector('.popup > .popup-container > .popup-content'),
       currentPopUpID = currentPopUp.getAttribute('data-id'),
-      currentImg = document.querySelector('.popup > .popup-container > .popup-content > img, .popup > .popup-container > .popup-content > audio, .popup > .popup-container > .popup-content > video'),
+      currentImg = document.querySelector('.popup > .popup-container > .popup-content > figure > img, .popup > .popup-container > .popup-content > figure > audio, .popup > .popup-container > .popup-content > figure > video'),
       currentImgID = currentImg.getAttribute('data-id'),
       currentImgParent = document.querySelector('[data-id="' + currentPopUpID + '"]');
-
   if(currentImgParent.classList.contains('wp-block-gallery')){
     var imgInGallery = document.querySelector('[data-id="' + currentPopUpID + '"] figure img[data-id="' + currentImgID + '"]'),
         imgInGalleryParent = imgInGallery.closest('figure');
@@ -245,9 +244,30 @@ function getNextImg(){
   } else if (this.classList.contains('back')) {
     var newImgParent = imgInGalleryParent.previousElementSibling;
   }
-  var newImg = newImgParent.querySelector('img, audio, video');
+  if(currentImgParent.classList.contains('wp-block-gallery')){
+    var newImg = newImgParent;
+  } else {
+    var newImg = newImgParent.querySelector('figure');
+  }
   document.querySelector('.popup > .popup-container > .popup-content').innerHTML = '';
-  document.querySelector('.popup > .popup-container > .popup-content').appendChild(newImg.cloneNode());
+  document.querySelector('.popup > .popup-container > .popup-content').appendChild(newImg.cloneNode(true));
+
+  if(currentImgParent.classList.contains('popup-info')){
+    document.querySelector('.popup > .popup-container > .popup-content').classList.add("with-info");
+    const infoContainer = document.createElement('div');
+    infoContainer.className = 'popup-info';
+    document.querySelector('.popup > .popup-container > .popup-content').appendChild(infoContainer);
+    // run ajax function
+    var config = {
+      action: 'loadEntryInfo',
+      path: mainPath,
+      targetContent: '.popup .popup-container .popup-content .popup-info',
+      id: newImg.querySelector('img, video, audio').getAttribute('data-id')
+    };
+    ajaxCall(config);
+  } else {
+    document.querySelector('.popup > .popup-container > .popup-content').classList.remove("with-info");
+  }
   // update arrows
   checkImgArrows(newImgParent);
   // update preview images
@@ -304,15 +324,35 @@ function PreviewImages(imgID, galleryID){
 function loadGalleryPopUp(){
   // load pop up
   loadPopUp();
+  var entryID = this.querySelector('img, video, audio').getAttribute('data-id');
   // load content
   setTimeout(function(self) {
-    // insert image and arrows
     var popupContainer = document.querySelector('.popup > .popup-container > .popup-content');
-    popupContainer.insertAdjacentHTML('beforebegin', galleryArrowBefore);
-    popupContainer.appendChild(self.cloneNode());
-    popupContainer.insertAdjacentHTML('afterend', galleryArrowAfter);
-    // add id of current gallery
     var currentGallery = self.closest('.add-popup');
+    // insert image and arrows
+    popupContainer.insertAdjacentHTML('beforebegin', galleryArrowBefore);
+    popupContainer.insertAdjacentHTML('afterend', galleryArrowAfter);
+    popupContainer.appendChild(self.cloneNode(true));
+    if(currentGallery.classList.contains('popup-info')){
+      const infoContainer = document.createElement('div');
+      popupContainer.classList.add("with-info");
+      infoContainer.className = 'popup-info';
+      popupContainer.appendChild(infoContainer);
+      if(popupContainer.querySelector('figure')){
+        popupContainer.querySelector('figure').classList.remove('add-popup', 'popup-info');
+      }
+      // run ajax function
+      var config = {
+        action: 'loadEntryInfo',
+        path: mainPath,
+        targetContent: '.popup .popup-container .popup-content .popup-info',
+        id: entryID
+      };
+      ajaxCall(config);
+    } else {
+      popupContainer.classList.remove("with-info");
+    }
+    // add id of current gallery
     popupContainer.setAttribute('data-id', currentGallery.getAttribute('data-id'));
     // check for preview images
     if(currentGallery.classList.contains('popup-preview')){
@@ -322,16 +362,11 @@ function loadGalleryPopUp(){
       // define popup to be with preview
       document.querySelector('.popup > .popup-container').classList.add('popup-preview');
       // get preview images
-      if(currentGallery.classList.contains('wp-block-gallery')){
-        var imgID = self.getAttribute('data-id');
-      } else {
-        var imgID = self.closest('li').getAttribute('data-id');
-      }
-      PreviewImages(imgID, currentGallery.getAttribute('data-id'));
+      PreviewImages(entryID, currentGallery.getAttribute('data-id'));
     }
     // check popup arrows
     if(currentGallery.classList.contains('wp-block-gallery')){
-      var parentLi = self.closest('figure');
+      var parentLi = self;
     } else {
       var parentLi = self.closest('li');
     }
@@ -361,7 +396,11 @@ function allGalleryEventListeners(){
     if(activeGalleries.length > 0){
     Array.from(activeGalleries).forEach(function(gallery) {
       // open pop-up
-      gallery.setAttribute('data-id', uniqueID());
+      if(gallery.hasAttribute('data-id')){
+        // ID existing
+      } else {
+        gallery.setAttribute('data-id', uniqueID());
+      }
     });
   }
 
@@ -426,7 +465,7 @@ function allGalleryEventListeners(){
 
   /* POPUP - Check for active swipers/grid without url
   /------------------------*/
-  var activeGalleryPopUps = document.querySelectorAll('.add-popup figure > img');
+  var activeGalleryPopUps = document.querySelectorAll('.add-popup figure');
   document.addEventListener("DOMContentLoaded", function(event) {
     if(activeGalleryPopUps.length > 0){
       Array.from(activeGalleryPopUps).forEach(function(popup) {

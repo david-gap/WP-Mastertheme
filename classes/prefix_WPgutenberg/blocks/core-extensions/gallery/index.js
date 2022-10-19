@@ -41,6 +41,7 @@
         addSwiper,
         addBulletNav,
         addPopUp,
+        addPopUpInfo,
         addPopUpPreview,
         addDownloadButton,
         addDownloadAllButton,
@@ -60,12 +61,15 @@
   /* add custom element class in save element
   /------------------------*/
   function applyExtraClass( extraProps, blockType, attributes ) {
-    const { addSwiper, addPopUp, addPopUpPreview } = attributes;
+    const { addSwiper, addPopUp, addPopUpInfo, addPopUpPreview } = attributes;
     if ( typeof addSwiper !== 'undefined' && addSwiper && allowedBlocks.includes( blockType.name ) ) {
       extraProps.className = classnames( extraProps.className, 'inside-gallery-swiper' );
     }
     if ( typeof addPopUp !== 'undefined' && addPopUp && allowedBlocks.includes( blockType.name ) ) {
       extraProps.className = classnames( extraProps.className, 'add-popup' );
+    }
+    if ( typeof addPopUpInfo !== 'undefined' && addPopUpInfo && allowedBlocks.includes( blockType.name ) ) {
+      extraProps.className = classnames( extraProps.className, 'popup-info' );
     }
     if ( typeof addPopUpPreview !== 'undefined' && addPopUpPreview && allowedBlocks.includes( blockType.name ) ) {
       extraProps.className = classnames( extraProps.className, 'popup-preview' );

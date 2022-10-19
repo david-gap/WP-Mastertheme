@@ -60,6 +60,10 @@ const attributes = {
     type: 'boolean',
     default: false,
   },
+  postPopUpInfo: {
+    type: 'boolean',
+    default: false,
+  },
   postPopUpNav: {
     type: 'boolean',
     default: false,

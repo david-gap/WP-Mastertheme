@@ -3,6 +3,10 @@ const attributes = {
     type: 'boolean',
     default: false,
   },
+  addPopUpInfo: {
+    type: 'boolean',
+    default: false,
+  },
   addDownloadButton: {
     type: 'boolean',
     default: false,

@@ -66,6 +66,10 @@ register_block_type(
         'type' => 'boolean',
         'default' => false
       ),
+      'postPopUpInfo' => array(
+        'type' => 'boolean',
+        'default' => false
+      ),
       'postPopUpNav' => array(
         'type' => 'boolean',
         'default' => false
@@ -449,6 +453,7 @@ function WPgutenberg_posts_blockRender($attr){
   $css .= array_key_exists('postSwiper', $attr) && $attr['postSwiper'] !== false ? ' gallery-swiper' : ' gallery-grid';
   // add popup
   $css .= array_key_exists('postPopUp', $attr) && $attr['postPopUp'] !== false ? ' add-popup' : '';
+  $css .= array_key_exists('postPopUpInfo', $attr) && $attr['postPopUpInfo'] !== false ? ' popup-info' : '';
   $css .= array_key_exists('postPopUpNav', $attr) && $attr['postPopUpNav'] !== false ? ' popup-preview' : '';
   // reset spacing if only one column
   $spacing = $attr['postColumnsSpace'];

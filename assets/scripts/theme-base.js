@@ -2,7 +2,7 @@
  * All template base javascript functions
  *
  * @author      David Voglgsang
- * @version     1.8
+ * @version     1.9
  *
  */
 
@@ -742,6 +742,7 @@ function loadPostsContent(){
   // run ajax function
   var config = {
     action: 'loadPageContent',
+    path: mainPath,
     targetContent: '.block-posts[data-id="' + container + '"] .posts-target .wp-block-group__inner-container',
     id: currentID
   };
@@ -941,6 +942,7 @@ function imagePinsLoadContent(){
   // run ajax function
   var config = {
     action: 'loadPageContent',
+    path: mainPath,
     targetContent: target,
     id: currentID
   };
@@ -1184,6 +1186,7 @@ function loadPopUp(){
 function loadImagePopUp(){
   // load pop up
   loadPopUp();
+  var entryID = this.getAttribute('data-id');
   // load content
   setTimeout(function(self) {
     // insert image and arrows
@@ -1192,11 +1195,28 @@ function loadImagePopUp(){
     popupContainer = document.querySelector('.popup > .popup-container > .popup-content');
     popupContainer.insertAdjacentHTML('beforebegin', galleryArrowBefore);
     popupContainer.appendChild(clone);
+    if(currentGallery.classList.contains('popup-info')){
+      popupContainer.classList.add("with-info");
+      const infoContainer = document.createElement('div');
+      infoContainer.className = 'popup-info';
+      popupContainer.appendChild(infoContainer);
+      popupContainer.querySelector('figure').classList.remove('add-popup', 'popup-info');
+      // run ajax function
+      var config = {
+        action: 'loadEntryInfo',
+        path: mainPath,
+        targetContent: '.popup .popup-container .popup-content .popup-info',
+        id: entryID
+      };
+      ajaxCall(config);
+    } else {
+      popupContainer.classList.remove("with-info");
+    }
     popupContainer.insertAdjacentHTML('afterend', galleryArrowAfter);
     // add id of current gallery
-    popupContainer.setAttribute('data-id', currentGallery.getAttribute('data-id'));
+    popupContainer.setAttribute('data-id', entryID);
     // check for preview images
-  }, 100, this);
+  }, 100, this, entryID);
 }
 
 
@@ -1358,6 +1378,7 @@ function runEventListeners(){
         // run ajax function
         var config = {
           action: 'loadPageContent',
+          path: mainPath,
           targetContent: '.block-posts[data-id="' + container + '"] .posts-target .wp-block-group__inner-container',
           id: currentID
         };

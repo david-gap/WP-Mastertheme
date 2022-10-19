@@ -11,6 +11,10 @@ const attributes = {
     type: 'boolean',
     default: false,
   },
+  addPopUpInfo: {
+    type: 'boolean',
+    default: false,
+  },
   addPopUpPreview: {
     type: 'boolean',
     default: false,

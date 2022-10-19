@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 1.70.32 | 19.10.2022 <💎 IMPROVE: core ajax, 📦 NEW: lightbox info>
+* Move core ajax functions to master theme
+* Add option to load entry info inside the lightbox
+* Add filter for core ajax functions
+* Add lightbox entry info styles
+* Fix extended vimeo align settings
+
 ## 1.69.32 | 16.10.2022 <💎 IMPROVE: posts & -filter breakpoints, 🐛 FIX>
 * Add search form label styles to customizer
 * Add subtitling in the configurator
