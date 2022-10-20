@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.70.33 | 19.10.2022 <🐛 FIX: backend desktop & mobile prev, range uni>
+* Fix open and close the customizer range-four-value manager
+* Fix customizer range-value and range-four-value unit current value
+* Fix backend styling for tablet and mobile preview
+
 ## 1.70.32 | 19.10.2022 <💎 IMPROVE: core ajax, 📦 NEW: lightbox info>
 * Move core ajax functions to master theme
 * Add option to load entry info inside the lightbox

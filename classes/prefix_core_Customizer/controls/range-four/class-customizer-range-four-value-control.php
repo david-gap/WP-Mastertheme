@@ -37,7 +37,7 @@ class Customizer_Range_Four_Value_Control extends \WP_Customize_Control {
             $currentValue = $this->input_attrs['suffix'];
             $attrAdd = ' disabled';
           else:
-            $currentValue = $this->value() ? preg_replace('/[0-9]+/', '', $this->value()) : $this->input_attrs['suffix'];
+            $currentValue = $this->value() ? preg_replace('/[0-9\.,]+/', '', $this->value()) : $this->input_attrs['suffix'];
             $attrAdd = '';
           endif;
           ?>
@@ -72,10 +72,10 @@ class Customizer_Range_Four_Value_Control extends \WP_Customize_Control {
           $splitFourUnit = $this->input_attrs['suffix'];
           $splitAttrAdd = ' disabled';
         else:
-          $splitOneUnit = $splitOne ? preg_replace('/[0-9]+/', '', $splitOne) : $this->input_attrs['suffix'];
-          $splitTwoUnit = $splitTwo ? preg_replace('/[0-9]+/', '', $splitTwo) : $this->input_attrs['suffix'];
-          $splitThreeUnit = $splitThree ? preg_replace('/[0-9]+/', '', $splitThree) : $this->input_attrs['suffix'];
-          $splitFourUnit = $splitFour ? preg_replace('/[0-9]+/', '', $splitFour) : $this->input_attrs['suffix'];
+          $splitOneUnit = $splitOne ? preg_replace('/[0-9\.,]+/', '', $splitOne) : $this->input_attrs['suffix'];
+          $splitTwoUnit = $splitTwo ? preg_replace('/[0-9\.,]+/', '', $splitTwo) : $this->input_attrs['suffix'];
+          $splitThreeUnit = $splitThree ? preg_replace('/[0-9\.,]+/', '', $splitThree) : $this->input_attrs['suffix'];
+          $splitFourUnit = $splitFour ? preg_replace('/[0-9\.,]+/', '', $splitFour) : $this->input_attrs['suffix'];
           $splitAttrAdd = '';
         endif;
       ?>

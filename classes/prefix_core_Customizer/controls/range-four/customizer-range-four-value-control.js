@@ -21,10 +21,10 @@
 
     slider.each(function() {
         activeEdit.on('click', function() {
-          $(this).closest('.range-four-slider-container').toggleClass("active");
+          $(this).closest('.range-four-slider-container').addClass("active");
         });
         inactiveEdit.on('click', function() {
-          $(this).closest('.range-four-slider-container').toggleClass("active");
+          $(this).closest('.range-four-slider-container').removeClass("active");
         });
         // main input
         range.on('input', function() {

@@ -8245,7 +8245,7 @@ class prefix_core_Customizer {
     $darkOutput = '';
     $mobileOutput = '';
     $output = '';
-    $output .= ':root {';
+    $output .= '.editor-styles-wrapper, :root {';
       $output .= '--wideWidth: ' . $wide_reset . 'px;';
       foreach ($this->defaultValues as $panelKey => $panelValues) {
         // first level sections
@@ -8326,7 +8326,7 @@ class prefix_core_Customizer {
     // mobile
     $output .= '@media screen and (max-width: ' . $mobile_breakpoint . $get_mobile_breakpoint[1] . ') {';
       if($mobileOutput !== ''):
-        $output .= ':root {';
+        $output .= '.editor-styles-wrapper, :root {';
           $output .= $mobileOutput;
         $output .= '}';
         // $output .= '.wp-block-columns:not(.is-not-stacked-on-mobile) {';
@@ -8361,12 +8361,12 @@ class prefix_core_Customizer {
         $fontSizeMobile = '';
         foreach ($gutenbergCofig['FontSizes'] as $fontsizeKey => $fontsize) {
           $slug = prefix_core_BaseFunctions::Slugify($fontsize["key"]);
-          $output .= 'body.frontend .has-' . $slug . '---font-size, .block-editor .editor-styles-wrapper .has-' . $slug . '---font-size, body.page-template .has-' . $slug . '---font-size, ';
-          $output .= 'body.frontend .has-' . $slug . '---font-size > *, .block-editor .editor-styles-wrapper .has-' . $slug . '---font-size > *, body.page-template .has-' . $slug . '---font-size > * ';
+          $output .= 'body.frontend .has-' . $slug . '---font-size, .editor-styles-wrapper .has-' . $slug . '---font-size, body.page-template .has-' . $slug . '---font-size, ';
+          $output .= 'body.frontend .has-' . $slug . '---font-size > *, .editor-styles-wrapper .has-' . $slug . '---font-size > *, body.page-template .has-' . $slug . '---font-size > * ';
           $output .= '{font-size: ' . $fontsize["value"] . ';}';
           if(array_key_exists('valueMobile', $fontsize)):
-            $fontSizeMobile .= 'body.frontend .has-' . $slug . '---font-size, .block-editor .editor-styles-wrapper .has-' . $slug . '---font-size, body.page-template .has-' . $slug . '---font-size, ';
-            $fontSizeMobile .= 'body.frontend .has-' . $slug . '---font-size > *, .block-editor .editor-styles-wrapper .has-' . $slug . '---font-size > *, body.page-template .has-' . $slug . '---font-size > * ';
+            $fontSizeMobile .= 'body.frontend .has-' . $slug . '---font-size, .editor-styles-wrapper .has-' . $slug . '---font-size, body.page-template .has-' . $slug . '---font-size, ';
+            $fontSizeMobile .= 'body.frontend .has-' . $slug . '---font-size > *, .editor-styles-wrapper .has-' . $slug . '---font-size > *, body.page-template .has-' . $slug . '---font-size > * ';
             $fontSizeMobile .= '{font-size: ' . $fontsize["valueMobile"] . ';}';
           endif;
         }

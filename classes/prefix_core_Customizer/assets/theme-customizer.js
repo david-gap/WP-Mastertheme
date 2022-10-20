@@ -1639,10 +1639,10 @@
                 $( 'body.dark' ).get(0).style.setProperty( '--' + setting.replace('dark__',''), to );
               } else {
                 // fallback to default
-                let value = document.querySelector('input[data-customize-setting-link="header_background"]');
-                console.log(value);
                 $( 'body.dark' ).get(0).style.setProperty( '--' + setting.replace('dark__',''), 'unset' );
               }
+            } else if(setting.includes('_mobile')){
+              $( ':root' ).get(0).style.setProperty( '--' + setting, to );
             } else {
               $( ':root' ).get(0).style.setProperty( '--' + setting, to );
             }

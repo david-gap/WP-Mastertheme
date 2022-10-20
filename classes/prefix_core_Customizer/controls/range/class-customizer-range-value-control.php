@@ -33,7 +33,7 @@ class Customizer_Range_Value_Control extends \WP_Customize_Control {
           $currentValue = $this->input_attrs['suffix'];
           $attrAdd = ' disabled';
         else:
-          $currentValue = $this->value() ? preg_replace('/[0-9]+/', '', $this->value()) : $this->input_attrs['suffix'];
+          $currentValue = $this->value() ? preg_replace('/[0-9\.,]+/', '', $this->value()) : $this->input_attrs['suffix'];
           $attrAdd = '';
         endif;
         ?>
