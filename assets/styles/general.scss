@@ -320,6 +320,18 @@ input[type="submit"] {
     }
   }
 }
+.is-type-video {
+  &.wp-embed-aspect-16-9 {
+    .wp-block-embed__wrapper {
+      padding-top: 56.25%;
+    }
+  }
+  &.wp-embed-aspect-4-3 {
+    .wp-block-embed__wrapper {
+      padding-top: 75%;
+    }
+  }
+}
 
 
 /* CONTAINER WITH OVERLAY
