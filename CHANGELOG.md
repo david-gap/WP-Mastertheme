@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.70.34 | 24.10.2022 <🐛 FIX: vimeo embed responsive>
+* Fix vimeo embed responsive
+
 ## 1.70.33 | 19.10.2022 <🐛 FIX: backend desktop & mobile prev, range uni>
 * Fix open and close the customizer range-four-value manager
 * Fix customizer range-value and range-four-value unit current value
