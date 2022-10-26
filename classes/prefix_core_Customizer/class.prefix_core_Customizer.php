@@ -261,10 +261,9 @@ class prefix_core_Customizer {
               'label' => 'Gutenberg font scaling',
               'type' => 'range-value',
               'default' => '.55',
-              'rangeSuffix' => '%',
-              'rangeMin' => 1,
-              'rangeMax' => 100,
-              'rangeStep' => 1
+              'rangeSuffix' => '',
+              'rangeMin' => 0,
+              'rangeMax' => 1
             ),
             'html__fontsize_small_mobile' => array(
               'label' => 'Small text size',
@@ -4242,6 +4241,26 @@ class prefix_core_Customizer {
                   'default' => '40px',
                   'rangeSuffix' => 'px'
                 ),
+                'popup__space_mobile' => array(
+                  'label' => 'Container padding',
+                  'type' => 'range-value',
+                  'default' => '0px',
+                  'rangeSuffix' => 'px'
+                )
+              )
+            ),
+            'theme_popup_media' => array(
+              'label' => 'Media',
+              'inputs' => array(
+                'popup__media_objectFit' => array(
+                  'label' => 'Object fit',
+                  'type' => 'select'
+                )
+              )
+            ),
+            'theme_popup_preview' => array(
+              'label' => 'Preview',
+              'inputs' => array(
                 'popup_prev_visible' => array(
                   'label' => 'Preview visibility',
                   'type' => 'range-value',
@@ -4249,11 +4268,17 @@ class prefix_core_Customizer {
                   'rangeSuffix' => 'px',
                   'rangeMax' => 1000
                 ),
-                'popup__space_mobile' => array(
-                  'label' => 'Container padding',
+                'popup_prev_maxHeight' => array(
+                  'label' => 'Max height',
                   'type' => 'range-value',
-                  'default' => '0px',
-                  'rangeSuffix' => 'px'
+                  'rangeMax' => 1000
+                ),
+                'popup_prev_opacity' => array(
+                  'label' => 'Opacity',
+                  'type' => 'range-value',
+                  'rangeMin' => 0,
+                  'rangeMax' => 1,
+                  'rangeSuffix' => ''
                 )
               )
             ),
@@ -4407,6 +4432,10 @@ class prefix_core_Customizer {
                 'popup__info_textAlign' => array(
                   'label' => 'Text align',
                   'type' => 'select'
+                ),
+                'popup__info_fontFamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
                 ),
                 'popup__info_fontSize' => array(
                   'label' => 'Font size',
@@ -8061,6 +8090,14 @@ class prefix_core_Customizer {
           'outside' => 'outside',
           'inherit' => 'inherit'
         );
+      elseif(!array_key_exists('options', $inputValues) && strpos($inputKey, '_objectFit') !== false):
+        $selectOptions = array(
+          'none' => 'None',
+          'contain' => 'Contain',
+          'cover' => 'Cover',
+          'fill' => 'Fill',
+          'scale-down' => 'Scale down'
+        );
       elseif(!array_key_exists('options', $inputValues) && strpos($inputKey, '_borderStyle') !== false):
         $selectOptions = array(
           '' => '-',
@@ -8361,12 +8398,12 @@ class prefix_core_Customizer {
         $fontSizeMobile = '';
         foreach ($gutenbergCofig['FontSizes'] as $fontsizeKey => $fontsize) {
           $slug = prefix_core_BaseFunctions::Slugify($fontsize["key"]);
-          $output .= 'body.frontend .has-' . $slug . '---font-size, .editor-styles-wrapper .has-' . $slug . '---font-size, body.page-template .has-' . $slug . '---font-size, ';
-          $output .= 'body.frontend .has-' . $slug . '---font-size > *, .editor-styles-wrapper .has-' . $slug . '---font-size > *, body.page-template .has-' . $slug . '---font-size > * ';
+          $output .= 'body.frontend .has-' . $slug . '-font-size, .editor-styles-wrapper .has-' . $slug . '-font-size, body.page-template .has-' . $slug . '-font-size, ';
+          $output .= 'body.frontend .has-' . $slug . '-font-size > *, .editor-styles-wrapper .has-' . $slug . '-font-size > *, body.page-template .has-' . $slug . '-font-size > * ';
           $output .= '{font-size: ' . $fontsize["value"] . ';}';
           if(array_key_exists('valueMobile', $fontsize)):
-            $fontSizeMobile .= 'body.frontend .has-' . $slug . '---font-size, .editor-styles-wrapper .has-' . $slug . '---font-size, body.page-template .has-' . $slug . '---font-size, ';
-            $fontSizeMobile .= 'body.frontend .has-' . $slug . '---font-size > *, .editor-styles-wrapper .has-' . $slug . '---font-size > *, body.page-template .has-' . $slug . '---font-size > * ';
+            $fontSizeMobile .= 'body.frontend .has-' . $slug . '-font-size, .editor-styles-wrapper .has-' . $slug . '-font-size, body.page-template .has-' . $slug . '-font-size, ';
+            $fontSizeMobile .= 'body.frontend .has-' . $slug . '-font-size > *, .editor-styles-wrapper .has-' . $slug . '-font-size > *, body.page-template .has-' . $slug . '-font-size > * ';
             $fontSizeMobile .= '{font-size: ' . $fontsize["valueMobile"] . ';}';
           endif;
         }
@@ -8408,7 +8445,7 @@ class prefix_core_Customizer {
   /* 3.1 PREVIEW CUSTOMIZER CHANGES
   /------------------------*/
   function customizerPreview() {
-    wp_enqueue_script('theme/customizer', get_template_directory_uri() . '/classes/prefix_core_Customizer/assets/theme-customizer.js', ['jquery', 'customize-preview'], '1.14', true);
+    wp_enqueue_script('theme/customizer', get_template_directory_uri() . '/classes/prefix_core_Customizer/assets/theme-customizer.js', ['jquery', 'customize-preview'], '1.15', true);
   }
 
 }

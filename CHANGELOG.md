@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 1.70.35 | 24.10.2022 <🐛 FIX: mobile font scaling, font sizes, vimeo dim>
+* Set font scaling only on custom font sizing
+* Override customizer font size if custom font size exists
+* Fix lightbox preview size of videos
+* Add lightbox customizer settings for media
+* Set range-four-value global value only if on value exists
+* Change extended vimeo block dimension to 16:9
+
 ## 1.70.34 | 24.10.2022 <🐛 FIX: vimeo embed responsive>
 * Fix vimeo embed responsive
 

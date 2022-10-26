@@ -198,84 +198,112 @@ body.page-template,
     &:not(.post-title):not(.wp-block-post-title):not([class^='is-style-']):not([class*=' is-style-']),
     &.is-style-default {
       font-family: var(--h1__fontFamily, inherit);
-      font-size: var(--h1__fontSize, inherit);
-      line-height: var(--h1__lineHeight, inherit);
       font-weight: var(--h1__fontWeight, inherit);
       text-transform: var(--h1__textTransform, inherit);
       font-style: var(--h1__fontStyle, initial);
       letter-spacing: var(--h1__letterSpacing, inherit);
+      &:not([style^='--font-size:']):not([style*=' --font-size:']):not([class^='-font-size']):not([class*='-font-size']){
+        font-size: var(--h1__fontSize, inherit);
+      }
+      &:not([style^='line-height:']):not([style*=' line-height:']){
+        line-height: var(--h1__lineHeight, inherit);
+      }
     }
   }
   h2 {
     &:not(.post-title):not([class^='is-style-']):not([class*=' is-style-']),
     &.is-style-default {
       font-family: var(--h2__fontFamily, inherit);
-      font-size: var(--h2__fontSize, inherit);
-      line-height: var(--h2__lineHeight, inherit);
       font-weight: var(--h2__fontWeight, inherit);
       text-transform: var(--h2__textTransform, inherit);
       font-style: var(--h2__fontStyle, initial);
       letter-spacing: var(--h2__letterSpacing, inherit);
+      &:not([style^='--font-size:']):not([style*=' --font-size:']):not([class^='-font-size']):not([class*='-font-size']){
+        font-size: var(--h2__fontSize, inherit);
+      }
+      &:not([style^='line-height:']):not([style*=' line-height:']){
+        line-height: var(--h2__lineHeight, inherit);
+      }
     }
   }
   h3 {
     &:not(.post-title):not([class^='is-style-']):not([class*=' is-style-']),
     &.is-style-default {
       font-family: var(--h3__fontFamily, inherit);
-      font-size: var(--h3__fontSize, inherit);
-      line-height: var(--h3__lineHeight, inherit);
       font-weight: var(--h3__fontWeight, inherit);
       text-transform: var(--h3__textTransform, inherit);
       font-style: var(--h3__fontStyle, initial);
       letter-spacing: var(--h3__letterSpacing, inherit);
+      &:not([style^='--font-size:']):not([style*=' --font-size:']):not([class^='-font-size']):not([class*='-font-size']){
+        font-size: var(--h3__fontSize, inherit);
+      }
+      &:not([style^='line-height:']):not([style*=' line-height:']){
+        line-height: var(--h3__lineHeight, inherit);
+      }
     }
   }
   h4 {
     &:not(.post-title):not([class^='is-style-']):not([class*=' is-style-']),
     &.is-style-default {
       font-family: var(--h4__fontFamily, inherit);
-      font-size: var(--h4__fontSize, inherit);
-      line-height: var(--h4__lineHeight, inherit);
       font-weight: var(--h4__fontWeight, inherit);
       text-transform: var(--h4__textTransform, inherit);
       font-style: var(--h4__fontStyle, initial);
       letter-spacing: var(--h4__letterSpacing, inherit);
+      &:not([style^='--font-size:']):not([style*=' --font-size:']):not([class^='-font-size']):not([class*='-font-size']){
+        font-size: var(--h4__fontSize, inherit);
+      }
+      &:not([style^='line-height:']):not([style*=' line-height:']){
+        line-height: var(--h4__lineHeight, inherit);
+      }
     }
   }
   h5 {
     &:not(.post-title):not([class^='is-style-']):not([class*=' is-style-']),
     &.is-style-default {
       font-family: var(--h5__fontFamily, inherit);
-      font-size: var(--h5__fontSize, inherit);
-      line-height: var(--h5__lineHeight, inherit);
       font-weight: var(--h5__fontWeight, inherit);
       text-transform: var(--h5__textTransform, inherit);
       font-style: var(--h5__fontStyle, initial);
       letter-spacing: var(--h5__letterSpacing, inherit);
+      &:not([style^='--font-size:']):not([style*=' --font-size:']):not([class^='-font-size']):not([class*='-font-size']){
+        font-size: var(--h5__fontSize, inherit);
+      }
+      &:not([style^='line-height:']):not([style*=' line-height:']){
+        line-height: var(--h5__lineHeight, inherit);
+      }
     }
   }
   h6 {
     &:not(.post-title):not([class^='is-style-']):not([class*=' is-style-']),
     &.is-style-default {
       font-family: var(--h6__fontFamily, inherit);
-      font-size: var(--h6__fontSize, inherit);
-      line-height: var(--h6__lineHeight, inherit);
       font-weight: var(--h6__fontWeight, inherit);
       text-transform: var(--h6__textTransform, inherit);
       font-style: var(--h6__fontStyle, initial);
       letter-spacing: var(--h6__letterSpacing, inherit);
+      &:not([style^='--font-size:']):not([style*=' --font-size:']):not([class^='-font-size']):not([class*='-font-size']){
+        font-size: var(--h6__fontSize, inherit);
+      }
+      &:not([style^='line-height:']):not([style*=' line-height:']){
+        line-height: var(--h6__lineHeight, inherit);
+      }
     }
   }
   .post-title,
   .wp-block-post-title,
   .is-style-post-title {
     font-family: var(--postTitle__fontFamily, inherit);
-    font-size: var(--postTitle__fontSize, inherit);
-    line-height: var(--postTitle__lineHeight, inherit);
     font-weight: var(--postTitle__fontWeight, inherit);
     text-transform: var(--postTitle__textTransform, inherit);
     font-style: var(--postTitle__fontStyle, initial);
     letter-spacing: var(--postTitle__letterSpacing, inherit);
+    &:not([style^='--font-size:']):not([style*=' --font-size:']):not([class^='-font-size']):not([class*='-font-size']){
+      font-size: var(--postTitle__fontSize, inherit);
+    }
+    &:not([style^='line-height:']):not([style*=' line-height:']){
+      line-height: var(--postTitle__lineHeight, inherit);
+    }
   }
 
 
@@ -655,11 +683,19 @@ body.page-template,
   /––––––––––––––––––––––––*/
   .wp-block-buttons {
     .wp-block-button {
+      &:not([style^='--font-size:']):not([style*=' --font-size:']):not([class^='-font-size']):not([class*='-font-size']){
+        .wp-block-button__link {
+          font-size: var(--block__buttons_fontSize, inherit);
+        }
+      }
+      &:not([style^='line-height:']):not([style*=' line-height:']){
+        .wp-block-button__link {
+          line-height: var(--block__buttons_lineHeight, inherit);
+        }
+      }
       .wp-block-button__link {
         font-family: var(--block__buttons_fontFamily, inherit);
-        font-size: var(--block__buttons_fontSize, inherit);
         font-weight: var(--block__buttons_fontWeight, inherit);
-        line-height: var(--block__buttons_lineHeight, inherit);
         text-transform: var(--block__buttons_textTransform, inherit);
         font-style: var(--block__buttons_fontStyle, initial);
         letter-spacing: var(--block__buttons_letterSpacing, inherit);
@@ -670,18 +706,33 @@ body.page-template,
   /* 5.3 TABLES
   /––––––––––––––––––––––––*/
   figure.wp-block-table {
+    &:not([style^='--font-size:']):not([style*=' --font-size:']):not([class^='-font-size']):not([class*='-font-size']){
+      table {
+        font-family: var(--block__table_fontFamily, inherit);
+        tr {
+          th {
+            font-size: var(--block__tableHead_fontSize, inherit);
+          }
+        }
+      }
+    }
+    &:not([style^='line-height:']):not([style*=' line-height:']){
+      table {
+        line-height: var(--block__table_lineHeight, inherit);
+        tr {
+          th {
+            line-height: var(--block__tableHead_lineHeight, inherit);
+          }
+        }
+      }
+    }
     table {
-      font-family: var(--block__table_fontFamily, inherit);
-      font-size: var(--block__table_fontSize, inherit);
-      line-height: var(--block__table_lineHeight, inherit);
       font-weight: var(--block__table_fontWeight, inherit);
       text-transform: var(--block__table_textTransform, none);
       letter-spacing: var(--block__table_letterSpacing, 0px);
       tr {
         th {
           font-family: var(--block__tableHead_fontFamily, inherit);
-          font-size: var(--block__tableHead_fontSize, inherit);
-          line-height: var(--block__tableHead_lineHeight, inherit);
           font-weight: var(--block__tableHead_fontWeight, inherit);
           text-transform: var(--block__tableHead_textTransform, none);
           letter-spacing: var(--block__tableHead_letterSpacing, 0px);
@@ -775,11 +826,22 @@ body.page-template,
   /––––––––––––––––––––––––*/
   .wp-block-quote {
     font-family: var(--block__quote_fontFamily, inherit);
-    font-size: var(--block__quote_fontSize, inherit);
     line-height: var(--block__quote_lineHeight, inherit);
     font-weight: var(--block__quote_fontWeight, inherit);
     text-transform: var(--block__quote_textTransform, inherit);
     letter-spacing: var(--block__quote_letterSpacing, inherit);
+    &:not([style^='--font-size:']):not([style*=' --font-size:']):not([class^='-font-size']):not([class*='-font-size']){
+      font-size: var(--block__quote_fontSize, inherit);
+      cite {
+        font-size: var(--block__quote_cite_fontSize, var(--block__quote_fontSize, inherit));
+      }
+    }
+    &:not([style^='line-height:']):not([style*=' line-height:']){
+      line-height: var(--block__quote_lineHeight, inherit);
+      cite {
+        line-height: var(--block__quote_cite_lineHeight, var(--block__quote_lineHeight, inherit));
+      }
+    }
     cite {
       font-family: var(--block__quote_cite_fontFamily, var(--block__quote_fontFamily, inherit));
       font-size: var(--block__quote_cite_fontSize, var(--block__quote_fontSize, inherit));
@@ -970,48 +1032,68 @@ body.page-template,
   /––––––––––––––––––––––––*/
   .is-style-title-one {
     font-family: var(--titleOne__fontFamily, inherit);
-    font-size: var(--titleOne__fontSize, inherit);
-    line-height: var(--titleOne__lineHeight, inherit);
     font-weight: var(--titleOne__fontWeight, inherit);
     text-transform: var(--titleOne__textTransform, inherit);
     font-style: var(--titleOne__fontStyle, initial);
     letter-spacing: var(--titleOne__letterSpacing, inherit);
+    &:not([style^='--font-size:']):not([style*=' --font-size:']):not([class^='-font-size']):not([class*='-font-size']){
+      font-size: var(--titleOne__fontSize, inherit);
+    }
+    &:not([style^='line-height:']):not([style*=' line-height:']){
+      line-height: var(--titleOne__lineHeight, inherit);
+    }
   }
   .is-style-title-two {
     font-family: var(--titleTwo__fontFamily, inherit);
-    font-size: var(--titleTwo__fontSize, inherit);
-    line-height: var(--titleTwo__lineHeight, inherit);
     font-weight: var(--titleTwo__fontWeight, inherit);
     text-transform: var(--titleTwo__textTransform, inherit);
     font-style: var(--titleTwo__fontStyle, initial);
     letter-spacing: var(--titleTwo__letterSpacing, inherit);
+    &:not([style^='--font-size:']):not([style*=' --font-size:']):not([class^='-font-size']):not([class*='-font-size']){
+      font-size: var(--titleTwo__fontSize, inherit);
+    }
+    &:not([style^='line-height:']):not([style*=' line-height:']){
+      line-height: var(--titleTwo__lineHeight, inherit);
+    }
   }
   .is-style-title-three {
     font-family: var(--titleThree__fontFamily, inherit);
-    font-size: var(--titleThree__fontSize, inherit);
-    line-height: var(--titleThree__lineHeight, inherit);
     font-weight: var(--titleThree__fontWeight, inherit);
     text-transform: var(--titleThree__textTransform, inherit);
     font-style: var(--titleThree__fontStyle, initial);
     letter-spacing: var(--titleThree__letterSpacing, inherit);
+    &:not([style^='--font-size:']):not([style*=' --font-size:']):not([class^='-font-size']):not([class*='-font-size']){
+      font-size: var(--titleThree__fontSize, inherit);
+    }
+    &:not([style^='line-height:']):not([style*=' line-height:']){
+      line-height: var(--titleThree__lineHeight, inherit);
+    }
   }
   .is-style-title-four {
     font-family: var(--titleFour__fontFamily, inherit);
-    font-size: var(--titleFour__fontSize, inherit);
-    line-height: var(--titleFour__lineHeight, inherit);
     font-weight: var(--titleFour__fontWeight, inherit);
     text-transform: var(--titleFour__textTransform, inherit);
     font-style: var(--titleFour__fontStyle, initial);
     letter-spacing: var(--titleFour__letterSpacing, inherit);
+    &:not([style^='--font-size:']):not([style*=' --font-size:']):not([class^='-font-size']):not([class*='-font-size']){
+      font-size: var(--titleFour__fontSize, inherit);
+    }
+    &:not([style^='line-height:']):not([style*=' line-height:']){
+      line-height: var(--titleFour__lineHeight, inherit);
+    }
   }
   .is-style-title-five {
     font-family: var(--titleFive__fontFamily, inherit);
-    font-size: var(--titleFive__fontSize, inherit);
-    line-height: var(--titleFive__lineHeight, inherit);
     font-weight: var(--titleFive__fontWeight, inherit);
     text-transform: var(--titleFive__textTransform, inherit);
     font-style: var(--titleFive__fontStyle, initial);
     letter-spacing: var(--titleFive__letterSpacing, inherit);
+    &:not([style^='--font-size:']):not([style*=' --font-size:']):not([class^='-font-size']):not([class*='-font-size']){
+      font-size: var(--titleFive__fontSize, inherit);
+    }
+    &:not([style^='line-height:']):not([style*=' line-height:']){
+      line-height: var(--titleFive__lineHeight, inherit);
+    }
   }
 
 
@@ -1020,12 +1102,16 @@ body.page-template,
   .leadtext,
   .is-style-lead {
     font-family: var(--leadText__fontFamily, inherit);
-    font-size: var(--leadText__fontSize, inherit);
-    line-height: var(--leadText__lineHeight, inherit);
     font-weight: var(--leadText__fontWeight, inherit);
     text-transform: var(--leadText__textTransform, inherit);
     font-style: var(--leadText__fontStyle, initial);
     letter-spacing: var(--leadText__letterSpacing, inherit);
+    &:not([style^='--font-size:']):not([style*=' --font-size:']):not([class^='-font-size']):not([class*='-font-size']){
+      font-size: var(--leadText__fontSize, inherit);
+    }
+    &:not([style^='line-height:']):not([style*=' line-height:']){
+      line-height: var(--leadText__lineHeight, inherit);
+    }
   }
 
 

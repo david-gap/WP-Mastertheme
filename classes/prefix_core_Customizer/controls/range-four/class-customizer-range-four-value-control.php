@@ -8,6 +8,7 @@ class Customizer_Range_Four_Value_Control extends \WP_Customize_Control {
 
 
   public function render_content() {
+    $splitedValue = explode(" ", $this->value());
     ?>
     <div class="range-four-slider-container">
       <span class="start-editing">
@@ -22,12 +23,12 @@ class Customizer_Range_Four_Value_Control extends \WP_Customize_Control {
               $this->link();
             ?>
           >
-          <input class="range-four-slider__range main" type="range" value="<?php echo esc_attr( str_replace(array('px', 'pt', '%', 'em', 'rem', 'vw', 'vh'), array("", "", "", "", "", "", ""), $this->value() ) ); ?>"
+          <input class="range-four-slider__range main" type="range" value="<?php echo esc_attr( str_replace(array('px', 'pt', '%', 'em', 'rem', 'vw', 'vh'), array("", "", "", "", "", "", ""), $splitedValue[0] ) ); ?>"
             <?php
               $this->input_attrs();
             ?>
           >
-          <input class="range-four-slider__text main" type="number" value="<?php echo esc_attr( str_replace(array('px', 'pt', '%', 'em', 'rem', 'vw', 'vh'), array("", "", "", "", "", "", ""), $this->value() ) ); ?>"
+          <input class="range-four-slider__text main" type="number" value="<?php echo esc_attr( str_replace(array('px', 'pt', '%', 'em', 'rem', 'vw', 'vh'), array("", "", "", "", "", "", ""), $splitedValue[0] ) ); ?>"
             <?php
               $this->input_attrs();
             ?>
@@ -58,7 +59,6 @@ class Customizer_Range_Four_Value_Control extends \WP_Customize_Control {
       </label>
       <?php
         // values
-        $splitedValue = explode(" ", $this->value());
         $activeSplit = count($splitedValue) > 1 ? ' active' : '';
         $splitOne = $splitedValue[0];
         $splitTwo = count($splitedValue) > 1 ? $splitedValue[1] : $splitOne;

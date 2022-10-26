@@ -25,11 +25,11 @@ const attributes = {
   },
   videoDimensionX: {
     type: 'string',
-    default: '4',
+    default: '16',
   },
   videoDimensionY: {
     type: 'string',
-    default: '3',
+    default: '9',
   },
   videoTableOfContent: {
     type: 'boolean',

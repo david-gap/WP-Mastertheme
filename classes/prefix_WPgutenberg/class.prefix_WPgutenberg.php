@@ -90,7 +90,7 @@ class prefix_WPgutenberg {
       // add theme support
       SELF::CustomThemeSupport();
       // Change inline font size to var
-      if($this->WPgutenberg_fontsizeScaler !== 0):
+      if($this->WPgutenberg_fontsizeScaler == 1):
         add_filter('the_content',  array($this, 'InlineFontSize') );
       endif;
       // add custom blocks scripts
@@ -576,7 +576,7 @@ class prefix_WPgutenberg {
   /------------------------*/
   function InlineFontSize($content) {
     if(!is_admin()):
-      return str_replace("font-size","--font-size",$content);
+      return str_replace(array("font-size:","line-height:"),array("--font-size:","--line-height:"),$content);
     endif;
   }
 

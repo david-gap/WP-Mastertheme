@@ -57,8 +57,14 @@ body.page-template {
   * {
     /* Gutenberg font size
     /––––––––––––––––––––––––*/
-    font-size: calc(var(--font-size) * var(--gutenberg__font_scale, 1));
-    line-height: calc(var(--font-size) * var(--gutenberg__font_scale, 1) * var(--html__lineheight, 1.4));
+    &[style^='--font-size:'],
+    &[style*=' --font-size:']{
+      font-size: calc(var(--font-size) * var(--gutenberg__font_scale, 1));
+    }
+    &[style^='--line-height:'],
+    &[style*=' --line-height:']{
+      line-height: calc(var(--line-height) * var(--gutenberg__font_scale, 1));
+    }
     // font-size: var(--font-size);
     // line-height: calc(var(--font-size) * var(--html__lineheight));
   }
