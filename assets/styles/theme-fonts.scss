@@ -41,6 +41,14 @@ Table of Contents:
     5.14 POSTS FILTER
     5.15 TITLE
     5.16 PARAGRAPH
+    5.17 USER AVATAR
+    5.18 POST AUTHOR
+    5.19 AUTHOR BIOGRAPHY
+    5.20 LOGIN/LOGOUT
+    5.21 POST DATE
+    5.22 READ MORE
+    5.23 PAGINATION
+    5.24 POST TERMS
 =======================================================*/
 
 
@@ -195,7 +203,7 @@ body.page-template,
   /* 2.4 TITLE
   /––––––––––––––––––––––––*/
   h1 {
-    &:not(.post-title):not(.wp-block-post-title):not([class^='is-style-']):not([class*=' is-style-']),
+    &:not(.post-title):not(.wp-block-site-title):not(.wp-block-post-title):not(.wp-block-post-title):not([class^='is-style-']):not([class*=' is-style-']),
     &.is-style-default {
       font-family: var(--h1__fontFamily, inherit);
       font-weight: var(--h1__fontWeight, inherit);
@@ -211,7 +219,7 @@ body.page-template,
     }
   }
   h2 {
-    &:not(.post-title):not([class^='is-style-']):not([class*=' is-style-']),
+    &:not(.post-title):not(.wp-block-site-title):not(.wp-block-post-title):not([class^='is-style-']):not([class*=' is-style-']),
     &.is-style-default {
       font-family: var(--h2__fontFamily, inherit);
       font-weight: var(--h2__fontWeight, inherit);
@@ -227,7 +235,7 @@ body.page-template,
     }
   }
   h3 {
-    &:not(.post-title):not([class^='is-style-']):not([class*=' is-style-']),
+    &:not(.post-title):not(.wp-block-site-title):not(.wp-block-post-title):not([class^='is-style-']):not([class*=' is-style-']),
     &.is-style-default {
       font-family: var(--h3__fontFamily, inherit);
       font-weight: var(--h3__fontWeight, inherit);
@@ -243,7 +251,7 @@ body.page-template,
     }
   }
   h4 {
-    &:not(.post-title):not([class^='is-style-']):not([class*=' is-style-']),
+    &:not(.post-title):not(.wp-block-site-title):not(.wp-block-post-title):not([class^='is-style-']):not([class*=' is-style-']),
     &.is-style-default {
       font-family: var(--h4__fontFamily, inherit);
       font-weight: var(--h4__fontWeight, inherit);
@@ -259,7 +267,7 @@ body.page-template,
     }
   }
   h5 {
-    &:not(.post-title):not([class^='is-style-']):not([class*=' is-style-']),
+    &:not(.post-title):not(.wp-block-site-title):not(.wp-block-post-title):not([class^='is-style-']):not([class*=' is-style-']),
     &.is-style-default {
       font-family: var(--h5__fontFamily, inherit);
       font-weight: var(--h5__fontWeight, inherit);
@@ -275,7 +283,7 @@ body.page-template,
     }
   }
   h6 {
-    &:not(.post-title):not([class^='is-style-']):not([class*=' is-style-']),
+    &:not(.post-title):not(.wp-block-site-title):not(.wp-block-post-title):not([class^='is-style-']):not([class*=' is-style-']),
     &.is-style-default {
       font-family: var(--h6__fontFamily, inherit);
       font-weight: var(--h6__fontWeight, inherit);
@@ -433,7 +441,9 @@ body.page-template,
 
   /* 2.12 COMMENTS
   /––––––––––––––––––––––––*/
-  #comments {
+  .wp-block-comments-query-loop,
+  div#comments {
+    > .wp-block-comments-title,
     h3.comments-title {
       font-family: var(--comments__title_fontFamiliy, inherit);
       font-size: var(--comments__title_fontSize, 100%);
@@ -494,8 +504,21 @@ body.page-template,
 
 
   // inputs
-  input[type="text"],
+  input[type="color"],
+  input[type="date"],
+  input[type="datetime-local"],
   input[type="email"],
+  input[type="file"],
+  input[type="hidden"],
+  input[type="month"],
+  input[type="number"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="text"],
+  input[type="time"],
+  input[type="url"],
+  input[type="week"],
   textarea {
     &:not(.editor-post-title__input) {
       font-family: var(--input__fontFamily, inherit);
@@ -1030,6 +1053,32 @@ body.page-template,
 
   /* 5.15 TITLE
   /––––––––––––––––––––––––*/
+  .wp-block-site-title {
+    font-family: var(--siteTitle__fontFamily, inherit);
+    font-weight: var(--siteTitle__fontWeight, inherit);
+    text-transform: var(--siteTitle__textTransform, inherit);
+    font-style: var(--siteTitle__fontStyle, initial);
+    letter-spacing: var(--siteTitle__letterSpacing, inherit);
+    &:not([style^='--font-size:']):not([style*=' --font-size:']):not([class^='-font-size']):not([class*='-font-size']){
+      font-size: var(--siteTitle__fontSize, inherit);
+    }
+    &:not([style^='line-height:']):not([style*=' line-height:']){
+      line-height: var(--siteTitle__lineHeight, inherit);
+    }
+  }
+  .wp-block-site-tagline {
+    font-family: var(--siteTagline__fontFamily, inherit);
+    font-weight: var(--siteTagline__fontWeight, inherit);
+    text-transform: var(--siteTagline__textTransform, inherit);
+    font-style: var(--siteTagline__fontStyle, initial);
+    letter-spacing: var(--siteTagline__letterSpacing, inherit);
+    &:not([style^='--font-size:']):not([style*=' --font-size:']):not([class^='-font-size']):not([class*='-font-size']){
+      font-size: var(--siteTagline__fontSize, inherit);
+    }
+    &:not([style^='line-height:']):not([style*=' line-height:']){
+      line-height: var(--siteTagline__lineHeight, inherit);
+    }
+  }
   .is-style-title-one {
     font-family: var(--titleOne__fontFamily, inherit);
     font-weight: var(--titleOne__fontWeight, inherit);
@@ -1112,6 +1161,198 @@ body.page-template,
     &:not([style^='line-height:']):not([style*=' line-height:']){
       line-height: var(--leadText__lineHeight, inherit);
     }
+  }
+
+
+  /* 5.17 USER AVATAR
+  /––––––––––––––––––––––––*/
+  .wp-block-avatar {
+    line-height: 0;
+    a {
+      line-height: 0;
+    }
+  }
+
+
+  /* 5.18 POST AUTHOR
+  /––––––––––––––––––––––––*/
+  .wp-block-post-author {
+    &:not([style^='--font-size:']):not([style*=' --font-size:']):not([class^='-font-size']):not([class*='-font-size']){
+      .wp-block-post-author__content {
+        .wp-block-post-author__name {
+          font-size: var(--block__postauthor_name_fontSize, inherit);
+        }
+      }
+    }
+    &:not([style^='line-height:']):not([style*=' line-height:']){
+      .wp-block-post-author__content {
+        .wp-block-post-author__name {
+          line-height: var(--block__postauthor_name_lineHeight, inherit);
+        }
+      }
+    }
+    .wp-block-post-author__avatar {
+      line-height: 0;
+    }
+    .wp-block-post-author__content {
+      .wp-block-post-author__byline {
+        font-size: var(--block__postauthor_byline_fontSize, inherit);
+        line-height: var(--block__postauthor_byline_lineHeight, inherit);
+        font-family: var(--block__postauthor_byline_fontFamily, inherit);
+        font-weight: var(--block__postauthor_byline_fontWeight, inherit);
+        text-transform: var(--block__postauthor_byline_textTransform, inherit);
+        font-style: var(--block__postauthor_byline_fontStyle, initial);
+        letter-spacing: var(--block__postauthor_byline_letterSpacing, inherit);
+      }
+      .wp-block-post-author__name {
+        font-family: var(--block__postauthor_name_fontFamily, inherit);
+        font-weight: var(--block__postauthor_name_fontWeight, inherit);
+        text-transform: var(--block__postauthor_name_textTransform, inherit);
+        font-style: var(--block__postauthor_name_fontStyle, initial);
+        letter-spacing: var(--block__postauthor_name_letterSpacing, inherit);
+      }
+      .wp-block-post-author__bio {
+        font-size: var(--block__postauthor_bio_fontSize, inherit);
+        line-height: var(--block__postauthor_bio_lineHeight, inherit);
+        font-family: var(--block__postauthor_bio_fontFamily, inherit);
+        font-weight: var(--block__postauthor_bio_fontWeight, inherit);
+        text-transform: var(--block__postauthor_bio_textTransform, inherit);
+        font-style: var(--block__postauthor_bio_fontStyle, initial);
+        letter-spacing: var(--block__postauthor_bio_letterSpacing, inherit);
+      }
+    }
+  }
+
+
+  /* 5.19 AUTHOR BIOGRAPHY
+  /––––––––––––––––––––––––*/
+  .wp-block-post-author-biography {
+    &:not([style^='--font-size:']):not([style*=' --font-size:']):not([class^='-font-size']):not([class*='-font-size']){
+      font-size: var(--block__authorbiography_fontSize, inherit);
+    }
+    &:not([style^='line-height:']):not([style*=' line-height:']){
+      line-height: var(--block__authorbiography_lineHeight, inherit);
+    }
+    font-family: var(--block__authorbiography_fontFamily, inherit);
+    font-weight: var(--block__authorbiography_fontWeight, inherit);
+    text-transform: var(--block__authorbiography_textTransform, inherit);
+    font-style: var(--block__authorbiography_fontStyle, initial);
+    letter-spacing: var(--block__authorbiography_letterSpacing, inherit);
+  }
+
+
+  /* 5.20 LOGIN/LOGOUT
+  /––––––––––––––––––––––––*/
+  .wp-block-loginout {
+    &:not([style^='--font-size:']):not([style*=' --font-size:']):not([class^='-font-size']):not([class*='-font-size']){
+      a {
+        font-size: var(--block__loginout_fontSize, inherit);
+      }
+    }
+    &:not([style^='line-height:']):not([style*=' line-height:']){
+      a {
+        line-height: var(--block__loginout_lineHeight, inherit);
+      }
+    }
+    a {
+      font-family: var(--block__loginout_fontFamily, inherit);
+      font-weight: var(--block__loginout_fontWeight, inherit);
+      text-transform: var(--block__loginout_textTransform, inherit);
+      font-style: var(--block__loginout_fontStyle, initial);
+      letter-spacing: var(--block__loginout_letterSpacing, inherit);
+    }
+  }
+
+
+  /* 5.21 POST DATE
+  /––––––––––––––––––––––––*/
+  .wp-block-post-date {
+    &:not([style^='--font-size:']):not([style*=' --font-size:']):not([class^='-font-size']):not([class*='-font-size']){
+      font-size: var(--block__postdate_fontSize, inherit);
+    }
+    &:not([style^='line-height:']):not([style*=' line-height:']){
+      line-height: var(--block__postdate_lineHeight, inherit);
+    }
+    font-family: var(--block__postdate_fontFamily, inherit);
+    font-weight: var(--block__postdate_fontWeight, inherit);
+    text-transform: var(--block__postdate_textTransform, inherit);
+    font-style: var(--block__postdate_fontStyle, initial);
+    letter-spacing: var(--block__postdate_letterSpacing, inherit);
+  }
+
+
+  /* 5.22 READ MORE
+  /––––––––––––––––––––––––*/
+  .wp-block-read-more {
+    &:not([style^='--font-size:']):not([style*=' --font-size:']):not([class^='-font-size']):not([class*='-font-size']){
+      font-size: var(--block__readmore_fontSize, inherit);
+    }
+    &:not([style^='line-height:']):not([style*=' line-height:']){
+      line-height: var(--block__readmore_lineHeight, inherit);
+    }
+    font-family: var(--block__readmore_fontFamily, inherit);
+    font-weight: var(--block__readmore_fontWeight, inherit);
+    text-transform: var(--block__readmore_textTransform, inherit);
+    font-style: var(--block__readmore_fontStyle, initial);
+    letter-spacing: var(--block__readmore_letterSpacing, inherit);
+  }
+
+
+  /* 5.23 PAGINATION
+  /––––––––––––––––––––––––*/
+  .wp-block-query-pagination {
+    .wp-block-query-pagination-previous,
+    .wp-block-query-pagination-next {
+      &:not([style^='--font-size:']):not([style*=' --font-size:']):not([class^='-font-size']):not([class*='-font-size']){
+        font-size: var(--block__pagination_button_fontSize, inherit);
+      }
+      &:not([style^='line-height:']):not([style*=' line-height:']){
+        line-height: var(--block__pagination_button_lineHeight, inherit);
+      }
+      font-family: var(--block__pagination_button_fontFamily, inherit);
+      font-weight: var(--block__pagination_button_fontWeight, inherit);
+      text-transform: var(--block__pagination_button_textTransform, inherit);
+      font-style: var(--block__pagination_button_fontStyle, initial);
+      letter-spacing: var(--block__pagination_button_letterSpacing, inherit);
+    }
+    .wp-block-query-pagination-numbers {
+      &:not([style^='--font-size:']):not([style*=' --font-size:']):not([class^='-font-size']):not([class*='-font-size']){
+        .page-numbers {
+          font-size: var(--block__pagination_numbersItem_fontSize, inherit);
+        }
+      }
+      &:not([style^='line-height:']):not([style*=' line-height:']){
+        line-height: 0;
+        .page-numbers {
+          line-height: var(--block__pagination_numbersItem_lineHeight, inherit);
+        }
+      }
+      .page-numbers {
+        font-family: var(--block__pagination_numbersItem_fontFamily, inherit);
+        font-weight: var(--block__pagination_numbersItem_fontWeight, inherit);
+        text-transform: var(--block__pagination_numbersItem_textTransform, inherit);
+        font-style: var(--block__pagination_numbersItem_fontStyle, initial);
+        letter-spacing: var(--block__pagination_numbersItem_letterSpacing, inherit);
+        &.current {}
+      }
+    }
+  }
+
+
+  /* 5.24 POST TERMS
+  /––––––––––––––––––––––––*/
+  .wp-block-post-terms {
+    &:not([style^='--font-size:']):not([style*=' --font-size:']):not([class^='-font-size']):not([class*='-font-size']){
+      font-size: var(--block__postterms_fontSize, inherit);
+    }
+    &:not([style^='line-height:']):not([style*=' line-height:']){
+      line-height: var(--block__postterms_lineHeight, inherit);
+    }
+    font-family: var(--block__postterms_fontFamily, inherit);
+    font-weight: var(--block__postterms_fontWeight, inherit);
+    text-transform: var(--block__postterms_textTransform, inherit);
+    font-style: var(--block__postterms_fontStyle, initial);
+    letter-spacing: var(--block__postterms_letterSpacing, inherit);
   }
 
 

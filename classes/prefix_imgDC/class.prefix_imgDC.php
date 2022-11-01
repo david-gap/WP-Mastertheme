@@ -6,7 +6,7 @@
  * IMG dominant color - WP compatible
  * https://github.com/david-gap/classes
  * Author:      David Voglgsang
- * @version     2.2.5
+ * @version     2.2.6
  *
  */
 
@@ -528,7 +528,7 @@ class prefix_imgDC {
 
         // output
         $output .= '<img';
-            $output .= ' src="' . $img_src . '"';
+            $output .= ' src="' . $img_path . '"';
             $output .= ' class="' . $css . '"';
             $output .= ' data-id="' . $id . '"';
             $output .= ' data-src="' . $img_path . '"';

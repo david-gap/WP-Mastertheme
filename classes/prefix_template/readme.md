@@ -1,4 +1,4 @@
-**Version 2.37.19** (19.10.2022)
+**Version 2.38.19** (01.11.2022)
 
 Custom class "template" with template parts and header / footer builder
 
@@ -36,6 +36,7 @@ Custom class "template" with template parts and header / footer builder
 * $template_header_custom:  Custom header html
 * $template_header_sort: Sort and activate blocks inside header builder
 * $template_header_logo_link: Logo link with wordpress fallback
+* $template_header_logo_title: Logo link title
 * $template_header_logo_d: desktop logo configuration
 * $template_header_logo_m: mobile logo configuration
 * $template_header_logo_scrolled: scrolled logo configuration

@@ -222,7 +222,7 @@ function WPgutenberg_posts_PostBuilder(array $attr, $id, $currentId){
       // add content
       $output .= '<div class="post-content">';
         if(array_key_exists('postTextOne', $attr) && $attr['postTextOne'] !== ''):
-          $output .= $attr['postTextOne'] == 'title' ? '<h4>' : '<div class="' . $attr['postTextOne'] . '">';
+          $output .= $attr['postTextOne'] == 'title' ? '<h4>' : '<div class="wp-block-post-' . $attr['postTextOne'] . '">';
             if(array_key_exists('postTaxonomyFilterOptions', $attr) && is_array($attr['postTaxonomyFilterOptions']) && in_array('link_row1', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
 
               $output .= $linkOpen;
@@ -234,7 +234,7 @@ function WPgutenberg_posts_PostBuilder(array $attr, $id, $currentId){
           $output .= $attr['postTextOne'] == 'title' ? '</h4>' : '</div>';
         endif;
         if(array_key_exists('postTextTwo', $attr) && $attr['postTextTwo'] !== ''):
-          $output .= $attr['postTextTwo'] == 'title' ? '<h4>' : '<div class="' . $attr['postTextTwo'] . '">';
+          $output .= $attr['postTextTwo'] == 'title' ? '<h4>' : '<div class="wp-block-post-' . $attr['postTextTwo'] . '">';
             if(array_key_exists('postTaxonomyFilterOptions', $attr) && is_array($attr['postTaxonomyFilterOptions']) && in_array('link_row2', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
               $output .= $linkOpen;
             endif;

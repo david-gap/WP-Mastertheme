@@ -5,7 +5,7 @@
  * Form Builder
  * https://github.com/david-gap/classes
  * Author: David Voglgsang
- * @version     2.0.1
+ * @version     2.1.1
  */
 
 class prefix_core_Formbuilder {
@@ -80,7 +80,7 @@ class prefix_core_Formbuilder {
         break;
       default:
           $output .= array_key_exists('form_input_before', $input) ? $input['form_input_before'] : '';
-          $output .= '<span class="'. $prefix . $type . $classes . '" ' . $c_addition . '>';
+          $output .= '<div class="form-row form-type-' . $type . ' '. $prefix . $type . $classes . '" ' . $c_addition . '>';
             $output .= array_key_exists('label', $input) ? '<label for="for-' . $name . '">' . $input['label'] . '</label>' : '';
             // output by input type
             switch ($type) {
@@ -99,31 +99,41 @@ class prefix_core_Formbuilder {
                 $output .= '<textarea ' . $i_addition . ' id="for-' . $name . '">' . prefix_core_BaseFunctions::getFormPost($prefix . $name, $value) . '</textarea>';
                 break;
               case "checkbox":
-                if (is_array($value)):
-                  foreach ($value as $key => $checkbox) {
-                    $checked = prefix_core_BaseFunctions::setChecked($checkbox, prefix_core_BaseFunctions::getFormPost($prefix . $name));
-                    $output .= '<label>';
-                      $output .= '<input type="checkbox" name="' . $prefix . $name . '[]" value="' . $key . '" ' . $checked . '>';
-                      $output .= '<span>' . $checkbox . '</span>';
-                    $output .= '</label>';
-                  }
-                else:
-                  $checked = prefix_core_BaseFunctions::setChecked($value, prefix_core_BaseFunctions::getFormPost($prefix . $name));
-                  $output .= '<label>';
+                $output .= '<div class="option-container">';
+                  if (is_array($value)):
+                    foreach ($value as $key => $checkbox) {
+                      $output .= '<div class="option-row">';
+                        $checked = prefix_core_BaseFunctions::setChecked($checkbox, prefix_core_BaseFunctions::getFormPost($prefix . $name));
+                        $output .= '<input type="checkbox" name="' . $prefix . $name . '[]" value="' . $key . '" ' . $checked . '>';
+                        $output .= '<label>';
+                          $output .= $checkbox;
+                        $output .= '</label>';
+                      $output .= '</div>';
+                    }
+                  else:
+                    $checked = prefix_core_BaseFunctions::setChecked($value, prefix_core_BaseFunctions::getFormPost($prefix . $name));
+                    $output .= '<div class="option-row">';
                     $output .= '<input type="checkbox" name="' . $prefix . $name . '" value="' . $value . '" ' . $checked . '>';
-                    $output .= '<span>' . $value . '</span>';
-                  $output .= '</label>';
-                endif;
+                      $output .= '<label>';
+                        $output .= $value;
+                      $output .= '</label>';
+                    $output .= '</div>';
+                  endif;
+                $output .= '</div>';
                 break;
               case "radio":
                 if (is_array($value)):
-                  foreach ($value as $key => $radio) {
-                    $checked = prefix_core_BaseFunctions::setChecked($radio, prefix_core_BaseFunctions::getFormPost($prefix . $name));
-                    $output .= '<label>';
-                      $output .= '<input type="radio" name="' . $prefix . $name . '[]" value="' . $key . '" ' . $checked . '>';
-                      $output .= '<span>' . $radio . '</span>';
-                    $output .= '</label>';
-                  }
+                  $output .= '<div class="option-container">';
+                    foreach ($value as $key => $radio) {
+                      $output .= '<div class="option-row">';
+                        $checked = prefix_core_BaseFunctions::setChecked($radio, prefix_core_BaseFunctions::getFormPost($prefix . $name));
+                        $output .= '<input type="radio" name="' . $prefix . $name . '[]" value="' . $key . '" ' . $checked . '>';
+                        $output .= '<label>';
+                          $output .= $radio;
+                        $output .= '</label>';
+                      $output .= '</div>';
+                    }
+                  $output .= '</div>';
                 else:
                   // Fallback if radio value is a string
                 endif;
@@ -131,7 +141,7 @@ class prefix_core_Formbuilder {
               default:
                 $output .= '<input type="' . $type . '" id="for-' . $name . '" value="' . prefix_core_BaseFunctions::getFormPost($prefix . $name, $value) . '" ' . $i_addition . '>';
             }
-          $output .= '</span>';
+          $output .= '</div>';
           $output .= array_key_exists('form_input_after', $input) ? $input['form_input_after'] : '';
     }
 
@@ -180,9 +190,9 @@ class prefix_core_Formbuilder {
     $submit = '';
     if(array_key_exists('submit', $args)):
       $submit_name = array_key_exists('name', $args['submit']) ? $args['submit']['name'] : 'submit';
-      $submit_add = array_key_exists('name', $args['submit']) ? ' ' . $args['submit']['name'] :' ';
+      $submit_id = array_key_exists('id', $args['submit']) ? ' id="' . $args['submit']['id'] .'"' : '';
       $submit_value = array_key_exists('value', $args['submit']) ? ' ' . $args['submit']['value'] :'Submit';
-      $submit .= '<input type="submit" name="' . $prefix . '-' . $submit_name . '" value="' . $submit_value . '"' . $submit_add . '>';
+      $submit .= '<input type="submit" name="' . $prefix . '-' . $submit_name . '" value="' . $submit_value . '"' . $submit_id . '>';
     endif;
 
     $output .= '<div class="' . $container_css . '"' . $container_add . '>';

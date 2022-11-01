@@ -32,6 +32,14 @@ Table of Contents:
     2.11 MEDIA & TEXT
     2.12 PARAGRAPH
     2.13 TITLE
+    2.14 USER AVATAR
+    2.15 POST AUTHOR
+    2.16 AUTHOR BIOGRAPHY
+    2.17 LOGIN/LOGOUT
+    2.18 POST DATE
+    2.19 READ MORE
+    2.20 PAGINATION
+    2.21 POST TERMS
   3.0 ADDITIONAL STYLINGS
     3.1 BACKEND HIGHLIGHTS
     3.2 COLUMNS
@@ -1197,7 +1205,7 @@ body.page-template,
 
   /* 2.12 PARAGRAPH
   /––––––––––––––––––––––––*/
-  p.has-background {
+  p.has-background:not(.wp-block-site-title):not(.wp-block-site-tagline) {
     padding: var(--block__paragraph_hasBackground_padding, var(--content__space, 30px));
   }
   .leadtext,
@@ -1210,6 +1218,20 @@ body.page-template,
 
   /* 2.13 TITLE
   /––––––––––––––––––––––––*/
+  .wp-block-site-title {
+    margin-top: var(--siteTitle__marginTop, 0);
+    margin-bottom: var(--siteTitle__marginBottom, 0);
+    padding: var(--siteTitle__padding, 0);
+    border-style: var(--siteTitle__borderStyle, solid);
+    border-width: var(--siteTitle__borderWidth, 0);
+  }
+  .wp-block-site-tagline {
+    margin-top: var(--siteTagline__marginTop, 0);
+    margin-bottom: var(--siteTagline__marginBottom, 0);
+    padding: var(--siteTagline__padding, 0);
+    border-style: var(--siteTagline__borderStyle, solid);
+    border-width: var(--siteTagline__borderWidth, 0);
+  }
   .is-style-title-one {
     margin-top: var(--titleOne__marginTop, 0);
     margin-bottom: var(--titleOne__marginBottom, 0);
@@ -1244,6 +1266,128 @@ body.page-template,
     padding: var(--titleFive__padding, 0);
     border-style: var(--titleFive__borderStyle, solid);
     border-width: var(--titleFive__borderWidth, 0);
+  }
+
+
+  /* 2.14 USER AVATAR
+  /––––––––––––––––––––––––*/
+  .wp-block-avatar {
+    a {
+      display: inline-block;
+    }
+  }
+
+
+  /* 2.15 POST AUTHOR
+  /––––––––––––––––––––––––*/
+  .wp-block-post-author {
+    padding: var(--block__postauthor_padding, 0);
+    border-width: var(--block__postauthor_borderWidth, 0);
+    border-style: var(--block__postauthor_borderStyle, solid);
+    border-radius: var(--block__postauthor_borderRadius, 0);
+    &.has-background {
+      padding: var(--block__postauthor_padding_hasBackground, var(--block__postauthor_padding, 0));
+    }
+    .wp-block-post-author__avatar {
+      margin-right: var(--block__postauthor_avatar_spacing, 1em);
+    }
+    .wp-block-post-author__content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--block__postauthor_gap, 5px);
+      .wp-block-post-author__byline {}
+      .wp-block-post-author__name {}
+      .wp-block-post-author__bio {}
+    }
+  }
+
+
+  /* 2.16 AUTHOR BIOGRAPHY
+  /––––––––––––––––––––––––*/
+  .wp-block-post-author-biography {
+    padding: var(--block__authorbiography_padding, 0);
+    border-width: var(--block__authorbiography_borderWidth, 0);
+    border-radius: var(--block__authorbiography_borderRadius, 0);
+    border-style: var(--block__authorbiography_borderStyle, solid);
+  }
+
+
+  /* 2.17 LOGIN/LOGOUT
+  /––––––––––––––––––––––––*/
+  .wp-block-loginout {
+    a {
+      padding: var(--block__loginout_padding, 10px 20px);
+      border-width: var(--block__loginout_borderWidth, 1px);
+      border-radius: var(--block__loginout_borderRadius, 0);
+      border-style: var(--block__loginout_borderStyle, solid);
+    }
+  }
+
+
+  /* 2.18 POST DATE
+  /––––––––––––––––––––––––*/
+  .wp-block-post-date {
+    padding: var(--block__postdate_padding, 0);
+    border-width: var(--block__postdate_borderWidth, 0);
+    border-radius: var(--block__postdate_borderRadius, 0);
+    border-style: var(--block__postdate_borderStyle, solid);
+  }
+
+
+  /* 2.19 READ MORE
+  /––––––––––––––––––––––––*/
+  .wp-block-read-more {
+    padding: var(--block__readmore_padding, 0);
+    border-width: var(--block__readmore_borderWidth, 0);
+    border-radius: var(--block__readmore_borderRadius, 0);
+    border-style: var(--block__readmore_borderStyle, solid);
+  }
+
+
+  /* 2.20 PAGINATION
+  /––––––––––––––––––––––––*/
+  .wp-block-query-pagination {
+    padding: var(--block__pagination_padding, 0);
+    border-width: var(--block__pagination_borderWidth, 0);
+    border-radius: var(--block__pagination_borderRadius, 0);
+    border-style: var(--block__pagination_borderStyle, solid);
+    gap: var(--block__pagination_gap, 20px);
+    row-gap: var(--block__pagination_gap, 20px);
+    .wp-block-query-pagination-previous,
+    .wp-block-query-pagination-next {
+      margin: 0;
+      padding: var(--block__pagination_button_padding, 0);
+      border-width: var(--block__pagination_button_borderWidth, 0);
+      border-radius: var(--block__pagination_button_borderRadius, 0);
+      border-style: var(--block__pagination_button_borderStyle, solid);
+    }
+    .wp-block-query-pagination-numbers {
+      display: flex;
+      gap: var(--block__pagination_numbers_gap, 20px);
+      row-gap: var(--block__pagination_numbers_gap, 20px);
+      margin: 0;
+      padding: var(--block__pagination_numbers_padding, 0);
+      border-width: var(--block__pagination_numbers_borderWidth, 0);
+      border-radius: var(--block__pagination_numbers_borderRadius, 0);
+      border-style: var(--block__pagination_numbers_borderStyle, solid);
+      .page-numbers {
+        padding: var(--block__pagination_numbersItem_padding, 0);
+        border-width: var(--block__pagination_numbersItem_borderWidth, 0);
+        border-radius: var(--block__pagination_numbersItem_borderRadius, 0);
+        border-style: var(--block__pagination_numbersItem_borderStyle, solid);
+        &.current {}
+      }
+    }
+  }
+
+
+  /* 2.21 POST TERMS
+  /––––––––––––––––––––––––*/
+  .wp-block-post-terms {
+    padding: var(--block__postterms_padding, 0);
+    border-width: var(--block__postterms_borderWidth, 0);
+    border-radius: var(--block__postterms_borderRadius, 0);
+    border-style: var(--block__postterms_borderStyle, solid);
   }
 
 

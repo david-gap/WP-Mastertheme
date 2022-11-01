@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 1.71.35 | 01.11.2022 <📦 NEW: gutenberg blocks stylings, logo title>
+* Add missing title style selection on post title
+* Add block styles to Customizer
+* use same block styles for date on posts and postsfilter block
+* Add header logo link title
+* Form builder stylings
+
 ## 1.70.35 | 24.10.2022 <🐛 FIX: mobile font scaling, font sizes, vimeo dim>
 * Set font scaling only on custom font sizing
 * Override customizer font size if custom font size exists

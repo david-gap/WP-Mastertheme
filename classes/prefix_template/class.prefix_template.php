@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.37.19
+ * @version     2.38.19
  *
 */
 
@@ -103,6 +103,7 @@ class prefix_template {
     * @param static string $template_header_custom:  Custom header html
     * @param static array $template_header_sort: Sort and activate blocks inside header builder
     * @param static string $template_header_logo_link: Logo link with wordpress fallback
+    * @param static string $template_header_logo_title: Logo link title
     * @param static array $template_header_logo_d: desktop logo configuration
     * @param static array $template_header_logo_m: mobile logo configuration
     * @param static array $template_header_logo_scrolled: scrolled logo configuration
@@ -236,6 +237,7 @@ class prefix_template {
     "container_end" => 1
   );
   static $template_header_logo_link                = "";
+  static $template_header_logo_title               = "";
   static $template_header_logo_d                   = array(
     "img" => "",
     "width" => "",
@@ -903,6 +905,11 @@ class prefix_template {
         "logo_link" => array(
           "label" => "Custom Logo link",
           "type" => "text"
+        ),
+        "logo_title" => array(
+          "label" => "Logo link title",
+          "type" => "text",
+          "translation" => "template_header_logo_title"
         ),
         "logo_desktop" => array(
           "label" => "Logo desktop",
@@ -1629,6 +1636,7 @@ class prefix_template {
           SELF::$template_header_custom = array_key_exists('custom', $header) ? $header['custom'] : SELF::$template_header_custom;
           SELF::$template_header_sort = array_key_exists('sort', $header) ? $header['sort'] : SELF::$template_header_sort;
           SELF::$template_header_logo_link = array_key_exists('logo_link', $header) ? $header['logo_link'] : SELF::$template_header_logo_link;
+          SELF::$template_header_logo_title = array_key_exists('logo_title', $header) ? $header['logo_title'] : SELF::$template_header_logo_title;
           SELF::$template_header_logo_d = array_key_exists('logo_desktop', $header) ? $header['logo_desktop'] : SELF::$template_header_logo_d;
           SELF::$template_header_logo_m = array_key_exists('logo_mobile', $header) ? $header['logo_mobile'] : SELF::$template_header_logo_m;
           SELF::$template_header_logo_scrolled = array_key_exists('logo_scrolled', $header) ? $header['logo_scrolled'] : SELF::$template_header_logo_scrolled;
@@ -2162,7 +2170,7 @@ class prefix_template {
             echo $value == 1 ? SELF::WP_MainMenu(SELF::$template_header_dmenu, 'hamburger', SELF::$template_header_menu_style, SELF::$template_header_hmenu_style, SELF::$template_header_hmenu_toggle, SELF::$template_header_hmenu_visible_head, SELF::$template_header_hmenu_text, SELF::$template_header_hmenu_streched) : '';
             break;
           case 'logo':
-            echo $value == 1 ? SELF::Logo(SELF::$template_header_logo_link, SELF::$template_header_logo_d, SELF::$template_header_logo_m, SELF::$template_header_logo_scrolled, SELF::$template_header_logo_svg) : '';
+            echo $value == 1 ? SELF::Logo(SELF::$template_header_logo_link, SELF::$template_header_logo_d, SELF::$template_header_logo_m, SELF::$template_header_logo_scrolled, SELF::$template_header_logo_svg, SELF::$template_header_logo_title) : '';
             break;
           case 'socialmedia':
             echo $value == 1 ? SELF::SocialMedia() : '';
@@ -2460,14 +2468,16 @@ class prefix_template {
 
     /* 3.6 LOGO
     /------------------------*/
-    public static function Logo(string $link = "", array $desktop = array(), array $mobile = array(), array $scrolled = array(), $svg = ''){
+    public static function Logo(string $link = "", array $desktop = array(), array $mobile = array(), array $scrolled = array(), $svg = '', $title = ''){
       // vars
       $output = '';
       $addCss = '';
+      $add_container = '';
+      $add_container .= $title !== '' ? ' title="' . prefix_core_BaseFunctions::getConfigTranslation('template_header_logo_title', $title) . '"' : '';
       $page_name = get_bloginfo();
       $link = function_exists("get_bloginfo") && $link == "" ? get_bloginfo('url') : $link;
       $add_desktop = array_key_exists('img', $mobile) && $mobile['img'] !== "" ? 'desktop' : '';
-      $add_container = array_key_exists('img', $desktop) && $desktop['img'] == "" && $mobile['img'] == "" ? ' text_logo' : '';
+      $add_container_class = array_key_exists('img', $desktop) && $desktop['img'] == "" && $mobile['img'] == "" ? ' text_logo' : '';
       $img_desktop = array_key_exists('img', $desktop) && $desktop['img'] !== '' ? wp_get_attachment_image_src($desktop['img'], 'full') : '';
       $img_mobile = array_key_exists('img', $mobile) && $mobile['img'] !== '' ? wp_get_attachment_image_src($mobile['img'], 'full') : '';
       $img_scrolled = array_key_exists('img', $scrolled) && $scrolled['img'] !== '' ? wp_get_attachment_image_src($scrolled['img'], 'full') : '';
@@ -2475,7 +2485,7 @@ class prefix_template {
         $addCss .= ' hide-on-scrolled';
       endif;
       // output
-      $output .= '<a href="' . $link . '" class="logo' . $add_container .'">';
+      $output .= '<a href="' . $link . '" class="logo' . $add_container_class .'"' . $add_container .'>';
         if($svg !== ''):
           $output .= $svg;
         else:
@@ -3066,7 +3076,7 @@ class prefix_template {
         $output .= '<div class="post-meta">';
             // meta date and time
             if($settingsDate || $settingsTime):
-              $output .= '<time class="entry-date" datetime="' . get_the_time('c', $postID) . '">';
+              $output .= '<div class="wp-block-post-date"><time class="entry-date" datetime="' . get_the_time('c', $postID) . '">';
               // if date active
               if($settingsDate):
                 $output .= '<span class="date">' . get_the_date(prefix_template::$template_meta_dateformat, $postID) . '</span>';
@@ -3075,7 +3085,7 @@ class prefix_template {
               if($settingsTime):
                 $output .= '<span class="time">' . get_the_date('G:i', $postID) . '</span>';
               endif;
-              $output .= '</time>';
+              $output .= '</time></div>';
             endif;
             // meta author
             if($settingsAuthor):
