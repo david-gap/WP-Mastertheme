@@ -1205,6 +1205,7 @@ body.page-template,
 
   /* 2.12 PARAGRAPH
   /––––––––––––––––––––––––*/
+  .wp-block-post-excerpt.has-background,  
   p.has-background:not(.wp-block-site-title):not(.wp-block-site-tagline) {
     padding: var(--block__paragraph_hasBackground_padding, var(--content__space, 30px));
   }
