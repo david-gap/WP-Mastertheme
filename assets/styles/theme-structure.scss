@@ -460,7 +460,7 @@ body.page-template,
       row-gap: var(--mainSection__gap, 20px);
       > article {
         flex-grow: 1;
-        width: min-content;
+        width: auto;
         max-width: 100%;
       }
       > #sidebar {
