@@ -31,6 +31,10 @@ const attributes = {
     type: 'boolean',
     default: false
   },
+  sideSpacing: {
+    type: 'boolean',
+    default: false
+  },
   dsgvoImgId: {
     type: 'number'
   },

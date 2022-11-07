@@ -1367,6 +1367,32 @@ body.page-template,
       }
     }
   }
+  .wp-block-post-excerpt {
+    &:not(.has-border-color){
+      .wp-block-post-excerpt__more-text a.wp-block-post-excerpt__more-link {
+        border-color: var(--block__readmore_borderColor, unset);
+        &:hover {
+          border-color: var(--block__readmore_borderColor_hover, unset);
+        }
+      }
+    }
+    &:not(.has-text-color){
+      .wp-block-post-excerpt__more-text a.wp-block-post-excerpt__more-link {
+        color: var(--block__readmore_color, inherit);
+        &:hover {
+          color: var(--block__readmore_color_hover, inherit);
+        }
+      }
+    }
+    &:not(.has-background){
+      .wp-block-post-excerpt__more-text a.wp-block-post-excerpt__more-link {
+        background-color: var(--block__readmore_backgroundColor, transparent);
+        &:hover {
+          background-color: var(--block__readmore_backgroundColor_hover, transparent);
+        }
+      }
+    }
+  }
 
 
   /* 4.21 PAGINATION

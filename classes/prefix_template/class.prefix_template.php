@@ -29,6 +29,7 @@ Table of Contents:
   2.8 REDIRECT DETAIL PAGE
   2.9 EXTEND THUMBNAIL
   2.10 MENU CUSTOM FIELDS
+  2.11 PAGINATION BUTTONS (PREV/NEXT)
 3.0 OUTPUT
   3.1 SORTABLE HEADER CONTENT
   3.2 SORTABLE FOOTER CONTENT
@@ -378,6 +379,9 @@ class prefix_template {
     add_action( 'wp_update_nav_menu_item', array( $this, 'menuCustomFields_saveValue' ), 10, 2 );
     add_filter( 'nav_menu_item_title', array( $this, 'menuCustomFields_frontendIcon' ), 10, 2 );
     add_filter( 'walker_nav_menu_start_el', array( $this, 'menuCustomFields_frontendDescription' ), 10, 4 );
+    // pagination prev/next links
+    add_filter('next_posts_link_attributes', array( $this, 'paginationButtonNext'));
+    add_filter('previous_posts_link_attributes', array( $this, 'paginationButtonPrevious'));
     // register widgets
     SELF::registerCustomWidgets();
     // shortcodes
@@ -1855,10 +1859,10 @@ class prefix_template {
         'name'          => __( 'Page Sidebar', 'devTheme' ),
         'id'            => 'sidebar-page',
         'description'   => __( 'Sidebar Widget for pages', 'devTheme' ),
-        'before_sidebar' => '<div id="%1$s" class="widget %2$s">',
-        'after_sidebar'  => '</div>',
-        'before_title'  => '<h5 class="sidebar-widget">',
-        'after_title'   => '</h5>',
+        // 'before_sidebar' => '<div id="%1$s" class="widget %2$s">',
+        // 'after_sidebar'  => '</div>',
+        // 'before_title'  => '<h5 class="sidebar-widget">',
+        // 'after_title'   => '</h5>',
         'before_widget' => '',
         'after_widget'  => '',
       ) );
@@ -1867,10 +1871,10 @@ class prefix_template {
         'name'          => __( 'Posts Sidebar', 'devTheme' ),
         'id'            => 'sidebar-post',
         'description'   => __( 'Sidebar Widget for posts', 'devTheme' ),
-        'before_sidebar' => '<div id="%1$s" class="widget %2$s">',
-        'after_sidebar'  => '</div>',
-        'before_title'  => '<h5 class="sidebar-widget">',
-        'after_title'   => '</h5>',
+        // 'before_sidebar' => '<div id="%1$s" class="widget %2$s">',
+        // 'after_sidebar'  => '</div>',
+        // 'before_title'  => '<h5 class="sidebar-widget">',
+        // 'after_title'   => '</h5>',
         'before_widget' => '',
         'after_widget'  => '',
       ) );
@@ -2107,7 +2111,17 @@ class prefix_template {
       $item_output .= '<span class="description position-' . $cf_descriptionPosition . '">' . $item->description . '</span>';
     }
     return $item_output;
-}
+  }
+
+
+  /* 2.11 PAGINATION BUTTONS (PREV/NEXT)
+  /------------------------*/
+  function paginationButtonNext(){
+    return 'class="wp-block-query-pagination-next"';
+  }
+  function paginationButtonPrevious(){
+    return 'class="wp-block-query-pagination-previous"';
+  }
 
 
 

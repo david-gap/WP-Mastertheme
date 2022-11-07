@@ -4,7 +4,7 @@
  *
  * Customizer extension
  * Author:      David Voglgsnag
- * @version     1.15
+ * @version     1.16
  *
  */
 
@@ -40,6 +40,7 @@ class prefix_core_Customizer {
     *  'default' => '1'
     *)
   */
+  private $version = 1.16;
   private $tree = array(
     'panel_one' => array(
       'label' => 'Panel 1',
@@ -75,7 +76,69 @@ class prefix_core_Customizer {
   private $defaultValues = array(
     'settings' => array(
       'label' => 'Settings',
-      'panels' => array(),
+      'panels' => array(
+        'tmpParts_spacing' => array(
+          'label' => 'Content spacing',
+          'sections' => array(
+            'tmp_spacing_default' => array(
+              'label' => 'Default spacings',
+              'inputs' => array(
+                'content__space' => array(
+                  'label' => 'Space between elements',
+                  'type' => 'range-value'
+                ),
+                'content__space_last' => array(
+                  'label' => 'Last element spacing',
+                  'type' => 'range-value'
+                ),
+                'html__anchor' => array(
+                  'label' => 'Anchor position (IE fix)',
+                  'type' => 'range-value',
+                  'default' => '100px',
+                  'rangeMax' => 300,
+                  'rangeSuffix' => 'px'
+                ),
+                'content__space_mobile' => array(
+                  'label' => 'Space between elements',
+                  'type' => 'range-value'
+                ),
+                'content__space_last_mobile' => array(
+                  'label' => 'Last element spacing',
+                  'type' => 'range-value'
+                ),
+                'html__anchor_mobile' => array(
+                  'label' => 'Anchor position (IE fix)',
+                  'type' => 'range-value',
+                  'default' => '120px',
+                  'rangeMax' => 300,
+                  'rangeSuffix' => 'px'
+                )
+              )
+            ),
+            'tmp_spacing_rules' => array(
+              'label' => 'Override spacing rules',
+              'inputs' => array(
+                'content__space_one' => array(
+                  'label' => 'Rule 1',
+                  'type' => 'range-value'
+                ),
+                'content__space_two' => array(
+                  'label' => 'Rule 2',
+                  'type' => 'range-value'
+                ),
+                'content__space_one_mobile' => array(
+                  'label' => 'Rule 1',
+                  'type' => 'range-value'
+                ),
+                'content__space_two_mobile' => array(
+                  'label' => 'Rule 2',
+                  'type' => 'range-value'
+                )
+              )
+            )
+          )
+        )
+      ),
       'sections' => array(
         'breakpoints' => array(
           'label' => 'Breakpoints',
@@ -490,12 +553,12 @@ class prefix_core_Customizer {
                   'default' => 'transparent'
                 ),
                 'mnav__color_active' => array(
-                  'label' => 'Color (active)',
+                  'label' => 'Color',
                   'type' => 'color',
                   'default' => 'transparent'
                 ),
                 'mnav__background_color_active' => array(
-                  'label' => 'Background color (active)',
+                  'label' => 'Background color',
                   'type' => 'color',
                   'default' => 'transparent'
                 ),
@@ -581,11 +644,11 @@ class prefix_core_Customizer {
                   'type' => 'color'
                 ),
                 'dark__mnav__color_active' => array(
-                  'label' => 'Color (active)',
+                  'label' => 'Color',
                   'type' => 'color'
                 ),
                 'dark__mnav__background_color_active' => array(
-                  'label' => 'Background color (active)',
+                  'label' => 'Background color',
                   'type' => 'color'
                 ),
                 'dark__mnav__border_color' => array(
@@ -630,11 +693,11 @@ class prefix_core_Customizer {
                   'type' => 'color'
                 ),
                 'mnav__sub_color_active' => array(
-                  'label' => 'Color (active)',
+                  'label' => 'Color',
                   'type' => 'color'
                 ),
                 'mnav__sub_background_color_active' => array(
-                  'label' => 'Background color (active)',
+                  'label' => 'Background color',
                   'type' => 'color'
                 ),
                 'mnav__sub_border_color' => array(
@@ -718,11 +781,11 @@ class prefix_core_Customizer {
                   'type' => 'color'
                 ),
                 'dark__mnav__sub_color_active' => array(
-                  'label' => 'Color (active)',
+                  'label' => 'Color',
                   'type' => 'color'
                 ),
                 'dark__mnav__sub_background_color_active' => array(
-                  'label' => 'Background color (active)',
+                  'label' => 'Background color',
                   'type' => 'color'
                 ),
                 'dark__mnav__sub_border_color' => array(
@@ -767,11 +830,11 @@ class prefix_core_Customizer {
                   'type' => 'color'
                 ),
                 'mnav__subSub_color_active' => array(
-                  'label' => 'Color (active)',
+                  'label' => 'Color',
                   'type' => 'color'
                 ),
                 'mnav__subSub_background_color_active' => array(
-                  'label' => 'Background color (active)',
+                  'label' => 'Background color',
                   'type' => 'color'
                 ),
                 'mnav__subSub_border_color' => array(
@@ -855,11 +918,11 @@ class prefix_core_Customizer {
                   'type' => 'color'
                 ),
                 'dark__mnav__subSub_color_active' => array(
-                  'label' => 'Color (active)',
+                  'label' => 'Color',
                   'type' => 'color'
                 ),
                 'dark__mnav__subSub_background_color_active' => array(
-                  'label' => 'Background color (active)',
+                  'label' => 'Background color',
                   'type' => 'color'
                 ),
                 'dark__mnav__subSub_border_color' => array(
@@ -904,11 +967,11 @@ class prefix_core_Customizer {
                   'type' => 'color'
                 ),
                 'mnav__subSubSub_color_active' => array(
-                  'label' => 'Color (active)',
+                  'label' => 'Color',
                   'type' => 'color'
                 ),
                 'mnav__subSubSub_background_color_active' => array(
-                  'label' => 'Background color (active)',
+                  'label' => 'Background color',
                   'type' => 'color'
                 ),
                 'mnav__subSubSub_border_color' => array(
@@ -992,11 +1055,11 @@ class prefix_core_Customizer {
                   'type' => 'color'
                 ),
                 'dark__mnav__subSubSub_color_active' => array(
-                  'label' => 'Color (active)',
+                  'label' => 'Color',
                   'type' => 'color'
                 ),
                 'dark__mnav__subSubSub_background_color_active' => array(
-                  'label' => 'Background color (active)',
+                  'label' => 'Background color',
                   'type' => 'color'
                 ),
                 'dark__mnav__subSubSub_border_color' => array(
@@ -1114,345 +1177,626 @@ class prefix_core_Customizer {
       ),
       'sections' => array()
     ),
-    'tmp' => array(
-      'label' => 'Template parts',
+    'tmpPages' => array(
+      'label' => 'Template pages',
       'panels' => array(
-        'tmp_spacing' => array(
-          'label' => 'Content spacing',
+        'tmpPages_page404' => array(
+          'label' => '404 Page',
           'sections' => array(
-            'tmp_spacing_default' => array(
-              'label' => 'Default spacings',
+            'page404_settings' => array(
+              'label' => 'Settings',
               'inputs' => array(
-                'content__space' => array(
-                  'label' => 'Space between elements',
-                  'type' => 'range-value'
-                ),
-                'content__space_last' => array(
-                  'label' => 'Last element spacing',
-                  'type' => 'range-value'
-                ),
-                'html__anchor' => array(
-                  'label' => 'Anchor position (IE fix)',
-                  'type' => 'range-value',
-                  'default' => '100px',
-                  'rangeMax' => 300,
-                  'rangeSuffix' => 'px'
-                ),
-                'content__space_mobile' => array(
-                  'label' => 'Space between elements',
-                  'type' => 'range-value'
-                ),
-                'content__space_last_mobile' => array(
-                  'label' => 'Last element spacing',
-                  'type' => 'range-value'
-                ),
-                'html__anchor_mobile' => array(
-                  'label' => 'Anchor position (IE fix)',
-                  'type' => 'range-value',
-                  'default' => '120px',
-                  'rangeMax' => 300,
-                  'rangeSuffix' => 'px'
-                )
-              )
-            ),
-            'tmp_spacing_rules' => array(
-              'label' => 'Override spacing rules',
-              'inputs' => array(
-                'content__space_one' => array(
-                  'label' => 'Rule 1',
-                  'type' => 'range-value'
-                ),
-                'content__space_two' => array(
-                  'label' => 'Rule 2',
-                  'type' => 'range-value'
-                ),
-                'content__space_one_mobile' => array(
-                  'label' => 'Rule 1',
-                  'type' => 'range-value'
-                ),
-                'content__space_two_mobile' => array(
-                  'label' => 'Rule 2',
-                  'type' => 'range-value'
-                )
-              )
-            )
-          )
-        ),
-        'tmp_menuItem' => array(
-          'label' => 'Menu items',
-          'sections' => array(
-            'tmp_menuItem_svg' => array(
-              'label' => 'SVG',
-              'inputs' => array(
-                'menuItem__svg_fillColor' => array(
-                  'label' => 'Filling color',
-                  'type' => 'color'
-                ),
-                'menuItem__svg_strokeColor' => array(
-                  'label' => 'stroking color',
-                  'type' => 'color'
-                ),
-                'menuItem__svg_fillColor_hover' => array(
-                  'label' => 'Filling color',
-                  'type' => 'color'
-                ),
-                'menuItem__svg_strokeColor_hover' => array(
-                  'label' => 'stroking color',
-                  'type' => 'color'
-                ),
-                'dark__menuItem__svg_fillColor' => array(
-                  'label' => 'Filling color',
-                  'type' => 'color'
-                ),
-                'dark__menuItem__svg_strokeColor' => array(
-                  'label' => 'stroking color',
-                  'type' => 'color'
-                ),
-                'dark__menuItem__svg_fillColor_hover' => array(
-                  'label' => 'Filling color',
-                  'type' => 'color'
-                ),
-                'dark__menuItem__svg_strokeColor_hover' => array(
-                  'label' => 'stroking color',
-                  'type' => 'color'
-                )
-              )
-            ),
-            'tmp_menuItem_svgBehind' => array(
-              'label' => 'SVG behind link',
-              'inputs' => array(
-                'menuItem__svg_positionBehind_opacity' => array(
-                  'label' => 'Opacity',
-                  'type' => 'range-value',
-                  'rangeMin' => 0,
-                  'rangeMax' => 1,
-                  'rangeSuffix' => ''
-                ),
-                'menuItem__svg_positionBehind_opacity_hover' => array(
-                  'label' => 'Opacity',
-                  'type' => 'range-value',
-                  'rangeMin' => 0,
-                  'rangeMax' => 1,
-                  'rangeSuffix' => ''
-                )
-              )
-            ),
-            'tmp_menuItem_svgContainer' => array(
-              'label' => 'SVG left container',
-              'inputs' => array(
-                'menuItem__svg_positionLeft_backgroundColor' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
-                ),
-                'menuItem__svg_positionLeft_borderColor' => array(
-                  'label' => 'border color',
-                  'type' => 'color'
-                ),
-                'menuItem__svg_positionLeft_backgroundColor_hover' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
-                ),
-                'menuItem__svg_positionLeft_borderColor_hover' => array(
-                  'label' => 'Border color',
-                  'type' => 'color'
-                ),
-                'menuItem__svg_positionLeft_width' => array(
-                  'label' => 'Width',
-                  'type' => 'range-value'
-                ),
-                'menuItem__svg_positionLeft_borderRadius' => array(
-                  'label' => 'Border radius',
+                'error__margin' => array(
+                  'label' => 'Margin',
                   'type' => 'range-four-value'
                 ),
-                'menuItem__svg_positionLeft_borderStyle' => array(
-                  'label' => 'Border style',
+                'error__padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'error__textAlign' => array(
+                  'label' => 'Text align',
                   'type' => 'select'
-                ),
-                'menuItem__svg_positionLeft_borderWidth' => array(
-                  'label' => 'Border width',
-                  'type' => 'range-four-value'
-                ),
-                'menuItem__svg_positionLeft_margin' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                ),
-                'menuItem__svg_positionLeft_padding' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'menuItem__svg_positionLeft_width_mobile' => array(
-                  'label' => 'Width',
-                  'type' => 'range-value'
-                ),
-                'menuItem__svg_positionLeft_margin_mobile' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                ),
-                'menuItem__svg_positionLeft_padding_mobile' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'dark__menuItem__svg_positionLeft_backgroundColor' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
-                ),
-                'dark__menuItem__svg_positionLeft_borderColor' => array(
-                  'label' => 'border color',
-                  'type' => 'color'
-                ),
-                'dark__menuItem__svg_positionLeft_backgroundColor_hover' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
-                ),
-                'dark__menuItem__svg_positionLeft_borderColor_hover' => array(
-                  'label' => 'Border color',
-                  'type' => 'color'
                 )
               )
             ),
-            'tmp_menuItem_description' => array(
-              'label' => 'Description',
+            'page404_title' => array(
+              'label' => 'Title',
               'inputs' => array(
-                'menuItem__description_backgroundColor' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
-                ),
-                'menuItem__description_color' => array(
-                  'label' => 'Color',
-                  'type' => 'color'
-                ),
-                'menuItem__description_borderColor' => array(
-                  'label' => 'Border color',
-                  'type' => 'color'
-                ),
-                'dark__menuItem__description_backgroundColor' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
-                ),
-                'dark__menuItem__description_color' => array(
-                  'label' => 'Color',
-                  'type' => 'color'
-                ),
-                'dark__menuItem__description_borderColor' => array(
-                  'label' => 'Border color',
-                  'type' => 'color'
-                ),
-                'menuItem__description_borderRadius' => array(
-                  'label' => 'Border radius',
-                  'type' => 'range-four-value'
-                ),
-                'menuItem__description_borderStyle' => array(
-                  'label' => 'Border style',
-                  'type' => 'select'
-                ),
-                'menuItem__description_borderWidth' => array(
-                  'label' => 'Border width',
-                  'type' => 'range-four-value'
-                ),
-                'menuItem__description_margin' => array(
+                'error__title_margin' => array(
                   'label' => 'Margin',
                   'type' => 'range-four-value'
                 ),
-                'menuItem__description_padding' => array(
+                'error__title_padding' => array(
                   'label' => 'Padding',
                   'type' => 'range-four-value'
                 ),
-                'menuItem__description_fontFamiliy' => array(
-                  'label' => 'Title font family',
+                'error__title_fontFamily' => array(
+                  'label' => 'Font family',
                   'type' => 'input'
                 ),
-                'menuItem__description_fontSize' => array(
+                'error__title_fontSize' => array(
                   'label' => 'Font size',
                   'type' => 'range-value'
                 ),
-                'menuItem__description_lineHeight' => array(
+                'error__title_lineHeight' => array(
                   'label' => 'Line height',
                   'type' => 'range-value'
                 ),
-                'menuItem__description_fontWeight' => array(
+                'error__title_fontWeight' => array(
                   'label' => 'Font weight',
                   'type' => 'select'
                 ),
-                'menuItem__description_textTransform' => array(
+                'error__title_textTransform' => array(
                   'label' => 'Text transform',
                   'type' => 'select'
                 ),
-                'menuItem__description_fontStyle' => array(
+                'error__title_fontStyle' => array(
                   'label' => 'Font style',
                   'type' => 'select'
                 ),
-                'menuItem__description_letterSpacing' => array(
+                'error__title_letterSpacing' => array(
                   'label' => 'Letter spacing',
                   'type' => 'range-value'
                 ),
-                'menuItem__description_fontSize_mobile' => array(
+                'error__title_margin_mobile' => array(
+                  'label' => 'Title margin',
+                  'type' => 'range-four-value'
+                ),
+                'error__title_padding_mobile' => array(
+                  'label' => 'Title padding',
+                  'type' => 'range-four-value'
+                ),
+                'error__title_fontSize_mobile' => array(
                   'label' => 'Font size',
                   'type' => 'range-value'
                 ),
-                'menuItem__description_margin_mobile' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                ),
-                'menuItem__description_padding_mobile' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'dark__menuItem__description_backgroundColor' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
-                ),
-                'dark__menuItem__description_color' => array(
-                  'label' => 'Color',
-                  'type' => 'color'
-                ),
-                'dark__menuItem__description_borderColor' => array(
-                  'label' => 'Border color',
-                  'type' => 'color'
+                'error__title_lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
                 )
               )
             )
           )
         ),
-        'thumbnails' => array(
-          'label' => 'Thumbnail',
+        'tmpPages_blog' => array(
+          'label' => 'Blog & Archive',
           'sections' => array(
-            'thumbnails_desktop' => array(
-              'label' => 'Desktop',
+            'blog_settings' => array(
+              'label' => 'Settings',
               'inputs' => array(
-                'thumbnail__height' => array(
-                  'label' => 'Height',
-                  'type' => 'range-value'
-                ),
-                'thumbnail__marginTop' => array(
+                'blog__marginTop' => array(
                   'label' => 'Margin top',
                   'type' => 'range-value'
                 ),
-                'thumbnail__marginBottom' => array(
+                'blog__marginBottom' => array(
                   'label' => 'Margin bottom',
+                  'type' => 'range-value'
+                ),
+                'blog__paddingTop' => array(
+                  'label' => 'Padding top',
+                  'type' => 'range-value'
+                ),
+                'blog__paddingBottom' => array(
+                  'label' => 'Padding bottom',
+                  'type' => 'range-value'
+                ),
+                'blog__marginTop_mobile' => array(
+                  'label' => 'Margin top',
+                  'type' => 'range-value'
+                ),
+                'blog__marginBottom_mobile' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'range-value'
+                ),
+                'blog__paddingTop_mobile' => array(
+                  'label' => 'Padding top',
+                  'type' => 'range-value'
+                ),
+                'blog__paddingBottom_mobile' => array(
+                  'label' => 'Padding bottom',
                   'type' => 'range-value'
                 )
               )
             ),
-            'thumbnails_mobile' => array(
-              'label' => 'Mobile',
+            'blog_item' => array(
+              'label' => 'Item',
               'inputs' => array(
-                'thumbnail__height_mobile' => array(
-                  'label' => 'Height',
+                'blog__article_borderColor' => array(
+                  'label' => 'Article border color',
+                  'type' => 'color'
+                ),
+                'blog__article_border' => array(
+                  'label' => 'Article border width',
+                  'type' => 'range-four-value'
+                ),
+                'blog__article_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'blog__article_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'blog__article_flexDirection' => array(
+                  'label' => 'Direction',
+                  'type' => 'select'
+                ),
+                'blog__article_flexGap' => array(
+                  'label' => 'Gap',
                   'type' => 'range-value'
                 ),
-                'thumbnail__marginTop_mobile' => array(
-                  'label' => 'Margin top',
+                'blog__article_flexDivWidth' => array(
+                  'label' => 'Excerpt width',
+                  'type' => 'range-value',
+                  'rangeMax' => 600
+                ),
+                'blog__article_flexMediaWidth' => array(
+                  'label' => 'Media width',
+                  'type' => 'range-value',
+                  'rangeMax' => 600
+                ),
+                'blog__article_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'blog__article_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'blog__article_flexDirection_mobile' => array(
+                  'label' => 'Direction',
+                  'type' => 'select'
+                ),
+                'blog__article_flexGap_mobile' => array(
+                  'label' => 'Gap',
                   'type' => 'range-value'
                 ),
-                'thumbnail__marginBottom_mobile' => array(
-                  'label' => 'Margin bottom',
+                'blog__article_flexDivWidth_mobile' => array(
+                  'label' => 'Excerpt width',
+                  'type' => 'range-value',
+                  'rangeMax' => 300
+                ),
+                'blog__article_flexMediaWidth_mobile' => array(
+                  'label' => 'Article media width',
+                  'type' => 'range-value',
+                  'rangeMax' => 300
+                )
+              )
+            ),
+            'blog_item_title' => array(
+              'label' => 'Item title',
+              'inputs' => array(
+                'blog__article_title_backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'blog__article_title_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'blog__article_title_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'blog__article_title_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'range-four-value'
+                ),
+                'blog__article_title_borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'blog__article_title_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'blog__article_title_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'blog__article_title_fontFamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'blog__article_title_fontSize' => array(
+                  'label' => 'Font size',
                   'type' => 'range-value'
+                ),
+                'blog__article_title_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
+                ),
+                'blog__article_title_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'blog__article_title_textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'blog__article_title_fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'blog__article_title_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'blog__article_title_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'blog__article_title_fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'blog__article_title_lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
+                )
+              )
+            ),
+            'blog_pagination' => array(
+              'label' => 'Pagination',
+              'inputs' => array(
+                'blog__pagination_flexWrap' => array(
+                  'label' => 'Flex wrap',
+                  'type' => 'select'
+                ),
+                'blog__pagination_alignItems' => array(
+                  'label' => 'Align items',
+                  'type' => 'select'
+                ),
+                'blog__pagination_flexDirection' => array(
+                  'label' => 'Flex direction',
+                  'type' => 'select'
+                ),
+                'blog__pagination_justifyContent' => array(
+                  'label' => 'Justify content',
+                  'type' => 'select'
+                ),
+                'blog__pagination_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'blog__pagination_flexWrap_mobile' => array(
+                  'label' => 'Flex wrap',
+                  'type' => 'select'
+                ),
+                'blog__pagination_alignItems_mobile' => array(
+                  'label' => 'Align items',
+                  'type' => 'select'
+                ),
+                'blog__pagination_flexDirection_mobile' => array(
+                  'label' => 'Flex direction',
+                  'type' => 'select'
+                ),
+                'blog__pagination_justifyContent_mobile' => array(
+                  'label' => 'Justify content',
+                  'type' => 'select'
+                ),
+                'blog__pagination_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
                 )
               )
             )
           )
         ),
-        'breadcrumbs' => array(
+        'pageSidebar' => array(
+          'label' => 'Page/Post & Sidebar',
+          'sections' => array(
+            'pageSidebar_section' => array(
+              'label' => 'Main section',
+              'inputs' => array(
+                'mainSection__bgColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'mainSection__flexDirection' => array(
+                  'label' => 'Position',
+                  'type' => 'select'
+                ),
+                'mainSection__gap' => array(
+                  'label' => 'Gap',
+                  'type' => 'range-value'
+                ),
+                'mainSection__marginTop' => array(
+                  'label' => 'Margin top',
+                  'type' => 'range-value'
+                ),
+                'mainSection__marginBottom' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'range-value'
+                ),
+                'mainSection__paddingTop' => array(
+                  'label' => 'Padding top',
+                  'type' => 'range-value'
+                ),
+                'mainSection__paddingBottom' => array(
+                  'label' => 'Padding bottom',
+                  'type' => 'range-value'
+                ),
+                'mainSection__flexDirection_mobile' => array(
+                  'label' => 'Position',
+                  'type' => 'select'
+                ),
+                'mainSection__gap_mobile' => array(
+                  'label' => 'Gap',
+                  'type' => 'range-value'
+                ),
+                'mainSection__marginTop_mobile' => array(
+                  'label' => 'Margin top',
+                  'type' => 'range-value'
+                ),
+                'mainSection__marginBottom_mobile' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'range-value'
+                ),
+                'mainSection__paddingTop_mobile' => array(
+                  'label' => 'Padding top',
+                  'type' => 'range-value'
+                ),
+                'mainSection__paddingBottom_mobile' => array(
+                  'label' => 'Padding bottom',
+                  'type' => 'range-value'
+                )
+              )
+            ),
+            'pageSidebar_sidebar' => array(
+              'label' => 'Sidebar',
+              'inputs' => array(
+                'sidebar__width' => array(
+                  'label' => 'Width',
+                  'type' => 'range-value',
+                  'rangeSuffix' => '%',
+                  'rangeMax' => 100,
+                  'rangeStep' => 1
+                ),
+                'sidebar__width_mobile' => array(
+                  'label' => 'Width',
+                  'type' => 'range-value',
+                  'rangeSuffix' => '%',
+                  'rangeMax' => 100,
+                  'rangeStep' => 1
+                )
+              )
+            )
+          )
+        ),
+        'search_results' => array(
+          'label' => 'Search results',
+          'sections' => array(
+            'search_results_settings' => array(
+              'label' => 'Settings',
+              'inputs' => array(
+                'search__marginTop' => array(
+                  'label' => 'Margin top',
+                  'type' => 'range-value'
+                ),
+                'search__marginBottom' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'range-value'
+                ),
+                'search__paddingTop' => array(
+                  'label' => 'Padding top',
+                  'type' => 'range-value'
+                ),
+                'search__paddingBottom' => array(
+                  'label' => 'Padding bottom',
+                  'type' => 'range-value'
+                ),
+                'search__marginTop_mobile' => array(
+                  'label' => 'Margin top',
+                  'type' => 'range-value'
+                ),
+                'search__marginBottom_mobile' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'range-value'
+                ),
+                'search__paddingTop_mobile' => array(
+                  'label' => 'Padding top',
+                  'type' => 'range-value'
+                ),
+                'search__paddingBottom_mobile' => array(
+                  'label' => 'Padding bottom',
+                  'type' => 'range-value'
+                )
+              )
+            ),
+            'search_results_item' => array(
+              'label' => 'Item',
+              'inputs' => array(
+                'search__article_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'search__article_border' => array(
+                  'label' => 'Border width',
+                  'type' => 'range-four-value'
+                ),
+                'search__article_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'search__article_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'search__article_flexDirection' => array(
+                  'label' => 'Direction',
+                  'type' => 'select'
+                ),
+                'search__article_flexGap' => array(
+                  'label' => 'Gap',
+                  'type' => 'range-value'
+                ),
+                'search__article_flexDivWidth' => array(
+                  'label' => 'Excerpt width',
+                  'type' => 'range-value',
+                  'rangeMax' => 600
+                ),
+                'search__article_flexMediaWidth' => array(
+                  'label' => 'Media width',
+                  'type' => 'range-value',
+                  'rangeMax' => 600
+                ),
+                'search__article_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'search__article_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'search__article_flexDirection_mobile' => array(
+                  'label' => 'Direction',
+                  'type' => 'select'
+                ),
+                'search__article_flexGap_mobile' => array(
+                  'label' => 'Gap',
+                  'type' => 'range-value'
+                ),
+                'search__article_flexDivWidth_mobile' => array(
+                  'label' => 'Excerpt width',
+                  'type' => 'range-value',
+                  'rangeMax' => 300
+                ),
+                'search__article_flexMediaWidth_mobile' => array(
+                  'label' => 'Media width',
+                  'type' => 'range-value',
+                  'rangeMax' => 300
+                )
+              )
+            ),
+            'search_results_item_title' => array(
+              'label' => 'Item title',
+              'inputs' => array(
+                'search__article_title_backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'search__article_title_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'search__article_title_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'search__article_title_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'range-four-value'
+                ),
+                'search__article_title_borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'search__article_title_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'search__article_title_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'search__article_title_fontFamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'search__article_title_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'search__article_title_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
+                ),
+                'search__article_title_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'search__article_title_textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'search__article_title_fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'search__article_title_fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'search__article_title_lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
+                ),
+                'search__article_title_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'search__article_title_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                )
+              )
+            ),
+            'search_results_pagination' => array(
+              'label' => 'Pagination',
+              'inputs' => array(
+                'search__pagination_flexWrap' => array(
+                  'label' => 'Flex wrap',
+                  'type' => 'select'
+                ),
+                'search__pagination_alignItems' => array(
+                  'label' => 'Align items',
+                  'type' => 'select'
+                ),
+                'search__pagination_flexDirection' => array(
+                  'label' => 'Flex direction',
+                  'type' => 'select'
+                ),
+                'search__pagination_justifyContent' => array(
+                  'label' => 'Justify content',
+                  'type' => 'select'
+                ),
+                'search__pagination_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'search__pagination_flexWrap_mobile' => array(
+                  'label' => 'Flex wrap',
+                  'type' => 'select'
+                ),
+                'search__pagination_alignItems_mobile' => array(
+                  'label' => 'Align items',
+                  'type' => 'select'
+                ),
+                'search__pagination_flexDirection_mobile' => array(
+                  'label' => 'Flex direction',
+                  'type' => 'select'
+                ),
+                'search__pagination_justifyContent_mobile' => array(
+                  'label' => 'Justify content',
+                  'type' => 'select'
+                ),
+                'search__pagination_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                )
+              )
+            )
+          )
+        )
+      ),
+      'sections' => array()
+    ),
+    'tmpParts' => array(
+      'label' => 'Template parts',
+      'panels' => array(
+        'tmpParts_breadcrumbs' => array(
           'label' => 'Breadcrumbs',
           'sections' => array(
             'breadcrumbs_desktop' => array(
@@ -1475,7 +1819,7 @@ class prefix_core_Customizer {
                   'type' => 'color'
                 ),
                 'bc__color_active' => array(
-                  'label' => 'Color (active)',
+                  'label' => 'Color',
                   'type' => 'color'
                 ),
                 'bc__margin' => array(
@@ -1527,7 +1871,7 @@ class prefix_core_Customizer {
                   'type' => 'color'
                 ),
                 'dark__bc__color_active' => array(
-                  'label' => 'Color (active)',
+                  'label' => 'Color',
                   'type' => 'color'
                 )
               )
@@ -1555,776 +1899,439 @@ class prefix_core_Customizer {
             )
           )
         ),
-        'languageswitcher' => array(
-          'label' => 'Language switcher',
+        'tmpParts_comments' => array(
+          'label' => 'Comments',
           'sections' => array(
-            'languageswitcher_settings' => array(
+            'tmp_comments_settings' => array(
               'label' => 'Settings',
               'inputs' => array(
-                'ls__background_color' => array(
+                'comments__bg' => array(
                   'label' => 'Background color',
                   'type' => 'color'
                 ),
-                'ls__color_active' => array(
-                  'label' => 'Active language color',
+                'comments__borderColor' => array(
+                  'label' => 'Border color',
                   'type' => 'color'
                 ),
-                'dark__ls__background_color' => array(
-                  'label' => 'Background Image',
+                'comments__borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'range-four-value'
+                ),
+                'comments__borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'comments__borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'range-four-value'
+                ),
+                'comments__margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'comments__padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                )
+              )
+            ),
+            'tmp_comments_title' => array(
+              'label' => 'Title',
+              'inputs' => array(
+                'comments__title_bg' => array(
+                  'label' => 'Background color',
                   'type' => 'color'
                 ),
-                'dark__ls__color_active' => array(
-                  'label' => 'Active language color',
+                'comments__title_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'comments__title_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'comments__title_borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'range-four-value'
+                ),
+                'comments__title_borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'comments__title_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'range-four-value'
+                ),
+                'comments__title_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'comments__title_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'comments__title_fontFamiliy' => array(
+                  'label' => 'Title font family',
+                  'type' => 'input'
+                ),
+                'comments__title_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'comments__title_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
+                ),
+                'comments__title_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'comments__title_textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'comments__title_fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'comments__title_letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'range-value'
+                ),
+                'comments__title_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'comments__title_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'comments__title_fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'comments__title_lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
+                ),
+                'dark__comments__title_bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__comments__title_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__comments__title_borderColor' => array(
+                  'label' => 'Border color',
                   'type' => 'color'
                 )
               )
             ),
-            'languageswitcher_links' => array(
-              'label' => 'Buttons',
+            'tmp_comments_list' => array(
+              'label' => 'Commentlist',
               'inputs' => array(
-                'ls__link_color' => array(
-                  'label' => 'Color',
-                  'type' => 'color'
-                ),
-                'ls__link_color_hover' => array(
-                  'label' => 'Hover color',
-                  'type' => 'color'
-                ),
-                'ls__link_margin' => array(
+                'comments__commentlist_margin' => array(
                   'label' => 'Margin',
                   'type' => 'range-four-value'
                 ),
-                'ls__link_padding' => array(
+                'comments__commentlist_padding' => array(
                   'label' => 'Padding',
                   'type' => 'range-four-value'
                 ),
-                'ls__link_fontfamily' => array(
+                'comments__commentlist_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'comments__commentlist_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                )
+              )
+            ),
+            'tmp_comments_list_item' => array(
+              'label' => 'Comment item',
+              'inputs' => array(
+                'comments__commentlist_item_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'comments__commentlist_item_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'comments__commentlist_item_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'comments__commentlist_item_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'range-four-value'
+                ),
+                'comments__commentlist_item_borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'comments__commentlist_item_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'comments__commentlist_item_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                )
+              )
+            ),
+            'tmp_comments_list_respond' => array(
+              'label' => 'Commentlist respond',
+              'inputs' => array(
+                'comments__commentlist_respond_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'comments__commentlist_respond_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'comments__commentlist_respond_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'comments__commentlist_respond_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                )
+              )
+            ),
+            'tmp_comments_list_respond_item' => array(
+              'label' => 'Comment item',
+              'inputs' => array(
+                'comments__commentlist_respond_item_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'comments__commentlist_respond_item_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'comments__commentlist_respond_item_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'comments__commentlist_respond_item_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'range-four-value'
+                ),
+                'comments__commentlist_respond_item_borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'comments__commentlist_respond_item_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'comments__commentlist_respond_item_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                )
+              )
+            ),
+            'tmp_comments_form' => array(
+              'label' => 'Form',
+              'inputs' => array(
+                'comments__form_flexDirection' => array(
+                  'label' => 'Direction',
+                  'type' => 'select'
+                ),
+                'comments__form_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'comments__form_flexDirection_mobile' => array(
+                  'label' => 'Direction',
+                  'type' => 'select'
+                ),
+                'comments__form_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                )
+              )
+            ),
+            'tmp_comments_avatar' => array(
+              'label' => 'Avatar',
+              'inputs' => array(
+                'comments__avatar_display' => array(
+                  'label' => 'Display',
+                  'type' => 'select'
+                ),
+                'comments__avatar_width' => array(
+                  'label' => 'Width',
+                  'type' => 'range-value'
+                ),
+                'comments__avatar_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'comments__avatar_width_mobile' => array(
+                  'label' => 'Width',
+                  'type' => 'range-value'
+                ),
+                'comments__avatar_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                )
+              )
+            )
+          )
+        ),
+        'tmpParts_consentContainer' => array(
+          'label' => 'DSGVO consent container',
+          'sections' => array(
+            'consentContainer_' => array(
+              'label' => 'Container',
+              'inputs' => array(
+                'consentContainer__bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'consentContainer__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'consentContainer__borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'consentContainer__borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'range-four-value'
+                ),
+                'consentContainer__borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'range-four-value'
+                ),
+                'consentContainer__padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'consentContainer__fontFamily' => array(
                   'label' => 'Font family',
                   'type' => 'input'
                 ),
-                'ls__link_fontsize' => array(
+                'consentContainer__fontSize' => array(
                   'label' => 'Font size',
                   'type' => 'range-value'
                 ),
-                'ls__link_lineheight' => array(
+                'consentContainer__lineHeight' => array(
                   'label' => 'Line height',
                   'type' => 'range-value'
                 ),
-                'ls__link_fontWeight' => array(
+                'consentContainer__fontWeight' => array(
                   'label' => 'Font weight',
                   'type' => 'select'
                 ),
-                'ls__link_textTransform' => array(
-                  'label' => 'Text transform',
+                'consentContainer__textAlign' => array(
+                  'label' => 'Text align',
                   'type' => 'select'
                 ),
-                'ls__link_fontStyle' => array(
-                  'label' => 'Font style',
-                  'type' => 'select'
-                ),
-                'ls__link_letterSpacing' => array(
-                  'label' => 'Letter spacing',
-                  'type' => 'range-value'
-                ),
-                'ls__link_margin_mobile' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                ),
-                'ls__link_padding_mobile' => array(
+                'consentContainer__padding_mobile' => array(
                   'label' => 'Padding',
                   'type' => 'range-four-value'
                 ),
-                'ls__link_fontsize_mobile' => array(
+                'consentContainer__fontSize_mobile' => array(
                   'label' => 'Font size',
                   'type' => 'range-value'
                 ),
-                'ls__link_lineheight_mobile' => array(
+                'consentContainer__lineHeight_mobile' => array(
                   'label' => 'Line height',
                   'type' => 'range-value'
+                )
+              )
+            ),
+            'consentContainer_button' => array(
+              'label' => 'Button',
+              'inputs' => array(
+                'consentContainer__Button_bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
                 ),
-                'dark__ls__link_color' => array(
+                'consentContainer__Button_color' => array(
                   'label' => 'Color',
                   'type' => 'color'
                 ),
-                'dark__ls__link_color_hover' => array(
-                  'label' => 'Hover color',
+                'consentContainer__Button_borderColor' => array(
+                  'label' => 'Border color',
                   'type' => 'color'
+                ),
+                'consentContainer__Button_bg_hover' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'consentContainer__Button_color_hover' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'consentContainer__Button_borderColor_hover' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'consentContainer__Button_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'range-four-value'
+                ),
+                'consentContainer__Button_borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'range-four-value'
+                ),
+                'consentContainer__Button_padding' => array(
+                  'label' => 'Button padding',
+                  'type' => 'range-four-value'
+                ),
+                'consentContainer__Button_fontFamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'consentContainer__Button_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'consentContainer__Button_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'consentContainer__Button_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
+                ),
+                'consentContainer__Button_textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'consentContainer__Button_fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'consentContainer__Button_letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'range-value'
+                ),
+                'consentContainer__Button_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'consentContainer__Button_fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'consentContainer__Button_lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
                 )
               )
             )
           )
         ),
-        'tagStyles' => array(
-          'label' => 'Tag styles',
-          'sections' => array(
-            'tagStyles_section' => array(
-              'label' => 'Main section',
-              'inputs' => array(
-                'mainSection__bgColor' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
-                ),
-                'mainSection__marginTop' => array(
-                  'label' => 'Margin top',
-                  'type' => 'range-value'
-                ),
-                'mainSection__marginBottom' => array(
-                  'label' => 'Margin bottom',
-                  'type' => 'range-value'
-                ),
-                'mainSection__paddingTop' => array(
-                  'label' => 'Padding top',
-                  'type' => 'range-value'
-                ),
-                'mainSection__paddingBottom' => array(
-                  'label' => 'Padding bottom',
-                  'type' => 'range-value'
-                ),
-                'mainSection__marginTop_mobile' => array(
-                  'label' => 'Margin top',
-                  'type' => 'range-value'
-                ),
-                'mainSection__marginBottom_mobile' => array(
-                  'label' => 'Margin bottom',
-                  'type' => 'range-value'
-                ),
-                'mainSection__paddingTop_mobile' => array(
-                  'label' => 'Padding top',
-                  'type' => 'range-value'
-                ),
-                'mainSection__paddingBottom_mobile' => array(
-                  'label' => 'Padding bottom',
-                  'type' => 'range-value'
-                )
-              )
-            ),
-            'tagStyles_h1' => array(
-              'label' => 'h1',
-              'inputs' => array(
-                'h1__bg' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
-                ),
-                'h1__color' => array(
-                  'label' => 'Color',
-                  'type' => 'color'
-                ),
-                'h1__borderColor' => array(
-                  'label' => 'Border color',
-                  'type' => 'color'
-                ),
-                'h1__borderRadius' => array(
-                  'label' => 'Border radius',
-                  'type' => 'range-four-value'
-                ),
-                'h1__borderStyle' => array(
-                  'label' => 'Border style',
-                  'type' => 'select'
-                ),
-                'h1__borderWidth' => array(
-                  'label' => 'Border width',
-                  'type' => 'range-four-value'
-                ),
-                'h1__marginTop' => array(
-                  'label' => 'Margin top',
-                  'type' => 'range-value'
-                ),
-                'h1__marginBottom' => array(
-                  'label' => 'Margin bottom',
-                  'type' => 'range-value'
-                ),
-                'h1__padding' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'h1__fontFamily' => array(
-                  'label' => 'Title font family',
-                  'type' => 'input'
-                ),
-                'h1__fontSize' => array(
-                  'label' => 'Font size',
-                  'type' => 'range-value'
-                ),
-                'h1__lineHeight' => array(
-                  'label' => 'Line height',
-                  'type' => 'range-value'
-                ),
-                'h1__fontWeight' => array(
-                  'label' => 'Font weight',
-                  'type' => 'select'
-                ),
-                'h1__textTransform' => array(
-                  'label' => 'Text transform',
-                  'type' => 'select'
-                ),
-                'h1__fontStyle' => array(
-                  'label' => 'Font style',
-                  'type' => 'select'
-                ),
-                'h1__letterSpacing' => array(
-                  'label' => 'Letter spacing',
-                  'type' => 'range-value'
-                ),
-                'h1__marginTop_mobile' => array(
-                  'label' => 'Margin top',
-                  'type' => 'range-value'
-                ),
-                'h1__marginBottom_mobile' => array(
-                  'label' => 'Margin bottom',
-                  'type' => 'range-value'
-                ),
-                'h1__padding_mobile' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'h1__fontSize_mobile' => array(
-                  'label' => 'Font size',
-                  'type' => 'range-value'
-                ),
-                'h1__lineHeight_mobile' => array(
-                  'label' => 'Line height',
-                  'type' => 'range-value'
-                ),
-                'dark__h1__bg' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
-                ),
-                'dark__h1__color' => array(
-                  'label' => 'Color',
-                  'type' => 'color'
-                ),
-                'dark__h1__borderColor' => array(
-                  'label' => 'Border color',
-                  'type' => 'color'
-                )
-              )
-            ),
-            'tagStyles_h2' => array(
-              'label' => 'h2',
-              'inputs' => array(
-                'h2__bg' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
-                ),
-                'h2__color' => array(
-                  'label' => 'Color',
-                  'type' => 'color'
-                ),
-                'h2__borderColor' => array(
-                  'label' => 'Border color',
-                  'type' => 'color'
-                ),
-                'h2__borderRadius' => array(
-                  'label' => 'Border radius',
-                  'type' => 'range-four-value'
-                ),
-                'h2__borderStyle' => array(
-                  'label' => 'Border style',
-                  'type' => 'select'
-                ),
-                'h2__borderWidth' => array(
-                  'label' => 'Border width',
-                  'type' => 'range-four-value'
-                ),
-                'h2__marginTop' => array(
-                  'label' => 'Margin top',
-                  'type' => 'range-value'
-                ),
-                'h2__marginBottom' => array(
-                  'label' => 'Margin bottom',
-                  'type' => 'range-value'
-                ),
-                'h2__padding' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'h2__fontFamily' => array(
-                  'label' => 'Title font family',
-                  'type' => 'input'
-                ),
-                'h2__fontSize' => array(
-                  'label' => 'Font size',
-                  'type' => 'range-value'
-                ),
-                'h2__lineHeight' => array(
-                  'label' => 'Line height',
-                  'type' => 'range-value'
-                ),
-                'h2__fontWeight' => array(
-                  'label' => 'Font weight',
-                  'type' => 'select'
-                ),
-                'h2__textTransform' => array(
-                  'label' => 'Text transform',
-                  'type' => 'select'
-                ),
-                'h2__fontStyle' => array(
-                  'label' => 'Font style',
-                  'type' => 'select'
-                ),
-                'h2__letterSpacing' => array(
-                  'label' => 'Letter spacing',
-                  'type' => 'range-value'
-                ),
-                'h2__marginTop_mobile' => array(
-                  'label' => 'Margin top',
-                  'type' => 'range-value'
-                ),
-                'h2__marginBottom_mobile' => array(
-                  'label' => 'Margin bottom',
-                  'type' => 'range-value'
-                ),
-                'h2__padding_mobile' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'h2__fontSize_mobile' => array(
-                  'label' => 'Font size',
-                  'type' => 'range-value'
-                ),
-                'h2__lineHeight_mobile' => array(
-                  'label' => 'Line height',
-                  'type' => 'range-value'
-                ),
-                'dark__h2__bg' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
-                ),
-                'dark__h2__color' => array(
-                  'label' => 'Color',
-                  'type' => 'color'
-                ),
-                'dark__h2__borderColor' => array(
-                  'label' => 'Border color',
-                  'type' => 'color'
-                )
-              )
-            ),
-            'tagStyles_h3' => array(
-              'label' => 'h3',
-              'inputs' => array(
-                'h3__bg' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
-                ),
-                'h3__color' => array(
-                  'label' => 'Color',
-                  'type' => 'color'
-                ),
-                'h3__borderColor' => array(
-                  'label' => 'Border color',
-                  'type' => 'color'
-                ),
-                'h3__borderRadius' => array(
-                  'label' => 'Border radius',
-                  'type' => 'range-four-value'
-                ),
-                'h3__borderStyle' => array(
-                  'label' => 'Border style',
-                  'type' => 'select'
-                ),
-                'h3__borderWidth' => array(
-                  'label' => 'Border width',
-                  'type' => 'range-four-value'
-                ),
-                'h3__marginTop' => array(
-                  'label' => 'Margin top',
-                  'type' => 'range-value'
-                ),
-                'h3__marginBottom' => array(
-                  'label' => 'Margin bottom',
-                  'type' => 'range-value'
-                ),
-                'h3__padding' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'h3__fontFamily' => array(
-                  'label' => 'Title font family',
-                  'type' => 'input'
-                ),
-                'h3__fontSize' => array(
-                  'label' => 'Font size',
-                  'type' => 'range-value'
-                ),
-                'h3__lineHeight' => array(
-                  'label' => 'Line height',
-                  'type' => 'range-value'
-                ),
-                'h3__fontWeight' => array(
-                  'label' => 'Font weight',
-                  'type' => 'select'
-                ),
-                'h3__textTransform' => array(
-                  'label' => 'Text transform',
-                  'type' => 'select'
-                ),
-                'h3__fontStyle' => array(
-                  'label' => 'Font style',
-                  'type' => 'select'
-                ),
-                'h3__letterSpacing' => array(
-                  'label' => 'Letter spacing',
-                  'type' => 'range-value'
-                ),
-                'h3__marginTop_mobile' => array(
-                  'label' => 'Margin top',
-                  'type' => 'range-value'
-                ),
-                'h3__marginBottom_mobile' => array(
-                  'label' => 'Margin bottom',
-                  'type' => 'range-value'
-                ),
-                'h3__padding_mobile' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'h3__fontSize_mobile' => array(
-                  'label' => 'Font size',
-                  'type' => 'range-value'
-                ),
-                'h3__lineHeight_mobile' => array(
-                  'label' => 'Line height',
-                  'type' => 'range-value'
-                ),
-                'dark__h3__bg' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
-                ),
-                'dark__h3__color' => array(
-                  'label' => 'Color',
-                  'type' => 'color'
-                ),
-                'dark__h3__borderColor' => array(
-                  'label' => 'Border color',
-                  'type' => 'color'
-                )
-              )
-            ),
-            'tagStyles_h4' => array(
-              'label' => 'h4',
-              'inputs' => array(
-                'h4__bg' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
-                ),
-                'h4__color' => array(
-                  'label' => 'Color',
-                  'type' => 'color'
-                ),
-                'h4__borderColor' => array(
-                  'label' => 'Border color',
-                  'type' => 'color'
-                ),
-                'h4__borderRadius' => array(
-                  'label' => 'Border radius',
-                  'type' => 'range-four-value'
-                ),
-                'h4__borderStyle' => array(
-                  'label' => 'Border style',
-                  'type' => 'select'
-                ),
-                'h4__borderWidth' => array(
-                  'label' => 'Border width',
-                  'type' => 'range-four-value'
-                ),
-                'h4__marginTop' => array(
-                  'label' => 'Margin top',
-                  'type' => 'range-value'
-                ),
-                'h4__marginBottom' => array(
-                  'label' => 'Margin bottom',
-                  'type' => 'range-value'
-                ),
-                'h4__padding' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'h4__fontFamily' => array(
-                  'label' => 'Title font family',
-                  'type' => 'input'
-                ),
-                'h4__fontSize' => array(
-                  'label' => 'Font size',
-                  'type' => 'range-value'
-                ),
-                'h4__lineHeight' => array(
-                  'label' => 'Line height',
-                  'type' => 'range-value'
-                ),
-                'h4__fontWeight' => array(
-                  'label' => 'Font weight',
-                  'type' => 'select'
-                ),
-                'h4__textTransform' => array(
-                  'label' => 'Text transform',
-                  'type' => 'select'
-                ),
-                'h4__fontStyle' => array(
-                  'label' => 'Font style',
-                  'type' => 'select'
-                ),
-                'h4__letterSpacing' => array(
-                  'label' => 'Letter spacing',
-                  'type' => 'range-value'
-                ),
-                'h4__marginTop_mobile' => array(
-                  'label' => 'Margin top',
-                  'type' => 'range-value'
-                ),
-                'h4__marginBottom_mobile' => array(
-                  'label' => 'Margin bottom',
-                  'type' => 'range-value'
-                ),
-                'h4__padding_mobile' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'h4__fontSize_mobile' => array(
-                  'label' => 'Font size',
-                  'type' => 'range-value'
-                ),
-                'h4__lineHeight_mobile' => array(
-                  'label' => 'Line height',
-                  'type' => 'range-value'
-                ),
-                'dark__h4__bg' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
-                ),
-                'dark__h4__color' => array(
-                  'label' => 'Color',
-                  'type' => 'color'
-                ),
-                'dark__h4__borderColor' => array(
-                  'label' => 'Border color',
-                  'type' => 'color'
-                )
-              )
-            ),
-            'tagStyles_h5' => array(
-              'label' => 'h5',
-              'inputs' => array(
-                'h5__bg' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
-                ),
-                'h5__color' => array(
-                  'label' => 'Color',
-                  'type' => 'color'
-                ),
-                'h5__borderColor' => array(
-                  'label' => 'Border color',
-                  'type' => 'color'
-                ),
-                'h5__borderRadius' => array(
-                  'label' => 'Border radius',
-                  'type' => 'range-four-value'
-                ),
-                'h5__borderStyle' => array(
-                  'label' => 'Border style',
-                  'type' => 'select'
-                ),
-                'h5__borderWidth' => array(
-                  'label' => 'Border width',
-                  'type' => 'range-four-value'
-                ),
-                'h5__marginTop' => array(
-                  'label' => 'Margin top',
-                  'type' => 'range-value'
-                ),
-                'h5__marginBottom' => array(
-                  'label' => 'Margin bottom',
-                  'type' => 'range-value'
-                ),
-                'h5__padding' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'h5__fontFamily' => array(
-                  'label' => 'Title font family',
-                  'type' => 'input'
-                ),
-                'h5__fontSize' => array(
-                  'label' => 'Font size',
-                  'type' => 'range-value'
-                ),
-                'h5__lineHeight' => array(
-                  'label' => 'Line height',
-                  'type' => 'range-value'
-                ),
-                'h5__fontWeight' => array(
-                  'label' => 'Font weight',
-                  'type' => 'select'
-                ),
-                'h5__textTransform' => array(
-                  'label' => 'Text transform',
-                  'type' => 'select'
-                ),
-                'h5__fontStyle' => array(
-                  'label' => 'Font style',
-                  'type' => 'select'
-                ),
-                'h5__letterSpacing' => array(
-                  'label' => 'Letter spacing',
-                  'type' => 'range-value'
-                ),
-                'h5__marginTop_mobile' => array(
-                  'label' => 'Margin top',
-                  'type' => 'range-value'
-                ),
-                'h5__marginBottom_mobile' => array(
-                  'label' => 'Margin bottom',
-                  'type' => 'range-value'
-                ),
-                'h5__padding_mobile' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'h5__fontSize_mobile' => array(
-                  'label' => 'Font size',
-                  'type' => 'range-value'
-                ),
-                'h5__lineHeight_mobile' => array(
-                  'label' => 'Line height',
-                  'type' => 'range-value'
-                ),
-                'dark__h5__bg' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
-                ),
-                'dark__h5__color' => array(
-                  'label' => 'Color',
-                  'type' => 'color'
-                ),
-                'dark__h5__borderColor' => array(
-                  'label' => 'Border color',
-                  'type' => 'color'
-                )
-              )
-            ),
-            'tagStyles_h6' => array(
-              'label' => 'h6',
-              'inputs' => array(
-                'h6__bg' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
-                ),
-                'h6__color' => array(
-                  'label' => 'Color',
-                  'type' => 'color'
-                ),
-                'h6__borderColor' => array(
-                  'label' => 'Border color',
-                  'type' => 'color'
-                ),
-                'h6__borderRadius' => array(
-                  'label' => 'Border radius',
-                  'type' => 'range-four-value'
-                ),
-                'h6__borderStyle' => array(
-                  'label' => 'Border style',
-                  'type' => 'select'
-                ),
-                'h6__borderWidth' => array(
-                  'label' => 'Border width',
-                  'type' => 'range-four-value'
-                ),
-                'h6__marginTop' => array(
-                  'label' => 'Margin top',
-                  'type' => 'range-value'
-                ),
-                'h6__marginBottom' => array(
-                  'label' => 'Margin bottom',
-                  'type' => 'range-value'
-                ),
-                'h6__padding' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'h6__fontFamily' => array(
-                  'label' => 'Title font family',
-                  'type' => 'input'
-                ),
-                'h6__fontSize' => array(
-                  'label' => 'Font size',
-                  'type' => 'range-value'
-                ),
-                'h6__lineHeight' => array(
-                  'label' => 'Line height',
-                  'type' => 'range-value'
-                ),
-                'h6__fontWeight' => array(
-                  'label' => 'Font weight',
-                  'type' => 'select'
-                ),
-                'h6__textTransform' => array(
-                  'label' => 'Text transform',
-                  'type' => 'select'
-                ),
-                'h6__fontStyle' => array(
-                  'label' => 'Font style',
-                  'type' => 'select'
-                ),
-                'h6__letterSpacing' => array(
-                  'label' => 'Letter spacing',
-                  'type' => 'range-value'
-                ),
-                'h6__marginTop_mobile' => array(
-                  'label' => 'Margin top',
-                  'type' => 'range-value'
-                ),
-                'h6__marginBottom_mobile' => array(
-                  'label' => 'Margin bottom',
-                  'type' => 'range-value'
-                ),
-                'h6__padding_mobile' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'h6__fontSize_mobile' => array(
-                  'label' => 'Font size',
-                  'type' => 'range-value'
-                ),
-                'h6__lineHeight_mobile' => array(
-                  'label' => 'Line height',
-                  'type' => 'range-value'
-                ),
-                'dark__h6__bg' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
-                ),
-                'dark__h6__color' => array(
-                  'label' => 'Color',
-                  'type' => 'color'
-                ),
-                'dark__h6__borderColor' => array(
-                  'label' => 'Border color',
-                  'type' => 'color'
-                )
-              )
-            ),
-            'tagStyles_b' => array(
-              'label' => 'B',
-              'inputs' => array(
-                'b_fontWeight' => array(
-                  'label' => 'Font weight',
-                  'type' => 'select'
-                )
-              )
-            ),
-            'tagStyles_strong' => array(
-              'label' => 'Strong',
-              'inputs' => array(
-                'strong_fontWeight' => array(
-                  'label' => 'Font weight',
-                  'type' => 'select'
-                )
-              )
-            )
-          )
-        ),
-        'forms' => array(
+        'tmpParts_forms' => array(
           'label' => 'Formular',
           'sections' => array(
             'forms_messages' => array(
@@ -3170,1092 +3177,106 @@ class prefix_core_Customizer {
             )
           )
         ),
-        'search_form' => array(
-          'label' => 'Search form',
+        'tmpParts_languageswitcher' => array(
+          'label' => 'Language switcher',
           'sections' => array(
-            'search_form_settings' => array(
-              'label' => 'Settings',
-              'inputs' => array()
-            ),
-            'search_form_label' => array(
-              'label' => 'Label',
-              'inputs' => array(
-                'searchForm__label_backgroundColor' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
-                ),
-                'searchForm__label_color' => array(
-                  'label' => 'Color',
-                  'type' => 'color'
-                ),
-                'searchForm__label_border_color' => array(
-                  'label' => 'Border color',
-                  'type' => 'color'
-                ),
-                'searchForm__label_display' => array(
-                  'label' => 'Display',
-                  'type' => 'select'
-                ),
-                'searchForm__label_width' => array(
-                  'label' => 'Width',
-                  'type' => 'range-value',
-                  'rangeMax' => 600
-                ),
-                'searchForm__label_borderRadius' => array(
-                  'label' => 'Border radius',
-                  'type' => 'range-four-value'
-                ),
-                'searchForm__label_borderWidth' => array(
-                  'label' => 'Border width',
-                  'type' => 'range-four-value'
-                ),
-                'searchForm__label_borderStyle' => array(
-                  'label' => 'Border style',
-                  'type' => 'select'
-                ),
-                'searchForm__label_margin' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                ),
-                'searchForm__label_padding' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'searchForm__label_fontFamily' => array(
-                  'label' => 'Font family',
-                  'type' => 'input'
-                ),
-                'searchForm__label_fontSize' => array(
-                  'label' => 'Font size',
-                  'type' => 'range-value'
-                ),
-                'searchForm__label_lineHeight' => array(
-                  'label' => 'Line height',
-                  'type' => 'range-value'
-                ),
-                'searchForm__label_fontWeight' => array(
-                  'label' => 'Font weight',
-                  'type' => 'select'
-                ),
-                'searchForm__label_textTransform' => array(
-                  'label' => 'Text transform',
-                  'type' => 'select'
-                ),
-                'searchForm__label_letterSpacing' => array(
-                  'label' => 'Letter spacing',
-                  'type' => 'range-value'
-                ),
-                'searchForm__label_display_mobile' => array(
-                  'label' => 'Display',
-                  'type' => 'select'
-                ),
-                'searchForm__label_width_mobile' => array(
-                  'label' => 'Minimum width',
-                  'type' => 'range-value',
-                  'rangeMax' => 300
-                ),
-                'searchForm__label_margin_mobile' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                ),
-                'searchForm__label_padding_mobile' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'searchForm__label_fontSize_mobile' => array(
-                  'label' => 'Font size',
-                  'type' => 'range-value'
-                ),
-                'searchForm__label_lineHeight_mobile' => array(
-                  'label' => 'Line height',
-                  'type' => 'range-value'
-                ),
-                'searchForm__label_letterSpacing_mobile' => array(
-                  'label' => 'Letter spacing',
-                  'type' => 'range-value'
-                ),
-                'dark__searchForm__label_backgroundColor' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
-                ),
-                'dark__searchForm__label_color' => array(
-                  'label' => 'Color',
-                  'type' => 'color'
-                ),
-                'dark__searchForm__label_border_color' => array(
-                  'label' => 'Border color',
-                  'type' => 'color'
-                )
-              )
-            ),
-            'search_form_input' => array(
-              'label' => 'Input',
-              'inputs' => array(
-                'searchForm__bg_color' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
-                ),
-                'searchForm__color' => array(
-                  'label' => 'Color',
-                  'type' => 'color'
-                ),
-                'searchForm__border_color' => array(
-                  'label' => 'Border color',
-                  'type' => 'color'
-                ),
-                'searchForm__border_width' => array(
-                  'label' => 'Border width',
-                  'type' => 'range-four-value'
-                ),
-                'searchForm__borderRadius' => array(
-                  'label' => 'Border radius',
-                  'type' => 'range-four-value'
-                ),
-                'searchForm__margin' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                ),
-                'searchForm__padding' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'searchForm__fontFamily' => array(
-                  'label' => 'Font family',
-                  'type' => 'input'
-                ),
-                'searchForm__fontSize' => array(
-                  'label' => 'Font size',
-                  'type' => 'range-value'
-                ),
-                'searchForm__lineHeight' => array(
-                  'label' => 'Line height',
-                  'type' => 'range-value'
-                ),
-                'searchForm__fontWeight' => array(
-                  'label' => 'Font weight',
-                  'type' => 'select'
-                ),
-                'searchForm__margin_mobile' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                ),
-                'searchForm__padding_mobile' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'searchForm__fontSize_mobile' => array(
-                  'label' => 'Font size',
-                  'type' => 'range-value'
-                ),
-                'searchForm__lineHeight_mobile' => array(
-                  'label' => 'Line height',
-                  'type' => 'range-value'
-                ),
-                'dark__searchForm__color' => array(
-                  'label' => 'Color',
-                  'type' => 'color'
-                ),
-                'dark__searchForm__bg_color' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
-                ),
-                'dark__searchForm__border_color' => array(
-                  'label' => 'Border color',
-                  'type' => 'color'
-                )
-              )
-            ),
-            'search_form_placeholder' => array(
-              'label' => 'Placeholder',
-              'inputs' => array(
-                'searchForm__placeholder_color' => array(
-                  'label' => 'Color',
-                  'type' => 'color'
-                ),
-                'searchForm__placeholder_fontFamily' => array(
-                  'label' => 'Font family',
-                  'type' => 'input'
-                ),
-                'searchForm__placeholder_fontSize' => array(
-                  'label' => 'Font size',
-                  'type' => 'range-value'
-                ),
-                'searchForm__placeholder_lineHeight' => array(
-                  'label' => 'Line height',
-                  'type' => 'range-value'
-                ),
-                'searchForm__placeholder_fontWeight' => array(
-                  'label' => 'Font weight',
-                  'type' => 'select'
-                ),
-                'searchForm__placeholder_textTransform' => array(
-                  'label' => 'Text transform',
-                  'type' => 'select'
-                ),
-                'dark__searchForm__placeholder_color' => array(
-                  'label' => 'Color',
-                  'type' => 'color'
-                )
-              )
-            ),
-            'search_form_button' => array(
-              'label' => 'Button',
-              'inputs' => array(
-                'searchForm__submit_bg_color' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
-                ),
-                'searchForm__submit_color' => array(
-                  'label' => 'Color',
-                  'type' => 'color'
-                ),
-                'searchForm__submit_border_color' => array(
-                  'label' => 'Border color',
-                  'type' => 'color'
-                ),
-                'searchForm__submit_bg_color_hover' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
-                ),
-                'searchForm__submit_color_hover' => array(
-                  'label' => 'Color',
-                  'type' => 'color'
-                ),
-                'searchForm__submit_border_color_hover' => array(
-                  'label' => 'Border color',
-                  'type' => 'color'
-                ),
-                'searchForm__submit_borderRadius' => array(
-                  'label' => 'Border radius',
-                  'type' => 'range-four-value'
-                ),
-                'searchForm__submit_borderWidth' => array(
-                  'label' => 'Border width',
-                  'type' => 'range-four-value'
-                ),
-                'searchForm__submit_margin' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                ),
-                'searchForm__submit_padding' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'searchForm__submit_fontFamily' => array(
-                  'label' => 'Font family',
-                  'type' => 'input'
-                ),
-                'searchForm__submit_fontSize' => array(
-                  'label' => 'Font size',
-                  'type' => 'range-value'
-                ),
-                'searchForm__submit_letterSpacing' => array(
-                  'label' => 'Letter spacing',
-                  'type' => 'range-value'
-                ),
-                'searchForm__submit_lineHeight' => array(
-                  'label' => 'Line height',
-                  'type' => 'range-value'
-                ),
-                'searchForm__submit_fontWeight' => array(
-                  'label' => 'Font weight',
-                  'type' => 'select'
-                ),
-                'searchForm__submit_textTransform' => array(
-                  'label' => 'Text transform',
-                  'type' => 'select'
-                ),
-                'searchForm__submit_fontSize_mobile' => array(
-                  'label' => 'Font size',
-                  'type' => 'range-value'
-                ),
-                'searchForm__submit_lineHeight_mobile' => array(
-                  'label' => 'Line height',
-                  'type' => 'range-value'
-                ),
-                'searchForm__submit_letterSpacing_mobile' => array(
-                  'label' => 'Letter spacing',
-                  'type' => 'range-value'
-                ),
-                'searchForm__submit_margin_mobile' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                ),
-                'searchForm__submit_padding_mobile' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'dark__searchForm__submit_bg_color' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
-                ),
-                'dark__searchForm__submit_color' => array(
-                  'label' => 'Text color',
-                  'type' => 'color'
-                ),
-                'dark__searchForm__submit_border_color' => array(
-                  'label' => 'Border color',
-                  'type' => 'color'
-                ),
-                'dark__searchForm__submit_bg_color_hover' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
-                ),
-                'dark__searchForm__submit_border_color_hover' => array(
-                  'label' => 'Border color',
-                  'type' => 'color'
-                ),
-                'dark__searchForm__submit_color_hover' => array(
-                  'label' => 'Color',
-                  'type' => 'color'
-                )
-              )
-            )
-          )
-        ),
-        'search_results' => array(
-          'label' => 'Search results',
-          'sections' => array(
-            'search_results_settings' => array(
+            'languageswitcher_settings' => array(
               'label' => 'Settings',
               'inputs' => array(
-                'search__marginTop' => array(
-                  'label' => 'Margin top',
-                  'type' => 'range-value'
-                ),
-                'search__marginBottom' => array(
-                  'label' => 'Margin bottom',
-                  'type' => 'range-value'
-                ),
-                'search__paddingTop' => array(
-                  'label' => 'Padding top',
-                  'type' => 'range-value'
-                ),
-                'search__paddingBottom' => array(
-                  'label' => 'Padding bottom',
-                  'type' => 'range-value'
-                ),
-                'search__marginTop_mobile' => array(
-                  'label' => 'Margin top',
-                  'type' => 'range-value'
-                ),
-                'search__marginBottom_mobile' => array(
-                  'label' => 'Margin bottom',
-                  'type' => 'range-value'
-                ),
-                'search__paddingTop_mobile' => array(
-                  'label' => 'Padding top',
-                  'type' => 'range-value'
-                ),
-                'search__paddingBottom_mobile' => array(
-                  'label' => 'Padding bottom',
-                  'type' => 'range-value'
-                )
-              )
-            ),
-            'search_results_item' => array(
-              'label' => 'Item',
-              'inputs' => array(
-                'search__article_borderColor' => array(
-                  'label' => 'Border color',
-                  'type' => 'color'
-                ),
-                'search__article_border' => array(
-                  'label' => 'Border width',
-                  'type' => 'range-four-value'
-                ),
-                'search__article_margin' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                ),
-                'search__article_padding' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'search__article_flexDirection' => array(
-                  'label' => 'Direction',
-                  'type' => 'select'
-                ),
-                'search__article_flexGap' => array(
-                  'label' => 'Gap',
-                  'type' => 'range-value'
-                ),
-                'search__article_flexDivWidth' => array(
-                  'label' => 'Excerpt width',
-                  'type' => 'range-value',
-                  'rangeMax' => 600
-                ),
-                'search__article_flexMediaWidth' => array(
-                  'label' => 'Media width',
-                  'type' => 'range-value',
-                  'rangeMax' => 600
-                ),
-                'search__article_margin_mobile' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                ),
-                'search__article_padding_mobile' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'search__article_flexDirection_mobile' => array(
-                  'label' => 'Direction',
-                  'type' => 'select'
-                ),
-                'search__article_flexGap_mobile' => array(
-                  'label' => 'Gap',
-                  'type' => 'range-value'
-                ),
-                'search__article_flexDivWidth_mobile' => array(
-                  'label' => 'Excerpt width',
-                  'type' => 'range-value',
-                  'rangeMax' => 300
-                ),
-                'search__article_flexMediaWidth_mobile' => array(
-                  'label' => 'Media width',
-                  'type' => 'range-value',
-                  'rangeMax' => 300
-                )
-              )
-            ),
-            'search_results_item_title' => array(
-              'label' => 'Item title',
-              'inputs' => array(
-                'search__article_title_backgroundColor' => array(
+                'ls__background_color' => array(
                   'label' => 'Background color',
                   'type' => 'color'
                 ),
-                'search__article_title_color' => array(
+                'ls__color_active' => array(
+                  'label' => 'Active language color',
+                  'type' => 'color'
+                ),
+                'dark__ls__background_color' => array(
+                  'label' => 'Background Image',
+                  'type' => 'color'
+                ),
+                'dark__ls__color_active' => array(
+                  'label' => 'Active language color',
+                  'type' => 'color'
+                )
+              )
+            ),
+            'languageswitcher_links' => array(
+              'label' => 'Buttons',
+              'inputs' => array(
+                'ls__link_color' => array(
                   'label' => 'Color',
                   'type' => 'color'
                 ),
-                'search__article_title_borderColor' => array(
-                  'label' => 'Border color',
+                'ls__link_color_hover' => array(
+                  'label' => 'Hover color',
                   'type' => 'color'
                 ),
-                'search__article_title_borderWidth' => array(
-                  'label' => 'Border width',
-                  'type' => 'range-four-value'
-                ),
-                'search__article_title_borderStyle' => array(
-                  'label' => 'Border style',
-                  'type' => 'select'
-                ),
-                'search__article_title_margin' => array(
+                'ls__link_margin' => array(
                   'label' => 'Margin',
                   'type' => 'range-four-value'
                 ),
-                'search__article_title_padding' => array(
+                'ls__link_padding' => array(
                   'label' => 'Padding',
                   'type' => 'range-four-value'
                 ),
-                'search__article_title_fontFamily' => array(
+                'ls__link_fontfamily' => array(
                   'label' => 'Font family',
                   'type' => 'input'
                 ),
-                'search__article_title_fontSize' => array(
+                'ls__link_fontsize' => array(
                   'label' => 'Font size',
                   'type' => 'range-value'
                 ),
-                'search__article_title_lineHeight' => array(
+                'ls__link_lineheight' => array(
                   'label' => 'Line height',
                   'type' => 'range-value'
                 ),
-                'search__article_title_fontWeight' => array(
+                'ls__link_fontWeight' => array(
                   'label' => 'Font weight',
                   'type' => 'select'
                 ),
-                'search__article_title_textTransform' => array(
+                'ls__link_textTransform' => array(
                   'label' => 'Text transform',
                   'type' => 'select'
                 ),
-                'search__article_title_fontStyle' => array(
+                'ls__link_fontStyle' => array(
                   'label' => 'Font style',
                   'type' => 'select'
                 ),
-                'search__article_title_fontSize_mobile' => array(
-                  'label' => 'Font size',
-                  'type' => 'range-value'
-                ),
-                'search__article_title_lineHeight_mobile' => array(
-                  'label' => 'Line height',
-                  'type' => 'range-value'
-                ),
-                'search__article_title_margin_mobile' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                ),
-                'search__article_title_padding_mobile' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                )
-              )
-            ),
-            'search_results_pagination' => array(
-              'label' => 'Pagination',
-              'inputs' => array(
-                'search__pagination_margin' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                )
-              )
-            )
-          )
-        ),
-        'blog' => array(
-          'label' => 'Blog & Archive',
-          'sections' => array(
-            'blog_settings' => array(
-              'label' => 'Settings',
-              'inputs' => array(
-                'blog__marginTop' => array(
-                  'label' => 'Margin top',
-                  'type' => 'range-value'
-                ),
-                'blog__marginBottom' => array(
-                  'label' => 'Margin bottom',
-                  'type' => 'range-value'
-                ),
-                'blog__paddingTop' => array(
-                  'label' => 'Padding top',
-                  'type' => 'range-value'
-                ),
-                'blog__paddingBottom' => array(
-                  'label' => 'Padding bottom',
-                  'type' => 'range-value'
-                ),
-                'blog__marginTop_mobile' => array(
-                  'label' => 'Margin top',
-                  'type' => 'range-value'
-                ),
-                'blog__marginBottom_mobile' => array(
-                  'label' => 'Margin bottom',
-                  'type' => 'range-value'
-                ),
-                'blog__paddingTop_mobile' => array(
-                  'label' => 'Padding top',
-                  'type' => 'range-value'
-                ),
-                'blog__paddingBottom_mobile' => array(
-                  'label' => 'Padding bottom',
-                  'type' => 'range-value'
-                )
-              )
-            ),
-            'blog_item' => array(
-              'label' => 'Item',
-              'inputs' => array(
-                'blog__article_borderColor' => array(
-                  'label' => 'Article border color',
-                  'type' => 'color'
-                ),
-                'blog__article_border' => array(
-                  'label' => 'Article border width',
-                  'type' => 'range-four-value'
-                ),
-                'blog__article_margin' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                ),
-                'blog__article_padding' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'blog__article_flexDirection' => array(
-                  'label' => 'Direction',
-                  'type' => 'select'
-                ),
-                'blog__article_flexGap' => array(
-                  'label' => 'Gap',
-                  'type' => 'range-value'
-                ),
-                'blog__article_flexDivWidth' => array(
-                  'label' => 'Excerpt width',
-                  'type' => 'range-value',
-                  'rangeMax' => 600
-                ),
-                'blog__article_flexMediaWidth' => array(
-                  'label' => 'Media width',
-                  'type' => 'range-value',
-                  'rangeMax' => 600
-                ),
-                'blog__article_margin_mobile' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                ),
-                'blog__article_padding_mobile' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'blog__article_flexDirection_mobile' => array(
-                  'label' => 'Direction',
-                  'type' => 'select'
-                ),
-                'blog__article_flexGap_mobile' => array(
-                  'label' => 'Gap',
-                  'type' => 'range-value'
-                ),
-                'blog__article_flexDivWidth_mobile' => array(
-                  'label' => 'Excerpt width',
-                  'type' => 'range-value',
-                  'rangeMax' => 300
-                ),
-                'blog__article_flexMediaWidth_mobile' => array(
-                  'label' => 'Article media width',
-                  'type' => 'range-value',
-                  'rangeMax' => 300
-                )
-              )
-            ),
-            'blog_item_title' => array(
-              'label' => 'Item title',
-              'inputs' => array(
-                'blog__article_title_backgroundColor' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
-                ),
-                'blog__article_title_color' => array(
-                  'label' => 'Color',
-                  'type' => 'color'
-                ),
-                'blog__article_title_borderColor' => array(
-                  'label' => 'Border color',
-                  'type' => 'color'
-                ),
-                'blog__article_title_borderWidth' => array(
-                  'label' => 'Border width',
-                  'type' => 'range-four-value'
-                ),
-                'blog__article_title_borderStyle' => array(
-                  'label' => 'Border style',
-                  'type' => 'select'
-                ),
-                'blog__article_title_margin' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                ),
-                'blog__article_title_padding' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'blog__article_title_fontFamily' => array(
-                  'label' => 'Font family',
-                  'type' => 'input'
-                ),
-                'blog__article_title_fontSize' => array(
-                  'label' => 'Font size',
-                  'type' => 'range-value'
-                ),
-                'blog__article_title_lineHeight' => array(
-                  'label' => 'Line height',
-                  'type' => 'range-value'
-                ),
-                'blog__article_title_fontWeight' => array(
-                  'label' => 'Font weight',
-                  'type' => 'select'
-                ),
-                'blog__article_title_textTransform' => array(
-                  'label' => 'Text transform',
-                  'type' => 'select'
-                ),
-                'blog__article_title_fontStyle' => array(
-                  'label' => 'Font style',
-                  'type' => 'select'
-                ),
-                'blog__article_title_margin_mobile' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                ),
-                'blog__article_title_padding_mobile' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'blog__article_title_fontSize_mobile' => array(
-                  'label' => 'Font size',
-                  'type' => 'range-value'
-                ),
-                'blog__article_title_lineHeight_mobile' => array(
-                  'label' => 'Line height',
-                  'type' => 'range-value'
-                )
-              )
-            ),
-            'blog_pagination' => array(
-              'label' => 'Pagination',
-              'inputs' => array(
-                'blog__pagination_margin' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                )
-              )
-            )
-          )
-        ),
-        'tmp_comments' => array(
-          'label' => 'Comments',
-          'sections' => array(
-            'tmp_comments_settings' => array(
-              'label' => 'Settings',
-              'inputs' => array(
-                'comments__bg' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
-                ),
-                'comments__borderColor' => array(
-                  'label' => 'Border color',
-                  'type' => 'color'
-                ),
-                'comments__borderRadius' => array(
-                  'label' => 'Border radius',
-                  'type' => 'range-four-value'
-                ),
-                'comments__borderStyle' => array(
-                  'label' => 'Border style',
-                  'type' => 'select'
-                ),
-                'comments__borderWidth' => array(
-                  'label' => 'Border width',
-                  'type' => 'range-four-value'
-                ),
-                'comments__margin' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                ),
-                'comments__padding' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                )
-              )
-            ),
-            'tmp_comments_title' => array(
-              'label' => 'Title',
-              'inputs' => array(
-                'comments__title_bg' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
-                ),
-                'comments__title_color' => array(
-                  'label' => 'Color',
-                  'type' => 'color'
-                ),
-                'comments__title_borderColor' => array(
-                  'label' => 'Border color',
-                  'type' => 'color'
-                ),
-                'comments__title_borderRadius' => array(
-                  'label' => 'Border radius',
-                  'type' => 'range-four-value'
-                ),
-                'comments__title_borderStyle' => array(
-                  'label' => 'Border style',
-                  'type' => 'select'
-                ),
-                'comments__title_borderWidth' => array(
-                  'label' => 'Border width',
-                  'type' => 'range-four-value'
-                ),
-                'comments__title_margin' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                ),
-                'comments__title_padding' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'comments__title_fontFamiliy' => array(
-                  'label' => 'Title font family',
-                  'type' => 'input'
-                ),
-                'comments__title_fontSize' => array(
-                  'label' => 'Font size',
-                  'type' => 'range-value'
-                ),
-                'comments__title_lineHeight' => array(
-                  'label' => 'Line height',
-                  'type' => 'range-value'
-                ),
-                'comments__title_fontWeight' => array(
-                  'label' => 'Font weight',
-                  'type' => 'select'
-                ),
-                'comments__title_textTransform' => array(
-                  'label' => 'Text transform',
-                  'type' => 'select'
-                ),
-                'comments__title_fontStyle' => array(
-                  'label' => 'Font style',
-                  'type' => 'select'
-                ),
-                'comments__title_letterSpacing' => array(
+                'ls__link_letterSpacing' => array(
                   'label' => 'Letter spacing',
                   'type' => 'range-value'
                 ),
-                'comments__title_margin_mobile' => array(
+                'ls__link_margin_mobile' => array(
                   'label' => 'Margin',
                   'type' => 'range-four-value'
                 ),
-                'comments__title_padding_mobile' => array(
+                'ls__link_padding_mobile' => array(
                   'label' => 'Padding',
                   'type' => 'range-four-value'
                 ),
-                'comments__title_fontSize_mobile' => array(
+                'ls__link_fontsize_mobile' => array(
                   'label' => 'Font size',
                   'type' => 'range-value'
                 ),
-                'comments__title_lineHeight_mobile' => array(
+                'ls__link_lineheight_mobile' => array(
                   'label' => 'Line height',
                   'type' => 'range-value'
                 ),
-                'dark__comments__title_bg' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
-                ),
-                'dark__comments__title_color' => array(
+                'dark__ls__link_color' => array(
                   'label' => 'Color',
                   'type' => 'color'
                 ),
-                'dark__comments__title_borderColor' => array(
-                  'label' => 'Border color',
+                'dark__ls__link_color_hover' => array(
+                  'label' => 'Hover color',
                   'type' => 'color'
-                )
-              )
-            ),
-            'tmp_comments_list' => array(
-              'label' => 'Commentlist',
-              'inputs' => array(
-                'comments__commentlist_margin' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                ),
-                'comments__commentlist_padding' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'comments__commentlist_margin_mobile' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                ),
-                'comments__commentlist_padding_mobile' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                )
-              )
-            ),
-            'tmp_comments_list_item' => array(
-              'label' => 'Comment item',
-              'inputs' => array(
-                'comments__commentlist_item_borderColor' => array(
-                  'label' => 'Border color',
-                  'type' => 'color'
-                ),
-                'comments__commentlist_item_margin' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                ),
-                'comments__commentlist_item_padding' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'comments__commentlist_item_borderWidth' => array(
-                  'label' => 'Border width',
-                  'type' => 'range-four-value'
-                ),
-                'comments__commentlist_item_borderStyle' => array(
-                  'label' => 'Border style',
-                  'type' => 'select'
-                ),
-                'comments__commentlist_item_margin_mobile' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                ),
-                'comments__commentlist_item_padding_mobile' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                )
-              )
-            ),
-            'tmp_comments_list_respond' => array(
-              'label' => 'Commentlist respond',
-              'inputs' => array(
-                'comments__commentlist_respond_margin' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                ),
-                'comments__commentlist_respond_padding' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'comments__commentlist_respond_margin_mobile' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                ),
-                'comments__commentlist_respond_padding_mobile' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                )
-              )
-            ),
-            'tmp_comments_list_respond_item' => array(
-              'label' => 'Comment item',
-              'inputs' => array(
-                'comments__commentlist_respond_item_borderColor' => array(
-                  'label' => 'Border color',
-                  'type' => 'color'
-                ),
-                'comments__commentlist_respond_item_margin' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                ),
-                'comments__commentlist_respond_item_padding' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'comments__commentlist_respond_item_borderWidth' => array(
-                  'label' => 'Border width',
-                  'type' => 'range-four-value'
-                ),
-                'comments__commentlist_respond_item_borderStyle' => array(
-                  'label' => 'Border style',
-                  'type' => 'select'
-                ),
-                'comments__commentlist_respond_item_margin_mobile' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                ),
-                'comments__commentlist_respond_item_padding_mobile' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                )
-              )
-            ),
-            'tmp_comments_form' => array(
-              'label' => 'Form',
-              'inputs' => array(
-                'comments__form_flexDirection' => array(
-                  'label' => 'Direction',
-                  'type' => 'select'
-                ),
-                'comments__form_margin' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                ),
-                'comments__form_flexDirection_mobile' => array(
-                  'label' => 'Direction',
-                  'type' => 'select'
-                ),
-                'comments__form_margin_mobile' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                )
-              )
-            ),
-            'tmp_comments_avatar' => array(
-              'label' => 'Avatar',
-              'inputs' => array(
-                'comments__avatar_display' => array(
-                  'label' => 'Display',
-                  'type' => 'select'
-                ),
-                'comments__avatar_width' => array(
-                  'label' => 'Width',
-                  'type' => 'range-value'
-                ),
-                'comments__avatar_margin' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                ),
-                'comments__avatar_width_mobile' => array(
-                  'label' => 'Width',
-                  'type' => 'range-value'
-                ),
-                'comments__avatar_margin_mobile' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
                 )
               )
             )
           )
         ),
-        'page404' => array(
-          'label' => '404 Page',
-          'sections' => array(
-            'page404_settings' => array(
-              'label' => 'Settings',
-              'inputs' => array(
-                'error__margin' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                ),
-                'error__padding' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'error__textAlign' => array(
-                  'label' => 'Text align',
-                  'type' => 'select'
-                )
-              )
-            ),
-            'page404_title' => array(
-              'label' => 'Title',
-              'inputs' => array(
-                'error__title_margin' => array(
-                  'label' => 'Margin',
-                  'type' => 'range-four-value'
-                ),
-                'error__title_padding' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'error__title_fontFamily' => array(
-                  'label' => 'Font family',
-                  'type' => 'input'
-                ),
-                'error__title_fontSize' => array(
-                  'label' => 'Font size',
-                  'type' => 'range-value'
-                ),
-                'error__title_lineHeight' => array(
-                  'label' => 'Line height',
-                  'type' => 'range-value'
-                ),
-                'error__title_fontWeight' => array(
-                  'label' => 'Font weight',
-                  'type' => 'select'
-                ),
-                'error__title_textTransform' => array(
-                  'label' => 'Text transform',
-                  'type' => 'select'
-                ),
-                'error__title_fontStyle' => array(
-                  'label' => 'Font style',
-                  'type' => 'select'
-                ),
-                'error__title_letterSpacing' => array(
-                  'label' => 'Letter spacing',
-                  'type' => 'range-value'
-                ),
-                'error__title_margin_mobile' => array(
-                  'label' => 'Title margin',
-                  'type' => 'range-four-value'
-                ),
-                'error__title_padding_mobile' => array(
-                  'label' => 'Title padding',
-                  'type' => 'range-four-value'
-                ),
-                'error__title_fontSize_mobile' => array(
-                  'label' => 'Font size',
-                  'type' => 'range-value'
-                ),
-                'error__title_lineHeight_mobile' => array(
-                  'label' => 'Line height',
-                  'type' => 'range-value'
-                )
-              )
-            )
-          )
-        ),
-        'tmp_lightbox' => array(
+        'tmpParts_lightbox' => array(
           'label' => 'Lightbox',
           'sections' => array(
             'theme_popup_box' => array(
@@ -4722,193 +3743,242 @@ class prefix_core_Customizer {
             )
           )
         ),
-        'consentContainer' => array(
-          'label' => 'DSGVO consent container',
+        'tmpParts_menuItem' => array(
+          'label' => 'Menu items',
           'sections' => array(
-            'consentContainer_' => array(
-              'label' => 'Container',
+            'tmp_menuItem_svg' => array(
+              'label' => 'SVG',
               'inputs' => array(
-                'consentContainer__bg' => array(
-                  'label' => 'Background color',
+                'menuItem__svg_fillColor' => array(
+                  'label' => 'Filling color',
                   'type' => 'color'
                 ),
-                'consentContainer__color' => array(
-                  'label' => 'Color',
+                'menuItem__svg_strokeColor' => array(
+                  'label' => 'stroking color',
                   'type' => 'color'
                 ),
-                'consentContainer__borderColor' => array(
-                  'label' => 'Border color',
+                'menuItem__svg_fillColor_hover' => array(
+                  'label' => 'Filling color',
                   'type' => 'color'
                 ),
-                'consentContainer__borderWidth' => array(
-                  'label' => 'Border width',
-                  'type' => 'range-four-value'
+                'menuItem__svg_strokeColor_hover' => array(
+                  'label' => 'stroking color',
+                  'type' => 'color'
                 ),
-                'consentContainer__borderRadius' => array(
-                  'label' => 'Border radius',
-                  'type' => 'range-four-value'
+                'dark__menuItem__svg_fillColor' => array(
+                  'label' => 'Filling color',
+                  'type' => 'color'
                 ),
-                'consentContainer__padding' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
+                'dark__menuItem__svg_strokeColor' => array(
+                  'label' => 'stroking color',
+                  'type' => 'color'
                 ),
-                'consentContainer__fontFamily' => array(
-                  'label' => 'Font family',
-                  'type' => 'input'
+                'dark__menuItem__svg_fillColor_hover' => array(
+                  'label' => 'Filling color',
+                  'type' => 'color'
                 ),
-                'consentContainer__fontSize' => array(
-                  'label' => 'Font size',
-                  'type' => 'range-value'
-                ),
-                'consentContainer__lineHeight' => array(
-                  'label' => 'Line height',
-                  'type' => 'range-value'
-                ),
-                'consentContainer__fontWeight' => array(
-                  'label' => 'Font weight',
-                  'type' => 'select'
-                ),
-                'consentContainer__textAlign' => array(
-                  'label' => 'Text align',
-                  'type' => 'select'
-                ),
-                'consentContainer__padding_mobile' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'consentContainer__fontSize_mobile' => array(
-                  'label' => 'Font size',
-                  'type' => 'range-value'
-                ),
-                'consentContainer__lineHeight_mobile' => array(
-                  'label' => 'Line height',
-                  'type' => 'range-value'
+                'dark__menuItem__svg_strokeColor_hover' => array(
+                  'label' => 'stroking color',
+                  'type' => 'color'
                 )
               )
             ),
-            'consentContainer_button' => array(
-              'label' => 'Button',
+            'tmp_menuItem_svgBehind' => array(
+              'label' => 'SVG behind link',
               'inputs' => array(
-                'consentContainer__Button_bg' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
+                'menuItem__svg_positionBehind_opacity' => array(
+                  'label' => 'Opacity',
+                  'type' => 'range-value',
+                  'rangeMin' => 0,
+                  'rangeMax' => 1,
+                  'rangeSuffix' => ''
                 ),
-                'consentContainer__Button_color' => array(
-                  'label' => 'Color',
-                  'type' => 'color'
-                ),
-                'consentContainer__Button_borderColor' => array(
-                  'label' => 'Border color',
-                  'type' => 'color'
-                ),
-                'consentContainer__Button_bg_hover' => array(
-                  'label' => 'Background color',
-                  'type' => 'color'
-                ),
-                'consentContainer__Button_color_hover' => array(
-                  'label' => 'Color',
-                  'type' => 'color'
-                ),
-                'consentContainer__Button_borderColor_hover' => array(
-                  'label' => 'Border color',
-                  'type' => 'color'
-                ),
-                'consentContainer__Button_borderWidth' => array(
-                  'label' => 'Border width',
-                  'type' => 'range-four-value'
-                ),
-                'consentContainer__Button_borderRadius' => array(
-                  'label' => 'Border radius',
-                  'type' => 'range-four-value'
-                ),
-                'consentContainer__Button_padding' => array(
-                  'label' => 'Button padding',
-                  'type' => 'range-four-value'
-                ),
-                'consentContainer__Button_fontFamily' => array(
-                  'label' => 'Font family',
-                  'type' => 'input'
-                ),
-                'consentContainer__Button_fontSize' => array(
-                  'label' => 'Font size',
-                  'type' => 'range-value'
-                ),
-                'consentContainer__Button_fontWeight' => array(
-                  'label' => 'Font weight',
-                  'type' => 'select'
-                ),
-                'consentContainer__Button_lineHeight' => array(
-                  'label' => 'Line height',
-                  'type' => 'range-value'
-                ),
-                'consentContainer__Button_textTransform' => array(
-                  'label' => 'Text transform',
-                  'type' => 'select'
-                ),
-                'consentContainer__Button_fontStyle' => array(
-                  'label' => 'Font style',
-                  'type' => 'select'
-                ),
-                'consentContainer__Button_letterSpacing' => array(
-                  'label' => 'Letter spacing',
-                  'type' => 'range-value'
-                ),
-                'consentContainer__Button_padding_mobile' => array(
-                  'label' => 'Padding',
-                  'type' => 'range-four-value'
-                ),
-                'consentContainer__Button_fontSize_mobile' => array(
-                  'label' => 'Font size',
-                  'type' => 'range-value'
-                ),
-                'consentContainer__Button_lineHeight_mobile' => array(
-                  'label' => 'Line height',
-                  'type' => 'range-value'
+                'menuItem__svg_positionBehind_opacity_hover' => array(
+                  'label' => 'Opacity',
+                  'type' => 'range-value',
+                  'rangeMin' => 0,
+                  'rangeMax' => 1,
+                  'rangeSuffix' => ''
                 )
               )
-            )
-          )
-        ),
-        'tmp_socialmedia' => array(
-          'label' => 'Social media',
-          'sections' => array(
-            'tmp_socialmedia_settings' => array(
-              'label' => 'Settings',
-              'inputs' => array(
-                'sm__icon_space' => array(
-                  'label' => 'Gap',
-                  'type' => 'range-value'
-                ),
-              )
             ),
-            'tmp_socialmedia_item' => array(
-              'label' => 'Item',
+            'tmp_menuItem_svgContainer' => array(
+              'label' => 'SVG left container',
               'inputs' => array(
-                'sm__icon_color' => array(
-                  'label' => 'Color',
+                'menuItem__svg_positionLeft_backgroundColor' => array(
+                  'label' => 'Background color',
                   'type' => 'color'
                 ),
-                'sm__icon_color_hover' => array(
-                  'label' => 'Color',
+                'menuItem__svg_positionLeft_borderColor' => array(
+                  'label' => 'border color',
                   'type' => 'color'
                 ),
-                'sm__icon_width' => array(
+                'menuItem__svg_positionLeft_backgroundColor_hover' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'menuItem__svg_positionLeft_borderColor_hover' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'menuItem__svg_positionLeft_width' => array(
                   'label' => 'Width',
                   'type' => 'range-value'
                 ),
-                'dark__sm__icon_color' => array(
+                'menuItem__svg_positionLeft_borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'range-four-value'
+                ),
+                'menuItem__svg_positionLeft_borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'menuItem__svg_positionLeft_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'range-four-value'
+                ),
+                'menuItem__svg_positionLeft_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'menuItem__svg_positionLeft_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'menuItem__svg_positionLeft_width_mobile' => array(
+                  'label' => 'Width',
+                  'type' => 'range-value'
+                ),
+                'menuItem__svg_positionLeft_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'menuItem__svg_positionLeft_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'dark__menuItem__svg_positionLeft_backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__menuItem__svg_positionLeft_borderColor' => array(
+                  'label' => 'border color',
+                  'type' => 'color'
+                ),
+                'dark__menuItem__svg_positionLeft_backgroundColor_hover' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__menuItem__svg_positionLeft_borderColor_hover' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
+            ),
+            'tmp_menuItem_description' => array(
+              'label' => 'Description',
+              'inputs' => array(
+                'menuItem__description_backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'menuItem__description_color' => array(
                   'label' => 'Color',
                   'type' => 'color'
                 ),
-                'dark__sm__icon_color_hover' => array(
+                'menuItem__description_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'dark__menuItem__description_backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__menuItem__description_color' => array(
                   'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__menuItem__description_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'menuItem__description_borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'range-four-value'
+                ),
+                'menuItem__description_borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'menuItem__description_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'range-four-value'
+                ),
+                'menuItem__description_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'menuItem__description_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'menuItem__description_fontFamiliy' => array(
+                  'label' => 'Title font family',
+                  'type' => 'input'
+                ),
+                'menuItem__description_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'menuItem__description_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
+                ),
+                'menuItem__description_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'menuItem__description_textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'menuItem__description_fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'menuItem__description_letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'range-value'
+                ),
+                'menuItem__description_fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'menuItem__description_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'menuItem__description_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'dark__menuItem__description_backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__menuItem__description_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__menuItem__description_borderColor' => array(
+                  'label' => 'Border color',
                   'type' => 'color'
                 )
               )
             )
           )
         ),
-        'scrollToTop' => array(
+        'tmpParts_scrollToTop' => array(
           'label' => 'Scroll to top',
           'sections' => array(
             'scrollToTop_settings' => array(
@@ -4997,6 +4067,1056 @@ class prefix_core_Customizer {
                 ),
                 'scrollToTop__Button_letterSpacing' => array(
                   'label' => 'Letter spacing',
+                  'type' => 'range-value'
+                )
+              )
+            )
+          )
+        ),
+        'search_form' => array(
+          'label' => 'Search form',
+          'sections' => array(
+            'search_form_settings' => array(
+              'label' => 'Settings',
+              'inputs' => array()
+            ),
+            'search_form_label' => array(
+              'label' => 'Label',
+              'inputs' => array(
+                'searchForm__label_backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'searchForm__label_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'searchForm__label_border_color' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'searchForm__label_display' => array(
+                  'label' => 'Display',
+                  'type' => 'select'
+                ),
+                'searchForm__label_width' => array(
+                  'label' => 'Width',
+                  'type' => 'range-value',
+                  'rangeMax' => 600
+                ),
+                'searchForm__label_borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'range-four-value'
+                ),
+                'searchForm__label_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'range-four-value'
+                ),
+                'searchForm__label_borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'searchForm__label_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'searchForm__label_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'searchForm__label_fontFamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'searchForm__label_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'searchForm__label_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
+                ),
+                'searchForm__label_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'searchForm__label_textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'searchForm__label_letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'range-value'
+                ),
+                'searchForm__label_display_mobile' => array(
+                  'label' => 'Display',
+                  'type' => 'select'
+                ),
+                'searchForm__label_width_mobile' => array(
+                  'label' => 'Minimum width',
+                  'type' => 'range-value',
+                  'rangeMax' => 300
+                ),
+                'searchForm__label_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'searchForm__label_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'searchForm__label_fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'searchForm__label_lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
+                ),
+                'searchForm__label_letterSpacing_mobile' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'range-value'
+                ),
+                'dark__searchForm__label_backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__searchForm__label_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__searchForm__label_border_color' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
+            ),
+            'search_form_input' => array(
+              'label' => 'Input',
+              'inputs' => array(
+                'searchForm__bg_color' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'searchForm__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'searchForm__border_color' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'searchForm__border_width' => array(
+                  'label' => 'Border width',
+                  'type' => 'range-four-value'
+                ),
+                'searchForm__borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'range-four-value'
+                ),
+                'searchForm__margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'searchForm__padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'searchForm__fontFamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'searchForm__fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'searchForm__lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
+                ),
+                'searchForm__fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'searchForm__margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'searchForm__padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'searchForm__fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'searchForm__lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
+                ),
+                'dark__searchForm__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__searchForm__bg_color' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__searchForm__border_color' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
+            ),
+            'search_form_placeholder' => array(
+              'label' => 'Placeholder',
+              'inputs' => array(
+                'searchForm__placeholder_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'searchForm__placeholder_fontFamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'searchForm__placeholder_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'searchForm__placeholder_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
+                ),
+                'searchForm__placeholder_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'searchForm__placeholder_textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'dark__searchForm__placeholder_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                )
+              )
+            ),
+            'search_form_button' => array(
+              'label' => 'Button',
+              'inputs' => array(
+                'searchForm__submit_bg_color' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'searchForm__submit_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'searchForm__submit_border_color' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'searchForm__submit_bg_color_hover' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'searchForm__submit_color_hover' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'searchForm__submit_border_color_hover' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'searchForm__submit_borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'range-four-value'
+                ),
+                'searchForm__submit_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'range-four-value'
+                ),
+                'searchForm__submit_margin' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'searchForm__submit_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'searchForm__submit_fontFamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'searchForm__submit_fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'searchForm__submit_letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'range-value'
+                ),
+                'searchForm__submit_lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
+                ),
+                'searchForm__submit_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'searchForm__submit_textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'searchForm__submit_fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'searchForm__submit_lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
+                ),
+                'searchForm__submit_letterSpacing_mobile' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'range-value'
+                ),
+                'searchForm__submit_margin_mobile' => array(
+                  'label' => 'Margin',
+                  'type' => 'range-four-value'
+                ),
+                'searchForm__submit_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'dark__searchForm__submit_bg_color' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__searchForm__submit_color' => array(
+                  'label' => 'Text color',
+                  'type' => 'color'
+                ),
+                'dark__searchForm__submit_border_color' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'dark__searchForm__submit_bg_color_hover' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__searchForm__submit_border_color_hover' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'dark__searchForm__submit_color_hover' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                )
+              )
+            )
+          )
+        ),
+        'tmp_socialmedia' => array(
+          'label' => 'Social media',
+          'sections' => array(
+            'tmp_socialmedia_settings' => array(
+              'label' => 'Settings',
+              'inputs' => array(
+                'sm__icon_space' => array(
+                  'label' => 'Gap',
+                  'type' => 'range-value'
+                ),
+              )
+            ),
+            'tmp_socialmedia_item' => array(
+              'label' => 'Item',
+              'inputs' => array(
+                'sm__icon_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'sm__icon_color_hover' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'sm__icon_width' => array(
+                  'label' => 'Width',
+                  'type' => 'range-value'
+                ),
+                'dark__sm__icon_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__sm__icon_color_hover' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                )
+              )
+            )
+          )
+        ),
+        'tagStyles' => array(
+          'label' => 'Tag styles',
+          'sections' => array(
+            'tagStyles_h1' => array(
+              'label' => 'h1',
+              'inputs' => array(
+                'h1__bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'h1__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'h1__borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'h1__borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'range-four-value'
+                ),
+                'h1__borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'h1__borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'range-four-value'
+                ),
+                'h1__marginTop' => array(
+                  'label' => 'Margin top',
+                  'type' => 'range-value'
+                ),
+                'h1__marginBottom' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'range-value'
+                ),
+                'h1__padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'h1__fontFamily' => array(
+                  'label' => 'Title font family',
+                  'type' => 'input'
+                ),
+                'h1__fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'h1__lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
+                ),
+                'h1__fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'h1__textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'h1__fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'h1__letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'range-value'
+                ),
+                'h1__marginTop_mobile' => array(
+                  'label' => 'Margin top',
+                  'type' => 'range-value'
+                ),
+                'h1__marginBottom_mobile' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'range-value'
+                ),
+                'h1__padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'h1__fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'h1__lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
+                ),
+                'dark__h1__bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__h1__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__h1__borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
+            ),
+            'tagStyles_h2' => array(
+              'label' => 'h2',
+              'inputs' => array(
+                'h2__bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'h2__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'h2__borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'h2__borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'range-four-value'
+                ),
+                'h2__borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'h2__borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'range-four-value'
+                ),
+                'h2__marginTop' => array(
+                  'label' => 'Margin top',
+                  'type' => 'range-value'
+                ),
+                'h2__marginBottom' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'range-value'
+                ),
+                'h2__padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'h2__fontFamily' => array(
+                  'label' => 'Title font family',
+                  'type' => 'input'
+                ),
+                'h2__fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'h2__lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
+                ),
+                'h2__fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'h2__textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'h2__fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'h2__letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'range-value'
+                ),
+                'h2__marginTop_mobile' => array(
+                  'label' => 'Margin top',
+                  'type' => 'range-value'
+                ),
+                'h2__marginBottom_mobile' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'range-value'
+                ),
+                'h2__padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'h2__fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'h2__lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
+                ),
+                'dark__h2__bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__h2__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__h2__borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
+            ),
+            'tagStyles_h3' => array(
+              'label' => 'h3',
+              'inputs' => array(
+                'h3__bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'h3__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'h3__borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'h3__borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'range-four-value'
+                ),
+                'h3__borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'h3__borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'range-four-value'
+                ),
+                'h3__marginTop' => array(
+                  'label' => 'Margin top',
+                  'type' => 'range-value'
+                ),
+                'h3__marginBottom' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'range-value'
+                ),
+                'h3__padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'h3__fontFamily' => array(
+                  'label' => 'Title font family',
+                  'type' => 'input'
+                ),
+                'h3__fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'h3__lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
+                ),
+                'h3__fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'h3__textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'h3__fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'h3__letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'range-value'
+                ),
+                'h3__marginTop_mobile' => array(
+                  'label' => 'Margin top',
+                  'type' => 'range-value'
+                ),
+                'h3__marginBottom_mobile' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'range-value'
+                ),
+                'h3__padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'h3__fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'h3__lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
+                ),
+                'dark__h3__bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__h3__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__h3__borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
+            ),
+            'tagStyles_h4' => array(
+              'label' => 'h4',
+              'inputs' => array(
+                'h4__bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'h4__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'h4__borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'h4__borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'range-four-value'
+                ),
+                'h4__borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'h4__borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'range-four-value'
+                ),
+                'h4__marginTop' => array(
+                  'label' => 'Margin top',
+                  'type' => 'range-value'
+                ),
+                'h4__marginBottom' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'range-value'
+                ),
+                'h4__padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'h4__fontFamily' => array(
+                  'label' => 'Title font family',
+                  'type' => 'input'
+                ),
+                'h4__fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'h4__lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
+                ),
+                'h4__fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'h4__textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'h4__fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'h4__letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'range-value'
+                ),
+                'h4__marginTop_mobile' => array(
+                  'label' => 'Margin top',
+                  'type' => 'range-value'
+                ),
+                'h4__marginBottom_mobile' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'range-value'
+                ),
+                'h4__padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'h4__fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'h4__lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
+                ),
+                'dark__h4__bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__h4__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__h4__borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
+            ),
+            'tagStyles_h5' => array(
+              'label' => 'h5',
+              'inputs' => array(
+                'h5__bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'h5__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'h5__borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'h5__borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'range-four-value'
+                ),
+                'h5__borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'h5__borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'range-four-value'
+                ),
+                'h5__marginTop' => array(
+                  'label' => 'Margin top',
+                  'type' => 'range-value'
+                ),
+                'h5__marginBottom' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'range-value'
+                ),
+                'h5__padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'h5__fontFamily' => array(
+                  'label' => 'Title font family',
+                  'type' => 'input'
+                ),
+                'h5__fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'h5__lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
+                ),
+                'h5__fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'h5__textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'h5__fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'h5__letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'range-value'
+                ),
+                'h5__marginTop_mobile' => array(
+                  'label' => 'Margin top',
+                  'type' => 'range-value'
+                ),
+                'h5__marginBottom_mobile' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'range-value'
+                ),
+                'h5__padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'h5__fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'h5__lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
+                ),
+                'dark__h5__bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__h5__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__h5__borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
+            ),
+            'tagStyles_h6' => array(
+              'label' => 'h6',
+              'inputs' => array(
+                'h6__bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'h6__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'h6__borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'h6__borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'range-four-value'
+                ),
+                'h6__borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'h6__borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'range-four-value'
+                ),
+                'h6__marginTop' => array(
+                  'label' => 'Margin top',
+                  'type' => 'range-value'
+                ),
+                'h6__marginBottom' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'range-value'
+                ),
+                'h6__padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'h6__fontFamily' => array(
+                  'label' => 'Title font family',
+                  'type' => 'input'
+                ),
+                'h6__fontSize' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'h6__lineHeight' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
+                ),
+                'h6__fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'h6__textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'h6__fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'h6__letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'range-value'
+                ),
+                'h6__marginTop_mobile' => array(
+                  'label' => 'Margin top',
+                  'type' => 'range-value'
+                ),
+                'h6__marginBottom_mobile' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'range-value'
+                ),
+                'h6__padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'h6__fontSize_mobile' => array(
+                  'label' => 'Font size',
+                  'type' => 'range-value'
+                ),
+                'h6__lineHeight_mobile' => array(
+                  'label' => 'Line height',
+                  'type' => 'range-value'
+                ),
+                'dark__h6__bg' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__h6__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__h6__borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
+            ),
+            'tagStyles_b' => array(
+              'label' => 'B',
+              'inputs' => array(
+                'b_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                )
+              )
+            ),
+            'tagStyles_strong' => array(
+              'label' => 'Strong',
+              'inputs' => array(
+                'strong_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                )
+              )
+            )
+          )
+        ),
+        'tmpParts_thumbnails' => array(
+          'label' => 'Thumbnail',
+          'sections' => array(
+            'thumbnails_desktop' => array(
+              'label' => 'Desktop',
+              'inputs' => array(
+                'thumbnail__height' => array(
+                  'label' => 'Height',
+                  'type' => 'range-value'
+                ),
+                'thumbnail__marginTop' => array(
+                  'label' => 'Margin top',
+                  'type' => 'range-value'
+                ),
+                'thumbnail__marginBottom' => array(
+                  'label' => 'Margin bottom',
+                  'type' => 'range-value'
+                )
+              )
+            ),
+            'thumbnails_mobile' => array(
+              'label' => 'Mobile',
+              'inputs' => array(
+                'thumbnail__height_mobile' => array(
+                  'label' => 'Height',
+                  'type' => 'range-value'
+                ),
+                'thumbnail__marginTop_mobile' => array(
+                  'label' => 'Margin top',
+                  'type' => 'range-value'
+                ),
+                'thumbnail__marginBottom_mobile' => array(
+                  'label' => 'Margin bottom',
                   'type' => 'range-value'
                 )
               )
@@ -5586,10 +5706,57 @@ class prefix_core_Customizer {
             )
           )
         ),
+        'gutenberg_rows' => array(
+          'label' => 'Rows',
+          'sections' => array(
+            'gutenberg_rows_spacing' => array(
+              'label' => 'Spacing',
+              'inputs' => array(
+                'block__groupRow_gap' => array(
+                  'label' => 'Gap',
+                  'type' => 'range-value'
+                ),
+                'block__groupRow_rowGap' => array(
+                  'label' => 'Vertical gap',
+                  'type' => 'range-value'
+                ),
+                'block__groupRow_gap_mobile' => array(
+                  'label' => 'Gap',
+                  'type' => 'range-value'
+                ),
+                'block__groupRow_rowGap_mobile' => array(
+                  'label' => 'Vertical gap',
+                  'type' => 'range-value'
+                )
+              )
+            ),
+            'gutenberg_rows_hasBg' => array(
+              'label' => 'Has background',
+              'inputs' => array(
+                'block__groupRow_hasBackground_paddingTop' => array(
+                  'label' => 'Padding top',
+                  'type' => 'range-value'
+                ),
+                'block__groupRow_hasBackground_paddingBottom' => array(
+                  'label' => 'Padding bottom',
+                  'type' => 'range-value'
+                ),
+                'block__groupRow_hasBackground_paddingTop_mobile' => array(
+                  'label' => 'Padding top',
+                  'type' => 'range-value'
+                ),
+                'block__groupRow_hasBackground_paddingBottom_mobile' => array(
+                  'label' => 'Padding bottom',
+                  'type' => 'range-value'
+                )
+              )
+            )
+          )
+        ),
         'gutenberg_group' => array(
           'label' => 'Group',
           'sections' => array(
-            'gutenberg_group_' => array(
+            'gutenberg_group_hasBg' => array(
               'label' => 'Has background',
               'inputs' => array(
                 'block__group_hasBackground_paddingTop' => array(
@@ -5736,15 +5903,15 @@ class prefix_core_Customizer {
                   'type' => 'color'
                 ),
                 'swiper__bulletNav_itemActive_bg' => array(
-                  'label' => 'Backgorund color (active)',
+                  'label' => 'Backgorund color',
                   'type' => 'color'
                 ),
                 'swiper__bulletNav_itemActive_color' => array(
-                  'label' => 'Color (active)',
+                  'label' => 'Color',
                   'type' => 'color'
                 ),
                 'swiper__bulletNav_itemActive_borderColor' => array(
-                  'label' => 'Border color (active)',
+                  'label' => 'Border color',
                   'type' => 'color'
                 ),
                 'swiper__bulletNav_item_borderRadius' => array(
@@ -9290,6 +9457,9 @@ class prefix_core_Customizer {
     if (strpos($inputKey, '_alignwide') !== false):
       $activeLabels[] = __( 'alignwide', 'customizer' );
     endif;
+    if (strpos($inputKey, '_active') !== false || strpos($inputKey, '_itemActive') !== false):
+      $activeLabels[] = __( 'active', 'customizer' );
+    endif;
     if (strpos($inputKey, '_hasBackground') !== false):
       $activeLabels[] = __( 'has background', 'customizer' );
     endif;
@@ -9466,6 +9636,31 @@ class prefix_core_Customizer {
           'table-row' => 'table-row',
           'table-row-group' => 'table-row-group',
           'inherit' => 'inherit'
+        );
+      elseif(!array_key_exists('options', $inputValues) && strpos($inputKey, '_flexWrap') !== false):
+        $selectOptions = array(
+          '' => '-',
+          'nowrap' => 'nowrap',
+          'wrap' => 'wrap',
+          'wrap-reverse' => 'wrap-reverse'
+        );
+      elseif(!array_key_exists('options', $inputValues) && strpos($inputKey, '_alignItems') !== false):
+        $selectOptions = array(
+          '' => '-',
+          'baseline' => 'baseline',
+          'center' => 'center',
+          'flex-end' => 'flex-end',
+          'flex-start' => 'flex-start',
+          'stretch' => 'stretch'
+        );
+      elseif(!array_key_exists('options', $inputValues) && strpos($inputKey, '_justifyContent') !== false):
+        $selectOptions = array(
+          '' => '-',
+          'center' => 'center',
+          'flex-end' => 'flex-end',
+          'flex-start' => 'flex-start',
+          'space-around' => 'space-around',
+          'space-between' => 'space-between'
         );
       elseif(!array_key_exists('options', $inputValues) && strpos($inputKey, '_textAlign') !== false):
         $selectOptions = array(
@@ -9772,7 +9967,7 @@ class prefix_core_Customizer {
   /* 3.1 PREVIEW CUSTOMIZER CHANGES
   /------------------------*/
   function customizerPreview() {
-    wp_enqueue_script('theme/customizer', get_template_directory_uri() . '/classes/prefix_core_Customizer/assets/theme-customizer.js', ['jquery', 'customize-preview'], '1.15', true);
+    wp_enqueue_script('theme/customizer', get_template_directory_uri() . '/classes/prefix_core_Customizer/assets/theme-customizer.js', ['jquery', 'customize-preview'], $this->version, true);
   }
 
 }

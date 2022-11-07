@@ -69,6 +69,7 @@
         removeSpacing,
         additionalSpacingOne,
         additionalSpacingTwo,
+        sideSpacing,
         dsgvoImgId,
         dsgvoImageURL,
         dsgvoCookie
@@ -88,7 +89,7 @@
   /* add custom element class in save element
   /------------------------*/
   function applyExtraClass( extraProps, blockType, attributes ) {
-    const { hideOnDesktop, hideOnMobile, removeSpacing, additionalSpacingOne, additionalSpacingTwo, dsgvoCookie } = attributes;
+    const { hideOnDesktop, hideOnMobile, removeSpacing, additionalSpacingOne, additionalSpacingTwo, sideSpacing, dsgvoCookie } = attributes;
     if ( typeof hideOnDesktop !== 'undefined' && hideOnDesktop ) {
       extraProps.className = classnames( extraProps.className, 'mobile' );
     }
@@ -103,6 +104,9 @@
     }
     if ( typeof additionalSpacingTwo !== 'undefined' && additionalSpacingTwo ) {
       extraProps.className = classnames( extraProps.className, 'spacing-two' );
+    }
+    if ( typeof sideSpacing !== 'undefined' && sideSpacing ) {
+      extraProps.className = classnames( extraProps.className, 'side-spacing' );
     }
     if ( typeof dsgvoCookie !== 'undefined' && dsgvoCookie ) {
       extraProps.className = classnames( extraProps.className, dsgvoCookie );
@@ -125,6 +129,7 @@
           'data-marginBottom': props.attributes.removeSpacing,
           'data-spacingOne': props.attributes.additionalSpacingOne,
           'data-spacingTwo': props.attributes.additionalSpacingTwo,
+          'data-sideSpacing': props.attributes.sideSpacing,
           'data-swiper': props.attributes.addSwiper,
           'data-popup': props.attributes.addPopUp,
           'data-popuppreview': props.attributes.addPopUpPreview

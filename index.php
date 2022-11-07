@@ -3,7 +3,7 @@
  * Home File
  *
  * @author      David Voglgsang
- * @version     1.4
+ * @version     1.5
  *
 */
 
@@ -26,16 +26,25 @@ get_header();
       endif;
     endwhile; endif; ?>
   </div>
-  <nav class="pagination">
-    <?php
+  <?php
     $big = 999999999; // need an unlikely integer
-    echo paginate_links( array(
+    $paginationPages = paginate_links(array(
+        'prev_next' => false,
+        'type' => 'plain',
         'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
         'format' => '?paged=%#%',
         'current' => max( 1, get_query_var('paged') ),
         'total' => $wp_query->max_num_pages
-    ) );
-    ?>
-  </nav>
+    ));
+    if($paginationPages):
+  ?>
+    <nav class="wp-block-query-pagination pagination">
+      <?php echo get_previous_posts_link(); ?>
+      <div class="wp-block-query-pagination-numbers">
+        <?php echo $paginationPages; ?>
+      </div>
+      <?php echo get_next_posts_link(); ?>
+    </nav>
+  <?php endif; ?>
 </section>
 <?php get_footer(); ?>

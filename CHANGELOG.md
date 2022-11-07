@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 1.72.35 | 07.11.2022 <💎 IMPROVE: gutenberg styles, gutenberg templates>
+* Return sidebar only if value exists
+* Return theme pagination in block structure
+* Filter gutenberg blocks for additional settings (spacing, visibility)
+* Add side padding option to all gutenberg blocks
+* Filter pagination next & previous button for additional css classes
+* Set customizer version as var
+* Customizer group and pagination styles (contain row and stamp)
+* Fix extended vimeo video inside row block
+* Style read more link inside excerpt block like read more block
+* First style settings for gutenberg template builder
+
 ## 1.71.35 | 01.11.2022 <📦 NEW: gutenberg blocks stylings, logo title>
 * Add missing title style selection on post title
 * Add block styles to Customizer

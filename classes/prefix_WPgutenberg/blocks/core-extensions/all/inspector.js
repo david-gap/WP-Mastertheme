@@ -51,6 +51,7 @@ export default class Inspector extends Component {
         removeSpacing,
         additionalSpacingOne,
         additionalSpacingTwo,
+        sideSpacing,
         dsgvoImgId,
         dsgvoImageURL,
         dsgvoCookie
@@ -193,6 +194,14 @@ export default class Inspector extends Component {
                         label={ __( 'Override bottom margin 2', 'devTheme' ) }
                         checked={ additionalSpacingTwo }
                         onChange={updateAdditionalSpacingTwo}
+                    />
+                  </PanelRow>
+                  <PanelRow>
+                    <ToggleControl
+                        id="additional-spacing-sides"
+                        label={ __( 'Side padding', 'devTheme' ) }
+                        checked={ sideSpacing }
+                        onChange={sideSpacing => setAttributes({ sideSpacing })}
                     />
                   </PanelRow>
               </PanelBody>

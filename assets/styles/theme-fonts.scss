@@ -797,7 +797,7 @@ body.page-template,
   .wp-block-image {
     figcaption {
       font-size: var(--block__imageFigcaption_fontSize, inherit);
-      line-height: var(--block__imageFigcaption_lineHeight, inherit);
+      line-height: var(--block__imageFigcaption_lineHeight, 1);
     }
     a {
       &.download-button {
@@ -1295,6 +1295,25 @@ body.page-template,
     text-transform: var(--block__readmore_textTransform, inherit);
     font-style: var(--block__readmore_fontStyle, initial);
     letter-spacing: var(--block__readmore_letterSpacing, inherit);
+  }
+  .wp-block-post-excerpt {
+    &:not([style^='--font-size:']):not([style*=' --font-size:']):not([class^='-font-size']):not([class*='-font-size']){
+      .wp-block-post-excerpt__more-text a.wp-block-post-excerpt__more-link {
+        font-size: var(--block__readmore_fontSize, inherit);
+      }
+    }
+    &:not([style^='line-height:']):not([style*=' line-height:']){
+      .wp-block-post-excerpt__more-text a.wp-block-post-excerpt__more-link {
+        line-height: var(--block__readmore_lineHeight, inherit);
+      }
+    }
+    .wp-block-post-excerpt__more-text a.wp-block-post-excerpt__more-link {
+      font-family: var(--block__readmore_fontFamily, inherit);
+      font-weight: var(--block__readmore_fontWeight, inherit);
+      text-transform: var(--block__readmore_textTransform, inherit);
+      font-style: var(--block__readmore_fontStyle, initial);
+      letter-spacing: var(--block__readmore_letterSpacing, inherit);
+    }
   }
 
 

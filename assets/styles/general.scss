@@ -419,6 +419,11 @@ html[data-touch="false"] .call {
       max-width: var(--container_content);
     }
   }
+  &.wp-block-group.is-layout-flex {
+    > .wp-block[data-type="templates/vimeo"] {
+      width: 100%;
+    }
+  }
 }
 .editor-styles-wrapper .wp-block-group__inner-container .wp-block {
   &:not([data-align="full"]){

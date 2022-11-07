@@ -908,9 +908,19 @@ body.page-template,
   /––––––––––––––––––––––––*/
   .wp-block-group {
     &.has-background {
+      padding-left: 0;
+      padding-right: 0;
       .wp-block-group__inner-container {
         padding-top: var(--block__group_hasBackground_paddingTop, var(--content__space, 30px));
         padding-bottom: var(--block__group_hasBackground_paddingBottom, var(--content__space, 30px));
+      }
+    }
+    &.is-layout-flex {
+      gap: var(--block__groupRow_gap, var(--content__space, 30px));
+      row-gap: var(--block__groupRow_rowGap, var(--content__space, 30px));
+      &.has-background {
+        padding-top: var(--block__groupRow_hasBackground_paddingTop, var(--block__group_hasBackground_paddingTop, var(--content__space, 30px)));
+        padding-bottom: var(--block__groupRow_hasBackground_paddingBottom, var(--block__group_hasBackground_paddingBottom, var(--content__space, 30px)));
       }
     }
   }
@@ -1205,7 +1215,7 @@ body.page-template,
 
   /* 2.12 PARAGRAPH
   /––––––––––––––––––––––––*/
-  .wp-block-post-excerpt.has-background,  
+  .wp-block-post-excerpt.has-background,
   p.has-background:not(.wp-block-site-title):not(.wp-block-site-tagline) {
     padding: var(--block__paragraph_hasBackground_padding, var(--content__space, 30px));
   }
@@ -1337,6 +1347,7 @@ body.page-template,
 
   /* 2.19 READ MORE
   /––––––––––––––––––––––––*/
+  .wp-block-post-excerpt .wp-block-post-excerpt__more-text a.wp-block-post-excerpt__more-link,
   .wp-block-read-more {
     padding: var(--block__readmore_padding, 0);
     border-width: var(--block__readmore_borderWidth, 0);

@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.27.17
+ * @version     2.28.17
  */
 
 /*=======================================================
@@ -590,6 +590,57 @@ class prefix_WPgutenberg {
       if(array_key_exists('attrs', $parent_block->parsed_block) && $parent_block->parsed_block['attrs']):
         if($parent_block->parsed_block['attrs'] && array_key_exists('addDownloadButton', $parent_block->parsed_block['attrs']) && $parent_block->parsed_block['attrs']['addDownloadButton'] == 1):
           $parsed_block['attrs']['addDownloadButton'] = 1;
+        endif;
+      endif;
+    endif;
+    // block controls
+    if(array_key_exists('attrs', $parsed_block) && $parsed_block['attrs']):
+      if(array_key_exists('hideOnDesktop', $parsed_block['attrs']) && $parsed_block['attrs']['hideOnDesktop'] == 1):
+        // mobile
+        if(array_key_exists('className', $parsed_block['attrs']) && strpos($parsed_block['attrs']['className'], 'mobile') === false):
+          $parsed_block['attrs']['className'] = $parsed_block['attrs']['className'] . ' mobile';
+        else:
+          $parsed_block['attrs']['className'] = 'mobile';
+        endif;
+      endif;
+      if(array_key_exists('hideOnMobile', $parsed_block['attrs']) && $parsed_block['attrs']['hideOnMobile'] == 1):
+        // desktop
+        if(array_key_exists('className', $parsed_block['attrs']) && strpos($parsed_block['attrs']['className'], 'desktop') === false):
+          $parsed_block['attrs']['className'] = $parsed_block['attrs']['className'] . ' desktop';
+        else:
+          $parsed_block['attrs']['className'] = 'desktop';
+        endif;
+      endif;
+      if(array_key_exists('removeSpacing', $parsed_block['attrs']) && $parsed_block['attrs']['removeSpacing'] == 1):
+        // no-spacing
+        if(array_key_exists('className', $parsed_block['attrs']) && strpos($parsed_block['attrs']['className'], 'no-spacing') === false):
+          $parsed_block['attrs']['className'] = $parsed_block['attrs']['className'] . ' no-spacing';
+        else:
+          $parsed_block['attrs']['className'] = 'no-spacing';
+        endif;
+      endif;
+      if(array_key_exists('additionalSpacingOne', $parsed_block['attrs']) && $parsed_block['attrs']['additionalSpacingOne'] == 1):
+        // spacing-one
+        if(array_key_exists('className', $parsed_block['attrs']) && strpos($parsed_block['attrs']['className'], 'spacing-one') === false):
+          $parsed_block['attrs']['className'] = $parsed_block['attrs']['className'] . ' spacing-one';
+        else:
+          $parsed_block['attrs']['className'] = 'spacing-one';
+        endif;
+      endif;
+      if(array_key_exists('additionalSpacingTwo', $parsed_block['attrs']) && $parsed_block['attrs']['additionalSpacingTwo'] == 1):
+        // spacing-two
+        if(array_key_exists('className', $parsed_block['attrs']) && strpos($parsed_block['attrs']['className'], 'spacing-two') === false):
+          $parsed_block['attrs']['className'] = $parsed_block['attrs']['className'] . ' spacing-two';
+        else:
+          $parsed_block['attrs']['className'] = 'spacing-two';
+        endif;
+      endif;
+      if(array_key_exists('sideSpacing', $parsed_block['attrs']) && $parsed_block['attrs']['sideSpacing'] == 1):
+        // side-spacing
+        if(array_key_exists('className', $parsed_block['attrs']) && strpos($parsed_block['attrs']['className'], 'side-spacing') === false):
+          $parsed_block['attrs']['className'] = $parsed_block['attrs']['className'] . ' side-spacing';
+        else:
+          $parsed_block['attrs']['className'] = 'side-spacing';
         endif;
       endif;
     endif;

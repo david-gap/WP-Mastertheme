@@ -3,14 +3,14 @@
  * Post Type File Overview
  *
  * @author      David Voglgsang
- * @version     1.5
+ * @version     1.6
  *
 */
 
 get_header();
 ?>
 <section id="archive" <?php echo prefix_template::AddContainer(prefix_template::$template_container, prefix_template::$template_container_archive_wide, true); ?>>
-  <div>
+  <div class="results">
     <?php while ( have_posts() ) : the_post();
       if(get_post_type() == "post" || post_type_supports(get_post_type(), 'post-formats')):
         $blog_type = get_post_format(get_the_ID()) ? get_post_format(get_the_ID()) : "default";
@@ -26,16 +26,25 @@ get_header();
       endif;
     endwhile;	?>
   </div>
-  <nav class="pagination">
-    <?php
+  <?php
     $big = 999999999; // need an unlikely integer
-    echo paginate_links( array(
+    $paginationPages = paginate_links(array(
+        'prev_next' => false,
+        'type' => 'plain',
         'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
         'format' => '?paged=%#%',
         'current' => max( 1, get_query_var('paged') ),
         'total' => $wp_query->max_num_pages
-    ) );
-    ?>
-  </nav>
+    ));
+    if($paginationPages):
+  ?>
+    <nav class="wp-block-query-pagination pagination">
+      <?php echo get_previous_posts_link(); ?>
+      <div class="wp-block-query-pagination-numbers">
+        <?php echo $paginationPages; ?>
+      </div>
+      <?php echo get_next_posts_link(); ?>
+    </nav>
+  <?php endif; ?>
 </section>
 <?php get_footer(); ?>
