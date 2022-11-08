@@ -466,6 +466,7 @@ body.page-template,
       > #sidebar {
         width: var(--sidebar__width, 100%);
         max-width: 100%;
+        flex-shrink: 0;
       }
     }
   }
