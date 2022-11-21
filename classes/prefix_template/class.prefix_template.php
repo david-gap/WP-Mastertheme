@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.38.19
+ * @version     2.39.19
  *
 */
 
@@ -83,6 +83,7 @@ class prefix_template {
     * @param static int $template_container_totop_wide: Set to top container to wide width
     * @param static int $template_container_footer_wide: Set footer container to wide width
     * @param static string $template_coloring: template coloring (dark/light)
+    * @param static bool $template_softHyphens: activate soft hyphens
     * @param static bool $template_ph_active: activate placeholder
     * @param static bool $template_ph_address: placeholder show address block
     * @param static string $template_ph_custom: placeholder custom content
@@ -163,6 +164,7 @@ class prefix_template {
   static $template_container_totop_wide            = 0;
   static $template_container_footer_wide           = 0;
   static $template_coloring                        = "light";
+  static $template_softHyphens                     = 0;
   static $template_ph_active                       = true;
   static $template_ph_address                      = true;
   static $template_ph_custom                       = "";
@@ -569,6 +571,10 @@ class prefix_template {
     "coloring" => array(
       "label" => "Custom css class",
       "type" => "text"
+    ),
+    "softHyphens" => array(
+      "label" => "Soft hyphens",
+      "type" => "switchbutton"
     ),
     "title_container" => array(
       "label" => "Activate container",
@@ -1610,6 +1616,7 @@ class prefix_template {
         SELF::$template_container_searchresults_wide = array_key_exists('container_searchresults_wide', $myConfig) ? $myConfig['container_searchresults_wide'] : SELF::$template_container_searchresults_wide;
         SELF::$template_container_errorpage_wide = array_key_exists('container_errorpage_wide', $myConfig) ? $myConfig['container_errorpage_wide'] : SELF::$template_container_errorpage_wide;
         SELF::$template_coloring = array_key_exists('coloring', $myConfig) ? $myConfig['coloring'] : SELF::$template_coloring;
+        SELF::$template_softHyphens = array_key_exists('softHyphens', $myConfig) ? $myConfig['softHyphens'] : SELF::$template_softHyphens;
         SELF::$template_address = array_key_exists('address', $myConfig) ? $myConfig['address'] : SELF::$template_address;
         SELF::$template_socialmedia = array_key_exists('socialmedia', $myConfig) ? $myConfig['socialmedia'] : SELF::$template_socialmedia;
         SELF::$template_contactblock = array_key_exists('contactblock', $myConfig) ? $myConfig['contactblock'] : SELF::$template_contactblock;
@@ -2045,7 +2052,10 @@ class prefix_template {
       $cf_svgIcon = prefix_template::$template_menu_svgIcon;
       $cf_description = prefix_template::$template_menu_description;
       $menu_cf_svgIcon = get_post_meta( $item_id, '_menu_svgIcon', true );
+      $menu_cf_svgIconPosition = get_post_meta( $item_id, '_menu_svgIconPosition', true ) && get_post_meta( $item_id, '_menu_svgIconPosition', true ) !== '' ? get_post_meta( $item_id, '_menu_svgIconPosition', true ) : '';
+      $menu_cf_svgIconOnly = get_post_meta( $item_id, '_menu_svgIconOnly', true ) ? get_post_meta( $item_id, '_menu_svgIconOnly', true ) : 0;
       $menu_cf_description = get_post_meta( $item_id, '_menu_description', true );
+      $menu_cf_descriptionPosition = get_post_meta( $item_id, '_menu_descriptionPosition', true ) && get_post_meta( $item_id, '_menu_descriptionPosition', true ) !== '' ? get_post_meta( $item_id, '_menu_descriptionPosition', true ) : '';
       // add textarea for the svg icon code
       if($cf_svgIcon):
         $output .= '<div style="clear: both;">';
@@ -2055,6 +2065,18 @@ class prefix_template {
               $output .= '<br><small>' . __('If you wish to use the icon coloring from the customizer set the class "stroked" or "filled" in the right position of the svg and remove the color definition','devTheme') . '</small>';
               $output .= '<br><textarea class="widefat edit-menu-svgIcon" name="menu_svgIcon[' . $item_id . ']" id="menu-svgIcon-' . $item_id . '">' . stripslashes($menu_cf_svgIcon) . '</textarea>';
             $output .= '</label>';
+            $output .= '<br><label for="menu-svgIconOnly-' . $item_id . '">';
+              $output .= '<input type="checkbox" class="edit-menu-svgIconOnly" name="menu_svgIconOnly[' . $item_id . ']" id="menu-svgIconOnly-' . $item_id . '" value="1" ' . prefix_core_BaseFunctions::setChecked('1', $menu_cf_svgIconOnly) . '>';
+              $output .= __('SVG Icon only','devTheme');
+            $output .= '</label>';
+            $output .= '<br><label for="menu-svgIconPosition-' . $item_id . '">';
+              $output .= __('SVG Icon Position','devTheme');
+            $output .= '</label> ';
+            $output .= '<select class="edit-menu-svgIconPosition" name="menu_svgIconPosition[' . $item_id . ']" id="menu-svgIconPosition-' . $item_id . '">';
+              $output .= '<option value="">Default: ' . prefix_template::$template_menu_svgIcon_position . '</option>';
+              $output .= '<option value="left"' . prefix_core_BaseFunctions::setSelected("left", $menu_cf_svgIconPosition) . '>left</option>';
+              $output .= '<option value="behind"' . prefix_core_BaseFunctions::setSelected("behind", $menu_cf_svgIconPosition) . '>behind</option>';
+            $output .= '</select>';
           $output .= '</p>';
         $output .= '</div>';
       endif;
@@ -2066,6 +2088,14 @@ class prefix_template {
               $output .= __('Menu item description','devTheme');
               $output .= '<br><textarea class="widefat edit-menu-description" name="menu_description[' . $item_id . ']" id="menu-description-' . $item_id . '">' . stripslashes($menu_cf_description) . '</textarea>';
             $output .= '</label>';
+            $output .= '<br><label for="menu-descriptionPosition-' . $item_id . '">';
+              $output .= __('Description position','devTheme');
+            $output .= '</label> ';
+            $output .= '<select class="edit-menu-descriptionPosition" name="menu_descriptionPosition[' . $item_id . ']" id="menu-descriptionPosition-' . $item_id . '">';
+              $output .= '<option value="">Default: ' . prefix_template::$template_menu_description_position . '</option>';
+              $output .= '<option value="under"' . prefix_core_BaseFunctions::setSelected("under", $menu_cf_descriptionPosition) . '>under</option>';
+              $output .= '<option value="hover"' . prefix_core_BaseFunctions::setSelected("hover", $menu_cf_descriptionPosition) . '>hover</option>';
+            $output .= '</select>';
           $output .= '</p>';
         $output .= '</div>';
       endif;
@@ -2074,19 +2104,46 @@ class prefix_template {
     }
     // save menu input
   function menuCustomFields_saveValue( $menu_id, $menu_item_db_id ) {
-    // svg
-    if ( isset( $_POST['menu_svgIcon'][$menu_item_db_id]  ) ):
-      $sanitized_svgIcon = stripslashes( $_POST['menu_svgIcon'][$menu_item_db_id] );
-      update_post_meta( $menu_item_db_id, '_menu_svgIcon', $sanitized_svgIcon );
-    else:
-      delete_post_meta( $menu_item_db_id, '_menu_svgIcon' );
+    $cf_svgIcon = prefix_template::$template_menu_svgIcon;
+    $cf_description = prefix_template::$template_menu_description;
+    if($cf_svgIcon):
+      // svg
+      if(isset($_POST['menu_svgIcon'][$menu_item_db_id])):
+        $sanitized_svgIcon = stripslashes($_POST['menu_svgIcon'][$menu_item_db_id]);
+        update_post_meta($menu_item_db_id, '_menu_svgIcon', $sanitized_svgIcon);
+      else:
+        delete_post_meta($menu_item_db_id, '_menu_svgIcon');
+      endif;
+      // svg position
+      if(isset($_POST['menu_svgIconPosition'][$menu_item_db_id])):
+        $sanitized_svgIconPosition = stripslashes($_POST['menu_svgIconPosition'][$menu_item_db_id]);
+        update_post_meta($menu_item_db_id, '_menu_svgIconPosition', $sanitized_svgIconPosition);
+      else:
+        delete_post_meta($menu_item_db_id, '_menu_svgIconPosition');
+      endif;
+      // svg icon only
+      if(isset($_POST['menu_svgIconOnly'][$menu_item_db_id])):
+        $sanitized_svgIconOnly = stripslashes($_POST['menu_svgIconOnly'][$menu_item_db_id]);
+        update_post_meta($menu_item_db_id, '_menu_svgIconOnly', $sanitized_svgIconOnly);
+      else:
+        delete_post_meta($menu_item_db_id, '_menu_svgIconOnly');
+      endif;
     endif;
-    // description
-    if ( isset( $_POST['menu_description'][$menu_item_db_id]  ) ):
-      $sanitized_description = stripslashes( $_POST['menu_description'][$menu_item_db_id] );
-      update_post_meta( $menu_item_db_id, '_menu_description', $sanitized_description );
-    else:
-      delete_post_meta( $menu_item_db_id, '_menu_description' );
+    if($cf_description):
+      // description
+      if(isset($_POST['menu_description'][$menu_item_db_id])):
+        $sanitized_description = stripslashes($_POST['menu_description'][$menu_item_db_id]);
+        update_post_meta($menu_item_db_id, '_menu_description', $sanitized_description);
+      else:
+        delete_post_meta($menu_item_db_id, '_menu_description');
+      endif;
+      // description position
+      if(isset($_POST['menu_descriptionPosition'][$menu_item_db_id])):
+        $sanitized_descriptionPosition = stripslashes($_POST['menu_descriptionPosition'][$menu_item_db_id]);
+        update_post_meta($menu_item_db_id, '_menu_descriptionPosition', $sanitized_descriptionPosition);
+      else:
+        delete_post_meta($menu_item_db_id, '_menu_descriptionPosition');
+      endif;
     endif;
   }
   // return on frontend
@@ -2097,7 +2154,9 @@ class prefix_template {
       if(is_object( $item ) && isset( $item->ID)):
         $menu_item_svgIcon = get_post_meta($item->ID, '_menu_svgIcon', true);
         if(! empty( $menu_item_svgIcon)):
-          $title = $menu_item_svgIcon ? '<span class="icon position-' . $cf_svgIconPosition . '">' . $menu_item_svgIcon . '</span>' . $title : $title;
+          $title = get_post_meta( $item->ID, '_menu_svgIconOnly', true ) ? '<span class="icon-only">' . $title . '</span>' : $title;
+          $cf_svgIconPositionUpdated = get_post_meta( $item->ID, '_menu_svgIconPosition', true ) && get_post_meta( $item->ID, '_menu_svgIconPosition', true ) !== '' ? get_post_meta( $item->ID, '_menu_svgIconPosition', true ) : $cf_svgIconPosition;
+          $title = $menu_item_svgIcon ? '<span class="icon position-' . $cf_svgIconPositionUpdated . '">' . $menu_item_svgIcon . '</span>' . $title : $title;
         endif;
       endif;
     endif;
@@ -2106,9 +2165,9 @@ class prefix_template {
   function menuCustomFields_frontendDescription( $item_output, $item, $depth, $args ) {
     $cf_description = prefix_template::$template_menu_description;
     $cf_descriptionPosition = prefix_template::$template_menu_description_position;
-    //
     if ($cf_description && !empty( $item->description ) ) {
-      $item_output .= '<span class="description position-' . $cf_descriptionPosition . '">' . $item->description . '</span>';
+      $cf_descriptionPositionUpdated = get_post_meta( $item->ID, '_menu_descriptionPosition', true ) && get_post_meta( $item->ID, '_menu_descriptionPosition', true ) !== '' ? get_post_meta( $item->ID, '_menu_descriptionPosition', true ) : $cf_descriptionPosition;
+      $item_output .= '<span class="description position-' . $cf_descriptionPositionUpdated . '">' . $item->description . '</span>';
     }
     return $item_output;
   }
@@ -2948,6 +3007,7 @@ class prefix_template {
       $classes .= $obj && property_exists($obj, 'post_type') ? ' pt-' . $obj->post_type : '';
       $classes .= $obj && property_exists($obj, 'name') ? ' pt-' . $obj->name : '';
       $classes .= prefix_template::$template_coloring !== '' ? ' ' . prefix_template::$template_coloring : '';
+      $classes .= prefix_template::$template_softHyphens ? ' soft-hyphens' : '';
       $classes .= prefix_template::CheckSticky(prefix_template::$template_header_sticky, prefix_template::$template_header_stickyload);
       // dark mode
       if($page_id > 0):
@@ -3192,8 +3252,10 @@ class prefix_template {
        endif;
 
       if($id > 0):
-        $output .= SELF::$template_thumbnail_div == 0 ? get_the_post_thumbnail($id, 'full', ['class' => $thumbnailCss, 'callingFrom' => 'detailpage']) : '';
-        $output .= SELF::$template_thumbnail_div == 0 && is_404() || SELF::$template_thumbnail_div == 0 && is_search() ? wp_get_attachment_image($id, 'full', ['class' => $thumbnailCss]) : '';
+        $output .= SELF::$template_thumbnail_div == 0 ? '<figure class="wp-block-post-featured-image">' : '';
+          $output .= SELF::$template_thumbnail_div == 0 ? get_the_post_thumbnail($id, 'full', ['class' => $thumbnailCss, 'callingFrom' => 'detailpage', 'figure' => 0]) : '';
+          $output .= SELF::$template_thumbnail_div == 0 && is_404() || SELF::$template_thumbnail_div == 0 && is_search() ? wp_get_attachment_image($id, 'full', ['class' => $thumbnailCss]) : '';
+        $output .= SELF::$template_thumbnail_div == 0 ? '</figure>' : '';
         $img_url = is_404() || is_search() ? wp_get_attachment_image_url($id, 'full') : get_the_post_thumbnail_url($id, 'full');
         $output .= SELF::$template_thumbnail_div == 1 && $img_url ? '<div class="' . $thumbnailCss . '" style="background-image: url(' . $img_url . ')"></div>' : '';
       endif;

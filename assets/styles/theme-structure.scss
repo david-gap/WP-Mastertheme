@@ -318,6 +318,7 @@ body.page-template,
   > header .widget,
   > main section,
   > main article,
+  > main aside,
   > main .wp-block-container,
   > main .wp-block-group__inner-container,
   > main .wp-block-cover__inner-container,
@@ -399,7 +400,8 @@ body.page-template,
   > main {
     margin: 0;
     section,
-    article {
+    article,
+    aside {
       & > p,
       & > ol,
       & > ul,
@@ -452,15 +454,21 @@ body.page-template,
     > section {
       display: flex;
       flex-direction: var(--mainSection__flexDirection, column);
+      flex-wrap: wrap;
       margin-top: var(--mainSection__marginTop, 0);
       margin-bottom: var(--mainSection__marginBottom, 0);
       padding-top: var(--mainSection__paddingTop, 0);
       padding-bottom: var(--mainSection__paddingBottom, 0);
       gap: var(--mainSection__gap, 20px);
       row-gap: var(--mainSection__gap, 20px);
+      > figure.wp-block-post-featured-image {
+        width: 100%;
+        flex-basis: 100%;
+        margin: 0;
+      }
       > article {
         flex-grow: 1;
-        width: auto;
+        width: min-content;
         max-width: 100%;
       }
       > #sidebar {
@@ -644,7 +652,9 @@ body.page-template,
 
   /* 3.3 MENU STYLING OPTIONS
   /––––––––––––––––––––––––*/
+  .menu-meta-menu-container .menu,
   .wp-menu {
+    list-style: none;
     margin: 0;
     padding: 0;
     &.horizontal {

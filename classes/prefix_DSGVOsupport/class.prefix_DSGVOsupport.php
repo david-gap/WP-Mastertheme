@@ -191,7 +191,9 @@ class prefix_DSGVOsupport {
       $blockClasses = '';
       $blockAdds = '';
       if("templates/vimeo" == $block['blockName']):
-        $paddingTop = 100 / $block["attrs"]["videoDimensionX"] * $block["attrs"]["videoDimensionY"];
+        $dimensionX = $block["attrs"]["videoDimensionX"] ? $block["attrs"]["videoDimensionX"] : 16;
+        $dimensionY = $block["attrs"]["videoDimensionY"] ? $block["attrs"]["videoDimensionY"] : 9;
+        $paddingTop = 100 / $dimensionX * $dimensionY;
         $blockAdds .= ' style="padding-top: ' . str_replace(",", ".", $paddingTop) . '%"';
         $blockClasses .= ' video-embed';
       endif;

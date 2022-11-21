@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 1.73.35 | 21.11.2022 <📦 NEW: soft hyphens 💎 IMPROVE: menu svg icon>
+* soft hyphens support
+* add svg and description settings to each menu item
+* Apply spacing rules to aside
+* Fix main section wrap
+* Fix template vimeo default dimension settings for api
+*
+
 ## 1.72.35 | 07.11.2022 <💎 IMPROVE: gutenberg styles, gutenberg templates>
 * Return sidebar only if value exists
 * Return theme pagination in block structure

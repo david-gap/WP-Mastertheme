@@ -75,6 +75,10 @@ Table of Contents:
   font-style: normal;
 }
 
+.soft-hyphens {
+  hyphens: auto;
+}
+
 
 
 body.frontend,
@@ -427,6 +431,9 @@ body.page-template,
   /* 2.11 MENU ITEMS
   /––––––––––––––––––––––––*/
   .menu-item {
+    .icon-only {
+      font-size: 0;
+    }
     .description {
       font-family: var(--menuItem__description_fontFamiliy, inherit);
       font-size: var(--menuItem__description_fontSize, 80%);
@@ -501,7 +508,6 @@ body.page-template,
   strong {
     font-weight: var(--strong_fontWeight, bold);
   }
-
 
   // inputs
   input[type="color"],
