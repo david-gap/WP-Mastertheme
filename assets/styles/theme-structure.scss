@@ -453,7 +453,7 @@ body.page-template,
   main {
     > section {
       display: flex;
-      flex-direction: var(--mainSection__flexDirection, column);
+      flex-direction: var(--mainSection__flexDirection, row);
       flex-wrap: wrap;
       margin-top: var(--mainSection__marginTop, 0);
       margin-bottom: var(--mainSection__marginBottom, 0);
