@@ -238,14 +238,14 @@ function isInViewport(el) {
 /* Clean string from letters and convert lefting numbers into int
 /------------------------*/
 function stringToNumberCoverter(string){
-  string = string.replace(/\D/g,'');
-  return parseInt(string);
+  string = string.replace(/[^-.,a-zA-Z0-9]/g,'');
+  return parseFloat(string);
 }
 
 
 /* Check if element overflows parent element
 /------------------------*/
-function checkChildPosition(parent, child, action = 'statement', gap = 0) {
+function checkChildPosition(parent, child, action = 'statement', gap = 0, zoom = 1) {
   // get elements position
   var box1coords = parent.getBoundingClientRect();
   var box2coords = child.getBoundingClientRect();
@@ -271,6 +271,38 @@ function checkChildPosition(parent, child, action = 'statement', gap = 0) {
       var currentLeft = stringToNumberCoverter(getStyle(child, 'left'));
       var newLeft =  box1coords.left - box2coords.left - currentLeft + gap;
       child.style.left = newLeft + "px";
+    }
+  } else if(action == 'holdInside') {
+    var stop = 0,
+        currentWidth = box1coords.width * zoom,
+        currentHeight = box1coords.height * zoom,
+        maxTop = (currentHeight - box1coords.height) / 2,
+        maxLeft = (currentWidth - box1coords.width) / 2,
+        maxBottom = (currentHeight - box1coords.height) / 2 * -1,
+        maxright = (currentWidth - box1coords.width) / 2 * -1;
+    // hold on top
+    if(stop < 2 && stringToNumberCoverter(getStyle(child, 'top')) > maxTop){
+      child.style.top = (maxTop + gap) + "px";
+      if(child.hasAttribute('data-y')){child.setAttribute('data-y', maxTop)}
+      stop++;
+    }
+    // hold left
+    if(stop < 2 && stringToNumberCoverter(getStyle(child, 'left')) > maxLeft){
+      child.style.left = (maxLeft + gap) + "px";
+      if(child.hasAttribute('data-x')){child.setAttribute('data-x', maxLeft)}
+      stop++;
+    }
+    // hold on bottom
+    if(stop < 2 && stringToNumberCoverter(getStyle(child, 'top')) < maxBottom){
+      child.style.top = (maxBottom + gap) + "px";
+      if(child.hasAttribute('data-y')){child.setAttribute('data-y', maxBottom)}
+      stop++;
+    }
+    // hold right
+    if(stop < 2 && stringToNumberCoverter(getStyle(child, 'left')) < maxright){
+      child.style.left = (maxright + gap) + "px";
+      if(child.hasAttribute('data-x')){child.setAttribute('data-x', maxright)}
+      stop++;
     }
   } else if(action == 'inside') {
     if(
@@ -659,6 +691,69 @@ function toggleBlock(){
     // play if autoplay is true
     if(videoAutoplay == "true"){
       player.play();
+    }
+  }
+}
+
+
+/* Dragable elements
+/------------------------*/
+function dragMoveListener(event){
+  var target = event.target;
+  // keep the dragged position in the data-x/data-y attributes
+  var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
+  var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+  // translate the element
+  // target.style.transform = 'translate(' + x + 'px, ' + y + 'px)'
+  target.style.left = x + 'px';
+  target.style.top = y + 'px';
+
+  // update the posiion attributes
+  target.setAttribute('data-x', x);
+  target.setAttribute('data-y', y);
+}
+
+
+/* Zoom animation
+/------------------------*/
+function zoomAnimation(){
+  if(!this.classList.contains("disabled")){
+    let container = this.closest('figure'),
+        zoomContainer = this.closest('.zoom-navigation'),
+        zoomMax = stringToNumberCoverter(zoomContainer.getAttribute('data-zoommax')),
+        zoomStep = stringToNumberCoverter(zoomContainer.getAttribute('data-zoomstep')),
+        zoomCurrent = stringToNumberCoverter(zoomContainer.getAttribute('data-zoomcurrent'));
+    // check if it a zoom in or out action
+    if(this.classList.contains("zoom-in")){
+      var zoomNew = zoomCurrent + zoomStep;
+    } else if (this.classList.contains("zoom-out")) {
+      var zoomNew = zoomCurrent - zoomStep;
+    } else {
+      var zoomNew = zoomCurrent;
+    }
+    // check if min or max achieved
+    if(zoomNew >= zoomMax){
+      var zoomNew = zoomMax;
+      this.closest('.zoom-navigation').querySelector('.zoom-in').classList.add("disabled");
+    } else if (1 >= zoomNew) {
+      var zoomNew = 1;
+      this.closest('.zoom-navigation').querySelector('.zoom-out').classList.add("disabled");
+    }
+    // update disabled buttons
+    if(zoomNew < zoomMax){
+      this.closest('.zoom-navigation').querySelector('.zoom-in').classList.remove("disabled");
+    }
+    if(zoomNew > 1){
+      this.closest('.zoom-navigation').querySelector('.zoom-out').classList.remove("disabled");
+    }
+    // update values
+    zoomContainer.setAttribute('data-zoomcurrent', zoomNew);
+    this.closest('figure').style.setProperty("--zoomCurrent", zoomNew);
+    // update position on zoom out
+    if (this.classList.contains("zoom-out")) {
+      var target = this.closest('figure').querySelector('.drag-container');
+      checkChildPosition(container, target, 'holdInside', 0, zoomNew);
     }
   }
 }
@@ -1317,6 +1412,37 @@ function runEventListeners(){
     });
   }
 
+  /* zoom items
+  /------------------------*/
+  var zoomItems = document.querySelectorAll('.zoom-navigation span');
+  if(zoomItems.length !== 0){
+    Array.from(zoomItems).forEach(function(zoomitem) {
+      zoomitem.addEventListener('click', zoomAnimation);
+      zoomitem.addEventListener('keypress', zoomAnimation);
+    });
+  }
+
+
+  /* Dragable elements action
+  /------------------------*/
+  interact('div.drag-container').draggable({
+    // enable inertial throwing
+    inertia: true,
+    // keep the element within the area of it's parent
+    modifiers: [
+      interact.modifiers.restrictRect({
+        restriction: 'parent',
+        endOnly: true
+      })
+    ],
+    // enable autoScroll
+    autoScroll: true,
+    listeners: {
+      // call this function on every dragmove event
+      move: dragMoveListener
+    }
+  });
+
   /* Image pins
   /------------------------*/
   // add data-id to container
@@ -1435,6 +1561,17 @@ function runEventListeners(){
     // click to toggle
     Array.from(selectVideoBlocks).forEach(function(videoblock) {
       runVideoJS(videoblock);
+    });
+  }
+
+
+  /* Maps
+  /------------------------*/
+  var selectMapBlocks = document.querySelectorAll('.wp-block-map');
+  if(selectMapBlocks.length !== 0){
+    // click to toggle
+    Array.from(selectMapBlocks).forEach(function(mapblock) {
+      MapBuilder.buildMap(mapblock);
     });
   }
 

@@ -1,12 +1,21 @@
 # CHANGELOG
 
+## 1.74.35 | 01.12.2022 <📦 NEW: zoom gutenberg blocks 🐛 FIX: thumb>
+* check template parts argument before usage
+* Gutenberg block options to zoom and drag&drop an image or an pin block
+* Add zoom navigation styling to Customizer
+* Add filter for the zoom-in & -out button content
+* Fix thumbnail figure return if empty
+* Rename asset files
+* Fix footer container style if its not contained
+* Getting ready for a maps block
+
 ## 1.73.35 | 21.11.2022 <📦 NEW: soft hyphens 💎 IMPROVE: menu svg icon>
 * soft hyphens support
 * add svg and description settings to each menu item
 * Apply spacing rules to aside
 * Fix main section wrap
 * Fix template vimeo default dimension settings for api
-*
 
 ## 1.72.35 | 07.11.2022 <💎 IMPROVE: gutenberg styles, gutenberg templates>
 * Return sidebar only if value exists

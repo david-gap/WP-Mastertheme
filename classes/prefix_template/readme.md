@@ -1,4 +1,4 @@
-**Version 2.39.19** (21.11.2022)
+**Version 2.39.20** (01.12.2022)
 
 Custom class "template" with template parts and header / footer builder
 

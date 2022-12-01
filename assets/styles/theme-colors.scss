@@ -20,6 +20,7 @@ Table of Contents:
     1.7 LANGUAGE SWITCHER
     1.8 SEARCH FORM
     1.9 DOWNLOAD ALL BUTTON
+    1.10 ZOOM ANIMATION
   2.0 HEADER
     2.1 BACKGROUND
     2.2 LOGO TEXT
@@ -414,6 +415,34 @@ body.page-template,
   }
 
 
+  /* 1.10 ZOOM ANIMATION
+  /––––––––––––––––––––––––*/
+  figure {
+    &[data-zoom="1"] {
+      .zoom-navigation {
+        background-color: var(--zoomNavigation__backgroundColor, initial);
+        color: var(--zoomNavigation__color, var(--link__color, var(--color__main)));
+        border-color: var(--zoomNavigation__borderColor, unset);
+        span {
+          background-color: var(--zoomNavigation__item_backgroundColor, var(--main_background));
+          color: var(--zoomNavigation__item_color, var(--link__color, var(--color__main)));
+          border-color: var(--zoomNavigation__item_borderColor, unset);
+          &:hover {
+            background-color: var(--zoomNavigation__item_backgroundColor_hover, var(--zoomNavigation__item_backgroundColor, var(--color__main)));
+            color: var(--zoomNavigation__item_color_hover, var(--zoomNavigation__item_color, var(--link__color, var(--main_background))));
+            border-color: var(--zoomNavigation__item_borderColor_hover, var(--zoomNavigation__item_borderColor, unset));
+          }
+          &.disabled {
+            background-color: var(--zoomNavigation__itemDisabled_backgroundColor, initial);
+            color: var(--zoomNavigation__itemDisabled_color, var(--link__color, var(--color__main)));
+            border-color: var(--zoomNavigation__itemDisabled_borderColor, unset);
+          }
+        }
+      }
+    }
+  }
+
+
   /*==================================================================================
     2.0 HEADER
   ==================================================================================*/
@@ -578,7 +607,7 @@ body.page-template,
   /* 3.2 TITLE
   /––––––––––––––––––––––––*/
   h1 {
-    &:not(.post-title):not(.wp-block-site-title):not(.wp-block-post-title):not(.wp-block-post-title):not([class^='is-style-']):not([class*=' is-style-']),
+    &:not(.post-title):not(.wp-block-site-title):not(.wp-block-post-title):not(.wp-block-post-title):not([class^='is-style-']):not([class*=' is-style-']):not(.wp-block-comments-title),
     &.is-style-default {
       &:not(.has-border-color){
         border-color: var(--h1__borderColor, unset);
@@ -592,7 +621,7 @@ body.page-template,
     }
   }
   h2 {
-    &:not(.post-title):not(.wp-block-site-title):not(.wp-block-post-title):not([class^='is-style-']):not([class*=' is-style-']),
+    &:not(.post-title):not(.wp-block-site-title):not(.wp-block-post-title):not([class^='is-style-']):not([class*=' is-style-']):not(.wp-block-comments-title),
     &.is-style-default {
       &:not(.has-border-color){
         border-color: var(--h2__borderColor, unset);
@@ -606,7 +635,7 @@ body.page-template,
     }
   }
   h3 {
-    &:not(.post-title):not(.wp-block-site-title):not(.wp-block-post-title):not([class^='is-style-']):not([class*=' is-style-']),
+    &:not(.post-title):not(.wp-block-site-title):not(.wp-block-post-title):not([class^='is-style-']):not([class*=' is-style-']):not(.wp-block-comments-title),
     &.is-style-default {
       &:not(.has-border-color){
         border-color: var(--h3__borderColor, unset);
@@ -620,7 +649,7 @@ body.page-template,
     }
   }
   h4 {
-    &:not(.post-title):not(.wp-block-site-title):not(.wp-block-post-title):not([class^='is-style-']):not([class*=' is-style-']),
+    &:not(.post-title):not(.wp-block-site-title):not(.wp-block-post-title):not([class^='is-style-']):not([class*=' is-style-']):not(.wp-block-comments-title),
     &.is-style-default {
       &:not(.has-border-color){
         border-color: var(--h4__borderColor, unset);
@@ -634,7 +663,7 @@ body.page-template,
     }
   }
   h5 {
-    &:not(.post-title):not(.wp-block-site-title):not(.wp-block-post-title):not([class^='is-style-']):not([class*=' is-style-']),
+    &:not(.post-title):not(.wp-block-site-title):not(.wp-block-post-title):not([class^='is-style-']):not([class*=' is-style-']):not(.wp-block-comments-title),
     &.is-style-default {
       &:not(.has-border-color){
         border-color: var(--h5__borderColor, unset);
@@ -648,7 +677,7 @@ body.page-template,
     }
   }
   h6 {
-    &:not(.post-title):not(.wp-block-site-title):not(.wp-block-post-title):not([class^='is-style-']):not([class*=' is-style-']),
+    &:not(.post-title):not(.wp-block-site-title):not(.wp-block-post-title):not([class^='is-style-']):not([class*=' is-style-']):not(.wp-block-comments-title),
     &.is-style-default {
       &:not(.has-border-color){
         border-color: var(--h6__borderColor, unset);
@@ -812,14 +841,23 @@ body.page-template,
   /* 3.7 COMMENTS
   /––––––––––––––––––––––––*/
   .wp-block-comments-query-loop,
+  .wp-block-comments,
   div#comments {
     background-color: var(--comments__bg, initial);
     border-color: var(--comments__borderColor, unset);
-    > .wp-block-comments-title,
+    .wp-block-comments-title,
     h3.comments-title {
-      background-color: var(--comments__title_bg, initial);
-      color: var(--comments__title_color, inherit);
-      border-color: var(--comments__title_borderColor, unset);
+      &:not(.post-title):not(.wp-block-site-title):not(.wp-block-post-title):not([class^='is-style-']):not([class*=' is-style-']){
+        &:not(.has-border-color){
+          border-color: var(--comments__title_borderColor, unset);
+        }
+        &:not(.has-text-color){
+          color: var(--comments__title_color, inherit);
+        }
+        &:not(.has-background){
+          background-color: var(--comments__title_bg, initial);
+        }
+      }
     }
     ol.wp-block-comment-template,
     ol.commentlist {

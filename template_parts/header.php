@@ -3,10 +3,10 @@
  * Blog template header for all
  *
  * @author      David Voglgsang
- * @version     1.0
+ * @version     1.0.1
  *
 */
-if($args['id'] && $args['id'] !== 0):
+if($args && array_key_exists('id', $args) && $args['id'] !== 0):
   global $post;
   $post = get_post($args['id']);
 endif;

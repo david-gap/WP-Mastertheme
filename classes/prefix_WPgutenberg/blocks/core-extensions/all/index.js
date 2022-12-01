@@ -132,7 +132,10 @@
           'data-sideSpacing': props.attributes.sideSpacing,
           'data-swiper': props.attributes.addSwiper,
           'data-popup': props.attributes.addPopUp,
-          'data-popuppreview': props.attributes.addPopUpPreview
+          'data-popuppreview': props.attributes.addPopUpPreview,
+          'data-zoom': props.attributes.zoomActive,
+          'data-zoomMax': props.attributes.zoomMax,
+          'data-zoomStep': props.attributes.zoomSteps
         }} />
       );
     };

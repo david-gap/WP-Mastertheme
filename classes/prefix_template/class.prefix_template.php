@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.39.19
+ * @version     2.39.20
  *
 */
 
@@ -3238,7 +3238,8 @@ class prefix_template {
     static function get_thumbnail(){
       $output = '';
       $obj = get_queried_object();
-      $id = $obj && property_exists($obj, 'ID') ? $obj->ID : 0;
+      $pageId = $obj && property_exists($obj, 'ID') ? $obj->ID : 0;
+      $id = has_post_thumbnail($pageId) ? $pageId : 0;
       $id = is_404() ? SELF::$template_thumbnail_404 : $id;
       $id = is_search() ? SELF::$template_thumbnail_search : $id;
       $options = $obj && property_exists($obj, 'ID') ? prefix_template::PageOptions($obj->ID) : array();
@@ -3253,7 +3254,7 @@ class prefix_template {
 
       if($id > 0):
         $output .= SELF::$template_thumbnail_div == 0 ? '<figure class="wp-block-post-featured-image">' : '';
-          $output .= SELF::$template_thumbnail_div == 0 ? get_the_post_thumbnail($id, 'full', ['class' => $thumbnailCss, 'callingFrom' => 'detailpage', 'figure' => 0]) : '';
+          $output .= SELF::$template_thumbnail_div == 0 && has_post_thumbnail($pageId) ? get_the_post_thumbnail($id, 'full', ['class' => $thumbnailCss, 'callingFrom' => 'detailpage', 'figure' => 0]) : '';
           $output .= SELF::$template_thumbnail_div == 0 && is_404() || SELF::$template_thumbnail_div == 0 && is_search() ? wp_get_attachment_image($id, 'full', ['class' => $thumbnailCss]) : '';
         $output .= SELF::$template_thumbnail_div == 0 ? '</figure>' : '';
         $img_url = is_404() || is_search() ? wp_get_attachment_image_url($id, 'full') : get_the_post_thumbnail_url($id, 'full');

@@ -6,7 +6,7 @@
  * https://github.com/david-gap/classes
  *
  * @author      David Voglgsang
- * @version     2.28.17
+ * @version     2.29.17
  */
 
 /*=======================================================
@@ -309,6 +309,7 @@ class prefix_WPgutenberg {
           "templates/vimeo",
           "templates/posts",
           "templates/postsfilter",
+          // "templates/maps",
           "templates/accordion",
           "templates/accordion-item",
           "templates/gallery",
@@ -507,6 +508,7 @@ class prefix_WPgutenberg {
     }
     include 'blocks/posts/index.php';
     include 'blocks/postsfilter/index.php';
+    // include 'blocks/map-marker/index.php';
     include 'blocks/image-pins-item/index.php';
   }
 
@@ -719,6 +721,38 @@ class prefix_WPgutenberg {
             endif;
           endif;
         endif;
+        // zoom
+        if($block['attrs'] && array_key_exists('zoomActive', $block['attrs']) && $block['attrs']['zoomActive'] == true):
+          // drag container
+          $callPins = prefix_core_BaseFunctions::getBetween($blockContent, '<div class="pins">', '</div>');
+          $drag = '<div class="drag-container">';
+              if("core/image" == $block['blockName'] && array_key_exists('id', $block['attrs'])):
+                $drag .= wp_get_attachment_image($block['attrs']['id'], 'full', false);
+              elseif("templates/image-pins" == $block['blockName'] && array_key_exists('imageId', $block['attrs'])):
+                $drag .= wp_get_attachment_image($block['attrs']['imageId'], 'full', false);
+              else:
+                $drag .= strip_tags($blockContent, '<img>');
+              endif;
+            $drag .= $callPins ? '<div class="pins">' . $callPins . '</div>' : '';
+          $drag .= '</div>';
+          // zoom configuration
+          $zoomPosition = array_key_exists('zoomPosition', $block['attrs']) ? $block['attrs']['zoomPosition'] : 'bottom-right';
+          $zoomMax = array_key_exists('zoomMax', $block['attrs']) ? $block['attrs']['zoomMax'] : '2';
+          $zoomSteps = array_key_exists('zoomSteps', $block['attrs']) ? $block['attrs']['zoomSteps'] : '0.5';
+          // zoom navigation
+          $zoom = '<div class="zoom-navigation position-' . $zoomPosition . '" data-zoomcurrent="1" data-zoommax="' . $zoomMax . '" data-zoomstep="' . $zoomSteps . '">';
+          $zoom .= '<span class="zoom-in">' . apply_filters( 'WPgutenberg_zoom_in', '+', $block['attrs'] ) . '</span>';
+          $zoom .= '<span class="zoom-out disabled">' . apply_filters( 'WPgutenberg_zoom_out', '-', $block['attrs'] ) . '</span>';
+          $zoom .= '</div>';
+          // insert additional html
+          if("core/image" == $block['blockName']):
+            $blockContent = str_replace(array('<figure', '</figure>'), array('<figure data-zoom="1"', $zoom . $drag . '</figure>'), $blockContent);
+          endif;
+          if("templates/image-pins" == $block['blockName']):
+            $blockContent = preg_replace('#<div class="pins">(.*?)</div></figure>#', '</figure>', $blockContent);
+            $blockContent = str_replace(array('<figure', '</figure>'), array('<figure data-zoom="1"', $zoom . $drag . '</figure>'), $blockContent);
+          endif;
+        endif;
       endif;
     endif;
 
@@ -729,33 +763,33 @@ class prefix_WPgutenberg {
   /* 3.4 EXTENTION FILES
   /------------------------*/
   function embedExtentionFiles() {
-    if (is_singular()) {
+    if(is_singular()):
       $id = get_the_ID();
-      if (has_block('core/video', $id)) {
+      if(has_block('core/video', $id)):
         wp_enqueue_script(
           'video-js',
           'https://vjs.zencdn.net/7.19.2/video.min.js',
           [],
           '7.19.2'
         );
-      }
-      if (has_block('core/gallery', $id)) {
+      endif;
+      if(has_block('core/gallery', $id)):
         wp_enqueue_script(
           'zip-js',
           get_template_directory_uri() . '/assets/jszip.min.js',
           [],
           '3.10.1'
         );
-      }
-      if (has_block('templates/vimeo', $id)) {
+      endif;
+      if(has_block('templates/vimeo', $id)):
         wp_enqueue_script(
           'vimeo-player',
           'https://player.vimeo.com/api/player.js',
           [],
           '2.17.1'
         );
-      }
-    }
+      endif;
+    endif;
   }
 
 

@@ -4,7 +4,7 @@
  *
  * Customizer extension
  * Author:      David Voglgsnag
- * @version     1.16
+ * @version     1.17
  *
  */
 
@@ -40,7 +40,7 @@ class prefix_core_Customizer {
     *  'default' => '1'
     *)
   */
-  private $version = 1.16;
+  private $version = 1.17;
   private $tree = array(
     'panel_one' => array(
       'label' => 'Panel 1',
@@ -5118,6 +5118,227 @@ class prefix_core_Customizer {
                 'thumbnail__marginBottom_mobile' => array(
                   'label' => 'Margin bottom',
                   'type' => 'range-value'
+                )
+              )
+            )
+          )
+        ),
+        'tmpParts_zoomNavigation' => array(
+          'label' => 'Zoom navigation',
+          'sections' => array(
+            'tmpParts_zoomNavigation_container' => array(
+              'label' => 'Container',
+              'inputs' => array(
+                'zoomNavigation__backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'zoomNavigation__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'zoomNavigation__borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+
+                'zoomNavigation__borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'range-four-value'
+                ),
+                'zoomNavigation__borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'range-four-value'
+                ),
+                'zoomNavigation__borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'zoomNavigation__padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'zoomNavigation__flexDirection' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'zoomNavigation__gap' => array(
+                  'label' => 'Gap',
+                  'type' => 'range-value'
+                ),
+                'zoomNavigation__topBottom' => array(
+                  'label' => 'Space to top/bottom',
+                  'type' => 'range-value'
+                ),
+                'zoomNavigation__leftRight' => array(
+                  'label' => 'Space to left/right',
+                  'type' => 'range-value'
+                ),
+                'zoomNavigation__padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'zoomNavigation__gap_mobile' => array(
+                  'label' => 'Gap',
+                  'type' => 'range-value'
+                ),
+                'zoomNavigation__topBottom_mobile' => array(
+                  'label' => 'Space to top/bottom',
+                  'type' => 'range-value'
+                ),
+                'zoomNavigation__leftRight_mobile' => array(
+                  'label' => 'Space to left/right',
+                  'type' => 'range-value'
+                ),
+                'dark__zoomNavigation__backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__zoomNavigation__color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__zoomNavigation__borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
+            ),
+            'tmpParts_zoomNavigation_items' => array(
+              'label' => 'Buttons',
+              'inputs' => array(
+                'zoomNavigation__item_backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'zoomNavigation__item_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'zoomNavigation__item_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'zoomNavigation__item_backgroundColor_hover' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'zoomNavigation__item_color_hover' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'zoomNavigation__item_borderColor_hover' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'zoomNavigation__item_borderWidth' => array(
+                  'label' => 'Border width',
+                  'type' => 'range-four-value'
+                ),
+                'zoomNavigation__item_borderRadius' => array(
+                  'label' => 'Border radius',
+                  'type' => 'range-four-value'
+                ),
+                'zoomNavigation__item_borderStyle' => array(
+                  'label' => 'Border style',
+                  'type' => 'select'
+                ),
+                'zoomNavigation__item_padding' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'zoomNavigation__item_fontFamily' => array(
+                  'label' => 'Font family',
+                  'type' => 'input'
+                ),
+                'zoomNavigation__item_fontSize' => array(
+                  'label' => 'Font-size',
+                  'type' => 'range-value'
+                ),
+                'zoomNavigation__item_fontWeight' => array(
+                  'label' => 'Font weight',
+                  'type' => 'select'
+                ),
+                'zoomNavigation__item_lineHeight' => array(
+                  'label' => 'Line-height',
+                  'type' => 'range-value'
+                ),
+                'zoomNavigation__item_textTransform' => array(
+                  'label' => 'Text transform',
+                  'type' => 'select'
+                ),
+                'zoomNavigation__item_fontStyle' => array(
+                  'label' => 'Font style',
+                  'type' => 'select'
+                ),
+                'zoomNavigation__item_letterSpacing' => array(
+                  'label' => 'Letter spacing',
+                  'type' => 'range-value'
+                ),
+                'zoomNavigation__item_padding_mobile' => array(
+                  'label' => 'Padding',
+                  'type' => 'range-four-value'
+                ),
+                'zoomNavigation__item_fontSize_mobile' => array(
+                  'label' => 'Font-size',
+                  'type' => 'range-value'
+                ),
+                'zoomNavigation__item_lineHeight_mobile' => array(
+                  'label' => 'Line-height',
+                  'type' => 'range-value'
+                ),
+                'dark__zoomNavigation__item_backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__zoomNavigation__item_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__zoomNavigation__item_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'dark__zoomNavigation__item_backgroundColor_hover' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__zoomNavigation__item_color_hover' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__zoomNavigation__item_borderColor_hover' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                )
+              )
+            ),
+            'tmpParts_zoomNavigation_disabledItems' => array(
+              'label' => 'Disabled button',
+              'inputs' => array(
+                'zoomNavigation__itemDisabled_backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'zoomNavigation__itemDisabled_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'zoomNavigation__itemDisabled_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
+                ),
+                'dark__zoomNavigation__itemDisabled_backgroundColor' => array(
+                  'label' => 'Background color',
+                  'type' => 'color'
+                ),
+                'dark__zoomNavigation__itemDisabled_color' => array(
+                  'label' => 'Color',
+                  'type' => 'color'
+                ),
+                'dark__zoomNavigation__itemDisabled_borderColor' => array(
+                  'label' => 'Border color',
+                  'type' => 'color'
                 )
               )
             )

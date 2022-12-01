@@ -1,4 +1,4 @@
-**Version 2.28.17** (07.11.2022)
+**Version 2.29.17** (01.12.2022)
 
 Custom class "WPgutenberg" to select allowed guttenberg blocks and add style options
 
@@ -188,3 +188,11 @@ WPgutenberg_image_downloadButton
 to replace the given download all button value
 There are two parameters inside this query. First parameter is the content and the second is the block attributes.
 WPgutenberg_gallery_downloadAllButton
+
+to replace the given zoom in text
+There are two parameters inside this query. First parameter is the default text and the second is the block attributes.
+WPgutenberg_zoom_in
+
+to replace the given zoom out text
+There are two parameters inside this query. First parameter is the default text and the second is the block attributes.
+WPgutenberg_zoom_out
