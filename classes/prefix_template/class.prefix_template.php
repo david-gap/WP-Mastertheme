@@ -3198,7 +3198,7 @@ class prefix_template {
 
     /* 3.21 RETURN WIDGET
     /------------------------*/
-    function getWidget($key) {
+    static function getWidget($key) {
       if(is_active_sidebar( $key )):
           dynamic_sidebar( $key );
       endif;
