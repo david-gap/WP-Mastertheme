@@ -1924,7 +1924,7 @@ class prefix_template {
 
     /* 2.6 REBUILD SEARCH FORM
     /------------------------*/
-    public function buildSearchForm(string $type = 'default'){
+    public static function buildSearchForm(string $type = 'default'){
       $output = '';
       if($type == 'menu'):
         $containerStart = '<li class="menu-item menu-search-form search-form">';

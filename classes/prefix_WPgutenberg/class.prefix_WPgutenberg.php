@@ -690,7 +690,7 @@ class prefix_WPgutenberg {
               $blockContent = str_replace(array('<a href="', '</figure>'), array('<a download href="', $downloadLink . '</figure>'), $blockContent);
             endif;
           endif;
-          $blockContent = str_replace('<img', '<img data-id="' . $block['attrs']['id'] . '"', $blockContent);
+          $blockContent = array_key_exists('id', $block['attrs']) ? str_replace('<img', '<img data-id="' . $block['attrs']['id'] . '"', $blockContent) : $blockContent;
         endif;
         // gallery
         if("core/gallery" == $block['blockName']):

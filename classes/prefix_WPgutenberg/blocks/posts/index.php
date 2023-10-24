@@ -4,7 +4,7 @@
 register_block_type(
   'templates/posts',
   array(
-    'editor_script' => 'gutenberg-blockposts',
+    'editor_script' => 'mce-gutenberg-block-posts',
     'attributes' => array(
       'anchor' => array(
         'type' => 'string'
@@ -13,7 +13,8 @@ register_block_type(
         'type' => 'array'
       ),
       'postTaxonomyFilterRelation' => array(
-        'type' => 'string'
+        'type' => 'string',
+        'default' => 'AND'
       ),
       'className' => array(
         'type' => 'string'
@@ -95,6 +96,7 @@ register_block_type(
   )
 );
 
+
 function WPgutenberg_posts_ContentRow($value, $id){
   switch ($value) {
     case "title":
@@ -102,44 +104,6 @@ function WPgutenberg_posts_ContentRow($value, $id){
       break;
     case "date":
       return get_the_date('d.m.Y', $id);
-      break;
-    case "template":
-      ob_start();
-      if(get_post_type($id) == "post" || post_type_supports(get_post_type($id), 'post-formats')):
-        $blog_type = get_post_format($id) ? get_post_format($id) : "default";
-        global $post;
-        $post = get_post($id);
-        setup_postdata($post);
-        // blog output
-        if(locate_template('template_parts/' . get_post_type($id) . '_' . $blog_type . '.php')):
-          get_template_part('template_parts/' . get_post_type($id) . '_' . $blog_type, '', array('id' => $id));
-        else:
-          get_template_part('template_parts/post_' . $blog_type, '', array('id' => $id));
-        endif;
-      else:
-        // default output
-        get_template_part('template_parts/post_default', '', array('id' => $id));
-      endif;
-      return ob_get_clean();
-      break;
-    case "templateMedia":
-      ob_start();
-      if(get_post_type($id) == "post" || post_type_supports(get_post_type($id), 'post-formats')):
-        $blog_type = get_post_format($id) ? get_post_format($id) : "default";
-        global $post;
-        $post = get_post($id);
-        setup_postdata($post);
-        // blog output
-        if(locate_template('template_parts/' . get_post_type($id) . '_' . $blog_type . '.php')):
-          get_template_part('template_parts/' . get_post_type($id) . '_' . $blog_type, '', array('id' => $id, 'mediaOnly' => 1));
-        else:
-          get_template_part('template_parts/post_' . $blog_type, '', array('id' => $id, 'mediaOnly' => 1));
-        endif;
-      else:
-        // default output
-        get_template_part('template_parts/post_default', '', array('id' => $id, 'mediaOnly' => 1));
-      endif;
-      return ob_get_clean();
       break;
     case "excerpt":
       return get_the_excerpt($id);
@@ -170,11 +134,12 @@ function WPgutenberg_posts_ContentRow($value, $id){
   }
 }
 
+
 // post builder
 function WPgutenberg_posts_PostBuilder(array $attr, $id, $currentId){
 
   $addClass = $currentId === $id ? ' class="current-item"' : '';
-  $pageOptions = prefix_template::PageOptions($id);
+  $pageOptions = class_exists('template') ? template::PageOptions($id) : array();
 
   $output = '';
   $output .= '<li data-id="' . $id . '"' . $addClass . '>';
@@ -222,7 +187,7 @@ function WPgutenberg_posts_PostBuilder(array $attr, $id, $currentId){
       // add content
       $output .= '<div class="post-content">';
         if(array_key_exists('postTextOne', $attr) && $attr['postTextOne'] !== ''):
-          $output .= $attr['postTextOne'] == 'title' ? '<h4>' : '<div class="wp-block-post-' . $attr['postTextOne'] . '">';
+          $output .= $attr['postTextOne'] == 'title' ? '<h4 class="wp-block-posts-title">' : '<div class="wp-block-post-' . $attr['postTextOne'] . '">';
             if(array_key_exists('postTaxonomyFilterOptions', $attr) && is_array($attr['postTaxonomyFilterOptions']) && in_array('link_row1', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
 
               $output .= $linkOpen;
@@ -234,7 +199,7 @@ function WPgutenberg_posts_PostBuilder(array $attr, $id, $currentId){
           $output .= $attr['postTextOne'] == 'title' ? '</h4>' : '</div>';
         endif;
         if(array_key_exists('postTextTwo', $attr) && $attr['postTextTwo'] !== ''):
-          $output .= $attr['postTextTwo'] == 'title' ? '<h4>' : '<div class="wp-block-post-' . $attr['postTextTwo'] . '">';
+          $output .= $attr['postTextTwo'] == 'title' ? '<h4 class="wp-block-posts-title">' : '<div class="wp-block-post-' . $attr['postTextTwo'] . '">';
             if(array_key_exists('postTaxonomyFilterOptions', $attr) && is_array($attr['postTaxonomyFilterOptions']) && in_array('link_row2', $attr['postTaxonomyFilterOptions']) && !in_array('link_box', $attr['postTaxonomyFilterOptions'])):
               $output .= $linkOpen;
             endif;
@@ -254,6 +219,10 @@ function WPgutenberg_posts_PostBuilder(array $attr, $id, $currentId){
 
 // post results
 function WPgutenberg_posts_getResultsAndSort(array $attr, string $source = 'first_load'){
+  $term_array = false;
+  $tagsToQuery = false;
+  $terms = false;
+  $sum = 0;
   // sort direction
   $postSortBy = in_array($attr['postSortBy'], array('title', 'date', 'menu_order')) ? $attr['postSortBy'] : 'meta_value';
   // add filter
@@ -327,7 +296,9 @@ function WPgutenberg_posts_getResultsAndSort(array $attr, string $source = 'firs
   if(array_key_exists('postIdFilter', $attr)):
    $queryArgs['post__in'] = $attr['postIdFilter'];
   else:
-    $queryArgs['tax_query'] = $term_array;
+    if($term_array):
+      $queryArgs['tax_query'] = $term_array;
+    endif;
     if($tagsToQuery):
       $queryArgs['tag_id'] = $tagsToQuery;
     endif;
@@ -383,7 +354,6 @@ function WPgutenberg_posts_getResultsAndSort(array $attr, string $source = 'firs
       // set taxonomy filter
       $groupedIds = apply_filters( 'WPgutenberg_filter_posts_taxSorting', $groupedIds, $attr );
       // return by taxonomy
-      $sum = 0;
 
       foreach ($groupedIds as $termkey => $termgroup) {
         if(is_array($termgroup) && !empty($termgroup)):
@@ -436,7 +406,8 @@ function WPgutenberg_posts_getResultsAndSort(array $attr, string $source = 'firs
     //   }
     // endif;
   else:
-    $output .= '<li class="wide"><p class="no-results">' . __( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'devTheme' ) . '</p></li>';
+    $noresults_txt = function_exists('pll_the_languages') ? pll__( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'devTheme' ) : __( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'devTheme' );
+    $output .= '<li class="wide"><p class="no-results">' . $noresults_txt . '</p></li>';
   endif;
 
   return $output;
@@ -449,7 +420,7 @@ function WPgutenberg_posts_blockRender($attr){
   $css = '';
   $inlinecss = '';
   // add edvanced options (ID/CSS)
-  $id = array_key_exists('anchor', $attr) ? $attr['anchor'] : prefix_core_BaseFunctions::ShortID(10, 'letters');
+  $id = array_key_exists('anchor', $attr) ? $attr['anchor'] : '';
   $css .= array_key_exists('className', $attr) ? ' ' . $attr['className'] : '';
   $css .= array_key_exists('align', $attr) ? ' align' . $attr['align'] : '';
   // add swiper
@@ -484,12 +455,12 @@ function WPgutenberg_posts_blockRender($attr){
             if (function_exists('acf_get_field')):
               $term = acf_get_field($value);
               if($term):
-                $name = __( $term['label'], 'WPgutenberg-' . $attr['postType'] );
+                $name = __( $term['label'], 'mce-' . $attr['postType'] );
               else:
-                $name = __( $value, 'WPgutenberg-' . $attr['postType'] );
+                $name = __( $value, 'mce-' . $attr['postType'] );
               endif;
             else:
-              $name = __( $value, 'WPgutenberg-' . $attr['postType'] );
+              $name = __( $value, 'mce-' . $attr['postType'] );
             endif;
             $sortd = $value == $attr['postSortBy'] ? $attr['postSortDirection'] : 'asc';
             $sort_css = '';
