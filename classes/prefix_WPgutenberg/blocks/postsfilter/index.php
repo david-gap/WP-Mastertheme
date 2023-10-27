@@ -80,6 +80,44 @@ function WPgutenberg_postsfilter_ContentRow($value, $id){
     case "date":
       return get_the_date('d.m.Y', $id);
       break;
+    case "template":
+      ob_start();
+      if(get_post_type($id) == "post" || post_type_supports(get_post_type($id), 'post-formats')):
+        $blog_type = get_post_format($id) ? get_post_format($id) : "default";
+        global $post;
+        $post = get_post($id);
+        setup_postdata($post);
+        // blog output
+        if(locate_template('template_parts/' . get_post_type($id) . '_' . $blog_type . '.php')):
+          get_template_part('template_parts/' . get_post_type($id) . '_' . $blog_type, '', array('id' => $id));
+        else:
+          get_template_part('template_parts/post_' . $blog_type, '', array('id' => $id));
+        endif;
+      else:
+        // default output
+        get_template_part('template_parts/post_default', '', array('id' => $id));
+      endif;
+      return ob_get_clean();
+      break;
+    case "templateMedia":
+      ob_start();
+      if(get_post_type($id) == "post" || post_type_supports(get_post_type($id), 'post-formats')):
+        $blog_type = get_post_format($id) ? get_post_format($id) : "default";
+        global $post;
+        $post = get_post($id);
+        setup_postdata($post);
+        // blog output
+        if(locate_template('template_parts/' . get_post_type($id) . '_' . $blog_type . '.php')):
+          get_template_part('template_parts/' . get_post_type($id) . '_' . $blog_type, '', array('id' => $id, 'mediaOnly' => 1));
+        else:
+          get_template_part('template_parts/post_' . $blog_type, '', array('id' => $id, 'mediaOnly' => 1));
+        endif;
+      else:
+        // default output
+        get_template_part('template_parts/post_default', '', array('id' => $id, 'mediaOnly' => 1));
+      endif;
+      return ob_get_clean();
+      break;
     case "excerpt":
       return get_the_excerpt($id);
       break;
@@ -349,7 +387,7 @@ function WPgutenberg_postsfilter_blockRender($attr){
   $css = '';
   $inlinecss = '';
   // add edvanced options (ID/CSS)
-  $id = array_key_exists('anchor', $attr) ? $attr['anchor'] : '';
+  $id = array_key_exists('anchor', $attr) ? $attr['anchor'] : prefix_core_BaseFunctions::ShortID(10, 'letters');
   $css .= array_key_exists('className', $attr) ? ' ' . $attr['className'] : '';
   $css .= array_key_exists('align', $attr) ? ' align' . $attr['align'] : '';
   $css .= array_key_exists('postFilterPosition', $attr) ? ' filter-' . $attr['postFilterPosition']  : '';
@@ -370,7 +408,7 @@ function WPgutenberg_postsfilter_blockRender($attr){
     $output .= '</style>';
   endif;
   // build content
-  $output .= '<div id="' . $id . '" class="block-postsfilter' . $css . '" data-id="' . prefix_core_BaseFunctions::shortID() . '">';
+  $output .= '<div id="' . $id . '" class="block-postsfilter' . $css . '" data-id="' . prefix_core_BaseFunctions::ShortID() . '">';
     $output .= '<form class="thefilter">';
       if($attr['postTextSearch']):
         $output .= '<div class="textsearch">';

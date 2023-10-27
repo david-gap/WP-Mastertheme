@@ -4,7 +4,7 @@
  *
  * Base dev functions - parent for all custom classes
  * Author:      David Voglgsnag
- * @version     2.16.8
+ * @version     2.16.9
  *
  */
 
@@ -724,8 +724,8 @@ class prefix_core_BaseFunctions {
   public static function GetFilterGroup(string $slug = "", $tax_arg = array(), string $class = "", int $hierarchical = 0, bool $legend = true, string $addlist = '', array $given = array()){
     // vars
     $output = '';
-    $get_given = $tax_arg['get_term'] ? $tax_arg['get_term'] : $slug;
-    $given = $_GET[$get_given] ? explode( "__", $_GET[$get_given] ) : $given;
+    $get_given = array_key_exists('get_term', $tax_arg) ? $tax_arg['get_term'] : $slug;
+    $given = isset($_GET[$get_given]) ? explode( "__", $_GET[$get_given] ) : $given;
     $taxonomy_details = get_taxonomy( $slug );
     $tax = get_terms( $slug, $tax_arg );
     $css = $class !== "" ? ' class="' . $class . '"' : '';
@@ -1034,7 +1034,7 @@ class prefix_core_BaseFunctions {
     * @param int $postID: post id
     * @param array $metas: meta list, key is the name value is a array with label and type
   */
-  public function metaBoxes(int $postID = 0, array $metas = array(), string $type = 'cpt') {
+  public static function metaBoxes(int $postID = 0, array $metas = array(), string $type = 'cpt') {
     if($type == 'tax'):
       $t_id = $postID;
       $term_meta = get_option( "taxonomy_term_$t_id" );
