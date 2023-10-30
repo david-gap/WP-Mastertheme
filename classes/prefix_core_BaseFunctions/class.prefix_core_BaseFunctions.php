@@ -4,7 +4,7 @@
  *
  * Base dev functions - parent for all custom classes
  * Author:      David Voglgsnag
- * @version     2.16.9
+ * @version     2.16.10
  *
  */
 
@@ -507,7 +507,7 @@ class prefix_core_BaseFunctions {
     /**
       * @return string
     */
-    static function getClientIpAddress(){
+    public static function getClientIpAddress(){
       $output = '';
       if(!empty($_SERVER['HTTP_CLIENT_IP']) && SELF::validIpAddress($_SERVER['HTTP_CLIENT_IP'])):
         // check for shared ISP IP
@@ -535,7 +535,7 @@ class prefix_core_BaseFunctions {
       endif;
       return $output;
     }
-    public function validIpAddress($ip){
+    public static function validIpAddress($ip){
       if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6 | FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) === false):
         return false;
       endif;

@@ -119,7 +119,7 @@ class prefix_Security {
       * @param array $countries: witch countries (Shortname) are safe to enter the area
       * @return bool access granted or denied
     */
-    function checkGeoAuthorization(array $countries = array()){
+    public static function checkGeoAuthorization(array $countries = array()){
       $countries = empty($countries) ? SELF::$WPsecurity_SafeCountries : $countries;
       $getClientIp = prefix_core_BaseFunctions::getClientIpAddress();
       if($_SERVER["REMOTE_ADDR"] == "127.0.0.1"):

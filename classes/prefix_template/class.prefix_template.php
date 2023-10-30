@@ -2024,7 +2024,7 @@ class prefix_template {
     function extendThumbnailOutput( $html, $post_id, $post_thumbnail_id, $size, $attr ) {
       $videoThumbActive = SELF::$template_thumbvideo;
       $videoId = get_post_meta($post_id, 'template_page_videothumb_videoId', true);
-      $videoOptions = get_post_meta($post_id, 'template_page_videothumb_options', true);
+      $videoOptions = get_post_meta($post_id, 'template_page_videothumb_options', true) ? get_post_meta($post_id, 'template_page_videothumb_options', true) : array();
       if(is_string($videoOptions)):
         $videoOptions = unserialize($videoOptions);
       endif;

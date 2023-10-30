@@ -241,7 +241,8 @@ class prefix_imgDC {
         else:
         endif;
       else:
-        $color = SELF::$imgDC_defaultcolor;
+        // $color = SELF::$imgDC_defaultcolor;
+        $color = false;
       endif;
       update_post_meta($id, 'imgDC_DominantColor', $color);
       if($return):
@@ -522,9 +523,9 @@ class prefix_imgDC {
           $get_img_color = get_post_meta( $id, 'imgDC_DominantColor', true);
           $img_color = $get_img_color ? $get_img_color : "false";
           // fallback color
-          if($img_color == "false"):
-            $img_color = SELF::$imgDC_defaultcolor;
-          endif;
+          // if($img_color == "false"):
+          //   $img_color = SELF::$imgDC_defaultcolor;
+          // endif;
 
         // output
         $output .= '<img';
@@ -533,7 +534,7 @@ class prefix_imgDC {
             $output .= ' data-id="' . $id . '"';
             $output .= ' data-src="' . $img_path . '"';
             $output .= ' ' . $additional;
-            $output .= ' style="background-color: #' . $img_color . ';' . $fallback_bg . '"';
+            $output .= $img_color ? ' style="background-color: #' . $img_color . ';' . $fallback_bg . '"' : '';
         $output .= ' />';
 
         return $output;
